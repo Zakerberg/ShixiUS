@@ -21,6 +21,7 @@
 		45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B6C20D8A4D50035FCA6 /* SX_VIPCenterVC.swift */; };
 		45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */; };
 		4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561F03D20DA027800C64878 /* SX_HomeModel.swift */; };
+		45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */; };
 		45BEF63A20DA264400B71FAC /* SX_ADCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63820DA264400B71FAC /* SX_ADCollectionViewCell.swift */; };
 		45BEF63B20DA264400B71FAC /* SX_ADScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63920DA264400B71FAC /* SX_ADScrollerView.swift */; };
 		45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */; };
@@ -74,6 +75,7 @@
 		45556B6C20D8A4D50035FCA6 /* SX_VIPCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_VIPCenterVC.swift; sourceTree = "<group>"; };
 		45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVC.swift; sourceTree = "<group>"; };
 		4561F03D20DA027800C64878 /* SX_HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeModel.swift; sourceTree = "<group>"; };
+		45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeAPI.swift; sourceTree = "<group>"; };
 		45BEF63820DA264400B71FAC /* SX_ADCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SX_ADCollectionViewCell.swift; sourceTree = "<group>"; };
 		45BEF63920DA264400B71FAC /* SX_ADScrollerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SX_ADScrollerView.swift; sourceTree = "<group>"; };
 		45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ADScrollModel.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 		45556B6320D8A0CF0035FCA6 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				45BEF63A20DA264400B71FAC /* SX_ADCollectionViewCell.swift in Sources */,
 				45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */,
 				45BEF63B20DA264400B71FAC /* SX_ADScrollerView.swift in Sources */,
+				45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */,
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,

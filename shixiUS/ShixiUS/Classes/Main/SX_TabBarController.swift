@@ -10,11 +10,11 @@ import UIKit
 
 class SX_TabBarController: UITabBarController {
     
-    static let SX_HomeVC : NSString = "SX_HomeVC"
-    static let SX_VIPCenterVC   : NSString = "SX_VIPCenterVC"
-    static let SX_MineVC   : NSString = "SX_MineVC"
-    static var SX_TabbarTitle    : NSString = "SX_TabbarTitle"
-    static let SX_TabbarImage    : NSString = "SX_TabbarImage"
+    static let SX_HomeVC               : NSString = "SX_HomeVC"
+    static let SX_MineVC               : NSString = "SX_MineVC"
+    static let SX_VIPCenterVC          : NSString = "SX_VIPCenterVC"
+    static var SX_TabbarTitle          : NSString = "SX_TabbarTitle"
+    static let SX_TabbarImage          : NSString = "SX_TabbarImage"
     static let SX_TabbarSelectedImage  : NSString = "SX_TabbarSelectedImage"
     static let SX_TabbarItemBadgeValue : NSString = "SX_TabbarItemBadgeValue"
     
@@ -68,12 +68,12 @@ class SX_TabBarController: UITabBarController {
             
             let vcInfo: NSDictionary = self.vcsInfoDict.object(forKey: vcName) as! NSDictionary
             guard let spaceName = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {
-                print("获取命名空间失败!")
+                SXLog("获取命名空间失败!")
                 return
             }
             let vcClass: AnyClass? = NSClassFromString(spaceName + ".\(vcName)")
             guard let typeClass = vcClass as? UIViewController.Type else{
-                print("vcClass不能当做UIViewController!")
+                SXLog("vcClass不能当做UIViewController!")
                 return
             }
             let vc = typeClass.init()
