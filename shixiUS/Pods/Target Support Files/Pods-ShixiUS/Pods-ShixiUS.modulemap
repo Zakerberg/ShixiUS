@@ -1,0 +1,6 @@
+framework module Pods_ShixiUS {
+  umbrella header "Pods-ShixiUS-umbrella.h"
+
+  export *
+  module * { export * }
+}
