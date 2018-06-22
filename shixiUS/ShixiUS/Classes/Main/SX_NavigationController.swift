@@ -16,6 +16,7 @@ class SX_NavigationController: UINavigationController {
         SX_NavigationController.setupBarButtonItemTheme()
     }
     
+    
     // MARK: - setNavBarTheme
     class func setNavBarTheme() {
         let apprance : UINavigationBar = UINavigationBar.appearance()
@@ -30,6 +31,8 @@ class SX_NavigationController: UINavigationController {
     class func setupBarButtonItemTheme() {
         let apprance: UIBarButtonItem = UIBarButtonItem.appearance()
         apprance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.SX_MainColor(), NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)], for: .normal)
+        
+        
         apprance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.SX_MainColor(), NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)], for: .selected)
     }
     

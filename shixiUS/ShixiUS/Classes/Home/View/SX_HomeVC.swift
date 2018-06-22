@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class SX_HomeVC: SX_BaseControler {
+class SX_HomeVC: UIViewController {
     
     let adScrollView = SX_ADScrollerView(Y: 0, H: 200)
     var homeTableView: UITableView?
@@ -45,6 +45,7 @@ class SX_HomeVC: SX_BaseControler {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //self.navigationController?.navigationBar.barTintColor = UIColor.SX_MainColor()
         self.barImageView = self.navigationController?.navigationBar.subviews.first
         
@@ -58,10 +59,6 @@ class SX_HomeVC: SX_BaseControler {
 }
 
 extension SX_HomeVC {
-    
-    
-    
-    
     
     
     
@@ -125,7 +122,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
 //        }
 //        let view = UIView()
 //        return view
-//
 //
 //
 //    }

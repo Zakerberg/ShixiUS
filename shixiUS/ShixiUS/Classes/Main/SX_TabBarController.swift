@@ -9,11 +9,11 @@
 import UIKit
 
 class SX_TabBarController: UITabBarController {
-    
+
     static let SX_HomeVC               : NSString = "SX_HomeVC"
     static let SX_MineVC               : NSString = "SX_MineVC"
     static let SX_VIPCenterVC          : NSString = "SX_VIPCenterVC"
-    static var SX_TabbarTitle          : NSString = "SX_TabbarTitle"
+    static let SX_TabbarTitle          : NSString = "SX_TabbarTitle"
     static let SX_TabbarImage          : NSString = "SX_TabbarImage"
     static let SX_TabbarSelectedImage  : NSString = "SX_TabbarSelectedImage"
     static let SX_TabbarItemBadgeValue : NSString = "SX_TabbarItemBadgeValue"
@@ -28,23 +28,23 @@ class SX_TabBarController: UITabBarController {
         get{
             return [
                 SX_TabBarController.SX_HomeVC : [
-                    SX_TabBarController.SX_TabbarTitle : "首页",
-                    SX_TabBarController.SX_TabbarImage : "Home",
-                    SX_TabBarController.SX_TabbarSelectedImage : "Home_Selected",
+                    SX_TabBarController.SX_TabbarTitle          : "首页",
+                    SX_TabBarController.SX_TabbarImage          : "Home",
+                    SX_TabBarController.SX_TabbarSelectedImage  : "Home_Selected",
                     SX_TabBarController.SX_TabbarItemBadgeValue : 0
                 ],
                 
                 SX_TabBarController.SX_VIPCenterVC : [
-                    SX_TabBarController.SX_TabbarTitle : "我的申请",
-                    SX_TabBarController.SX_TabbarImage : "Application",
-                    SX_TabBarController.SX_TabbarSelectedImage : "Application_Selected",
+                    SX_TabBarController.SX_TabbarTitle          : "我的申请",
+                    SX_TabBarController.SX_TabbarImage          : "Application",
+                    SX_TabBarController.SX_TabbarSelectedImage  : "Application_Selected",
                     SX_TabBarController.SX_TabbarItemBadgeValue : 0
                 ],
                 
                 SX_TabBarController.SX_MineVC : [
-                    SX_TabBarController.SX_TabbarTitle : "我的",
-                    SX_TabBarController.SX_TabbarImage : "Mine",
-                    SX_TabBarController.SX_TabbarSelectedImage : "Mine_Selected",
+                    SX_TabBarController.SX_TabbarTitle          : "我的",
+                    SX_TabBarController.SX_TabbarImage          : "Mine",
+                    SX_TabBarController.SX_TabbarSelectedImage  : "Mine_Selected",
                     SX_TabBarController.SX_TabbarItemBadgeValue : 0
                 ]
             ]
@@ -93,4 +93,6 @@ class SX_TabBarController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
 }
+
+
 

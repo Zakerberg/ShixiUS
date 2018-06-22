@@ -36,11 +36,3 @@ class SX_BaseControler: UIViewController {
 //    }
 //}
 
-
-
-
-
-
-
-
-
