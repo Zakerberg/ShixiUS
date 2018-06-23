@@ -30,9 +30,9 @@ class SX_TrainingCell: UITableViewCell {
         let shixiCollectionView = UICollectionView()
         
         
-        
-        
-        
+        shixiCollectionView.layout { (make) in
+            make.left.right.bottom.equalToSuperview()
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

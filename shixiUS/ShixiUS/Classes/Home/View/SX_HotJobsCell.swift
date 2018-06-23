@@ -36,8 +36,9 @@ class SX_HotJobsCell: UITableViewCell {
         }).config({ (jobsLabel) in
             
             jobsLabel.text = "111111"
-            jobsLabel.textColor = UIColor.black
             
+            
+            jobsLabel.textColor = UIColor.black
         })
     }
     
