@@ -11,9 +11,7 @@ import Kingfisher
 
 class WRCycleCell: UICollectionViewCell
 {
-    //=======================================================
     // MARK: 对外提供的属性
-    //=======================================================
     var imgSource:ImgSource = ImgSource.LOCAL(name: "placeholder")  {
         didSet {
             switch imgSource {
@@ -73,16 +71,13 @@ class WRCycleCell: UICollectionViewCell
         }
     }
     
-    //=======================================================
+    
     // MARK: 内部属性
-    //=======================================================
     fileprivate var imgView:UIImageView!
     fileprivate var descLabel:UILabel!
     fileprivate var bottomView:UIView!
-    
-    //=======================================================
+
     // MARK: 构造方法
-    //=======================================================
     override init(frame: CGRect)
     {
         super.init(frame: frame)

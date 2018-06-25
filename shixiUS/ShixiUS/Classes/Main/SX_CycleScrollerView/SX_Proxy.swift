@@ -21,7 +21,7 @@ enum ImgType:Int {
     case LOCAL = 1
 }
 
-struct Proxy
+struct SXProxy
 {
     var imgType:ImgType = .SERVER
     var imgArray:[ImgSource] = [ImgSource]()
@@ -54,8 +54,8 @@ struct Proxy
 
 // MARK: - pageControl 相关
 
-private let WRPageControlMargin: CGFloat = 15
-private let WRPageControlPointWidth: CGFloat = 2
+private let SXPageControlMargin: CGFloat = 15
+private let SXPageControlPointWidth: CGFloat = 2
 
 enum PageControlAliment {
     case CenterBottom
@@ -86,9 +86,9 @@ extension PageControlAlimentProtocol where Self : UIView
             case .CenterBottom:
                 pageX = CGFloat(self.bounds.width / 2) - pageW * 0.5
             case .RightBottom:
-                pageX = bounds.width - pageW - WRPageControlMargin
+                pageX = bounds.width - pageW - SXPageControlMargin
             case .LeftBottom:
-                pageX = bounds.origin.x + WRPageControlMargin
+                pageX = bounds.origin.x + SXPageControlMargin
             }
             pageControl.frame = CGRect(x:pageX, y:pageY, width:pageW, height:pageH)
         }

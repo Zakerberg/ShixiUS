@@ -7,15 +7,30 @@
 //
 
 import UIKit
-import Alamofire
+private let NAVBAR_COLORCHANGE_POINT = -80
+private let IMAGE_HEIGHT:CGFloat = 240
+private let SCROLL_DOWN_LIMIT: CGFloat = 100
+private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 
 class SX_HomeVC: UIViewController {
     
-    // let adScrollView = SX_ADScrollerView(Y: 0, H: 200)
-    var homeTableView: UITableView?
-    // 导航栏背景视图
-    var barImageView: UIView?
-
+    lazy var homeTableView: UITableView = {
+    let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
+        tableView.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-kNavH, 0, 0, 0)
+        tableView.showsVerticalScrollIndicator = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
+    
+    lazy var cycleScrollerView: SX_CycleScrollerView = {
+        
+       let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
+        let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVICE, imgs: nil, descs: nil)
+        return cycleView
+    }()
+   
+/****
     // KVO实例
       var observation: NSKeyValueObservation?
     // 视图显示的时候触发
@@ -38,6 +53,8 @@ class SX_HomeVC: UIViewController {
             // 移除kvo
             observation?.invalidate()
         }
+*/
+    
     
     override func loadView() {
         super.loadView()
@@ -46,32 +63,19 @@ class SX_HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.navigationController?.navigationBar.barTintColor = UIColor.SX_MainColor()
-        self.barImageView = self.navigationController?.navigationBar.subviews.first
-        self.homeTableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT - kNavH - kTabBarHeight)), style: .plain)
-        self.homeTableView?.delegate = self
-        self.homeTableView?.dataSource = self
-        self.homeTableView?.register(UITableViewCell.self, forCellReuseIdentifier: "SwiftCell")
-        self.view.addSubview(self.homeTableView!)
+//        self.barImageView = self.navigationController?.navigationBar.subviews.first
+//        self.homeTableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT - kNavH - kTabBarHeight)), style: .plain)
+//        self.homeTableView?.delegate = self
+//        self.homeTableView?.dataSource = self
+//        self.homeTableView?.register(UITableViewCell.self, forCellReuseIdentifier: "SwiftCell")
+//        self.view.addSubview(self.homeTableView!)
     }
 }
 
 // 轮播
 extension SX_HomeVC {
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }
 
@@ -79,7 +83,6 @@ extension SX_HomeVC {
 extension SX_HomeVC {
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset.y)
-
 
 
     }
@@ -96,7 +99,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 50
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,34 +111,10 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    //
-    //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    //
-    //        if section == 0 {
-    //            return 300
-    //        }
-    //
-    //        return 10
-    //    }
-    //
-    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //
-    //        if section == 0 {
-    //
-    //
-    //        let headerView = UIView()
-    //        headerView.backgroundColor = UIColor.blue
-    //
-    //
-    //        return headerView
-    //        }
-    //        let view = UIView()
-    //        return view
-    //
-    //
-    //    }
-    
 }
+
+
+/***
 //MARK: - 版本判断
 func judgeAppVersion() {
     let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! NSString
@@ -161,5 +139,4 @@ func judgeAppVersion() {
         
     } catch { }
 }
-
-
+***/
