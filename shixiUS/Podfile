@@ -15,6 +15,7 @@ pod 'RxSwift'
 pod 'Alamofire'
 pod 'Result'
 pod 'SDWebImage'
+pod 'Kingfisher'
 
   
   target 'ShixiUSTests' do

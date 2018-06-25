@@ -15,29 +15,29 @@ class SX_HomeVC: UIViewController {
     var homeTableView: UITableView?
     // 导航栏背景视图
     var barImageView: UIView?
+
     // KVO实例
-    var observation: NSKeyValueObservation?
-    
+      var observation: NSKeyValueObservation?
     // 视图显示的时候触发
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //使用kvo来监听视图偏移量变化
-        observation = self.homeTableView!.observe(\.contentOffset, options: [.new, .old]) {
-            [unowned self] homeTableView, changed in
-            //根据偏移量修改导航栏透明度
-            var delta = changed.newValue!.y / CGFloat(0) + 1
-            delta = CGFloat.maximum(delta, 0)
-            self.barImageView?.alpha = CGFloat.minimum(delta, 1)
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+    
+   // 使用kvo来监听视图偏移量变化
+            observation = self.homeTableView!.observe(\.contentOffset, options: [.new, .old]) {
+                [unowned self] homeTableView, changed in
+                //根据偏移量修改导航栏透明度
+                var delta = changed.newValue!.y / CGFloat(0) + 1
+                delta = CGFloat.maximum(delta, 0)
+                self.barImageView?.alpha = CGFloat.minimum(delta, 1)
+            }
         }
-    }
     
     //视图消失的时候调用
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        // 移除kvo
-        observation?.invalidate()
-    }
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewDidDisappear(animated)
+            // 移除kvo
+            observation?.invalidate()
+        }
     
     override func loadView() {
         super.loadView()
@@ -46,10 +46,8 @@ class SX_HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.SX_MainColor()
+        //self.navigationController?.navigationBar.barTintColor = UIColor.SX_MainColor()
         self.barImageView = self.navigationController?.navigationBar.subviews.first
-        
-        //self.homeTableView = UITableView(frame: self.view.frame, style: .plain)
         self.homeTableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT - kNavH - kTabBarHeight)), style: .plain)
         self.homeTableView?.delegate = self
         self.homeTableView?.dataSource = self
@@ -58,7 +56,17 @@ class SX_HomeVC: UIViewController {
     }
 }
 
+// 轮播
 extension SX_HomeVC {
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -71,7 +79,9 @@ extension SX_HomeVC {
 extension SX_HomeVC {
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset.y)
-        let offSetY = scrollView.contentOffset.y
+
+
+
     }
 }
 

@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.7.2)
   - Bugly (2.5.0)
+  - Kingfisher (4.8.0)
   - ReactiveSwift (3.1.0):
     - Result (~> 3.2)
   - Result (3.2.4)
@@ -15,6 +16,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Bugly
+  - Kingfisher
   - ReactiveSwift
   - Result
   - RxCocoa
@@ -25,6 +27,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
+  Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   ReactiveSwift: 5b26d2e988fe0eed2daf48c4054d1de74db50184
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
@@ -32,6 +35,6 @@ SPEC CHECKSUMS:
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: c2e6844de064c4667bae87f997c1457e7c54fb47
+PODFILE CHECKSUM: f59f9199d492b4d4a585eb360db75c7c85552cf3
 
 COCOAPODS: 1.4.0
