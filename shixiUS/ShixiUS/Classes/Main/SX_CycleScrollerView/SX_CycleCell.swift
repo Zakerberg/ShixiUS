@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class WRCycleCell: UICollectionViewCell
+class SX_CycleCell: UICollectionViewCell
 {
     // MARK: 对外提供的属性
     var imgSource:ImgSource = ImgSource.LOCAL(name: "placeholder")  {
@@ -90,7 +90,7 @@ class WRCycleCell: UICollectionViewCell
         fatalError("init(coder:) has not been implemented")
     }
     deinit {
-        print("WRCycleCell  deinit")
+        print("SXCycleCell  deinit")
     }
     
     
@@ -118,7 +118,7 @@ class WRCycleCell: UICollectionViewCell
 //=======================================================
 // MARK: - 基本控件（图片、描述文字、底部view）
 //=======================================================
-extension WRCycleCell
+extension SX_CycleCell
 {
     fileprivate func setupImgView()
     {

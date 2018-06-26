@@ -11,70 +11,63 @@ import UIKit
 protocol SXCycleScrollerViewDelegate {
     
     // 点击图片的回调
-    func cycleScrollerViewSelected(at index:Int, cycleScrollerView: SX_CycleScrollerView)
+    func cycleScrollerViewSelected(at index:Int, cycleScrollerView: SX_CycleScrollView)
     // 图片滚动的回调
-    func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollerView)
+    func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollView)
 }
 
-class SX_CycleScrollerView: UIView {
+
+class SX_CycleScrollView: UIView, PageControlAlimentProtocol, EndlessScrollProtocol {
     
+    //=======================================================
+    // MARK: 对外提供的属性
+    //=======================================================
     var delegate: SXCycleScrollerViewDelegate?
     
-    fileprivate var proxy: SXProxy!
-    fileprivate var flowLayout: UICollectionViewFlowLayout?
-    fileprivate var collectionView: UICollectionView?
-    fileprivate var cellID = "SXCycleCellID"
-    fileprivate var pageControl: SX_PageControl!
-    var timer:Timer?
-    
-    var outerPageControlFrame: CGRect? {
-        didSet{
+    var outerPageControlFrame:CGRect? {
+        didSet {
             setupPageControl()
         }
     }
     
-    //MARK: - 数据相关
-    var imgsType: ImgType = .SERVER
-    var localImageArray:[String]? {
-        didSet{
-            if let local = localImageArray {
+    /// 数据相关
+    var imgsType:ImgType = .SERVER
+    var localImgArray :[String]? {
+        didSet {
+            if let local = localImgArray {
                 proxy = SXProxy(type: .LOCAL, array: local)
                 reloadData()
             }
         }
     }
-    
-    
     var serverImgArray:[String]? {
-        didSet{
+        didSet {
             if let server = serverImgArray {
                 proxy = SXProxy(type: .SERVER, array: server)
                 reloadData()
             }
         }
     }
-    
-    var descTextArray: [String]?
+    var descTextArray :[String]?
     var placeholderImage: UIImage?
     
-    // SX_CycleCell相关
-    var imageContentMode: UIViewContentMode?
+    /// SXCycleCell相关
+    var imageContentModel: UIViewContentMode?
     var descLabelFont: UIFont?
-    var descLabelTxetColor: UIColor?
+    var descLabelTextColor: UIColor?
     var descLabelHeight: CGFloat?
-    var descLabelTextAlignment: NSTextAlignment?
-    var bottonViewBackgroundColor: UIColor?
+    var descLabelTextAlignment:NSTextAlignment?
+    var bottomViewBackgroundColor: UIColor?
     
-    // 主要功能需求
+    /// 主要功能需求相关
     override var frame: CGRect {
-        didSet{
+        didSet {
             flowLayout?.itemSize = frame.size
             collectionView?.frame = bounds
         }
     }
-    
-    var isAutoScroll: Bool = true {
-        didSet{
+    var isAutoScroll:Bool = true {
+        didSet {
             timer?.invalidate()
             timer = nil
             if isAutoScroll == true {
@@ -82,77 +75,329 @@ class SX_CycleScrollerView: UIView {
             }
         }
     }
+    var isEndlessScroll:Bool = true {
+        didSet {
+            reloadData()
+        }
+    }
+    var autoScrollInterval: Double = 1.5
     
-    var isEndlessScroll: Bool = true {
-        didSet{
-            timer?.invalidate()
-            timer = nil
-            if isEndlessScroll == true {
-                setEndTimer()
-            }
+    /// pageControl相关
+    var pageControlAliment: PageControlAliment = .CenterBottom
+    var defaultPageDotImage: UIImage? {
+        didSet {
+            setupPageControl()
+        }
+    }
+    var currentPageDotImage: UIImage? {
+        didSet {
+            setupPageControl()
+        }
+    }
+    var pageControlPointSpace: CGFloat = 15 {
+        didSet {
+            setupPageControl()
+        }
+    }
+    var showPageControl: Bool = true {
+        didSet {
+            setupPageControl()
+        }
+    }
+    var currentDotColor: UIColor = UIColor.orange {
+        didSet {
+            self.pageControl?.currentPageIndicatorTintColor = currentDotColor
+        }
+    }
+    var otherDotColor: UIColor = UIColor.gray {
+        didSet {
+            self.pageControl?.pageIndicatorTintColor = otherDotColor
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // MARK: - 对外的方法
-    func reloadData() {
-        
+    //=======================================================
+    // MARK: 对外提供的方法
+    //=======================================================
+    func reloadData()
+    {
         timer?.invalidate()
         timer = nil
         collectionView?.reloadData()
         
         setupPageControl()
-
-
+        if canChangeCycleCell == true {
+            changeToFirstCycleCell(animated: false, collectionView: collectionView!)
+        }
+        if isAutoScroll == true {
+            setupTimer()
+        }
+        guard let pageControl = self.pageControl else {
+            return
+        }
+        
+        if showPageControl == true {
+            if let outFrame = outerPageControlFrame {
+                self.relayoutPageControl(pageControl: pageControl, outerFrame: outFrame)
+            } else {
+                self.relayoutPageControl(pageControl: pageControl)
+            }
+        }
     }
     
     
-    func setupTimer() {
+    //=======================================================
+    // MARK: 内部属性
+    //=======================================================
+    let endlessScrollTimes:Int = 128
+    fileprivate var imgsCount:Int {
+        return (isEndlessScroll == true) ? (itemsInSection / endlessScrollTimes) : itemsInSection
+    }
+    var itemsInSection:Int {
+        guard let imgs = proxy?.imgArray else {
+            return 0
+        }
+        return (isEndlessScroll == true) ? (imgs.count * endlessScrollTimes) : imgs.count
+    }
+    fileprivate var firstItem:Int {
+        return (isEndlessScroll == true) ? (itemsInSection / 2) : 0
+    }
+    fileprivate var canChangeCycleCell:Bool {
+        guard itemsInSection  != 0 ,
+            let _ = collectionView,
+            let _ = flowLayout else {
+                return false
+        }
+        return true
+    }
+    fileprivate var indexOnPageControl:Int {
+        var curIndex = Int((collectionView!.contentOffset.x + flowLayout!.itemSize.width * 0.5) / flowLayout!.itemSize.width)
+        curIndex = max(0, curIndex)
+        return curIndex % imgsCount
+    }
+    fileprivate var proxy:SXProxy!
+    fileprivate var flowLayout:UICollectionViewFlowLayout?
+    fileprivate var collectionView:UICollectionView?
+    fileprivate let CellID = "SXCycleCell"
+    fileprivate var pageControl:SX_PageControl?
+    var timer:Timer?
+    // 标识子控件是否布局完成，布局完成后在layoutSubviews方法中就不执行 changeToFirstCycleCell 方法
+    fileprivate var isLoadOver = false
+    
+    
+    //=======================================================
+    // MARK: 构造方法
+    //=======================================================
+    /// 构造方法
+    ///
+    /// - Parameters:
+    ///   - frame: frame
+    ///   - type:  ImagesType                         default:Server
+    ///   - imgs:  localImgArray / serverImgArray     default:nil
+    ///   - descs: descTextArray                      default:nil
+    init(frame: CGRect, type:ImgType = .SERVER, imgs:[String]? = nil, descs:[String]? = nil, defaultDotImage:UIImage? = nil, currentDotImage:UIImage? = nil, placeholderImage:UIImage? = nil)
+    {
+        super.init(frame: frame)
+        setupCollectionView()
+        defaultPageDotImage = defaultDotImage
+        currentPageDotImage = currentDotImage
+        self.placeholderImage = placeholderImage
+        imgsType = type
+        if imgsType == .SERVER {
+            if let server = imgs {
+                proxy = SXProxy(type: .SERVER, array: server)
+            }
+        }
+        else {
+            if let local = imgs {
+                proxy = SXProxy(type: .LOCAL, array: local)
+            }
+        }
         
-        
+        if let descTexts = descs {
+            descTextArray = descTexts
+        }
+        reloadData()
     }
     
-    func setEndTimer() {
-        
+    required init?(coder aDecoder: NSCoder) {
+        // 支持StoryBoard创建
+        super.init(coder: aDecoder)
+        self.setupCollectionView()
     }
     
+    deinit {
+        collectionView?.delegate = nil
+        print("SXCycleScrollView  deinit")
+    }
     
+    //=======================================================
+    // MARK: 内部方法（layoutSubviews、willMove）
+    //=======================================================
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+        // 解决WRCycleCell自动偏移问题
+        collectionView?.contentInset = .zero
+        if isLoadOver == false && canChangeCycleCell == true {
+            changeToFirstCycleCell(animated: false, collectionView: collectionView!)
+        }
+        
+        guard let pageControl = self.pageControl else {
+            return
+        }
+        
+        if showPageControl == true {
+            if let outFrame = outerPageControlFrame {
+                self.relayoutPageControl(pageControl: pageControl, outerFrame: outFrame)
+            } else {
+                self.relayoutPageControl(pageControl: pageControl)
+            }
+        }
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    override func willMove(toSuperview newSuperview: UIView?)
+    {   // 解决定时器导致的循环引用
+        super.willMove(toSuperview: newSuperview)
+        // 展现的时候newSuper不为nil，离开的时候newSuper为nil
+        guard let _ = newSuperview else {
+            timer?.invalidate()
+            timer = nil
+            return
+        }
+    }
 }
 
-// MARK: - PageControl页面
-extension SX_CycleScrollerView {
+//=======================================================
+// MARK: - 定时器、自动滚动、scrollView代理方法
+//=======================================================
+extension SX_CycleScrollView
+{
+    func setupTimer()
+    {
+        timer = Timer(timeInterval: autoScrollInterval, target: self, selector: #selector(autoChangeCycleCell), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer!, forMode: .commonModes)
+    }
     
-    fileprivate func setupPageControl() {
+    @objc func autoChangeCycleCell()
+    {
+        if canChangeCycleCell == true {
+            changeCycleCell(collectionView: collectionView!)
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        timer?.invalidate()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    {
+        if isAutoScroll == true {
+            setupTimer()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        scrollViewDidEndScrollingAnimation(scrollView)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView)
+    {
+        guard canChangeCycleCell else {
+            return
+        }
+        delegate?.cycleScrollerDidScroller(to: indexOnPageControl, cycleScrollerView: self)
         
+        if indexOnPageControl >= firstItem {
+            isLoadOver = true
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        guard canChangeCycleCell else {
+            return
+        }
+        pageControl?.currentPage = indexOnPageControl
+    }
+}
+
+//=======================================================
+// MARK: - pageControl页面
+//=======================================================
+extension SX_CycleScrollView
+{
+    fileprivate func setupPageControl()
+    {
+        pageControl?.removeFromSuperview()
+        if showPageControl == true
+        {
+            pageControl = SX_PageControl(frame: CGRect.zero, currentImage: currentPageDotImage, defaultImage: defaultPageDotImage)
+            pageControl?.numberOfPages = imgsCount
+            pageControl?.hidesForSinglePage = true
+            pageControl?.currentPageIndicatorTintColor = self.currentDotColor
+            pageControl?.pageIndicatorTintColor = self.otherDotColor
+            pageControl?.isUserInteractionEnabled = false
+            pageControl?.pointSpace = pageControlPointSpace
+            
+            if let _ = outerPageControlFrame {
+                superview?.addSubview(pageControl!)
+            } else {
+                addSubview(pageControl!)
+            }
+        }
+    }
+}
+
+//=======================================================
+// MARK: - SXCycleCell 相关
+//=======================================================
+extension SX_CycleScrollView: UICollectionViewDelegate,UICollectionViewDataSource
+{
+    fileprivate func setupCollectionView()
+    {
+        flowLayout = UICollectionViewFlowLayout()
+        flowLayout?.itemSize = frame.size
+        flowLayout?.minimumLineSpacing = 0
+        flowLayout?.scrollDirection = .horizontal
         
+        collectionView = UICollectionView(frame: bounds, collectionViewLayout: flowLayout!)
+        collectionView?.register(SX_CycleCell.self, forCellWithReuseIdentifier: CellID)
+        collectionView?.isPagingEnabled = true
+        collectionView?.bounces = false
+        collectionView?.showsVerticalScrollIndicator = false
+        collectionView?.showsHorizontalScrollIndicator = false
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        addSubview(collectionView!)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        return itemsInSection
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        let curIndex = indexPath.item % imgsCount
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! SX_CycleCell
+        cell.placeholderImage = placeholderImage
+        cell.imgSource = proxy[curIndex]
+        cell.descText = descTextArray?[curIndex]
         
-        
-        
+        if let _ = descTextArray
+        {
+            cell.imageContentModel = (imageContentModel == nil) ? cell.imageContentModel : imageContentModel!
+            cell.descLabelFont = (descLabelFont == nil) ? cell.descLabelFont : descLabelFont!
+            cell.descLabelTextColor = (descLabelTextColor == nil) ? cell.descLabelTextColor : descLabelTextColor!
+            cell.descLabelHeight = (descLabelHeight == nil) ? cell.descLabelHeight : descLabelHeight!
+            cell.descLabelTextAlignment = (descLabelTextAlignment == nil) ? cell.descLabelTextAlignment : descLabelTextAlignment!
+            cell.bottomViewBackgroundColor = (bottomViewBackgroundColor == nil) ? cell.bottomViewBackgroundColor : bottomViewBackgroundColor!
+        }
+        return cell
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        delegate?.cycleScrollerDidScroller(to: indexOnPageControl, cycleScrollerView: self)
     }
 }

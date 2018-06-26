@@ -23,10 +23,10 @@ class SX_HomeVC: UIViewController {
         return tableView
     }()
     
-    lazy var cycleScrollerView: SX_CycleScrollerView = {
+    lazy var cycleScrollerView: SX_CycleScrollView = {
         
        let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
-        let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVICE, imgs: nil, descs: nil)
+        let cycleView = SX_CycleScrollView(frame: frame, type: .SERVER, imgs: nil, descs: nil)
         return cycleView
     }()
    
