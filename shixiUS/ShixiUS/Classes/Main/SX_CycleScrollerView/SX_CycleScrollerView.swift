@@ -11,13 +11,13 @@ import UIKit
 protocol SXCycleScrollerViewDelegate {
     
     // 点击图片的回调
-    func cycleScrollerViewSelected(at index:Int, cycleScrollerView: SX_CycleScrollView)
+    func cycleScrollerViewSelected(at index:Int, cycleScrollerView: SX_CycleScrollerView)
     // 图片滚动的回调
-    func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollView)
+    func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollerView)
 }
 
 
-class SX_CycleScrollView: UIView, PageControlAlimentProtocol, EndlessScrollProtocol {
+class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollProtocol {
     
     //=======================================================
     // MARK: 对外提供的属性
@@ -270,7 +270,7 @@ class SX_CycleScrollView: UIView, PageControlAlimentProtocol, EndlessScrollProto
 //=======================================================
 // MARK: - 定时器、自动滚动、scrollView代理方法
 //=======================================================
-extension SX_CycleScrollView
+extension SX_CycleScrollerView
 {
     func setupTimer()
     {
@@ -324,7 +324,7 @@ extension SX_CycleScrollView
 //=======================================================
 // MARK: - pageControl页面
 //=======================================================
-extension SX_CycleScrollView
+extension SX_CycleScrollerView
 {
     fileprivate func setupPageControl()
     {
@@ -351,7 +351,7 @@ extension SX_CycleScrollView
 //=======================================================
 // MARK: - SXCycleCell 相关
 //=======================================================
-extension SX_CycleScrollView: UICollectionViewDelegate,UICollectionViewDataSource
+extension SX_CycleScrollerView: UICollectionViewDelegate,UICollectionViewDataSource
 {
     fileprivate func setupCollectionView()
     {

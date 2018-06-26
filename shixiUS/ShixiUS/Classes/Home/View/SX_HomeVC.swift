@@ -15,7 +15,7 @@ private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 class SX_HomeVC: UIViewController {
     
     lazy var homeTableView: UITableView = {
-    let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
         tableView.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-kNavH, 0, 0, 0)
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
@@ -23,72 +23,78 @@ class SX_HomeVC: UIViewController {
         return tableView
     }()
     
-    lazy var cycleScrollerView: SX_CycleScrollView = {
+    // 轮播
+    lazy var cycleScrollerView: SX_CycleScrollerView = {
         
-       let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
-        let cycleView = SX_CycleScrollView(frame: frame, type: .SERVER, imgs: nil, descs: nil)
+        let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
+        let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: nil, descs: nil)
         return cycleView
     }()
-   
-/****
-    // KVO实例
-      var observation: NSKeyValueObservation?
-    // 视图显示的时候触发
-        override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
     
-   // 使用kvo来监听视图偏移量变化
-            observation = self.homeTableView!.observe(\.contentOffset, options: [.new, .old]) {
-                [unowned self] homeTableView, changed in
-                //根据偏移量修改导航栏透明度
-                var delta = changed.newValue!.y / CGFloat(0) + 1
-                delta = CGFloat.maximum(delta, 0)
-                self.barImageView?.alpha = CGFloat.minimum(delta, 1)
-            }
-        }
-    
-    //视图消失的时候调用
-        override func viewWillDisappear(_ animated: Bool) {
-            super.viewDidDisappear(animated)
-            // 移除kvo
-            observation?.invalidate()
-        }
-*/
-    
-    
-    override func loadView() {
-        super.loadView()
-    }
-    
+    /****
+     // KVO实例
+     var observation: NSKeyValueObservation?
+     // 视图显示的时候触发
+     override func viewWillAppear(_ animated: Bool) {
+     super.viewWillAppear(animated)
+     
+     // 使用kvo来监听视图偏移量变化
+     observation = self.homeTableView!.observe(\.contentOffset, options: [.new, .old]) {
+     [unowned self] homeTableView, changed in
+     //根据偏移量修改导航栏透明度
+     var delta = changed.newValue!.y / CGFloat(0) + 1
+     delta = CGFloat.maximum(delta, 0)
+     self.barImageView?.alpha = CGFloat.minimum(delta, 1)
+     }
+     }
+     
+     //视图消失的时候调用
+     override func viewWillDisappear(_ animated: Bool) {
+     super.viewDidDisappear(animated)
+     // 移除kvo
+     observation?.invalidate()
+     }
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.barImageView = self.navigationController?.navigationBar.subviews.first
-//        self.homeTableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT - kNavH - kTabBarHeight)), style: .plain)
-//        self.homeTableView?.delegate = self
-//        self.homeTableView?.dataSource = self
-//        self.homeTableView?.register(UITableViewCell.self, forCellReuseIdentifier: "SwiftCell")
-//        self.view.addSubview(self.homeTableView!)
+        self.title = "实习网"
+        view.backgroundColor = UIColor.white
+        
+        let NetImgArr = Array<Any>()
+        let descLabelArr = Array<Any>()
+        
+        
+        cycleScrollerView.serverImgArray = NetImgArr as! [String]
+        cycleScrollerView.descTextArray  = descLabelArr as! [String]
+        cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
+        
+        homeTableView.addSubview(cycleScrollerView)
+        view.addSubview(homeTableView)
+        
+        
+        self.navBarTintColor = UIColor.SX_MainColor()
+        self.navBarBackgroundAlpha = 0
+    }
+    
+    deinit {
+        homeTableView.delegate = nil
+        print("deinit")
     }
 }
 
-// 轮播
+// ==============================
+// MARK: - UIScrollerViewDelagate
+// ==============================
 extension SX_HomeVC {
-    
-
-    
-}
-
-//MARK: - UIScrollerViewDelagate
-extension SX_HomeVC {
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
-
-
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
     }
 }
 
+// ==============================
 //MARK: - UITableViewDelegate
+// ==============================
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,28 +121,28 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
 
 
 /***
-//MARK: - 版本判断
-func judgeAppVersion() {
-    let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! NSString
-    do {
-        _ = NSError()
-        var response = try NSURLConnection.sendSynchronousRequest(URLRequest(url: URL(fileURLWithPath: "https://itunes.apple.com/cn/lookup?id=1044254573")), returning: nil)
-        if response == nil {
-            print("没连接网络")
-            return
-        }
-        
-        let appInfoDic = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary
-        print(appInfoDic)
-        let array = appInfoDic["results"] as! NSArray
-        if array.count < 1 {
-            print("此App未提交")
-            return
-        }
-        let dic = array[0] as! NSDictionary
-        let appStoreVersion = dic["version"]
-        print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
-        
-    } catch { }
-}
-***/
+ //MARK: - 版本判断
+ func judgeAppVersion() {
+ let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! NSString
+ do {
+ _ = NSError()
+ var response = try NSURLConnection.sendSynchronousRequest(URLRequest(url: URL(fileURLWithPath: "https://itunes.apple.com/cn/lookup?id=1044254573")), returning: nil)
+ if response == nil {
+ print("没连接网络")
+ return
+ }
+ 
+ let appInfoDic = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary
+ print(appInfoDic)
+ let array = appInfoDic["results"] as! NSArray
+ if array.count < 1 {
+ print("此App未提交")
+ return
+ }
+ let dic = array[0] as! NSDictionary
+ let appStoreVersion = dic["version"]
+ print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
+ 
+ } catch { }
+ }
+ ***/
