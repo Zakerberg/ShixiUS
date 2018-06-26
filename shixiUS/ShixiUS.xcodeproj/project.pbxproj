@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F24381F419BB7C6CDD0046C /* Pods_ShixiUSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */; };
+		452C664020E22F3900747C0D /* SX_TrainingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452C663F20E22F3900747C0D /* SX_TrainingCollectionViewCell.swift */; };
 		45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */; };
 		45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45440EFB20E0C2CE00058978 /* SX_Proxy.swift */; };
 		45440EFE20E0C40D00058978 /* SX_PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45440EFD20E0C40D00058978 /* SX_PageControl.swift */; };
@@ -61,6 +62,7 @@
 		1190C349599AFF1C16E19BBE /* Pods-ShixiUS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShixiUS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShixiUS/Pods-ShixiUS.release.xcconfig"; sourceTree = "<group>"; };
 		1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		452C663F20E22F3900747C0D /* SX_TrainingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCollectionViewCell.swift; sourceTree = "<group>"; };
 		45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CycleScrollerView.swift; sourceTree = "<group>"; };
 		45440EFB20E0C2CE00058978 /* SX_Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_Proxy.swift; sourceTree = "<group>"; };
 		45440EFD20E0C40D00058978 /* SX_PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PageControl.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				45BEF63820DA264400B71FAC /* SX_ADCollectionViewCell.swift */,
 				45BEF63920DA264400B71FAC /* SX_ADScrollerView.swift */,
 				45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */,
+				452C663F20E22F3900747C0D /* SX_TrainingCollectionViewCell.swift */,
 				45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */,
 			);
 			path = View;
@@ -694,6 +697,7 @@
 				45556B6720D8A1180035FCA6 /* SX_HomeVC.swift in Sources */,
 				45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */,
 				45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */,
+				452C664020E22F3900747C0D /* SX_TrainingCollectionViewCell.swift in Sources */,
 				45440EFE20E0C40D00058978 /* SX_PageControl.swift in Sources */,
 				45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */,
 				45BEF63A20DA264400B71FAC /* SX_ADCollectionViewCell.swift in Sources */,

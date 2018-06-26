@@ -14,7 +14,7 @@ private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 
 class SX_HomeVC: UIViewController {
     
-    lazy var homeTableView: UITableView = {
+    private lazy var homeTableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
         tableView.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-kNavH, 0, 0, 0)
         tableView.showsVerticalScrollIndicator = false
@@ -24,7 +24,7 @@ class SX_HomeVC: UIViewController {
     }()
     
     // 轮播
-    lazy var cycleScrollerView: SX_CycleScrollerView = {
+    private lazy var cycleScrollerView: SX_CycleScrollerView = {
         
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
         let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: nil, descs: nil)
@@ -65,8 +65,8 @@ class SX_HomeVC: UIViewController {
         let descLabelArr = Array<Any>()
         
         
-        cycleScrollerView.serverImgArray = NetImgArr as! [String]
-        cycleScrollerView.descTextArray  = descLabelArr as! [String]
+        cycleScrollerView.serverImgArray = NetImgArr as? [String]
+        cycleScrollerView.descTextArray  = descLabelArr as? [String]
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
         
         homeTableView.addSubview(cycleScrollerView)
@@ -86,14 +86,23 @@ class SX_HomeVC: UIViewController {
 // ==============================
 // MARK: - UIScrollerViewDelagate
 // ==============================
-extension SX_HomeVC {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+extension SX_HomeVC: UICollectionViewDelegate, UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell:SX_TrainingCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCellID", for: indexPath) as! SX_TrainingCollectionViewCell
+        
+        return cell
+    }
+    
 }
 
 // ==============================
-//MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 // ==============================
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
@@ -116,7 +125,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
 }
 
 
