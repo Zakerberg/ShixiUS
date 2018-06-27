@@ -11,7 +11,9 @@ import Kingfisher
 
 class SX_CycleCell: UICollectionViewCell
 {
+    //=======================================================
     // MARK: 对外提供的属性
+    //=======================================================
     var imgSource:ImgSource = ImgSource.LOCAL(name: "placeholder")  {
         didSet {
             switch imgSource {
@@ -71,12 +73,16 @@ class SX_CycleCell: UICollectionViewCell
         }
     }
     
+    //=======================================================
     // MARK: 内部属性
+    //=======================================================
     fileprivate var imgView:UIImageView!
     fileprivate var descLabel:UILabel!
     fileprivate var bottomView:UIView!
-
+    
+    //=======================================================
     // MARK: 构造方法
+    //=======================================================
     override init(frame: CGRect)
     {
         super.init(frame: frame)
@@ -89,7 +95,7 @@ class SX_CycleCell: UICollectionViewCell
         fatalError("init(coder:) has not been implemented")
     }
     deinit {
-        print("SXCycleCell  deinit")
+        print("SX_CycleCell  deinit")
     }
     
     //=======================================================
@@ -116,10 +122,9 @@ class SX_CycleCell: UICollectionViewCell
 //=======================================================
 // MARK: - 基本控件（图片、描述文字、底部view）
 //=======================================================
-extension SX_CycleCell
-{
-    fileprivate func setupImgView()
-    {
+extension SX_CycleCell {
+    
+    fileprivate func setupImgView() {
         imgView = UIImageView()
         imgView.contentMode = imageContentModel
         imgView.clipsToBounds = true
@@ -147,5 +152,4 @@ extension SX_CycleCell
         bottomView.isHidden = true
     }
 }
-
 
