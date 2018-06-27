@@ -33,6 +33,10 @@
         return colorWithHexString(hex: "ff7900", alpha: 1.0)
     }
     
+    class func SX_BackGroundColor() -> UIColor {
+        return colorWithHexString(hex: "f3f4f8", alpha: 1.0)
+    }
+    
     static func colorWithHexString(hex: String, alpha: CGFloat) -> UIColor {
         
         var cString: NSString = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased() as NSString

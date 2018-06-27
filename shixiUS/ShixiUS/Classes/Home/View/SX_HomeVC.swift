@@ -15,7 +15,7 @@ private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 class SX_HomeVC: UIViewController {
     
     private lazy var homeTableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-kNavH, 0, 0, 0)
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
@@ -57,7 +57,7 @@ class SX_HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "实习网"
+        self.title = "首页"
         view.backgroundColor = UIColor.white
         
         /**** ======================================================================================================
@@ -69,10 +69,10 @@ class SX_HomeVC: UIViewController {
         
         let localImgs = ["localImg6","localImg7","localImg8","localImg9","localImg10"]
         let descLabels = ["韩国防部回应停止部署萨德:遵照最高统帅指导方针",
-                            "勒索病毒攻击再次爆发 国内校园网大面积感染",
-                            "Win10秋季更新重磅功能：跟安卓与iOS无缝连接",
-                            "《琅琊榜2》为何没有胡歌？胡歌：我看过剧本，离开是种保护",
-                            "阿米尔汗在印度的影响力，我国的哪位影视明星能与之齐名呢？"]
+                          "勒索病毒攻击再次爆发 国内校园网大面积感染",
+                          "Win10秋季更新重磅功能：跟安卓与iOS无缝连接",
+                          "《琅琊榜2》为何没有胡歌？胡歌：我看过剧本，离开是种保护",
+                          "阿米尔汗在印度的影响力，我国的哪位影视明星能与之齐名呢？"]
         
         cycleScrollerView.localImgArray = localImgs
         cycleScrollerView.descTextArray = descLabels
@@ -86,7 +86,7 @@ class SX_HomeVC: UIViewController {
         self.navigationController?.navigationBar.alpha = 0
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
-
+    
     deinit {
         homeTableView.delegate = nil
         print("deinit")
@@ -133,19 +133,46 @@ extension SX_HomeVC {
 // MARK: - UITableViewDelegate
 // ========================================================================================================================
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 10
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 25
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let identifier:String = "SwiftCell"
         let cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
-        cell.textLabel?.text = "测试条目\(indexPath.row)"
+        cell.textLabel?.text = "测试\(indexPath.row)"
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == 0 {
+            let headerView = UIView()
+            headerView.backgroundColor = UIColor.SX_BackGroundColor()
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            return headerView
+        }
+        
+        let view = UIView()
+        return view
     }
 }
 
