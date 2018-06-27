@@ -71,7 +71,6 @@ class SX_CycleCell: UICollectionViewCell
         }
     }
     
-    
     // MARK: 内部属性
     fileprivate var imgView:UIImageView!
     fileprivate var descLabel:UILabel!
@@ -92,7 +91,6 @@ class SX_CycleCell: UICollectionViewCell
     deinit {
         print("SXCycleCell  deinit")
     }
-    
     
     //=======================================================
     // MARK: 内部方法（layoutSubviews）

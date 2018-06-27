@@ -41,6 +41,3 @@ class SX_TrainingCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 }
-
-
-

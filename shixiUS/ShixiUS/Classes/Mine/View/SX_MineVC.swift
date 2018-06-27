@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SX_MineVC: SX_BaseControler {
+class SX_MineVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

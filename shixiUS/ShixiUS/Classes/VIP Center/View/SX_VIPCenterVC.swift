@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SX_VIPCenterVC: SX_BaseControler {
+class SX_VIPCenterVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

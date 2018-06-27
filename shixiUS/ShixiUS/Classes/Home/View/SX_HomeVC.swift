@@ -25,7 +25,6 @@ class SX_HomeVC: UIViewController {
     
     // 轮播
     private lazy var cycleScrollerView: SX_CycleScrollerView = {
-        
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
         let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: nil, descs: nil)
         return cycleView
@@ -61,20 +60,30 @@ class SX_HomeVC: UIViewController {
         self.title = "实习网"
         view.backgroundColor = UIColor.white
         
-        let NetImgArr = Array<Any>()
-        let descLabelArr = Array<Any>()
+        /**** ======================================================================================================
+         let NetImgArr = Array<Any>()
+         let descLabelArr = Array<Any>()
+         cycleScrollerView.serverImgArray = NetImgArr as? [String]
+         cycleScrollerView.descTextArray  = descLabelArr as? [String]
+         ====================================================================================================== *****/
         
+        let localImgArr = ["localImg6","localImg7","localImg8","localImg9","localImg10"]
+        let descLabelArr = ["韩国防部回应停止部署萨德:遵照最高统帅指导方针",
+                            "勒索病毒攻击再次爆发 国内校园网大面积感染",
+                            "Win10秋季更新重磅功能：跟安卓与iOS无缝连接",
+                            "《琅琊榜2》为何没有胡歌？胡歌：我看过剧本，离开是种保护",
+                            "阿米尔汗在印度的影响力，我国的哪位影视明星能与之齐名呢？"]
         
-        cycleScrollerView.serverImgArray = NetImgArr as? [String]
-        cycleScrollerView.descTextArray  = descLabelArr as? [String]
+        cycleScrollerView.localImgArray = localImgArr
+        cycleScrollerView.descTextArray = descLabelArr
+        
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
         
         homeTableView.addSubview(cycleScrollerView)
         view.addSubview(homeTableView)
         
-        
-        self.navBarTintColor = UIColor.SX_MainColor()
-        self.navBarBackgroundAlpha = 0
+        self.navigationController?.navigationBar.barTintColor = UIColor.SX_MainColor()
+        self.navigationController?.navigationBar.alpha = 0
     }
     
     deinit {
@@ -83,27 +92,45 @@ class SX_HomeVC: UIViewController {
     }
 }
 
-// ==============================
+// ========================================================================================================================
 // MARK: - UIScrollerViewDelagate
-// ==============================
-extension SX_HomeVC: UICollectionViewDelegate, UICollectionViewDataSource{
+// ========================================================================================================================
+extension SX_HomeVC: UIScrollViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        if (offSetY > CGFloat(NAVBAR_COLORCHANGE_POINT)) {
+            let alpha = (offSetY - CGFloat(NAVBAR_COLORCHANGE_POINT)) / CGFloat(kNavH)
+            
+            self.navigationController?.navigationBar.alpha = alpha
+        }else {
+            self.navigationController?.navigationBar.alpha = 0
+        }
+        
+        if (offSetY < LIMIT_OFFSET_Y) {
+            scrollView.contentOffset = CGPoint.init(x: 0, y: LIMIT_OFFSET_Y)
+        }
+        
+        // 改变图片框的大小 (上滑的时候不改变)
+        // 这里不能使用offsetY，因为当（offsetY < LIMIT_OFFSET_Y）的时候，y = LIMIT_OFFSET_Y 不等于 offsetY
+        let newOffsetY = scrollView.contentOffset.y
+        if (newOffsetY < -IMAGE_HEIGHT)
+        {
+            cycleScrollerView.frame = CGRect(x: 0, y: newOffsetY, width: CGFloat(SCREEN_WIDTH), height: -newOffsetY)
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell:SX_TrainingCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCellID", for: indexPath) as! SX_TrainingCollectionViewCell
-        
-        return cell
+    fileprivate func imgsScaledToSize(image: UIImage, newSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(CGSize(width: newSize.width * 2.0, height: newSize.height * 2.0))
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width * 2.0, height: newSize.height * 2.0))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() ?? image
+        return newImage
     }
-    
 }
 
-// ==============================
+// ========================================================================================================================
 // MARK: - UITableViewDelegate
-// ==============================
+// ========================================================================================================================
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -126,7 +153,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
 
 /***
  //MARK: - 版本判断
@@ -154,3 +180,4 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
  } catch { }
  }
  ***/
+
