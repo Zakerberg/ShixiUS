@@ -16,7 +16,6 @@ protocol SXCycleScrollerViewDelegate {
     func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollerView)
 }
 
-
 class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollProtocol {
     
     //==============================================================================================================
@@ -40,6 +39,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
             }
         }
     }
+    
     var serverImgArray:[String]? {
         didSet {
             if let server = serverImgArray {

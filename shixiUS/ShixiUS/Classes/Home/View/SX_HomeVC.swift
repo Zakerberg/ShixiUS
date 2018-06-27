@@ -67,15 +67,15 @@ class SX_HomeVC: UIViewController {
          cycleScrollerView.descTextArray  = descLabelArr as? [String]
          ====================================================================================================== *****/
         
-        let localImgArr = ["localImg6","localImg7","localImg8","localImg9","localImg10"]
-        let descLabelArr = ["韩国防部回应停止部署萨德:遵照最高统帅指导方针",
+        let localImgs = ["localImg6","localImg7","localImg8","localImg9","localImg10"]
+        let descLabels = ["韩国防部回应停止部署萨德:遵照最高统帅指导方针",
                             "勒索病毒攻击再次爆发 国内校园网大面积感染",
                             "Win10秋季更新重磅功能：跟安卓与iOS无缝连接",
                             "《琅琊榜2》为何没有胡歌？胡歌：我看过剧本，离开是种保护",
                             "阿米尔汗在印度的影响力，我国的哪位影视明星能与之齐名呢？"]
         
-        cycleScrollerView.localImgArray = localImgArr
-        cycleScrollerView.descTextArray = descLabelArr
+        cycleScrollerView.localImgArray = localImgs
+        cycleScrollerView.descTextArray = descLabels
         
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
         
@@ -84,8 +84,9 @@ class SX_HomeVC: UIViewController {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.SX_MainColor()
         self.navigationController?.navigationBar.alpha = 0
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
-    
+
     deinit {
         homeTableView.delegate = nil
         print("deinit")
@@ -95,7 +96,7 @@ class SX_HomeVC: UIViewController {
 // ========================================================================================================================
 // MARK: - UIScrollerViewDelagate
 // ========================================================================================================================
-extension SX_HomeVC: UIScrollViewDelegate {
+extension SX_HomeVC {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offSetY = scrollView.contentOffset.y
@@ -132,24 +133,18 @@ extension SX_HomeVC: UIScrollViewDelegate {
 // MARK: - UITableViewDelegate
 // ========================================================================================================================
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 50
+        return 25
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let identify:String = "SwiftCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: identify, for: indexPath)
-        cell.accessoryType = .disclosureIndicator
+        let identifier:String = "SwiftCell"
+        let cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
         cell.textLabel?.text = "测试条目\(indexPath.row)"
-        
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         return cell
     }
 }

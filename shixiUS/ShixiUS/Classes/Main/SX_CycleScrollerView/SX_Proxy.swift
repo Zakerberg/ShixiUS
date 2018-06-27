@@ -1,4 +1,3 @@
-
 //
 //  SX_Proxy.swift
 //  ShixiUS
@@ -52,8 +51,9 @@ struct SXProxy
     }
 }
 
+// ====================================================================================
 // MARK: - pageControl 相关
-
+// ====================================================================================
 private let SXPageControlMargin: CGFloat = 15
 private let SXPageControlPointWidth: CGFloat = 2
 
@@ -77,7 +77,7 @@ extension PageControlAlimentProtocol where Self : UIView
     {
         if pageControl.isHidden == false
         {
-            let pageH:CGFloat = 20//pageControl.pageSize.height
+            let pageH:CGFloat = 20 //pageControl.pageSize.height
             let pageY = bounds.height - pageH
             let pageW = pageControl.pageSize.width
             var pageX:CGFloat = 0

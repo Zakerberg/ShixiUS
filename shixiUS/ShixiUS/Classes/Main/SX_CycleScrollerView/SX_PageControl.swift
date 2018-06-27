@@ -49,14 +49,14 @@ class SX_PageControl: UIPageControl
     }
 }
 
+
 // MARK: - update index
 extension SX_PageControl
 {
     func updatePageControl()
     {
-        for index in 0...subviews.count
+        for index in 0..<subviews.count
         {
-            
             let newSize = getDotSize(currentIndex: index)
             let dot = subviews[index]
             dot.frame = CGRect(x: dot.frame.origin.x, y: dot.frame.origin.y, width: newSize.width, height: newSize.height)
