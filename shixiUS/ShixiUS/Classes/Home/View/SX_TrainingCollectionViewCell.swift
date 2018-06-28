@@ -10,6 +10,8 @@ import UIKit
 
 class SX_TrainingCollectionViewCell: UICollectionViewCell {
     
+    var titleLabel: UILabel?
+    var moreButton: UIButton?
     var imageView: UIImageView?
     var descTitle: UILabel?
     var priceLabel: UILabel?
@@ -26,19 +28,11 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
     
     func setupView()  {
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        self.titleLabel = UILabel()
+        self.titleLabel?.text = "热门实训"
+        self.titleLabel?.textColor = UIColor.gray
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+    
     }
 }
 
