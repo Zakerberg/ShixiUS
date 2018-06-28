@@ -15,7 +15,3 @@ let SCREEN_WIDTH = UIScreen.main.bounds.size.width
 let iphoneX = (SCREEN_WIDTH == 375 && SCREEN_HEIGHT == 812 ?  true : false)
 let kNavH = (SCREEN_HEIGHT == 812 ? 88 : 64).FloatValue
 let kTabBarHeight = (iphoneX ? 83.FloatValue : 49.FloatValue)
-
-
-
-

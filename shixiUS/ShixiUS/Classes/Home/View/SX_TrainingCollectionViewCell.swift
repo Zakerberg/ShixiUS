@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 6/26/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//
+//  热门实训CollectionViewCell
 
 import UIKit
 
@@ -26,7 +26,19 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
     
     func setupView()  {
         
-        imageView?.image = UIImage(named: "ccc")
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
 

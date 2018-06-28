@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import RxSwift
+
 private let NAVBAR_COLORCHANGE_POINT = -80
 private let IMAGE_HEIGHT:CGFloat = 240
 private let SCROLL_DOWN_LIMIT: CGFloat = 100
 private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 
 class SX_HomeVC: UIViewController {
+    
+    private lazy var homeButton: UIButton = {
+        let button = UIButton()
+        button.imageView?.frame = CGRect(x: 20, y: 20, width: 55, height: 55)
+        button.imageView?.center = CGPoint(x: SCREEN_WIDTH/3, y: 40)
+        button.titleLabel?.frame = CGRect(x: 0, y: 50, width: button.frame.size.width, height: 50)
+        button.titleLabel?.textAlignment = .center
+        return button
+    }()
     
     private lazy var homeTableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -57,7 +68,6 @@ class SX_HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "首页"
         view.backgroundColor = UIColor.white
         
         /**** ======================================================================================================
@@ -134,10 +144,17 @@ extension SX_HomeVC {
 // ========================================================================================================================
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            
+            return 100
+        }
+        return 0
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return 10
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -158,21 +175,37 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
             let headerView = UIView()
-            headerView.backgroundColor = UIColor.SX_BackGroundColor()
+            headerView.backgroundColor = UIColor.white
+            let arr = ["实训项目","海外就业","培训认证"]
             
-            
-            
-            
-            
-            
-            
-            
-            
+            for i in 0..<arr.count {
+                
+                let index = i % 3
+                let page = i / 3
+                homeButton = UIButton()
+                homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
+                homeButton.titleLabel?.lineBreakMode = .byWordWrapping
+                homeButton.titleLabel?.numberOfLines = 0
+                homeButton.setTitleColor(UIColor.black, for: .normal)
+             
+                homeButton.titleLabel?.textAlignment = .center
+                //shomeButton.setTitle(arr[i], for: .normal)
+                homeButton.setImage(UIImage(named: arr[i]), for: .normal)
+                homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+                homeButton.addTarget(self, action: #selector(homeButtonClick), for: .touchUpInside)
+                
+                headerView.addSubview(homeButton)
+                
+            }
             return headerView
         }
         
         let view = UIView()
         return view
+    }
+    
+    @objc func homeButtonClick() {
+        SXLog("111")
     }
 }
 

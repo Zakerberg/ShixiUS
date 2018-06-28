@@ -29,7 +29,7 @@ class SX_TrainingCell: UITableViewCell {
         
         collectionView.delegate = self as? UICollectionViewDelegate
         collectionView.dataSource = self as? UICollectionViewDataSource
-        collectionView.register(SX_TrainingCell.self, forCellWithReuseIdentifier: "collectionViewCellID")
+        collectionView.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: "collectionViewCellID")
         collectionView.isScrollEnabled = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = UIColor.colorWithHexString(hex: "f0f0f0", alpha: 0)
