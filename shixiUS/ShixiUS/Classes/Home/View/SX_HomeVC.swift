@@ -22,6 +22,8 @@ class SX_HomeVC: UIViewController {
         button.imageView?.center = CGPoint(x: SCREEN_WIDTH/3, y: 40)
         button.titleLabel?.frame = CGRect(x: 0, y: 50, width: button.frame.size.width, height: 50)
         button.titleLabel?.textAlignment = .center
+        
+        
         return button
     }()
     
