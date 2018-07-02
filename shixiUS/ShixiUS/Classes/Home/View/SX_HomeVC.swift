@@ -14,6 +14,13 @@ private let IMAGE_HEIGHT:CGFloat = 240
 private let SCROLL_DOWN_LIMIT: CGFloat = 100
 private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 
+/// 实训项目视图
+struct InterShipPreview {
+    var title:[String]
+    var imgs:[String]
+    var prices:[String]
+}
+
 class SX_HomeVC: UIViewController {
     
     private lazy var homeButton: UIButton = {
@@ -30,6 +37,8 @@ class SX_HomeVC: UIViewController {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-kNavH, 0, 0, 0)
         tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
+        tableView.estimatedRowHeight = 200
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -157,12 +166,15 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 10
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        if  section == 1 {
+            return 4
+        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -212,30 +224,55 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-/***
- //MARK: - 版本判断
- func judgeAppVersion() {
- let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! NSString
- do {
- _ = NSError()
- var response = try NSURLConnection.sendSynchronousRequest(URLRequest(url: URL(fileURLWithPath: "https://itunes.apple.com/cn/lookup?id=1044254573")), returning: nil)
- if response == nil {
- print("没连接网络")
- return
- }
- 
- let appInfoDic = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary
- print(appInfoDic)
- let array = appInfoDic["results"] as! NSArray
- if array.count < 1 {
- print("此App未提交")
- return
- }
- let dic = array[0] as! NSDictionary
- let appStoreVersion = dic["version"]
- print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
- 
- } catch { }
- }
- ***/
+// ========================================================================================================================
+// MARK: - UICollectionViewDelegate
+// ========================================================================================================================
+extension SX_HomeVC: UICollectionViewDelegate,UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return 4
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        var cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCellID", for: indexPath)
+        
+        if cell == nil {
+            
+            cell = UICollectionViewCell()
+        }
+        
+        cell.contentView.backgroundColor = UIColor.red
+        
+        return cell
+    }
+}
+
+//MARK: - 版本判断
+func judgeAppVersion() {
+    let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! NSString
+    do {
+        _ = NSError()
+        var response = try NSURLConnection.sendSynchronousRequest(URLRequest(url: URL(fileURLWithPath: "https://itunes.apple.com/cn/lookup?id=1044254573")), returning: nil)
+        if response == nil {
+            print("没连接网络")
+            return
+        }
+        
+        let appInfoDic = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary
+        print(appInfoDic)
+        let array = appInfoDic["results"] as! NSArray
+        if array.count < 1 {
+            print("此App未提交")
+            return
+        }
+        let dic = array[0] as! NSDictionary
+        let appStoreVersion = dic["version"]
+        print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
+        
+    } catch { }
+}
+
 

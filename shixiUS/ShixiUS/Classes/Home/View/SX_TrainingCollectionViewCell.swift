@@ -49,16 +49,12 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
             self.moreButton?.titleLabel?.textAlignment = .right
         })
         
-        
         self.imageView?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
         }).config({ (imageView) in
             self.imageView?.image = UIImage(named: "")
             self.accessibilityAssistiveTechnologyFocusedIdentifiers()
-            
-            
         })
-    
     }
 }
 
