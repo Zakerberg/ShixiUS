@@ -54,25 +54,10 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
             
         }).config({ (imageView) in
             self.imageView?.image = UIImage(named: "")
+            self.accessibilityAssistiveTechnologyFocusedIdentifiers()
+            
+            
         })
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
     }
 }

@@ -23,7 +23,6 @@ class SX_HomeVC: UIViewController {
         button.titleLabel?.frame = CGRect(x: 0, y: 50, width: button.frame.size.width, height: 50)
         button.titleLabel?.textAlignment = .center
         
-        
         return button
     }()
     
@@ -33,6 +32,7 @@ class SX_HomeVC: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
+        
         return tableView
     }()
     
@@ -40,6 +40,7 @@ class SX_HomeVC: UIViewController {
     private lazy var cycleScrollerView: SX_CycleScrollerView = {
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
         let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: nil, descs: nil)
+        
         return cycleView
     }()
     
@@ -189,7 +190,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                 homeButton.titleLabel?.lineBreakMode = .byWordWrapping
                 homeButton.titleLabel?.numberOfLines = 0
                 homeButton.setTitleColor(UIColor.black, for: .normal)
-             
+                
                 homeButton.titleLabel?.textAlignment = .center
                 //shomeButton.setTitle(arr[i], for: .normal)
                 homeButton.setImage(UIImage(named: arr[i]), for: .normal)
@@ -197,8 +198,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                 homeButton.addTarget(self, action: #selector(homeButtonClick), for: .touchUpInside)
                 
                 headerView.addSubview(homeButton)
-                
             }
+            
             return headerView
         }
         
