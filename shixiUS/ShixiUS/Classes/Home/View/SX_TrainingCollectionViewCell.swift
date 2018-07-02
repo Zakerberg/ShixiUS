@@ -13,7 +13,7 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
 
     var sourceImageView:UIImageView?
     var sourceTitle:UILabel?
-    var priceTitle:UILabel?
+    var priceLabel:UILabel?
     // 课程下面的title
     var certificateTitle:UILabel?
     
@@ -56,12 +56,12 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
             certificateTitle.textColor = UIColor.gray
         })
         
-        self.priceTitle?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.priceLabel?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.lessThanOrEqualTo(self.certificateTitle!.snp.bottom).offset(Margin)
-        }).config({ (priceTitle) in
-            priceTitle.text = "人名币2000元"
-            priceTitle.textColor = UIColor.SX_MainColor()
-            priceTitle.font = UIFont.boldSystemFont(ofSize: 10)
+        }).config({ (priceLabel) in
+            priceLabel.text = "人名币2000元"
+            priceLabel.textColor = UIColor.SX_MainColor()
+            priceLabel.font = UIFont.boldSystemFont(ofSize: 10)
         })
         
     }

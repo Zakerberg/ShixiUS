@@ -40,7 +40,6 @@ class SX_TrainingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -68,4 +67,20 @@ class SX_TrainingCell: UITableViewCell {
             self.moreButton?.titleLabel?.textAlignment = .right
         })
     }
+
+    func reloadData() {
+    
+        
+        
+        
+        
+        
+    }
+
+
+
+
+
+
+
 }
