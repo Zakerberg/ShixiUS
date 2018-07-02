@@ -22,22 +22,20 @@ class SX_HotJobsCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpView()
+        configCell()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUpView() {
+    func configCell() {
     
         self.jobsLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.center.equalToSuperview()
+            
         }).config({ (jobsLabel) in
-            
             jobsLabel.text = "111111"
-            
-            
             jobsLabel.textColor = UIColor.black
         })
     }

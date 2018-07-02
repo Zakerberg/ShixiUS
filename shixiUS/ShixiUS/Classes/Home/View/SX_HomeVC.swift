@@ -36,9 +36,10 @@ class SX_HomeVC: UIViewController {
     private lazy var homeTableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-kNavH, 0, 0, 0)
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.showsVerticalScrollIndicator = false
-        tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 200
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -98,9 +99,7 @@ class SX_HomeVC: UIViewController {
         
         cycleScrollerView.localImgArray = localImgs
         cycleScrollerView.descTextArray = descLabels
-        
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
-        
         homeTableView.addSubview(cycleScrollerView)
         view.addSubview(homeTableView)
         
@@ -224,31 +223,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-// ========================================================================================================================
-// MARK: - UICollectionViewDelegate
-// ========================================================================================================================
-extension SX_HomeVC: UICollectionViewDelegate,UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 4
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        var cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCellID", for: indexPath)
-        
-        if cell == nil {
-            
-            cell = UICollectionViewCell()
-        }
-        
-        cell.contentView.backgroundColor = UIColor.red
-        
-        return cell
-    }
-}
+
+
 
 //MARK: - 版本判断
 func judgeAppVersion() {

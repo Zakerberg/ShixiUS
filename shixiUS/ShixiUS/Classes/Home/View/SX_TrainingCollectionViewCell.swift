@@ -4,57 +4,73 @@
 //
 //  Created by Michael 柏 on 6/26/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  热门实训CollectionViewCell
+//  热门实训等... CollectionViewCell
 
 import UIKit
 
+private let Margin:CGFloat = 5
 class SX_TrainingCollectionViewCell: UICollectionViewCell {
-    
-    var titleLabel: UILabel?
-    var moreButton: UIButton?
-    var imageView: UIImageView?
-    var descTitle: UILabel?
-    var priceLabel: UILabel?
-    var symbolLabel: UILabel?
+
+    var sourceImageView:UIImageView?
+    var sourceTitle:UILabel?
+    var priceTitle:UILabel?
+    // 课程下面的title
+    var certificateTitle:UILabel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        configCell()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView()  {
+    /// 配置Cell
+    func configCell() {
         
-        self.titleLabel = UILabel()
-        self.titleLabel?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(40)
-            make.centerX.equalToSuperview()
-        }).config({ (titleLabel) in
-            self.titleLabel?.text = "热门实训"
-            self.titleLabel?.textColor = UIColor.gray
-            self.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        self.sourceImageView?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(50)
+        }).config({ (sourceImageView) in
+            sourceImageView.image = UIImage(named: "placeholder")
         })
         
-        self.moreButton = UIButton()
-        
-        self.moreButton?.addhere(toSuperView: self.contentView.layout(snapKitMaker: { (make) in
-            make.top.equalTo((self.titleLabel?.snp.top)!).offset(0)
-            make.left.equalToSuperview().offset(-10)
-        })).config({ (morebutton) in
-            self.moreButton?.backgroundColor = UIColor.blue
-            self.moreButton?.titleLabel?.text = "更多"
-            self.moreButton?.titleLabel?.textAlignment = .right
+        self.sourceTitle?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.lessThanOrEqualTo(self.sourceImageView!.snp.bottom).offset(Margin)
+            make.left.lessThanOrEqualTo(self.contentView).offset(Margin)
+        }).config({ (sourceTitle) in
+            sourceTitle.text = "课程标题 测试测试课程标题 测试测试课程标题 测试测试课程标题 测试测试000"
+            sourceTitle.font = UIFont.boldSystemFont(ofSize: 12)
+            sourceTitle.textColor = UIColor.black
+            sourceTitle.numberOfLines = 0
         })
         
-        self.imageView?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.certificateTitle?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.lessThanOrEqualTo(self.sourceTitle!.snp.bottom).offset(Margin)
+            make.right
             
-        }).config({ (imageView) in
-            self.imageView?.image = UIImage(named: "")
-            self.accessibilityAssistiveTechnologyFocusedIdentifiers()
+        }).config({ (certificateTitle) in
+            certificateTitle.text = "证书标题 测试证书000"
+            certificateTitle.font = UIFont.systemFont(ofSize: 7)
+            certificateTitle.textColor = UIColor.gray
         })
+        
+        self.priceTitle?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.lessThanOrEqualTo(self.certificateTitle!.snp.bottom).offset(Margin)
+        }).config({ (priceTitle) in
+            priceTitle.text = "人名币2000元"
+            priceTitle.textColor = UIColor.SX_MainColor()
+            priceTitle.font = UIFont.boldSystemFont(ofSize: 10)
+        })
+        
     }
 }
+
+
+
+
+
+
+
 
