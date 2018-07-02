@@ -63,14 +63,5 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
             priceLabel.textColor = UIColor.SX_MainColor()
             priceLabel.font = UIFont.boldSystemFont(ofSize: 10)
         })
-        
     }
 }
-
-
-
-
-
-
-
-

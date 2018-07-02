@@ -7,6 +7,7 @@
 //  热门岗位Cell
 
 import UIKit
+import SDWebImage
 
 class SX_HotJobsCell: UITableViewCell {
 
@@ -14,6 +15,9 @@ class SX_HotJobsCell: UITableViewCell {
     var insduryLabel: UILabel?
     var addressLabel:UILabel?
     var eduLabel:UILabel?
+    var addImageView:UIImageView?
+    var eduImageView:UIImageView?
+    var logoImageView:UIImageView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,6 +42,15 @@ class SX_HotJobsCell: UITableViewCell {
             jobsLabel.text = "111111"
             jobsLabel.textColor = UIColor.black
         })
+    }
+    
+    func reloadData(jobs: NSString, insduty: NSString,address: NSString,edu: NSString, logo: NSString)  {
+        self.jobsLabel?.text = jobs as String
+        self.addressLabel?.text = address as String
+        self.eduLabel?.text = edu as String
+    
+        //self.logoImageView?.image = UIImage.init(data: )
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

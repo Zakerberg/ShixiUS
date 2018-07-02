@@ -39,7 +39,6 @@ class SX_HomeVC: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.showsVerticalScrollIndicator = false
         tableView.estimatedRowHeight = 200
-        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -179,9 +178,17 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let identifier:String = "SwiftCell"
-        let cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
-        cell.textLabel?.text = "测试\(indexPath.row)"
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        
+        // let cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
+        // cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        
+        let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
+        
+        
+
+        
+        
+        
         return cell
     }
     
