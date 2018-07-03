@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 class SX_HotJobsCell: UITableViewCell {
-
+    
     var jobsLabel: UILabel?
     var insduryLabel: UILabel?
     var addressLabel:UILabel?
@@ -34,7 +34,7 @@ class SX_HotJobsCell: UITableViewCell {
     }
     
     func configCell() {
-    
+        
         self.jobsLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.center.equalToSuperview()
             
@@ -48,14 +48,11 @@ class SX_HotJobsCell: UITableViewCell {
         self.jobsLabel?.text = jobs as String
         self.addressLabel?.text = address as String
         self.eduLabel?.text = edu as String
-    
-        //self.logoImageView?.image = UIImage.init(data: )
-        
+        // self.logoImageView?.image = UIImage.sd_image(with: <#T##Data?#>)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 }
