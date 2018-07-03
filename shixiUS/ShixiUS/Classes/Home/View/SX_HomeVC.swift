@@ -156,25 +156,24 @@ extension SX_HomeVC {
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-     return 85
-        
+        return 90
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 100
+            
+        }else if section == 1{
+            return 42
         }
         return 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if  section == 1 {
             return 4
         }
@@ -190,8 +189,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
-            let headerView = UIView()
-            headerView.backgroundColor = UIColor.white
+            let headerView1 = UIView()
+            headerView1.backgroundColor = UIColor.white
             let arr = ["实训项目","海外就业","培训认证"]
             
             for i in 0..<arr.count {
@@ -205,15 +204,28 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                 homeButton.setTitleColor(UIColor.black, for: .normal)
                 
                 homeButton.titleLabel?.textAlignment = .center
-                //shomeButton.setTitle(arr[i], for: .normal)
+                homeButton.setTitle(arr[i], for: .normal)
                 homeButton.setImage(UIImage(named: arr[i]), for: .normal)
                 homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
                 homeButton.addTarget(self, action: #selector(homeButtonClick), for: .touchUpInside)
                 
-                headerView.addSubview(homeButton)
+                headerView1.addSubview(homeButton)
             }
             
-            return headerView
+            return headerView1
+            
+        }else if section == 1 {
+            let hotJobHeaderView = UIView()
+            
+            let hotTitle = UILabel().addhere(toSuperView: hotJobHeaderView).layout { (make) in
+                make
+                
+                }.config { (hotTitle) in
+                    hotTitle.text = "热门实训"
+                    hotTitle.font = UIFont.systemFont(ofSize: 15)
+                    hotTitle.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+            }
+            return hotJobHeaderView
         }
         
         let view = UIView()
