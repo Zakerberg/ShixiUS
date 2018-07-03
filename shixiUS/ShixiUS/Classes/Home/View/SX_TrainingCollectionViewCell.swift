@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let Margin:CGFloat = 5
+
 class SX_TrainingCollectionViewCell: UICollectionViewCell {
 
     var sourceImageView:UIImageView?
