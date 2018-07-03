@@ -17,6 +17,6 @@ let kNavH = (SCREEN_HEIGHT == 812 ? 88 : 64).FloatValue
 let kTabBarHeight = (iphoneX ? 83.FloatValue : 49.FloatValue)
 
 // 间距
-let Margin:CGFloat = 5
+let Margin:CGFloat = 10
 
 

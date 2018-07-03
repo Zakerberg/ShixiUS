@@ -13,6 +13,7 @@ private let NAVBAR_COLORCHANGE_POINT = -80
 private let IMAGE_HEIGHT:CGFloat = 240
 private let SCROLL_DOWN_LIMIT: CGFloat = 100
 private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
+private let identifier:String = "hotJobsCell"
 
 /// 实训项目视图
 struct InterShipPreview {
@@ -154,9 +155,13 @@ extension SX_HomeVC {
 // ========================================================================================================================
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+     return 100
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            
             return 100
         }
         return 0
@@ -176,18 +181,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let identifier:String = "SwiftCell"
-        
-        // let cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
-        // cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        
         let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
-        
-        
-
-        
-        
         
         return cell
     }
@@ -229,9 +223,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         SXLog("111")
     }
 }
-
-
-
 
 //MARK: - 版本判断
 func judgeAppVersion() {

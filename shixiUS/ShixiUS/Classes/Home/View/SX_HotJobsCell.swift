@@ -59,61 +59,63 @@ class SX_HotJobsCell: UITableViewCell {
             insduryLabel.sizeToFit()
         })
         
-        self.addImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.equalTo(self.insduryLabel!.snp.left)
-            make.top.equalTo(self.insduryLabel!.snp.bottom).offset(Margin)
-            make.width.height.equalToSuperview().offset(15)
-            
-        }).config({ (addImageView) in
-            addImageView.image = UIImage(named: "address")
-        })
+//        
+//        self.stackView = UIStackView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.top.equalTo(self.insduryLabel!.snp.bottom).offset(Margin)
+//            make.height.equalToSuperview().offset(14)
+//            
+//        }).config({ (stackView) in
+//            stackView.sizeToFit()
+//            stackView.spacing = 5
+//            stackView.insertArrangedSubview(self.addImageView!, at: 0)
+//            stackView.insertArrangedSubview(self.addressLabel!, at: 1)
+//            stackView.insertArrangedSubview(self.eduImageView!, at: 2)
+//            stackView.insertArrangedSubview(self.eduLabel!, at: 3)
+//        })
         
-        self.addressLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.equalTo(self.addImageView!.snp.right).offset(Margin)
-            make.top.height.width.equalTo(self.addImageView!)
-        }).config({ (addressLabel) in
-            addressLabel.sizeToFit()
-            addressLabel.font = UIFont.systemFont(ofSize: 10)
-            addressLabel.text = "美国/纽约 测试"
-        })
-        
-        self.eduImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.equalTo(self.addressLabel!.snp.right).offset(Margin)
-            make.top.width.height.equalTo(self.addImageView!)
-        }).config({ (eduImageView) in
-            eduImageView.image = UIImage(named: "education")
-        })
-        
-        self.eduLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.equalTo(self.addressLabel!.snp.right).offset(Margin)
-            make.top.height.width.equalTo(self.addImageView!)
-        }).config({ (eduLabel) in
-            eduLabel.text = "本科-测试"
-            eduLabel.font = UIFont.systemFont(ofSize: 10)
-            eduLabel.sizeToFit()
-        })
-        
-        
-        //        self.stackView = UIStackView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-        //            make.top.equalTo(self.insduryLabel!.snp.bottom).offset(Margin)
-        //            make.height.equalToSuperview().offset(14)
-        //
-        //        }).config({ (stackView) in
-        //            stackView.sizeToFit()
-        //            stackView.spacing = 5
-        //            stackView.insertArrangedSubview(self.addImageView!, at: 0)
-        //            stackView.insertArrangedSubview(self.addressLabel!, at: 1)
-        //            stackView.insertArrangedSubview(self.eduImageView!, at: 2)
-        //            stackView.insertArrangedSubview(self.eduLabel!, at: 3)
-        //        })
-        
-        self.logoImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.jobsLabel!)
-            make.left.equalToSuperview().offset(Margin)
-            make.width.width.equalToSuperview().offset(60)
-        }).config({ (logoImageView) in
-            logoImageView.image = UIImage.init(named: "test000")
-        })
+//        self.addImageView = UIImageView().addhere(toSuperView: self.stackView!).layout(snapKitMaker: { (make) in
+//            make.left.equalTo(self.insduryLabel!.snp.left)
+//            make.top.equalTo(self.insduryLabel!.snp.bottom).offset(Margin)
+//            make.width.height.equalTo(15)
+//
+//        }).config({ (addImageView) in
+//            addImageView.image = UIImage(named: "address")
+//        })
+//
+//        self.addressLabel = UILabel().addhere(toSuperView: self.stackView!).layout(snapKitMaker: { (make) in
+//            make.left.equalTo(self.addImageView!.snp.right).offset(Margin)
+//            make.top.height.width.equalTo(self.addImageView!)
+//        }).config({ (addressLabel) in
+//            addressLabel.sizeToFit()
+//            addressLabel.font = UIFont.systemFont(ofSize: 10)
+//            addressLabel.text = "美国/纽约 测试"
+//        })
+//
+//        self.eduImageView = UIImageView().addhere(toSuperView: self.stackView!).layout(snapKitMaker: { (make) in
+//            make.left.equalTo(self.addressLabel!.snp.right).offset(Margin)
+//            make.top.width.height.equalTo(self.addImageView!)
+//        }).config({ (eduImageView) in
+//            eduImageView.image = UIImage(named: "education")
+//        })
+//
+//        self.eduLabel = UILabel().addhere(toSuperView: self.stackView!).layout(snapKitMaker: { (make) in
+//            make.left.equalTo(self.addressLabel!.snp.right).offset(Margin)
+//            make.top.height.width.equalTo(self.addImageView!)
+//        }).config({ (eduLabel) in
+//            eduLabel.text = "本科-测试"
+//            eduLabel.font = UIFont.systemFont(ofSize: 10)
+//            eduLabel.sizeToFit()
+//        })
+//
+//
+//
+//        self.logoImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.top.equalTo(self.jobsLabel!)
+//            make.left.equalToSuperview().offset(Margin)
+//            make.width.equalTo(60)
+//        }).config({ (logoImageView) in
+//            logoImageView.image = UIImage.init(named: "test000")
+//        })
     }
     
     func reloadData(jobs: NSString, insduty: NSString,address: NSString,edu: NSString, logo: NSString)  {
