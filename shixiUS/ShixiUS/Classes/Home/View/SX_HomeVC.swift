@@ -182,12 +182,12 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
+        
         if indexPath.section == 1 {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
             return cell
         }
-       
+        
         let cell1 = UITableViewCell(style: .default, reuseIdentifier: CellID)
         cell1.textLabel?.text = "测试Cell"
         cell1.backgroundColor = UIColor.red
@@ -224,7 +224,16 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     homeButton.adjustsImageWhenDisabled = false
                     homeButton.setImage(UIImage(named: imagesArr[i]), for: .normal)
                     homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-                    homeButton.addTarget(self, action: #selector(homeBtbClick), for: .touchUpInside)
+                    homeButton.rx.tap.subscribe(onNext: { (self) in
+                        
+                    }, onError: { (error) in
+                        
+                    }, onCompleted: {
+                        
+                    }, onDisposed: {
+                        
+                    })
+                    
                 })
             }
             return headerView1
@@ -254,41 +263,45 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
                     moreButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -35, bottom: 0, right: 35)
             }
-            
             return hotJobHeaderView
         }
         
         let view = UIView()
         return view
     }
+}
+
+//MARK: - Other Method
+extension SX_HomeVC {
+    /// Alert
+    func showMessage(_ text:String) {
+        let alertController = UIAlertController(title: text, message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
     
-    @objc func homeBtbClick(){
-        print("111")
+    /// Version
+    func judgeAppVersion() {
+        let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! NSString
+        do {
+            _ = NSError()
+            var response = try NSURLConnection.sendSynchronousRequest(URLRequest(url: URL(fileURLWithPath: "https://itunes.apple.com/cn/lookup?id=1044254573")), returning: nil)
+            if response == nil {
+                print("没连接网络")
+                return
+            }
+            
+            let appInfoDic = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary
+            print(appInfoDic)
+            let array = appInfoDic["results"] as! NSArray
+            if array.count < 1 {
+                print("此App未提交")
+                return
+            }
+            let dic = array[0] as! NSDictionary
+            let appStoreVersion = dic["version"]
+            print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
+        } catch { }
     }
 }
-
-//MARK: - 版本判断
-func judgeAppVersion() {
-    let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! NSString
-    do {
-        _ = NSError()
-        var response = try NSURLConnection.sendSynchronousRequest(URLRequest(url: URL(fileURLWithPath: "https://itunes.apple.com/cn/lookup?id=1044254573")), returning: nil)
-        if response == nil {
-            print("没连接网络")
-            return
-        }
-        
-        let appInfoDic = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary
-        print(appInfoDic)
-        let array = appInfoDic["results"] as! NSArray
-        if array.count < 1 {
-            print("此App未提交")
-            return
-        }
-        let dic = array[0] as! NSDictionary
-        let appStoreVersion = dic["version"]
-        print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
-    } catch { }
-}
-
-
