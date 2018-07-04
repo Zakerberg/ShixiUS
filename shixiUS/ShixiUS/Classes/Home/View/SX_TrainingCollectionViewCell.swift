@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class SX_TrainingCollectionViewCell: UICollectionViewCell {
 
     var sourceImageView:UIImageView?

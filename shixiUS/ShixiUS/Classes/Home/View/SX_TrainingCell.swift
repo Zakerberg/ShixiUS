@@ -61,19 +61,18 @@ class SX_TrainingCell: UITableViewCell {
         self.moreButton?.addhere(toSuperView: self.contentView.layout(snapKitMaker: { (make) in
             make.top.equalTo((self.titleLabel?.snp.top)!).offset(0)
             make.left.equalToSuperview().offset(-10)
-        })).config({ (morebutton) in
-            self.moreButton?.backgroundColor = UIColor.blue
-            self.moreButton?.titleLabel?.text = "更多"
-            self.moreButton?.titleLabel?.textAlignment = .right
+        })).config({ (moreButton) in
+            moreButton.setImage(UIImage.init(named: "more"), for: .normal)
+            moreButton.setTitle("更多", for: .normal)
+            moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
+            moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
+            moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
         })
     }
-
+    
     func reloadData() {
     
-        
-        
-        
-        
         
     }
 }

@@ -268,7 +268,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
                     moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
                     moreButton.rx.tap.subscribe(onNext: { (self) in
-                        SXLog("进入不更多界面")
+                        SXLog("进入更多界面")
                     }, onError: { (error) in
                         
                     }, onCompleted: nil, onDisposed: nil)
@@ -297,6 +297,7 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
 
 //MARK: - Other Method
 extension SX_HomeVC {
+    
     /// Alert
     func showMessage(_ text:String) {
         let alertController = UIAlertController(title: text, message: nil, preferredStyle: .alert)

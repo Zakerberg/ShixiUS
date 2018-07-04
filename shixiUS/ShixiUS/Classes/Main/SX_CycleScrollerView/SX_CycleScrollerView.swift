@@ -11,7 +11,7 @@ import UIKit
 protocol SXCycleScrollerViewDelegate {
     
     // 点击图片的回调
-    func cycleScrollerViewSelected(at index:Int, cycleScrollerView: SX_CycleScrollerView)
+   func cycleScrollerViewSelected(at index:Int, cycleScrollerView: SX_CycleScrollerView)
     // 图片滚动的回调
     func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollerView)
 }
@@ -48,6 +48,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
             }
         }
     }
+    
     var descTextArray :[String]?
     var placeholderImage: UIImage?
     
@@ -193,6 +194,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     ///   - type:  ImagesType                         default:Server
     ///   - imgs:  localImgArray / serverImgArray     default:nil
     ///   - descs: descTextArray                      default:nil
+    
     init(frame: CGRect, type:ImgType = .SERVER, imgs:[String]? = nil, descs:[String]? = nil, defaultDotImage:UIImage? = nil, currentDotImage:UIImage? = nil, placeholderImage:UIImage? = nil)
     {
         super.init(frame: frame)
