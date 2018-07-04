@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 6/19/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//
+//  首页
 
 import UIKit
 import RxSwift
@@ -204,10 +204,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             let imagesArr = ["project","oversea","training"]
             
             for i in 0..<namesArr.count {
-                
                 let index = i % 3
                 let page = i / 3
-                
                 // homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
                 homeButton = UIButton(type: .custom).addhere(toSuperView: headerView1).layout(snapKitMaker: { (make) in
                     make.top.equalToSuperview().offset(Margin)
@@ -226,16 +224,20 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
                     homeButton.rx.tap.subscribe(onNext: { (self) in
                         
+                        SXLog("首页按钮的点击\(i)")
+                        if i == 0 {
+                            SXLog("进入实训项目\(i)")
+                        }else if i == 1 {
+                            SXLog("进入海外就业\(i)")
+                        }else if i == 2 {
+                            SXLog("进入培训认证\(i)")
+                        }
                     }, onError: { (error) in
-                        
-                    }, onCompleted: {
-                        
-                    }, onDisposed: {
-                        
-                    })
-                    
+                        SXLog(error)
+                    }, onCompleted: nil, onDisposed: nil)
                 })
             }
+            
             return headerView1
         }else if section == 1 {
             
@@ -252,17 +254,24 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     hotTitle.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             }
             
-            let moreButton = UIButton().addhere(toSuperView: hotJobHeaderView).layout { (make) in
+            let _ = UIButton().addhere(toSuperView: hotJobHeaderView).layout { (make) in
                 make.top.equalTo(hotTitle.snp.top)
-                make.right.equalToSuperview()
                 make.height.centerY.equalTo(hotTitle)
+                make.right.equalToSuperview().offset(-Margin)
                 }.config { (moreButton) in
                     moreButton.setImage(UIImage.init(named: "more"), for: .normal)
                     moreButton.setTitle("更多", for: .normal)
                     moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
                     moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
-                    moreButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -35, bottom: 0, right: 35)
+                    moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
+                    moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
+                    moreButton.rx.tap.subscribe(onNext: { (self) in
+                        SXLog("进入不更多界面")
+                    }, onError: { (error) in
+                        
+                    }, onCompleted: nil, onDisposed: nil)
             }
+            
             return hotJobHeaderView
         }
         
