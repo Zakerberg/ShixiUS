@@ -15,6 +15,7 @@ private let IMAGE_HEIGHT:CGFloat = 240
 private let SCROLL_DOWN_LIMIT: CGFloat = 100
 private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 private let identifier:String = "hotJobsCell"
+let CellID = "CellID"
 
 /// 实训项目视图
 struct InterShipPreview {
@@ -181,8 +182,17 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
-        return cell
+      
+        if indexPath.section == 1 {
+            let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
+            return cell
+        }
+       
+        let cell1 = UITableViewCell(style: .default, reuseIdentifier: CellID)
+        cell1.textLabel?.text = "测试Cell"
+        cell1.backgroundColor = UIColor.red
+        cell1.accessoryType = .disclosureIndicator
+        return cell1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -201,10 +211,9 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                 // homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
                 homeButton = UIButton(type: .custom).addhere(toSuperView: headerView1).layout(snapKitMaker: { (make) in
                     make.top.equalToSuperview().offset(Margin)
-                    make.left.equalToSuperview().offset(index*Int(SCREEN_WIDTH/3)+40)
+                    make.left.equalToSuperview().offset(index*Int(SCREEN_WIDTH/3)+30)
                     make.height.lessThanOrEqualTo(100)
-                    //make.width.lessThanOrEqualTo(50)
-                    make.width.equalTo(70)
+                    make.width.lessThanOrEqualTo(70)
                 }).config({ (homeButton) in
                     homeButton.setTitleColor(UIColor.black, for: .normal)
                     homeButton.setTitle(namesArr[i], for: .normal)
@@ -215,10 +224,9 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     homeButton.adjustsImageWhenDisabled = false
                     homeButton.setImage(UIImage(named: imagesArr[i]), for: .normal)
                     homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-//                    homeButton.addTarget(self, action: #selector(homeBtbClick), for: .touchUpInside)
+                    homeButton.addTarget(self, action: #selector(homeBtbClick), for: .touchUpInside)
                 })
             }
-            
             return headerView1
         }else if section == 1 {
             
@@ -252,6 +260,10 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         let view = UIView()
         return view
+    }
+    
+    @objc func homeBtbClick(){
+        print("111")
     }
 }
 
