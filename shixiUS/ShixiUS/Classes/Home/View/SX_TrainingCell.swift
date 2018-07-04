@@ -64,10 +64,13 @@ class SX_TrainingCell: UITableViewCell {
             moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
         })
         
-        //        self.collectionView = UICollectionView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-        //
-        //        }).config({ (collectionView) in
-        //
-        //        })
+        self.collectionView = UICollectionView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
+            
+            
+        }).config({ (collectionView) in
+
+              collectionView.backgroundColor = UIColor.red
+        })
     }
 }

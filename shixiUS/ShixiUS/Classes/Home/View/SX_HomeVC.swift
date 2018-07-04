@@ -159,7 +159,16 @@ extension SX_HomeVC {
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        
+        
+        if indexPath.section == 1 {
+            
+            return 90
+        }
+        
+        return 400
+        
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -189,9 +198,9 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
             return cell
         }
-      
+        
         let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
-    
+        
         return shixiTrainingCell
     }
     
@@ -289,7 +298,7 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
     }
     
     func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
-         //SXLog("选择点击了轮播\(index)")
+        //SXLog("选择点击了轮播\(index)")
     }
 }
 
