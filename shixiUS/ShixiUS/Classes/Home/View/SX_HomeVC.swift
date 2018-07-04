@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 private let NAVBAR_COLORCHANGE_POINT = -80
 private let IMAGE_HEIGHT:CGFloat = 240
@@ -189,28 +190,44 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             let headerView1 = UIView()
             headerView1.backgroundColor = UIColor.white
-            let arr = ["实训项目","海外就业","培训认证"]
+            let namesArr = ["实训项目","海外就业","培训认证"]
+            let imagesArr = ["project","oversea","training"]
             
-            for i in 0..<arr.count {
+            for i in 0..<namesArr.count {
                 
                 let index = i % 3
                 let page = i / 3
                 
                 // homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
-                homeButton = UIButton().addhere(toSuperView: headerView1).layout(snapKitMaker: { (make) in
+                homeButton = UIButton(type: .custom).addhere(toSuperView: headerView1).layout(snapKitMaker: { (make) in
                     make.top.equalToSuperview().offset(Margin)
                     make.left.equalToSuperview().offset(index*Int(SCREEN_WIDTH/3))
                     make.height.lessThanOrEqualTo(100)
-                    make.width.equalTo(Int(SCREEN_WIDTH/3))
                 }).config({ (homeButton) in
-                    homeButton.titleLabel?.lineBreakMode = .byWordWrapping
-                    homeButton.titleLabel?.numberOfLines = 0
                     homeButton.setTitleColor(UIColor.black, for: .normal)
-                    homeButton.titleLabel?.textAlignment = .center
-                    homeButton.setTitle(arr[i], for: .normal)
-                    homeButton.setImage(UIImage(named: arr[i]), for: .normal)
-                    homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+                    homeButton.setTitle(namesArr[i], for: .normal)
+                    homeButton.titleEdgeInsets = UIEdgeInsets(top: homeButton.imageView!.frame.size.height+70, left: -homeButton.imageView!.frame.size.width-100, bottom: 0, right: 0)
+                    homeButton.contentHorizontalAlignment = .center
+                    homeButton.titleLabel?.textAlignment = NSTextAlignment(rawValue: 1)!
+                    homeButton.adjustsImageWhenDisabled = false
+                    homeButton.setImage(UIImage(named: imagesArr[i]), for: .normal)
+                    homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 })
+                
+                
+                
             }
             
             return headerView1
@@ -224,7 +241,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                 make.height.lessThanOrEqualTo(Margin)
                 }.config { (hotTitle) in
                     hotTitle.sizeToFit()
-                    hotTitle.text = "热门实训"
+                    hotTitle.text = "热门岗位"
                     hotTitle.font = UIFont.systemFont(ofSize: 15)
                     hotTitle.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             }
