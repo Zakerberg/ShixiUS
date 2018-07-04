@@ -201,33 +201,22 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                 // homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
                 homeButton = UIButton(type: .custom).addhere(toSuperView: headerView1).layout(snapKitMaker: { (make) in
                     make.top.equalToSuperview().offset(Margin)
-                    make.left.equalToSuperview().offset(index*Int(SCREEN_WIDTH/3))
+                    make.left.equalToSuperview().offset(index*Int(SCREEN_WIDTH/3)+40)
                     make.height.lessThanOrEqualTo(100)
+                    //make.width.lessThanOrEqualTo(50)
+                    make.width.equalTo(70)
                 }).config({ (homeButton) in
                     homeButton.setTitleColor(UIColor.black, for: .normal)
                     homeButton.setTitle(namesArr[i], for: .normal)
-                    homeButton.titleEdgeInsets = UIEdgeInsets(top: homeButton.imageView!.frame.size.height+70, left: -homeButton.imageView!.frame.size.width-100, bottom: 0, right: 0)
+                    homeButton.titleLabel?.sizeToFit()
+                    homeButton.titleEdgeInsets = UIEdgeInsets(top: homeButton.imageView!.frame.size.height+70, left: -homeButton.imageView!.frame.size.width-60, bottom: 0, right: 0)
                     homeButton.contentHorizontalAlignment = .center
                     homeButton.titleLabel?.textAlignment = NSTextAlignment(rawValue: 1)!
                     homeButton.adjustsImageWhenDisabled = false
                     homeButton.setImage(UIImage(named: imagesArr[i]), for: .normal)
                     homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+//                    homeButton.addTarget(self, action: #selector(homeBtbClick), for: .touchUpInside)
                 })
-                
-                
-                
             }
             
             return headerView1
