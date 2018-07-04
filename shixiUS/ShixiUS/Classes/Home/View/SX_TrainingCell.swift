@@ -7,32 +7,31 @@
 //  热门实训,培训认证,实习户外 tableViewCell
 
 import UIKit
-class SX_TrainingCell: UITableViewCell {
+
+private let CollectionViewCellID = "CollectionViewCellID"
+
+class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate {
     
     var titleLabel: UILabel?
     var moreButton: UIButton?
-    
-    private lazy var collectionView: UICollectionView = {
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.contentView.bounds.size.width, height: self.contentView.bounds.size.height), collectionViewLayout: flowLayout)
-        
-        collectionView.delegate = self as? UICollectionViewDelegate
-        collectionView.dataSource = self as? UICollectionViewDataSource
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionViewCellID")
-        collectionView.isScrollEnabled = false
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = UIColor.colorWithHexString(hex: "f0f0f0", alpha: 0)
-        
-        return collectionView
-    }()
-    
+    var collectionView: UICollectionView?
+    /// collectionView 高度约束
+    var collectionViewHeight:NSLayoutConstraint?
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.collectionView!.delegate = self
+        self.collectionView!.dataSource = self as? UICollectionViewDataSource
+        
+       // self.collectionView!.register(SX_TrainingCollectionViewCell.self(), forCellWithReuseIdentifier: CollectionViewCellID)
+        
+        
+        
         configCell()
     }
     
@@ -69,6 +68,13 @@ class SX_TrainingCell: UITableViewCell {
             moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
             moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
         })
+        
+        self.collectionView?.addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (collectionView) in
+            
+        })
+        
     }
     
     func reloadData() {
@@ -76,3 +82,9 @@ class SX_TrainingCell: UITableViewCell {
         
     }
 }
+
+
+
+
+
+

@@ -291,7 +291,7 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
     }
     
     func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
-         SXLog("选择点击了轮播\(index)")
+         //SXLog("选择点击了轮播\(index)")
     }
 }
 
