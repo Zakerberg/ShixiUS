@@ -80,7 +80,6 @@ class SX_HomeVC: UIViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = UIColor.white
         
         /**** ======================================================================================================
@@ -182,7 +181,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
-        
         return cell
     }
     
@@ -197,43 +195,57 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                 
                 let index = i % 3
                 let page = i / 3
-                homeButton = UIButton()
-                homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
-                homeButton.titleLabel?.lineBreakMode = .byWordWrapping
-                homeButton.titleLabel?.numberOfLines = 0
-                homeButton.setTitleColor(UIColor.black, for: .normal)
                 
-                homeButton.titleLabel?.textAlignment = .center
-                homeButton.setTitle(arr[i], for: .normal)
-                homeButton.setImage(UIImage(named: arr[i]), for: .normal)
-                homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-                homeButton.addTarget(self, action: #selector(homeButtonClick), for: .touchUpInside)
-                
-                headerView1.addSubview(homeButton)
+                // homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
+                homeButton = UIButton().addhere(toSuperView: headerView1).layout(snapKitMaker: { (make) in
+                    make.top.equalToSuperview().offset(Margin)
+                    make.left.equalToSuperview().offset(index*Int(SCREEN_WIDTH/3))
+                    make.height.lessThanOrEqualTo(100)
+                    make.width.equalTo(Int(SCREEN_WIDTH/3))
+                }).config({ (homeButton) in
+                    homeButton.titleLabel?.lineBreakMode = .byWordWrapping
+                    homeButton.titleLabel?.numberOfLines = 0
+                    homeButton.setTitleColor(UIColor.black, for: .normal)
+                    homeButton.titleLabel?.textAlignment = .center
+                    homeButton.setTitle(arr[i], for: .normal)
+                    homeButton.setImage(UIImage(named: arr[i]), for: .normal)
+                    homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+                })
             }
             
             return headerView1
-            
         }else if section == 1 {
+            
             let hotJobHeaderView = UIView()
+            hotJobHeaderView.backgroundColor = UIColor.white
             
             let hotTitle = UILabel().addhere(toSuperView: hotJobHeaderView).layout { (make) in
-                make
-                
+                make.top.left.equalTo(hotJobHeaderView).offset(Margin)
+                make.height.lessThanOrEqualTo(Margin)
                 }.config { (hotTitle) in
+                    hotTitle.sizeToFit()
                     hotTitle.text = "热门实训"
                     hotTitle.font = UIFont.systemFont(ofSize: 15)
                     hotTitle.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             }
+            
+            let moreButton = UIButton().addhere(toSuperView: hotJobHeaderView).layout { (make) in
+                make.top.equalTo(hotTitle.snp.top)
+                make.right.equalToSuperview()
+                make.height.centerY.equalTo(hotTitle)
+                }.config { (moreButton) in
+                    moreButton.setImage(UIImage.init(named: "more"), for: .normal)
+                    moreButton.setTitle("更多", for: .normal)
+                    moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+                    moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
+                    moreButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -35, bottom: 0, right: 35)
+            }
+            
             return hotJobHeaderView
         }
         
         let view = UIView()
         return view
-    }
-    
-    @objc func homeButtonClick() {
-        SXLog("111")
     }
 }
 
@@ -258,7 +270,6 @@ func judgeAppVersion() {
         let dic = array[0] as! NSDictionary
         let appStoreVersion = dic["version"]
         print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
-        
     } catch { }
 }
 

@@ -72,7 +72,7 @@ class SX_HotJobsCell: UITableViewCell {
         }).config({ (addressLabel) in
             addressLabel.sizeToFit()
             addressLabel.font = UIFont.systemFont(ofSize: 10)
-            addressLabel.text = "美国/纽约"
+            addressLabel.text = "美国/纽约-测试"
             addressLabel.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
         })
         
