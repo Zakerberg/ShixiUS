@@ -76,11 +76,4 @@ class SX_TrainingCell: UITableViewCell {
         
         
     }
-
-
-
-
-
-
-
 }

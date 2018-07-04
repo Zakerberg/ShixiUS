@@ -27,8 +27,6 @@
 		45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */; };
 		4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561F03D20DA027800C64878 /* SX_HomeModel.swift */; };
 		45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */; };
-		45BEF63A20DA264400B71FAC /* SX_ADCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63820DA264400B71FAC /* SX_ADCollectionViewCell.swift */; };
-		45BEF63B20DA264400B71FAC /* SX_ADScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63920DA264400B71FAC /* SX_ADScrollerView.swift */; };
 		45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */; };
 		45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */; };
 		45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */; };
@@ -85,8 +83,6 @@
 		45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVC.swift; sourceTree = "<group>"; };
 		4561F03D20DA027800C64878 /* SX_HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeModel.swift; sourceTree = "<group>"; };
 		45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeAPI.swift; sourceTree = "<group>"; };
-		45BEF63820DA264400B71FAC /* SX_ADCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SX_ADCollectionViewCell.swift; sourceTree = "<group>"; };
-		45BEF63920DA264400B71FAC /* SX_ADScrollerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SX_ADScrollerView.swift; sourceTree = "<group>"; };
 		45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ADScrollModel.swift; sourceTree = "<group>"; };
 		45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCell.swift; sourceTree = "<group>"; };
 		45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobsCell.swift; sourceTree = "<group>"; };
@@ -262,8 +258,6 @@
 			isa = PBXGroup;
 			children = (
 				45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */,
-				45BEF63820DA264400B71FAC /* SX_ADCollectionViewCell.swift */,
-				45BEF63920DA264400B71FAC /* SX_ADScrollerView.swift */,
 				45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */,
 				452C663F20E22F3900747C0D /* SX_TrainingCollectionViewCell.swift */,
 				45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */,
@@ -694,9 +688,7 @@
 				452C664020E22F3900747C0D /* SX_TrainingCollectionViewCell.swift in Sources */,
 				45440EFE20E0C40D00058978 /* SX_PageControl.swift in Sources */,
 				45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */,
-				45BEF63A20DA264400B71FAC /* SX_ADCollectionViewCell.swift in Sources */,
 				45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */,
-				45BEF63B20DA264400B71FAC /* SX_ADScrollerView.swift in Sources */,
 				45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */,
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
