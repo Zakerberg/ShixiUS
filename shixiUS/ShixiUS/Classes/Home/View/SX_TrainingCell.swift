@@ -10,7 +10,7 @@ import UIKit
 
 private let CollectionViewCellID = "CollectionViewCellID"
 
-class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate {
+class SX_TrainingCell: UITableViewCell {
     
     var titleLabel: UILabel?
     var moreButton: UIButton?
@@ -25,10 +25,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.collectionView!.delegate = self
-        self.collectionView!.dataSource = self as? UICollectionViewDataSource
-        self.collectionView!.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
-        
+        self.collectionView?.delegate = self as? UICollectionViewDelegate
+        self.collectionView?.dataSource = self as? UICollectionViewDataSource
+        self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
         configCell()
     }
     
@@ -47,15 +46,16 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate {
             make.height.lessThanOrEqualTo(Margin)
         }).config({ (titleLabel) in
             titleLabel.sizeToFit()
-            titleLabel.text = "热门实训"
+            titleLabel.text = "热门实训--测试"
             titleLabel.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             titleLabel.font = UIFont.systemFont(ofSize: 15)
         })
         
-        self.moreButton = UIButton().addhere(toSuperView: self.contentView.layout(snapKitMaker: { (make) in
-            make.top.equalTo((self.titleLabel?.snp.top)!).offset(0)
-            make.left.equalToSuperview().offset(-10)
-        })).config({ (moreButton) in
+        self.moreButton = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalToSuperview().offset(Margin)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(Margin)
+        }).config({ (moreButton) in
             moreButton.setImage(UIImage.init(named: "more"), for: .normal)
             moreButton.setTitle("更多", for: .normal)
             moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -64,14 +64,10 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate {
             moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
         })
         
-        self.collectionView = UICollectionView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (collectionView) in
-            
-        })
-    }
-    
-    func reloadData() {
-        
+        //        self.collectionView = UICollectionView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        //
+        //        }).config({ (collectionView) in
+        //
+        //        })
     }
 }

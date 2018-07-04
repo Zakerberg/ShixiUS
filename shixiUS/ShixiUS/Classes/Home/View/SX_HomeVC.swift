@@ -15,7 +15,7 @@ private let IMAGE_HEIGHT:CGFloat = 240
 private let SCROLL_DOWN_LIMIT: CGFloat = 100
 private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 private let identifier:String = "hotJobsCell"
-let CellID = "CellID"
+private let shixiTrainingCellID = "shixiTrainingCellID"
 
 /// 实训项目视图
 struct InterShipPreview {
@@ -189,12 +189,10 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
             return cell
         }
-        
-        let cell1 = UITableViewCell(style: .default, reuseIdentifier: CellID)
-        cell1.textLabel?.text = "测试Cell"
-        cell1.backgroundColor = UIColor.red
-        cell1.accessoryType = .disclosureIndicator
-        return cell1
+      
+        let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
+    
+        return shixiTrainingCell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -251,7 +249,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                 make.height.lessThanOrEqualTo(Margin)
                 }.config { (hotTitle) in
                     hotTitle.sizeToFit()
-                    hotTitle.text = "热门岗位"
+                    hotTitle.text = "热门岗位--测试"
                     hotTitle.font = UIFont.systemFont(ofSize: 15)
                     hotTitle.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             }
