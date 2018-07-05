@@ -42,12 +42,6 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     // ========================================================================================================================
     // MARK: - UICollectionViewDelegate
     // ========================================================================================================================
-  
-//    func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
-    
-//    }
-    
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -70,6 +64,44 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return cell
     }
     
+    
+    /*
+     #pragma mark - UICollectionViewDelegateFlowLayout
+     - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+     if (_dataSource.count > 8) {
+     //        要显示第5个的一半
+     return CGSizeMake(kWIDTH /4.5, kWIDTH /4.5);
+     }
+     else if (_dataSource.count < 4) {
+     
+     return CGSizeMake(kWIDTH / 4.0, kWIDTH / 4.0);
+     }
+     else {
+     return CGSizeMake(kWIDTH / 4.0, kWIDTH / 4.0);
+     }
+     }
+     
+     - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+     return CGFLOAT_MIN;
+     }
+     - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+     return CGFLOAT_MIN;
+     }
+     */
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // ========================================================================================================================
+    // MARK: - configCell
+    // ========================================================================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
