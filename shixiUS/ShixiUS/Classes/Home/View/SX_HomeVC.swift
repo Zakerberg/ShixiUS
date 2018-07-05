@@ -209,7 +209,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             
             for i in 0..<namesArr.count {
                 let index = i % 3
-                let page = i / 3
+                 // let page = i / 3
                 // homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
                 homeButton = UIButton(type: .custom).addhere(toSuperView: headerView1).layout(snapKitMaker: { (make) in
                     make.top.equalToSuperview().offset(Margin)
@@ -289,11 +289,20 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
 // ========================================================================================================================
 extension SX_HomeVC: SXCycleScrollerViewDelegate {
     func cycleScrollerViewSelected(at index: Int, cycleScrollerView: SX_CycleScrollerView) {
+        self.cycleScrollerView = cycleScrollerView
+        
         SXLog("点击了轮播\(index)")
+        
+        
+        
     }
     
     func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
         //SXLog("选择点击了轮播\(index)")
+        
+        
+        
+        
     }
 }
 

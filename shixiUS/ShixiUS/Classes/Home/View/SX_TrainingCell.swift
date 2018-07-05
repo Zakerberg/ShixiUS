@@ -15,9 +15,6 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     var titleLabel: UILabel?
     var moreButton: UIButton?
     var collectionView: UICollectionView?
-    /// collectionViewCell 高度约束
-    var cellHeight:CGFloat?
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -70,7 +67,6 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     // ========================================================================================================================
     // MARK: - UICollectionViewDelegateFlowLayout
     // ========================================================================================================================
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: 165, height: 160)
@@ -119,7 +115,6 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             make.right.equalToSuperview().offset(-Margin)
             
         }).config({ (collectionView) in
-            
             collectionView.isScrollEnabled = false
             collectionView.showsVerticalScrollIndicator = false
             collectionView.backgroundColor = UIColor.SX_BackGroundColor()
@@ -129,6 +124,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     /// reloadData
     func reloadData() {
 
+        
         
     }
 }
