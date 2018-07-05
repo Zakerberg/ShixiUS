@@ -13,7 +13,7 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
     var sourceImageView:UIImageView?
     var sourceTitle:UILabel?
     var priceLabel:UILabel?
-    // 课程下面的title
+    //  职业技术证书label
     var certificateTitle:UILabel?
     
     override init(frame: CGRect) {

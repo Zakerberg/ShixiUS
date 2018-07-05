@@ -10,7 +10,7 @@ import UIKit
 
 private let CollectionViewCellID = "CollectionViewCellID"
 
-class SX_TrainingCell: UITableViewCell {
+class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionViewDataSource {
     
     var titleLabel: UILabel?
     var moreButton: UIButton?
@@ -25,8 +25,9 @@ class SX_TrainingCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.collectionView?.delegate = self as? UICollectionViewDelegate
-        self.collectionView?.dataSource = self as? UICollectionViewDataSource
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
+        
         self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
         configCell()
     }
@@ -37,6 +38,33 @@ class SX_TrainingCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    
+    // ========================================================================================================================
+    // MARK: - UICollectionViewDelegate
+    // ========================================================================================================================
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    //返回对应的单元格
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
+        
+        cell.sourceImageView?.image = UIImage.init(named: "localImg4")
+        cell.priceLabel?.text = "￥" + "2998.00--测试"
+        cell.sourceTitle?.text = "课程名称课程名称测试"
+        cell.certificateTitle?.text = "职业技术证书"
+        
+        return cell
     }
     
     func configCell()  {
@@ -64,13 +92,28 @@ class SX_TrainingCell: UITableViewCell {
             moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
         })
         
-        self.collectionView = UICollectionView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        let flowLayout = UICollectionViewFlowLayout()
+        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
-            
+            make.left.equalTo(self.titleLabel!)
+            make.bottom.equalToSuperview().offset(-Margin*2)
+            make.right.equalToSuperview().offset(-Margin)
             
         }).config({ (collectionView) in
-
-              collectionView.backgroundColor = UIColor.red
+            
+            collectionView.isScrollEnabled = false
+            collectionView.showsVerticalScrollIndicator = false
+            collectionView.backgroundColor = UIColor.green
         })
     }
+    
+    /// reloadData
+    func reloadData() {
+        
+        
+    }
 }
+
+
+
+

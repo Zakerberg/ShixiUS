@@ -160,15 +160,10 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        
         if indexPath.section == 1 {
-            
             return 90
         }
-        
         return 400
-        
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
