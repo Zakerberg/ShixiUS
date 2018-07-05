@@ -45,7 +45,6 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     // MARK: - UICollectionViewDelegate
     // ========================================================================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         return 2
     }
     
@@ -58,9 +57,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
-        
+      
         cell.sourceImageView?.image = UIImage.init(named: "localImg4")
-        cell.priceLabel?.text = "￥" + "2998.00--测试"
+        cell.priceLabel?.text = "￥" + "2998.00--测试"
         cell.sourceTitle?.text = "课程名称课程名称测试"
         cell.certificateTitle?.text = "职业技术证书"
         
@@ -103,7 +102,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             
             collectionView.isScrollEnabled = false
             collectionView.showsVerticalScrollIndicator = false
-            collectionView.backgroundColor = UIColor.green
+            collectionView.backgroundColor = UIColor.white
         })
     }
     

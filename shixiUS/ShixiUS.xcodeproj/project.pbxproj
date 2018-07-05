@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0F24381F419BB7C6CDD0046C /* Pods_ShixiUSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */; };
-		452C664020E22F3900747C0D /* SX_TrainingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452C663F20E22F3900747C0D /* SX_TrainingCollectionViewCell.swift */; };
 		45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */; };
 		45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45440EFB20E0C2CE00058978 /* SX_Proxy.swift */; };
 		45440EFE20E0C40D00058978 /* SX_PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45440EFD20E0C40D00058978 /* SX_PageControl.swift */; };
@@ -27,6 +26,8 @@
 		45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */; };
 		4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561F03D20DA027800C64878 /* SX_HomeModel.swift */; };
 		45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */; };
+		45A5219A20EDBD6F0036A23D /* SX_TrainingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A5219820EDBD6F0036A23D /* SX_TrainingCollectionViewCell.swift */; };
+		45A5219B20EDBD6F0036A23D /* SX_TrainingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A5219920EDBD6F0036A23D /* SX_TrainingCollectionViewCell.xib */; };
 		45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */; };
 		45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */; };
 		45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */; };
@@ -58,7 +59,6 @@
 		1190C349599AFF1C16E19BBE /* Pods-ShixiUS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShixiUS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShixiUS/Pods-ShixiUS.release.xcconfig"; sourceTree = "<group>"; };
 		1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		452C663F20E22F3900747C0D /* SX_TrainingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCollectionViewCell.swift; sourceTree = "<group>"; };
 		45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CycleScrollerView.swift; sourceTree = "<group>"; };
 		45440EFB20E0C2CE00058978 /* SX_Proxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_Proxy.swift; sourceTree = "<group>"; };
 		45440EFD20E0C40D00058978 /* SX_PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PageControl.swift; sourceTree = "<group>"; };
@@ -83,6 +83,8 @@
 		45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVC.swift; sourceTree = "<group>"; };
 		4561F03D20DA027800C64878 /* SX_HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeModel.swift; sourceTree = "<group>"; };
 		45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeAPI.swift; sourceTree = "<group>"; };
+		45A5219820EDBD6F0036A23D /* SX_TrainingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCollectionViewCell.swift; sourceTree = "<group>"; };
+		45A5219920EDBD6F0036A23D /* SX_TrainingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SX_TrainingCollectionViewCell.xib; sourceTree = "<group>"; };
 		45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ADScrollModel.swift; sourceTree = "<group>"; };
 		45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCell.swift; sourceTree = "<group>"; };
 		45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobsCell.swift; sourceTree = "<group>"; };
@@ -259,7 +261,8 @@
 			children = (
 				45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */,
 				45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */,
-				452C663F20E22F3900747C0D /* SX_TrainingCollectionViewCell.swift */,
+				45A5219820EDBD6F0036A23D /* SX_TrainingCollectionViewCell.swift */,
+				45A5219920EDBD6F0036A23D /* SX_TrainingCollectionViewCell.xib */,
 				45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */,
 			);
 			path = View;
@@ -492,6 +495,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45A5219B20EDBD6F0036A23D /* SX_TrainingCollectionViewCell.xib in Resources */,
 				45556B3320D89C600035FCA6 /* LaunchScreen.storyboard in Resources */,
 				45556B3020D89C600035FCA6 /* Assets.xcassets in Resources */,
 			);
@@ -685,7 +689,6 @@
 				45556B6720D8A1180035FCA6 /* SX_HomeVC.swift in Sources */,
 				45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */,
 				45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */,
-				452C664020E22F3900747C0D /* SX_TrainingCollectionViewCell.swift in Sources */,
 				45440EFE20E0C40D00058978 /* SX_PageControl.swift in Sources */,
 				45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */,
 				45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */,
@@ -698,6 +701,7 @@
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
 				45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */,
 				45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */,
+				45A5219A20EDBD6F0036A23D /* SX_TrainingCollectionViewCell.swift in Sources */,
 				45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */,
 				45556B5D20D89DAD0035FCA6 /* SX_TabBarController.swift in Sources */,
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
