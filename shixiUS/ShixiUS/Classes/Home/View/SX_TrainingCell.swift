@@ -10,13 +10,14 @@ import UIKit
 
 private let CollectionViewCellID = "CollectionViewCellID"
 
-class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionViewDataSource {
+class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     var titleLabel: UILabel?
     var moreButton: UIButton?
     var collectionView: UICollectionView?
-    /// collectionView 高度约束
-    var collectionViewHeight:NSLayoutConstraint?
+    /// collectionViewCell 高度约束
+    var cellHeight:CGFloat?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,10 +34,12 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+   
     }
     
     // ========================================================================================================================
@@ -45,7 +48,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
-    
+
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         return 2
@@ -55,49 +58,30 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
-      
+        
         cell.sourceImageView?.image = UIImage.init(named: "localImg4")
-        cell.priceLabel?.text = "￥" + "2998.00--测试"
+        cell.priceLabel?.text = "￥" + "2998.00"
         cell.sourceTitle?.text = "课程名称课程名称测试"
         cell.certificateLabel?.text = "职业技术证书"
         
         return cell
     }
     
-    
-    /*
-     #pragma mark - UICollectionViewDelegateFlowLayout
-     - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-     if (_dataSource.count > 8) {
-     //        要显示第5个的一半
-     return CGSizeMake(kWIDTH /4.5, kWIDTH /4.5);
-     }
-     else if (_dataSource.count < 4) {
-     
-     return CGSizeMake(kWIDTH / 4.0, kWIDTH / 4.0);
-     }
-     else {
-     return CGSizeMake(kWIDTH / 4.0, kWIDTH / 4.0);
-     }
-     }
-     
-     - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-     return CGFLOAT_MIN;
-     }
-     - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-     return CGFLOAT_MIN;
-     }
-     */
+    // ========================================================================================================================
+    // MARK: - UICollectionViewDelegateFlowLayout
+    // ========================================================================================================================
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 165, height: 160)
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
     
     // ========================================================================================================================
     // MARK: - configCell
@@ -138,17 +122,13 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             
             collectionView.isScrollEnabled = false
             collectionView.showsVerticalScrollIndicator = false
-            collectionView.backgroundColor = UIColor.yellow
+            collectionView.backgroundColor = UIColor.SX_BackGroundColor()
         })
     }
     
     /// reloadData
     func reloadData() {
-        
-        
-        
-        
-        
+
         
     }
 }
