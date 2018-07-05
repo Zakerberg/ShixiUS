@@ -24,12 +24,11 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configCell()
         
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
-        
-        self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
-        configCell()
+        self.collectionView?.register(UINib(nibName: "SX_TrainingCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: CollectionViewCellID)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,10 +39,15 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         super.setSelected(selected, animated: animated)
     }
     
-    
     // ========================================================================================================================
     // MARK: - UICollectionViewDelegate
     // ========================================================================================================================
+  
+//    func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
+    
+//    }
+    
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -59,9 +63,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
       
         cell.sourceImageView?.image = UIImage.init(named: "localImg4")
-        cell.priceLabel?.text = "￥" + "2998.00--测试"
+        cell.priceLabel?.text = "￥" + "2998.00--测试"
         cell.sourceTitle?.text = "课程名称课程名称测试"
-        cell.certificateTitle?.text = "职业技术证书"
+        cell.certificateLabel?.text = "职业技术证书"
         
         return cell
     }
@@ -69,7 +73,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.left.equalToSuperview().offset(Margin)
+            make.top.left.lessThanOrEqualTo(Margin)
             make.height.lessThanOrEqualTo(Margin)
         }).config({ (titleLabel) in
             titleLabel.sizeToFit()
@@ -102,7 +106,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             
             collectionView.isScrollEnabled = false
             collectionView.showsVerticalScrollIndicator = false
-            collectionView.backgroundColor = UIColor.white
+            collectionView.backgroundColor = UIColor.yellow
         })
     }
     
@@ -110,8 +114,13 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     func reloadData() {
         
         
+        
+        
+        
+        
     }
 }
+
 
 
 
