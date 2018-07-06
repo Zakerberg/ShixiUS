@@ -876,7 +876,7 @@
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShixiUS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -900,7 +900,7 @@
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShixiUS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

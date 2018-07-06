@@ -49,10 +49,10 @@ class SX_HomeVC: UIViewController {
     }()
     
     /// 轮播
-    private lazy var cycleScrollerView: SX_CycleScrollerView = {
+    lazy var cycleScrollerView: SX_CycleScrollerView = {
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
-        let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: nil, descs: nil)
-        
+        let cycleView = SX_CycleScrollerView(frame: frame, type: .LOCAL, imgs: nil, descs: nil)
+        cycleView.delegate = self
         return cycleView
     }()
     
@@ -102,7 +102,6 @@ class SX_HomeVC: UIViewController {
         cycleScrollerView.localImgArray = localImgs
         cycleScrollerView.descTextArray = descLabels
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
-        cycleScrollerView.delegate = self
         homeTableView.addSubview(cycleScrollerView)
         view.addSubview(homeTableView)
         
@@ -288,21 +287,14 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
 // MARK: - SXCycleScrollerViewDelegate
 // ========================================================================================================================
 extension SX_HomeVC: SXCycleScrollerViewDelegate {
-    func cycleScrollerViewSelected(at index: Int, cycleScrollerView: SX_CycleScrollerView) {
-        self.cycleScrollerView = cycleScrollerView
-        
-        SXLog("点击了轮播\(index)")
-        
-        
-        
+ 
+    func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
+
     }
     
-    func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
-        //SXLog("选择点击了轮播\(index)")
-        
-        
-        
-        
+    func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
+
+        SXLog("点击了轮播\(index)")
     }
 }
 

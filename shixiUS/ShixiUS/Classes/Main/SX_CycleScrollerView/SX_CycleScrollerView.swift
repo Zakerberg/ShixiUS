@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol SXCycleScrollerViewDelegate {
+@objc protocol SXCycleScrollerViewDelegate {
     
     // 点击图片的回调
-   func cycleScrollerViewSelected(at index:Int, cycleScrollerView: SX_CycleScrollerView)
+    @objc func cycleScrollViewDidSelect(at index:Int, cycleScrollView: SX_CycleScrollerView)
     // 图片滚动的回调
-    func cycleScrollerDidScroller(to index: Int, cycleScrollerView: SX_CycleScrollerView)
+    @objc func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView)
 }
 
 class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollProtocol {
@@ -21,7 +21,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     //==============================================================================================================
     // MARK: 对外提供的属性
     //==============================================================================================================
-    var delegate: SXCycleScrollerViewDelegate?
+   weak var delegate: SXCycleScrollerViewDelegate?
     
     var outerPageControlFrame:CGRect? {
         didSet {
@@ -306,7 +306,7 @@ extension SX_CycleScrollerView
         guard canChangeCycleCell else {
             return
         }
-        delegate?.cycleScrollerDidScroller(to: indexOnPageControl, cycleScrollerView: self)
+        delegate?.cycleScrollerDidScroll(to: indexOnPageControl, cycleScrollerView: self)
         
         if indexOnPageControl >= firstItem {
             isLoadOver = true
@@ -399,6 +399,7 @@ extension SX_CycleScrollerView: UICollectionViewDelegate,UICollectionViewDataSou
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        delegate?.cycleScrollerDidScroller(to: indexOnPageControl, cycleScrollerView: self)
+        
+       delegate?.cycleScrollViewDidSelect(at: indexOnPageControl, cycleScrollView: self)
     }
 }
