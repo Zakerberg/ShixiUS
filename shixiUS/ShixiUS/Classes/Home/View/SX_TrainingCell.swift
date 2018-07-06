@@ -126,9 +126,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     /// reloadData
     func reloadData() {
-        
-        
-        
+
     }
 }
 

@@ -34,6 +34,8 @@
 		45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */; };
 		45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */; };
 		45CF168E20EF120000188F42 /* SX_ CertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168D20EF120000188F42 /* SX_ CertificationController.swift */; };
+		45CF169020EF37BC00188F42 /* SX_BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168F20EF37BC00188F42 /* SX_BaseController.swift */; };
+		45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */; };
 		45D3520F20D8B3F600D7300A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3520E20D8B3F600D7300A /* Common.swift */; };
 		45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */; };
 		7E1318263BF4D1BCB60E6CD2 /* Pods_ShixiUSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */; };
@@ -94,6 +96,8 @@
 		45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingProjectController.swift; sourceTree = "<group>"; };
 		45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaController.swift; sourceTree = "<group>"; };
 		45CF168D20EF120000188F42 /* SX_ CertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SX_ CertificationController.swift"; sourceTree = "<group>"; };
+		45CF168F20EF37BC00188F42 /* SX_BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseController.swift; sourceTree = "<group>"; };
+		45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseWebController.swift; sourceTree = "<group>"; };
 		45D3520E20D8B3F600D7300A /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		45EBB89520D8D87200863544 /* ShixiUS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShixiUS-Bridging-Header.h"; sourceTree = "<group>"; };
 		45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuideViewController.swift; sourceTree = "<group>"; };
@@ -258,6 +262,8 @@
 				45440EF820E0B98900058978 /* SX_CycleScrollerView */,
 				45556B5C20D89DAD0035FCA6 /* SX_TabBarController.swift */,
 				45556B5E20D89FE00035FCA6 /* SX_NavigationController.swift */,
+				45CF168F20EF37BC00188F42 /* SX_BaseController.swift */,
+				45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -707,12 +713,14 @@
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
+				45CF169020EF37BC00188F42 /* SX_BaseController.swift in Sources */,
 				45CF168E20EF120000188F42 /* SX_ CertificationController.swift in Sources */,
 				4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */,
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
 				45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */,
 				45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */,
+				45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */,
 				45A5219A20EDBD6F0036A23D /* SX_TrainingCollectionViewCell.swift in Sources */,
 				45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */,
 				45556B5D20D89DAD0035FCA6 /* SX_TabBarController.swift in Sources */,
