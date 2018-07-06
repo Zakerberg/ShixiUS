@@ -31,6 +31,9 @@
 		45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */; };
 		45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */; };
 		45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */; };
+		45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */; };
+		45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */; };
+		45CF168E20EF120000188F42 /* SX_ CertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168D20EF120000188F42 /* SX_ CertificationController.swift */; };
 		45D3520F20D8B3F600D7300A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3520E20D8B3F600D7300A /* Common.swift */; };
 		45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */; };
 		7E1318263BF4D1BCB60E6CD2 /* Pods_ShixiUSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */; };
@@ -88,6 +91,9 @@
 		45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ADScrollModel.swift; sourceTree = "<group>"; };
 		45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCell.swift; sourceTree = "<group>"; };
 		45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobsCell.swift; sourceTree = "<group>"; };
+		45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingProjectController.swift; sourceTree = "<group>"; };
+		45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaController.swift; sourceTree = "<group>"; };
+		45CF168D20EF120000188F42 /* SX_ CertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SX_ CertificationController.swift"; sourceTree = "<group>"; };
 		45D3520E20D8B3F600D7300A /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		45EBB89520D8D87200863544 /* ShixiUS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShixiUS-Bridging-Header.h"; sourceTree = "<group>"; };
 		45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuideViewController.swift; sourceTree = "<group>"; };
@@ -210,7 +216,7 @@
 				45556B6520D8A0D00035FCA6 /* Model */,
 				45556B6320D8A0CF0035FCA6 /* Service */,
 				45556B6220D8A0CF0035FCA6 /* View */,
-				45556B6420D8A0CF0035FCA6 /* ViewModel */,
+				45CF168820EF10E400188F42 /* Controller */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -259,7 +265,6 @@
 		45556B6220D8A0CF0035FCA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */,
 				45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */,
 				45A5219820EDBD6F0036A23D /* SX_TrainingCollectionViewCell.swift */,
 				45A5219920EDBD6F0036A23D /* SX_TrainingCollectionViewCell.xib */,
@@ -274,13 +279,6 @@
 				45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		45556B6420D8A0CF0035FCA6 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		45556B6520D8A0D00035FCA6 /* Model */ = {
@@ -349,6 +347,18 @@
 			);
 			path = View;
 			sourceTree = "<group>";
+		};
+		45CF168820EF10E400188F42 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */,
+				45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */,
+				45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */,
+				45CF168D20EF120000188F42 /* SX_ CertificationController.swift */,
+			);
+			name = Controller;
+			path = ShixiUS/Classes/Home/Controller;
+			sourceTree = SOURCE_ROOT;
 		};
 		45EBB89920D8DB0100863544 /* LogInAndGuide */ = {
 			isa = PBXGroup;
@@ -691,11 +701,13 @@
 				45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */,
 				45440EFE20E0C40D00058978 /* SX_PageControl.swift in Sources */,
 				45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */,
+				45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */,
 				45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */,
 				45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */,
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
+				45CF168E20EF120000188F42 /* SX_ CertificationController.swift in Sources */,
 				4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */,
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
@@ -705,6 +717,7 @@
 				45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */,
 				45556B5D20D89DAD0035FCA6 /* SX_TabBarController.swift in Sources */,
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
+				45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */,
 				45440F0020E0C4E700058978 /* SX_CycleCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

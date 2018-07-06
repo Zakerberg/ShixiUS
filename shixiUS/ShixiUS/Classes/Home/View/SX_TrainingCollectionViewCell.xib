@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="165" height="156"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="localImg4" translatesAutoresizingMaskIntoConstraints="NO" id="CFE-cS-2GV">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="localImg4" translatesAutoresizingMaskIntoConstraints="NO" id="CFE-cS-2GV">
                         <rect key="frame" x="0.0" y="0.0" width="165" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="tHF-kv-gLb"/>
@@ -54,6 +55,7 @@
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="CFE-cS-2GV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="1qT-g2-kD6"/>
                 <constraint firstItem="ldL-0l-qOI" firstAttribute="top" secondItem="sa9-ls-odK" secondAttribute="bottom" constant="4" id="2rp-nn-73R"/>

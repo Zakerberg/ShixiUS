@@ -56,7 +56,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
         
-        cell.sourceImageView?.image = UIImage.init(named: "localImg4")
+        cell.sourceImageView?.image = UIImage.init(named: "localImg3")
         cell.priceLabel?.text = "￥" + "2998.00"
         cell.sourceTitle?.text = "课程名称课程名称测试"
         cell.certificateLabel?.text = "职业技术证书"
@@ -72,11 +72,14 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return CGSize(width: 165, height: 160)
     }
     
+    /// 列间距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return CGFloat.leastNormalMagnitude
     }
+    
+    /// 行间距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return CGFloat.leastNormalMagnitude
     }
     
     // ========================================================================================================================
@@ -123,7 +126,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     /// reloadData
     func reloadData() {
-
+        
         
         
     }
