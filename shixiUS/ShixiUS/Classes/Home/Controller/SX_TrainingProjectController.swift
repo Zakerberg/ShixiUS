@@ -15,13 +15,19 @@ class SX_TrainingProjectController: UIViewController {
     // ========================================================================================================================
     /// 综合排序View
     private lazy var comprehensiveView: UIView = {
+        
         let comprehensiveView = UIView()
+        
+        
         return comprehensiveView
+    
     }()
     
     /// 实训类别View
     private lazy var trainingView: UIView = {
+        
         let trainingView = UIView()
+        
         return trainingView
     }()
     
@@ -30,6 +36,15 @@ class SX_TrainingProjectController: UIViewController {
         let countryView = UIView()
         return countryView
     }()
+    
+    private lazy var TableView: UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        return tableView
+    }()
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -47,6 +62,23 @@ class SX_TrainingProjectController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+// ========================================================================================================================
+// MARK: - UITableViewDelegate
+// ========================================================================================================================
+extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cellID")
+        cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.text = "测试cell"
+        return cell
+        
+     }
 }
 
 // ========================================================================================================================
