@@ -24,15 +24,6 @@ class SX_ComprehensiveView: UIView {
         for index in 0..<arr.count {
             
             
-            
         }
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }
