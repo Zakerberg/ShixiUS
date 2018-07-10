@@ -8,27 +8,27 @@
 
 import UIKit
 
+private let ArrowTag = 3000
+private let ControlTag = 1000
+private let LabelTag = 2000
+
 class SX_TrainingProjectController: UIViewController {
     
     var topSelectedView: SX_TopSelectedView?
+    var blackBgView: UIView? // 黑色背景弹窗
     
     // ========================================================================================================================
     // MARK: - lazy
     // ========================================================================================================================
     /// 综合排序View
     private lazy var comprehensiveView: UIView = {
-        
         let comprehensiveView = UIView()
-        
         return comprehensiveView
-        
     }()
     
     /// 实训类别View
     private lazy var trainingView: UIView = {
-        
         let trainingView = UIView()
-        
         return trainingView
     }()
     
@@ -79,7 +79,6 @@ extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSourc
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = "测试cell"
         return cell
-        
     }
 }
 
@@ -87,6 +86,7 @@ extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSourc
 // MARK: - Other Method
 // ========================================================================================================================
 extension SX_TrainingProjectController {
+    
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.automaticallyAdjustsScrollViewInsets = false
@@ -117,16 +117,6 @@ extension SX_TrainingProjectController {
     }
     
     
-    func fetchData()  {
-        
-    }
-    
-    /// controlClick
-    @objc func topSelectedBtnClick() {
-        
-        
-    }
-    
     /// 顶部三个按钮
     func setTopSelectedView() {
         self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
@@ -146,9 +136,9 @@ extension SX_TrainingProjectController {
             
             let control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
             control.addTarget(self, action: #selector(topSelectedBtnClick), for: .touchUpInside)
-            control.tag = index + 1000
+            control.tag = index + ControlTag
             view.addSubview(control)
-        }        
+        }
     }
     
     /// 创建头部选择条件View
@@ -165,7 +155,7 @@ extension SX_TrainingProjectController {
                 label.font = UIFont.systemFont(ofSize: 14)
                 label.textColor = UIColor.colorWithHexString(hex: "323232", alpha: 1)
                 label.lineBreakMode = .byTruncatingMiddle
-                label.tag = tag + 2000
+                label.tag = tag + LabelTag
         }
         
         let _ = UIImageView(image: UIImage.init(named: "btn_down")).addhere(toSuperView: view).layout { (make) in
@@ -173,11 +163,66 @@ extension SX_TrainingProjectController {
             make.top.equalToSuperview().offset(19)
             make.size.equalTo(CGSize(width: 7, height: 4))
             }.config { (imageV) in
-                imageV.tag = tag + 3000
+                imageV.tag = tag + ArrowTag
         }
         return view
     }
 }
+
+
+// ========================================================================================================================
+// MARK: - Other Method 2 响应
+// ========================================================================================================================
+extension SX_TrainingProjectController {
+    
+    func fetchData()  {
+        
+    }
+    
+    /// 调出PickerView
+    @objc func topSelectedBtnClick(control: UIControl) {
+        if control.isSelected == true {
+            control.isSelected == false
+            /// 收起
+            
+            
+        }
+    }
+    
+    /// hideView
+    func hideViewWithAnimation(view: UIView) {
+        
+        self.blackBgView?.isHidden = true
+        if view.isHidden == false {
+            
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
+                view.frame = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
+            }) {(finished) in
+                view.isHidden = true
+            }
+            
+            UIView.animate(withDuration: 0.4, animations: {
+                /// 小三角的选中状态
+                for index in 0...3 {
+                    
+                    let allImg = self.topSelectedView?.viewWithTag(ArrowTag + index) as! UIImageView
+                    allImg.image = UIImage.init(named: "btn_down")
+                    let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(-Double.pi)*0)
+                    allImg.transform = transform
+                    
+                    let allLabel = self.topSelectedView?.viewWithTag(LabelTag + index) as! UILabel
+                    allLabel.textColor = UIColor.black
+                }
+                
+            }) { (finished) in
+                
+            }
+        }
+    }
+}
+
+
+
 
 
 
