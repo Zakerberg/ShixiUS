@@ -18,9 +18,9 @@ class SX_TrainingProjectController: UIViewController {
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
     
-// ========================================================================================================================================
-// MARK: - lazy
-// ========================================================================================================================================
+    // ========================================================================================================================================
+    // MARK: - lazy
+    // ========================================================================================================================================
     /// 综合排序View
     private lazy var comprehensiveView: UIView = {
         let comprehensiveView = UIView()
@@ -188,13 +188,13 @@ extension SX_TrainingProjectController {
             hideViewWithAnimation(view: self.comprehensiveView)
             hideViewWithAnimation(view: self.trainingView)
             hideViewWithAnimation(view: self.countryView)
-        
+            
         }else if(control.isSelected == false) {
             control.isSelected = true
             
             if(control.tag == 1000) {
-              
-             
+                
+                
                 
                 
             }
@@ -235,34 +235,63 @@ extension SX_TrainingProjectController {
     /// 展示隐藏动画
     func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
         if view.isKind(of: type(of: self.comprehensiveView)) {
-        
+            
+            self.trainingView.frame = CGRect(x: 0, y: -self.trainingView.bounds.size.height, width: SCREEN_WIDTH, height: self.trainingView.bounds.size.height)
+            self.countryView.frame = CGRect(x: 0, y: -self.countryView.bounds.size.height, width: SCREEN_WIDTH, height: self.countryView.bounds.size.height)
+            
+            self.trainingView.isHidden = true
+            self.countryView.isHidden  = true
+            
+            let control1 = self.topSelectedView?.viewWithTag(1001) as! UIControl
+            control1.isSelected = false
+            let control2 = self.topSelectedView?.viewWithTag(1002) as! UIControl
+            control2.isSelected = false
+            
+        } else if (view.isKind(of: type(of: trainingView))) {
+            
+            self.comprehensiveView.frame = CGRect(x: 0, y: Int(-self.comprehensiveView.bounds.size.height), width: Int(SCREEN_WIDTH), height: Int(self.comprehensiveView.bounds.size.height))
+            self.countryView.frame = CGRect(x: 0, y: -self.countryView.bounds.size.height, width: SCREEN_WIDTH, height: self.countryView.bounds.size.height)
+            
+            self.comprehensiveView.isHidden = true
+            self.countryView.isHidden       = true
+            
+            let control1 = self.topSelectedView?.viewWithTag(1000) as! UIControl
+            control1.isSelected = false
+            
+            let control2 = self.topSelectedView?.viewWithTag(1002) as! UIControl
+            control2.isSelected = false
+            
+        } else if (view.isKind(of: type(of: self.countryView))) {
+            
             self.comprehensiveView.frame = CGRect(x: 0, y: -self.comprehensiveView.bounds.size.height, width: SCREEN_WIDTH, height: self.comprehensiveView.bounds.size.height)
+            self.trainingView.frame = CGRect(x: 0, y: -self.trainingView.bounds.size.height, width: SCREEN_WIDTH, height: self.trainingView.bounds.size.height)
             
-            self
+            self.comprehensiveView.isHidden = true
+            self.countryView.isHidden       = true
             
-            
-            
-            
-        
+            let control1 = self.topSelectedView?.viewWithTag(1000) as! UIControl
+            control1.isSelected = false
+            let control2 = self.topSelectedView?.viewWithTag(1001) as! UIControl
+            control2.isSelected = false
         }
         
+        self.blackBgView?.isHidden = false
+        view.isHidden = false
         
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseOut, animations: {
+            view.frame = CGRect(x: 0, y: self.topSelectedView!.bounds.origin.y + self.topSelectedView!.bounds.size.height + 0.5, width: SCREEN_WIDTH, height: view.bounds.size.height)
+        }) { (finished) in
+            
+        }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        /// 翻转箭头
+        UIView.animate(withDuration: 0.4, animations: {
+            let selectedImg = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
+            selectedImg.image = UIImage.init(named: "btn_down")
+            let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
+            selectedImg.transform = transform
+        }) { (finished) in
+        }
     }
     
     /// showLoadingView
@@ -274,7 +303,7 @@ extension SX_TrainingProjectController {
     
     /// hideLoadingView
     func hideLoadingView() {
-     
+        
         
         
     }
