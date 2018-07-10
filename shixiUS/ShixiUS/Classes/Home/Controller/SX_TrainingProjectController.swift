@@ -235,17 +235,34 @@ extension SX_TrainingProjectController {
     /// 展示隐藏动画
     func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
         if view.isKind(of: type(of: self.comprehensiveView)) {
+        
+            self.comprehensiveView.frame = CGRect(x: 0, y: -self.comprehensiveView.bounds.size.height, width: SCREEN_WIDTH, height: self.comprehensiveView.bounds.size.height)
+            
+            self
             
             
             
             
-            
-            
-            
-            
-            
-            
+        
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     /// showLoadingView
