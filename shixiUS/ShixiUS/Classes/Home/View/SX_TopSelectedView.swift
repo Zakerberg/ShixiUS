@@ -25,8 +25,8 @@ class SX_TopSelectedView: UIView {
         
 //        CGContext.addPath(context)!
 //        CGContext.drawPath(context!)
+//        context!.strokePath()
         
-        //context!.strokePath()
         context?.drawPath(using: CGPathDrawingMode.fill)
     }
 }

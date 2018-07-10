@@ -10,6 +10,8 @@ import UIKit
 
 class SX_TrainingProjectController: UIViewController {
     
+    var topSelectedView: SX_TopSelectedView?
+    
     // ========================================================================================================================
     // MARK: - lazy
     // ========================================================================================================================
@@ -18,9 +20,8 @@ class SX_TrainingProjectController: UIViewController {
         
         let comprehensiveView = UIView()
         
-        
         return comprehensiveView
-    
+        
     }()
     
     /// 实训类别View
@@ -44,7 +45,7 @@ class SX_TrainingProjectController: UIViewController {
         
         return tableView
     }()
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -56,6 +57,7 @@ class SX_TrainingProjectController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        setTopSelectedView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,7 +80,7 @@ extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSourc
         cell.textLabel?.text = "测试cell"
         return cell
         
-     }
+    }
 }
 
 // ========================================================================================================================
@@ -94,7 +96,7 @@ extension SX_TrainingProjectController {
         self.comprehensiveView.isHidden = true
         self.countryView.isHidden = true
     }
-
+    
     func setleftBackButton() {
         
         let _ = UIButton(type:.custom).addhere(toSuperView: self.view).layout { (make) in
@@ -114,9 +116,66 @@ extension SX_TrainingProjectController {
         }
     }
     
+    
     func fetchData()  {
         
+    }
+    
+    /// controlClick
+    @objc func topSelectedBtnClick() {
         
+        
+    }
+    
+    /// 顶部三个按钮
+    func setTopSelectedView() {
+        self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
+            topSelectedView.backgroundColor = UIColor.white
+        })
+        
+        let _ = UIView(frame: CGRect(x: 0, y: self.topSelectedView!.frame.origin.y + self.topSelectedView!.frame.size.height + 0.1 , width: SCREEN_WIDTH, height: 0.5)).addhere(toSuperView: self.view).config { (lineView) in
+            lineView.backgroundColor = UIColor.colorWithHexString(hex: "b2b2b2", alpha: 1)
+        }
+        
+        let titleArr = ["综合排序","实训项目","国家"]
+        for index in 0...3 {
+            let title = titleArr[index]
+            let view = creatBtnView(title, frame: CGRect(x: Int((SCREEN_WIDTH/3)) * index, y: 0, width: Int(SCREEN_WIDTH/3), height: 44), tag: index)
+            view.isUserInteractionEnabled = true
+            self.topSelectedView?.addSubview(view)
+            
+            let control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+            control.addTarget(self, action: #selector(topSelectedBtnClick), for: .touchUpInside)
+            control.tag = index + 1000
+            view.addSubview(control)
+        }        
+    }
+    
+    /// 创建头部选择条件View
+    func creatBtnView(_ title:String, frame: CGRect, tag:NSInteger) -> UIView {
+        
+        let view = UIView(frame: frame)
+        view.backgroundColor = UIColor.white
+        
+        let label = UILabel().addhere(toSuperView: view).layout { (make) in
+            make.centerX.equalToSuperview().offset(-6)
+            make.top.equalToSuperview().offset(15)
+            make.size.equalTo(CGSize(width: 65, height: 14))
+            }.config { (label) in
+                label.font = UIFont.systemFont(ofSize: 14)
+                label.textColor = UIColor.colorWithHexString(hex: "323232", alpha: 1)
+                label.lineBreakMode = .byTruncatingMiddle
+                label.tag = tag + 2000
+        }
+        
+        let _ = UIImageView(image: UIImage.init(named: "btn_down")).addhere(toSuperView: view).layout { (make) in
+            make.left.equalTo(label.snp.right).offset(5)
+            make.top.equalToSuperview().offset(19)
+            make.size.equalTo(CGSize(width: 7, height: 4))
+            }.config { (imageV) in
+                imageV.tag = tag + 3000
+        }
+        return view
     }
 }
 
