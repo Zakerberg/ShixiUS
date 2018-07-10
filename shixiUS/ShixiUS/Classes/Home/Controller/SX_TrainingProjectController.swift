@@ -16,10 +16,11 @@ class SX_TrainingProjectController: UIViewController {
     
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
+    var loadingView: SX_LoadingView?
     
-    // ========================================================================================================================
-    // MARK: - lazy
-    // ========================================================================================================================
+// ========================================================================================================================================
+// MARK: - lazy
+// ========================================================================================================================================
     /// 综合排序View
     private lazy var comprehensiveView: UIView = {
         let comprehensiveView = UIView()
@@ -66,9 +67,9 @@ class SX_TrainingProjectController: UIViewController {
     }
 }
 
-// ========================================================================================================================
+// ========================================================================================================================================
 // MARK: - UITableViewDelegate
-// ========================================================================================================================
+// ========================================================================================================================================
 extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 50
@@ -82,9 +83,9 @@ extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSourc
     }
 }
 
-// ========================================================================================================================
+// ========================================================================================================================================
 // MARK: - Other Method
-// ========================================================================================================================
+// ========================================================================================================================================
 extension SX_TrainingProjectController {
     
     func setUI() {
@@ -170,9 +171,9 @@ extension SX_TrainingProjectController {
 }
 
 
-// ========================================================================================================================
+// ========================================================================================================================================
 // MARK: - Other Method 2 响应
-// ========================================================================================================================
+// ========================================================================================================================================
 extension SX_TrainingProjectController {
     
     func fetchData()  {
@@ -182,10 +183,21 @@ extension SX_TrainingProjectController {
     /// 调出PickerView
     @objc func topSelectedBtnClick(control: UIControl) {
         if control.isSelected == true {
-            control.isSelected == false
+            control.isSelected = false
             /// 收起
+            hideViewWithAnimation(view: self.comprehensiveView)
+            hideViewWithAnimation(view: self.trainingView)
+            hideViewWithAnimation(view: self.countryView)
+        
+        }else if(control.isSelected == false) {
+            control.isSelected = true
             
-            
+            if(control.tag == 1000) {
+              
+             
+                
+                
+            }
         }
     }
     
@@ -218,6 +230,36 @@ extension SX_TrainingProjectController {
                 
             }
         }
+    }
+    
+    /// 展示隐藏动画
+    func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
+        if view.isKind(of: type(of: self.comprehensiveView)) {
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        }
+    }
+    
+    /// showLoadingView
+    func showLoadingView() {
+        
+        
+        
+    }
+    
+    /// hideLoadingView
+    func hideLoadingView() {
+     
+        
+        
     }
 }
 
