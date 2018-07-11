@@ -192,35 +192,13 @@ extension SX_TrainingProjectController {
         }else if(control.isSelected == false) {
             control.isSelected = true
             
+            /// 创建弹窗 选择条件
             if(control.tag == 1000) {
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                showViewWithAnimationAndTag(self.comprehensiveView, tag: control.tag)
+            } else if(control.tag == 1001) {
+                showViewWithAnimationAndTag(self.trainingView, tag: control.tag)
+            } else if(control.tag == 1002) {
+                showViewWithAnimationAndTag(self.countryView, tag: control.tag)
             }
         }
     }
