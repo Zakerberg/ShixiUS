@@ -18,9 +18,9 @@ class SX_TrainingProjectController: UIViewController {
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
     
-// ========================================================================================================================================
-// MARK: - lazy
-// ========================================================================================================================================
+    // ========================================================================================================================================
+    // MARK: - lazy
+    // ========================================================================================================================================
     /// 综合排序View
     private lazy var comprehensiveView: UIView = {
         let comprehensiveView = UIView()
@@ -196,7 +196,31 @@ extension SX_TrainingProjectController {
                 
                 
                 
-                                        
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
             }
         }
     }
@@ -292,6 +316,26 @@ extension SX_TrainingProjectController {
             selectedImg.transform = transform
         }) { (finished) in
         }
+        
+        /// 恢复状态
+        for index in 0...3 {
+            if (index != (tag-ControlTag)) {
+                UIView.animate(withDuration: 0.4, animations: {
+                    let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as! UIImageView
+                    allImg.image = UIImage.init(named: "btn_down")
+                    let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
+                    allImg.transform = transform
+                }) { (finished) in
+                    SXLog(finished)
+                    
+                    let allLabel = self.topSelectedView?.viewWithTag(index+LabelTag) as! UILabel
+                    allLabel.textColor = UIColor.black
+                }
+            }
+            
+            let selectedLabel = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as! UILabel
+            selectedLabel.textColor = UIColor.SX_MainColor()
+        }
     }
     
     /// showLoadingView
@@ -299,10 +343,22 @@ extension SX_TrainingProjectController {
         
         
         
+        
+        
+        
+        
+        
+        
     }
     
     /// hideLoadingView
     func hideLoadingView() {
+        
+        
+        
+        
+        
+        
         
         
         
