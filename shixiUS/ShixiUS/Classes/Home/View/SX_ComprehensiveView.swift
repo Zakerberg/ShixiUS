@@ -13,6 +13,9 @@ class SX_ComprehensiveView: UIView {
     
     var dataArr: [String]?
     
+    typealias getComprehensiveChangeClosure = (_ str:NSString) -> ()?
+    var getComprehensiveStr: getComprehensiveChangeClosure?
+
     private lazy var tableView: UITableView = {
         
         let tableView = UITableView().addhere(toSuperView: self).layout(snapKitMaker: { (make) in
@@ -63,13 +66,9 @@ extension SX_ComprehensiveView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     
-        
-        
+        let title = self.dataArr![indexPath.row]
+        self.getComprehensiveStr!(title as NSString)
     }
-    
-    
-    
 }
 
 

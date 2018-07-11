@@ -24,18 +24,45 @@ class SX_TrainingProjectController: UIViewController {
     /// 综合排序View
     private lazy var comprehensiveView: UIView = {
         let comprehensiveView = UIView()
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return comprehensiveView
     }()
     
     /// 实训类别View
     private lazy var trainingView: UIView = {
         let trainingView = UIView()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return trainingView
     }()
     
     /// 国家分类View
     private lazy var countryView: UIView = {
         let countryView = UIView()
+        
+        
+        
+        
+        
+        
         return countryView
     }()
     
@@ -328,16 +355,9 @@ extension SX_TrainingProjectController {
     /// hideLoadingView
     func hideLoadingView() {
         let delaySeconds = 0.5
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
     }
 }
 
