@@ -18,9 +18,9 @@ class SX_TrainingProjectController: UIViewController {
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
     
-    // ========================================================================================================================================
-    // MARK: - lazy
-    // ========================================================================================================================================
+// ========================================================================================================================================
+// MARK: - lazy
+// ========================================================================================================================================
     /// 综合排序View
     private lazy var comprehensiveView: UIView = {
         let comprehensiveView = UIView()
@@ -318,19 +318,17 @@ extension SX_TrainingProjectController {
     
     /// showLoadingView
     func showLoadingView() {
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+        if (self.loadingView == nil) {
+            self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+        }
+        self.view.addSubview(self.loadingView!)
     }
     
     /// hideLoadingView
     func hideLoadingView() {
+        let delaySeconds = 0.5
+        
         
         
         
