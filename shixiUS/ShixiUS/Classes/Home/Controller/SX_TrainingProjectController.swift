@@ -28,7 +28,6 @@ class SX_TrainingProjectController: UIViewController {
         })
         
         compreView.isHidden = true
-        
         return compreView
     }()
     
@@ -269,14 +268,14 @@ extension SX_TrainingProjectController {
         self.blackBgView?.isHidden = false
         view.isHidden = false
         
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseOut, animations: {
             view.frame = CGRect(x: 0, y: self.topSelectedView!.bounds.origin.y + self.topSelectedView!.bounds.size.height + 0.5, width: SCREEN_WIDTH, height: view.bounds.size.height)
         }) { (finished) in
             
         }
         
         /// 翻转箭头
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.1, animations: {
             let selectedImg = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
             selectedImg.image = UIImage.init(named: "btn_odown")
             let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
@@ -287,7 +286,7 @@ extension SX_TrainingProjectController {
         /// 恢复状态
         for index in 0..<3 {
             if (index != (tag-ControlTag)) {
-                UIView.animate(withDuration: 0.4, animations: {
+                UIView.animate(withDuration: 0.1, animations: {
                     let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
                     allImg?.image = UIImage.init(named: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
@@ -317,6 +316,12 @@ extension SX_TrainingProjectController {
     /// hideLoadingView
     func hideLoadingView() {
         let delaySeconds = 0.5
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+      
+        
     }
 }
 

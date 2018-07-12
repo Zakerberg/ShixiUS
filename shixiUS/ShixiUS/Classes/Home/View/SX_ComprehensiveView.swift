@@ -17,7 +17,7 @@ class SX_ComprehensiveView: UIView {
     var getComprehensiveStr: getComprehensiveChangeClosure?
     
     private lazy var compreTableView: UITableView = {
-
+        
         let tableView = UITableView().addhere(toSuperView: self).layout(snapKitMaker: { (make) in
             make.edges.equalToSuperview()
         })
@@ -44,7 +44,7 @@ class SX_ComprehensiveView: UIView {
 // MARK: - UITableViewDelegate
 // ========================================================================================================================================
 extension SX_ComprehensiveView: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataArr!.count
     }
@@ -59,7 +59,7 @@ extension SX_ComprehensiveView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let title = self.dataArr![indexPath.row]
         self.getComprehensiveStr?(title as NSString)
@@ -69,9 +69,3 @@ extension SX_ComprehensiveView: UITableViewDelegate, UITableViewDataSource {
         return 40
     }
 }
-
-
-
-
-
-
