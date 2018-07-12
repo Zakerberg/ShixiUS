@@ -12,7 +12,6 @@ class SX_MineVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = "sss"
+        self.title = "我的"
     }
 }

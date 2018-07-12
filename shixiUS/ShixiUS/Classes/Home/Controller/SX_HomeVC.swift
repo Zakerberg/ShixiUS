@@ -84,7 +84,7 @@ class SX_HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        
+        self.navigationController?.delegate = self
         /**** ======================================================================================================
          let NetImgArr = Array<Any>()
          let descLabelArr = Array<Any>()
@@ -226,7 +226,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     homeButton.setImage(UIImage(named: imagesArr[i]), for: .normal)
                     homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
                     homeButton.rx.tap.subscribe(onNext: { (_) in
-                        
                         SXLog("首页按钮的点击\(i)")
                         if i == 0 {
                             SXLog("进入实训项目\(i)")
@@ -236,9 +235,19 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                             self.hidesBottomBarWhenPushed = false
                         }else if i == 1 {
                             SXLog("进入海外就业\(i)")
+                            self.hidesBottomBarWhenPushed = true
+                            let vc = SX_OverseaController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                            self.hidesBottomBarWhenPushed = false
+                            
                         }else if i == 2 {
                             SXLog("进入培训认证\(i)")
+                            self.hidesBottomBarWhenPushed = true
+                            let vc = SX_CertificationController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                            self.hidesBottomBarWhenPushed = false
                         }
+                        
                     }, onError: { (error) in
                         SXLog(error)
                     }, onCompleted: nil, onDisposed: nil)
@@ -302,7 +311,20 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
     }
 }
 
+// ========================================================================================================================================
+// MARK: - UINavigationControllerDelegate
+// ========================================================================================================================================
+extension SX_HomeVC: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        let isShowHomePage = viewController.isKind(of: type(of: self))
+        self.navigationController?.setNavigationBarHidden(isShowHomePage, animated: true)
+    }
+}
+
+// ========================================================================================================================================
 //MARK: - Other Method
+// ========================================================================================================================================
 extension SX_HomeVC {
     
     /// Alert
@@ -337,3 +359,8 @@ extension SX_HomeVC {
         } catch { }
     }
 }
+
+
+
+
+

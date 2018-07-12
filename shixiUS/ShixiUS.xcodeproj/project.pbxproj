@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F24381F419BB7C6CDD0046C /* Pods_ShixiUSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */; };
+		4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982120F6F11C00504B6E /* SX_CertificationController.swift */; };
 		45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */; };
 		45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2F20F48C240099CDDD /* SX_LoadingView.swift */; };
 		45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */; };
@@ -35,7 +36,6 @@
 		45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */; };
 		45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */; };
 		45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */; };
-		45CF168E20EF120000188F42 /* SX_ CertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168D20EF120000188F42 /* SX_ CertificationController.swift */; };
 		45CF169020EF37BC00188F42 /* SX_BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168F20EF37BC00188F42 /* SX_BaseController.swift */; };
 		45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */; };
 		45CF169420EF515600188F42 /* SX_ComprehensiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF169320EF515600188F42 /* SX_ComprehensiveView.swift */; };
@@ -69,6 +69,7 @@
 		1190C349599AFF1C16E19BBE /* Pods-ShixiUS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShixiUS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShixiUS/Pods-ShixiUS.release.xcconfig"; sourceTree = "<group>"; };
 		1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4505982120F6F11C00504B6E /* SX_CertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CertificationController.swift; sourceTree = "<group>"; };
 		45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TopSelectedView.swift; sourceTree = "<group>"; };
 		45341D2F20F48C240099CDDD /* SX_LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_LoadingView.swift; sourceTree = "<group>"; };
 		45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CycleScrollerView.swift; sourceTree = "<group>"; };
@@ -102,7 +103,6 @@
 		45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobsCell.swift; sourceTree = "<group>"; };
 		45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingProjectController.swift; sourceTree = "<group>"; };
 		45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaController.swift; sourceTree = "<group>"; };
-		45CF168D20EF120000188F42 /* SX_ CertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SX_ CertificationController.swift"; sourceTree = "<group>"; };
 		45CF168F20EF37BC00188F42 /* SX_BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseController.swift; sourceTree = "<group>"; };
 		45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseWebController.swift; sourceTree = "<group>"; };
 		45CF169320EF515600188F42 /* SX_ComprehensiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ComprehensiveView.swift; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 				45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */,
 				45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */,
 				45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */,
-				45CF168D20EF120000188F42 /* SX_ CertificationController.swift */,
+				4505982120F6F11C00504B6E /* SX_CertificationController.swift */,
 			);
 			name = Controller;
 			path = ShixiUS/Classes/Home/Controller;
@@ -731,7 +731,6 @@
 				45CF169620EF63A000188F42 /* SX_TrainingView.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
 				45CF169020EF37BC00188F42 /* SX_BaseController.swift in Sources */,
-				45CF168E20EF120000188F42 /* SX_ CertificationController.swift in Sources */,
 				4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
@@ -742,6 +741,7 @@
 				45CF169820EF63D200188F42 /* SX_CountryView.swift in Sources */,
 				45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */,
 				45A5219A20EDBD6F0036A23D /* SX_TrainingCollectionViewCell.swift in Sources */,
+				4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */,
 				45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */,
 				45556B5D20D89DAD0035FCA6 /* SX_TabBarController.swift in Sources */,
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
