@@ -11,11 +11,4 @@ import UIKit
 class SX_CountryView: UIView {
 
 
-
-    
-    
-    
-    
-    
-    
 }

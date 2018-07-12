@@ -17,20 +17,19 @@ class SX_TrainingProjectController: UIViewController {
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
-    // var comprehensiveView = SX_ComprehensiveView?
     
 //========================================================================================================================================
 //  MARK: - lazy
 //========================================================================================================================================
     // 综合排序View
     private lazy var comprehensiveView: UIView = {
-        let view = SX_ComprehensiveView()
+        let compreView = SX_ComprehensiveView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 241)).addhere(toSuperView: self.view).config({ (compreView) in
+            compreView.backgroundColor = UIColor.red
+        })
         
-        
-        
-        
-        
-        return view
+        compreView.isHidden = true
+ 
+        return compreView
     }()
     
     /// 实训类别View
@@ -278,9 +277,9 @@ extension SX_TrainingProjectController {
         }
         
         /// 翻转箭头
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             let selectedImg = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
-            selectedImg.image = UIImage.init(named: "btn_down")
+            selectedImg.image = UIImage.init(named: "btn_odown")
             let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
             selectedImg.transform = transform
         }) { (finished) in

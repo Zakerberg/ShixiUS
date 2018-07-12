@@ -13,7 +13,7 @@ class SX_ComprehensiveView: UIView {
     
     var dataArr: [String]?
     
-    typealias getComprehensiveChangeClosure = (_ str:NSString) -> ()?
+    typealias getComprehensiveChangeClosure = (_ str:NSString) -> Void
     var getComprehensiveStr: getComprehensiveChangeClosure?
 
     private lazy var tableView: UITableView = {
@@ -39,19 +39,20 @@ class SX_ComprehensiveView: UIView {
     }
 }
 
-// ========================================================================================================================
+// ========================================================================================================================================
 // MARK: - Other Method
-// ========================================================================================================================
+// ========================================================================================================================================
 extension SX_ComprehensiveView {
     
     func setupView() {
+        self.backgroundColor = UIColor.white
         self.dataArr = ["综合排序","项目时间","价格降序","价格升序"]
     }
 }
 
-// ========================================================================================================================
+// ========================================================================================================================================
 // MARK: - UITableViewDelegate
-// ========================================================================================================================
+// ========================================================================================================================================
 extension SX_ComprehensiveView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
