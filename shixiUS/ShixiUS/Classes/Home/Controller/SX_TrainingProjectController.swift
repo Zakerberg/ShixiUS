@@ -23,12 +23,12 @@ class SX_TrainingProjectController: UIViewController {
 //========================================================================================================================================
     // 综合排序View
     private lazy var comprehensiveView: UIView = {
-        let compreView = SX_ComprehensiveView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 241)).addhere(toSuperView: self.view).config({ (compreView) in
-            compreView.backgroundColor = UIColor.red
+        let compreView = SX_ComprehensiveView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
+            compreView.backgroundColor = UIColor.white
         })
         
         compreView.isHidden = true
- 
+        
         return compreView
     }()
     
@@ -120,7 +120,6 @@ extension SX_TrainingProjectController {
         
         var titleArr = ["综合排序","实训项目","国家"]
         for index in 0..<3 {
-            //let title = titleArr[index]
             let view = creatBtnView(titleArr[index], frame: CGRect(x: Int((SCREEN_WIDTH/3)) * index, y: 0, width: Int(SCREEN_WIDTH/3), height: 44), tag: index)
             view.isUserInteractionEnabled = true
             self.topSelectedView?.addSubview(view)
@@ -146,7 +145,7 @@ extension SX_TrainingProjectController {
                 label.text = title
                 label.font = UIFont.systemFont(ofSize: 14)
                 label.textColor = UIColor.black
-                label.lineBreakMode = .byTruncatingMiddle
+                label.textAlignment = .right
                 label.tag = tag + LabelTag
         }
         
