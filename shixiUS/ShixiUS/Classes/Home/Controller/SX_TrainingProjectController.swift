@@ -102,6 +102,7 @@ extension SX_TrainingProjectController {
     func setUI() {
         self.title = "实训项目"
         self.view.backgroundColor = UIColor.colorWithHexString(hex: "f1f1f1", alpha: 1)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.trainingView.isHidden = true
         self.comprehensiveView.isHidden = true
         self.countryView.isHidden = true
