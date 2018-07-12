@@ -208,7 +208,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             
             for i in 0..<namesArr.count {
                 let index = i % 3
-                 // let page = i / 3
+                // let page = i / 3
                 // homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
                 homeButton = UIButton(type: .custom).addhere(toSuperView: headerView1).layout(snapKitMaker: { (make) in
                     make.top.equalToSuperview().offset(Margin)
@@ -225,11 +225,15 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     homeButton.adjustsImageWhenDisabled = false
                     homeButton.setImage(UIImage(named: imagesArr[i]), for: .normal)
                     homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-                    homeButton.rx.tap.subscribe(onNext: { (self) in
+                    homeButton.rx.tap.subscribe(onNext: { (_) in
                         
                         SXLog("首页按钮的点击\(i)")
                         if i == 0 {
                             SXLog("进入实训项目\(i)")
+                            self.hidesBottomBarWhenPushed = true
+                            let vc = SX_TrainingProjectController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                            self.hidesBottomBarWhenPushed = false
                         }else if i == 1 {
                             SXLog("进入海外就业\(i)")
                         }else if i == 2 {
@@ -287,13 +291,13 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
 // MARK: - SXCycleScrollerViewDelegate
 // ========================================================================================================================================
 extension SX_HomeVC: SXCycleScrollerViewDelegate {
- 
+    
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
-
+        
     }
     
     func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
-
+        
         SXLog("点击了轮播\(index)")
     }
 }
