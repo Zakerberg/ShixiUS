@@ -14,7 +14,6 @@ class SX_CertificationController: UIViewController {
         super.viewDidLoad()
         self.title = "培训认证"
         self.view.backgroundColor = UIColor.groupTableViewBackground
-        
     }
     
     override func didReceiveMemoryWarning() {

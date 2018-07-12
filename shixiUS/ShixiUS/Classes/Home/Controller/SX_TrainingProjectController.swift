@@ -17,15 +17,17 @@ class SX_TrainingProjectController: UIViewController {
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
-   // var comprehensiveView = SX_ComprehensiveView?
+    // var comprehensiveView = SX_ComprehensiveView?
     
 //========================================================================================================================================
 //  MARK: - lazy
 //========================================================================================================================================
     // 综合排序View
     private lazy var comprehensiveView: UIView = {
+        let view = SX_ComprehensiveView()
         
-        let view = UIView()
+        
+        
         
         
         return view
@@ -67,11 +69,9 @@ class SX_TrainingProjectController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        setUI()
-        //        fetchData()
-        //        setTopSelectedView()
-        self.title = "实训项目"
-        self.view.backgroundColor = UIColor.groupTableViewBackground
+        setUI()
+        fetchData()
+        setTopSelectedView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -102,35 +102,12 @@ extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSourc
 extension SX_TrainingProjectController {
     
     func setUI() {
-        
         self.title = "实训项目"
         self.view.backgroundColor = UIColor.colorWithHexString(hex: "f1f1f1", alpha: 1)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
         self.trainingView.isHidden = true
         self.comprehensiveView.isHidden = true
         self.countryView.isHidden = true
     }
-    
-    func setleftBackButton() {
-        
-        let _ = UIButton(type:.custom).addhere(toSuperView: self.view).layout { (make) in
-            make.top.left.equalToSuperview()
-            make.width.height.equalTo(44)
-            }.config { (leftBtn) in
-                leftBtn.setImage(UIImage.init(named: ""), for: .normal)
-                leftBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -28, 0, 0)
-                leftBtn.rx.tap.subscribe(onNext: { (_) in
-                    self.navigationController?.popViewController(animated: true)
-                }, onError: { (error) in
-                    SXLog(error)
-                }, onCompleted: nil, onDisposed: nil)
-                let backItem = UIBarButtonItem(customView: leftBtn)
-                self.navigationItem.leftBarButtonItem = backItem
-                self.navigationController?.interactivePopGestureRecognizer?.delegate = self as! UIGestureRecognizerDelegate
-        }
-    }
-    
     
     /// 顶部三个按钮
     func setTopSelectedView() {
@@ -142,10 +119,10 @@ extension SX_TrainingProjectController {
             lineView.backgroundColor = UIColor.colorWithHexString(hex: "b2b2b2", alpha: 1)
         }
         
-        let titleArr = ["综合排序","实训项目","国家"]
+        var titleArr = ["综合排序","实训项目","国家"]
         for index in 0..<3 {
-            let title = titleArr[index]
-            let view = creatBtnView(title, frame: CGRect(x: Int((SCREEN_WIDTH/3)) * index, y: 0, width: Int(SCREEN_WIDTH/3), height: 44), tag: index)
+            //let title = titleArr[index]
+            let view = creatBtnView(titleArr[index], frame: CGRect(x: Int((SCREEN_WIDTH/3)) * index, y: 0, width: Int(SCREEN_WIDTH/3), height: 44), tag: index)
             view.isUserInteractionEnabled = true
             self.topSelectedView?.addSubview(view)
             
@@ -160,15 +137,16 @@ extension SX_TrainingProjectController {
     func creatBtnView(_ title:String, frame: CGRect, tag:NSInteger) -> UIView {
         
         let view = UIView(frame: frame)
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.groupTableViewBackground
         
         let label = UILabel().addhere(toSuperView: view).layout { (make) in
             make.centerX.equalToSuperview().offset(-6)
             make.top.equalToSuperview().offset(15)
             make.size.equalTo(CGSize(width: 65, height: 14))
             }.config { (label) in
+                label.text = title
                 label.font = UIFont.systemFont(ofSize: 14)
-                label.textColor = UIColor.colorWithHexString(hex: "323232", alpha: 1)
+                label.textColor = UIColor.black
                 label.lineBreakMode = .byTruncatingMiddle
                 label.tag = tag + LabelTag
         }
