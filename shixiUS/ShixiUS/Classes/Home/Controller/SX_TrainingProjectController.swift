@@ -64,6 +64,9 @@ class SX_TrainingProjectController: UIViewController {
         return tableView
     }()
     
+//========================================================================================================================================
+//
+//========================================================================================================================================
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -230,13 +233,13 @@ extension SX_TrainingProjectController {
                 }
                 
             }) { (finished) in
-                
+                SXLog(finished)
             }
         }
     }
     
     /// 展示隐藏动画
-    func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
+   func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
       
         if view.isKind(of: type(of: self.comprehensiveView)) { //综合
             
