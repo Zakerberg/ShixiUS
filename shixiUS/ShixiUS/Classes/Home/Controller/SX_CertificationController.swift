@@ -21,3 +21,13 @@ class SX_CertificationController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
+
+//=========================================================================================================================================
+// MARK: - UITableViewDelegate
+//=========================================================================================================================================
+extension SX_CertificationController {
+    
+    
+    
+    
+}

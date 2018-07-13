@@ -174,6 +174,16 @@ extension SX_TrainingProjectController {
     
     func fetchData()  {
         
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     /// 调出PickerView
@@ -333,10 +343,13 @@ extension SX_TrainingProjectController {
     /// hideLoadingView
     func hideLoadingView() {
         let delaySeconds = 0.5
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
+        
     }
 }
 

@@ -14,8 +14,8 @@ pod 'RxCocoa'
 pod 'RxSwift'
 pod 'Alamofire'
 pod 'Result'
-pod 'SDWebImage'
 pod 'Kingfisher'
+pod 'FDFullscreenPopGesture'
 
   
   target 'ShixiUSTests' do
