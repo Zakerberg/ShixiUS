@@ -23,31 +23,36 @@ class SX_TrainingProjectController: UIViewController {
 //========================================================================================================================================
     // 综合排序View
     private lazy var comprehensiveView: UIView = {
-        let compreView = SX_ComprehensiveView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
+        let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
             compreView.backgroundColor = UIColor.white
         })
         
+        compreView.dataArr = ["综合排序","项目时间","价格降序","价格升序"]
         compreView.isHidden = true
+        
         return compreView
     }()
     
     /// 实训类别View
     private lazy var trainingView: UIView = {
-        let trainingView = SX_TrainingView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (trainingView) in
+        let trainingView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (trainingView) in
             trainingView.backgroundColor = UIColor.white
         })
         
+        trainingView.dataArr = ["测试类别1","测试类别2","测试类别3","测试类别4","测试类别5"]
         trainingView.isHidden = true
+        
         return trainingView
     }()
     
     /// 国家分类View
     private lazy var countryView: UIView = {
-        let countryView = SX_CountryView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (countryView) in
+        let countryView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (countryView) in
             countryView.backgroundColor = UIColor.white
         })
-        
+        countryView.dataArr = ["中国","美国","不限"]
         countryView.isHidden = true
+        
         return countryView
     }()
     
@@ -125,6 +130,7 @@ extension SX_TrainingProjectController {
             let control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
             control.addTarget(self, action: #selector(topSelectedBtnClick), for: .touchUpInside)
             control.tag = index + ControlTag
+
             view.addSubview(control)
         }
     }
@@ -182,10 +188,18 @@ extension SX_TrainingProjectController {
             /// 创建弹窗 选择条件
             if(control.tag == 1000) {
                 showViewWithAnimationAndTag(self.comprehensiveView, tag: control.tag)
+                hideViewWithAnimation(view: self.trainingView)
+                hideViewWithAnimation(view: self.countryView)
+
             } else if(control.tag == 1001) {
                 showViewWithAnimationAndTag(self.trainingView, tag: control.tag)
+                hideViewWithAnimation(view: self.comprehensiveView)
+                hideViewWithAnimation(view: self.countryView)
+                
             } else if(control.tag == 1002) {
                 showViewWithAnimationAndTag(self.countryView, tag: control.tag)
+                hideViewWithAnimation(view: self.comprehensiveView)
+                hideViewWithAnimation(view: self.trainingView)
             }
         }
     }
@@ -223,20 +237,21 @@ extension SX_TrainingProjectController {
     
     /// 展示隐藏动画
     func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
-        if view.isKind(of: type(of: self.comprehensiveView)) {
+      
+        if view.isKind(of: type(of: self.comprehensiveView)) { //综合
             
             self.trainingView.frame = CGRect(x: 0, y: -self.trainingView.bounds.size.height, width: SCREEN_WIDTH, height: self.trainingView.bounds.size.height)
             self.countryView.frame = CGRect(x: 0, y: -self.countryView.bounds.size.height, width: SCREEN_WIDTH, height: self.countryView.bounds.size.height)
             
             self.trainingView.isHidden = true
             self.countryView.isHidden  = true
-            
+
             let control1 = self.topSelectedView?.viewWithTag(1001) as? UIControl
             control1?.isSelected = false
             let control2 = self.topSelectedView?.viewWithTag(1002) as? UIControl
             control2?.isSelected = false
             
-        } else if (view.isKind(of: type(of: trainingView))) {
+        } else if (view.isKind(of: type(of: trainingView))) {  // 实训项目
             
             self.comprehensiveView.frame = CGRect(x: 0, y: Int(-self.comprehensiveView.bounds.size.height), width: Int(SCREEN_WIDTH), height: Int(self.comprehensiveView.bounds.size.height))
             self.countryView.frame = CGRect(x: 0, y: -self.countryView.bounds.size.height, width: SCREEN_WIDTH, height: self.countryView.bounds.size.height)
@@ -250,14 +265,14 @@ extension SX_TrainingProjectController {
             let control2 = self.topSelectedView?.viewWithTag(1002) as? UIControl
             control2?.isSelected = false
             
-        } else if (view.isKind(of: type(of: self.countryView))) {
+        } else if (view.isKind(of: type(of: self.countryView))) { // 国家
             
             self.comprehensiveView.frame = CGRect(x: 0, y: -self.comprehensiveView.bounds.size.height, width: SCREEN_WIDTH, height: self.comprehensiveView.bounds.size.height)
             self.trainingView.frame = CGRect(x: 0, y: -self.trainingView.bounds.size.height, width: SCREEN_WIDTH, height: self.trainingView.bounds.size.height)
             
-            self.comprehensiveView.isHidden = true
-            self.countryView.isHidden       = true
-            
+            self.comprehensiveView.isHidden  = true
+            self.trainingView.isHidden       = true
+
             let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
             control1?.isSelected = false
             let control2 = self.topSelectedView?.viewWithTag(1001) as? UIControl
@@ -318,8 +333,7 @@ extension SX_TrainingProjectController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-      
+
     }
 }
 

@@ -194,7 +194,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         }
         
         let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
-        
         return shixiTrainingCell
     }
     
@@ -287,10 +286,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                         
                     }, onCompleted: nil, onDisposed: nil)
             }
-            
             return hotJobHeaderView
         }
-        
         let view = UIView()
         return view
     }
@@ -323,7 +320,7 @@ extension SX_HomeVC: UINavigationControllerDelegate {
 }
 
 // ========================================================================================================================================
-//MARK: - Other Method
+// MARK: - Other Method
 // ========================================================================================================================================
 extension SX_HomeVC {
     
@@ -351,6 +348,7 @@ extension SX_HomeVC {
             let array = appInfoDic["results"] as! NSArray
             if array.count < 1 {
                 print("此App未提交")
+                
                 return
             }
             let dic = array[0] as! NSDictionary

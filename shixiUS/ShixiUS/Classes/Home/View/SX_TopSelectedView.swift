@@ -13,7 +13,7 @@ class SX_TopSelectedView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-       let context = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0))
         path.addLine(to: CGPoint(x: self.frame.size.width, y: 0))
@@ -22,11 +22,6 @@ class SX_TopSelectedView: UIView {
         
         path.lineWidth = 0.5
         UIColor.colorWithHexString(hex: "b2b2b2", alpha: 1).set()
-        
-//        CGContext.addPath(context)!
-//        CGContext.drawPath(context!)
-//        context!.strokePath()
-        
         context?.drawPath(using: CGPathDrawingMode.fill)
     }
 }

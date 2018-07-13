@@ -1,36 +1,33 @@
 //
-//  SX_CountryView.swift
+//  SX_BasePopSelectedView.swift
 //  ShixiUS
 //
-//  Created by Michael 柏 on 7/6/18.
+//  Created by Michael 柏 on 7/13/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  国家View
+//  所有向下弹出的选择View
 
 import UIKit
 
-private let countryCellID = "countryCellID"
+private let cellID = "cellID"
 
-class SX_CountryView: UIView {
-
-    var dataArr:[String]?
+class SX_BasePopSelectedView: UIView {
     
-    private lazy var countryTableView: UITableView = {
-        
+    var dataArr: [String]?
+    
+    private lazy var basePopSelectedTableView: UITableView = {
         let tableView = UITableView().addhere(toSuperView: self).layout(snapKitMaker: { (make) in
             make.edges.equalToSuperview()
         })
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
-        
         return tableView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.addSubview(basePopSelectedTableView)
         self.backgroundColor = UIColor.white
-        self.addSubview(countryTableView)
-        self.dataArr = ["中国","美国","不限"]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,19 +35,16 @@ class SX_CountryView: UIView {
     }
 }
 
-
 // ========================================================================================================================================
 // MARK: - UITableViewDelegate
 // ========================================================================================================================================
-extension SX_CountryView: UITableViewDelegate,UITableViewDataSource {
-    
+extension SX_BasePopSelectedView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataArr!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = UITableViewCell(style: .default, reuseIdentifier: countryCellID)
+        let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
         cell.textLabel?.text = self.dataArr?[indexPath.row]
         cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
         cell.textLabel?.textColor = UIColor.black
@@ -61,7 +55,6 @@ extension SX_CountryView: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         SXLog("点击了taining\(indexPath.row)")
     }
     
@@ -73,10 +66,15 @@ extension SX_CountryView: UITableViewDelegate,UITableViewDataSource {
 // ========================================================================================================================================
 // MARK: - Other Method
 // ========================================================================================================================================
-extension SX_CountryView {
+extension SX_BasePopSelectedView {
     
+    func fetchData() {
     
-    
-    
-    
+        
+        
+    }
 }
+
+
+
+

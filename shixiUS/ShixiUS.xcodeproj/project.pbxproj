@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F24381F419BB7C6CDD0046C /* Pods_ShixiUSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */; };
 		4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982120F6F11C00504B6E /* SX_CertificationController.swift */; };
+		4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */; };
 		45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */; };
 		45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2F20F48C240099CDDD /* SX_LoadingView.swift */; };
 		45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */; };
@@ -38,9 +39,6 @@
 		45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */; };
 		45CF169020EF37BC00188F42 /* SX_BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168F20EF37BC00188F42 /* SX_BaseController.swift */; };
 		45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */; };
-		45CF169420EF515600188F42 /* SX_ComprehensiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF169320EF515600188F42 /* SX_ComprehensiveView.swift */; };
-		45CF169620EF63A000188F42 /* SX_TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF169520EF63A000188F42 /* SX_TrainingView.swift */; };
-		45CF169820EF63D200188F42 /* SX_CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF169720EF63D200188F42 /* SX_CountryView.swift */; };
 		45D3520F20D8B3F600D7300A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3520E20D8B3F600D7300A /* Common.swift */; };
 		45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */; };
 		7E1318263BF4D1BCB60E6CD2 /* Pods_ShixiUSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */; };
@@ -70,6 +68,7 @@
 		1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4505982120F6F11C00504B6E /* SX_CertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CertificationController.swift; sourceTree = "<group>"; };
+		4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BasePopSelectedView.swift; sourceTree = "<group>"; };
 		45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TopSelectedView.swift; sourceTree = "<group>"; };
 		45341D2F20F48C240099CDDD /* SX_LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_LoadingView.swift; sourceTree = "<group>"; };
 		45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CycleScrollerView.swift; sourceTree = "<group>"; };
@@ -105,9 +104,6 @@
 		45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaController.swift; sourceTree = "<group>"; };
 		45CF168F20EF37BC00188F42 /* SX_BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseController.swift; sourceTree = "<group>"; };
 		45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseWebController.swift; sourceTree = "<group>"; };
-		45CF169320EF515600188F42 /* SX_ComprehensiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ComprehensiveView.swift; sourceTree = "<group>"; };
-		45CF169520EF63A000188F42 /* SX_TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingView.swift; sourceTree = "<group>"; };
-		45CF169720EF63D200188F42 /* SX_CountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CountryView.swift; sourceTree = "<group>"; };
 		45D3520E20D8B3F600D7300A /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		45EBB89520D8D87200863544 /* ShixiUS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShixiUS-Bridging-Header.h"; sourceTree = "<group>"; };
 		45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuideViewController.swift; sourceTree = "<group>"; };
@@ -287,9 +283,7 @@
 				45A5219920EDBD6F0036A23D /* SX_TrainingCollectionViewCell.xib */,
 				45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */,
 				45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */,
-				45CF169320EF515600188F42 /* SX_ComprehensiveView.swift */,
-				45CF169520EF63A000188F42 /* SX_TrainingView.swift */,
-				45CF169720EF63D200188F42 /* SX_CountryView.swift */,
+				4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -725,11 +719,10 @@
 				45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */,
 				45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */,
 				45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */,
-				45CF169420EF515600188F42 /* SX_ComprehensiveView.swift in Sources */,
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
-				45CF169620EF63A000188F42 /* SX_TrainingView.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
+				4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */,
 				45CF169020EF37BC00188F42 /* SX_BaseController.swift in Sources */,
 				4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
@@ -738,7 +731,6 @@
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
 				45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */,
 				45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */,
-				45CF169820EF63D200188F42 /* SX_CountryView.swift in Sources */,
 				45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */,
 				45A5219A20EDBD6F0036A23D /* SX_TrainingCollectionViewCell.swift in Sources */,
 				4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */,
