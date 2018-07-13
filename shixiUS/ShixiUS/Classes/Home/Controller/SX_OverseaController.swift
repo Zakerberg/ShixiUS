@@ -133,9 +133,9 @@ extension SX_OverseaController {
             lineView.backgroundColor = UIColor.colorWithHexString(hex: "b2b2b2", alpha: 1)
         }
         
-        var titleArr = ["综","的","3"]
-        for index in 0..<3 {
-            let view = creatBtnView(titleArr[index], frame: CGRect(x: Int((SCREEN_WIDTH/3)) * index, y: 0, width: Int(SCREEN_WIDTH/3), height: 44), tag: index)
+        var titleArr = ["职位分类","工作性质","工作时长","发布日期"]
+        for index in 0..<4 {
+            let view = creatBtnView(titleArr[index], frame: CGRect(x: Int((SCREEN_WIDTH/4)) * index, y: 0, width: Int(SCREEN_WIDTH/4), height: 44), tag: index)
             view.isUserInteractionEnabled = true
             self.topSelectedView?.addSubview(view)
             

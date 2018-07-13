@@ -298,7 +298,7 @@ extension SX_TrainingProjectController {
         UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseOut, animations: {
             view.frame = CGRect(x: 0, y: self.topSelectedView!.bounds.origin.y + self.topSelectedView!.bounds.size.height + 0.5, width: SCREEN_WIDTH, height: view.bounds.size.height)
         }) { (finished) in
-            
+            SXLog(finished)
         }
         
         /// 翻转箭头
@@ -308,10 +308,11 @@ extension SX_TrainingProjectController {
             let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
             selectedImg.transform = transform
         }) { (finished) in
+            SXLog(finished)
         }
         
         /// 恢复状态
-        for index in 0..<3 {
+        for index in 0..<4 {
             if (index != (tag-ControlTag)) {
                 UIView.animate(withDuration: 0.1, animations: {
                     let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
@@ -320,12 +321,10 @@ extension SX_TrainingProjectController {
                     allImg?.transform = transform
                 }) { (finished) in
                     SXLog(finished)
-                    
                     let allLabel = self.topSelectedView?.viewWithTag(index+LabelTag) as? UILabel
                     allLabel?.textColor = UIColor.black
                 }
             }
-            
             let selectedLabel = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
             selectedLabel?.textColor = UIColor.SX_MainColor()
         }
@@ -344,7 +343,6 @@ extension SX_TrainingProjectController {
     func hideLoadingView() {
         let delaySeconds = 0.5
         
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -352,6 +350,4 @@ extension SX_TrainingProjectController {
         
     }
 }
-
-
 
