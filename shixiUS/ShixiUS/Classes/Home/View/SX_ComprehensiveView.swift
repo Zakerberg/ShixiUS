@@ -55,6 +55,7 @@ extension SX_ComprehensiveView: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
         cell.textLabel?.textColor = UIColor.black
         cell.accessoryType = .none
+        
         return cell
     }
     
