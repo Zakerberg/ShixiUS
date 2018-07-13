@@ -13,5 +13,4 @@ class SX_ADScrollModel: NSObject {
     var detail_url: String = ""
     var img_url: String = ""
     var ad_title: String = ""
-    
 }

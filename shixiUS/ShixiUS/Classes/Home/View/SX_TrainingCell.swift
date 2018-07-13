@@ -39,9 +39,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
    
     }
     
-    // ========================================================================================================================
-    // MARK: - UICollectionViewDelegate
-    // ========================================================================================================================
+// ========================================================================================================================================
+// MARK: - UICollectionViewDelegate
+// ========================================================================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -64,9 +64,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return cell
     }
     
-    // ========================================================================================================================
-    // MARK: - UICollectionViewDelegateFlowLayout
-    // ========================================================================================================================
+// ========================================================================================================================================
+// MARK: - UICollectionViewDelegateFlowLayout
+// ========================================================================================================================================
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: 165, height: 160)
@@ -82,9 +82,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return CGFloat.leastNormalMagnitude
     }
     
-    // ========================================================================================================================
-    // MARK: - configCell
-    // ========================================================================================================================
+// ========================================================================================================================================
+// MARK: - configCell
+// ========================================================================================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
