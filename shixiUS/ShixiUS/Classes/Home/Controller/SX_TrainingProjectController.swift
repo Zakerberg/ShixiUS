@@ -33,23 +33,21 @@ class SX_TrainingProjectController: UIViewController {
     
     /// 实训类别View
     private lazy var trainingView: UIView = {
-        let trainingView = UIView()
+        let trainingView = SX_TrainingView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (trainingView) in
+            trainingView.backgroundColor = UIColor.white
+        })
         
-        
-        
-        
-        
+        trainingView.isHidden = true
         return trainingView
     }()
     
     /// 国家分类View
     private lazy var countryView: UIView = {
-        let countryView = UIView()
+        let countryView = SX_CountryView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (countryView) in
+            countryView.backgroundColor = UIColor.white
+        })
         
-        
-        
-        
-        
+        countryView.isHidden = true
         return countryView
     }()
     
