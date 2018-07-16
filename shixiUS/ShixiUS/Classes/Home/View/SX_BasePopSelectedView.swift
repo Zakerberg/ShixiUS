@@ -69,9 +69,7 @@ extension SX_BasePopSelectedView: UITableViewDelegate, UITableViewDataSource {
 extension SX_BasePopSelectedView {
     
     func fetchData() {
-    
 
-        
         
     }
 }

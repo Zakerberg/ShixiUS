@@ -64,6 +64,21 @@ class SX_TrainingProjectController: UIViewController {
         return tableView
     }()
     
+    private lazy var BlackBgView: UIView = {
+       self.blackBgView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+       self.blackBgView?.backgroundColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+       self.blackBgView?.alpha = 0.5
+       self.view.insertSubview(self.blackBgView!, aboveSubview: self.TableView)
+        
+       self.blackBgView?.isHidden = true
+        
+        
+        
+       
+        
+        return blackBgView!
+    }()
+    
 //========================================================================================================================================
 //
 //========================================================================================================================================
@@ -266,7 +281,6 @@ extension SX_TrainingProjectController {
             
             let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
             control1?.isSelected = false
-            
             let control2 = self.topSelectedView?.viewWithTag(1002) as? UIControl
             control2?.isSelected = false
             
@@ -304,7 +318,7 @@ extension SX_TrainingProjectController {
         }
         
         /// 恢复状态
-        for index in 0..<4 {
+        for index in 0..<3 {
             if (index != (tag-ControlTag)) {
                 UIView.animate(withDuration: 0.1, animations: {
                     let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
@@ -317,6 +331,7 @@ extension SX_TrainingProjectController {
                     allLabel?.textColor = UIColor.black
                 }
             }
+            
             let selectedLabel = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
             selectedLabel?.textColor = UIColor.SX_MainColor()
         }
@@ -335,10 +350,14 @@ extension SX_TrainingProjectController {
     func hideLoadingView() {
         let delaySeconds = 0.5
         
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
+        
+        
         
     }
 }
