@@ -16,10 +16,11 @@ private let overseaCellID = "overseaCellID"
 class SX_OverseaController: UIViewController {
     
     var topSelectedView: SX_TopSelectedView?
+    var blackBgView: UIView? // 黑色背景弹窗
     
-//========================================================================================================================================
-//  MARK: - lazy
-//========================================================================================================================================
+    //========================================================================================================================================
+    //  MARK: - lazy
+    //========================================================================================================================================
     /// 职位分类View
     private lazy var positionView: UIView = {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 440)).addhere(toSuperView: self.view).config({ (positionView) in
@@ -47,7 +48,7 @@ class SX_OverseaController: UIViewController {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
-        positionView.dataArr = ["中国","美国","不限"]
+        positionView.dataArr = ["test1","test2","test3"]
         positionView.isHidden = true
         
         return positionView
@@ -58,7 +59,7 @@ class SX_OverseaController: UIViewController {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
-        positionView.dataArr = ["中国","美国","不限"]
+        positionView.dataArr = ["sb","ss","xtdm"]
         positionView.isHidden = true
         
         return positionView
@@ -73,12 +74,12 @@ class SX_OverseaController: UIViewController {
         return tableView
     }()
     
-//========================================================================================================================================
-//
-//========================================================================================================================================
+    //========================================================================================================================================
+    //
+    //========================================================================================================================================
     override func viewDidLoad() {
         super.viewDidLoad()
-       setUI()
+        setUI()
     }
     
     override func didReceiveMemoryWarning() {
@@ -174,10 +175,133 @@ extension SX_OverseaController {
         }
         return view
     }
+}
+
+// ========================================================================================================================================
+// MARK: - Other Method 2 响应
+// ========================================================================================================================================
+extension SX_OverseaController {
     
-    @objc func topSelectedBtnClick() {
+    /// 调出PickerView
+    @objc func topSelectedBtnClick(control: UIControl) {
+        if control.isSelected == true {
+            control.isSelected = false
+            /// 收起
+            hideViewWithAnimation(view: self.positionView)
+            hideViewWithAnimation(view: self.workNatureView)
+            hideViewWithAnimation(view: self.workTimeView)
+            hideViewWithAnimation(view: self.releaseDateView)
+            
+        }else if(control.isSelected == false) {
+            control.isSelected = true
+            
+            /// 创建弹窗 选择条件                   /// comprehensiveView    // trainingView    // countryView
+            if(control.tag == 1000) {
+                showViewWithAnimationAndTag(self.positionView, tag: control.tag)
+                hideViewWithAnimation(view: self.workNatureView)
+                hideViewWithAnimation(view: self.workTimeView)
+                hideViewWithAnimation(view: self.releaseDateView)
+                
+            } else if(control.tag == 1001) {
+                showViewWithAnimationAndTag(self.workNatureView, tag: control.tag)
+                hideViewWithAnimation(view: self.positionView)
+                hideViewWithAnimation(view: self.workTimeView)
+                hideViewWithAnimation(view: self.releaseDateView)
+                
+            } else if(control.tag == 1002) {
+                showViewWithAnimationAndTag(self.workTimeView, tag: control.tag)
+                hideViewWithAnimation(view: self.positionView)
+                hideViewWithAnimation(view: self.workNatureView)
+                hideViewWithAnimation(view: self.releaseDateView)
+                
+            } else if(control.tag == 1003) {
+                showViewWithAnimationAndTag(self.releaseDateView, tag: control.tag)
+                hideViewWithAnimation(view: self.positionView)
+                hideViewWithAnimation(view: self.workNatureView)
+                hideViewWithAnimation(view: self.workTimeView)
+            }
+        }
+    }
+    
+    /// hideView
+    func hideViewWithAnimation(view: UIView) {
         
+        
+        
+    }
+    
+    /// 展示隐藏动画
+    func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
+        
+        if view.isKind(of: type(of: self.positionView)) { //职位分类
+            
+            self.workNatureView.frame = CGRect(x: 0, y: -self.workNatureView.bounds.size.height, width: SCREEN_WIDTH, height: self.workNatureView.bounds.size.height)
+            self.workTimeView.frame = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
+            self.releaseDateView.frame = CGRect(x: 0, y: -self.releaseDateView.bounds.size.height, width: SCREEN_WIDTH, height: self.releaseDateView.bounds.size.height)
+            
+            self.workNatureView.isHidden  = true
+            self.workTimeView.isHidden    = true
+            self.releaseDateView.isHidden = true
+            
+            let control1 = self.topSelectedView?.viewWithTag(1001) as? UIControl
+            control1?.isSelected = false
+            let control2 = self.topSelectedView?.viewWithTag(1002) as? UIControl
+            control2?.isSelected = false
+            let control3 = self.topSelectedView?.viewWithTag(1003) as? UIControl
+            control3?.isSelected = false
+            
+        } else if(view.isKind(of: type(of: workNatureView))) {  // 工作性质
+            
+            self.positionView.frame = CGRect(x: 0, y: -self.positionView.bounds.size.height, width: SCREEN_WIDTH, height: self.positionView.bounds.size.height)
+            self.workTimeView.frame = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
+            self.releaseDateView.frame = CGRect(x: 0, y: -self.releaseDateView.bounds.size.height, width: SCREEN_WIDTH, height: self.releaseDateView.bounds.size.height)
+            
+            self.positionView.isHidden    = true
+            self.workTimeView.isHidden    = true
+            self.releaseDateView.isHidden = true
+            
+            let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
+            control1?.isSelected = false
+            let control2 = self.topSelectedView?.viewWithTag(1002) as? UIControl
+            control2?.isSelected = false
+            let control3 = self.topSelectedView?.viewWithTag(1003) as? UIControl
+            control3?.isSelected = false
 
-
+        } else if(view.isKind(of: type(of: self.workTimeView))) { // 工作时长
+            
+            self.positionView.frame = CGRect(x: 0, y: -self.positionView.bounds.size.height, width: SCREEN_WIDTH, height: self.positionView.bounds.size.height)
+            self.workNatureView.frame = CGRect(x: 0, y: -self.workNatureView.bounds.size.height, width: SCREEN_WIDTH, height: self.workNatureView.bounds.size.height)
+            self.releaseDateView.frame = CGRect(x: 0, y: -self.releaseDateView.bounds.size.height, width: SCREEN_WIDTH, height: self.releaseDateView.bounds.size.height)
+            
+            self.positionView.isHidden    = true
+            self.workNatureView.isHidden  = true
+            self.releaseDateView.isHidden = true
+            
+            let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
+            control1?.isSelected = false
+            let control2 = self.topSelectedView?.viewWithTag(1001) as? UIControl
+            control2?.isSelected = false
+            let control3 = self.topSelectedView?.viewWithTag(1003) as? UIControl
+            control3?.isSelected = false
+            
+        } else if(view.isKind(of: type(of: self.releaseDateView))) { // 发布日期
+            
+            self.positionView.frame = CGRect(x: 0, y: -self.positionView.bounds.size.height, width: SCREEN_WIDTH, height: self.positionView.bounds.size.height)
+            self.workNatureView.frame = CGRect(x: 0, y: -self.workNatureView.bounds.size.height, width: SCREEN_WIDTH, height: self.workNatureView.bounds.size.height)
+            self.workTimeView.frame = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
+            
+            self.positionView.isHidden   = true
+            self.workNatureView.isHidden = true
+            self.workTimeView.isHidden   = true
+            
+            let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
+            control1?.isSelected = false
+            let control2 = self.topSelectedView?.viewWithTag(1001) as? UIControl
+            control2?.isSelected = false
+            let control3 = self.topSelectedView?.viewWithTag(1002) as? UIControl
+            control3?.isSelected = false
+        }
     }
 }
+
+

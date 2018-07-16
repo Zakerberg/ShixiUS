@@ -70,6 +70,7 @@ extension SX_BasePopSelectedView {
     
     func fetchData() {
     
+
         
         
     }

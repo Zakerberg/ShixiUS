@@ -174,15 +174,7 @@ extension SX_TrainingProjectController {
     
     func fetchData()  {
         
-       
-        
-        
-        
-        
-        
-        
-        
-        
+
         
     }
     

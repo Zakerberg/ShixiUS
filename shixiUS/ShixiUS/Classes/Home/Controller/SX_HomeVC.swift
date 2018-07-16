@@ -300,6 +300,8 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
     
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
         
+        
+        
     }
     
     func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
@@ -340,6 +342,7 @@ extension SX_HomeVC {
             var response = try NSURLConnection.sendSynchronousRequest(URLRequest(url: URL(fileURLWithPath: "https://itunes.apple.com/cn/lookup?id=1044254573")), returning: nil)
             if response == nil {
                 print("没连接网络")
+                
                 return
             }
             
