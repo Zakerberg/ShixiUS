@@ -85,7 +85,14 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
+
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsetsMake(20, 20, 20, 20)
+        
+    }
+
     
 // ========================================================================================================================================
 // MARK: - configCell

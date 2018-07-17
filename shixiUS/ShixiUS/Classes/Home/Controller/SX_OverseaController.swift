@@ -301,6 +301,44 @@ extension SX_OverseaController {
             let control3 = self.topSelectedView?.viewWithTag(1002) as? UIControl
             control3?.isSelected = false
         }
+
+        self.blackBgView?.isHidden = false
+        view.isHidden = false
+
+        UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseOut, animations: {
+            view.frame = CGRect(x: 0, y: self.topSelectedView!.bounds.origin.y + self.topSelectedView!.bounds.size.height + 0.5, width: SCREEN_WIDTH, height: view.bounds.size.height)
+        }) { (finished) in
+            SXLog(finished)
+        }
+        
+        /// 翻转箭头
+        UIView.animate(withDuration: 0.1, animations: {
+            let selectedImg = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
+            selectedImg.image = UIImage.init(named: "btn_odown")
+            let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
+            selectedImg.transform = transform
+        }) { (finished) in
+            SXLog(finished)
+        }
+
+        /// 恢复状态
+        for index in 0..<4 {
+            if (index != (tag-ControlTag)) {
+                UIView.animate(withDuration: 0.1, animations: {
+                    let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
+                    allImg?.image = UIImage.init(named: "btn_down")
+                    let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
+                    allImg?.transform = transform
+                }) { (finished) in
+                    SXLog(finished)
+                    let allLabel = self.topSelectedView?.viewWithTag(index+LabelTag) as? UILabel
+                    allLabel?.textColor = UIColor.black
+                }
+            }
+            
+            let selectedLabel = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
+            selectedLabel?.textColor = UIColor.SX_MainColor()
+        }
     }
 }
 
