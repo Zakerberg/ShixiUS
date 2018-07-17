@@ -26,77 +26,73 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
-        self.collectionView?.register(UINib(nibName: "SX_TrainingCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: CollectionViewCellID)
+        self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-   
+        
     }
     
-// ========================================================================================================================================
+// ==================================================================================================================================
 // MARK: - UICollectionViewDelegate
-// ========================================================================================================================
+// ==================================================================================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
-        
-
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         return 2
-        
     }
     
-    //返回对应的单元格
+    /// 返回对应的单元格
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
         
+        cell.layer.shadowColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 5
+        cell.backgroundColor = UIColor.white
+        
         cell.sourceImageView?.image = UIImage.init(named: "localImg3")
         cell.priceLabel?.text = "￥" + "2998.00"
-        cell.sourceTitle?.text = "课程名称课程名称测试"
+        cell.sourceName?.text = "课程名称课程名称测试"
         cell.certificateLabel?.text = "职业技术证书"
         
         return cell
     }
     
-// ========================================================================================================================================
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        SXLog("点击了CollectionView的\(indexPath.row)")
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+    }
+    
+// ==================================================================================================================================
 // MARK: - UICollectionViewDelegateFlowLayout
-// ========================================================================================================================================
+// ==================================================================================================================================
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 165, height: 160)
-    }
-    
-    /// 列间距
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-        
-    }
-    
-    /// 行间距
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        return CGSize(width: 165, height: 165)
     }
 
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        return UIEdgeInsetsMake(20, 20, 20, 20)
-        
+        return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
 
-    
-// ========================================================================================================================================
+// ==================================================================================================================================
 // MARK: - configCell
-// ========================================================================================================================================
+// ==================================================================================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -126,7 +122,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
             make.left.equalTo(self.titleLabel!)
-            make.bottom.equalToSuperview().offset(-Margin*2)
+            make.bottom.equalToSuperview().offset(-Margin)
             make.right.equalToSuperview().offset(-Margin)
             
         }).config({ (collectionView) in
@@ -138,11 +134,10 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     /// reloadData
     func reloadData() {
-
+        
+        
+        
+        
+        
     }
 }
-
-
-
-
-
