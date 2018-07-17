@@ -124,7 +124,6 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             make.left.equalTo(self.titleLabel!)
             make.bottom.equalToSuperview().offset(-Margin)
             make.right.equalToSuperview().offset(-Margin)
-            
         }).config({ (collectionView) in
             collectionView.isScrollEnabled = false
             collectionView.showsVerticalScrollIndicator = false
@@ -135,7 +134,5 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     /// reloadData
     func reloadData() {
         
-        
-
     }
 }

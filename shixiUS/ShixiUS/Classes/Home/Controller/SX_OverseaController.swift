@@ -11,12 +11,14 @@ import UIKit
 private let ArrowTag = 3000
 private let ControlTag = 1000
 private let LabelTag = 2000
-private let overseaCellID = "overseaCellID"
+
+let overseaCellID = "overseaCellID"
 
 class SX_OverseaController: UIViewController {
     
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
+    var overseaTableView: UITableView?
     
 // ==================================================================================================================================
 //  MARK: - lazy
@@ -48,7 +50,7 @@ class SX_OverseaController: UIViewController {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
-        positionView.dataArr = ["test1","test2","test3"]
+        positionView.dataArr = ["1","2","3"]
         positionView.isHidden = true
         
         return positionView
@@ -59,29 +61,20 @@ class SX_OverseaController: UIViewController {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
-        positionView.dataArr = ["sb","ss","xtdm"]
+        positionView.dataArr = ["1","2","3"]
         positionView.isHidden = true
         
         return positionView
     }()
     
     
-    private lazy var overseaTableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        return tableView
-    }()
-    
 // ==================================================================================================================================
-//
+// MARK: - O 1 2 3 4 5 6 7 8 9 -
 // ==================================================================================================================================
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
         fetchData()
-        setTopSelectedView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,10 +93,22 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: overseaCellID)
-        cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = "测试cell"
+        
+        let cell = SX_OverseaCell(style: .default, reuseIdentifier: overseaCellID)
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        SXLog("点击了海外就业的第\(indexPath.row)个")
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+     
     }
 }
 
@@ -120,9 +125,13 @@ extension SX_OverseaController {
         self.workTimeView.isHidden    = true
         self.workNatureView.isHidden  = true
         self.releaseDateView.isHidden = true
+        
+        setTopSelectedView()
     }
     
     func fetchData() {
+        
+        
         
     }
     
@@ -358,7 +367,6 @@ extension SX_OverseaController {
                     allLabel?.textColor = UIColor.black
                 }
             }
-            
             let selectedLabel = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
             selectedLabel?.textColor = UIColor.SX_MainColor()
         }
