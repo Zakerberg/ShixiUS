@@ -10,6 +10,7 @@
 		0F24381F419BB7C6CDD0046C /* Pods_ShixiUSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */; };
 		4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982120F6F11C00504B6E /* SX_CertificationController.swift */; };
 		4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */; };
+		4505982620FC8CB900504B6E /* SX_OverseaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982520FC8CB900504B6E /* SX_OverseaCell.swift */; };
 		45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */; };
 		45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2F20F48C240099CDDD /* SX_LoadingView.swift */; };
 		45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */; };
@@ -69,6 +70,7 @@
 		274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4505982120F6F11C00504B6E /* SX_CertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CertificationController.swift; sourceTree = "<group>"; };
 		4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BasePopSelectedView.swift; sourceTree = "<group>"; };
+		4505982520FC8CB900504B6E /* SX_OverseaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaCell.swift; sourceTree = "<group>"; };
 		45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TopSelectedView.swift; sourceTree = "<group>"; };
 		45341D2F20F48C240099CDDD /* SX_LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_LoadingView.swift; sourceTree = "<group>"; };
 		45440EF920E0B9C600058978 /* SX_CycleScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CycleScrollerView.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */,
 				45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */,
 				4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */,
+				4505982520FC8CB900504B6E /* SX_OverseaCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
 				4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */,
+				4505982620FC8CB900504B6E /* SX_OverseaCell.swift in Sources */,
 				45CF169020EF37BC00188F42 /* SX_BaseController.swift in Sources */,
 				4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,

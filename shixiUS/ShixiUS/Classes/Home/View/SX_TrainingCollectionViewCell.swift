@@ -18,5 +18,6 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         SXLog("走到这里了")
+
     }
 }

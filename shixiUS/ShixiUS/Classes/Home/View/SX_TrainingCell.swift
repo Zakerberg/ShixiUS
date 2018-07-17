@@ -44,11 +44,14 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
 // ========================================================================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
+        
+
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         return 2
+        
     }
     
     //返回对应的单元格
@@ -74,13 +77,15 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     /// 列间距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        return 10
+        
     }
     
     /// 行间距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
+    
     
 // ========================================================================================================================================
 // MARK: - configCell
