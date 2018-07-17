@@ -18,9 +18,9 @@ class SX_OverseaController: UIViewController {
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
     
-    //========================================================================================================================================
-    //  MARK: - lazy
-    //========================================================================================================================================
+// ==================================================================================================================================
+//  MARK: - lazy
+// ==================================================================================================================================
     /// 职位分类View
     private lazy var positionView: UIView = {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 440)).addhere(toSuperView: self.view).config({ (positionView) in
@@ -74,12 +74,14 @@ class SX_OverseaController: UIViewController {
         return tableView
     }()
     
-    //========================================================================================================================================
-    //
-    //========================================================================================================================================
+// ==================================================================================================================================
+//
+// ==================================================================================================================================
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        fetchData()
+        setTopSelectedView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -88,9 +90,9 @@ class SX_OverseaController: UIViewController {
     }
 }
 
-// ========================================================================================================================================
+// ==================================================================================================================================
 // MARK: - UITableViewDelegate
-// ========================================================================================================================================
+// ==================================================================================================================================
 extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -105,9 +107,9 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-// ========================================================================================================================================
+// ==================================================================================================================================
 // MARK: - Other Method
-// ========================================================================================================================================
+// ==================================================================================================================================
 extension SX_OverseaController {
     
     func setUI() {
@@ -177,9 +179,9 @@ extension SX_OverseaController {
     }
 }
 
-// ========================================================================================================================================
+// ==================================================================================================================================
 // MARK: - Other Method 2 响应
-// ========================================================================================================================================
+// ==================================================================================================================================
 extension SX_OverseaController {
     
     /// 调出PickerView
@@ -195,7 +197,7 @@ extension SX_OverseaController {
         }else if(control.isSelected == false) {
             control.isSelected = true
             
-            /// 创建弹窗 选择条件                   /// comprehensiveView    // trainingView    // countryView
+            /// 创建弹窗 选择条件
             if(control.tag == 1000) {
                 showViewWithAnimationAndTag(self.positionView, tag: control.tag)
                 hideViewWithAnimation(view: self.workNatureView)
@@ -226,8 +228,29 @@ extension SX_OverseaController {
     /// hideView
     func hideViewWithAnimation(view: UIView) {
         
-        
-        
+        self.blackBgView?.isHidden = true
+        if view.isHidden == false {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
+                view.frame = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
+            }) {(finished) in
+                view.isHidden = true
+            }
+            UIView.animate(withDuration: 0.4, animations: {
+                /// 小三角的选中状态
+                for index in 0..<4 {
+                    
+                    let allImg = self.topSelectedView?.viewWithTag(ArrowTag + index) as? UIImageView
+                    allImg?.image = UIImage.init(named: "btn_down")
+                    let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(-Double.pi)*0)
+                    allImg?.transform = transform
+                    
+                    let allLabel = self.topSelectedView?.viewWithTag(LabelTag + index) as? UILabel
+                    allLabel?.textColor = UIColor.black
+                }
+            }) { (finished) in
+                SXLog(finished)
+            }
+        }
     }
     
     /// 展示隐藏动画

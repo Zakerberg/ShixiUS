@@ -18,9 +18,9 @@ class SX_TrainingProjectController: UIViewController {
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
     
-//========================================================================================================================================
+// ==================================================================================================================================
 //  MARK: - lazy
-//========================================================================================================================================
+// ==================================================================================================================================
     // 综合排序View
     private lazy var comprehensiveView: UIView = {
         let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
@@ -72,16 +72,12 @@ class SX_TrainingProjectController: UIViewController {
         
        self.blackBgView?.isHidden = true
         
-        
-        
-       
-        
         return blackBgView!
     }()
     
-//========================================================================================================================================
+// ==================================================================================================================================
 //
-//========================================================================================================================================
+// ==================================================================================================================================
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -99,9 +95,9 @@ class SX_TrainingProjectController: UIViewController {
     }
 }
 
-// ========================================================================================================================================
+// =================================================================================================================================
 // MARK: - UITableViewDelegate
-// ========================================================================================================================================
+// ==================================================================================================================================
 extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 50
@@ -115,9 +111,9 @@ extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSourc
     }
 }
 
-// ========================================================================================================================================
+// ==================================================================================================================================
 // MARK: - Other Method
-// ========================================================================================================================================
+// ==================================================================================================================================
 extension SX_TrainingProjectController {
     
     func setUI() {
@@ -182,9 +178,9 @@ extension SX_TrainingProjectController {
     }
 }
 
-// ========================================================================================================================================
+// =================================================================================================================================
 // MARK: - Other Method 2 响应
-// ========================================================================================================================================
+// ==================================================================================================================================
 extension SX_TrainingProjectController {
     
     func fetchData()  {
@@ -226,16 +222,13 @@ extension SX_TrainingProjectController {
     
     /// hideView
     func hideViewWithAnimation(view: UIView) {
-        
         self.blackBgView?.isHidden = true
         if view.isHidden == false {
-            
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
                 view.frame = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
             }) {(finished) in
                 view.isHidden = true
             }
-            
             UIView.animate(withDuration: 0.4, animations: {
                 /// 小三角的选中状态
                 for index in 0..<3 {
@@ -248,7 +241,6 @@ extension SX_TrainingProjectController {
                     let allLabel = self.topSelectedView?.viewWithTag(LabelTag + index) as? UILabel
                     allLabel?.textColor = UIColor.black
                 }
-                
             }) { (finished) in
                 SXLog(finished)
             }
