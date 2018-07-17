@@ -17,11 +17,13 @@ class SX_TrainingProjectController: UIViewController {
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
+    var projectCollectionView: UICollectionView?
+    var collectionView: UICollectionView?
     
 // ==================================================================================================================================
 //  MARK: - lazy
 // ==================================================================================================================================
-    // 综合排序View
+// 综合排序View
     private lazy var comprehensiveView: UIView = {
         let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
             compreView.backgroundColor = UIColor.white
@@ -56,27 +58,18 @@ class SX_TrainingProjectController: UIViewController {
         return countryView
     }()
     
-    private lazy var TableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        return tableView
-    }()
-    
     private lazy var BlackBgView: UIView = {
-       self.blackBgView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-       self.blackBgView?.backgroundColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-       self.blackBgView?.alpha = 0.5
-       self.view.insertSubview(self.blackBgView!, aboveSubview: self.TableView)
+        self.blackBgView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+        self.blackBgView?.backgroundColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+        self.blackBgView?.alpha = 0.5
         
-       self.blackBgView?.isHidden = true
+        self.blackBgView?.isHidden = true
         
         return blackBgView!
     }()
     
 // ==================================================================================================================================
-//
+// MARK: - O 1 2 3 4 5 6 7 8 9 -
 // ==================================================================================================================================
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,7 +79,6 @@ class SX_TrainingProjectController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
-        setTopSelectedView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,19 +87,38 @@ class SX_TrainingProjectController: UIViewController {
     }
 }
 
-// =================================================================================================================================
-// MARK: - UITableViewDelegate
 // ==================================================================================================================================
-extension SX_TrainingProjectController: UITableViewDelegate,UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+// MARK: - UITableViewDelegate, UICollectionViewDelegateFlowLayout
+// ==================================================================================================================================
+extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cellID")
-        cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = "测试cell"
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
+        
+        cell.layer.shadowColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 5
+        cell.backgroundColor = UIColor.white
+        
+        cell.sourceImageView?.image = UIImage.init(named: "localImg3")
+        cell.priceLabel?.text = "￥" + "2998.00"
+        cell.sourceName?.text = "课程名称课程名称测试"
+        cell.certificateLabel?.text = "职业技术证书"
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 165, height: 165)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
 }
 
@@ -123,10 +134,27 @@ extension SX_TrainingProjectController {
         self.trainingView.isHidden = true
         self.comprehensiveView.isHidden = true
         self.countryView.isHidden = true
+        setTopSelectedView()
     }
     
-    /// 顶部三个按钮
+    /// 顶部三个按钮 && CollectionView
     func setTopSelectedView() {
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
+        self.collectionView?.backgroundColor = UIColor.white
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
+        self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
+        self.view.insertSubview(self.collectionView!, belowSubview: self.trainingView)
+        self.collectionView?.snp.makeConstraints({ (make) in
+            make.top.equalToSuperview().offset(44)
+            make.left.equalToSuperview().offset(Margin)
+            make.right.equalToSuperview().offset(-Margin)
+            make.bottom.equalToSuperview()
+        })
+        
         self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
             topSelectedView.backgroundColor = UIColor.white
         })
@@ -144,8 +172,9 @@ extension SX_TrainingProjectController {
             let control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
             control.addTarget(self, action: #selector(topSelectedBtnClick), for: .touchUpInside)
             control.tag = index + ControlTag
-
+            
             view.addSubview(control)
+            
         }
     }
     
@@ -185,7 +214,7 @@ extension SX_TrainingProjectController {
     
     func fetchData()  {
         
-
+        
         
     }
     
@@ -206,7 +235,7 @@ extension SX_TrainingProjectController {
                 showViewWithAnimationAndTag(self.comprehensiveView, tag: control.tag)
                 hideViewWithAnimation(view: self.trainingView)
                 hideViewWithAnimation(view: self.countryView)
-
+                
             } else if(control.tag == 1001) {
                 showViewWithAnimationAndTag(self.trainingView, tag: control.tag)
                 hideViewWithAnimation(view: self.comprehensiveView)
@@ -248,8 +277,8 @@ extension SX_TrainingProjectController {
     }
     
     /// 展示隐藏动画
-   func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
-      
+    func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
+        
         if view.isKind(of: type(of: self.comprehensiveView)) { //综合
             
             self.trainingView.frame = CGRect(x: 0, y: -self.trainingView.bounds.size.height, width: SCREEN_WIDTH, height: self.trainingView.bounds.size.height)
@@ -257,7 +286,7 @@ extension SX_TrainingProjectController {
             
             self.trainingView.isHidden = true
             self.countryView.isHidden  = true
-
+            
             let control1 = self.topSelectedView?.viewWithTag(1001) as? UIControl
             control1?.isSelected = false
             let control2 = self.topSelectedView?.viewWithTag(1002) as? UIControl
@@ -283,7 +312,7 @@ extension SX_TrainingProjectController {
             
             self.comprehensiveView.isHidden  = true
             self.trainingView.isHidden       = true
-
+            
             let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
             control1?.isSelected = false
             let control2 = self.topSelectedView?.viewWithTag(1001) as? UIControl
@@ -342,12 +371,10 @@ extension SX_TrainingProjectController {
     func hideLoadingView() {
         let delaySeconds = 0.5
         
-        
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        
         
         
         

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let CollectionViewCellID = "CollectionViewCellID"
+let CollectionViewCellID = "CollectionViewCellID"
 
 class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
@@ -136,8 +136,6 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     func reloadData() {
         
         
-        
-        
-        
+
     }
 }
