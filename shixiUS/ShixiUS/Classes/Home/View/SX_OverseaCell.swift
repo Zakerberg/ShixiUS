@@ -49,9 +49,8 @@ extension SX_OverseaCell {
             make.top.equalTo(Margin)
             make.height.equalTo(Margin)
             make.left.lessThanOrEqualTo(Margin)
-            make.width.lessThanOrEqualTo(270)
+            make.width.equalToSuperview()
         }).config({ (jobName) in
-            jobName.text = "美国金融实习岗位-信托和过桥基金业务"
             jobName.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
             jobName.font = UIFont.boldSystemFont(ofSize: 15)
             jobName.sizeToFit()
@@ -59,19 +58,18 @@ extension SX_OverseaCell {
         
         let addressImg = UIImageView().addhere(toSuperView: self.contentView).layout { (make) in
             make.left.equalTo(self.jobName!.snp.left)
-            make.top.equalTo(self.jobName!.snp.bottom).offset(10)
+            make.top.equalTo(self.jobName!.snp.bottom).offset(Margin)
             make.width.height.equalTo(14)
             }.config { (addressImg) in
                 addressImg.image = UIImage.init(named: "address")
         }
         
         self.address = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.equalTo(self.address!.snp.right).offset(5)
-            make.top.height.equalTo(self.address!)
+            make.left.equalTo(addressImg.snp.right).offset(5)
+            make.top.height.equalTo(addressImg)
         }).config({ (address) in
             address.sizeToFit()
             address.font = UIFont.systemFont(ofSize: 10)
-            address.text = "美国/纽约-测试"
             address.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
         })
         
@@ -83,12 +81,11 @@ extension SX_OverseaCell {
         }
         
         self.duration = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.equalTo(durationImg.snp.right).offset(10)
+            make.left.equalTo(durationImg.snp.right).offset(5)
             make.height.top.equalTo(addressImg)
         }).config({ (duration) in
             duration.sizeToFit()
             duration.font = UIFont.systemFont(ofSize: 10)
-            duration.text = "全职-测试"
             duration.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
         })
         
@@ -100,22 +97,20 @@ extension SX_OverseaCell {
         }
         
         self.nature = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.equalTo(natureImg.snp.right).offset(10)
+            make.left.equalTo(natureImg.snp.right).offset(5)
             make.height.top.equalTo(addressImg)
         }).config({ (nature) in
             nature.sizeToFit()
             nature.font = UIFont.systemFont(ofSize: 10)
-            nature.text = "实习-测试"
             nature.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
         })
         
         self.date = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.centerX.height.equalToSuperview()
-            make.right.equalToSuperview().offset(-10)
+            make.centerY.height.equalTo(addressImg)
+            make.right.equalToSuperview().offset(-12)
         }).config({ (date) in
             date.sizeToFit()
             date.font = UIFont.systemFont(ofSize: 10)
-            date.text = "2018.03.03"
             date.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
         })
     }

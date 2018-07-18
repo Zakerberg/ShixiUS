@@ -115,41 +115,6 @@
         let newImage = UIImage(cgImage: imageRef!)
         return newImage
     }
-    
-    
-    /*
-     let imageview = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
-     imageview.center = view.center
-     imageview.image = UIImage(named: "meinv")
-     // 开始对imageView进行画图
-     UIGraphicsBeginImageContextWithOptions(imageview.bounds.size, false, 0);
-     // 实例化一个圆形的路径
-     let path = UIBezierPath(ovalIn: imageview.bounds)
-     //  进行路劲裁切   后续的绘图都会出现在圆形内  外部的都被干掉
-     path.addClip()
-     imageview.draw(imageview.bounds)
-     //  取到结果
-     imageview.image = UIGraphicsGetImageFromCurrentImageContext()
-     // 关闭上下文
-     UIGraphicsEndImageContext()
-     view.addSubview(imageview)
-     OC代码如下：
-     UIImageView * imageview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 150, 150)];
-     imageview.center = self.view.center;
-     imageview.image = [UIImage imageNamed:@"meinv"];
-     //开始对imageView进行画图
-     UIGraphicsBeginImageContextWithOptions(imageview.bounds.size, NO, 0);
-     //使用贝塞尔曲线画出一个圆形图
-     [[UIBezierPath bezierPathWithOvalInRect:imageview.bounds] addClip];
-     [imageview drawRect:imageview.bounds];
-     imageview.image = UIGraphicsGetImageFromCurrentImageContext();
-     //结束画图
-     UIGraphicsEndImageContext();
-     [self.view addSubview:imageview];
-     
-     */
-    
-    
 }
  
  // UI

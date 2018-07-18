@@ -129,7 +129,7 @@ extension SX_TrainingProjectController {
     
     func setUI() {
         self.title = "实训项目"
-        self.view.backgroundColor = UIColor.colorWithHexString(hex: "f1f1f1", alpha: 1)
+        self.view.backgroundColor = UIColor.white
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.trainingView.isHidden = true
         self.comprehensiveView.isHidden = true
@@ -374,6 +374,7 @@ extension SX_TrainingProjectController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         
         
         

@@ -18,7 +18,6 @@ class SX_OverseaController: UIViewController {
     
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
-    var overseaTableView: UITableView?
     
 // ==================================================================================================================================
 //  MARK: - lazy
@@ -61,12 +60,20 @@ class SX_OverseaController: UIViewController {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
-        positionView.dataArr = ["1","2","3"]
+        positionView.dataArr = ["4","5","666"]
         positionView.isHidden = true
         
         return positionView
     }()
     
+    private lazy var overseaTableView: UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 35, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
+        tableView.backgroundColor = UIColor.white
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        return tableView
+    }()
     
 // ==================================================================================================================================
 // MARK: - O 1 2 3 4 5 6 7 8 9 -
@@ -80,6 +87,11 @@ class SX_OverseaController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        overseaTableView.delegate = nil
+        print("overseaTableView---deinit")
     }
 }
 
@@ -95,6 +107,11 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = SX_OverseaCell(style: .default, reuseIdentifier: overseaCellID)
+        cell.jobName?.text = "[金融] 美国金融岗位美国金融岗位美国金融岗位"
+        cell.address?.text = "美国/New York"
+        cell.nature?.text = "全职1"
+        cell.duration?.text = "实习2"
+        cell.date?.text = "2018.18.18"
         
         return cell
     }
@@ -108,8 +125,9 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-     
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
 }
 
 // ==================================================================================================================================
@@ -119,17 +137,23 @@ extension SX_OverseaController {
     
     func setUI() {
         self.title = "海外就业"
-        self.view.backgroundColor = UIColor.colorWithHexString(hex: "f1f1f1", alpha: 1)
+        self.view.backgroundColor = UIColor.white
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
         self.positionView.isHidden    = true
         self.workTimeView.isHidden    = true
         self.workNatureView.isHidden  = true
         self.releaseDateView.isHidden = true
         
+        self.view.insertSubview(self.overseaTableView, belowSubview: self.positionView)
+        
         setTopSelectedView()
     }
     
     func fetchData() {
+        
+     
+        
         
         
         
@@ -137,6 +161,7 @@ extension SX_OverseaController {
     
     /// 顶部4个按钮
     func setTopSelectedView() {
+        
         self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
             topSelectedView.backgroundColor = UIColor.white
         })
