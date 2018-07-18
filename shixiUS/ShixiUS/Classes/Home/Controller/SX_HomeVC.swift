@@ -56,31 +56,6 @@ class SX_HomeVC: UIViewController {
         return cycleView
     }()
     
-    /****
-     // KVO实例
-     var observation: NSKeyValueObservation?
-     // 视图显示的时候触发
-     override func viewWillAppear(_ animated: Bool) {
-     super.viewWillAppear(animated)
-     
-     // 使用kvo来监听视图偏移量变化
-     observation = self.homeTableView!.observe(\.contentOffset, options: [.new, .old]) {
-     [unowned self] homeTableView, changed in
-     //根据偏移量修改导航栏透明度
-     var delta = changed.newValue!.y / CGFloat(0) + 1
-     delta = CGFloat.maximum(delta, 0)
-     self.barImageView?.alpha = CGFloat.minimum(delta, 1)
-     }
-     }
-     
-     //视图消失的时候调用
-     override func viewWillDisappear(_ animated: Bool) {
-     super.viewDidDisappear(animated)
-     // 移除kvo
-     observation?.invalidate()
-     }
-     */
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white

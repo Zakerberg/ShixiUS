@@ -8,6 +8,8 @@
 
 import UIKit
 
+let cellID = "cellID"
+
 class SX_CertificationController: UIViewController {
     
     override func viewDidLoad() {
@@ -25,9 +27,16 @@ class SX_CertificationController: UIViewController {
 // ==================================================================================================================================
 // MARK: - UITableViewDelegate
 // ==================================================================================================================================
-extension SX_CertificationController {
+extension SX_CertificationController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 12
+    }
     
-    
-    
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
+        return cell
+
+    }
 }

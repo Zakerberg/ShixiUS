@@ -32,6 +32,7 @@
 		45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */; };
 		4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561F03D20DA027800C64878 /* SX_HomeModel.swift */; };
 		45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */; };
+		458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */; };
 		45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */; };
 		45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */; };
 		45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */; };
@@ -97,6 +98,7 @@
 		45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVC.swift; sourceTree = "<group>"; };
 		4561F03D20DA027800C64878 /* SX_HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeModel.swift; sourceTree = "<group>"; };
 		45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeAPI.swift; sourceTree = "<group>"; };
+		458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailController.swift; sourceTree = "<group>"; };
 		45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ADScrollModel.swift; sourceTree = "<group>"; };
 		45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCell.swift; sourceTree = "<group>"; };
 		45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobsCell.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */,
 				45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */,
 				4505982120F6F11C00504B6E /* SX_CertificationController.swift */,
+				458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */,
 			);
 			name = Controller;
 			path = ShixiUS/Classes/Home/Controller;
@@ -734,6 +737,7 @@
 				45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */,
 				4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */,
 				45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */,
+				458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */,
 				45556B5D20D89DAD0035FCA6 /* SX_TabBarController.swift in Sources */,
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
 				45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */,
