@@ -16,9 +16,9 @@ class SX_NavigationController: UINavigationController {
         SX_NavigationController.setupBarButtonItemTheme()
     }
     
-//=========================================================================================================================================
+// ==================================================================================================================================
 // MARK: - setNavBarTheme
-//=========================================================================================================================================
+// ==================================================================================================================================
     class func setNavBarTheme() {
         let apprance : UINavigationBar = UINavigationBar.appearance()
         apprance.tintColor = UIColor.white
@@ -27,9 +27,9 @@ class SX_NavigationController: UINavigationController {
                                         NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 18)]
         apprance.shadowImage = UIImage.imageWithColor(color: UIColor.SX_MainColor(), size: CGSize.init(width: 0.6, height: 0.6))
     }
-//=========================================================================================================================================
+// ==================================================================================================================================
 // MARK: - setupBarButtonItemTheme
-//=========================================================================================================================================
+// ==================================================================================================================================
     class func setupBarButtonItemTheme() {
         let apprance: UIBarButtonItem = UIBarButtonItem.appearance()
         apprance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : UIColor.SX_MainColor(), NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)], for: .normal)

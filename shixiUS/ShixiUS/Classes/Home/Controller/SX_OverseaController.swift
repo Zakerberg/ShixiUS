@@ -392,6 +392,7 @@ extension SX_OverseaController {
                     allLabel?.textColor = UIColor.black
                 }
             }
+            
             let selectedLabel = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
             selectedLabel?.textColor = UIColor.SX_MainColor()
         }

@@ -31,9 +31,6 @@ class SX_ProjectDetailController: UIViewController {
 //    }()
 //    
 
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -76,8 +73,6 @@ extension SX_ProjectDetailController {
     
     
     func fetchData() {
-        
-        
         
     }
 }
