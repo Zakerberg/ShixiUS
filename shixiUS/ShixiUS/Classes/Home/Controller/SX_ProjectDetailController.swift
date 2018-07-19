@@ -8,7 +8,31 @@
 
 import UIKit
 
+
 class SX_ProjectDetailController: UIViewController {
+
+// =================================================================================================================================
+// MARK: - Other Method
+// =================================================================================================================================
+    lazy var tableView:UITableView = {
+        let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: self.view.bounds.height), style: .plain)
+        table.contentInset = UIEdgeInsetsMake(-CGFloat(kNavH), 0, 0, 0);
+        table.delegate = self
+        table.dataSource = self
+        return table
+    }()
+    
+//    lazy var topView:UIImageView = {
+//        let imgView = UIImageView(image: UIImage(named: "wbBg"))
+//        imgView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: IMAGE_HEIGHT)
+//        imgView.contentMode = UIViewContentMode.scaleAspectFill
+//        imgView.clipsToBounds = true
+//        return imgView
+//    }()
+//    
+
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,42 +47,38 @@ class SX_ProjectDetailController: UIViewController {
 }
 
 // =================================================================================================================================
+// MARK: - UITableViewDelegate
+// =================================================================================================================================
+extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cellidentifier")
+        cell.textLabel?.text = "这是projectController的\(indexPath.row)"
+        
+        return cell
+    }
+}
+
+// =================================================================================================================================
 // MARK: - Other Method
 // =================================================================================================================================
 extension SX_ProjectDetailController {
     
     func setUI() {
-        self.navigationController?.navigationBar.barTintColor = UIColor.SX_MainColor()
-        self.navigationController?.navigationBar.subviews[0].alpha = 0
-    }
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        view.addSubview(self.tableView)
+}
+    
     
     func fetchData() {
-       
-        
         
         
         
     }
 }
 
-// =================================================================================================================================
-// MARK: - UIScrollViewDelegate
-// =================================================================================================================================
-extension SX_ProjectDetailController: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-       
-        //获取ScrollView的偏移量y
-        let offsetY = scrollView.contentOffset.y
-        print(offsetY)
-        //自己设置需要滚动到哪里可以完全显示导航栏
-        let ScrollValue:CGFloat = 64.0
-        //将偏移量除以需要滚动的量,可以得到需要显示的透明度
-        var alpha = offsetY / ScrollValue
-        if alpha >= 1{
-            alpha = 1
-        }
-        //将透明度赋值给第一个View即可
-        self.navigationController?.navigationBar.subviews[0].alpha = alpha
-    }
-}
