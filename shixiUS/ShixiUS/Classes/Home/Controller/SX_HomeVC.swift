@@ -8,8 +8,7 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
-import FDFullscreenPopGesture
+import RxCocoa 
 
 private let NAVBAR_COLORCHANGE_POINT = -80
 private let IMAGE_HEIGHT:CGFloat = 240
