@@ -18,21 +18,27 @@ class SX_TabBarController: UITabBarController {
         firstNavController.navigationBar.barTintColor = UIColor.SX_MainColor()
         firstNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Home"), selectedImage: UIImage(named: "Home_Selected"))
         firstNavController.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, -10, 0)
-        
+
         let vipCenterVC = SX_VIPCenterVC()
         let secondNavController = SX_NavigationController(rootViewController: vipCenterVC)
         secondNavController.navigationBar.tintColor = UIColor.SX_MainColor()
         secondNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Application"), selectedImage: UIImage(named: "Application_Selected"))
         secondNavController.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0 , -10, 0)
-        
+
         let mineVC = SX_MineVC()
         let thirdNavController = SX_NavigationController(rootViewController: mineVC)
         thirdNavController.navigationBar.tintColor = UIColor.SX_MainColor()
         thirdNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Mine"), selectedImage: UIImage(named: "Mine_Selected"))
         thirdNavController.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0 , -10, 0)
+
         setTbaBarApperence()
         self.setViewControllers([firstNavController,secondNavController,thirdNavController], animated: true)
+    
+       setTbaBarApperence()
     }
+}
+
+extension SX_TabBarController {
     
     func setTbaBarApperence() {
         let tabBarApperence = UITabBar.appearance()
@@ -40,3 +46,7 @@ class SX_TabBarController: UITabBarController {
         tabBarApperence.tintColor = UIColor.SX_MainColor()
     }
 }
+
+
+
+

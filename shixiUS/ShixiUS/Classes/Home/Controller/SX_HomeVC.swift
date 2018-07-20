@@ -36,7 +36,7 @@ class SX_HomeVC: UIViewController {
         return button
     }()
     
-    private lazy var homeTableView: UITableView = {
+   private lazy var homeTableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.contentInset = UIEdgeInsetsMake(CGFloat(IMAGE_HEIGHT-kNavH), 0, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -44,7 +44,7 @@ class SX_HomeVC: UIViewController {
         tableView.estimatedRowHeight = 200
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         return tableView
     }()
     
@@ -79,7 +79,7 @@ class SX_HomeVC: UIViewController {
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
         homeTableView.addSubview(cycleScrollerView)
         view.addSubview(homeTableView)
-        
+
         self.navigationController?.navigationBar.barTintColor = UIColor.SX_MainColor()
         self.navigationController?.navigationBar.alpha = 0
         self.navigationController?.navigationBar.barTintColor = UIColor.white
@@ -87,7 +87,7 @@ class SX_HomeVC: UIViewController {
     
     deinit {
         homeTableView.delegate = nil
-        print("deinit")
+        print("deinit-----")
     }
 }
 
@@ -206,13 +206,20 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                             self.hidesBottomBarWhenPushed = true
                             let vc = SX_TrainingProjectController()
                             self.navigationController?.pushViewController(vc, animated: true)
+                            
                             self.hidesBottomBarWhenPushed = false
                         }else if i == 1 {
                             SXLog("进入海外就业\(i)")
-                            self.hidesBottomBarWhenPushed = true
-                            let vc = SX_OverseaController()
-                            self.navigationController?.pushViewController(vc, animated: true)
-                            self.hidesBottomBarWhenPushed = false
+//                            self.hidesBottomBarWhenPushed = true
+//                            let vc = SX_OverseaController()
+//                            self.navigationController?.pushViewController(vc, animated: true)
+//                            self.hidesBottomBarWhenPushed = false
+                            
+                            let vc: UIViewController = UIViewController()
+                            vc.view.backgroundColor = UIColor.white
+                            vc.title = "XXXXXXX"
+                            vc.navigationController?.setNavigationBarHidden(false, animated: true)
+                           self.navigationController?.pushViewController(vc, animated: true)
                             
                         }else if i == 2 {
                             SXLog("进入培训认证\(i)")
@@ -291,7 +298,7 @@ extension SX_HomeVC: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let isShowHomePage = viewController.isKind(of: type(of: self))
-        self.navigationController?.setNavigationBarHidden(isShowHomePage, animated: true)
+        self.navigationController?.setNavigationBarHidden(isShowHomePage, animated: false)
     }
 }
 
