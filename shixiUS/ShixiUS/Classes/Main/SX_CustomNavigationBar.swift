@@ -32,17 +32,18 @@ extension UIViewController {
     
     class func sx_currentViewController() -> UIViewController {
         
-        if let rootVC = UIApplication.shared.delegate?.window??.rootViewController {
-            return self.sx_currentViewController(from: rootVC)
-        }else {
-            return UIViewController()
-        }
-    }
+//        if let rootVC = UIApplication.shared.delegate?.window??.rootViewController {
+//           // return self.sx_currentViewController(from: rootVC)
+//        }else {
+//            return UIViewController()
+//        }
+//
+//    }
     
 //    class func sx_currentViewController(from fromVC:UIViewController) -> UIViewController {
-//        
 //
-//        
+//
+//
 //    }
 }
 
