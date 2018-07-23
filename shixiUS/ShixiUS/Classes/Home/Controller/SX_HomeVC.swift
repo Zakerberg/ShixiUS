@@ -273,6 +273,10 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         let view = UIView()
         return view
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 // ==================================================================================================================================
