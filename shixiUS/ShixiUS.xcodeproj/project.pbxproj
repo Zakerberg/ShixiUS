@@ -35,6 +35,7 @@
 		458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */; };
 		458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458805212100751F006FCDC7 /* SX_BaseViewController.swift */; };
 		45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */; };
+		45ACF3F72105BC44001DAE5A /* SX_OverseaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F62105BC44001DAE5A /* SX_OverseaDetailController.swift */; };
 		45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */; };
 		45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */; };
 		45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */; };
@@ -102,6 +103,7 @@
 		458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailController.swift; sourceTree = "<group>"; };
 		458805212100751F006FCDC7 /* SX_BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseViewController.swift; sourceTree = "<group>"; };
 		45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_NavigationBar.swift; sourceTree = "<group>"; };
+		45ACF3F62105BC44001DAE5A /* SX_OverseaDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaDetailController.swift; sourceTree = "<group>"; };
 		45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ADScrollModel.swift; sourceTree = "<group>"; };
 		45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCell.swift; sourceTree = "<group>"; };
 		45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobsCell.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 		45556B5620D89D290035FCA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				45ACF3F82105BEF1001DAE5A /* LogIn */,
 				45EBB89920D8DB0100863544 /* LogInAndGuide */,
 				45556B5720D89D290035FCA6 /* Home */,
 				45556B5820D89D290035FCA6 /* Other */,
@@ -368,14 +371,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		45ACF3F82105BEF1001DAE5A /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
 		45CF168820EF10E400188F42 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */,
 				45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */,
-				45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */,
 				4505982120F6F11C00504B6E /* SX_CertificationController.swift */,
 				458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */,
+				45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */,
+				45ACF3F62105BC44001DAE5A /* SX_OverseaDetailController.swift */,
 			);
 			name = Controller;
 			path = ShixiUS/Classes/Home/Controller;
@@ -716,6 +727,7 @@
 			files = (
 				45556B6720D8A1180035FCA6 /* SX_HomeVC.swift in Sources */,
 				45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */,
+				45ACF3F72105BC44001DAE5A /* SX_OverseaDetailController.swift in Sources */,
 				45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */,
 				45440EFE20E0C40D00058978 /* SX_PageControl.swift in Sources */,
 				45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */,
