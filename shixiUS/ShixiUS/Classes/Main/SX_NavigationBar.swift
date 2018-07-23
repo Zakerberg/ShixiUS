@@ -216,7 +216,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
             ]
             
             for selector in needSwizzleSelectorArr {
-                // _updateInteractiveTransition:  =>  wr_updateInteractiveTransition:
+                // _updateInteractiveTransition:  =>  sx_updateInteractiveTransition:
                 let str = ("sx_" + selector.description).replacingOccurrences(of: "__", with: "_")
                 if let originalMethod = class_getInstanceMethod(self, selector),
                     let swizzledMethod = class_getInstanceMethod(self, Selector(str)) {
@@ -238,8 +238,9 @@ extension UINavigationController: SXFatherAwakeProtocol {
             return current / all
         }
     }
-    
-    // swizzling system method: popToViewController
+// ==================================================================================================================================
+// swizzling system method: popToViewController
+// ==================================================================================================================================
     @objc func sx_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBarUpdate(titleColor: viewController.navBarTitleColor)
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
@@ -257,8 +258,9 @@ extension UINavigationController: SXFatherAwakeProtocol {
         CATransaction.commit()
         return vcs
     }
-    
-    // swizzling system method: popToRootViewControllerAnimated
+// ==================================================================================================================================
+// swizzling system method: popToRootViewControllerAnimated
+// ==================================================================================================================================
     @objc func sx_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
         displayLink?.add(to: RunLoop.main, forMode: .commonModes)
@@ -403,7 +405,6 @@ extension UINavigationController: UINavigationBarDelegate {
     }
 }
 
-
 //=============================================================================
 // MARK: - store navigationBar barTintColor and tintColor every viewController
 //=============================================================================
@@ -495,7 +496,7 @@ extension UIViewController: SXAwakeProtocol {
             
             if customNavBar.isKind(of: UINavigationBar.self) {
                 //                let navBar = customNavBar as! UINavigationBar
-                //                navBar.wr_setBackgroundAlpha(alpha: newValue)
+                //                navBar.sx_setBackgroundAlpha(alpha: newValue)
             }
             else {
                 if canUpdateNavBarBarTintColorOrBackgroundAlpha == true {
@@ -676,7 +677,6 @@ extension UIViewController: SXAwakeProtocol {
     }
 }
 
-
 extension SX_NavigationBar {
     class func isIphoneX() -> Bool {
         return UIScreen.main.bounds.equalTo(CGRect(x: 0, y: 0, width: 375, height: 812))
@@ -714,7 +714,6 @@ extension UIApplication {
         return super.next
     }
 }
-
 
 extension UINavigationBar: SXAwakeProtocol {
     
@@ -891,8 +890,8 @@ extension DispatchQueue {
     
     private static var onceTracker = [String]()
     
-    //Executes a block of code, associated with a unique token, only once.  The code is thread safe and will only execute the code once even in the presence of multithreaded calls.
-    public class func once(token: String, block: () -> Void) {   // 保证被 objc_sync_enter 和 objc_sync_exit 包裹的代码可以有序同步地执行
+    // 保证被 objc_sync_enter 和 objc_sync_exit 包裹的代码可以有序同步地执行
+    public class func once(token: String, block: () -> Void) {
         objc_sync_enter(self)
         defer { // 作用域结束后执行defer中的代码
             objc_sync_exit(self)

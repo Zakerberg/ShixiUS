@@ -184,7 +184,6 @@
     var DoubleValue:Double{return Double(self)}
  }
  
- 
  //打印信息
  func SXLog<T>(_ message : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
     #if DEBUG
