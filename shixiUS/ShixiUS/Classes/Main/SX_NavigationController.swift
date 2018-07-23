@@ -12,8 +12,8 @@ class SX_NavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       SX_NavigationController.setNavBarTheme()
-        SX_NavigationController.setupBarButtonItemTheme()
+       // SX_NavigationController.setNavBarTheme()
+      //  SX_NavigationController.setupBarButtonItemTheme()
     }
     
 // ==================================================================================================================================

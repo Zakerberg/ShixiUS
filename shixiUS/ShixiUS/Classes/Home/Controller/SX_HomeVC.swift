@@ -8,9 +8,9 @@
 
 import UIKit
 import RxSwift
-import RxCocoa 
+import RxCocoa
 
-private let NAVBAR_COLORCHANGE_POINT = -80
+private let NAVBAR_COLORCHANGE_POINT = IMAGE_HEIGHT - CGFloat(kNavH * 2)
 private let IMAGE_HEIGHT:CGFloat = 240
 private let SCROLL_DOWN_LIMIT: CGFloat = 100
 private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
@@ -59,7 +59,7 @@ class SX_HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        self.navigationController?.delegate = self
+        // self.navigationController?.delegate = self
         /**** ======================================================================================================
          let NetImgArr = Array<Any>()
          let descLabelArr = Array<Any>()
@@ -79,10 +79,14 @@ class SX_HomeVC: UIViewController {
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
         homeTableView.addSubview(cycleScrollerView)
         view.addSubview(homeTableView)
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "··· ", style: .done, target: nil, action: nil)
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.SX_MainColor()
-        self.navigationController?.navigationBar.alpha = 0
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        // 设置导航栏颜色
+        navBarBarTintColor = UIColor.SX_MainColor()
+        // 设置初始导航栏透明度
+        navBarBackgroundAlpha = 0
+        // 设置导航栏按钮和标题颜色
+        navBarTintColor = .white
     }
     
     deinit {
@@ -97,27 +101,31 @@ class SX_HomeVC: UIViewController {
 extension SX_HomeVC {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offSetY = scrollView.contentOffset.y
-        if (offSetY > CGFloat(NAVBAR_COLORCHANGE_POINT)) {
-            let alpha = (offSetY - CGFloat(NAVBAR_COLORCHANGE_POINT)) / CGFloat(kNavH)
-            
-            self.navigationController?.navigationBar.alpha = alpha
-        }else {
-            self.navigationController?.navigationBar.alpha = 0
-        }
-        
-        if (offSetY < LIMIT_OFFSET_Y) {
-            scrollView.contentOffset = CGPoint.init(x: 0, y: LIMIT_OFFSET_Y)
-        }
-        
-        // 改变图片框的大小 (上滑的时候不改变)
-        // 这里不能使用offsetY，因为当（offsetY < LIMIT_OFFSET_Y）的时候，y = LIMIT_OFFSET_Y 不等于 offsetY
-        let newOffsetY = scrollView.contentOffset.y
-        if (newOffsetY < -IMAGE_HEIGHT)
+        let offsetY = scrollView.contentOffset.y
+        if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
-            cycleScrollerView.frame = CGRect(x: 0, y: newOffsetY, width: CGFloat(SCREEN_WIDTH), height: -newOffsetY)
+            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(SX_NavigationBar.navBarBottom())
+            navBarBackgroundAlpha = alpha
+            navBarTintColor = UIColor.white.withAlphaComponent(alpha)
+            navBarTitleColor = UIColor.white.withAlphaComponent(alpha)
+            statusBarStyle = .default
+            title = "首页"
+        } else {
+            navBarBackgroundAlpha = 0
+            navBarTintColor = .clear
+            navBarTitleColor = .clear
+            statusBarStyle = .lightContent
+            title = "首页"
         }
     }
+    
+    // 改变图片框的大小 (上滑的时候不改变)
+    // 这里不能使用offsetY，因为当（offsetY < LIMIT_OFFSET_Y）的时候，y = LIMIT_OFFSET_Y 不等于 offsetY
+    //        let newOffsetY = scrollView.contentOffset.y
+    //        if (newOffsetY < -IMAGE_HEIGHT) {
+    //            cycleScrollerView.frame = CGRect(x: 0, y: newOffsetY, width: CGFloat(SCREEN_WIDTH), height: -newOffsetY)
+    //        }
+    //    }
     
     fileprivate func imgsScaledToSize(image: UIImage, newSize: CGSize) -> UIImage {
         UIGraphicsBeginImageContext(CGSize(width: newSize.width * 2.0, height: newSize.height * 2.0))
@@ -165,7 +173,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 1 {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
-            cell.selectionStyle = .none
+            
             return cell
         }
         
@@ -208,21 +216,13 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                             self.hidesBottomBarWhenPushed = true
                             let vc = SX_TrainingProjectController()
                             self.navigationController?.pushViewController(vc, animated: true)
-                            
                             self.hidesBottomBarWhenPushed = false
                         }else if i == 1 {
                             SXLog("进入海外就业\(i)")
-                            //                            self.hidesBottomBarWhenPushed = true
-                            //                            let vc = SX_OverseaController()
-                            //                            self.navigationController?.pushViewController(vc, animated: true)
-                            //                            self.hidesBottomBarWhenPushed = false
-                            
-                            let vc: UIViewController = UIViewController()
-                            vc.view.backgroundColor = UIColor.white
-                            vc.title = "XXXXXXX"
-                            vc.navigationController?.setNavigationBarHidden(false, animated: true)
+                            self.hidesBottomBarWhenPushed = true
+                            let vc = SX_OverseaController()
                             self.navigationController?.pushViewController(vc, animated: true)
-                            
+                            self.hidesBottomBarWhenPushed = false
                         }else if i == 2 {
                             SXLog("进入培训认证\(i)")
                             self.hidesBottomBarWhenPushed = true
@@ -277,7 +277,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 
@@ -302,10 +302,10 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
 // ==================================================================================================================================
 extension SX_HomeVC: UINavigationControllerDelegate {
     
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        let isShowHomePage = viewController.isKind(of: type(of: self))
-        self.navigationController?.setNavigationBarHidden(isShowHomePage, animated: false)
-    }
+   //    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    //        let isShowHomePage = viewController.isKind(of: type(of: self))
+    //        self.navigationController?.setNavigationBarHidden(isShowHomePage, animated: false)
+    //    }
 }
 
 // ==================================================================================================================================

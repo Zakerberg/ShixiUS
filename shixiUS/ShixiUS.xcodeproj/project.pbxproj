@@ -34,6 +34,7 @@
 		45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */; };
 		458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */; };
 		458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458805212100751F006FCDC7 /* SX_BaseViewController.swift */; };
+		45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */; };
 		45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */; };
 		45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */; };
 		45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */; };
@@ -100,6 +101,7 @@
 		45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeAPI.swift; sourceTree = "<group>"; };
 		458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailController.swift; sourceTree = "<group>"; };
 		458805212100751F006FCDC7 /* SX_BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseViewController.swift; sourceTree = "<group>"; };
+		45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_NavigationBar.swift; sourceTree = "<group>"; };
 		45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ADScrollModel.swift; sourceTree = "<group>"; };
 		45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCell.swift; sourceTree = "<group>"; };
 		45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobsCell.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				458805212100751F006FCDC7 /* SX_BaseViewController.swift */,
 				45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */,
 				45341D2F20F48C240099CDDD /* SX_LoadingView.swift */,
+				45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */,
 				45440F0020E0C4E700058978 /* SX_CycleCell.swift in Sources */,
 				4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */,
+				45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,7 +916,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShixiUS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShixiUS/ShixiUS-Bridging-Header.h";
@@ -933,7 +940,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShixiUS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShixiUS/ShixiUS-Bridging-Header.h";
@@ -951,7 +961,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -969,7 +983,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -986,7 +1004,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1003,7 +1025,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
