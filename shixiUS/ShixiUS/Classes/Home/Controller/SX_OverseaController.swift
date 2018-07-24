@@ -10,17 +10,16 @@ import UIKit
 
 class SX_OverseaController: UIViewController {
     
-// ==================================================================================================================================
-// MARK: - Lazy
-// ==================================================================================================================================
+    // ==================================================================================================================================
+    // MARK: - Lazy
+    // ==================================================================================================================================
     lazy var tableView: UITableView = {
-        let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: self.view.bounds.height), style: .plain)
+        let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: self.view.bounds.height), style: .grouped)
         table.contentInset = UIEdgeInsetsMake(-CGFloat(kNavH), 0, 0, 0);
         table.delegate = self
         table.dataSource = self
         return table
     }()
-
     
     lazy var overseaScrollerView: SX_CycleScrollerView = {
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
@@ -29,16 +28,22 @@ class SX_OverseaController: UIViewController {
         return cycleView
     }()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
         let localImgs = ["image11","image12","image13","image14","image15"]
+        
+        var titleDataArr = ["关于我们","我们的服务","我们的宗旨"]
+        var contentDataArr = ["实习科技是基于大数据应用的中国首家全球化就业、实习、职场教育和培训的一站式人力资源服务平台。实习网的核心业务是基于就业与实习为切入，整合全国高等院校、高校学生和优秀企业资源，运用信息化智能化大数据应用技术建立的平台系统，为就业实习人才提供智能简历、为企业精准匹配人才等线上线下为一体的人力资源服务。目前，实习网已经成为企业定制化人才培养，定制化人才批量输出，实习与就业全球化和职场教育与培训一站式服务综合平台，为中国的国际化人才培养，为“一带一路”沿线国家发展输送优秀人才做出贡献。",
+                              
+                              " ● 对于那些急切寻找工作的毕业生来说，通过我们的专属定制服务可以更快、更准确的对接业界知名企业，提升个人竞争力，获得实习或正式工作岗位。\n ● 通过专业顾问与候选人进行沟通和模拟面试，对个人竞争力和求职能力进行评估，给出评估反馈，进行课程规划，提出短板技能的学习建议，帮助锁定目标行业岗位。\n ● 对简历文书和英文求职信进行精修，添加岗位关键性词汇，深度挖掘个人优势和潜力，对经历进行润色提炼，全面提升履历质量。\n ● 设计定制化的求职规划方案，实时掌握行业招聘动态，精准对接内推职位，提供一手独家内推渠道及精选岗位。\n ● 基于岗位要求进行面试辅导，准备模拟面试并给出建议。\n ● 全额退款机制保障，签订服务合同协议，若最终未被企业录取，所交费用将会全额退款。",
+                              
+                              "实习网的战略方针是 “从中国发起，向全球发展”，最终成为全球最大的实习和就业平台。其目标是建立和发展中国实习文化和实习标准，提高学生素质，培养具有社会责任感、企业精神文化、全球化视野、和生活综合化的高素质学生，为社会和企业输送合格实用的人才。\n 公司口号：体验你的未来，全球机会！\n Explore Your Future, Global Opportunities! \n 公司指导原则：SHIXI \n Our Philosophy:Serve 服务 / Honor 荣誉 / Initiative 主动性 / X-Cross Skills 综合能力 / Innovation 创造力"]
+        
         overseaScrollerView.localImgArray = localImgs
         view.addSubview(tableView)
         tableView.tableHeaderView = overseaScrollerView
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,7 +78,7 @@ extension SX_OverseaController {
 // MARK: - UITableViewDelegate
 // ==================================================================================================================================
 extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
-   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 40
     }
@@ -83,6 +88,7 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "OverCellId")
         cell.textLabel?.text = "oversea的\(indexPath.row)"
         return cell
+    
     }
 }
 
@@ -126,6 +132,34 @@ extension SX_OverseaController: SXCycleScrollerViewDelegate {
         SXLog("点击了oversea\(index)")
     }
 }
+
+
+extension SX_OverseaController {
+    
+    func getTextHeigh(_ textStr: String,font: UIFont,width: CGFloat) -> CGFloat {
+        
+        let normalText: NSString = textStr as NSString
+        let size = CGSize(width: width, height: 1000)
+        let dic = NSDictionary(object: font, forKey: kCTFontAttributeName as! NSCopying)
+        let stringSize = normalText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedStringKey : Any], context:nil).size
+        
+        return stringSize.height
+    }
+    
+    func getTexWidth(_ textStr: String,font: UIFont,height: CGFloat) -> CGFloat {
+        
+        let normalText: NSString = textStr as NSString
+        let size = CGSize(width:1000, height: height)
+        let dic = NSDictionary(object: font, forKey: kCTFontAttributeName as! NSCopying)
+        let stringSize = normalText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedStringKey : Any], context:nil).size
+        
+        return stringSize.width
+    }
+}
+
+
+
+
 
 
 

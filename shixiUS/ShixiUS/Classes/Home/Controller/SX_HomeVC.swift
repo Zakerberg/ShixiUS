@@ -125,7 +125,6 @@ extension SX_HomeVC {
     //        }
     //    }
     
-    
     fileprivate func imgsScaledToSize(image: UIImage, newSize: CGSize) -> UIImage {
         UIGraphicsBeginImageContext(CGSize(width: newSize.width * 2.0, height: newSize.height * 2.0))
         image.draw(in: CGRect(x: 0, y: 0, width: newSize.width * 2.0, height: newSize.height * 2.0))
