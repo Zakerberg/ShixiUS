@@ -46,13 +46,15 @@ extension SX_UsInOverseaCell {
         }).config({ (titleLabel) in
             titleLabel.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
             titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
+            titleLabel.textAlignment = .center
             titleLabel.sizeToFit()
         })
         
         self.contentTF = UITextView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.titleLabel!.snp.bottom).offset(Margin)
-            make.left.equalToSuperview().offset(25)
-            make.right.equalToSuperview().offset(-25)
+            make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(Margin)
+            make.right.equalToSuperview().offset(-Margin)
+            make.bottom.equalToSuperview()
         }).config({ (contentTF) in
             contentTF.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
             contentTF.font = UIFont.systemFont(ofSize: 13)
