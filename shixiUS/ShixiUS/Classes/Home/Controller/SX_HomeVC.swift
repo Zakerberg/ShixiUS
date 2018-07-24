@@ -10,8 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-private let NAVBAR_COLORCHANGE_POINT = IMAGE_HEIGHT - CGFloat(kNavH * 2)
-private let IMAGE_HEIGHT:CGFloat = 240
 private let SCROLL_DOWN_LIMIT: CGFloat = 100
 private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 private let identifier:String = "hotJobsCell"
@@ -73,7 +71,7 @@ class SX_HomeVC: UIViewController {
                           "Win10秋季更新重磅功能：跟安卓与iOS无缝连接",
                           "《琅琊榜2》为何没有胡歌？胡歌：我看过剧本，离开是种保护",
                           "阿米尔汗在印度的影响力，我国的哪位影视明星能与之齐名呢？"]
-        
+
         cycleScrollerView.localImgArray = localImgs
         cycleScrollerView.descTextArray = descLabels
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
@@ -126,6 +124,7 @@ extension SX_HomeVC {
     //            cycleScrollerView.frame = CGRect(x: 0, y: newOffsetY, width: CGFloat(SCREEN_WIDTH), height: -newOffsetY)
     //        }
     //    }
+    
     
     fileprivate func imgsScaledToSize(image: UIImage, newSize: CGSize) -> UIImage {
         UIGraphicsBeginImageContext(CGSize(width: newSize.width * 2.0, height: newSize.height * 2.0))
@@ -279,6 +278,13 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
+    
+    
+    
+    
+    
+    
+    
 }
 
 // ==================================================================================================================================

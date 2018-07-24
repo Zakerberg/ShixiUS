@@ -677,23 +677,6 @@ extension UIViewController: SXAwakeProtocol {
     }
 }
 
-extension SX_NavigationBar {
-    class func isIphoneX() -> Bool {
-        return UIScreen.main.bounds.equalTo(CGRect(x: 0, y: 0, width: 375, height: 812))
-    }
-    class func navBarBottom() -> Int {
-        return self.isIphoneX() ? 88 : 64;
-    }
-    class func tabBarHeight() -> Int {
-        return self.isIphoneX() ? 83 : 49;
-    }
-    class func screenWidth() -> Int {
-        return Int(UIScreen.main.bounds.size.width)
-    }
-    class func screenHeight() -> Int {
-        return Int(UIScreen.main.bounds.size.height)
-    }
-}
 
 class NothingToSeeHere {
     static func harmlessFunction(){

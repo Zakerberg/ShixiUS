@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 设置导航栏标题默认颜色
         SX_NavigationBar.defaultNavBarTitleColor = .white
         // 统一设置状态栏样式
-        SX_NavigationBar.defaultStatusBarStyle = .lightContent
+        SX_NavigationBar.defaultStatusBarStyle = .default
         // 如果需要设置导航栏底部分割线隐藏，可以在这里统一设置
         SX_NavigationBar.defaultShadowImageHidden = true
     }
