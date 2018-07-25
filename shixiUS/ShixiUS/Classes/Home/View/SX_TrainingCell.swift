@@ -83,7 +83,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
 // MARK: - UICollectionViewDelegateFlowLayout
 // ==================================================================================================================================
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 165, height: 165)
+        return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -122,7 +122,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
             make.left.equalTo(self.titleLabel!)
-            make.bottom.equalToSuperview().offset(-Margin)
+            make.bottom.equalToSuperview().offset(-21)
             make.right.equalToSuperview().offset(-Margin)
         }).config({ (collectionView) in
             collectionView.isScrollEnabled = false
