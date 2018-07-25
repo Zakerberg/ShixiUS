@@ -198,10 +198,6 @@ extension Int {
  }
  
  
- 
- 
- 
- 
 // ==================================================================================================================================
 // MARK: - UILabel Extension
 // ==================================================================================================================================
@@ -216,7 +212,6 @@ extension Int {
      *  @param zpace  字间距 --> @10 这样设置  默认的话设置 0 就ok
      */
  
-    
     
     /*
      -(CGFloat)SX_getSpaceLabelHeight:(NSString*)text withFont:(UIFont*)font withWidth:(CGFloat)width withSpace:(CGFloat)space withZspace:(NSNumber *)zpace{
@@ -246,9 +241,7 @@ extension Int {
      }
      
      */
-    
-    
- }
+}
  
  
  
