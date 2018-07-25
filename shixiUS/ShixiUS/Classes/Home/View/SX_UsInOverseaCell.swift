@@ -52,11 +52,12 @@ extension SX_UsInOverseaCell {
         
         self.contentLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
-            
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
         }).config({ (contentLabel) in
             contentLabel.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
             contentLabel.font = UIFont.systemFont(ofSize: 13)
-            contentLabel.textAlignment = .justified
+            contentLabel.numberOfLines = 0
         })
     }
 }

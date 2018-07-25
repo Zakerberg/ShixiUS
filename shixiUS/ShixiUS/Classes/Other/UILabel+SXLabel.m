@@ -31,10 +31,10 @@
     paraStyle.headIndent = 0;
     paraStyle.tailIndent = 0;
     
-    //设置字间距 NSKernAttributeName:@1.5f
+    //设置字间距 NSKernAttributeName:@0.5f
     NSDictionary *dic;
     if (zpace == 0) {
-        dic =@{NSFontAttributeName:font,NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:@1.5f
+        dic =@{NSFontAttributeName:font,NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:@0.5f
                };
     }else {
         dic =@{NSFontAttributeName:font,NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:zpace

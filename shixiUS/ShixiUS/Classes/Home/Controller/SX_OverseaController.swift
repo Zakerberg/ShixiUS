@@ -110,21 +110,16 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let  label1 = UILabel()
         
         if indexPath.section == 0 {
-            
-            
-            
+            return (label1.sx_getSpaceLabelHeight(self.contentDataArr[indexPath.section], with: UIFont.systemFont(ofSize: 14), withWidth: SCREEN_WIDTH-20, withSpace: 0, withZspace: 0)) + 40
+
         } else if indexPath.section == 1 {
-            
-            
-            
+            return label1.sx_getSpaceLabelHeight(self.contentDataArr[indexPath.section], with: UIFont.systemFont(ofSize: 14), withWidth: SCREEN_WIDTH-20, withSpace: 0, withZspace: 0) + 40
             
         } else if indexPath.section == 2 {
-            
-            
-            
-            
+            return label1.sx_getSpaceLabelHeight(self.contentDataArr[indexPath.section], with: UIFont.systemFont(ofSize: 14), withWidth: SCREEN_WIDTH-20, withSpace: 0, withZspace: 0) + 40
         }
         return 45
     }
