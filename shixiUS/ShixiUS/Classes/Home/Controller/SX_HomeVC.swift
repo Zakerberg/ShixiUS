@@ -142,8 +142,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 1 {
             return 90.FloatValue.IPAD_XValue
-            
         }
+        
         return 400.FloatValue.IPAD_XValue
     }
     
@@ -271,8 +271,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             }
             return hotJobHeaderView
         }
-        let view = UIView()
-        return view
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

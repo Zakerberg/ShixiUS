@@ -82,10 +82,14 @@ extension SX_OverseaController {
 extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 3 {
+            return  4
+        }
+        
         return 1
     }
     
@@ -96,12 +100,19 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
             let cell = SX_UsInOverseaCell(style: .default, reuseIdentifier: "usinOverCellID")
              cell.titleLabel?.text = self.titleDataArr[indexPath.section]
              cell.contentLabel?.text = self.contentDataArr[indexPath.section]
+           
+            return cell
+            
+        } else if indexPath.section == 3 {
+            let cell = SX_HotJobsCell(style: .default, reuseIdentifier: "hotJobCellID")
+            
             return cell
         }
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "OverCellId")
-        cell.textLabel?.text = "oversea的\(indexPath.section)"
-        return cell
+        let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: "shixiTrainingCellId")
+        shixiTrainingCell.selectionStyle = .none
+        
+        return shixiTrainingCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -120,13 +131,20 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
             
         } else if indexPath.section == 2 {
             return label1.sx_getSpaceLabelHeight(self.contentDataArr[indexPath.section], with: UIFont.systemFont(ofSize: 14), withWidth: SCREEN_WIDTH-20, withSpace: 0, withZspace: 0) + 40
+            
+        } else if indexPath.section == 3{
+             return 90.FloatValue.IPAD_XValue
         }
-        return 45
+        
+        return 400.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return CGFloat.leastNormalMagnitude
+            
+        } else if section == 3{
+            return 42
         }
         return 5
     }
@@ -140,6 +158,41 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == 3 {
+            let hotJobHeaderView = UIView()
+            hotJobHeaderView.backgroundColor = UIColor.white
+            
+            let hotTitle = UILabel().addhere(toSuperView: hotJobHeaderView).layout { (make) in
+                make.top.left.equalTo(hotJobHeaderView).offset(Margin)
+                make.height.lessThanOrEqualTo(Margin)
+                }.config { (hotTitle) in
+                    hotTitle.sizeToFit()
+                    hotTitle.text = "热门岗位--测试"
+                    hotTitle.font = UIFont.systemFont(ofSize: 15)
+                    hotTitle.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+            }
+            
+            let _ = UIButton().addhere(toSuperView: hotJobHeaderView).layout { (make) in
+                make.top.equalTo(hotTitle.snp.top)
+                make.height.centerY.equalTo(hotTitle)
+                make.right.equalToSuperview().offset(-Margin)
+                }.config { (moreButton) in
+                    moreButton.setImage(UIImage.init(named: "more"), for: .normal)
+                    moreButton.setTitle("更多", for: .normal)
+                    moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+                    moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
+                    moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
+                    moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
+                    moreButton.rx.tap.subscribe(onNext: { (self) in
+                        SXLog("进入更多界面")
+                    }, onError: { (error) in
+                        
+                    }, onCompleted: nil, onDisposed: nil)
+            }
+            return hotJobHeaderView
+        }
+        
         return UIView()
     }
 }
