@@ -11,7 +11,7 @@ import UIKit
 class SX_UsInOverseaCell: UITableViewCell {
     
     var titleLabel : UILabel?
-    var contentTF  : UITextView?
+    var contentLabel : UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,16 +50,13 @@ extension SX_UsInOverseaCell {
             titleLabel.sizeToFit()
         })
         
-        self.contentTF = UITextView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.contentLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(Margin)
-            make.right.equalToSuperview().offset(-Margin)
-            make.bottom.equalToSuperview()
-        }).config({ (contentTF) in
-            contentTF.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-            contentTF.font = UIFont.systemFont(ofSize: 13)
-            contentTF.textAlignment = .justified
-            contentTF.isUserInteractionEnabled = false
+            
+        }).config({ (contentLabel) in
+            contentLabel.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            contentLabel.font = UIFont.systemFont(ofSize: 13)
+            contentLabel.textAlignment = .justified
         })
     }
 }

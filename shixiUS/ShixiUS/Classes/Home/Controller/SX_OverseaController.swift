@@ -95,7 +95,7 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
             
             let cell = SX_UsInOverseaCell(style: .default, reuseIdentifier: "usinOverCellID")
              cell.titleLabel?.text = self.titleDataArr[indexPath.section]
-             cell.contentTF?.text = self.contentDataArr[indexPath.section]
+             cell.contentLabel?.text = self.contentDataArr[indexPath.section]
             return cell
         }
         
@@ -112,17 +112,16 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
-            return getTextHeigh(self.contentDataArr[indexPath.section] as NSString, font: UIFont.systemFont(ofSize: 13), width: 13)
             
             
             
         } else if indexPath.section == 1 {
-            return getTextHeigh(self.contentDataArr[indexPath.section] as NSString, font: UIFont.systemFont(ofSize: 13), width: 13)
+            
             
             
             
         } else if indexPath.section == 2 {
-            return getTextHeigh(self.contentDataArr[indexPath.section] as NSString, font: UIFont.systemFont(ofSize: 13), width: 13)
+            
             
             
             
@@ -193,27 +192,15 @@ extension SX_OverseaController: SXCycleScrollerViewDelegate {
 
 extension SX_OverseaController {
     
-    func getTextHeigh(_ textStr: NSString,font: UIFont,width: CGFloat) -> CGFloat {
-        
-        let normalText = textStr
-        let size = CGSize(width: width, height: 1000)
-        let dic = NSDictionary(object: font, forKey: kCTFontAttributeName as! NSCopying)
-        let stringSize = normalText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedStringKey : Any], context:nil).size
-        
-        return stringSize.height
-    }
-    
-    func getTextWidth(_ textStr: NSString,font: UIFont,height: CGFloat) -> CGFloat {
-        
-        let normalText = textStr
-        let size = CGSize(width:1000, height: height)
-        let dic = NSDictionary(object: font, forKey: kCTFontAttributeName as! NSCopying)
-        let stringSize = normalText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedStringKey : Any], context:nil).size
-        
-        return stringSize.width
-    }
-}
 
+
+
+
+
+
+
+
+}
 
 
 
