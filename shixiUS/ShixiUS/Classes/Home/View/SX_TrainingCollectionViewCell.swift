@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 7/17/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  trainingViewCell 
+//   
 
 import UIKit
 
@@ -63,8 +63,6 @@ extension SX_TrainingCollectionViewCell {
         })
     }
 }
-
-
 
 
 

@@ -113,8 +113,6 @@ extension SX_LoadingView  {
     ///
     @objc func reloadButtonClick(btn: UIButton) {
       
-      
-        
         
     }
 }

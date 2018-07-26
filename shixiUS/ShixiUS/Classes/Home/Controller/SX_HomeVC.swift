@@ -57,7 +57,6 @@ class SX_HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        // self.navigationController?.delegate = self
         /**** ======================================================================================================
          let NetImgArr = Array<Any>()
          let descLabelArr = Array<Any>()
@@ -178,6 +177,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
         shixiTrainingCell.selectionStyle = .none
+        shixiTrainingCell.delegate = self
         return shixiTrainingCell
     }
     
@@ -296,17 +296,6 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
 }
 
 // ==================================================================================================================================
-// MARK: - UINavigationControllerDelegate
-// ==================================================================================================================================
-extension SX_HomeVC: UINavigationControllerDelegate {
-    
-   //    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-    //        let isShowHomePage = viewController.isKind(of: type(of: self))
-    //        self.navigationController?.setNavigationBarHidden(isShowHomePage, animated: false)
-    //    }
-}
-
-// ==================================================================================================================================
 // MARK: - Other Method
 // ==================================================================================================================================
 extension SX_HomeVC {
@@ -345,6 +334,19 @@ extension SX_HomeVC {
         } catch { }
     }
 }
+
+// =================================================================================================================================
+// MARK: - SX_TrainingCellDelegate
+// =================================================================================================================================
+extension SX_HomeVC: SX_TrainingCellDelegate {
+    func clickCell(item: Int) {
+        let vc = SX_ProjectDetailController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+
+
 
 
 

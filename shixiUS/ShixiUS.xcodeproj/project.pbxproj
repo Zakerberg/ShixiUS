@@ -39,6 +39,8 @@
 		458A002C2108535A00D38014 /* SX_TrainingApplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A002B2108535A00D38014 /* SX_TrainingApplyController.swift */; };
 		458A002E21086A7300D38014 /* SX_BaseSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A002D21086A7300D38014 /* SX_BaseSuccessController.swift */; };
 		458A0030210875B300D38014 /* SX_trainingApplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A002F210875B300D38014 /* SX_trainingApplyCell.swift */; };
+		459B334A210965EA00B2EBB0 /* SX_MoreDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B3349210965EA00B2EBB0 /* SX_MoreDateController.swift */; };
+		459B334C21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B334B21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift */; };
 		45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */; };
 		45ACF3F72105BC44001DAE5A /* SX_OverseaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F62105BC44001DAE5A /* SX_OverseaDetailController.swift */; };
 		45ACF3FA2105C40E001DAE5A /* SX_LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F92105C40E001DAE5A /* SX_LoginView.swift */; };
@@ -114,6 +116,8 @@
 		458A002B2108535A00D38014 /* SX_TrainingApplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingApplyController.swift; sourceTree = "<group>"; };
 		458A002D21086A7300D38014 /* SX_BaseSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseSuccessController.swift; sourceTree = "<group>"; };
 		458A002F210875B300D38014 /* SX_trainingApplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_trainingApplyCell.swift; sourceTree = "<group>"; };
+		459B3349210965EA00B2EBB0 /* SX_MoreDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MoreDateController.swift; sourceTree = "<group>"; };
+		459B334B21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailDateCell.swift; sourceTree = "<group>"; };
 		45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_NavigationBar.swift; sourceTree = "<group>"; };
 		45ACF3F62105BC44001DAE5A /* SX_OverseaDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaDetailController.swift; sourceTree = "<group>"; };
 		45ACF3F92105C40E001DAE5A /* SX_LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_LoginView.swift; sourceTree = "<group>"; };
@@ -295,6 +299,7 @@
 				45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */,
 				45341D2F20F48C240099CDDD /* SX_LoadingView.swift */,
 				45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */,
+				459B3349210965EA00B2EBB0 /* SX_MoreDateController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				4505982520FC8CB900504B6E /* SX_OverseaCell.swift */,
 				458A00252106FBC600D38014 /* SX_UsInOverseaCell.swift */,
 				458A002F210875B300D38014 /* SX_trainingApplyCell.swift */,
+				459B334B21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -746,6 +752,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45556B6720D8A1180035FCA6 /* SX_HomeVC.swift in Sources */,
+				459B334A210965EA00B2EBB0 /* SX_MoreDateController.swift in Sources */,
 				45ACF3FA2105C40E001DAE5A /* SX_LoginView.swift in Sources */,
 				45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */,
 				45ACF3F72105BC44001DAE5A /* SX_OverseaDetailController.swift in Sources */,
@@ -755,6 +762,7 @@
 				45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */,
 				45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */,
 				45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */,
+				459B334C21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift in Sources */,
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
 				458A0030210875B300D38014 /* SX_trainingApplyCell.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,

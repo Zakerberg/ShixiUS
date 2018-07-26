@@ -193,7 +193,6 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
             }
             return hotJobHeaderView
         }
-        
         return UIView()
     }
 }
@@ -225,7 +224,6 @@ extension SX_OverseaController: UIScrollViewDelegate {
 
 // ==================================================================================================================================
 // MARK: - SXCycleScrollerViewDelegate
-
 // ==================================================================================================================================
 extension SX_OverseaController: SXCycleScrollerViewDelegate {
     
@@ -237,11 +235,4 @@ extension SX_OverseaController: SXCycleScrollerViewDelegate {
         
         SXLog("点击了oversea\(index)")
     }
-}
-
-extension SX_OverseaController {
-    
-
-
-
 }

@@ -10,12 +10,19 @@ import UIKit
 
 let CollectionViewCellID = "CollectionViewCellID"
 
+protocol SX_TrainingCellDelegate {
+    func clickCell(item: Int)
+}
+
 class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     var titleLabel: UILabel?
     var moreButton: UIButton?
     var collectionView: UICollectionView?
     
+    // delegate
+    var delegate: SX_TrainingCellDelegate?
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -61,6 +68,11 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
         
+//        let tapSingle = UITapGestureRecognizer(target: self, action: #selector(Tap(_:)))
+//        tapSingle.numberOfTapsRequired = 1
+//        tapSingle.numberOfTouchesRequired = 1
+//        cell.addGestureRecognizer(tapSingle)
+        
         cell.sourceImageView?.image = UIImage.init(named: "localImg3")
         cell.priceLabel?.text = "￥" + "2998.00"
         cell.sourceName?.text = "课程名称课程名称测试"
@@ -70,8 +82,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        SXLog("点击了CollectionView的\(indexPath.row)")
-        
+        SXLog("点击了CollectionView的\(indexPath.section)---\(indexPath.row)")
+
+        self.delegate?.clickCell(item: indexPath.section)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -136,3 +149,37 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
 }
+
+// =================================================================================================================================
+// MARK: - 查找所在的ViewController
+// =================================================================================================================================
+extension SX_TrainingCell {
+    
+    // MARK: - 查找所在的ViewController
+//    func responderViewController() -> UIViewController? {
+//        for view in sequence(first: self.superview, next: {$0?.superview}) {
+//            if let responder = view?.next {
+//                if responder.isKind(of: UIViewController.self) {
+//                    return responder as? UIViewController
+//                }
+//            }
+//        }
+//        return nil
+//    }
+//
+//    @objc func Tap(_ recognizer:UITapGestureRecognizer) {
+//        // MARK: - secondVC是目标页面
+//        let secondVC = SX_ProjectDetailController()
+//        // MARK: - firstVC是所在页面
+//        let firstVC = self.responderViewController()
+//        firstVC?.navigationController?.pushViewController(secondVC, animated: true)
+//    }
+}
+
+
+
+
+
+
+
+
