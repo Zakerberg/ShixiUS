@@ -105,6 +105,7 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
             
         } else if indexPath.section == 3 {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: "hotJobCellID")
+            cell.selectionStyle = .none
             
             return cell
         }
