@@ -19,7 +19,6 @@ let kTabBarHeight = (iphoneX ? 83.FloatValue : 49.FloatValue)
 // 间距
 let Margin:CGFloat = 15
 
-
 // 轮播图高度
 let IMAGE_HEIGHT:CGFloat = 240
 // 导航栏变色的点

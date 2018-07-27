@@ -10,6 +10,11 @@ import UIKit
 
 class SX_ProjectDetailTitleCell: UITableViewCell {
 
+    var projectName: UILabel?
+    var projectContent: UILabel?
+    var projectCity: UILabel?
+    var projectPrice: UILabel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,6 +42,7 @@ class SX_ProjectDetailTitleCell: UITableViewCell {
 extension SX_ProjectDetailTitleCell {
     
     func configCell() {
+        
         
         
     }
