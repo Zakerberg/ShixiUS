@@ -23,9 +23,9 @@ class SX_TrainingProjectController: UIViewController {
 // ==================================================================================================================================
 //  MARK: - lazy
 // ==================================================================================================================================
-    // 综合排序View
+// 综合排序View
     lazy var comprehensiveView: UIView = {
-        let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (compreView) in
+        let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
             compreView.backgroundColor = UIColor.white
             compreView.dataArr = ["综合排序","项目时间","价格降序","价格升序"]
             compreView.isHidden = true
@@ -68,7 +68,7 @@ class SX_TrainingProjectController: UIViewController {
     }()
     
 // ==================================================================================================================================
-// MARK: - O 1 2 3 4 5 6 7 8 9 -
+// MARK: - O
 // ==================================================================================================================================
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -138,20 +138,22 @@ extension SX_TrainingProjectController {
     /// 顶部三个按钮 && CollectionView
     func setTopSelectedView() {
         
-        //        let flowLayout = UICollectionViewFlowLayout()
-        //        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
-        //        self.collectionView?.backgroundColor = UIColor.white
-        //        self.collectionView?.delegate = self
-        //        self.collectionView?.dataSource = self
-        //        self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
-        //        self.view.insertSubview(self.collectionView!, belowSubview: self.trainingView)
-        //        self.collectionView?.snp.makeConstraints({ (make) in
-        //            make.top.equalToSuperview().offset(44)
-        //            make.left.equalToSuperview().offset(Margin)
-        //            make.right.equalToSuperview().offset(-Margin)
-        //            make.bottom.equalToSuperview()
-        //        })
-        //
+        let flowLayout = UICollectionViewFlowLayout()
+        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
+        self.collectionView?.backgroundColor = UIColor.white
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
+        self.collectionView?.showsHorizontalScrollIndicator = false
+        self.collectionView?.showsVerticalScrollIndicator = false
+        self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
+        self.view.insertSubview(self.collectionView!, belowSubview: self.trainingView)
+        self.collectionView?.snp.makeConstraints({ (make) in
+            make.top.equalToSuperview().offset(kNavH+55)
+            make.left.equalToSuperview().offset(Margin)
+            make.right.equalToSuperview().offset(-Margin)
+            make.bottom.equalToSuperview()
+        })
+        
         self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: kNavH, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
             topSelectedView.backgroundColor = UIColor.white
         })
@@ -357,23 +359,23 @@ extension SX_TrainingProjectController {
         }
     }
     
-//    /// showLoadingView
-//    func showLoadingView() {
-//
-//        if (self.loadingView == nil) {
-//            self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
-//        }
-//        self.view.addSubview(self.loadingView!)
-//    }
-//
-//    /// hideLoadingView
-//    func hideLoadingView() {
-//        let delaySeconds = 0.5
-//
-//    }
-//
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-//    }
+    //    /// showLoadingView
+    //    func showLoadingView() {
+    //
+    //        if (self.loadingView == nil) {
+    //            self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+    //        }
+    //        self.view.addSubview(self.loadingView!)
+    //    }
+    //
+    //    /// hideLoadingView
+    //    func hideLoadingView() {
+    //        let delaySeconds = 0.5
+    //
+    //    }
+    //
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //
+    //    }
 }
 
