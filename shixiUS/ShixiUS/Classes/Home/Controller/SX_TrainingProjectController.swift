@@ -23,21 +23,20 @@ class SX_TrainingProjectController: UIViewController {
 // ==================================================================================================================================
 //  MARK: - lazy
 // ==================================================================================================================================
-// 综合排序View
-    private lazy var comprehensiveView: UIView = {
-        let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
+    // 综合排序View
+    lazy var comprehensiveView: UIView = {
+        let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (compreView) in
             compreView.backgroundColor = UIColor.white
+            compreView.dataArr = ["综合排序","项目时间","价格降序","价格升序"]
+            compreView.isHidden = true
+            compreView.backgroundColor = UIColor.red
         })
-        
-        compreView.dataArr = ["综合排序","项目时间","价格降序","价格升序"]
-        compreView.isHidden = true
-        
         return compreView
     }()
     
     /// 实训类别View
     private lazy var trainingView: UIView = {
-        let trainingView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (trainingView) in
+        let trainingView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (trainingView) in
             trainingView.backgroundColor = UIColor.white
         })
         
@@ -49,7 +48,7 @@ class SX_TrainingProjectController: UIViewController {
     
     /// 国家分类View
     private lazy var countryView: UIView = {
-        let countryView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (countryView) in
+        let countryView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (countryView) in
             countryView.backgroundColor = UIColor.white
         })
         countryView.dataArr = ["中国","美国","不限"]
@@ -130,7 +129,6 @@ extension SX_TrainingProjectController {
     func setUI() {
         self.title = "实训项目"
         self.view.backgroundColor = UIColor.white
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.trainingView.isHidden = true
         self.comprehensiveView.isHidden = true
         self.countryView.isHidden = true
@@ -140,22 +138,21 @@ extension SX_TrainingProjectController {
     /// 顶部三个按钮 && CollectionView
     func setTopSelectedView() {
         
-        let flowLayout = UICollectionViewFlowLayout()
-        
-        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
-        self.collectionView?.backgroundColor = UIColor.white
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
-        self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
-        self.view.insertSubview(self.collectionView!, belowSubview: self.trainingView)
-        self.collectionView?.snp.makeConstraints({ (make) in
-            make.top.equalToSuperview().offset(44)
-            make.left.equalToSuperview().offset(Margin)
-            make.right.equalToSuperview().offset(-Margin)
-            make.bottom.equalToSuperview()
-        })
-        
-        self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
+        //        let flowLayout = UICollectionViewFlowLayout()
+        //        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
+        //        self.collectionView?.backgroundColor = UIColor.white
+        //        self.collectionView?.delegate = self
+        //        self.collectionView?.dataSource = self
+        //        self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
+        //        self.view.insertSubview(self.collectionView!, belowSubview: self.trainingView)
+        //        self.collectionView?.snp.makeConstraints({ (make) in
+        //            make.top.equalToSuperview().offset(44)
+        //            make.left.equalToSuperview().offset(Margin)
+        //            make.right.equalToSuperview().offset(-Margin)
+        //            make.bottom.equalToSuperview()
+        //        })
+        //
+        self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: kNavH, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
             topSelectedView.backgroundColor = UIColor.white
         })
         
@@ -258,6 +255,7 @@ extension SX_TrainingProjectController {
             }) {(finished) in
                 view.isHidden = true
             }
+            
             UIView.animate(withDuration: 0.4, animations: {
                 /// 小三角的选中状态
                 for index in 0..<3 {
@@ -322,8 +320,9 @@ extension SX_TrainingProjectController {
         self.blackBgView?.isHidden = false
         view.isHidden = false
         
+        /// 改变传入的View frame
         UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseOut, animations: {
-            view.frame = CGRect(x: 0, y: self.topSelectedView!.bounds.origin.y + self.topSelectedView!.bounds.size.height + 0.5, width: SCREEN_WIDTH, height: view.bounds.size.height)
+            view.frame = CGRect(x: 0, y: self.topSelectedView!.bounds.origin.y + self.topSelectedView!.bounds.size.height + kNavH , width: SCREEN_WIDTH, height: view.bounds.size.height)
         }) { (finished) in
             SXLog(finished)
         }
@@ -358,23 +357,23 @@ extension SX_TrainingProjectController {
         }
     }
     
-    /// showLoadingView
-    func showLoadingView() {
-        
-        if (self.loadingView == nil) {
-            self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
-        }
-        self.view.addSubview(self.loadingView!)
-    }
-    
-    /// hideLoadingView
-    func hideLoadingView() {
-        let delaySeconds = 0.5
-        
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-    }
+//    /// showLoadingView
+//    func showLoadingView() {
+//
+//        if (self.loadingView == nil) {
+//            self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+//        }
+//        self.view.addSubview(self.loadingView!)
+//    }
+//
+//    /// hideLoadingView
+//    func hideLoadingView() {
+//        let delaySeconds = 0.5
+//
+//    }
+//
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//    }
 }
 

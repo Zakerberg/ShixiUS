@@ -10,8 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-private let SCROLL_DOWN_LIMIT: CGFloat = 100
-private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 private let identifier:String = "hotJobsCell"
 private let shixiTrainingCellID = "shixiTrainingCellID"
 
@@ -85,7 +83,6 @@ class SX_HomeVC: UIViewController {
         // 设置导航栏按钮和标题颜色
         navBarTintColor = .white
     }
-    
     deinit {
         homeTableView.delegate = nil
         print("deinit-----")

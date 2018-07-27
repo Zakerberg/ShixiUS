@@ -25,6 +25,10 @@ let IMAGE_HEIGHT:CGFloat = 240
 // 导航栏变色的点
 let NAVBAR_COLORCHANGE_POINT = IMAGE_HEIGHT - CGFloat(kNavH * 2)
 
+// 下拉距离
+let SCROLL_DOWN_LIMIT:CGFloat = 100
+let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
+
 extension SX_NavigationBar {
     class func isIphoneX() -> Bool {
         return UIScreen.main.bounds.equalTo(CGRect(x: 0, y: 0, width: 375, height: 812))

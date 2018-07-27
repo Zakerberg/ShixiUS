@@ -14,7 +14,7 @@ class SX_BasePopSelectedView: UIView {
     
     var dataArr: [String]?
     
-    private lazy var basePopSelectedTableView: UITableView = {
+    lazy var basePopSelectedTableView: UITableView = {
         let tableView = UITableView().addhere(toSuperView: self).layout(snapKitMaker: { (make) in
             make.edges.equalToSuperview()
         })
@@ -55,7 +55,7 @@ extension SX_BasePopSelectedView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        SXLog("点击了taining\(indexPath.row)")
+        SXLog("点击了basePopSelectedView 的\(indexPath.section)  ===== \(indexPath.row)")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
