@@ -9,17 +9,18 @@
 import UIKit
 
 class SX_ProjectDetailTitleCell: UITableViewCell {
-
-    var projectName: UILabel?
-    var projectContent: UILabel?
-    var projectCity: UILabel?
-    var projectPrice: UILabel?
+    
+    var projectBgView  : UIView?
+    var projectName    : UILabel?
+    var projectContent : UILabel?
+    var projectCity    : UILabel?
+    var projectPrice   : UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configCell()
@@ -31,7 +32,7 @@ class SX_ProjectDetailTitleCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 }
@@ -43,8 +44,35 @@ extension SX_ProjectDetailTitleCell {
     
     func configCell() {
         
+        self.projectBgView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (projectBgView) in
+            
+        })
         
+        self.projectName = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (projectName) in
+            
+        })
         
+        self.projectContent = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (projectContent) in
+            
+        })
+        
+        self.projectCity = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (projectCity) in
+            
+        })
+        
+        self.projectPrice = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (projectPrice) in
+            
+        })
     }
 }
 

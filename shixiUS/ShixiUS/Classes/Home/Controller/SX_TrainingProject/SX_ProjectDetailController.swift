@@ -9,7 +9,6 @@
 import UIKit
 
 let projectDetailCellID = "projectDetailCellID"
-
 class SX_ProjectDetailController: UIViewController {
     
 // =================================================================================================================================
@@ -74,7 +73,7 @@ extension SX_ProjectDetailController {
 extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 26
+        return 16
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,7 +83,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: projectDetailCellID)
-        cell.textLabel?.text = "这是实训项目详情的\(indexPath.row)"
+        cell.textLabel?.text = "这是实训项目详情的\(indexPath.section)"
+        cell.selectionStyle = .none
         
         return cell
     }
@@ -95,6 +95,14 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
     }
 }
 
@@ -122,11 +130,23 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
             changeNavBarAnimateWithIsClear(isClear: false)
             title = "项目详情"
         } else {
-            
             changeNavBarAnimateWithIsClear(isClear: true)
             title = ""
         }
+
+        // 限制下拉距离
+        if (offsetY < LIMIT_OFFSET_Y) {
+            scrollView.contentOffset = CGPoint.init(x: 0, y: LIMIT_OFFSET_Y)
+        }
+        
+        // 改变图片框的大小 (上滑的时候不改变)
+        // 这里不能使用offsetY，因为当（offsetY < LIMIT_OFFSET_Y）的时候，y = LIMIT_OFFSET_Y 不等于 offsetY
+        let newOffsetY = scrollView.contentOffset.y
+        if (newOffsetY < -IMAGE_HEIGHT) {
+            detailScrollerView.frame = CGRect(x: 0, y: newOffsetY, width: SCREEN_WIDTH, height: -newOffsetY)
+        }
     }
+    
     private func changeNavBarAnimateWithIsClear(isClear:Bool) {
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             if let weakSelf = self
@@ -141,16 +161,4 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
         })
     }
 }
-
-// private
-fileprivate func imageScaledToSize(image:UIImage, newSize:CGSize) -> UIImage
-{
-    UIGraphicsBeginImageContext(CGSize(width: newSize.width * 2.0, height: newSize.height * 2.0))
-    image.draw(in: CGRect(x: 0, y: 0, width: newSize.width * 2.0, height: newSize.height * 2.0))
-    let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext() ?? image
-    UIGraphicsEndImageContext()
-    return newImage
-}
-
-
 

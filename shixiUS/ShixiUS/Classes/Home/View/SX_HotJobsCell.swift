@@ -19,8 +19,6 @@ class SX_HotJobsCell: UITableViewCell {
     var eduImageView:UIImageView?
     var logoImageView:UIImageView?
     
-    var stackView:UIStackView?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
