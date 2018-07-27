@@ -214,7 +214,6 @@ extension SX_TrainingProjectController {
     func fetchData()  {
         
         
-        
     }
     
     /// 调出PickerView
@@ -359,23 +358,23 @@ extension SX_TrainingProjectController {
         }
     }
     
-    //    /// showLoadingView
-    //    func showLoadingView() {
-    //
-    //        if (self.loadingView == nil) {
-    //            self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
-    //        }
-    //        self.view.addSubview(self.loadingView!)
-    //    }
-    //
-    //    /// hideLoadingView
-    //    func hideLoadingView() {
-    //        let delaySeconds = 0.5
-    //
-    //    }
-    //
-    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //
-    //    }
+        /// showLoadingView
+        func showLoadingView() {
+    
+            if (self.loadingView == nil) {
+                self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+            }
+            self.view.addSubview(self.loadingView!)
+        }
+    
+        /// hideLoadingView
+        func hideLoadingView() {
+            let delaySeconds = 0.5
+    
+        }
+    
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+        }
 }
 

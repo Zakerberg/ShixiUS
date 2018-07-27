@@ -245,3 +245,43 @@ extension Int {
  
  
  
+// =================================================================================================================================
+// MARK: - setRightItem
+// =================================================================================================================================
+extension UIViewController {
+    
+    func setRightItem(_ imageName: String) {
+    
+        let imageItem = UIBarButtonItem(image: UIImage.init(named: imageName), style: .plain, target: self, action: #selector(rightAction))
+        imageItem.setBackgroundImage(UIImage.init(named: "mask"), for: .normal, barMetrics: .default)
+        let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        negativeSpacer.width = 0
+        self.navigationItem.rightBarButtonItems = [imageItem]
+    }
+    
+    
+    func setLeftItem(_ imageName: String) {
+        
+        let btn = UIButton(type: .custom)
+        btn.frame = CGRect(x: 0, y: 0, width: 15, height: 20)
+        btn.setBackgroundImage(UIImage.init(named: "mask"), for: .normal)
+        btn.setImage(UIImage.init(named: imageName), for: .normal)
+        btn.addTarget(self, action: #selector(leftBackAction), for: .touchUpInside)
+        
+        let leftItem = UIBarButtonItem(customView: btn)
+        
+        let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        negativeSpacer.width = -10
+        self.navigationItem.leftBarButtonItems = [negativeSpacer, leftItem]
+        
+    }
+    
+    @objc func rightAction() {
+        SXLog("share.....还没写,慢慢填坑......") 
+    }
+    
+    @objc func leftBackAction() {
+        self.navigationController?.popViewController(animated: true)
+    }
+ }
+ 

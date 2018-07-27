@@ -35,14 +35,16 @@ class SX_ProjectDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        let localImgs = ["localImg4","localImg6","localImg3","localImg5"]
+        self.setRightItem("share")
+        self.setLeftItem("leftBack")
+        
+        let localImgs = ["localImg4","localImg6","localImg3"]
         
         detailScrollerView.localImgArray = localImgs
         tableView.addSubview(detailScrollerView)
         view.addSubview(tableView)
         
         navBarBackgroundAlpha = 0
-
     }
     
     deinit {
@@ -117,40 +119,37 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         if (offsetY > NAVBAR_COLORCHANGE_POINT) {
-            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavH)
-            navBarBackgroundAlpha = alpha
-            navBarTintColor = UIColor.white.withAlphaComponent(alpha)
-            navBarTitleColor = UIColor.white.withAlphaComponent(alpha)
+            changeNavBarAnimateWithIsClear(isClear: false)
             title = "项目详情"
         } else {
-            navBarBackgroundAlpha = 0
-            navBarTintColor = .clear
-            navBarTitleColor = .clear
-            title = "项目详情"
-        }
-        
-        // 限制下拉距离
-        if (offsetY < LIMIT_OFFSET_Y) {
-            scrollView.contentOffset = CGPoint.init(x: 0, y: LIMIT_OFFSET_Y)
-        }
-        
-        // 改变图片框的大小 (上滑的时候不改变)
-        // 这里不能使用offsetY，因为当（offsetY < LIMIT_OFFSET_Y）的时候，y = LIMIT_OFFSET_Y 不等于 offsetY
-        let newOffsetY = scrollView.contentOffset.y
-        if (newOffsetY < -IMAGE_HEIGHT) {
-            detailScrollerView.frame = CGRect(x: 0, y: newOffsetY, width: SCREEN_WIDTH, height: -newOffsetY)
+            
+            changeNavBarAnimateWithIsClear(isClear: true)
+            title = ""
         }
     }
-    
-    // private
-    fileprivate func imageScaledToSize(image:UIImage, newSize:CGSize) -> UIImage
-    {
-        UIGraphicsBeginImageContext(CGSize(width: newSize.width * 2.0, height: newSize.height * 2.0))
-        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width * 2.0, height: newSize.height * 2.0))
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext() ?? image
-        UIGraphicsEndImageContext()
-        return newImage
+    private func changeNavBarAnimateWithIsClear(isClear:Bool) {
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            if let weakSelf = self
+            {
+                if (isClear == true) {
+                    weakSelf.navBarBackgroundAlpha = 0
+                }
+                else {
+                    weakSelf.navBarBackgroundAlpha = 1.0
+                }
+            }
+        })
     }
+}
+
+// private
+fileprivate func imageScaledToSize(image:UIImage, newSize:CGSize) -> UIImage
+{
+    UIGraphicsBeginImageContext(CGSize(width: newSize.width * 2.0, height: newSize.height * 2.0))
+    image.draw(in: CGRect(x: 0, y: 0, width: newSize.width * 2.0, height: newSize.height * 2.0))
+    let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext() ?? image
+    UIGraphicsEndImageContext()
+    return newImage
 }
 
 
