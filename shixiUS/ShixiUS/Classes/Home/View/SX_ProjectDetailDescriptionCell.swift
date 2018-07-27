@@ -1,20 +1,19 @@
 //
-//  SX_ProjectDetailDateCell.swift
+//  SX_ProjectDetailDescriptionCell.swift
 //  ShixiUS
 //
-//  Created by Michael 柏 on 7/26/18.
+//  Created by Michael 柏 on 7/27/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  项目详情行程日期cell
+//  项目详情项目说明Cell
 
 import UIKit
 
-class SX_ProjectDetailDateCell: UITableViewCell {
+class SX_ProjectDetailDescriptionCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configCell()
@@ -23,7 +22,7 @@ class SX_ProjectDetailDateCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -31,13 +30,13 @@ class SX_ProjectDetailDateCell: UITableViewCell {
     }
 }
 
+
 // =================================================================================================================================
 // MARK: - configCell()
 // =================================================================================================================================
-extension SX_ProjectDetailDateCell {
+extension SX_ProjectDetailDescriptionCell {
     
     func configCell() {
-        
         
         
     }
