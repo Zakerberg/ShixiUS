@@ -11,9 +11,9 @@ import UIKit
 let projectDetailCellID = "projectDetailCellID"
 class SX_ProjectDetailController: UIViewController {
     
-    // =================================================================================================================================
-    // MARK: - Lazy
-    // =================================================================================================================================
+// =================================================================================================================================
+// MARK: - Lazy
+// =================================================================================================================================
     lazy var tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: self.view.bounds.height), style: .grouped)
         table.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
@@ -31,6 +31,18 @@ class SX_ProjectDetailController: UIViewController {
         return cycleView
     }()
     
+    lazy var projectBgView: UIView = {
+        let projectBgView = UIImageView(image: UIImage.init(named: "Bg")).addhere(toSuperView: self.tableView).layout(snapKitMaker: { (make) in
+             make.top.equalTo(self.detailScrollerView.snp.bottom).offset(-20)
+             make.height.equalTo(Margin+10)
+             make.width.equalToSuperview()
+        }).config({ (projectBgView) in
+
+        })
+
+        return projectBgView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -40,9 +52,9 @@ class SX_ProjectDetailController: UIViewController {
         let localImgs = ["localImg4","localImg6","localImg3"]
         
         detailScrollerView.localImgArray = localImgs
-        tableView.addSubview(detailScrollerView)
         view.addSubview(tableView)
-        
+        tableView.addSubview(detailScrollerView)
+        tableView.addSubview(projectBgView)
         navBarBackgroundAlpha = 0
     }
     
@@ -73,7 +85,7 @@ extension SX_ProjectDetailController {
 extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 16
+        return 6
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,20 +112,28 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 135
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if section == 0 {
+            return 0.01
+        }
+        return Margin
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
     }
 }
 

@@ -10,7 +10,6 @@ import UIKit
 
 class SX_ProjectDetailTitleCell: UITableViewCell {
     
-    var projectBgView  : UIView?
     var projectName    : UILabel?
     var projectContent : UILabel?
     var projectCity    : UILabel?
@@ -44,17 +43,8 @@ extension SX_ProjectDetailTitleCell {
     
     func configCell() {
         
-        self.projectBgView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(Margin)
-            make.left.width.height.equalToSuperview()
-        }).config({ (projectBgView) in
-            projectBgView.backgroundColor = UIColor.blue
-            projectBgView.clipsToBounds = true
-            //projectBgView.constraints = 10
-        })
-        
         self.projectName = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(Margin)
+            make.top.equalToSuperview().offset(5)
             make.left.equalToSuperview().offset(Margin)
             make.width.equalToSuperview()
             make.height.equalTo(Margin+2)

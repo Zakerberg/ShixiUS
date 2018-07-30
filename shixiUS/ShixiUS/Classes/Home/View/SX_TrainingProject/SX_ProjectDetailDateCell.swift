@@ -10,6 +10,14 @@ import UIKit
 
 class SX_ProjectDetailDateCell: UITableViewCell {
 
+    var tripCollectionView: UICollectionView?
+    var leftCount: UILabel? // 剩余
+    var dateLabel: UILabel?
+    var priceLabel: UILabel?
+    
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,10 +46,7 @@ extension SX_ProjectDetailDateCell {
     
     func configCell() {
         
-        
-        
-        
-        
+
         
         
         
