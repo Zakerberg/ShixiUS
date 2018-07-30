@@ -8,7 +8,10 @@
 
 import UIKit
 
-class SX_ProjectDetailDateCell: UITableViewCell,UICollectionViewDelegateFlowLayout {
+let projectDetailTripCellID  = "projectDetailTripCellID"
+let projectDetailStarTimeID  = "projectDetailStarTimeID"
+
+class SX_ProjectDetailDateCell: UITableViewCell {
     
     var tripCollectionView: UICollectionView?
     var dateCollectionView: UICollectionView?
@@ -25,8 +28,11 @@ class SX_ProjectDetailDateCell: UITableViewCell,UICollectionViewDelegateFlowLayo
         
         self.tripCollectionView?.delegate = self
         self.tripCollectionView?.dataSource = self
+        self.tripCollectionView?.register(SX_ProjectDetailTripCollectionViewCell.self, forCellWithReuseIdentifier: projectDetailTripCellID)
+        
         self.dateCollectionView?.delegate = self
         self.dateCollectionView?.dataSource = self
+        self.dateCollectionView?.register(SX_ProjectDetailStarTimeCollectionViewCell.self, forCellWithReuseIdentifier: projectDetailTripCellID)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,35 +46,41 @@ class SX_ProjectDetailDateCell: UITableViewCell,UICollectionViewDelegateFlowLayo
     }
 }
 
-
-// =================================================================================================================================
+// ===============================================================================================================================
 // MARK: - configCell()
-// =================================================================================================================================
+// ===============================================================================================================================
 extension SX_ProjectDetailDateCell {
     
     func configCell() {
         
         let flowLayout = UICollectionViewFlowLayout()
         self.tripCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.top.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(Margin)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(70.FloatValue.IPAD_XValue)
         }).config({ (tripCollectionView) in
             tripCollectionView.isScrollEnabled = false
             tripCollectionView.showsVerticalScrollIndicator = false
             tripCollectionView.tag = 0
         })
-    
-        let starTime = UILabel().addhere(toSuperView: self.contentView).layout { (make) in
         
+        let starTime = UILabel().addhere(toSuperView: self.contentView).layout { (make) in
+            make.top.equalTo(self.tripCollectionView!.snp.bottom).offset(Margin)
+            make.left.equalTo(self.tripCollectionView!)
+            make.height.equalTo(Margin)
             }.config { (starTime) in
                 starTime.text = "出发时间"
                 starTime.font = UIFont.systemFont(ofSize: 14)
                 starTime.sizeToFit()
                 starTime.textColor = UIColor.black
         }
-
+        
         self.dateCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
+            
         }).config({ (dateCollectionView) in
+            dateCollectionView.backgroundColor = UIColor.green
             dateCollectionView.isScrollEnabled = false
             dateCollectionView.showsVerticalScrollIndicator = false
             dateCollectionView.tag = 1
@@ -82,24 +94,37 @@ extension SX_ProjectDetailDateCell {
     }
 }
 
-// ==================================================================================================================================
+// ===============================================================================================================================
 // MARK: - UICollectionViewDelegate
-// ==================================================================================================================================
+// ===============================================================================================================================
 extension SX_ProjectDetailDateCell: UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
+        let projectDetailTripCell = collectionView.dequeueReusableCell(withReuseIdentifier: projectDetailTripCellID, for: indexPath)
+        return projectDetailTripCell
         
     }
 }
 
-
+// ===============================================================================================================================
+// MARK: - UICollectionViewDelegateFlowLayout
+// ===============================================================================================================================
+extension SX_ProjectDetailDateCell: UICollectionViewDelegateFlowLayout {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
 
 
 
