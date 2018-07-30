@@ -25,7 +25,11 @@ class SX_TrainingApplyController: UIViewController {
     lazy var topView: UIView = {
         
         let topView = UIView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+        
+            
         }).config({ (topView) in
+            
+            
         })
         
         return view
@@ -62,9 +66,11 @@ extension SX_TrainingApplyController {
     
     func setUI() {
         
+        
     }
     
     func fetchData() {
+        
         
     }
 }

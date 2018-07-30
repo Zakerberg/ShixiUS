@@ -11,9 +11,9 @@ import UIKit
 let projectDetailCellID = "projectDetailCellID"
 class SX_ProjectDetailController: UIViewController {
     
-// =================================================================================================================================
-// MARK: - Lazy
-// =================================================================================================================================
+    // =================================================================================================================================
+    // MARK: - Lazy
+    // =================================================================================================================================
     lazy var tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: self.view.bounds.height), style: .grouped)
         table.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
@@ -82,6 +82,17 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if indexPath.section == 0 {
+            
+            let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: "projectDetailTitleCellId")
+            titleCell.projectName!.text = "联合国新兴全球领导人和公民培养计划-测试"
+            titleCell.projectContent!.text = "包含:课程,签证,机票,活动,食宿,保险 - 测试"
+            titleCell.projectCity!.text = "出发城市: 北京 - 测试"
+            titleCell.projectPrice!.text = "$" + "1500" + "起/人"
+            
+            return titleCell
+        }
+        
         let cell = UITableViewCell(style: .default, reuseIdentifier: projectDetailCellID)
         cell.textLabel?.text = "这是实训项目详情的\(indexPath.section)"
         cell.selectionStyle = .none
@@ -133,7 +144,7 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
             changeNavBarAnimateWithIsClear(isClear: true)
             title = ""
         }
-
+        
         // 限制下拉距离
         if (offsetY < LIMIT_OFFSET_Y) {
             scrollView.contentOffset = CGPoint.init(x: 0, y: LIMIT_OFFSET_Y)
