@@ -8,6 +8,9 @@
 
 import UIKit
 
+let projectDetailTitleCellID    = "projectDetailTitleCellID"
+let projectDetailDateTripCellID = "projectDetailDateTripCellID"
+
 let projectDetailCellID = "projectDetailCellID"
 class SX_ProjectDetailController: UIViewController {
     
@@ -96,13 +99,22 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         
         if indexPath.section == 0 {
             
-            let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: "projectDetailTitleCellId")
+            let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.projectName!.text = "联合国新兴全球领导人和公民培养计划-测试"
             titleCell.projectContent!.text = "包含:课程,签证,机票,活动,食宿,保险 - 测试"
             titleCell.projectCity!.text = "出发城市: 北京 - 测试"
             titleCell.projectPrice!.text = "$" + "1500" + "起/人"
             
             return titleCell
+            
+        } else if indexPath.section == 1 {
+            let dateTripCell = SX_ProjectDetailDateCell(style: .default, reuseIdentifier: projectDetailDateTripCellID)
+            dateTripCell.selectionStyle = .none
+            dateTripCell.accessoryType  = .none
+            
+            
+            return dateTripCell
+            
         }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: projectDetailCellID)
@@ -113,7 +125,17 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 135
+        
+        switch indexPath.section {
+        case 0:
+            return 135.FloatValue.IPAD_XValue
+            
+        case 1:
+            return 185.FloatValue.IPAD_XValue
+            
+        default:
+            return 50.FloatValue.IPAD_XValue
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -121,7 +143,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         if section == 0 {
             return 0.01
         }
-        return Margin
+        return Margin-5
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

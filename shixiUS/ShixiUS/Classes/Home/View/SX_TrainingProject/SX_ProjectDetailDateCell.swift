@@ -55,30 +55,33 @@ extension SX_ProjectDetailDateCell {
         
         let flowLayout = UICollectionViewFlowLayout()
         self.tripCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(Margin)
             make.right.equalToSuperview().offset(-Margin)
-            make.height.equalTo(70.FloatValue.IPAD_XValue)
+            make.height.equalTo(55.FloatValue.IPAD_XValue)
         }).config({ (tripCollectionView) in
+            tripCollectionView.backgroundColor = UIColor.blue
             tripCollectionView.isScrollEnabled = false
             tripCollectionView.showsVerticalScrollIndicator = false
             tripCollectionView.tag = 0
         })
         
         let starTime = UILabel().addhere(toSuperView: self.contentView).layout { (make) in
-            make.top.equalTo(self.tripCollectionView!.snp.bottom).offset(Margin)
+            make.top.equalTo(self.tripCollectionView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(self.tripCollectionView!)
             make.height.equalTo(Margin)
             }.config { (starTime) in
                 starTime.text = "出发时间"
-                starTime.font = UIFont.systemFont(ofSize: 14)
+                starTime.font = UIFont.systemFont(ofSize: 15)
                 starTime.sizeToFit()
                 starTime.textColor = UIColor.black
         }
         
         self.dateCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-            
+               make.top.equalTo(starTime.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+               make.left.equalTo(starTime)
+               make.right.equalToSuperview().offset(-80.FloatValue.IPAD_XValue)
+               make.height.equalTo(75.FloatValue.IPAD_XValue)
         }).config({ (dateCollectionView) in
             dateCollectionView.backgroundColor = UIColor.green
             dateCollectionView.isScrollEnabled = false
@@ -87,9 +90,14 @@ extension SX_ProjectDetailDateCell {
         })
         
         self.moreDateBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.top.equalTo(starTime.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.height.equalTo(self.dateCollectionView!)
+            make.left.equalTo(self.dateCollectionView!.snp.right).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview().offset(-10.FloatValue.IPAD_XValue)
         }).config({ (moreBtn) in
-            
+            moreBtn.backgroundColor = UIColor.yellow
+
+
         })
     }
 }
@@ -105,9 +113,9 @@ extension SX_ProjectDetailDateCell: UICollectionViewDelegate,UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let projectDetailTripCell = collectionView.dequeueReusableCell(withReuseIdentifier: projectDetailTripCellID, for: indexPath)
-        return projectDetailTripCell
+        let tripCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: projectDetailTripCellID, for: indexPath)
         
+        return tripCollectionViewCell
     }
 }
 
@@ -115,6 +123,9 @@ extension SX_ProjectDetailDateCell: UICollectionViewDelegate,UICollectionViewDat
 // MARK: - UICollectionViewDelegateFlowLayout
 // ===============================================================================================================================
 extension SX_ProjectDetailDateCell: UICollectionViewDelegateFlowLayout {
+    
+    
+    
     
     
     
