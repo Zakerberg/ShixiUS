@@ -31,9 +31,9 @@ extension SX_ProjectDetailTripCollectionViewCell {
     func configCell() {
         
         self.tripName = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(8.FloatValue.IPAD_XValue)
             make.width.equalToSuperview()
-            make.height.equalTo(Margin)
+            make.height.equalTo(Margin+3)
         }).config({ (tripName) in
             tripName.sizeToFit()
             tripName.textAlignment = .center
@@ -43,11 +43,12 @@ extension SX_ProjectDetailTripCollectionViewCell {
         })
         
         self.tripArrange = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.tripName!.snp.bottom).offset(5)
+            make.top.equalTo(self.tripName!.snp.bottom).offset(8.FloatValue)
             make.width.equalTo(self.tripName!)
-            make.height.equalTo(12)
+            make.height.equalTo(12.FloatValue.IPAD_XValue)
         }).config({ (tripArrange) in
             tripArrange.sizeToFit()
+            tripArrange.font = UIFont.systemFont(ofSize: 14)
             tripArrange.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             tripArrange.textAlignment = .center
             tripArrange.text = "5天行程安排"
