@@ -18,6 +18,8 @@ class SX_ProjectDetailDateCell: UITableViewCell {
     var moreDateBtn: UIButton?
     
     var tripDataArr = [0,1,2,3]
+    //var starTimeDataArr = [5,6,7]
+    var starTimeDataArr = [5,6,7,8]
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -114,40 +116,40 @@ extension SX_ProjectDetailDateCell {
 // ===============================================================================================================================
 extension SX_ProjectDetailDateCell: UICollectionViewDelegate,UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.tripDataArr.count
+        
+        if collectionView.tag == 0 {
+            return self.tripDataArr.count
+        }
+        return self.starTimeDataArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let tripCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: projectDetailTripCellID, for: indexPath)
-        
-//        let view = UIView()
-//        view.backgroundColor = UIColor.SX_MainColor()
-//        tripCollectionViewCell.selectedBackgroundView = view
-//
-//
-//        if tripCollectionViewCell.isSelected == true {
-//
-//            tripCollectionViewCell.backgroundColor = UIColor.SX_MainColor()
-//        }else{
-//
+        if collectionView.tag == 0 {
+          
+            let tripCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: projectDetailTripCellID, for: indexPath)
             tripCollectionViewCell.backgroundColor = UIColor.colorWithHexString(hex: "e6e6e6", alpha: 1)
-//        }
+            tripCollectionViewCell.layer.masksToBounds = true
+            tripCollectionViewCell.layer.cornerRadius  = 6
+
+            return tripCollectionViewCell
+        }
         
-        tripCollectionViewCell.layer.masksToBounds = true
-        tripCollectionViewCell.layer.cornerRadius  = 6
+        let starTimeColltionCell = collectionView.dequeueReusableCell(withReuseIdentifier: projectDetailStarTimeID, for: indexPath)
         
         
-        return tripCollectionViewCell
+        return starTimeColltionCell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        SXLog("点击项目详情界面 行程CollectionView  ---- \(indexPath.row)")
+     
+        if collectionView.tag == 0 {
+            SXLog("点击项目详情界面 行程CollectionView  ---- \(indexPath.row)")
+        }
+        
+        SXLog("点击项目详情界面 出发时间CollectionView  ---- \(indexPath.row)")
+        
         
                 let tripCell = collectionView.cellForItem(at: indexPath)
         
@@ -159,9 +161,7 @@ extension SX_ProjectDetailDateCell: UICollectionViewDelegate,UICollectionViewDat
 //                    tripCell?.backgroundColor = UIColor.colorWithHexString(hex: "e6e6e6", alpha: 1)
 //                }
         
-        
         collectionView.reloadData()
-        
     }
 }
 

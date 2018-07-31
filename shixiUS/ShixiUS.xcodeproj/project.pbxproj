@@ -48,6 +48,7 @@
 		45ACF3FA2105C40E001DAE5A /* SX_LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F92105C40E001DAE5A /* SX_LoginView.swift */; };
 		45B19334210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */; };
 		45B19336210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */; };
+		45B19339211056C700EFF422 /* SX_ProjectDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19338211056C700EFF422 /* SX_ProjectDetailModel.swift */; };
 		45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */; };
 		45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */; };
 		45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */; };
@@ -129,6 +130,7 @@
 		45ACF3F92105C40E001DAE5A /* SX_LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_LoginView.swift; sourceTree = "<group>"; };
 		45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailTripCollectionViewCell.swift; sourceTree = "<group>"; };
 		45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailStarTimeCollectionViewCell.swift; sourceTree = "<group>"; };
+		45B19338211056C700EFF422 /* SX_ProjectDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailModel.swift; sourceTree = "<group>"; };
 		45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ADScrollModel.swift; sourceTree = "<group>"; };
 		45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCell.swift; sourceTree = "<group>"; };
 		45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobsCell.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 		45556B6520D8A0D00035FCA6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				45B19337211056A800EFF422 /* SX_ProjectDetail */,
 				4561F03D20DA027800C64878 /* SX_HomeModel.swift */,
 				45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */,
 			);
@@ -464,6 +467,14 @@
 				45ACF3F92105C40E001DAE5A /* SX_LoginView.swift */,
 			);
 			path = LogIn;
+			sourceTree = "<group>";
+		};
+		45B19337211056A800EFF422 /* SX_ProjectDetail */ = {
+			isa = PBXGroup;
+			children = (
+				45B19338211056C700EFF422 /* SX_ProjectDetailModel.swift */,
+			);
+			path = SX_ProjectDetail;
 			sourceTree = "<group>";
 		};
 		45CF168820EF10E400188F42 /* Controller */ = {
@@ -840,6 +851,7 @@
 				45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */,
 				45B19336210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift in Sources */,
 				45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */,
+				45B19339211056C700EFF422 /* SX_ProjectDetailModel.swift in Sources */,
 				45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */,
 				453C5B51210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift in Sources */,
 				45B19334210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift in Sources */,
