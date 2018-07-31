@@ -30,9 +30,9 @@ class SX_ProjectDetailDateCell: UITableViewCell {
         self.tripCollectionView?.dataSource = self
         self.tripCollectionView?.register(SX_ProjectDetailTripCollectionViewCell.self, forCellWithReuseIdentifier: projectDetailTripCellID)
         
-        self.dateCollectionView?.delegate = self
-        self.dateCollectionView?.dataSource = self
-        self.dateCollectionView?.register(SX_ProjectDetailStarTimeCollectionViewCell.self, forCellWithReuseIdentifier: projectDetailTripCellID)
+//        self.dateCollectionView?.delegate = self
+//        self.dateCollectionView?.dataSource = self
+//        self.dateCollectionView?.register(SX_ProjectDetailStarTimeCollectionViewCell.self, forCellWithReuseIdentifier: projectDetailStarTimeID)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,16 +53,18 @@ extension SX_ProjectDetailDateCell {
     
     func configCell() {
         
-        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout = SX_CollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: CGFloat(100).IPAD_XValue, height: 55.FloatValue.IPAD_XValue)
         self.tripCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(Margin)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(55.FloatValue.IPAD_XValue)
         }).config({ (tripCollectionView) in
-            tripCollectionView.backgroundColor = UIColor.blue
-            tripCollectionView.isScrollEnabled = false
+            tripCollectionView.backgroundColor = UIColor.white
+            tripCollectionView.alwaysBounceHorizontal = true
             tripCollectionView.showsVerticalScrollIndicator = false
+            tripCollectionView.showsHorizontalScrollIndicator = false
             tripCollectionView.tag = 0
         })
         
@@ -77,28 +79,29 @@ extension SX_ProjectDetailDateCell {
                 starTime.textColor = UIColor.black
         }
         
-        self.dateCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-               make.top.equalTo(starTime.snp.bottom).offset(10.FloatValue.IPAD_XValue)
-               make.left.equalTo(starTime)
-               make.right.equalToSuperview().offset(-80.FloatValue.IPAD_XValue)
-               make.height.equalTo(75.FloatValue.IPAD_XValue)
-        }).config({ (dateCollectionView) in
-            dateCollectionView.backgroundColor = UIColor.green
-            dateCollectionView.isScrollEnabled = false
-            dateCollectionView.showsVerticalScrollIndicator = false
-            dateCollectionView.tag = 1
-        })
-        
-        self.moreDateBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(starTime.snp.bottom).offset(10.FloatValue.IPAD_XValue)
-            make.height.equalTo(self.dateCollectionView!)
-            make.left.equalTo(self.dateCollectionView!.snp.right).offset(10.FloatValue.IPAD_XValue)
-            make.right.equalToSuperview().offset(-10.FloatValue.IPAD_XValue)
-        }).config({ (moreBtn) in
-            moreBtn.backgroundColor = UIColor.yellow
-
-
-        })
+//        self.dateCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//               make.top.equalTo(starTime.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+//               make.left.equalTo(starTime)
+//               make.right.equalToSuperview().offset(-80.FloatValue.IPAD_XValue)
+//               make.height.equalTo(75.FloatValue.IPAD_XValue)
+//        }).config({ (dateCollectionView) in
+//            dateCollectionView.backgroundColor = UIColor.green
+//            dateCollectionView.isScrollEnabled = false
+//            dateCollectionView.showsVerticalScrollIndicator = false
+//            dateCollectionView.tag = 1
+//        })
+//
+//        self.moreDateBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.top.equalTo(starTime.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+//            make.height.equalTo(self.dateCollectionView!)
+//            make.left.equalTo(self.dateCollectionView!.snp.right).offset(10.FloatValue.IPAD_XValue)
+//            make.right.equalToSuperview().offset(-10.FloatValue.IPAD_XValue)
+//        }).config({ (moreBtn) in
+//            moreBtn.backgroundColor = UIColor.yellow
+//
+//
+//
+//        })
     }
 }
 
@@ -107,14 +110,18 @@ extension SX_ProjectDetailDateCell {
 // ===============================================================================================================================
 extension SX_ProjectDetailDateCell: UICollectionViewDelegate,UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let tripCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: projectDetailTripCellID, for: indexPath)
-        
+        tripCollectionViewCell.backgroundColor = UIColor.SX_MainColor()
         return tripCollectionViewCell
     }
 }
@@ -124,18 +131,32 @@ extension SX_ProjectDetailDateCell: UICollectionViewDelegate,UICollectionViewDat
 // ===============================================================================================================================
 extension SX_ProjectDetailDateCell: UICollectionViewDelegateFlowLayout {
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: CGFloat(100).IPAD_XValue, height: 55.FloatValue.IPAD_XValue)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 0, left: Margin+6, bottom: 0, right: 0)
+//    }
 }
+
+
+// ===============================================================================================================================
+// MARK: - SX_CollectionViewFlowLayout
+// ===============================================================================================================================
+class SX_CollectionViewFlowLayout: UICollectionViewFlowLayout {
+    
+    override func prepare() {
+        super.prepare()
+        scrollDirection = UICollectionViewScrollDirection.horizontal
+    }
+    //（该方法默认返回false） 返回true  frame发生改变就重新布局  内部会重新调用prepare 和layoutAttributesForElements InRect
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
+}
+
+
 
 
 

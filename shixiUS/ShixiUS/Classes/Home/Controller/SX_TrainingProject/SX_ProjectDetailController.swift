@@ -88,7 +88,7 @@ extension SX_ProjectDetailController {
 extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 36
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,9 +112,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             dateTripCell.selectionStyle = .none
             dateTripCell.accessoryType  = .none
             
-            
             return dateTripCell
-            
         }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: projectDetailCellID)
