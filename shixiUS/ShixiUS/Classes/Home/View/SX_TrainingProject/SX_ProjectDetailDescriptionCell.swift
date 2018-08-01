@@ -37,6 +37,7 @@ extension SX_ProjectDetailDescriptionCell {
     
     func configCell() {
         
+
         
     }
 }

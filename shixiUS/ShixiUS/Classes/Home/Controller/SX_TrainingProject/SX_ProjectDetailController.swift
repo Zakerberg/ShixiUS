@@ -112,6 +112,14 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             dateTripCell.selectionStyle = .none
             dateTripCell.accessoryType  = .none
             
+            dateTripCell.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
+                
+            SXLog("进入更多日期界面++++++, 坑啊, 填不完了.......|| _ ||")
+
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+
             return dateTripCell
         }
         

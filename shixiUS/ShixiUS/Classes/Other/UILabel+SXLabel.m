@@ -22,22 +22,24 @@
 -(CGFloat)SX_getSpaceLabelHeight:(NSString*)text withFont:(UIFont*)font withWidth:(CGFloat)width withSpace:(CGFloat)space withZspace:(NSNumber *)zpace{
     
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-    paraStyle.lineBreakMode =NSLineBreakByCharWrapping;
-    paraStyle.alignment =NSTextAlignmentLeft;
-    paraStyle.lineSpacing = space;
-    paraStyle.hyphenationFactor = 1.0;
-    paraStyle.firstLineHeadIndent =0.0;
-    paraStyle.paragraphSpacingBefore =0.0;
-    paraStyle.headIndent = 0;
-    paraStyle.tailIndent = 0;
+    paraStyle.alignment                = NSTextAlignmentLeft;
+    paraStyle.headIndent               = 0;
+    paraStyle.tailIndent               = 0;
+    paraStyle.lineSpacing              = space;
+    paraStyle.lineBreakMode            = NSLineBreakByCharWrapping;
+    paraStyle.hyphenationFactor        = 1.0;
+    paraStyle.firstLineHeadIndent      = 0.0;
+    paraStyle.paragraphSpacingBefore   = 0.0;
     
     //设置字间距 NSKernAttributeName:@0.5f
     NSDictionary *dic;
     if (zpace == 0) {
-        dic =@{NSFontAttributeName:font,NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:@0.5f
+        dic = @{
+                NSFontAttributeName:font,NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:@0.5f
                };
     }else {
-        dic =@{NSFontAttributeName:font,NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:zpace
+        dic = @{
+                NSFontAttributeName:font,NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:zpace
                };
     }
     

@@ -24,6 +24,7 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 // =================================================================================================================================
 // MARK: - Other Method 
 // =================================================================================================================================
@@ -34,7 +35,6 @@ extension SX_TrainingCollectionViewCell {
           make.top.left.right.equalToSuperview()
           make.height.equalTo(95)
         }).config({ (sourceImageView) in
-            
             
         })
         
@@ -65,9 +65,3 @@ extension SX_TrainingCollectionViewCell {
         })
     }
 }
-
-
-
-
-
-
