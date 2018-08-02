@@ -22,7 +22,6 @@ class SX_ProjectDetailInstructionsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         ConfigCell()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -92,6 +91,7 @@ extension SX_ProjectDetailInstructionsView {
                 btn.setTitleColor(UIColor.colorWithHexString(hex: "ff7900", alpha: 1), for: .normal)
             }
         }
+        
         let btnWidth = SCREEN_WIDTH/CGFloat(self.titleBtnArray!.count)
         self.indicateLine?.frame = CGRect(x: btnWidth*CGFloat(colunm), y: 49, width: btnWidth, height: 1)
     }
