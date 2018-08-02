@@ -15,8 +15,6 @@ pod 'RxSwift'
 pod 'Alamofire'
 pod 'Result'
 pod 'Kingfisher'
-pod 'PagingMenuController'
-
   
   target 'ShixiUSTests' do
     inherit! :search_paths

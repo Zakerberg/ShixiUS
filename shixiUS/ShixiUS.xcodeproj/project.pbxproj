@@ -51,6 +51,8 @@
 		45B19334210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */; };
 		45B19336210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */; };
 		45B19339211056C700EFF422 /* SX_ProjectDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19338211056C700EFF422 /* SX_ProjectDetailModel.swift */; };
+		45BAD4A82111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD4A72111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift */; };
+		45BAD4AA2111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD4A92111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift */; };
 		45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */; };
 		45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */; };
 		45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */; };
@@ -135,6 +137,8 @@
 		45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailTripCollectionViewCell.swift; sourceTree = "<group>"; };
 		45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailStarTimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		45B19338211056C700EFF422 /* SX_ProjectDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailModel.swift; sourceTree = "<group>"; };
+		45BAD4A72111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailScheduleCell.swift; sourceTree = "<group>"; };
+		45BAD4A92111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailCostInformationCell.swift; sourceTree = "<group>"; };
 		45BEF63C20DA2B7000B71FAC /* SX_ADScrollModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ADScrollModel.swift; sourceTree = "<group>"; };
 		45BEF63E20DA4F8500B71FAC /* SX_TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCell.swift; sourceTree = "<group>"; };
 		45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobsCell.swift; sourceTree = "<group>"; };
@@ -219,6 +223,8 @@
 				45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */,
 				45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */,
 				45215E7821118A1E00AED771 /* SX_ProjectDetailInstructionsView.swift */,
+				45BAD4A72111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift */,
+				45BAD4A92111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift */,
 			);
 			path = SX_TrainingProject;
 			sourceTree = "<group>";
@@ -755,7 +761,6 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShixiUS/Pods-ShixiUS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/PagingMenuController/PagingMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -766,7 +771,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PagingMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -831,6 +835,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45556B6720D8A1180035FCA6 /* SX_HomeVC.swift in Sources */,
+				45BAD4AA2111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift in Sources */,
 				459B334A210965EA00B2EBB0 /* SX_MoreDateController.swift in Sources */,
 				45ACF3FA2105C40E001DAE5A /* SX_LoginView.swift in Sources */,
 				45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */,
@@ -852,6 +857,7 @@
 				4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */,
 				4505982620FC8CB900504B6E /* SX_OverseaCell.swift in Sources */,
 				4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */,
+				45BAD4A82111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
 				45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */,
@@ -1048,7 +1054,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShixiUS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShixiUS/ShixiUS-Bridging-Header.h";
@@ -1069,7 +1078,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShixiUS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShixiUS/ShixiUS-Bridging-Header.h";
@@ -1087,7 +1099,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1105,7 +1121,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1122,7 +1142,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1139,7 +1163,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
