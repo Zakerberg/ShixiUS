@@ -10,17 +10,9 @@ import UIKit
 
 let projectDetailTitleCellID    = "projectDetailTitleCellID"
 let projectDetailDateTripCellID = "projectDetailDateTripCellID"
-private let kScrollStopNotificationName = "scrollStop" // 滚动停止通知
+
 let projectDetailCellID = "projectDetailCellID"
-
-protocol  SX_ProjectDetailControllerDelegate {
-    // 悬停的位置
-    func tableViewHeightForStayPosition(tableView: UITableView) -> CGFloat
-}
-
 class SX_ProjectDetailController: UIViewController {
-    
-    var canScroll: Bool?
     
 // =================================================================================================================================
 // MARK: - Lazy
@@ -53,18 +45,6 @@ class SX_ProjectDetailController: UIViewController {
         
         return projectBgView
     }()
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        /*
-         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollStop:) name:kScrollStopNotificationName object:nil];
-         self.canScroll = YES;
-         self.showsVerticalScrollIndicator = NO
-         */
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(scrollTop), name: NSNotification.Name(rawValue: kScrollStopNotificationName), object: nil)
-        self.canScroll = false
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -239,30 +219,6 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
                 }
             }
         })
-    }
-}
-
-
-// ===============================================================================================================================
-// MARK: - SX_ProjectDetailControllerDelegate
-// ===============================================================================================================================
-extension SX_ProjectDetailController: SX_ProjectDetailControllerDelegate {
-    
-    func tableViewHeightForStayPosition(tableView: UITableView) -> CGFloat {
-        
-        return 100.FloatValue
-    }
-}
-
-// ===============================================================================================================================
-// MARK: - Noti
-// ===============================================================================================================================
-extension SX_ProjectDetailController {
-    
-    @objc func scrollTop() {
-    
-    
-    
     }
 }
 
