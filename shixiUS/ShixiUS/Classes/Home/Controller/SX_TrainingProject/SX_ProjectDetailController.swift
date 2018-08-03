@@ -19,15 +19,22 @@ class SX_ProjectDetailController: UIViewController {
 // =================================================================================================================================
 // MARK: - Lazy
 // =================================================================================================================================
+    
+    /// 主 TbaleView
     lazy var tableView: UITableView = {
-        let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: self.view.bounds.height), style: .grouped)
+        let table = SX_PorjectDetailTableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-kTabBarHeight), style: .grouped)
         table.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
         table.delegate = self
         table.dataSource = self
+        table.type = .Main
+        table.delegate_StayPosition = self
+        table.showsVerticalScrollIndicator = false
+        table.tableFooterView = UIView()
         
         return table
     }()
     
+    /// 项目详情的轮播
     lazy var detailScrollerView: SX_CycleScrollerView = {
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
         let cycleView = SX_CycleScrollerView(frame: frame, type: .LOCAL, imgs: nil, descs: nil)
@@ -35,6 +42,7 @@ class SX_ProjectDetailController: UIViewController {
         
         return cycleView
     }()
+    
     
     lazy var projectBgView: UIView = {
         let projectBgView = UIImageView(image: UIImage.init(named: "Bg")).addhere(toSuperView: self.tableView).layout(snapKitMaker: { (make) in
@@ -47,31 +55,27 @@ class SX_ProjectDetailController: UIViewController {
         return projectBgView
     }()
     
-    /*
-     -(TitlesView *)titlesView{
-     if (_titlesView==nil) {
-     _titlesView = [[TitlesView alloc] initWithTitleArray:@[@"列表0",@"列表1",@"列表2"]];
-     __weak typeof(self) weakSelf = self;
-     _titlesView.titleClickBlock = ^(NSInteger row){
-     if (weakSelf.subView.contentView) {
-     weakSelf.subView.contentView.contentOffset = CGPointMake([UIScreen mainScreen].bounds.size.width*row, 0);
-     }
-       };
-     }
-     return _titlesView;
-     }
-     
-     */
+    
+    lazy var subView: SX_SubView = {
+        let subView = SX_SubView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+        subView.ScrollEventClosure?(row!)
+       // self.titleView.setItemSelected(colunm: row!)
+        
+        return subView
+    }()
     
     lazy var titleView: SX_ProjectDetailInstructionsView = {
-       let titileView = SX_ProjectDetailInstructionsView()
+        let titileView = SX_ProjectDetailInstructionsView()
+        if self.subView.contenView != nil{
+            titileView.titleClosure?(row!)
+            if (self.subView.contenView) != nil {
+                self.subView.contenView?.contentOffset = CGPoint(x: Int(SCREEN_WIDTH), y: 0)
+            }
+        }
         
-        titileView.titleClosure?(row!)
-            
-
         return titileView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -118,7 +122,7 @@ extension SX_ProjectDetailController {
 extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 36
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -154,7 +158,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: projectDetailCellID)
-        cell.textLabel?.text = "这是实训项目详情的\(indexPath.section)"
+        
+        cell.addSubview(self.subView)
         cell.selectionStyle = .none
         
         return cell
@@ -170,7 +175,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             return 185.FloatValue.IPAD_XValue
             
         default:
-            return 50.FloatValue.IPAD_XValue
+            return self.subView.bounds.size.height
         }
     }
     
@@ -178,7 +183,10 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         
         if section == 0 {
             return 0.01
+        } else if section == 2 {
+            return 50.FloatValue.IPAD_XValue
         }
+        
         return Margin-5
     }
     
@@ -187,6 +195,11 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == 2 {
+            return self.titleView
+        }
+        
         return UIView()
     }
     
@@ -252,20 +265,13 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
 }
 
 // ===============================================================================================================================
-// MARK: - SX_ProjectDetailTableViewDelegate
+// MARK: - SX_ProjectDetailTableViewDelegate -- 悬停位置 ! ! !
 // ===============================================================================================================================
 extension SX_ProjectDetailController: SX_ProjectDetailTableViewDelegate {
     func tableViewHeightForStayPosition(tableView: UITableView) -> CGFloat {
+        return tableView.rect(forSection: 2).origin.y
         
-        return 100.FloatValue
+        
+        
     }
 }
-
-
-
-
-
-
-
-
-

@@ -224,10 +224,10 @@
 				4505982720FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift */,
 				45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */,
 				45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */,
-				45215E7821118A1E00AED771 /* SX_ProjectDetailInstructionsView.swift */,
 				45BAD4A72111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift */,
 				45BAD4A92111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift */,
 				45BAD4AB2112A3FF003DBD02 /* SX_PorjectDetailTableView.swift */,
+				45215E7821118A1E00AED771 /* SX_ProjectDetailInstructionsView.swift */,
 			);
 			path = SX_TrainingProject;
 			sourceTree = "<group>";
