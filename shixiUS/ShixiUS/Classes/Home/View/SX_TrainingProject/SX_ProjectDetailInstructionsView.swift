@@ -10,14 +10,14 @@ import UIKit
 
 class SX_ProjectDetailInstructionsView: UIView {
     
-    typealias titleClickClosure = ((NSInteger)->Void)
+    typealias titleClickClosure = ((_ row: NSInteger)->Void)
     var titleClosure: titleClickClosure?
     
-    var titles: Array<Any>?
     var bottomView: UIView?
     var indicateLine:UIView?
     var instructionBtn: UIButton?
     var titleBtnArray :NSMutableArray?
+    var titleArr = ["项目亮点","日程安排","费用说明","预定须知"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +38,6 @@ extension SX_ProjectDetailInstructionsView {
         
         self.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40.FloatValue.IPAD_XValue)
         self.backgroundColor = UIColor.green
-        let titleArr = ["项目亮点","日程安排","费用说明","预定须知"]
         let btnWidth = SCREEN_WIDTH/4
         
         for i in 0...titleArr.count {
@@ -87,7 +86,7 @@ extension SX_ProjectDetailInstructionsView {
             let btn = titleBtnArray![index] as! UIButton
             if index == colunm {
                 btn.setTitleColor(UIColor.SX_MainColor(), for: .normal)
-            }else{
+            } else {
                 btn.setTitleColor(UIColor.colorWithHexString(hex: "ff7900", alpha: 1), for: .normal)
             }
         }

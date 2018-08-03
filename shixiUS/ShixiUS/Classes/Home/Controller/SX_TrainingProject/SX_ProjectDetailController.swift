@@ -14,6 +14,8 @@ let projectDetailDateTripCellID = "projectDetailDateTripCellID"
 let projectDetailCellID = "projectDetailCellID"
 class SX_ProjectDetailController: UIViewController {
     
+    var row:NSInteger?
+    
 // =================================================================================================================================
 // MARK: - Lazy
 // =================================================================================================================================
@@ -42,10 +44,34 @@ class SX_ProjectDetailController: UIViewController {
         }).config({ (projectBgView) in
             
         })
-        
         return projectBgView
     }()
     
+    /*
+     -(TitlesView *)titlesView{
+     if (_titlesView==nil) {
+     _titlesView = [[TitlesView alloc] initWithTitleArray:@[@"列表0",@"列表1",@"列表2"]];
+     __weak typeof(self) weakSelf = self;
+     _titlesView.titleClickBlock = ^(NSInteger row){
+     if (weakSelf.subView.contentView) {
+     weakSelf.subView.contentView.contentOffset = CGPointMake([UIScreen mainScreen].bounds.size.width*row, 0);
+     }
+       };
+     }
+     return _titlesView;
+     }
+     
+     */
+    
+    lazy var titleView: SX_ProjectDetailInstructionsView = {
+       let titileView = SX_ProjectDetailInstructionsView()
+        
+        titileView.titleClosure?(row!)
+            
+
+        return titileView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -78,6 +104,9 @@ class SX_ProjectDetailController: UIViewController {
 extension SX_ProjectDetailController {
     
     func fetchData() {
+        
+        
+        
         
         
     }
@@ -221,5 +250,22 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
         })
     }
 }
+
+// ===============================================================================================================================
+// MARK: - SX_ProjectDetailTableViewDelegate
+// ===============================================================================================================================
+extension SX_ProjectDetailController: SX_ProjectDetailTableViewDelegate {
+    func tableViewHeightForStayPosition(tableView: UITableView) -> CGFloat {
+        
+        return 100.FloatValue
+    }
+}
+
+
+
+
+
+
+
 
 

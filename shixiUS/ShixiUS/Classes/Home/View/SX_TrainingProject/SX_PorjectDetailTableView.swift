@@ -94,16 +94,6 @@ class SX_PorjectDetailTableView: UITableView {
     }
 }
 
-// ===============================================================================================================================
-// MARK: - SX_ProjectDetailTableViewDelegate
-// ===============================================================================================================================
-extension SX_PorjectDetailTableView: SX_ProjectDetailTableViewDelegate {
-    
-    func tableViewHeightForStayPosition(tableView: UITableView) -> CGFloat {
-        
-        return 100.FloatValue
-    }
-}
 
 // ===============================================================================================================================
 // MARK: - Noti & UIGestureRecognizerDelegate
