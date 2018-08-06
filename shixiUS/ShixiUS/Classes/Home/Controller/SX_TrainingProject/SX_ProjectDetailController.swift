@@ -16,18 +16,16 @@ class SX_ProjectDetailController: UIViewController {
     
     var row:NSInteger?
     
-// =================================================================================================================================
-// MARK: - Lazy
-// =================================================================================================================================
+    // =================================================================================================================================
+    // MARK: - Lazy
+    // =================================================================================================================================
     
     /// 主 TbaleView
     lazy var tableView: UITableView = {
-        let table = SX_PorjectDetailTableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-kTabBarHeight), style: .grouped)
+        let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-kTabBarHeight), style: .grouped)
         table.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
         table.delegate = self
         table.dataSource = self
-        table.type = .Main
-        table.delegate_StayPosition = self
         table.showsVerticalScrollIndicator = false
         table.tableFooterView = UIView()
         
@@ -43,7 +41,6 @@ class SX_ProjectDetailController: UIViewController {
         return cycleView
     }()
     
-    
     lazy var projectBgView: UIView = {
         let projectBgView = UIImageView(image: UIImage.init(named: "Bg")).addhere(toSuperView: self.tableView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.detailScrollerView.snp.bottom).offset(-20)
@@ -55,26 +52,30 @@ class SX_ProjectDetailController: UIViewController {
         return projectBgView
     }()
     
-    
-    lazy var subView: SX_SubView = {
-        let subView = SX_SubView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
-        subView.ScrollEventClosure?(row!)
-        self.titleView.setItemSelected(colunm: 1)
+    lazy var headerBtnView: UIView = {
         
-        return subView
+        let headerBtnView = UIView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+            
+        }).config({ (headerBtnView) in
+            
+        })
+        
+        return headerBtnView
     }()
     
-    lazy var titleView: SX_ProjectDetailInstructionsView = {
-        let titileView = SX_ProjectDetailInstructionsView()
-        if self.subView.contenView != nil{
-            titileView.titleClosure?(row!)
-            if (self.subView.contenView) != nil {
-                self.subView.contenView?.contentOffset = CGPoint(x: Int(SCREEN_WIDTH), y: 0)
-            }
-        }
-        
-        return titileView
-    }()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,7 +160,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: projectDetailCellID)
         
-        cell.addSubview(self.subView)
+        // cell.addSubview(self.subView)
         cell.selectionStyle = .none
         
         return cell
@@ -175,7 +176,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             return 185.FloatValue.IPAD_XValue
             
         default:
-            return self.subView.bounds.size.height
+            return 50.FloatValue.IPAD_XValue
         }
     }
     
@@ -195,11 +196,6 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        if section == 2 {
-            return self.titleView
-        }
-        
         return UIView()
     }
     
@@ -244,9 +240,16 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
         // 改变图片框的大小 (上滑的时候不改变)
         // 这里不能使用offsetY，因为当（offsetY < LIMIT_OFFSET_Y）的时候，y = LIMIT_OFFSET_Y 不等于 offsetY
         let newOffsetY = scrollView.contentOffset.y
+        
         if (newOffsetY < -IMAGE_HEIGHT) {
             detailScrollerView.frame = CGRect(x: 0, y: newOffsetY, width: SCREEN_WIDTH, height: -newOffsetY)
         }
+        
+        
+        
+        
+        
+        
     }
     
     private func changeNavBarAnimateWithIsClear(isClear:Bool) {
@@ -265,13 +268,5 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
 }
 
 // ===============================================================================================================================
-// MARK: - SX_ProjectDetailTableViewDelegate -- 悬停位置 ! ! !
+// MARK: -
 // ===============================================================================================================================
-extension SX_ProjectDetailController: SX_ProjectDetailTableViewDelegate {
-    func tableViewHeightForStayPosition(tableView: UITableView) -> CGFloat {
-        return tableView.rect(forSection: 2).origin.y
-        
-        
-        
-    }
-}

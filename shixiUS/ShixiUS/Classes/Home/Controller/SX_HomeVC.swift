@@ -68,7 +68,7 @@ class SX_HomeVC: UIViewController {
                           "Win10秋季更新重磅功能：跟安卓与iOS无缝连接",
                           "《琅琊榜2》为何没有胡歌？胡歌：我看过剧本，离开是种保护",
                           "阿米尔汗在印度的影响力，我国的哪位影视明星能与之齐名呢？"]
-
+        
         cycleScrollerView.localImgArray = localImgs
         cycleScrollerView.descTextArray = descLabels
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
@@ -168,7 +168,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 1 {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
-            
+            cell.selectionStyle = .none
             return cell
         }
         
