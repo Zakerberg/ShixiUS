@@ -59,7 +59,7 @@ class SX_ProjectDetailController: UIViewController {
     lazy var subView: SX_SubView = {
         let subView = SX_SubView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         subView.ScrollEventClosure?(row!)
-       // self.titleView.setItemSelected(colunm: row!)
+        self.titleView.setItemSelected(colunm: 1)
         
         return subView
     }()

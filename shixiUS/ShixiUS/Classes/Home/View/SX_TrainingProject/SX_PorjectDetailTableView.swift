@@ -72,7 +72,7 @@ class SX_PorjectDetailTableView: UITableView {
         } else if self.type == .Sub { // sub类型
             if self.canScroll == true {
                 if y < 0 {
-                    contentOffset.y == 0
+                   contentOffset.y == 0
                     super.setContentOffset(contentOffset, animated: true)
                     self.canScroll = false
                     // 发送通知，子类不可滚动
@@ -81,7 +81,7 @@ class SX_PorjectDetailTableView: UITableView {
                     super.setContentOffset(contentOffset, animated: true)
                 }
             } else { // sub 禁止滚动
-                contentOffset.y == 0
+                  contentOffset.y == 0
                 super.setContentOffset(contentOffset, animated: true)
             }
         } else {

@@ -195,6 +195,5 @@ extension SX_ProjectDetailInstructionsTableView: UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
-    
 }
 
