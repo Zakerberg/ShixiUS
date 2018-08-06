@@ -13,8 +13,8 @@ class SX_MineIconViewCell: UITableViewCell {
     var logInBtn: UIButton?
     var iconImageView: UIImageView?
     var nameTitle: UILabel?
-    var VIPImageView: UIImageView?
-    var VIPLabel: UILabel?
+//    var VIPImageView: UIImageView?
+//    var VIPLabel: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,12 +42,23 @@ class SX_MineIconViewCell: UITableViewCell {
 extension SX_MineIconViewCell {
     
     func configCell() {
+        
+        self.iconImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
 
+        }).config({ (iconImageView) in
+
+        })
+
+        self.logInBtn = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (logInBtn) in
+            
+        })
         
-        
-        
-        
-        
-        
+        self.nameTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (iconImageView) in
+            
+        })
     }
 }

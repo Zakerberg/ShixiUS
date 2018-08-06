@@ -39,8 +39,7 @@ extension SX_MineVC {
         
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.title = "我的"
-        
-        
+  
     }
 }
 
