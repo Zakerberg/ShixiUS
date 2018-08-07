@@ -30,6 +30,9 @@
 		45454BDA2118398C002B9EBC /* SX_MineFixPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */; };
 		45454BDC211932B9002B9EBC /* SX_MineApplyHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */; };
 		45454BDE2119687F002B9EBC /* SX_MineApplyScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */; };
+		45454BE1211989EC002B9EBC /* SX_VocationalTrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */; };
+		45454BE321198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BE221198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift */; };
+		45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BE421198A95002B9EBC /* SX_EmploymentJobsCell.swift */; };
 		45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B2520D89C5D0035FCA6 /* AppDelegate.swift */; };
 		45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45556B2C20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld */; };
 		45556B3020D89C600035FCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45556B2F20D89C600035FCA6 /* Assets.xcassets */; };
@@ -117,6 +120,9 @@
 		45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineFixPasswordController.swift; sourceTree = "<group>"; };
 		45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineApplyHeadView.swift; sourceTree = "<group>"; };
 		45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineApplyScrollView.swift; sourceTree = "<group>"; };
+		45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_VocationalTrainingCell.swift; sourceTree = "<group>"; };
+		45454BE221198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MyApplyTrainingProjectCell.swift; sourceTree = "<group>"; };
+		45454BE421198A95002B9EBC /* SX_EmploymentJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_EmploymentJobsCell.swift; sourceTree = "<group>"; };
 		45556B2220D89C5D0035FCA6 /* ShixiUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShixiUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45556B2520D89C5D0035FCA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45556B2D20D89C5D0035FCA6 /* ShixiUS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShixiUS.xcdatamodel; sourceTree = "<group>"; };
@@ -283,6 +289,18 @@
 				45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		45454BDF21198995002B9EBC /* SX_MyApply */ = {
+			isa = PBXGroup;
+			children = (
+				45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */,
+				45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */,
+				45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */,
+				45454BE221198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift */,
+				45454BE421198A95002B9EBC /* SX_EmploymentJobsCell.swift */,
+			);
+			path = SX_MyApply;
 			sourceTree = "<group>";
 		};
 		45556B1920D89C5D0035FCA6 = {
@@ -490,9 +508,8 @@
 		45556B7120D8A51A0035FCA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				45454BDF21198995002B9EBC /* SX_MyApply */,
 				45454BCF211834CE002B9EBC /* SX_MineIconViewCell.swift */,
-				45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */,
-				45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -874,6 +891,7 @@
 				453C5B53210B04A1009F9CB9 /* SX_ProjectDetailDescriptionCell.swift in Sources */,
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
 				45215E762111816500AED771 /* SX_ProjectDetailMoreDateController.swift in Sources */,
+				45454BE1211989EC002B9EBC /* SX_VocationalTrainingCell.swift in Sources */,
 				458A0030210875B300D38014 /* SX_trainingApplyCell.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
@@ -885,6 +903,8 @@
 				45BAD4A82111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
+				45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */,
+				45454BE321198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift in Sources */,
 				45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */,
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
 				458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */,

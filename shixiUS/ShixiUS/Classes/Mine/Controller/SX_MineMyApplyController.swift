@@ -16,9 +16,11 @@ class SX_MineMyApplyController: UIViewController {
     
     lazy var titleHeadView: UIView = {
         let titleHeadView = SX_MineApplyHeadView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
-            
+            make.top.width.left.right.equalToSuperview()
+            make.height.equalTo(41.FloatValue)
         }).config({ (titleHeadView) in
-
+         
+            
         })
         
         return titleHeadView
