@@ -27,6 +27,8 @@ class SX_MineApplyScrollView: UIView {
         self.clipsToBounds = true
         creatTheScrollView()
         
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -65,10 +67,14 @@ extension SX_MineApplyScrollView {
         }
     }
     
-    ///
+    /// 滑动到对应的列表?
     func scrollToListWithIndex(index: NSInteger) {
-        
-        
+        SXLog("index-----\(index)")
+        let offset = CGPoint(x: self.frame.size.width * CGFloat(index), y: 0)
+        UIView.animate(withDuration: 0.25) {
+            self.scrollView?.contentOffset = offset
+        }
+        endScroll()
     }
     
     func addListView(listView: UIView) {
