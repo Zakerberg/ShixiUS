@@ -98,12 +98,23 @@ extension SX_MineApplyScrollView {
 // ===============================================================================================================================
 extension SX_MineApplyScrollView: UIScrollViewDelegate {
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
     
+    // 停止减速的时候
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if self.listScrollViewDidScroll != nil {
+            self.listScrollViewDidScroll?(scrollView)
+        }
+    }
     
-    
-    
-    
-    
+    // 停止拖拽, 是否减速
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if decelerate == false {
+            endScroll()
+        }
+    }
 }
 
 
