@@ -65,6 +65,7 @@ extension SX_MineApplyScrollView {
         }
     }
     
+    ///
     func scrollToListWithIndex(index: NSInteger) {
         
         
@@ -72,6 +73,16 @@ extension SX_MineApplyScrollView {
     
     func addListView(listView: UIView) {
         
+        // 数组 记录 列表的View
+        listViewArray?.add(listView)
+        SXLog("listViewArray ----------\(String(describing: listViewArray?.count))")
+        // 重新设置Frame
+        listView.frame = CGRect(x: Int(self.frame.size.width) * (listViewArray!.count - 1), y: 0, width: Int(self.frame.size.width), height: Int(self.frame.size.height))
+        
+        // 滑动View 添加 列表View
+        scrollView?.addSubview(listView)
+        // 显示范围
+        scrollView?.contentSize = CGSize(width: listViewArray!.count.FloatValue * scrollView!.frame.size.width, height: scrollView!.frame.size.height)
     }
 }
 
