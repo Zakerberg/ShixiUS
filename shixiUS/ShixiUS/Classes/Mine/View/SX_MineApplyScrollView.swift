@@ -1,0 +1,93 @@
+//
+//  SX_MineApplyScrollView.swift
+//  ShixiUS
+//
+//  Created by Michael 柏 on 8/7/18.
+//  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
+//
+
+import UIKit
+
+class SX_MineApplyScrollView: UIView {
+    
+    typealias scrollToCurrentView = ((_ view: UIView)-> Void)
+    typealias endScrollIndex = ((_ index: NSInteger)-> Void)
+    typealias listScrollViewDidScroll = ((_ scrollView: UIScrollView)-> Void)
+    
+    var scrollView: UIScrollView?
+    var listViewArray: NSMutableArray?
+    var scrollToCurrentView: scrollToCurrentView?
+    var endScrollIndex: endScrollIndex?
+    var listScrollViewDidScroll: listScrollViewDidScroll?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        listViewArray = NSMutableArray()
+        self.clipsToBounds = true
+        creatTheScrollView()
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// ===============================================================================================================================
+// MARK: - Other Method
+// ===============================================================================================================================
+extension SX_MineApplyScrollView {
+    
+    func creatTheScrollView() {
+        scrollView = UIScrollView().addhere(toSuperView: self).layout(snapKitMaker: { (make) in
+            make.edges.equalToSuperview()
+        }).config({ (scrollView) in
+            scrollView.delegate = self
+            scrollView.isPagingEnabled = true
+            scrollView.contentSize = CGSize(width: SCREEN_WIDTH*3, height: SCREEN_HEIGHT)
+        })
+    }
+    
+    // 停止滚动
+    func endScroll() {
+        let currentPageIndex = Int(scrollView!.contentOffset.x / scrollView!.frame.size.width + 1)
+        if listViewArray!.count > currentPageIndex - 1 {
+            let currentView = listViewArray![currentPageIndex - 1] as? UIView
+            if self.scrollToCurrentView != nil {
+                self.scrollToCurrentView?(currentView!)
+            }
+            if self.endScrollIndex != nil {
+                self.endScrollIndex?(currentPageIndex)
+            } else {
+                SXLog("数组越界+++")
+            }
+        }
+    }
+    
+    func scrollToListWithIndex(index: NSInteger) {
+        
+        
+    }
+    
+    func addListView(listView: UIView) {
+        
+    }
+}
+
+
+// ===============================================================================================================================
+// MARK: - UIScrollViewDelegate
+// ===============================================================================================================================
+extension SX_MineApplyScrollView: UIScrollViewDelegate {
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+

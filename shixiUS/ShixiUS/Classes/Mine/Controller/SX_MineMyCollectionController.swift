@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 8/6/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//
+//  我的收藏
 
 import UIKit
 

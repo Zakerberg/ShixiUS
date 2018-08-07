@@ -8,7 +8,8 @@
 
 import UIKit
 
-let minwCellID = "mineCellID"
+let mineCellID = "mineCellID"
+let mineIconCellID = "mineIconCellID"
 
 class SX_MineVC: UIViewController {
     
@@ -39,7 +40,7 @@ extension SX_MineVC {
         
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.title = "我的"
-  
+        
     }
 }
 
@@ -47,9 +48,6 @@ extension SX_MineVC {
 // MARK: -
 // ===============================================================================================================================
 extension SX_MineVC {
-    
-    
-    
     
     
     
@@ -68,15 +66,20 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         if section == 0 || section == 3 {
             return 1
         }
-        
         return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: minwCellID)
+        if indexPath.section == 0 {
+            let cell = SX_MineIconViewCell(style: .default, reuseIdentifier: mineIconCellID)
+            return cell
+        }
         
-        cell.textLabel?.text = "MineCell的\(indexPath.section) ---- \(indexPath.row)"
+        let cell = UITableViewCell(style: .default, reuseIdentifier: mineCellID)
+        cell.textLabel?.text  = "MineCell的\(indexPath.section) ---- \(indexPath.row)"
+        cell.imageView?.image = UIImage.init(named: "")
+        cell.accessoryType = .disclosureIndicator
         
         return cell
     }

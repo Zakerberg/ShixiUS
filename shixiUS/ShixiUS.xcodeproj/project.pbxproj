@@ -28,6 +28,8 @@
 		45454BD62118393B002B9EBC /* SX_MinePaymentRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD52118393B002B9EBC /* SX_MinePaymentRecordController.swift */; };
 		45454BD821183965002B9EBC /* SX_MinePersonalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD721183965002B9EBC /* SX_MinePersonalController.swift */; };
 		45454BDA2118398C002B9EBC /* SX_MineFixPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */; };
+		45454BDC211932B9002B9EBC /* SX_MineApplyHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */; };
+		45454BDE2119687F002B9EBC /* SX_MineApplyScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */; };
 		45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B2520D89C5D0035FCA6 /* AppDelegate.swift */; };
 		45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45556B2C20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld */; };
 		45556B3020D89C600035FCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45556B2F20D89C600035FCA6 /* Assets.xcassets */; };
@@ -113,6 +115,8 @@
 		45454BD52118393B002B9EBC /* SX_MinePaymentRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MinePaymentRecordController.swift; sourceTree = "<group>"; };
 		45454BD721183965002B9EBC /* SX_MinePersonalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MinePersonalController.swift; sourceTree = "<group>"; };
 		45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineFixPasswordController.swift; sourceTree = "<group>"; };
+		45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineApplyHeadView.swift; sourceTree = "<group>"; };
+		45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineApplyScrollView.swift; sourceTree = "<group>"; };
 		45556B2220D89C5D0035FCA6 /* ShixiUS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShixiUS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45556B2520D89C5D0035FCA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45556B2D20D89C5D0035FCA6 /* ShixiUS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShixiUS.xcdatamodel; sourceTree = "<group>"; };
@@ -487,6 +491,8 @@
 			isa = PBXGroup;
 			children = (
 				45454BCF211834CE002B9EBC /* SX_MineIconViewCell.swift */,
+				45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */,
+				45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -887,6 +893,7 @@
 				45B19336210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift in Sources */,
 				45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */,
 				45B19339211056C700EFF422 /* SX_ProjectDetailModel.swift in Sources */,
+				45454BDC211932B9002B9EBC /* SX_MineApplyHeadView.swift in Sources */,
 				45454BCD2118184F002B9EBC /* SX_LoginController.swift in Sources */,
 				45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */,
 				45454BD821183965002B9EBC /* SX_MinePersonalController.swift in Sources */,
@@ -898,6 +905,7 @@
 				45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */,
 				458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */,
 				45556B5D20D89DAD0035FCA6 /* SX_TabBarController.swift in Sources */,
+				45454BDE2119687F002B9EBC /* SX_MineApplyScrollView.swift in Sources */,
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
 				458A002E21086A7300D38014 /* SX_BaseSuccessController.swift in Sources */,
 				458A002C2108535A00D38014 /* SX_TrainingApplyController.swift in Sources */,
