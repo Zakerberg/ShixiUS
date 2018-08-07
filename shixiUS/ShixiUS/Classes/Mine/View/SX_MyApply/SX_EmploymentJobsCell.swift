@@ -98,7 +98,7 @@ extension SX_EmploymentJobsCell {
         
         self.employmentStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (title) in
+        }).config({ (Style) in
             
         })
         
@@ -120,7 +120,6 @@ extension SX_EmploymentJobsCell {
             
         })
         
-        
         self.employmentInterview = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
         }).config({ (Interview) in
@@ -140,6 +139,3 @@ extension SX_EmploymentJobsCell {
         })
     }
 }
-
-
-
