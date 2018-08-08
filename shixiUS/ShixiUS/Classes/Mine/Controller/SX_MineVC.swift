@@ -13,8 +13,8 @@ let mineIconCellID = "mineIconCellID"
 
 class SX_MineVC: UIViewController {
     
-//    var mineImageArr = [["MyApply", "MyCollection"], ["PayRecord", "Personal"], "FixPassword"]
-//    var mineTitleArr = [["我的申请", "我的收藏"], ["付费记录", "个人信息"], "修改密码"]
+    var mineImageArr = ["aa", ["MyApply", "MyCollection"], ["PayRecord", "Personal"], "FixPassword"] as? [[Any]]
+    var mineTitleArr = ["aak", ["我的申请", "我的收藏"], ["付费记录", "个人信息"], "修改密码"] as? [[Any]]
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -84,10 +84,15 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
+        
+        
+        
+        
+        
         let cell = UITableViewCell(style: .default, reuseIdentifier: mineCellID)
-//        cell.textLabel?.text  = self.mineTitleArr[indexPath.section][indexPath.row]
-//        cell.imageView?.image = UIImage.init(named: self.mineImageArr[indexPath.section][indexPath.row])
-        cell.textLabel?.text = "indexPath-----\(indexPath.section)------\(indexPath.row)"
+        cell.textLabel?.text  = self.mineTitleArr![indexPath.section][indexPath.row] as? String
+        cell.imageView?.image = UIImage.init(named: self.mineImageArr![indexPath.section][indexPath.row] as! String)
+       // cell.textLabel?.text = "indexPath-----\(indexPath.section)------\(indexPath.row)"
         cell.accessoryType = .disclosureIndicator
         
         return cell
