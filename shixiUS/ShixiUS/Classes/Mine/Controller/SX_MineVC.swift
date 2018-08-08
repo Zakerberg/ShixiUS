@@ -18,7 +18,6 @@ class SX_MineVC: UIViewController {
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
-        tableView.contentInset = UIEdgeInsetsMake(CGFloat(IMAGE_HEIGHT-kNavH), 0, 0, 0)
         tableView.backgroundColor = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
@@ -29,7 +28,8 @@ class SX_MineVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "我的"
+        self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
     }
 }
@@ -38,12 +38,12 @@ class SX_MineVC: UIViewController {
 // MARK: - Other Method
 // ===============================================================================================================================
 extension SX_MineVC {
-    
-    func setUI() {
-        
-        self.view.backgroundColor = UIColor.SX_BackGroundColor()
-        self.title = "我的"
-    }
+
+
+
+
+
+
 }
 
 // ===============================================================================================================================
@@ -58,10 +58,7 @@ extension SX_MineVC {
     
     
     
-    
-    
-    
-    
+
 }
 
 // ===============================================================================================================================
@@ -90,20 +87,29 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: mineCellID)
 //        cell.textLabel?.text  = self.mineTitleArr[indexPath.section][indexPath.row]
 //        cell.imageView?.image = UIImage.init(named: self.mineImageArr[indexPath.section][indexPath.row])
+        cell.textLabel?.text = "indexPath-----\(indexPath.section)------\(indexPath.row)"
         cell.accessoryType = .disclosureIndicator
         
         return cell
     }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45.FloatValue.IPAD_XValue
+    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10.FloatValue.IPAD_XValue
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 45.FloatValue.IPAD_XValue
-    }
+    }    
 }

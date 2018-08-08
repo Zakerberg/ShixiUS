@@ -43,20 +43,23 @@ extension SX_MineIconViewCell {
     
     func configCell() {
         
+        //        self.logInBtn = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        //
+        //        }).config({ (logInBtn) in
+        //
+        //        })
+        
         self.iconImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-
+                 make.top.left.equalToSuperview().offset(Margin)
+                 make.height.equalTo(60.FloatValue.IPAD_XValue)
         }).config({ (iconImageView) in
-
-        })
-
-        self.logInBtn = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (logInBtn) in
-            
+            iconImageView.layer.masksToBounds = true
+            iconImageView.layer.cornerRadius  = 30
+            iconImageView.image = UIImage.init(named: "")
         })
         
         self.nameTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+             
         }).config({ (iconImageView) in
             
         })
