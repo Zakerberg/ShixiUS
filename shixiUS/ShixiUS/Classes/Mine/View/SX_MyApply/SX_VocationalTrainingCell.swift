@@ -19,7 +19,6 @@ class SX_VocationalTrainingCell: UITableViewCell {
     var vocationalCancel  : UIButton?
     var vocationalPay     : UIButton?
     var vocationalRfund   : UIButton? // 退款
-
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +36,7 @@ class SX_VocationalTrainingCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 }
@@ -48,13 +47,67 @@ class SX_VocationalTrainingCell: UITableViewCell {
 extension SX_VocationalTrainingCell {
     
     func ConfigCell() {
-     
+        
+        self.vocationalTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (Title) in
+            
+        })
+        
+        let periodImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (periodImage) in
+            
+        })
+        
+        self.vocationalPeriod = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (Period) in
+            
+        })
+        
+        self.vocationalDate = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (Date) in
+            
+        })
+        
+        let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (line) in
+            
+        })
+        
+//---------------------------------------------------------------------------------------------------------------------------------
+        
+        self.vocationalStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (Style) in
+            
+        })
+        
+        self.vocationalContact = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (Contact) in
+            
+        })
+        
+        self.vocationalPay = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (Pay) in
+            
+        })
+        
+        self.vocationalCancel = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (Cancel) in
+            
+        })
+        
+        self.vocationalRfund = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (Refund) in
+            
+        })
     }
-    
-  
-    
-    
-    
-    
-    
 }
