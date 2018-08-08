@@ -26,10 +26,7 @@ class SX_MineApplyScrollView: UIView {
         listViewArray = NSMutableArray()
         self.clipsToBounds = true
         creatTheScrollView()
-        
-        
-        
-    }
+   }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

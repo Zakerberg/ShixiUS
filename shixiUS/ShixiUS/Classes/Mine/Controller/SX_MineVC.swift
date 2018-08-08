@@ -13,8 +13,10 @@ let mineIconCellID = "mineIconCellID"
 
 class SX_MineVC: UIViewController {
     
+//    var mineImageArr = [["MyApply", "MyCollection"], ["PayRecord", "Personal"], "FixPassword"]
+//    var mineTitleArr = [["我的申请", "我的收藏"], ["付费记录", "个人信息"], "修改密码"]
+    
     lazy var table: UITableView = {
-        
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.contentInset = UIEdgeInsetsMake(CGFloat(IMAGE_HEIGHT-kNavH), 0, 0, 0)
         tableView.backgroundColor = UIColor.SX_BackGroundColor()
@@ -27,6 +29,7 @@ class SX_MineVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.view.addSubview(table)
     }
 }
@@ -40,7 +43,6 @@ extension SX_MineVC {
         
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.title = "我的"
-        
     }
 }
 
@@ -48,6 +50,15 @@ extension SX_MineVC {
 // MARK: -
 // ===============================================================================================================================
 extension SX_MineVC {
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -77,8 +88,8 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: mineCellID)
-        cell.textLabel?.text  = "MineCell的\(indexPath.section) ---- \(indexPath.row)"
-        cell.imageView?.image = UIImage.init(named: "")
+//        cell.textLabel?.text  = self.mineTitleArr[indexPath.section][indexPath.row]
+//        cell.imageView?.image = UIImage.init(named: self.mineImageArr[indexPath.section][indexPath.row])
         cell.accessoryType = .disclosureIndicator
         
         return cell

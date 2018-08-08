@@ -12,16 +12,23 @@ class SX_EmploymentJobsCell: UITableViewCell {
     
     var employmentTitle     : UILabel?
     var employmentAddress   : UILabel?
-    var employmentNature    : UILabel?  // 岗位性质
+    var employmentNature    : UILabel?
+    /// 岗位性质
     var employmentDate      : UILabel?
-    
-    var employmentStyle     : UILabel?  // 岗位申请的状态
-    var employmentDetail    : UIButton? // 查看详情
-    var employmentCancel    : UIButton? // 取消申请
-    var employmentDeposit   : UIButton? // 支付定金
-    var employmentInterview : UIButton? // 面试通知
-    var employmentEmployed  : UIButton? // 录用通知
-    var employmentRefund    : UIButton? // 退款
+    /// 岗位申请的状态
+    var employmentStyle     : UILabel?
+    /// 查看详情
+    var employmentDetail    : UIButton?
+    /// 取消申请
+    var employmentCancel    : UIButton?
+    /// 支付定金
+    var employmentDeposit   : UIButton?
+    /// 面试通知
+    var employmentInterview : UIButton?
+    /// 录用通知
+    var employmentEmployed  : UIButton?
+    /// 退款
+    var employmentRefund    : UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()

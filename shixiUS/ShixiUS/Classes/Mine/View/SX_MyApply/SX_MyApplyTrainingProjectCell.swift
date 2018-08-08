@@ -17,9 +17,12 @@ class SX_MyApplyTrainingProjectCell: UITableViewCell {
     var projectStyle     : UILabel?
     
     var projectContact   : UILabel?
-    var projectCancel    : UIButton? // 取消申请
-    var projectPay       : UIButton? // 支付
-    var projectRefund    : UIButton? // 退款
+    /// 取消申请
+    var projectCancel    : UIButton?
+    /// 支付
+    var projectPay       : UIButton?
+    /// 退款
+    var projectRefund    : UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()

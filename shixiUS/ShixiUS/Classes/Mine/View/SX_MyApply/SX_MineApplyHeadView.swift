@@ -29,7 +29,6 @@ class SX_MineApplyHeadView: UIView {
         _isShow = true
         _isShow2 = true
         creatTheHeadView()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
