@@ -10,7 +10,7 @@ import UIKit
 
 class SX_MinePersonalController: UIViewController {
 
-    var titleArr   = ["头像", "用户名", "手机号", "国家/diqu", "微信", "邮箱"]
+    var titleArr   = ["头像", "用户名", "手机号", "国家/地区", "微信", "邮箱"]
     var contentArr = ["", "请输入姓名", "请输入手机号", "请选择国家和地区", "请输入微信", "请输入邮箱"]
 
     lazy var table: UITableView = {
@@ -25,7 +25,9 @@ class SX_MinePersonalController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "个人信息"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        self.view.addSubview(self.table)
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,7 +59,7 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
      
-        if indexPath.section == 0 {
+        if indexPath.row == 0 {
             return 100.FloatValue.IPAD_XValue
         }
         return 45.FloatValue.IPAD_XValue
@@ -68,10 +70,18 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             let iconCell = SX_PersonalIconCell(style: .default, reuseIdentifier: nil)
             iconCell.selectionStyle = .none
             
+            
             return iconCell
         }
         
         let cell = SX_PersonalMessageCell(style: .default, reuseIdentifier: nil)
+        
+        cell.titleLabel?.text = self.titleArr[indexPath.row]
+        cell.tF?.placeholder  = self.contentArr[indexPath.row]
+        
+        cell.selectionStyle = .none
+        
+        
         
         return cell
     }
@@ -79,16 +89,12 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
-    }
 }
 
 // ===============================================================================================================================
-// MARK: -
+// MARK: - UITextFieldDelegate
 // ===============================================================================================================================
-extension SX_MinePersonalController {
+extension SX_MinePersonalController: UITextFieldDelegate {
     
  
     

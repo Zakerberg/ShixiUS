@@ -52,13 +52,12 @@ extension SX_PersonalMessageCell {
         })
         
         self.tF = UITextField().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(Margin)
+            make.height.centerY.equalTo(self.titleLabel!)
             make.right.equalToSuperview().offset(-Margin)
-            make.left.equalTo(self.titleLabel!.snp.right).offset(Margin)
-            make.height.equalTo(40.FloatValue.IPAD_XValue)
         }).config({ (tF) in
-            tF.placeholder = "请输入用户名 --- 测试"
-            tF.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            tF.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            tF.textAlignment = .right
+            tF.sizeToFit()
         })
     }
 }

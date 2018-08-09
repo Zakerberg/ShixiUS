@@ -38,12 +38,12 @@ class SX_MineVC: UIViewController {
 // MARK: - Other Method
 // ===============================================================================================================================
 extension SX_MineVC {
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
 }
 
 // ===============================================================================================================================
@@ -58,7 +58,7 @@ extension SX_MineVC {
     
     
     
-
+    
 }
 
 // ===============================================================================================================================
@@ -81,7 +81,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0 {
             let cell = SX_MineIconViewCell(style: .default, reuseIdentifier: mineIconCellID)
-        
+            
             cell.nameTitle?.isHidden = true
             cell.selectionStyle   = .none
             return cell
@@ -95,7 +95,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
@@ -111,12 +111,38 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10.FloatValue.IPAD_XValue
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
-    }    
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            
+        } else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                SXLog("进入我的申请Conroller")
+            }else {
+                SXLog("进入我的收藏Conroller")
+            }
+        } else if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                SXLog("进入付款记录Conroller")
+            }else {
+                SXLog("进入个人信息Conroller")
+                self.hidesBottomBarWhenPushed = true
+                let vc = SX_MinePersonalController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                self.hidesBottomBarWhenPushed = false
+            }
+        } else {
+            SXLog("进入修改密码Conroller")
+        }
+    }
 }
