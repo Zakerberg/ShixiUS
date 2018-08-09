@@ -124,7 +124,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             make.height.equalTo(Margin)
         }).config({ (moreButton) in
             moreButton.setImage(UIImage.init(named: "more"), for: .normal)
-            moreButton.setTitle("更多", for: .normal)
+            moreButton.setTitle("更多 ", for: .normal)
             moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
             moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
             moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
