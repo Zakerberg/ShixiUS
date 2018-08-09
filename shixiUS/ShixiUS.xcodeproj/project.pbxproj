@@ -16,6 +16,8 @@
 		4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F872211A8970000EAEB9 /* SX_ApplyDetailController.swift */; };
 		4527F875211A8A95000EAEB9 /* SX_ApplyProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */; };
 		4527F879211ACA91000EAEB9 /* SX_ApplyAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F878211ACA91000EAEB9 /* SX_ApplyAmountCell.swift */; };
+		4527F8FA211BE532000EAEB9 /* SX_PersonalIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F8F9211BE532000EAEB9 /* SX_PersonalIconCell.swift */; };
+		4527F8FC211BE93D000EAEB9 /* SX_PersonalMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F8FB211BE93D000EAEB9 /* SX_PersonalMessageCell.swift */; };
 		45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */; };
 		45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2F20F48C240099CDDD /* SX_LoadingView.swift */; };
 		453C5B51210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C5B50210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift */; };
@@ -109,6 +111,8 @@
 		4527F872211A8970000EAEB9 /* SX_ApplyDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyDetailController.swift; sourceTree = "<group>"; };
 		4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyProgressCell.swift; sourceTree = "<group>"; };
 		4527F878211ACA91000EAEB9 /* SX_ApplyAmountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyAmountCell.swift; sourceTree = "<group>"; };
+		4527F8F9211BE532000EAEB9 /* SX_PersonalIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PersonalIconCell.swift; sourceTree = "<group>"; };
+		4527F8FB211BE93D000EAEB9 /* SX_PersonalMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PersonalMessageCell.swift; sourceTree = "<group>"; };
 		45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TopSelectedView.swift; sourceTree = "<group>"; };
 		45341D2F20F48C240099CDDD /* SX_LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_LoadingView.swift; sourceTree = "<group>"; };
 		453C5B50210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailTitleCell.swift; sourceTree = "<group>"; };
@@ -211,6 +215,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4527F8F8211BE4EC000EAEB9 /* SX_Personal */ = {
+			isa = PBXGroup;
+			children = (
+				4527F8F9211BE532000EAEB9 /* SX_PersonalIconCell.swift */,
+				4527F8FB211BE93D000EAEB9 /* SX_PersonalMessageCell.swift */,
+			);
+			path = SX_Personal;
+			sourceTree = "<group>";
+		};
 		453C5B54210B0667009F9CB9 /* SX_Certification */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +314,8 @@
 		45454BDF21198995002B9EBC /* SX_MyApply */ = {
 			isa = PBXGroup;
 			children = (
+				4527F878211ACA91000EAEB9 /* SX_ApplyAmountCell.swift */,
+				4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */,
 				45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */,
 				45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */,
 				45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */,
@@ -515,10 +530,9 @@
 		45556B7120D8A51A0035FCA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				45454BDF21198995002B9EBC /* SX_MyApply */,
 				45454BCF211834CE002B9EBC /* SX_MineIconViewCell.swift */,
-				4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */,
-				4527F878211ACA91000EAEB9 /* SX_ApplyAmountCell.swift */,
+				4527F8F8211BE4EC000EAEB9 /* SX_Personal */,
+				45454BDF21198995002B9EBC /* SX_MyApply */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -895,6 +909,7 @@
 				4527F875211A8A95000EAEB9 /* SX_ApplyProgressCell.swift in Sources */,
 				45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */,
 				45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */,
+				4527F8FA211BE532000EAEB9 /* SX_PersonalIconCell.swift in Sources */,
 				45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */,
 				45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */,
 				459B334C21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift in Sources */,
@@ -939,6 +954,7 @@
 				45454BDE2119687F002B9EBC /* SX_MineApplyScrollView.swift in Sources */,
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
 				458A002E21086A7300D38014 /* SX_BaseSuccessController.swift in Sources */,
+				4527F8FC211BE93D000EAEB9 /* SX_PersonalMessageCell.swift in Sources */,
 				458A002C2108535A00D38014 /* SX_TrainingApplyController.swift in Sources */,
 				45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */,
 				45440F0020E0C4E700058978 /* SX_CycleCell.swift in Sources */,
