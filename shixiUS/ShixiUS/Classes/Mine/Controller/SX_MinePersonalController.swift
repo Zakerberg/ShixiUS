@@ -10,6 +10,9 @@ import UIKit
 
 class SX_MinePersonalController: UIViewController {
 
+    var titleArr   = ["头像", "用户名", "手机号", "国家/diqu", "微信", "邮箱"]
+    var contentArr = ["", "请输入姓名", "请输入手机号", "请选择国家和地区", "请输入微信", "请输入邮箱"]
+
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
         tableView.backgroundColor = UIColor.SX_BackGroundColor()
@@ -22,7 +25,6 @@ class SX_MinePersonalController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
     }
     
@@ -41,25 +43,45 @@ extension SX_MinePersonalController {
     
     
     
+
 }
 
 // ===============================================================================================================================
-// MARK: -
+// MARK: - UITableViewDelegate
 // ===============================================================================================================================
 extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource {
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return self.titleArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     
+        if indexPath.section == 0 {
+            return 100.FloatValue.IPAD_XValue
+        }
+        return 45.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        if indexPath.row == 0 {
+            let iconCell = SX_PersonalIconCell(style: .default, reuseIdentifier: nil)
+            iconCell.selectionStyle = .none
+            
+            return iconCell
+        }
         
-        
-        
-        
+        let cell = SX_PersonalMessageCell(style: .default, reuseIdentifier: nil)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
     }
 }
 
@@ -76,12 +98,3 @@ extension SX_MinePersonalController {
     
     
 }
-
-
-
-
-
-
-
-
-
