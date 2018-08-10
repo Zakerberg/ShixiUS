@@ -54,6 +54,7 @@ extension SX_PersonalMessageCell {
         self.tF = UITextField().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.height.centerY.equalTo(self.titleLabel!)
             make.right.equalToSuperview().offset(-Margin)
+            
         }).config({ (tF) in
             tF.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             tF.textAlignment = .right
