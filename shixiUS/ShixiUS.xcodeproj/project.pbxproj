@@ -447,7 +447,6 @@
 			children = (
 				45454BCE211834A2002B9EBC /* Controller */,
 				45556B6F20D8A51A0035FCA6 /* Model */,
-				45556B6E20D8A51A0035FCA6 /* Service */,
 				45556B7120D8A51A0035FCA6 /* View */,
 			);
 			path = Mine;
@@ -523,13 +522,6 @@
 			sourceTree = "<group>";
 		};
 		45556B6B20D8A4B70035FCA6 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		45556B6E20D8A51A0035FCA6 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 			);
