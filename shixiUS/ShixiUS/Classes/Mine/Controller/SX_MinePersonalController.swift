@@ -13,6 +13,7 @@ class SX_MinePersonalController: UIViewController {
     var titleArr   = ["头像", "用户名", "手机号", "国家/地区", "微信", "邮箱"]
     var contentArr = ["", "请输入姓名", "请输入手机号", "请选择国家和地区", "请输入微信", "请输入邮箱"]
     var getUrlDataArr: Array<Any>?
+    var headPortrait: UIImage?
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
@@ -91,10 +92,15 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let iconCell = SX_PersonalIconCell(style: .default, reuseIdentifier: nil)
-            iconCell.selectionStyle = .none
+            let singleTap = UIGestureRecognizer(target: self, action: #selector(alterHeadPortrait))
             
-            return iconCell
+            let cell = SX_HeadPortraitCell(style: .default, reuseIdentifier: nil)
+            cell.selectionStyle = .none
+            cell.headPortraitImageView?.image = headPortrait
+            
+            cell.addGestureRecognizer(singleTap)
+            
+            return cell
         }
         
         let cell = SX_PersonalMessageCell(style: .default, reuseIdentifier: nil)
@@ -131,15 +137,6 @@ extension SX_MinePersonalController: UITextFieldDelegate {
     }
 }
 
-// ===============================================================================================================================
-// MARK: - UIImagePickerControllerDelegate
-// ===============================================================================================================================
-extension SX_MinePersonalController: UIImagePickerControllerDelegate {
-    
-    
- 
-    
-}
 
 // ===============================================================================================================================
 // MARK: - UIGestureRecognizerDelegate
@@ -155,45 +152,57 @@ extension SX_MinePersonalController: UIGestureRecognizerDelegate {
 // ===============================================================================================================================
 // MARK: - UINavigationControllerDelegate
 // ===============================================================================================================================
-extension SX_MinePersonalController: UINavigationControllerDelegate {
+extension SX_MinePersonalController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     
-
-    
-    
-    
-    
-    
+//    - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+//    //定义一个newPhoto，用来存放我们选择的图片。
+//    UIImage *newPhoto = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+//    _myHeadPortrait.image = newPhoto;
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    }
+   
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let newPhoto = info.index(forKey: "UIImagePickerControllerEditedImage")
+        
+//      self.headPortrait = newPhoto
+        self.dismiss(animated: true, completion: nil)
+        
+    }
 }
 
 // ===============================================================================================================================
 // MARK: - UIActionSheetDelegate
 // ===============================================================================================================================
-extension SX_MinePersonalController: UIActionSheetDelegate {
-    func iconClick() {
-      
-        let sheet = UIAlertController(title: "提示", message: nil, preferredStyle: .actionSheet)
+extension SX_MinePersonalController: UIAlertViewDelegate {
+    
+    @objc func alterHeadPortrait() {
+        
+        let alert = UIAlertController(title: "提示", message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "拍照", style: .default) { (Camera) in
+            SXLog("相机 操作")
+            let pickerImage = UIImagePickerController()
+            pickerImage.sourceType = .camera
+            pickerImage.allowsEditing = true
+            pickerImage.delegate = self
+        }
+        
+        let albunAction = UIAlertAction(title: "从相册选取", style: .default) { (Albun) in
+            let pickerImage = UIImagePickerController()
+            pickerImage.sourceType = .photoLibrary
+            pickerImage.allowsEditing = true
+            pickerImage.delegate = self
+        }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (Cancel) in
-            SXLog("取消 操作")
+            self.present(alert, animated: true, completion: nil)
         }
-
-        let cameraAction = UIAlertAction(title: "相机", style: .default) { (Camera) in
-            SXLog("相机 操作")
-        }
-
-        let albunAction = UIAlertAction(title: "相册", style: .default) { (Albun) in
-            SXLog("相册 操作")
-        }
-
-        sheet.addAction(cancelAction)
-        sheet.addAction(albunAction)
-        sheet.addAction(cameraAction)
         
+        alert.addAction(cancelAction)
+        alert.addAction(albunAction)
+        alert.addAction(cameraAction)
         
-//         let sheet = UIActionSheet(title: "提示", delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: "相机", otherButtonTitles: "相册")
-//        sheet.tag = 100
-//        sheet.show(in: self.view)
-        
+        self.present(alert, animated: true, completion: nil)
     }
 }
