@@ -41,9 +41,13 @@ extension SX_ApplyDetailController {
   
     func setUI() {
         
+        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        
+        self.view.addSubview(table)
     }
     
     func fetchData() {
+        
         
     }
 }
