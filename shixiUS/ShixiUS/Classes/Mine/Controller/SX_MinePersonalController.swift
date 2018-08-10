@@ -58,6 +58,8 @@ extension SX_MinePersonalController {
                 Save.layer.masksToBounds = true
                 Save.rx.tap.subscribe(onNext: { (_) in
                     SXLog("保存个人信息---")
+                    
+                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
@@ -171,20 +173,27 @@ extension SX_MinePersonalController: UIActionSheetDelegate {
     func iconClick() {
       
         let sheet = UIAlertController(title: "提示", message: nil, preferredStyle: .actionSheet)
+        
         let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (Cancel) in
-            // 取消 操作
+            SXLog("取消 操作")
         }
-        
+
         let cameraAction = UIAlertAction(title: "相机", style: .default) { (Camera) in
-            // 相机 操作
+            SXLog("相机 操作")
         }
-        
+
         let albunAction = UIAlertAction(title: "相册", style: .default) { (Albun) in
-            // 相册 操作
+            SXLog("相册 操作")
         }
-        
+
         sheet.addAction(cancelAction)
         sheet.addAction(albunAction)
         sheet.addAction(cameraAction)
+        
+        
+//         let sheet = UIActionSheet(title: "提示", delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: "相机", otherButtonTitles: "相册")
+//        sheet.tag = 100
+//        sheet.show(in: self.view)
+        
     }
 }

@@ -1,20 +1,18 @@
 //
-//  SX_MineIconViewCell.swift
+//  SX_HeadPortraitCell.swift
 //  ShixiUS
 //
-//  Created by Michael 柏 on 8/6/18.
+//  Created by Michael 柏 on 8/10/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  头像cell
+//  头像Cell
 
 import UIKit
 
-class SX_MineIconViewCell: UITableViewCell {
+class SX_HeadPortraitCell: UITableViewCell {
     
     var logInBtn: UIButton?
     var iconImageView: UIImageView?
     var nameTitle: UILabel?
-    //    var VIPImageView: UIImageView?
-    //    var VIPLabel: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,13 +34,13 @@ class SX_MineIconViewCell: UITableViewCell {
     }
 }
 
+
 // ===============================================================================================================================
 // MARK: - configCell()
 // ===============================================================================================================================
-extension SX_MineIconViewCell {
+extension SX_HeadPortraitCell {
     
     func configCell() {
-        
         self.iconImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.left.equalToSuperview().offset(Margin)
             make.height.width.equalTo(60.FloatValue.IPAD_XValue)
@@ -60,7 +58,6 @@ extension SX_MineIconViewCell {
             logIn.setTitle("登录/注册  ", for: .normal)
             logIn.setImage(UIImage.init(named: "more"), for: .normal)
             logIn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-//            logIn.tintColor = UIColor.colorWithHexString(hex: "2d2d2d", alpha: 1)
             logIn.setTitleColor(UIColor.colorWithHexString(hex: "2d2d2d", alpha: 1), for: .normal)
             logIn.titleEdgeInsets = UIEdgeInsetsMake(0, -logIn.imageView!.bounds.size.width, 0, logIn.imageView!.bounds.size.width)
             logIn.imageEdgeInsets = UIEdgeInsetsMake(0, logIn.titleLabel!.bounds.size.width, 0, -logIn.titleLabel!.bounds.size.width)
@@ -78,3 +75,7 @@ extension SX_MineIconViewCell {
         })
     }
 }
+
+
+
+

@@ -80,7 +80,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = SX_MineIconViewCell(style: .default, reuseIdentifier: mineIconCellID)
+            let cell = SX_HeadPortraitCell(style: .default, reuseIdentifier: mineIconCellID)
             
             cell.nameTitle?.isHidden = true
             cell.selectionStyle   = .none
