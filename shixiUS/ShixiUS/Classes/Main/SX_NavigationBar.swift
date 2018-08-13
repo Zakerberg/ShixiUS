@@ -314,7 +314,8 @@ extension UINavigationController: SXFatherAwakeProtocol {
             displayLink = nil
             pushProperties.displayCount = 0
             viewController.pushToCurrentVCFinished = true
-        };
+        }
+        
         CATransaction.setAnimationDuration(pushProperties.pushDuration)
         CATransaction.begin()
         sx_pushViewController(viewController, animated: animated)

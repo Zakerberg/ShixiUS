@@ -9,21 +9,31 @@
 import UIKit
 
 class SX_MineMyApplyController: UIViewController {
-
+    
     var listScrollView: UIScrollView?
     var page: NSInteger?
     var status: NSInteger?
     
-    lazy var titleHeadView: UIView = {
+    lazy var titleHeadView: SX_MineApplyHeadView = {
         let titleHeadView = SX_MineApplyHeadView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.width.left.right.equalToSuperview()
             make.height.equalTo(41.FloatValue)
-        }).config({ (titleHeadView) in
-         
-            
+        }).config({ (HeadView) in
+             
         })
         
         return titleHeadView
+    }()
+    
+    lazy var applyScrollView: SX_MineApplyScrollView = {
+        let applyScroll = SX_MineApplyScrollView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+            
+        }).config({ (applyScroll) in
+            
+            
+        })
+        
+        return applyScroll
     }()
     
     lazy var regOrLoginView: UIView = {
@@ -38,25 +48,23 @@ class SX_MineMyApplyController: UIViewController {
     }()
     
     override func viewDidAppear(_ animated: Bool) {
-         super.viewDidAppear(animated)
+        super.viewDidAppear(animated)
         
-          //autoRefresh()
-        
+        //autoRefresh()
         SXLog("此处 的 自动刷新没写 !  !   !  ")
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -76,11 +84,11 @@ extension SX_MineMyApplyController {
             self.view.addSubview(self.listScrollView!)
         } else { // 游客模式
             self.regOrLoginView.isHidden = false
-          
             SXLog("此处添加未登录的处理++++")
             
+            
+            
         }
-        
         self.tabBarController?.delegate = self
     }
 }
@@ -110,13 +118,6 @@ extension SX_MineMyApplyController: UITableViewDelegate {
 // MARK: - UITableViewDelegate
 // ===============================================================================================================================
 extension SX_MineMyApplyController: UITabBarControllerDelegate {
-    
-    
-    
-    
-    
-    
-    
     
     
     

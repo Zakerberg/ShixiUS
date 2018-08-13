@@ -57,8 +57,3 @@ extension SX_ApplyAmountCell {
         })
     }
 }
-
-
-
-
-

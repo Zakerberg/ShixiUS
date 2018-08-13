@@ -38,5 +38,6 @@ extension SX_ProgressDetailCell{
     
     func ConfigCell() {
         
+        
     }
 }

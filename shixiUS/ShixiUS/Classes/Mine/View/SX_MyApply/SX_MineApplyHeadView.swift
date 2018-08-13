@@ -4,7 +4,18 @@
 //
 //  Created by Michael 柏 on 8/7/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  
+//
+
+/*
+ 
+ 北上看到的冰川是你
+ 南下追寻的极光是你
+ 西去流浪的经幡是你
+ 东去皈依的佛经也是你
+ 世不遇你
+ 生无可喜
+
+ */
 
 import UIKit
 
@@ -71,6 +82,7 @@ extension SX_MineApplyHeadView {
              }];
              }
              */
+            
         }
     }
     

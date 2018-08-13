@@ -10,8 +10,11 @@ import UIKit
 
 class SX_MineApplyScrollView: UIView {
     
+    /// 滑动停止, 把当前View传出去
     typealias scrollToCurrentView = ((_ view: UIView)-> Void)
+    /// 停止滚动, 把当前是第几个列表传出去
     typealias endScrollIndex = ((_ index: NSInteger)-> Void)
+    /// 滑动时, 把该页面传出去
     typealias listScrollViewDidScroll = ((_ scrollView: UIScrollView)-> Void)
     
     var scrollView: UIScrollView?
