@@ -7,11 +7,13 @@
 //  我的申请
 
 /*
- 是你绑架我到你心里,
- 我又没钱交赎金,
- 如果你不撕票,
- 我会用一生的爱,
- 慢慢还你.
+ 
+   是你绑架我到你心里,
+        我又没钱交赎金,
+   如果你不撕票,
+        我会用一生的爱,
+   慢慢还你.
+ 
  */
 
 import UIKit
@@ -73,8 +75,8 @@ extension SX_MyApplyController {
         
         // trackerStyle 跟踪器的样式
         let pageMenu = SPPageMenu(frame: CGRect(x: 0, y: kNavH, width: SCREEN_WIDTH, height: PageMenuH), trackerStyle: .lineLongerThanItem)
-        // 传递数组,默任选择第2个
-        pageMenu.setItems(self.dataArr, selectedItemIndex: 1)
+        // 传递数组,默任选择第1个
+        pageMenu.setItems(self.dataArr, selectedItemIndex: 0)
         pageMenu.needTextColorGradients = false
         
         pageMenu.delegate = self

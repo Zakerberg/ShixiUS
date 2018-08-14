@@ -2,7 +2,6 @@
 //  SPPageMenu.m
 //  SPPageMenu
 //
-//
 
 #import "SPPageMenu.h"
 
@@ -521,7 +520,7 @@
     
     _itemPadding = 30;
     _itemTitleFont = [UIFont systemFontOfSize:16];
-    _selectedItemTitleColor = [UIColor redColor];
+    _selectedItemTitleColor = [UIColor orangeColor];
     _unSelectedItemTitleColor = [UIColor blackColor];
     _trackerHeight = 3;
     _dividingLineHeight = 0.5;
@@ -1112,7 +1111,7 @@
     for (int i= 0 ; i < self.buttons.count; i++) {
         SPItem *button = self.buttons[i];
         
-        CGFloat setupButtonW = [[self.setupWidths objectForKey:[NSString stringWithFormat:@"%zd",i]] floatValue];
+        CGFloat setupButtonW = [[self.setupWidths objectForKey:[NSString stringWithFormat:@"%d",i]] floatValue];
         CGFloat textW = [button.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, itemScrollViewH) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_itemTitleFont} context:nil].size.width;
         CGFloat imageW = button.currentImage.size.width;
         if (button.currentTitle && !button.currentImage) {
@@ -1135,38 +1134,68 @@
     CGFloat diff = itemScrollViewW - contentW_sum;
     
     [self.buttons enumerateObjectsUsingBlock:^(SPItem *button, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGFloat setupButtonW = [[self.setupWidths objectForKey:[NSString stringWithFormat:@"%zd",idx]] floatValue];
-        if (self.permutationWay == SPPageMenuPermutationWayScrollAdaptContent) {
+       CGFloat setupButtonW = [[self.setupWidths objectForKey:[NSString stringWithFormat:@"%zd",idx]] floatValue];
+    //if (self.permutationWay == SPPageMenuPermutationWayScrollAdaptContent) {
             buttonW = [buttonWidths[idx] floatValue];
             if (idx == 0) {
-                button.frame = CGRectMake(self->_itemPadding*0.5+lastButtonMaxX, 0, buttonW, itemScrollViewH);
+                button.frame = CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
             } else {
-                button.frame = CGRectMake(self->_itemPadding+lastButtonMaxX, 0, buttonW, itemScrollViewH);
+                button.frame = CGRectMake(lastButtonMaxX, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
 
             }
-        } else if (self.permutationWay == SPPageMenuPermutationWayNotScrollEqualWidths) {
-            // 求出外界设置的按钮宽度之和
-            CGFloat totalSetupButtonW = [[self.setupWidths.allValues valueForKeyPath:@"@sum.floatValue"] floatValue];
-            // 如果该按钮外界设置了宽，则取外界设置的，如果外界没设置，则其余按钮等宽
-            buttonW = setupButtonW ? setupButtonW : (itemScrollViewW-self->_itemPadding*(self.buttons.count)-totalSetupButtonW)/(self.buttons.count-self.setupWidths.count);
-            if (buttonW < 0) { // 按钮过多时,有可能会为负数
-                buttonW = 0;
-            }
-            if (idx == 0) {
-                button.frame = CGRectMake(self->_itemPadding*0.5+lastButtonMaxX, 0, buttonW, itemScrollViewH);
-            } else {
-                button.frame = CGRectMake(self->_itemPadding+lastButtonMaxX, 0, buttonW, itemScrollViewH);
-            }
+        
+           // 求出外界设置的按钮宽度之和
+//            CGFloat totalSetupButtonW = [[self.setupWidths.allValues valueForKeyPath:@"@sum.floatValue"] floatValue];
+//           // 如果该按钮外界设置了宽，则取外界设置的，如果外界没设置，则其余按钮等宽
+//            buttonW = setupButtonW ? setupButtonW : (itemScrollViewW-self->_itemPadding*(self.buttons.count)-totalSetupButtonW)/(self.buttons.count-self.setupWidths.count);
+//            if (buttonW < 0) { // 按钮过多时,有可能会为负数
+//                buttonW = 0;
+//            }
+//            if (idx == 0) {
+//                button.frame = CGRectMake(self->_itemPadding*0.5+lastButtonMaxX, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
+//            }
+//            else {
+//                button.frame = CGRectMake(self->_itemPadding+lastButtonMaxX, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
+//            }
+        
+        //}
+//        else {
+//            self->_itemPadding = diff/self.buttons.count;
+//            buttonW = [buttonWidths[idx] floatValue];
+//            if (idx == 0) {
+//                button.frame = CGRectMake(self->_itemPadding*0.5+lastButtonMaxX, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
+//            } else {
+//                button.frame = CGRectMake(self->_itemPadding+lastButtonMaxX, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
+//            }
+//        }
+
             
-        } else {
-            self->_itemPadding = diff/self.buttons.count;
-            buttonW = [buttonWidths[idx] floatValue];
-            if (idx == 0) {
-                button.frame = CGRectMake(self->_itemPadding*0.5+lastButtonMaxX, 0, buttonW, itemScrollViewH);
-            } else {
-                button.frame = CGRectMake(self->_itemPadding+lastButtonMaxX, 0, buttonW, itemScrollViewH);
-            }
-        }
+//        }
+//        else if (self.permutationWay == SPPageMenuPermutationWayNotScrollEqualWidths) {
+//             求出外界设置的按钮宽度之和
+//            CGFloat totalSetupButtonW = [[self.setupWidths.allValues valueForKeyPath:@"@sum.floatValue"] floatValue];
+//             如果该按钮外界设置了宽，则取外界设置的，如果外界没设置，则其余按钮等宽
+//            buttonW = setupButtonW ? setupButtonW : (itemScrollViewW-self->_itemPadding*(self.buttons.count)-totalSetupButtonW)/(self.buttons.count-self.setupWidths.count);
+//            if (buttonW < 0) { // 按钮过多时,有可能会为负数
+//                buttonW = 0;
+//            }
+//            if (idx == 0) {
+//                button.frame = CGRectMake(self->_itemPadding*0.5+lastButtonMaxX, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
+//            }
+//            else {
+//                button.frame = CGRectMake(self->_itemPadding+lastButtonMaxX, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
+//            }
+//            
+//        }
+//        else {
+//            self->_itemPadding = diff/self.buttons.count;
+//            buttonW = [buttonWidths[idx] floatValue];
+//            if (idx == 0) {
+//                button.frame = CGRectMake(self->_itemPadding*0.5+lastButtonMaxX, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
+//            } else {
+//                button.frame = CGRectMake(self->_itemPadding+lastButtonMaxX, 0, UIScreen.mainScreen.bounds.size.width/3, itemScrollViewH);
+//            }
+//        }
         lastButtonMaxX = CGRectGetMaxX(button.frame);
     }];
     
