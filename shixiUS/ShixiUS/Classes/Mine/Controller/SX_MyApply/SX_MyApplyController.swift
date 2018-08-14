@@ -7,7 +7,8 @@
 //  我的申请
 
 import UIKit
-let PageMenuH = 40.FloatValue
+let PageMenuH        = 40.FloatValue
+let scrollViewHeight = SCREEN_WIDTH-88-PageMenuH
 
 class SX_MyApplyController: UIViewController {
     
@@ -68,11 +69,35 @@ extension SX_MyApplyController {
         self.view.addSubview(pageMenu)
         self.pageMenu = pageMenu
         
-        let controllerClassNames = NSArray.init(array: [""])
+        // 就业岗位, 培训项目, 职业认证
+        let controllerClassNames = NSArray.init(array: ["SX_ApplyEmploymentJobsController", "SX_ApplyTrainingProjectController", "SX_ApplyVocationalTrainingController"])
         
+        for index in 0...self.dataArr.count {
+            if controllerClassNames.count > index{
+                let viewController = NSClassFromString(controllerClassNames[index] as! String)
+                self.addChildViewController(viewController as! UIViewController)
+                self.myChildViewControllers?.add(viewController!)
+            }
+        }
         
+        self.scrollView = UIScrollView(frame: CGRect(x: 0, y: kNavH+PageMenuH, width: SCREEN_WIDTH, height: scrollViewHeight))
+        scrollView?.delegate = self
+        scrollView?.isPagingEnabled = true
+        scrollView?.showsHorizontalScrollIndicator = false
+        self.view.addSubview(scrollView!)
         
+        /// 这一行赋值, 可以实现pageMenu的跟踪器时刻跟随scrollView 滑动的效果 ! ! !
+        self.pageMenu?.bridgeScrollView = self.scrollView!
         
+        /// pageMenu.selectedItemIndex 就是选中的item下标
+        if (self.pageMenu?.selectedItemIndex)! < 3 {
+         
+            let viewCotroller = self.myChildViewControllers![Int((self.pageMenu?.selectedItemIndex)! as UInt)] as! UIViewController
+            scrollView?.addSubview(viewCotroller.view)
+            viewCotroller.view.frame = CGRect(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0, width: SCREEN_WIDTH, height: scrollViewHeight)
+            scrollView?.contentOffset =  CGPoint(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0)
+            scrollView?.contentSize = CGSize(width: self.dataArr.count.FloatValue*SCREEN_WIDTH, height: 0)
+        }
     }
 }
 
@@ -84,18 +109,12 @@ extension SX_MyApplyController: SPPageMenuDelegate {
     
     
     
-    
-    
-    
-    
-    
-    
 }
 
 // ===============================================================================================================================
-// MARK: -
+// MARK: - UIScrollViewDelegate
 // ===============================================================================================================================
-extension SX_MyApplyController {
+extension SX_MyApplyController: UIScrollViewDelegate {
     
     
     

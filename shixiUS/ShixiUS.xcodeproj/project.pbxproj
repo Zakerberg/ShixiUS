@@ -40,8 +40,6 @@
 		45454BD62118393B002B9EBC /* SX_MinePaymentRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD52118393B002B9EBC /* SX_MinePaymentRecordController.swift */; };
 		45454BD821183965002B9EBC /* SX_MinePersonalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD721183965002B9EBC /* SX_MinePersonalController.swift */; };
 		45454BDA2118398C002B9EBC /* SX_MineFixPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */; };
-		45454BDC211932B9002B9EBC /* SX_MineApplyHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */; };
-		45454BDE2119687F002B9EBC /* SX_MineApplyScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */; };
 		45454BE1211989EC002B9EBC /* SX_VocationalTrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */; };
 		45454BE321198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BE221198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift */; };
 		45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BE421198A95002B9EBC /* SX_EmploymentJobsCell.swift */; };
@@ -143,8 +141,6 @@
 		45454BD52118393B002B9EBC /* SX_MinePaymentRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MinePaymentRecordController.swift; sourceTree = "<group>"; };
 		45454BD721183965002B9EBC /* SX_MinePersonalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MinePersonalController.swift; sourceTree = "<group>"; };
 		45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineFixPasswordController.swift; sourceTree = "<group>"; };
-		45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineApplyHeadView.swift; sourceTree = "<group>"; };
-		45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineApplyScrollView.swift; sourceTree = "<group>"; };
 		45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_VocationalTrainingCell.swift; sourceTree = "<group>"; };
 		45454BE221198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MyApplyTrainingProjectCell.swift; sourceTree = "<group>"; };
 		45454BE421198A95002B9EBC /* SX_EmploymentJobsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_EmploymentJobsCell.swift; sourceTree = "<group>"; };
@@ -352,8 +348,6 @@
 				4527F878211ACA91000EAEB9 /* SX_ApplyAmountCell.swift */,
 				4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */,
 				4527F8FF211D2645000EAEB9 /* SX_ProgressDetailCell.swift */,
-				45454BDB211932B9002B9EBC /* SX_MineApplyHeadView.swift */,
-				45454BDD2119687F002B9EBC /* SX_MineApplyScrollView.swift */,
 				45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */,
 				45454BE221198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift */,
 				45454BE421198A95002B9EBC /* SX_EmploymentJobsCell.swift */,
@@ -974,7 +968,6 @@
 				45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */,
 				4527F91321226B70000EAEB9 /* SX_MyApplyController.swift in Sources */,
 				45B19339211056C700EFF422 /* SX_ProjectDetailModel.swift in Sources */,
-				45454BDC211932B9002B9EBC /* SX_MineApplyHeadView.swift in Sources */,
 				45454BCD2118184F002B9EBC /* SX_LoginController.swift in Sources */,
 				45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */,
 				45454BD821183965002B9EBC /* SX_MinePersonalController.swift in Sources */,
@@ -986,7 +979,6 @@
 				458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */,
 				4527F902211D5D97000EAEB9 /* SX_HeadPortraitCell.swift in Sources */,
 				45556B5D20D89DAD0035FCA6 /* SX_TabBarController.swift in Sources */,
-				45454BDE2119687F002B9EBC /* SX_MineApplyScrollView.swift in Sources */,
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
 				4527F905211D700D000EAEB9 /* SX_FixPasswordCell.swift in Sources */,
 				458A002E21086A7300D38014 /* SX_BaseSuccessController.swift in Sources */,
