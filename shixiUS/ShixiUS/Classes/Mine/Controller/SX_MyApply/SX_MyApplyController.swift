@@ -1,40 +1,22 @@
 //
-//  SX_MineMyApplyController.swift
+//  SX_MyApplyController.swift
 //  ShixiUS
 //
-//  Created by Michael 柏 on 8/6/18.
+//  Created by Michael 柏 on 8/14/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的申请
 
 import UIKit
+let PageMenuH = 40.FloatValue
 
-class SX_MineMyApplyController: UIViewController {
+class SX_MyApplyController: UIViewController {
     
-    var listScrollView: UIScrollView?
+    var scrollView: UIScrollView?
     var page: NSInteger?
     var status: NSInteger?
-    
-    lazy var titleHeadView: SX_MineApplyHeadView = {
-        let titleHeadView = SX_MineApplyHeadView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
-            make.top.width.left.right.equalToSuperview()
-            make.height.equalTo(41.FloatValue)
-        }).config({ (HeadView) in
-             
-        })
-        
-        return titleHeadView
-    }()
-    
-    lazy var applyScrollView: SX_MineApplyScrollView = {
-        let applyScroll = SX_MineApplyScrollView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
-            
-        }).config({ (applyScroll) in
-            
-            
-        })
-        
-        return applyScroll
-    }()
+    var pageMenu: SPPageMenu?
+    var dataArr = ["就业岗位", "实训项目", "职业培训"]
+    var myChildViewControllers: NSMutableArray?
     
     lazy var regOrLoginView: UIView = {
         let regOrLoginView = UIView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -43,13 +25,11 @@ class SX_MineMyApplyController: UIViewController {
         }).config({ (regOrLoginView) in
             regOrLoginView.isHidden = true
         })
-        
         return regOrLoginView
     }()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         //autoRefresh()
         SXLog("此处 的 自动刷新没写 !  !   !  ")
     }
@@ -57,7 +37,6 @@ class SX_MineMyApplyController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         super.viewWillAppear(animated)
-        
     }
     
     override func viewDidLoad() {
@@ -74,39 +53,38 @@ class SX_MineMyApplyController: UIViewController {
 // ===============================================================================================================================
 // MARK: - Other Method
 // ===============================================================================================================================
-extension SX_MineMyApplyController {
+extension SX_MyApplyController {
     func setUI() {
         title = "我的申请"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
-        self.view.addSubview(self.titleHeadView)
         
-        if UserDefaults.standard.object(forKey: "isVisitor") as! String == "no"{
-            self.view.addSubview(self.listScrollView!)
-        } else { // 游客模式
-            self.regOrLoginView.isHidden = false
-            SXLog("此处添加未登录的处理++++")
-            
-            
-            
-        }
-        self.tabBarController?.delegate = self
+        // trackerStyle 跟踪器的样式
+        let pageMenu = SPPageMenu(frame: CGRect(x: 0, y: kNavH, width: SCREEN_WIDTH, height: PageMenuH), trackerStyle: .lineLongerThanItem)
+        // 传递数组,默任选择第2个
+        pageMenu.setItems(self.dataArr, selectedItemIndex: 1)
+        pageMenu.needTextColorGradients = false
+        
+        pageMenu.delegate = self
+        self.view.addSubview(pageMenu)
+        self.pageMenu = pageMenu
+        
+        let controllerClassNames = NSArray.init(array: [""])
+        
+        
+        
+        
     }
 }
 
 // ===============================================================================================================================
-// MARK: - UIScrollViewDelegate
+// MARK: - SPPageMenuDelegate
 // ===============================================================================================================================
-extension SX_MineMyApplyController: UIScrollViewDelegate {
+extension SX_MyApplyController: SPPageMenuDelegate {
     
     
     
     
-}
-
-// ===============================================================================================================================
-// MARK: - UITableViewDelegate
-// ===============================================================================================================================
-extension SX_MineMyApplyController: UITableViewDelegate {
+    
     
     
     
@@ -115,9 +93,14 @@ extension SX_MineMyApplyController: UITableViewDelegate {
 }
 
 // ===============================================================================================================================
-// MARK: - UITableViewDelegate
+// MARK: -
 // ===============================================================================================================================
-extension SX_MineMyApplyController: UITabBarControllerDelegate {
+extension SX_MyApplyController {
+    
+    
+    
+    
+    
     
     
     

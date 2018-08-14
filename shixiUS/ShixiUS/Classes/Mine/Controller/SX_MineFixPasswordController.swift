@@ -9,11 +9,6 @@
 import UIKit
 
 class SX_MineFixPasswordController: UIViewController {
-
-    
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +29,11 @@ extension SX_MineFixPasswordController {
     func setUI() {
         
         
+        
     }
     
     func fetchData() {
+        
         
     }
 }
@@ -59,10 +56,5 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
 }
-
-
-
-
-
 
 
