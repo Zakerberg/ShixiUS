@@ -17,7 +17,7 @@ class SX_MyApplyController: UIViewController {
     var status: NSInteger?
     var pageMenu: SPPageMenu?
     var dataArr = ["就业岗位", "实训项目", "职业培训"]
-    var myChildViewControllers: NSMutableArray?
+    var myChildViewControllers = NSMutableArray()
     
     lazy var regOrLoginView: UIView = {
         let regOrLoginView = UIView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -49,6 +49,10 @@ class SX_MyApplyController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    deinit {
+        SXLog("父控制器被销毁了...")
+    }
 }
 
 // ===============================================================================================================================
@@ -76,7 +80,7 @@ extension SX_MyApplyController {
             if controllerClassNames.count > index{
                 let viewController = NSClassFromString(controllerClassNames[index] as! String)
                 self.addChildViewController(viewController as! UIViewController)
-                self.myChildViewControllers?.add(viewController!)
+                self.myChildViewControllers.add(viewController!)
             }
         }
         
@@ -92,7 +96,7 @@ extension SX_MyApplyController {
         /// pageMenu.selectedItemIndex 就是选中的item下标
         if (self.pageMenu?.selectedItemIndex)! < 3 {
             
-            let viewCotroller = self.myChildViewControllers![Int((self.pageMenu?.selectedItemIndex)! as UInt)] as! UIViewController
+            let viewCotroller = self.myChildViewControllers[Int((self.pageMenu?.selectedItemIndex)! as UInt)] as! UIViewController
             scrollView?.addSubview(viewCotroller.view)
             viewCotroller.view.frame = CGRect(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0, width: SCREEN_WIDTH, height: scrollViewHeight)
             scrollView?.contentOffset =  CGPoint(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0)
@@ -119,9 +123,9 @@ extension SX_MyApplyController: SPPageMenuDelegate {
         } else {
             self.scrollView?.setContentOffset(CGPoint(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0), animated: true)
         }
-        if (self.myChildViewControllers?.count)! <= toIndex {return}
+        if self.myChildViewControllers.count <= toIndex {return}
         
-        let targetViewController = self.myChildViewControllers![toIndex] as! UIViewController
+        let targetViewController = self.myChildViewControllers[toIndex] as! UIViewController
         targetViewController.view.frame = CGRect(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0, width: SCREEN_WIDTH, height: scrollViewHeight)
         self.scrollView?.addSubview(targetViewController.view)
     }
@@ -132,10 +136,8 @@ extension SX_MyApplyController: SPPageMenuDelegate {
 // ===============================================================================================================================
 extension SX_MyApplyController: UIScrollViewDelegate {
     
-    
-    
-    
-    
-    
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 这一步是实现跟踪器时刻跟随scrollView滑动的效果,如果对self.pageMenu.scrollView赋了值，这一步可省
+        // self.pageMenu?.moveTrackerFollow(scrollView)
+    }
 }
