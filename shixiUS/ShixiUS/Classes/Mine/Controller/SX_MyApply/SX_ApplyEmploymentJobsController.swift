@@ -12,15 +12,11 @@ class SX_ApplyEmploymentJobsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = UIColor.yellow
+        self.view.backgroundColor = UIColor.SX_BackGroundColor()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-
 }

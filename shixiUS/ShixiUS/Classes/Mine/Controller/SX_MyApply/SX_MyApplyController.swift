@@ -103,7 +103,7 @@ extension SX_MyApplyController {
             }
         }
         
-        self.scrollView = UIScrollView(frame: CGRect(x: 0, y: kNavH+PageMenuH, width: SCREEN_WIDTH, height: scrollViewHeight))
+        self.scrollView = UIScrollView(frame: CGRect(x: 0, y: kNavH+PageMenuH, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         scrollView?.delegate = self
         scrollView?.isPagingEnabled = true
         scrollView?.showsHorizontalScrollIndicator = false
@@ -117,7 +117,7 @@ extension SX_MyApplyController {
             
             let viewCotroller = self.myChildViewControllers[Int((self.pageMenu?.selectedItemIndex)! as UInt)] as! UIViewController
             scrollView?.addSubview(viewCotroller.view)
-            viewCotroller.view.frame = CGRect(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0, width: SCREEN_WIDTH, height: scrollViewHeight)
+            viewCotroller.view.frame = CGRect(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
             scrollView?.contentOffset =  CGPoint(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0)
             scrollView?.contentSize = CGSize(width: self.dataArr.count.FloatValue*SCREEN_WIDTH, height: 0)
         }
@@ -157,6 +157,6 @@ extension SX_MyApplyController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 这一步是实现跟踪器时刻跟随scrollView滑动的效果,如果对self.pageMenu.scrollView赋了值，这一步可省
-        // self.pageMenu?.moveTrackerFollow(scrollView)
+       //  self.pageMenu?.moveTrackerFollow(scrollView)
     }
 }
