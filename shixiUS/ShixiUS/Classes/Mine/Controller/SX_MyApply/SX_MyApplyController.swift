@@ -91,7 +91,7 @@ extension SX_MyApplyController {
         
         /// pageMenu.selectedItemIndex 就是选中的item下标
         if (self.pageMenu?.selectedItemIndex)! < 3 {
-         
+            
             let viewCotroller = self.myChildViewControllers![Int((self.pageMenu?.selectedItemIndex)! as UInt)] as! UIViewController
             scrollView?.addSubview(viewCotroller.view)
             viewCotroller.view.frame = CGRect(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0, width: SCREEN_WIDTH, height: scrollViewHeight)
@@ -106,17 +106,31 @@ extension SX_MyApplyController {
 // ===============================================================================================================================
 extension SX_MyApplyController: SPPageMenuDelegate {
     
+    func pageMenu(_ pageMenu: SPPageMenu, itemSelectedAt index: Int) {
+        SXLog(index)
+    }
     
-    
-    
+    func pageMenu(_ pageMenu: SPPageMenu, itemSelectedFrom fromIndex: Int, to toIndex: Int) {
+        SXLog("\(fromIndex) ---- \(toIndex)")
+        
+        // 如果formIndex和toIndex之差>=2 ,说明跨界面移动了, 此时不动画
+        if labs(toIndex - fromIndex) >= 2 {
+            self.scrollView?.setContentOffset(CGPoint(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0), animated: false)
+        } else {
+            self.scrollView?.setContentOffset(CGPoint(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0), animated: true)
+        }
+        if (self.myChildViewControllers?.count)! <= toIndex {return}
+        
+        let targetViewController = self.myChildViewControllers![toIndex] as! UIViewController
+        targetViewController.view.frame = CGRect(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0, width: SCREEN_WIDTH, height: scrollViewHeight)
+        self.scrollView?.addSubview(targetViewController.view)
+    }
 }
 
 // ===============================================================================================================================
 // MARK: - UIScrollViewDelegate
 // ===============================================================================================================================
 extension SX_MyApplyController: UIScrollViewDelegate {
-    
-    
     
     
     
