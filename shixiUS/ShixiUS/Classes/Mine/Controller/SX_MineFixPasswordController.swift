@@ -27,14 +27,11 @@ class SX_MineFixPasswordController: UIViewController {
 extension SX_MineFixPasswordController {
     
     func setUI() {
-        
-        
-        
+        self.view.backgroundColor = UIColor.yellow
     }
     
     func fetchData() {
-        
-        
+    
     }
 }
 

@@ -13,7 +13,7 @@ class SX_MineMyCollectionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.brown
     }
 
     override func didReceiveMemoryWarning() {

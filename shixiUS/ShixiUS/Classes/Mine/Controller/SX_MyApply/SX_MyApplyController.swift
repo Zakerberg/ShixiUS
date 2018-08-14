@@ -6,6 +6,14 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的申请
 
+/*
+ 是你绑架我到你心里,
+ 我又没钱交赎金,
+ 如果你不撕票,
+ 我会用一生的爱,
+ 慢慢还你.
+ */
+
 import UIKit
 let PageMenuH        = 40.FloatValue
 let scrollViewHeight = SCREEN_WIDTH-88-PageMenuH
@@ -74,13 +82,22 @@ extension SX_MyApplyController {
         self.pageMenu = pageMenu
         
         // 就业岗位, 培训项目, 职业认证
-        let controllerClassNames = NSArray.init(array: ["SX_ApplyEmploymentJobsController", "SX_ApplyTrainingProjectController", "SX_ApplyVocationalTrainingController"])
+        let controllerClassNames = ["SX_ApplyEmploymentJobsController", "SX_ApplyTrainingProjectController", "SX_ApplyVocationalTrainingController"]
         
         for index in 0...self.dataArr.count {
             if controllerClassNames.count > index{
-                let viewController = NSClassFromString(controllerClassNames[index] as! String)
-                self.addChildViewController(viewController as! UIViewController)
-                self.myChildViewControllers.add(viewController!)
+                guard let spaceName = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {
+                    SXLog("获取命名空间失败!")
+                    return
+                }
+                let viewController: AnyClass? = NSClassFromString(spaceName + ".\(controllerClassNames[index])")
+                guard let typeClass = viewController as? UIViewController.Type else{
+                    SXLog("viewController不能当做UIViewController!")
+                    return
+                }
+                let vc = typeClass.init()
+                self.addChildViewController(vc)
+                self.myChildViewControllers.add(vc)
             }
         }
         

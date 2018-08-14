@@ -50,21 +50,20 @@ class SX_MinePersonalController: UIViewController {
 extension SX_MinePersonalController {
     
     func setUI() {
-        let saveBtn = UIButton(type: .custom).addhere(toSuperView: self.table.tableFooterView!).layout { (make) in
-            
-            
-            }.config { (Save) in
-                Save.backgroundColor = UIColor.SX_MainColor()
-                Save.layer.cornerRadius = 10.FloatValue.IPAD_XValue
-                Save.layer.masksToBounds = true
-                Save.rx.tap.subscribe(onNext: { (_) in
-                    SXLog("保存个人信息---")
-                    
-                    
-                }, onError: { (error) in
-                    SXLog(error)
-                }, onCompleted: nil, onDisposed: nil)
-        }
+//        let saveBtn = UIButton(type: .custom).addhere(toSuperView: self.table.tableFooterView!).layout { (make) in
+//            
+//            }.config { (Save) in
+//                Save.backgroundColor = UIColor.SX_MainColor()
+//                Save.layer.cornerRadius = 10.FloatValue.IPAD_XValue
+//                Save.layer.masksToBounds = true
+//                Save.rx.tap.subscribe(onNext: { (_) in
+//                    SXLog("保存个人信息---")
+//                    
+//                    
+//                }, onError: { (error) in
+//                    SXLog(error)
+//                }, onCompleted: nil, onDisposed: nil)
+//        }
     }
     
     func fetchData() {

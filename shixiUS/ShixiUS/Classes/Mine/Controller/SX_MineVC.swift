@@ -6,6 +6,18 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的
 
+/*
+ 
+   北上看到的冰川是你,
+   南下追寻的极光是你,
+   西去流浪的经幡是你,
+   东去皈依的佛经也是你.
+ 
+      世 不 遇 你
+      生 无 可 喜
+
+*/
+
 import UIKit
 
 let mineCellID = "mineCellID"
@@ -128,12 +140,24 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 SXLog("进入我的申请Conroller")
+                self.hidesBottomBarWhenPushed = true
+                let vc = SX_MyApplyController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                self.hidesBottomBarWhenPushed = false
             }else {
                 SXLog("进入我的收藏Conroller")
+                self.hidesBottomBarWhenPushed = true
+                let vc = SX_MineMyCollectionController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                self.hidesBottomBarWhenPushed = false
             }
         } else if indexPath.section == 2 {
             if indexPath.row == 0 {
                 SXLog("进入付款记录Conroller")
+                self.hidesBottomBarWhenPushed = true
+                let vc = SX_MinePaymentRecordController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                self.hidesBottomBarWhenPushed = false
             }else {
                 SXLog("进入个人信息Conroller")
                 self.hidesBottomBarWhenPushed = true
@@ -143,6 +167,10 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             SXLog("进入修改密码Conroller")
+            self.hidesBottomBarWhenPushed = true
+            let vc = SX_MineFixPasswordController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            self.hidesBottomBarWhenPushed = false
         }
     }
 }
