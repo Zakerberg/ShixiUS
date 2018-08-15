@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 8/6/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  LogIn
+//  登录
 
 import UIKit
 
@@ -38,10 +38,8 @@ extension SX_LoginController {
         
         self.view.backgroundColor = UIColor.white
         
-        
-        
         self.backBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
-            
+            make
         }).config({ (backBtn) in
             
         })

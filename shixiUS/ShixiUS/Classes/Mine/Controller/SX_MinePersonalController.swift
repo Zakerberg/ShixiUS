@@ -96,6 +96,9 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             let cell = SX_HeadPortraitCell(style: .default, reuseIdentifier: nil)
             cell.selectionStyle = .none
             cell.headPortraitImageView?.image = headPortrait
+            cell.logInButton?.isHidden = true
+            cell.nameTitle?.isHidden   = true
+          //  cell.headPortraitImageView?.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
             
             cell.addGestureRecognizer(singleTap)
             
