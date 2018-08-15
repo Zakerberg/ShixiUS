@@ -17,13 +17,12 @@ class SX_TrainingProjectController: UIViewController {
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
-    var projectCollectionView: UICollectionView?
     var collectionView: UICollectionView?
     
 // ==================================================================================================================================
 //  MARK: - lazy
 // ==================================================================================================================================
-// 综合排序View
+    // 综合排序View
     lazy var comprehensiveView: UIView = {
         let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
             compreView.backgroundColor = UIColor.white
@@ -57,16 +56,6 @@ class SX_TrainingProjectController: UIViewController {
         return countryView
     }()
     
-    private lazy var BlackBgView: UIView = {
-        self.blackBgView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-        self.blackBgView?.backgroundColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-        self.blackBgView?.alpha = 0.5
-        
-        self.blackBgView?.isHidden = true
-        
-        return blackBgView!
-    }()
-    
 // ==================================================================================================================================
 // MARK: - O
 // ==================================================================================================================================
@@ -87,9 +76,9 @@ class SX_TrainingProjectController: UIViewController {
 }
 
 // ==================================================================================================================================
-// MARK: - UITableViewDelegate, UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 // ==================================================================================================================================
-extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
@@ -133,6 +122,17 @@ extension SX_TrainingProjectController {
         self.comprehensiveView.isHidden = true
         self.countryView.isHidden = true
         setTopSelectedView()
+        
+        // 创建底部的黑色透明图, 先隐藏
+        self.blackBgView = UIView(frame: CGRect(x: 0, y: (self.topSelectedView?.frame.origin.y)! + (self.topSelectedView?.frame.size.height)!, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - kNavH - (self.topSelectedView?.frame.size.height)!))
+        self.blackBgView?.backgroundColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+        self.blackBgView?.alpha = 0.3
+        self.view.insertSubview(self.blackBgView!, aboveSubview: self.collectionView!)
+        self.blackBgView?.isHidden = true
+        
+        let tap = UIGestureRecognizer(target: self, action: #selector(TapClick))
+        tap.cancelsTouchesInView = false
+        self.blackBgView?.addGestureRecognizer(tap)
     }
     
     /// 顶部三个按钮 && CollectionView
@@ -173,7 +173,6 @@ extension SX_TrainingProjectController {
             control.tag = index + ControlTag
             
             view.addSubview(control)
-            
         }
     }
     
@@ -358,23 +357,25 @@ extension SX_TrainingProjectController {
         }
     }
     
-        /// showLoadingView
-        func showLoadingView() {
-    
-            if (self.loadingView == nil) {
-                self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
-            }
-            self.view.addSubview(self.loadingView!)
+    /// showLoadingView
+    func showLoadingView() {
+        
+        if (self.loadingView == nil) {
+            self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         }
+        self.view.addSubview(self.loadingView!)
+    }
     
-        /// hideLoadingView
-        func hideLoadingView() {
-            let delaySeconds = 0.5
+    /// hideLoadingView
+    func hideLoadingView() {
+        let delaySeconds = 0.5
+        
+    }
     
-        }
-    
-        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    
-        }
+    @objc func TapClick() {
+        hideViewWithAnimation(view: self.comprehensiveView)
+        hideViewWithAnimation(view: self.trainingView)
+        hideViewWithAnimation(view: self.countryView)
+    }
 }
 
