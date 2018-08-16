@@ -221,10 +221,15 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                             self.hidesBottomBarWhenPushed = false
                         }else if i == 2 {
                             SXLog("进入培训认证\(i)")
-                            self.hidesBottomBarWhenPushed = true
-                            let vc = SX_CertificationController()
-                            self.navigationController?.pushViewController(vc, animated: true)
-                            self.hidesBottomBarWhenPushed = false
+//                            self.hidesBottomBarWhenPushed = true
+//                            let vc = SX_CertificationController()
+//                            self.navigationController?.pushViewController(vc, animated: true)
+//                            self.hidesBottomBarWhenPushed = false
+                            
+                            let vc = SX_LoginController()
+                            self.navigationController?.present(vc, animated: true)
+                            
+                            
                         }
                         
                     }, onError: { (error) in
