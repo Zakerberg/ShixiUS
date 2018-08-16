@@ -242,19 +242,15 @@ extension SX_LoginController {
 //}
 
 
-//class SX_TextField: UITextField {
-// 
-//    override func textRect(forBounds bounds: CGRect) -> CGRect {
-//      return CGRect.
-//    }
-//    
-//    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-//        
-//    }
-//}
-
-
-
-
-
+class SX_TextField: UITextField {
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        
+        return bounds.insetBy(dx: 10, dy: 0)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: 10, dy: 0)
+    }
+}
 

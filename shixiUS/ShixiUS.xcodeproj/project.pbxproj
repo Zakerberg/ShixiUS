@@ -81,7 +81,6 @@
 		45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */; };
 		45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */; };
 		45D3520F20D8B3F600D7300A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3520E20D8B3F600D7300A /* Common.swift */; };
-		45E019AA2125527C0015E7AE /* SX_TextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E019A92125527C0015E7AE /* SX_TextField.m */; };
 		45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */; };
 		7E1318263BF4D1BCB60E6CD2 /* Pods_ShixiUSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */; };
 		93F93EA320358C71A5E13755 /* Pods_ShixiUS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */; };
@@ -190,8 +189,6 @@
 		45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaController.swift; sourceTree = "<group>"; };
 		45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseWebController.swift; sourceTree = "<group>"; };
 		45D3520E20D8B3F600D7300A /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
-		45E019A82125527C0015E7AE /* SX_TextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SX_TextField.h; sourceTree = "<group>"; };
-		45E019A92125527C0015E7AE /* SX_TextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SX_TextField.m; sourceTree = "<group>"; };
 		45EBB89520D8D87200863544 /* ShixiUS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShixiUS-Bridging-Header.h"; sourceTree = "<group>"; };
 		45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuideViewController.swift; sourceTree = "<group>"; };
 		553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -446,8 +443,6 @@
 				458A002921081E3500D38014 /* UILabel+SXLabel.m */,
 				4527F906212181B0000EAEB9 /* SPPageMenu.h */,
 				4527F907212181B0000EAEB9 /* SPPageMenu.m */,
-				45E019A82125527C0015E7AE /* SX_TextField.h */,
-				45E019A92125527C0015E7AE /* SX_TextField.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1009,7 +1004,6 @@
 				45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */,
 				45440F0020E0C4E700058978 /* SX_CycleCell.swift in Sources */,
 				4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */,
-				45E019AA2125527C0015E7AE /* SX_TextField.m in Sources */,
 				4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */,
 				4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */,
 				4527F91921226C2D000EAEB9 /* SX_ApplyVocationalTrainingController.swift in Sources */,

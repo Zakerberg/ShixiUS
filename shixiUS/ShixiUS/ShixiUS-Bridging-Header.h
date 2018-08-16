@@ -9,6 +9,5 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "UILabel+SXLabel.h"
 #import "SPPageMenu.h"
-#import "SX_TextField.h"
 
 #endif /* SX_NetWork_Header_h */
