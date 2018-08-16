@@ -60,7 +60,6 @@
 		458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */; };
 		458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458805212100751F006FCDC7 /* SX_BaseViewController.swift */; };
 		458A00262106FBC600D38014 /* SX_UsInOverseaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A00252106FBC600D38014 /* SX_UsInOverseaCell.swift */; };
-		458A002A21081E3500D38014 /* UILabel+SXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 458A002921081E3500D38014 /* UILabel+SXLabel.m */; };
 		458A002C2108535A00D38014 /* SX_TrainingApplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A002B2108535A00D38014 /* SX_TrainingApplyController.swift */; };
 		458A002E21086A7300D38014 /* SX_BaseSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A002D21086A7300D38014 /* SX_BaseSuccessController.swift */; };
 		458A0030210875B300D38014 /* SX_trainingApplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A002F210875B300D38014 /* SX_trainingApplyCell.swift */; };
@@ -167,8 +166,6 @@
 		458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailController.swift; sourceTree = "<group>"; };
 		458805212100751F006FCDC7 /* SX_BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseViewController.swift; sourceTree = "<group>"; };
 		458A00252106FBC600D38014 /* SX_UsInOverseaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_UsInOverseaCell.swift; sourceTree = "<group>"; };
-		458A002821081E3500D38014 /* UILabel+SXLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+SXLabel.h"; sourceTree = "<group>"; };
-		458A002921081E3500D38014 /* UILabel+SXLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+SXLabel.m"; sourceTree = "<group>"; };
 		458A002B2108535A00D38014 /* SX_TrainingApplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingApplyController.swift; sourceTree = "<group>"; };
 		458A002D21086A7300D38014 /* SX_BaseSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseSuccessController.swift; sourceTree = "<group>"; };
 		458A002F210875B300D38014 /* SX_trainingApplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_trainingApplyCell.swift; sourceTree = "<group>"; };
@@ -439,8 +436,6 @@
 			children = (
 				45556B6020D8A0370035FCA6 /* Defines.swift */,
 				45D3520E20D8B3F600D7300A /* Common.swift */,
-				458A002821081E3500D38014 /* UILabel+SXLabel.h */,
-				458A002921081E3500D38014 /* UILabel+SXLabel.m */,
 				4527F906212181B0000EAEB9 /* SPPageMenu.h */,
 				4527F907212181B0000EAEB9 /* SPPageMenu.m */,
 			);
@@ -1007,7 +1002,6 @@
 				4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */,
 				4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */,
 				4527F91921226C2D000EAEB9 /* SX_ApplyVocationalTrainingController.swift in Sources */,
-				458A002A21081E3500D38014 /* UILabel+SXLabel.m in Sources */,
 				45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

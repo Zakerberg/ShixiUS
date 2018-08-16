@@ -7,7 +7,6 @@
 
 //#import <CommonCrypto/CommonCrypto.h>
 #import <CommonCrypto/CommonDigest.h>
-#import "UILabel+SXLabel.h"
 #import "SPPageMenu.h"
 
 #endif /* SX_NetWork_Header_h */

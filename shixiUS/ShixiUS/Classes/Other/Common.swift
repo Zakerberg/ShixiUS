@@ -211,36 +211,31 @@
      *  @return 高度
      *  @param zpace  字间距 --> @10 这样设置  默认的话设置 0 就ok
      */
+    func SX_getSpaceLabelHeight(_ text: NSString, font: UIFont, width: CGFloat, space: CGFloat, zpace: NSNumber) -> CGFloat {
+        
+        let paraStyle = NSMutableParagraphStyle()
+        paraStyle.alignment              = .left
+        paraStyle.headIndent             = 0
+        paraStyle.tailIndent             = 0
+        paraStyle.lineSpacing            = space
+        paraStyle.lineBreakMode          = .byCharWrapping
+        paraStyle.firstLineHeadIndent    = 0.0
+        paraStyle.hyphenationFactor      = 1.0
+        paraStyle.paragraphSpacingBefore = 0.0
+        
+        //设置字间距 NSKernAttributeName: 0.5.FloatValue
+        var dic = NSDictionary()
+        if zpace == 0 {
+            dic = [kCTFontAttributeName: font, kCTParagraphStyleAttributeName: paraStyle, kCTKernAttributeName: 0.5]
+        } else {
+            dic = [kCTFontAttributeName: font, kCTParagraphStyleAttributeName: paraStyle, kCTKernAttributeName: zpace]
+        }
+        
+        let size = text.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedStringKey : Any], context: nil)
+        
+        return size.height
     
-    
-    /*
-     -(CGFloat)SX_getSpaceLabelHeight:(NSString*)text withFont:(UIFont*)font withWidth:(CGFloat)width withSpace:(CGFloat)space withZspace:(NSNumber *)zpace{
-     
-     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-     paraStyle.lineBreakMode =NSLineBreakByCharWrapping;
-     paraStyle.alignment =NSTextAlignmentLeft;
-     paraStyle.lineSpacing = space;
-     paraStyle.hyphenationFactor = 1.0;
-     paraStyle.firstLineHeadIndent =0.0;
-     paraStyle.paragraphSpacingBefore =0.0;
-     paraStyle.headIndent = 0;
-     paraStyle.tailIndent = 0;
-     
-     //设置字间距 NSKernAttributeName:@0.5f
-     NSDictionary *dic;
-     if (zpace == 0) {
-     dic =@{NSFontAttributeName:font,NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:@0.5f
-     };
-     }else {
-     dic =@{NSFontAttributeName:font,NSParagraphStyleAttributeName:paraStyle,NSKernAttributeName:zpace
-     };
-     }
-     
-     CGSize size = [text boundingRectWithSize:CGSizeMake(width,MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:dic context:nil].size;
-     return size.height;
-     }
-     
-     */
+    }
  }
  
  // ==============================================================================================================================
@@ -271,7 +266,6 @@
         let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         negativeSpacer.width = -10
         self.navigationItem.leftBarButtonItems = [negativeSpacer, leftItem]
-        
     }
     
     @objc func rightAction() {

@@ -10,9 +10,9 @@ import UIKit
 
 class SX_OverseaController: UIViewController {
     
-// ==================================================================================================================================
+// ==============================================================================================================================
 // MARK: - Lazy
-// ==================================================================================================================================
+// ==============================================================================================================================
     lazy var tableView: UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: self.view.bounds.height), style: .grouped)
         table.contentInset = UIEdgeInsetsMake(-CGFloat(kNavH), 0, 0, 0);
@@ -59,26 +59,26 @@ class SX_OverseaController: UIViewController {
     }
 }
 
-// ==================================================================================================================================
+// ==============================================================================================================================
 // MARK: - Other Method
-// ==================================================================================================================================
+// =============================================================================================================================
 extension SX_OverseaController {
     
     
     
 }
 
-// ==================================================================================================================================
+// ==============================================================================================================================
 // MARK: - Other Method 2 响应
-// ==================================================================================================================================
+// ==============================================================================================================================
 extension SX_OverseaController {
     
     
 }
 
-// ==================================================================================================================================
+// ===============================================================================================================================
 // MARK: - UITableViewDelegate
-// ==================================================================================================================================
+// ==============================================================================================================================
 extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -125,13 +125,13 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
         let  label1 = UILabel()
         
         if indexPath.section == 0 {
-            return (label1.sx_getSpaceLabelHeight(self.contentDataArr[indexPath.section], with: UIFont.systemFont(ofSize: 14), withWidth: SCREEN_WIDTH-20, withSpace: 0, withZspace: 0)) + 40
+            return (label1.SX_getSpaceLabelHeight(self.contentDataArr[indexPath.section] as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0)) + 40
 
         } else if indexPath.section == 1 {
-            return label1.sx_getSpaceLabelHeight(self.contentDataArr[indexPath.section], with: UIFont.systemFont(ofSize: 14), withWidth: SCREEN_WIDTH-20, withSpace: 0, withZspace: 0) + 40
+            return label1.SX_getSpaceLabelHeight(self.contentDataArr[indexPath.section] as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 40
             
         } else if indexPath.section == 2 {
-            return label1.sx_getSpaceLabelHeight(self.contentDataArr[indexPath.section], with: UIFont.systemFont(ofSize: 14), withWidth: SCREEN_WIDTH-20, withSpace: 0, withZspace: 0) + 40
+            return label1.SX_getSpaceLabelHeight(self.contentDataArr[indexPath.section] as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 40
             
         } else if indexPath.section == 3{
              return 90.FloatValue.IPAD_XValue
