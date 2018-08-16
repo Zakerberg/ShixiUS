@@ -8,9 +8,9 @@
  
  import UIKit
  import SnapKit
-// ==================================================================================================================================
-// MARK: - UIColor
-// ==================================================================================================================================
+ // ==============================================================================================================================
+ // MARK: - UIColor
+ // ==============================================================================================================================
  extension UIColor {
     
     /// rgb颜色
@@ -74,9 +74,9 @@
         return UIColor(red: ((CGFloat)((hexValue & 0xFF0000) >> 16)) / 255.0, green: ((CGFloat)((hexValue & 0xFF00) >> 8)) / 255.0, blue: ((CGFloat)(hexValue & 0xFF)) / 255.0, alpha: 1.0)
     }
  }
-// ==================================================================================================================================
-// MARK: - UIImage Extension
-// ==================================================================================================================================
+ // ==============================================================================================================================
+ // MARK: - UIImage Extension
+ // ==============================================================================================================================
  extension UIImage {
     
     var height:CGFloat{return self.size.height}
@@ -146,10 +146,10 @@
  // #define HexColor(HexValue,alphaValue) [UIColor colorWithRed:((float)((HexValue & 0xFF0000) >> 16))/255.0 green:((float)((HexValue & 0xFF00) >> 8))/255.0 blue:((float)(HexValue & 0xFF))/255.0 alpha:alphaValue]
  //使用,前面是十六进制值,后面是透明度(粉嫩色...)
  // self.view.backgroundColor = HexColor(0xFF335B,1.0f);
-
-// ==================================================================================================================================
-//MARK: - NSString Extension
-// ==================================================================================================================================
+ 
+ // ==============================================================================================================================
+ //MARK: - NSString Extension
+ // ==============================================================================================================================
  extension NSString  {
     
     var md5: NSString! {
@@ -179,7 +179,7 @@
     }
  }
  
-extension Int {
+ extension Int {
     var FloatValue:CGFloat{return CGFloat(self)}
     var DoubleValue:Double{return Double(self)}
     
@@ -198,11 +198,11 @@ extension Int {
  }
  
  
-// ==================================================================================================================================
-// MARK: - UILabel Extension
-// ==================================================================================================================================
+ // ==============================================================================================================================
+ // MARK: - UILabel Extension
+ // ==============================================================================================================================
  extension UILabel {
-
+    
     /**
      *  计算UILabel的高度(带有行间距的情况)
      *  @param text  内容
@@ -211,7 +211,7 @@ extension Int {
      *  @return 高度
      *  @param zpace  字间距 --> @10 这样设置  默认的话设置 0 就ok
      */
- 
+    
     
     /*
      -(CGFloat)SX_getSpaceLabelHeight:(NSString*)text withFont:(UIFont*)font withWidth:(CGFloat)width withSpace:(CGFloat)space withZspace:(NSNumber *)zpace{
@@ -241,17 +241,15 @@ extension Int {
      }
      
      */
-}
+ }
  
- 
- 
-// =================================================================================================================================
-// MARK: - setRightItem
-// =================================================================================================================================
-extension UIViewController {
+ // ==============================================================================================================================
+ // MARK: - setRightItem
+ // ==============================================================================================================================
+ extension UIViewController {
     
     func setRightItem(_ imageName: String) {
-    
+        
         let imageItem = UIBarButtonItem(image: UIImage.init(named: imageName), style: .plain, target: self, action: #selector(rightAction))
         imageItem.setBackgroundImage(UIImage.init(named: "mask"), for: .normal, barMetrics: .default)
         let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
@@ -284,4 +282,39 @@ extension UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
  }
+ 
+ // ==============================================================================================================================
+ // MARK: - UIButton Extension
+ // ==============================================================================================================================
+ extension UIButton {
+    
+     func addTimer(_ timeOut: Int, btn: UIButton){
+        //倒计时时间
+        var timeout = timeOut
+        let queue:DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
+        let _timer:DispatchSource = DispatchSource.makeTimerSource(flags: [], queue: queue) as! DispatchSource
+        _timer.schedule(wallDeadline: DispatchWallTime.now(), repeating: .seconds(1))
+        //每秒执行
+        _timer.setEventHandler(handler: { () -> Void in
+            if(timeout<=0){ //倒计时结束，关闭
+                _timer.cancel();
+                DispatchQueue.main.sync(execute: { () -> Void in
+                    btn.setTitle("重新获取", for: UIControlState())
+                    btn.isEnabled = true
+                    btn.layer.backgroundColor = UIColor.SX_MainColor().cgColor
+                })
+            }else{//正在倒计时
+                let seconds = timeout
+                _ = NSString.localizedStringWithFormat("%.2d", seconds)
+                DispatchQueue.main.sync(execute: { () -> Void in
+                    btn.isEnabled = false
+                    btn.layer.backgroundColor = UIColor.gray.cgColor
+                })
+                timeout -= 1;
+            }
+        })
+        _timer.resume()
+    }
+ }
+
  

@@ -200,12 +200,9 @@ extension SX_LoginController {
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
         })
-
-        
-        
-        
     }
 }
+
 
 // =============================================================================================================================
 // MARK: - UIPickerViewDelegate
@@ -223,28 +220,27 @@ extension SX_LoginController: UIPickerViewDelegate, UIPickerViewDataSource {
 // =============================================================================================================================
 // MARK: - UITextFieldDelegate
 // =============================================================================================================================
-//extension SX_LoginController: UITextFieldDelegate {
-//
-//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-//
-//        if textField == self._loginView?.passCodeTF {
-//            if (textField.text?.lengthOfBytes(using: .utf8))! > 6 {
-////                textField.text =
-//            }
-//
-//            let cs = NSCharacterSet(charactersIn: "0123456789").inverted
-//            // 按cs分离出数组, 数组按""分离出字符串
-//            let filtered = textField.text?.components(separatedBy: cs).joined(separator: "")
-//            if textField.text == filtered {
-//
-//            } else {
-//                self._loginView?.passCodeTF?.text = ""
-//                SXLog("仅限数字----")
-//            }
-//        }
-//    }
-//}
-
+extension SX_LoginController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        
+        if textField == self.passCodeTF {
+            if (textField.text?.lengthOfBytes(using: .utf8))! > 6 {
+                //                textField.text =
+            }
+            
+            let cs = NSCharacterSet(charactersIn: "0123456789").inverted
+            // 按cs分离出数组, 数组按""分离出字符串
+            let filtered = textField.text?.components(separatedBy: cs).joined(separator: "")
+            if textField.text == filtered {
+                
+            } else {
+                
+                SXLog("仅限数字----")
+            }
+        }
+    }
+}
 
 class SX_TextField: UITextField {
     
