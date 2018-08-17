@@ -9,9 +9,7 @@
 import UIKit
 import WebKit
 
-class SX_
-
-: UIViewController,WKNavigationDelegate {
+class SX_UserAgreementController: UIViewController,WKNavigationDelegate {
 
     var webView : WKWebView?
     var urlStr  : NSString?
