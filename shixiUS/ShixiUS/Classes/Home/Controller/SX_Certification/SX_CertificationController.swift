@@ -21,9 +21,9 @@ class SX_CertificationController: UIViewController {
     var loadingView: SX_LoadingView?
     var collectionView: UICollectionView?
     
-// ==================================================================================================================================
+// ==============================================================================================================================
 //  MARK: - lazy
-// ==================================================================================================================================
+// ==============================================================================================================================
     // 综合排序View
     lazy var comprehensiveView: UIView = {
         let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
@@ -70,9 +70,9 @@ class SX_CertificationController: UIViewController {
     }
 }
 
-// ==================================================================================================================================
+// ==============================================================================================================================
 // MARK: - Other Method
-// ==================================================================================================================================
+// ==============================================================================================================================
 extension SX_CertificationController {
     
     func setUI() {
@@ -152,9 +152,9 @@ extension SX_CertificationController {
     }
 }
 
-// ==================================================================================================================================
+// ==============================================================================================================================
 // MARK: - Other Method 2 响应
-// ==================================================================================================================================
+// ==============================================================================================================================
 extension SX_CertificationController {
     
     func fetchData() {
@@ -253,11 +253,11 @@ extension SX_CertificationController {
             
         } else if (view.isKind(of: type(of: self.professionalTypeView))) { // 国家
             
-            self.comprehensiveView.frame = CGRect(x: 0, y: -self.comprehensiveView.bounds.size.height, width: SCREEN_WIDTH, height: self.comprehensiveView.bounds.size.height)
+            self.comprehensiveView.frame  = CGRect(x: 0, y: -self.comprehensiveView.bounds.size.height, width: SCREEN_WIDTH, height: self.comprehensiveView.bounds.size.height)
             self.ClassAttributeView.frame = CGRect(x: 0, y: -self.ClassAttributeView.bounds.size.height, width: SCREEN_WIDTH, height: self.ClassAttributeView.bounds.size.height)
             
             self.comprehensiveView.isHidden  = true
-            self.ClassAttributeView.isHidden       = true
+            self.ClassAttributeView.isHidden = true
             
             let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
             control1?.isSelected = false
@@ -319,15 +319,11 @@ extension SX_CertificationController {
         let delaySeconds = 0.5
         
     }
-    
-    
-    
-    
 }
 
-// ==================================================================================================================================
+// ==============================================================================================================================
 // MARK: - UICollectionViewDelegate
-// ==================================================================================================================================
+// ==============================================================================================================================
 extension SX_CertificationController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -360,8 +356,3 @@ extension SX_CertificationController: UICollectionViewDelegate, UICollectionView
     }
     
 }
-
-
-
-
-
