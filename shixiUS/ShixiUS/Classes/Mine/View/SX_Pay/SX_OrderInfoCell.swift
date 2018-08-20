@@ -55,14 +55,6 @@ extension SX_OrderInfoCell {
         
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 

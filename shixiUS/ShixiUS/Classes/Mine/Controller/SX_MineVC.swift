@@ -150,7 +150,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 SXLog("进入付款记录Conroller")
                 self.hidesBottomBarWhenPushed = true
-                let vc = SX_MinePaymentRecordController()
+                let vc = SX_OrderDetailsController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 self.hidesBottomBarWhenPushed = false
             }else {

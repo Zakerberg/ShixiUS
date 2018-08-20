@@ -70,7 +70,7 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        
+        cell.selectionStyle = .none
         let TF = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
             make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
             make.centerY.equalToSuperview()

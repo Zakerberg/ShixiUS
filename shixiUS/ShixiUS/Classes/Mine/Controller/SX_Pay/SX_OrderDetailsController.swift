@@ -66,16 +66,21 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         
+        cell.backgroundColor = UIColor.yellow
+        cell.textLabel?.text = "我是\(indexPath.section)"
+        cell.selectionStyle = .none
+        
+        
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
-            return 100
-        } else {
+        if indexPath.section == 2 {
             return 200
+        } else {
+            return 100
         }
     }
     
@@ -88,7 +93,7 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        return Margin
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
