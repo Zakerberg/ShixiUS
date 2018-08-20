@@ -81,6 +81,9 @@
 		45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */; };
 		45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */; };
 		45D3520F20D8B3F600D7300A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D3520E20D8B3F600D7300A /* Common.swift */; };
+		45E573BD212A61FE007A4DCD /* SX_OrderDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E573BC212A61FE007A4DCD /* SX_OrderDetailsController.swift */; };
+		45E573C0212A7094007A4DCD /* SX_OrderPayInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E573BF212A7094007A4DCD /* SX_OrderPayInfoCell.swift */; };
+		45E573C2212A70AC007A4DCD /* SX_OrderInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E573C1212A70AC007A4DCD /* SX_OrderInfoCell.swift */; };
 		45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */; };
 		45FDD9A52126AEC300E336F9 /* SX_NetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FDD9A42126AEC300E336F9 /* SX_NetManager.swift */; };
 		7E1318263BF4D1BCB60E6CD2 /* Pods_ShixiUSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */; };
@@ -189,6 +192,9 @@
 		45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaController.swift; sourceTree = "<group>"; };
 		45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseWebController.swift; sourceTree = "<group>"; };
 		45D3520E20D8B3F600D7300A /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		45E573BC212A61FE007A4DCD /* SX_OrderDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OrderDetailsController.swift; sourceTree = "<group>"; };
+		45E573BF212A7094007A4DCD /* SX_OrderPayInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OrderPayInfoCell.swift; sourceTree = "<group>"; };
+		45E573C1212A70AC007A4DCD /* SX_OrderInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OrderInfoCell.swift; sourceTree = "<group>"; };
 		45EBB89520D8D87200863544 /* ShixiUS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShixiUS-Bridging-Header.h"; sourceTree = "<group>"; };
 		45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuideViewController.swift; sourceTree = "<group>"; };
 		45FDD9A42126AEC300E336F9 /* SX_NetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_NetManager.swift; sourceTree = "<group>"; };
@@ -333,12 +339,12 @@
 		45454BCE211834A2002B9EBC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4527F909212269F1000EAEB9 /* SX_MyApply */,
+				45E573BB212A6104007A4DCD /* SX_Pay */,
 				45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */,
 				45454BD32118390D002B9EBC /* SX_MineMyCollectionController.swift */,
-				45454BD52118393B002B9EBC /* SX_MinePaymentRecordController.swift */,
 				45454BD721183965002B9EBC /* SX_MinePersonalController.swift */,
 				45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */,
-				4527F909212269F1000EAEB9 /* SX_MyApply */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -555,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				4527F901211D5D97000EAEB9 /* SX_HeadPortraitCell.swift */,
+				45E573BE212A6234007A4DCD /* SX_Pay */,
 				4527F8F8211BE4EC000EAEB9 /* SX_Personal */,
 				45454BDF21198995002B9EBC /* SX_MyApply */,
 				4527F903211D6FA3000EAEB9 /* SX_FixPassword */,
@@ -605,6 +612,24 @@
 				45452E5B21265C8F002CC995 /* SX_UserAgreementController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		45E573BB212A6104007A4DCD /* SX_Pay */ = {
+			isa = PBXGroup;
+			children = (
+				45454BD52118393B002B9EBC /* SX_MinePaymentRecordController.swift */,
+				45E573BC212A61FE007A4DCD /* SX_OrderDetailsController.swift */,
+			);
+			path = SX_Pay;
+			sourceTree = "<group>";
+		};
+		45E573BE212A6234007A4DCD /* SX_Pay */ = {
+			isa = PBXGroup;
+			children = (
+				45E573BF212A7094007A4DCD /* SX_OrderPayInfoCell.swift */,
+				45E573C1212A70AC007A4DCD /* SX_OrderInfoCell.swift */,
+			);
+			path = SX_Pay;
 			sourceTree = "<group>";
 		};
 		45EBB89920D8DB0100863544 /* LogInAndGuide */ = {
@@ -954,6 +979,7 @@
 			files = (
 				45556B6720D8A1180035FCA6 /* SX_HomeVC.swift in Sources */,
 				45BAD4AA2111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift in Sources */,
+				45E573BD212A61FE007A4DCD /* SX_OrderDetailsController.swift in Sources */,
 				459B334A210965EA00B2EBB0 /* SX_MoreDateController.swift in Sources */,
 				45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */,
 				45ACF3F72105BC44001DAE5A /* SX_OverseaDetailController.swift in Sources */,
@@ -983,6 +1009,7 @@
 				4505982620FC8CB900504B6E /* SX_OverseaCell.swift in Sources */,
 				4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */,
 				45BAD4A82111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift in Sources */,
+				45E573C0212A7094007A4DCD /* SX_OrderPayInfoCell.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
 				45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */,
@@ -1021,6 +1048,7 @@
 				4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */,
 				4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */,
 				4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */,
+				45E573C2212A70AC007A4DCD /* SX_OrderInfoCell.swift in Sources */,
 				4527F91921226C2D000EAEB9 /* SX_ApplyVocationalTrainingController.swift in Sources */,
 				45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */,
 			);
