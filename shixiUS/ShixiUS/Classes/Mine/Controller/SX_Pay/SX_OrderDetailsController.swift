@@ -45,7 +45,6 @@ extension SX_OrderDetailsController {
     
     func fetchData() {
         
-        
     }
 }
 
@@ -64,13 +63,23 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if indexPath.section == 0 {
+            let cell = SX_OrderPayInfoCell(style: .default, reuseIdentifier: nil)
+            cell.tradingStauts?.font = UIFont.boldSystemFont(ofSize: 15)
+            cell.tradingStauts?.text = "已付款"
+            cell.payTime?.text   = "付款时间: "  + "2018-01-12 16:32:10"
+            cell.orderNum?.text  = "订 单 号 : "  + "89558565412"
+            cell.makeOrder?.text = "下单时间: "  + "2018-01-12 16:32:10"
+            cell.payPrice?.text  = "订单金额: "  + "1.00"
+            
+            return cell
+        }
+
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         
         cell.backgroundColor = UIColor.yellow
         cell.textLabel?.text = "我是\(indexPath.section)"
         cell.selectionStyle = .none
-        
-        
         
         return cell
     }
@@ -78,9 +87,9 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 2 {
-            return 200
+            return 234.FloatValue.IPAD_XValue
         } else {
-            return 100
+            return 130.FloatValue.IPAD_XValue
         }
     }
     
@@ -99,5 +108,4 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
-    
 }
