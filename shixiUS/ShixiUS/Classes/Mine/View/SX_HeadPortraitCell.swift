@@ -76,7 +76,3 @@ extension SX_HeadPortraitCell {
         })
     }
 }
-
-
-
-
