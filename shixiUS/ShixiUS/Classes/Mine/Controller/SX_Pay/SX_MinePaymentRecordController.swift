@@ -12,7 +12,7 @@ class SX_MinePaymentRecordController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setUI()
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,4 +56,5 @@ extension SX_MinePaymentRecordController {
 extension SX_MinePaymentRecordController {
     
     
+
 }
