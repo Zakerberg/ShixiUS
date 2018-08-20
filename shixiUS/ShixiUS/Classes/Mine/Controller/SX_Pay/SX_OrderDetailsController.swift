@@ -65,6 +65,7 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
         
         if indexPath.section == 0 {
             let cell = SX_OrderPayInfoCell(style: .default, reuseIdentifier: nil)
+            cell.selectionStyle = .none
             cell.tradingStauts?.font = UIFont.boldSystemFont(ofSize: 15)
             cell.tradingStauts?.text = "已付款"
             cell.payTime?.text   = "付款时间: "  + "2018-01-12 16:32:10"
@@ -73,10 +74,22 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
             cell.payPrice?.text  = "订单金额: "  + "1.00"
             
             return cell
+            
+        } else if indexPath.section == 1 {
+            
+            let cell = SX_OrderPayInfoCell(style: .default, reuseIdentifier: nil)
+            cell.selectionStyle = .none
+            cell.tradingStauts?.font = UIFont.boldSystemFont(ofSize: 15)
+            cell.tradingStauts?.text = "支付信息"
+            cell.payTime?.text   = "支付时间: "  + "2018-01-12 16:32:10"
+            cell.orderNum?.text  = "交 易 号 : "  + "89558565412"
+            cell.makeOrder?.text = "支付方式: "  + "支付宝"
+            cell.payPrice?.text  = "支付金额: "  + "1.00"
+            
+            return cell
         }
-
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.backgroundColor = UIColor.yellow
         cell.textLabel?.text = "我是\(indexPath.section)"
         cell.selectionStyle = .none
