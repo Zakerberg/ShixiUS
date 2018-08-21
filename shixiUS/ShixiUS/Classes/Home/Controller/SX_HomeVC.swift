@@ -6,6 +6,14 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  首页
 
+/*
+    我想这世上,
+      许多事早已命中注定.
+         像江海不可平,
+      像走进你心里的路,
+         遥遥不可行.
+ */
+
 import UIKit
 import RxSwift
 import RxCocoa
@@ -221,10 +229,10 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                             self.hidesBottomBarWhenPushed = false
                         }else if i == 2 {
                             SXLog("进入培训认证\(i)")
-//                            self.hidesBottomBarWhenPushed = true
-//                            let vc = SX_CertificationController()
-//                            self.navigationController?.pushViewController(vc, animated: true)
-//                            self.hidesBottomBarWhenPushed = false
+                            //                            self.hidesBottomBarWhenPushed = true
+                            //                            let vc = SX_CertificationController()
+                            //                            self.navigationController?.pushViewController(vc, animated: true)
+                            //                            self.hidesBottomBarWhenPushed = false
                             
                             let vc = SX_LoginController()
                             self.navigationController?.present(vc, animated: true)
