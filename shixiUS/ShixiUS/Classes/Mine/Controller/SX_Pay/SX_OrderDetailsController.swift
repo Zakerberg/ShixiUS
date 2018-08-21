@@ -39,6 +39,7 @@ class SX_OrderDetailsController: UIViewController {
 extension SX_OrderDetailsController {
     
     func setUI() {
+        title = "订单详情"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(self.OrderdetailTable)
     }
@@ -89,10 +90,19 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
             return cell
         }
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.backgroundColor = UIColor.yellow
-        cell.textLabel?.text = "我是\(indexPath.section)"
-        cell.selectionStyle = .none
+        let cell = SX_OrderInfoCell(style: .default, reuseIdentifier: nil)
+        cell.selectionStyle          = .none
+        cell.orderNum?.text          = "订单号:" + "SX3213fsffd"
+        cell.orderStatus?.text       = "【" + "已支付" + "】"
+        cell.orderDate?.text         = "2018-01-12 16:11:22"
+        cell.orderpojectImage?.image = UIImage.init(named: "test000")
+        cell.orderpojectTitle?.text  = "实训项目XXXX实训名称XXXX实训名称"
+        cell.orderTrip?.text         = "行程: " + "5天"
+        cell.orderPeopleCount?.text  = "2成人"
+        cell.orderpojectDate?.text   = "出行日期: " + "2018.5.11 ~ 2018.5.19"
+        cell.orderDestination?.text  = "目的地:" + "New York"
+        cell.totalAmount?.text       = "金额总计: " + "￥4000.00"
+        cell.payableAmount?.text     = "已付金额: " + "￥4000.00"
         
         return cell
     }
