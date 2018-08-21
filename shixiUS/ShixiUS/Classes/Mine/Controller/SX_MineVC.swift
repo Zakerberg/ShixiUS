@@ -25,13 +25,15 @@ class SX_MineVC: UIViewController {
     
     var mineImageArr = [["te"], ["MyApply", "MyCollection"], ["PayRecord", "Personal"], ["FixPassword"]]
     var mineTitleArr = [["st"], ["我的申请", "我的收藏"], ["付费记录", "个人信息"], ["修改密码"]]
+    var quitBtn: UIButton?
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
-        tableView.backgroundColor = UIColor.SX_BackGroundColor()
+        tableView.backgroundColor              = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
-        tableView.delegate   = self
-        tableView.dataSource = self
+        tableView.isScrollEnabled              = false
+        tableView.delegate                     = self
+        tableView.dataSource                   = self
         
         return tableView
     }()
@@ -46,18 +48,6 @@ class SX_MineVC: UIViewController {
 
 // ===============================================================================================================================
 // MARK: - Other Method
-// ===============================================================================================================================
-extension SX_MineVC {
-    
-    
-    
-    
-    
-    
-}
-
-// ===============================================================================================================================
-// MARK: -
 // ===============================================================================================================================
 extension SX_MineVC {
     
@@ -116,6 +106,10 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        if section == 3 {
+            return 45.FloatValue.IPAD_XValue
+        }
         return 10.FloatValue.IPAD_XValue
     }
     
@@ -124,6 +118,26 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        if section == 3 {
+            let view = UIView()
+            
+            self.quitBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+                make.top.equalToSuperview().offset(Margin)
+                make.width.equalTo(SCREEN_WIDTH)
+            }).config({ (QUIT) in
+                QUIT.backgroundColor   = UIColor.white
+                QUIT.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 18)
+                QUIT.setTitle("退出登录", for: .normal)
+                QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
+                QUIT.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("退出登录 +++ + ")
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
+            return view
+        }
         return UIView()
     }
     

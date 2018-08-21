@@ -16,8 +16,8 @@ class SX_OrderDetailsController: UIViewController {
         tableView.backgroundColor = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
-        tableView.delegate   = self
-        tableView.dataSource = self
+        tableView.delegate        = self
+        tableView.dataSource      = self
         
         return tableView
     }()
@@ -25,6 +25,7 @@ class SX_OrderDetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,6 +47,7 @@ extension SX_OrderDetailsController {
     
     func fetchData() {
         
+            
     }
 }
 
@@ -66,13 +68,13 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
         
         if indexPath.section == 0 {
             let cell = SX_OrderPayInfoCell(style: .default, reuseIdentifier: nil)
-            cell.selectionStyle = .none
+            cell.selectionStyle      = .none
             cell.tradingStauts?.font = UIFont.boldSystemFont(ofSize: 15)
             cell.tradingStauts?.text = "已付款"
-            cell.payTime?.text   = "付款时间: "  + "2018-01-12 16:32:10"
-            cell.orderNum?.text  = "订 单 号 : "  + "89558565412"
-            cell.makeOrder?.text = "下单时间: "  + "2018-01-12 16:32:10"
-            cell.payPrice?.text  = "订单金额: "  + "1.00"
+            cell.payTime?.text       = "付款时间: "  + "2018-01-12 16:32:10"
+            cell.orderNum?.text      = "订 单 号 : "  + "89558565412"
+            cell.makeOrder?.text     = "下单时间: "  + "2018-01-12 16:32:10"
+            cell.payPrice?.text      = "订单金额: "  + "1.00"
             
             return cell
             
@@ -82,10 +84,10 @@ extension SX_OrderDetailsController: UITableViewDelegate, UITableViewDataSource 
             cell.selectionStyle = .none
             cell.tradingStauts?.font = UIFont.boldSystemFont(ofSize: 15)
             cell.tradingStauts?.text = "支付信息"
-            cell.payTime?.text   = "支付时间: "  + "2018-01-12 16:32:10"
-            cell.orderNum?.text  = "交 易 号 : "  + "89558565412"
-            cell.makeOrder?.text = "支付方式: "  + "支付宝"
-            cell.payPrice?.text  = "支付金额: "  + "1.00"
+            cell.payTime?.text       = "支付时间: "  + "2018-01-12 16:32:10"
+            cell.orderNum?.text      = "交 易 号 : "  + "89558565412"
+            cell.makeOrder?.text     = "支付方式: "  + "支付宝"
+            cell.payPrice?.text      = "支付金额: "  + "1.00"
             
             return cell
         }
