@@ -74,12 +74,20 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
         
         if indexPath.section == 0 {
             let cell = SX_ApplyProgressCell(style: .default, reuseIdentifier: nil)
-            cell.backgroundView?.isHidden = true
             cell.accessoryType            = .disclosureIndicator
             cell.selectionStyle           = .none
-            cell.progressBgView?.isHidden = true
+            cell.progressNormalBgView?.isHidden = false
+            cell.progressBgView?.isHidden = true  // 1
             cell.progressStatus?.text     = "等待客服联系这是测试的数据为了显示换行,确实要换行啊,还要多少字?换行了吧!"
             cell.progressTime?.text       = "2018-07-10 20:55:00"
+            cell.progressRejected?.text   = "退款申请被驳回,有问题联系客服" // 1
+            
+            
+            return cell
+            
+        } else if indexPath.section == 1 {
+            
+            let cell = UITableViewCell(style: .default, reuseIdentifier: applyDetailCellID)
             
             
             return cell

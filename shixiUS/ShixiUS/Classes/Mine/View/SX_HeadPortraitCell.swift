@@ -34,9 +34,9 @@ class SX_HeadPortraitCell: UITableViewCell {
     }
 }
 
-// ===============================================================================================================================
+// ==================================================================================================================
 // MARK: - configCell()
-// ===============================================================================================================================
+// =================================================================================================================
 extension SX_HeadPortraitCell {
     
     func configCell() {
@@ -46,7 +46,7 @@ extension SX_HeadPortraitCell {
         }).config({ (headPortrait) in
             headPortrait.layer.masksToBounds = true
             headPortrait.layer.cornerRadius  = 30
-            headPortrait.image = UIImage.init(named: "icon")
+            headPortrait.image = #imageLiteral(resourceName: "icon")
             headPortrait.isUserInteractionEnabled = true
         })
 
@@ -56,7 +56,7 @@ extension SX_HeadPortraitCell {
             make.height.equalTo(Margin)
         }).config({ (logIn) in
             logIn.setTitle("登录/注册  ", for: .normal)
-            logIn.setImage(UIImage.init(named: "more"), for: .normal)
+            logIn.setImage(#imageLiteral(resourceName: "more"), for: .normal)
             logIn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             logIn.setTitleColor(UIColor.colorWithHexString(hex: "2d2d2d", alpha: 1), for: .normal)
             logIn.titleEdgeInsets = UIEdgeInsetsMake(0, -logIn.imageView!.bounds.size.width, 0, logIn.imageView!.bounds.size.width)

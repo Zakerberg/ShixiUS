@@ -96,7 +96,7 @@ class SX_HotJobsCell: UITableViewCell {
             make.right.equalToSuperview().offset(-Margin)
             make.width.height.equalTo(60)
         }).config({ (logoImageView) in
-            logoImageView.image = UIImage.init(named: "logo")
+            logoImageView.image = #imageLiteral(resourceName: "logo")
         })
     }
     

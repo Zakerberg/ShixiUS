@@ -165,7 +165,7 @@ extension SX_OverseaDetailController {
                 label.tag = tag + LabelTag
         }
         
-        let _ = UIImageView(image: UIImage.init(named: "btn_down")).addhere(toSuperView: view).layout { (make) in
+        let _ = UIImageView(image: #imageLiteral(resourceName: "btn_down")).addhere(toSuperView: view).layout { (make) in
             make.left.equalTo(label.snp.right).offset(5)
             make.top.equalToSuperview().offset(19)
             make.size.equalTo(CGSize(width: 7, height: 4))
@@ -176,9 +176,9 @@ extension SX_OverseaDetailController {
     }
 }
 
-// ==========================================================================================================================
+// =========================================================================================================================
 // MARK: - Other Method 2 响应
-// =============================================================================================================================
+// =========================================================================================================================
 extension SX_OverseaDetailController {
     /// 调出PickerView
     @objc func topSelectedBtnClick(control: UIControl) {
@@ -236,7 +236,7 @@ extension SX_OverseaDetailController {
                 for index in 0..<4 {
                     
                     let allImg = self.topSelectedView?.viewWithTag(ArrowTag + index) as? UIImageView
-                    allImg?.image = UIImage.init(named: "btn_down")
+                    allImg?.image = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(-Double.pi)*0)
                     allImg?.transform = transform
                     
@@ -333,7 +333,7 @@ extension SX_OverseaDetailController {
         /// 翻转箭头
         UIView.animate(withDuration: 0.1, animations: {
             let selectedImg = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
-            selectedImg.image = UIImage.init(named: "btn_odown")
+            selectedImg.image = #imageLiteral(resourceName: "btn_odown")
             let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
             selectedImg.transform = transform
         }) { (finished) in
@@ -345,7 +345,7 @@ extension SX_OverseaDetailController {
             if (index != (tag-ControlTag)) {
                 UIView.animate(withDuration: 0.1, animations: {
                     let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
-                    allImg?.image = UIImage.init(named: "btn_down")
+                    allImg?.image = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
                     allImg?.transform = transform
                 }) { (finished) in

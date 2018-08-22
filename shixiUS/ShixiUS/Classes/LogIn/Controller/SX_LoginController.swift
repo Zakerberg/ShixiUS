@@ -56,7 +56,7 @@ extension SX_LoginController {
             }, onCompleted: nil, onDisposed: nil)
         })
         
-        let logoView = UIImageView(image: UIImage.init(named: "ShixiLogo")).addhere(toSuperView: self.view).layout { (make) in
+        let logoView = UIImageView(image: #imageLiteral(resourceName: "ShixiLogo")).addhere(toSuperView: self.view).layout { (make) in
             make.top.equalTo(self.backBtn!.snp.bottom).offset(40.FloatValue.IPAD_XValue)
             make.centerX.equalToSuperview()
             make.height.equalTo(45.FloatValue.IPAD_XValue)

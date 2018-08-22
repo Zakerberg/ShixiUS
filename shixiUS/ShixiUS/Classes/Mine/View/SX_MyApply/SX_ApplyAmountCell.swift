@@ -46,13 +46,13 @@ extension SX_ApplyAmountCell {
      
         self.amountTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Title) in
+        }).config({ (TITLE) in
             
         })
         
         self.amountNumber = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Title) in
+        }).config({ (NUMBER) in
             
         })
     }

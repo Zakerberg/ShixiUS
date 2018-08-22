@@ -10,16 +10,17 @@ import UIKit
 
 class SX_ApplyProgressCell: UITableViewCell {
     
-    /// 整个Cell的背景View 上面放 被驳回的Label
-    var progressBgView   : UIView?
-    
-    var progressImageV   : UIImageView?
-    var progressStatus   : UILabel?
-    var progressTime     : UILabel?
+    /// 背景View 上面放 被驳回的Label
+    var progressBgView       : UIView?
+    /// 背景View 上面放 正常的信息
+    var progressNormalBgView : UIView?
+    var progressImageV       : UIImageView?
+    var progressStatus       : UILabel?
+    var progressTime         : UILabel?
     /// 退款申请被驳回Label
-    var progressRejected : UILabel?
+    var progressRejected     : UILabel?
     /// 申请进度Btn >
-    var progressBtn      : UIButton?
+    var progressBtn          : UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,13 +50,21 @@ extension SX_ApplyProgressCell {
     
     func ConfigCell() {
         
+        // 驳回
         progressBgView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.edges.equalToSuperview()
         }).config({ (BGVIEW) in
-            BGVIEW.backgroundColor = UIColor.green
+            BGVIEW.backgroundColor = UIColor.white
         })
         
-        let title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        // Normal
+        self.progressNormalBgView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.edges.equalToSuperview()
+        }).config({ (NORMAL) in
+            NORMAL.backgroundColor = UIColor.white
+        })
+        
+        let title = UILabel().addhere(toSuperView: self.progressNormalBgView!).layout(snapKitMaker: { (make) in
             make.left.top.equalToSuperview().offset(Margin)
             make.height.equalTo(16)
         }).config({ (TITLE) in
@@ -65,7 +74,7 @@ extension SX_ApplyProgressCell {
             TITLE.font = UIFont.boldSystemFont(ofSize: 15)
         })
         
-        self.progressImageV = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.progressImageV = UIImageView().addhere(toSuperView: self.progressNormalBgView!).layout(snapKitMaker: { (make) in
             make.top.equalTo(title.snp.bottom).offset(Margin)
             make.height.width.equalTo(Margin)
             make.left.equalTo(title)
@@ -73,7 +82,7 @@ extension SX_ApplyProgressCell {
             IMAGEVIEW.image = UIImage.init(named: "progress")
         })
         
-        self.progressStatus = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.progressStatus = UILabel().addhere(toSuperView: self.progressNormalBgView!).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.progressImageV!)
             make.left.equalTo(self.progressImageV!.snp.right).offset(Margin)
             make.width.equalTo(250.FloatValue.IPAD_XValue)
@@ -85,7 +94,7 @@ extension SX_ApplyProgressCell {
             STATUS.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         })
         
-        let lineView = UIView().addhere(toSuperView: self.contentView).layout { (make) in
+        let _ = UIView().addhere(toSuperView: self.progressNormalBgView!).layout { (make) in
             make.top.equalTo(self.progressImageV!.snp.bottom)
             make.centerX.equalTo(self.progressImageV!)
             make.width.equalTo(1)
@@ -94,7 +103,7 @@ extension SX_ApplyProgressCell {
                 LINEVIEW.setGradientBackgroundWith([UIColor.gray, UIColor.white], locations: nil, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 1, y: 0))
         }
         
-        self.progressTime = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.progressTime = UILabel().addhere(toSuperView: self.progressNormalBgView!).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.progressStatus!.snp.bottom).offset(5.FloatValue.IPAD_XValue)
             make.left.equalTo(self.progressStatus!)
             make.height.equalTo(13)
@@ -105,11 +114,13 @@ extension SX_ApplyProgressCell {
         })
         
         /// 驳回!
-        //        self.progressRejected = UILabel().addhere(toSuperView: self.progressBgView!).layout(snapKitMaker: { (make) in
-        //
-        //        }).config({ (REJECTED) in
-        //
-        //
-        //        })
+        self.progressRejected = UILabel().addhere(toSuperView: self.progressBgView!).layout(snapKitMaker: { (make) in
+            make.center.equalToSuperview()
+            make.height.equalTo(17)
+        }).config({ (REJECTED) in
+            REJECTED.sizeToFit()
+            REJECTED.textColor = UIColor.red
+            REJECTED.font = UIFont.boldSystemFont(ofSize: 16)
+        })
     }
 }

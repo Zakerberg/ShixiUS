@@ -46,9 +46,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-// ==================================================================================================================================
+// ==============================================================================================================
 // MARK: - UICollectionViewDelegate
-// ==================================================================================================================================
+// ===============================================================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -73,7 +73,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
 //        tapSingle.numberOfTouchesRequired = 1
 //        cell.addGestureRecognizer(tapSingle)
         
-        cell.sourceImageView?.image = UIImage.init(named: "localImg3")
+        cell.sourceImageView?.image = #imageLiteral(resourceName: "localImg3")
         cell.priceLabel?.text = "￥" + "2998.00"
         cell.sourceName?.text = "课程名称课程名称测试"
         cell.certificateLabel?.text = "职业技术证书"
@@ -103,9 +103,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
 
-// ==================================================================================================================================
+// ===============================================================================================================
 // MARK: - configCell
-// ==================================================================================================================================
+// ===============================================================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -150,9 +150,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     }
 }
 
-// =================================================================================================================================
+// ===============================================================================================================
 // MARK: - 查找所在的ViewController
-// =================================================================================================================================
+// ===============================================================================================================
 extension SX_TrainingCell {
     
     // MARK: - 查找所在的ViewController

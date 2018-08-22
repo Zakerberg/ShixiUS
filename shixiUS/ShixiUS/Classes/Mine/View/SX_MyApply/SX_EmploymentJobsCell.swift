@@ -49,99 +49,103 @@ class SX_EmploymentJobsCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    
 }
 
-// ===============================================================================================================================
+// ====================================================================================================================
 // MARK: - ConfigCell
-// ===============================================================================================================================
+// ====================================================================================================================
 extension SX_EmploymentJobsCell {
     
     func ConfigCell() {
         
         self.employmentTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (Title) in
-            
+            make.top.left.equalToSuperview().offset(Margin)
+            make.height.equalTo(16)
+        }).config({ (TITLE) in
+            TITLE.sizeToFit()
+            TITLE.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            TITLE.font = UIFont.boldSystemFont(ofSize: 15)
         })
         
         let addressImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (addressImage) in
-            
+            make.top.equalTo(self.employmentTitle!.snp.bottom).offset(Margin)
+            make.left.equalTo(self.employmentTitle!)
+            make.height.width.equalTo(11.FloatValue.IPAD_XValue)
+        }).config({ (ADDRESSIMAGEV) in
+            ADDRESSIMAGEV.image = #imageLiteral(resourceName: "address")
         })
         
         self.employmentAddress = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Address) in
+        }).config({ (ADDRESS) in
             
         })
         
         let natureImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (natureImage) in
+        }).config({ (NATUREIMAGE) in
             
         })
         
         self.employmentNature = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Nature) in
+        }).config({ (NATURE) in
             
         })
         
         self.employmentDate = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Date) in
+        }).config({ (DATE) in
             
         })
         
         let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (line) in
+        }).config({ (LINE) in
             
         })
         
-// ---------------------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
         
         self.employmentStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Style) in
+        }).config({ (STYLE) in
             
         })
         
         self.employmentDetail = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Detail) in
+        }).config({ (DRTAIL) in
             
         })
         
         self.employmentCancel = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Cancel) in
+        }).config({ (CANCEL) in
             
         })
         
         self.employmentDeposit = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Deposit) in
+        }).config({ (DEPOSIT) in
             
         })
         
         self.employmentInterview = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Interview) in
+        }).config({ (INTERVIEW) in
             
         })
         
         self.employmentEmployed = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Employed) in
+        }).config({ (EMPLOYED) in
             
         })
         
         self.employmentRefund = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Refund) in
+        }).config({ (REFUND) in
             
         })
     }

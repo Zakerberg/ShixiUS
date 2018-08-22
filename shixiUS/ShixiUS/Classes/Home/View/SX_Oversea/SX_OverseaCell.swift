@@ -38,9 +38,9 @@ class SX_OverseaCell: UITableViewCell {
     }
 }
 
-// ==================================================================================================================================
+// ====================================================================================================================
 // MARK: - Other Method
-// ==================================================================================================================================
+// ====================================================================================================================
 extension SX_OverseaCell {
     
     func configCell() {
@@ -61,7 +61,7 @@ extension SX_OverseaCell {
             make.top.equalTo(self.jobName!.snp.bottom).offset(Margin)
             make.width.height.equalTo(14)
             }.config { (addressImg) in
-                addressImg.image = UIImage.init(named: "address")
+                addressImg.image = #imageLiteral(resourceName: "address")
         }
         
         self.address = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -77,7 +77,7 @@ extension SX_OverseaCell {
             make.left.equalTo(self.address!.snp.right).offset(10)
             make.height.top.equalTo(addressImg)
             }.config { (durationImg) in
-                durationImg.image = UIImage.init(named: "Fulltime")
+                durationImg.image = #imageLiteral(resourceName: "Fulltime")
         }
         
         self.duration = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -93,7 +93,7 @@ extension SX_OverseaCell {
             make.left.equalTo(self.duration!.snp.right).offset(10)
             make.height.top.equalTo(addressImg)
             }.config { (natureImg) in
-                natureImg.image = UIImage.init(named: "intership")
+                natureImg.image = #imageLiteral(resourceName: "intership")
         }
         
         self.nature = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
