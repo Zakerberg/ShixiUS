@@ -26,6 +26,8 @@ class SX_ApplyDetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
+        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,28 +36,28 @@ class SX_ApplyDetailController: UIViewController {
     }
 }
 
-// ===============================================================================================================================
+// ======================================================================================================================
 // MARK: - Other Method
-// ===============================================================================================================================
+// =======================================================================================================================
 extension SX_ApplyDetailController {
-  
+    
     func setUI() {
-        
+        title = "申请进度"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
-        
         self.view.addSubview(table)
+        
     }
     
     func fetchData() {
         
-        
     }
 }
 
-// ===============================================================================================================================
+// ========================================================================================================================
 // MARK: - UITableViewDelegate
-// ===============================================================================================================================
+// ========================================================================================================================
 extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
@@ -70,7 +72,18 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if indexPath.section == 0 {
+            let cell = SX_ApplyProgressCell(style: .default, reuseIdentifier: nil)
+            cell.backgroundView?.isHidden = true
+            cell.accessoryType = .disclosureIndicator
+            
+            
+            return cell
+        }
+        
         let cell = UITableViewCell(style: .default, reuseIdentifier: applyDetailCellID)
+        cell.backgroundColor = UIColor.yellow
+        cell.textLabel?.text = "我是\(indexPath.section)----\(indexPath.row)"
         
         return cell
     }
@@ -94,9 +107,9 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
     }
 }
 
-// ===============================================================================================================================
+// ========================================================================================================================
 // MARK: -
-// ===============================================================================================================================
+// ========================================================================================================================
 extension SX_ApplyDetailController {
     
     

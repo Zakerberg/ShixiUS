@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 8/8/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  我的申请里面 所有的 申请进度Cell
+//  我的申请里面 所有的 申请进度Cell 申请详情里面的申请进度
 
 import UIKit
 
@@ -13,6 +13,7 @@ class SX_ApplyProgressCell: UITableViewCell {
     /// 整个Cell的背景View 上面放 被驳回的Label
     var progressBgView   : UIView?
 
+    var progressImageV   : UIImageView?
     var progressTitle    : UILabel?
     var progressTime     : UILabel?
     /// 退款申请被驳回Label
@@ -41,42 +42,57 @@ class SX_ApplyProgressCell: UITableViewCell {
     }
 }
 
-// ===============================================================================================================================
+// =============================================================================================================
 // MARK: - ConfigCell
-// ===============================================================================================================================
+//==============================================================================================================
 extension SX_ApplyProgressCell {
     
     func ConfigCell() {
         
         progressBgView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.edges.equalToSuperview()
-        }).config({ (bgView) in
-           bgView.backgroundColor = UIColor.green
+        }).config({ (BGVIEW) in
+           BGVIEW.backgroundColor = UIColor.green
         })
         
         let title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (title) in
-            title.text = "申请进度"
-            title.sizeToFit()
-            title.font = UIFont.boldSystemFont(ofSize: 15)
+            make.left.top.equalToSuperview().offset(Margin)
+            make.height.equalTo(16)
+        }).config({ (TITLE) in
+            TITLE.sizeToFit()
+            TITLE.text = "申请进度"
+            TITLE.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            TITLE.font = UIFont.boldSystemFont(ofSize: 15)
+        })
+        
+        self.progressImageV = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(title.snp.bottom)
+            make.height.width.equalTo(Margin*2)
+        }).config({ (IMAGEVIEW) in
+            IMAGEVIEW.image = UIImage.init(named: "progress")
         })
         
         self.progressTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (Title) in
-            
+            make.top.equalTo(self.progressImageV!)
+            make
+        }).config({ (PROGRESSTITLE) in
+            PROGRESSTITLE
         })
      
         self.progressTime = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
-        }).config({ (Time) in
+            
+        }).config({ (TIME) in
+            
             
         })
         
+        /// 驳回!
         self.progressRejected = UILabel().addhere(toSuperView: self.progressBgView!).layout(snapKitMaker: { (make) in
             
-        }).config({ (Title) in
+            
+        }).config({ (REJECTED) in
+            
             
         })
     }
