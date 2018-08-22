@@ -13,6 +13,7 @@ class SX_EmploymentJobsCell: UITableViewCell {
     var employmentTitle     : UILabel?
     var employmentAddress   : UILabel?
     var employmentNature    : UILabel?
+    
     /// 岗位性质
     var employmentDate      : UILabel?
     /// 岗位申请的状态
@@ -76,77 +77,90 @@ extension SX_EmploymentJobsCell {
         })
         
         self.employmentAddress = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.centerX.height.equalTo(addressImage)
+            make.left.equalTo(addressImage.snp.right).offset(2.FloatValue.IPAD_XValue)
         }).config({ (ADDRESS) in
-            
+            ADDRESS.sizeToFit()
+            ADDRESS.font = UIFont.systemFont(ofSize: 11)
+            ADDRESS.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
         let natureImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.centerX.height.equalTo(addressImage)
+            make.left.equalTo(self.employmentAddress!.snp.right).offset(Margin)
         }).config({ (NATUREIMAGE) in
-            
+            NATUREIMAGE.image = #imageLiteral(resourceName: "nature")
         })
         
         self.employmentNature = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.centerX.height.equalTo(addressImage)
+            make.left.equalTo(natureImage.snp.right).offset(2.FloatValue.IPAD_XValue)
         }).config({ (NATURE) in
-            
+            NATURE.sizeToFit()
+            NATURE.font = UIFont.systemFont(ofSize: 11)
+            NATURE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
         self.employmentDate = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.centerX.height.equalTo(addressImage)
+            make.right.equalToSuperview().offset(-Margin)
         }).config({ (DATE) in
-            
+            DATE.sizeToFit()
+            DATE.font = UIFont.systemFont(ofSize: 11)
+            DATE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
         let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.top.equalTo(self.employmentAddress!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.left.equalTo(addressImage)
+            make.right.equalTo(self.employmentDate!)
+            make.height.equalTo(0.5)
         }).config({ (LINE) in
-            
+            LINE.backgroundColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
 // ---------------------------------------------------------------------------------------------------------------------
         
-        self.employmentStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (STYLE) in
-            
-        })
-        
-        self.employmentDetail = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (DRTAIL) in
-            
-        })
-        
-        self.employmentCancel = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (CANCEL) in
-            
-        })
-        
-        self.employmentDeposit = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (DEPOSIT) in
-            
-        })
-        
-        self.employmentInterview = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (INTERVIEW) in
-            
-        })
-        
-        self.employmentEmployed = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (EMPLOYED) in
-            
-        })
-        
-        self.employmentRefund = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (REFUND) in
-            
-        })
+//        self.employmentStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//
+//        }).config({ (STYLE) in
+//
+//        })
+//
+//        self.employmentDetail = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//
+//        }).config({ (DRTAIL) in
+//
+//        })
+//
+//        self.employmentCancel = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//
+//        }).config({ (CANCEL) in
+//
+//        })
+//
+//        self.employmentDeposit = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//
+//        }).config({ (DEPOSIT) in
+//
+//        })
+//
+//        self.employmentInterview = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//
+//        }).config({ (INTERVIEW) in
+//
+//        })
+//
+//        self.employmentEmployed = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//
+//        }).config({ (EMPLOYED) in
+//
+//        })
+//
+//        self.employmentRefund = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//
+//        }).config({ (REFUND) in
+//
+//        })
     }
 }
