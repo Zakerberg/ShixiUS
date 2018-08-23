@@ -7,7 +7,6 @@
 
 @implementation UIView (Gradient)
 
-
 + (Class)layerClass {
     return [CAGradientLayer class];
 }
@@ -74,7 +73,6 @@
         [((CAGradientLayer *)self.layer) setEndPoint:self.endPoint];
     }
 }
-
 
 @end
 
