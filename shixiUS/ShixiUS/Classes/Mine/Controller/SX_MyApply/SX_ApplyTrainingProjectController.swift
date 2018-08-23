@@ -20,3 +20,17 @@ class SX_ApplyTrainingProjectController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
+
+
+
+extension SX_ApplyTrainingProjectController {
+    
+    
+    
+    
+    
+    
+}
+
+
+

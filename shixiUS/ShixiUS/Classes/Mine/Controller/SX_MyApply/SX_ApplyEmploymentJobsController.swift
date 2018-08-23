@@ -8,15 +8,138 @@
 
 import UIKit
 
-class SX_ApplyEmploymentJobsController: UIViewController {
+let employCellID = "employCellID"
 
+class SX_ApplyEmploymentJobsController: UIViewController {
+    
+    var dataArr = [Int](repeating: 0, count: 6)
+   
+    lazy var table: UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
+        tableView.backgroundColor              = UIColor.SX_BackGroundColor()
+        tableView.showsVerticalScrollIndicator = false
+        tableView.delegate                     = self
+        tableView.dataSource                   = self
+        
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        setUI()
+        fetchData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 }
+
+// =======================================================================================================================
+// MARK: - Other Method
+// =======================================================================================================================
+extension SX_ApplyEmploymentJobsController {
+    
+    func setUI() {
+        title = "我的申请"
+        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        self.view.addSubview(table)
+    }
+    
+    func fetchData() {
+        
+        SXLog("fetchData")
+        
+    }
+}
+
+// =======================================================================================================================
+// MARK: - UITableViewDelegate
+// =======================================================================================================================
+extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dataArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = SX_EmploymentJobsCell(style: .default, reuseIdentifier: employCellID)
+        cell.backgroundColor           = UIColor.white
+        cell.selectionStyle            = .none
+        cell.employmentTitle?.text     = "美国金融实习岗位-信托和过桥基金业务"
+        cell.employmentDate?.text      = "2018.03.03"
+        cell.employmentAddress?.text   = "美国/纽约"
+        cell.employmentNature?.text    = "正式"
+        
+        switch indexPath.section {
+        case 0: // 申请成功, 查看详情
+            cell.employmentStyle?.text = "申请成功"
+            break
+        case 1: //支付定金, 取消申请
+            
+            break
+        case 2: // 面试通知
+            
+            break
+        case 3: // 等待面试反馈
+            
+            break
+        case 4: // 录用通知
+            
+            break
+        case 5: // 退款
+            
+            break
+        default: break
+            
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 110.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+        SXLog("进入就业岗位的申请详情")
+    
+    }
+}
+
+// =======================================================================================================================
+// MARK: - 
+// =======================================================================================================================
+extension SX_ApplyEmploymentJobsController {
+    
+    
+    
+    
+    
+    
+    
+}
+
