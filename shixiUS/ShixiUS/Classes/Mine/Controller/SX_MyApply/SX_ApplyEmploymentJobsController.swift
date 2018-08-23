@@ -80,21 +80,45 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
         switch indexPath.section {
         case 0: // 申请成功, 查看详情
             cell.employmentStyle?.text = "申请成功"
+            cell.employmentDetail?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.employmentDetail?.titleLabel?.textAlignment = .center
+            cell.employmentDetail?.setTitle("查看详情", for: .normal)
+            cell.employmentDetail?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+
+            cell.employmentDetail?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("查看详情 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+            
             break
         case 1: //支付定金, 取消申请
+            cell.employmentDetail?.isHidden = true
             
             break
         case 2: // 面试通知
+            cell.employmentDetail?.isHidden = true
             
             break
         case 3: // 等待面试反馈
+            cell.employmentDetail?.isHidden = true
             
             break
         case 4: // 录用通知
+            cell.employmentDetail?.isHidden = true
             
             break
         case 5: // 退款
-            
+            cell.employmentDetail?.setTitle("退款", for: .normal)
+            cell.employmentDetail?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.employmentDetail?.setTitleColor(UIColor.white, for: .normal)
+            cell.employmentDetail?.backgroundColor  = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
+            cell.employmentDetail?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("退款 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+
             break
         default: break
             

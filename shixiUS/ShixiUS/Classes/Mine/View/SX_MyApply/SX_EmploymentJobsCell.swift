@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SX_EmploymentJobsCell: UITableViewCell {
+class SX_EmploymentJobsCell : UITableViewCell {
     
     var employmentTitle     : UILabel?
     var employmentAddress   : UILabel?
@@ -18,11 +18,12 @@ class SX_EmploymentJobsCell: UITableViewCell {
     /// 岗位申请的状态
     var employmentStyle     : UILabel?
     
-    /// 查看详情,取消申请, 面试通知, 录用通知, 退款
+    /// 取消申请, 面试通知, 录用通知 (带下划线)
+    var employmentNotiBtn   : SX_UnderlineBtn?
+    /// 查看详情,退款
     var employmentDetail    : UIButton?
     /// 支付定金
-    var employmentPay    : UIButton?
-    
+    var employmentPay       : UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -84,7 +85,7 @@ extension SX_EmploymentJobsCell {
         }).config({ (NATUREIMAGE) in
             NATUREIMAGE.image = #imageLiteral(resourceName: "nature")
         })
-
+        
         self.employmentNature = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.centerY.height.equalTo(addressImage)
             make.left.equalTo(natureImage.snp.right).offset(2.FloatValue.IPAD_XValue)
@@ -93,7 +94,7 @@ extension SX_EmploymentJobsCell {
             NATURE.font = UIFont.systemFont(ofSize: 11)
             NATURE.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
         })
-
+        
         self.employmentDate = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.centerY.height.equalTo(addressImage)
             make.right.equalToSuperview().offset(-Margin)
@@ -102,7 +103,7 @@ extension SX_EmploymentJobsCell {
             DATE.font = UIFont.systemFont(ofSize: 11)
             DATE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
-
+        
         let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.employmentAddress!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(addressImage)
@@ -112,7 +113,7 @@ extension SX_EmploymentJobsCell {
             LINE.backgroundColor = UIColor.SX_LineColor()
         })
         
-// ---------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
         
         self.employmentStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(lineView.snp.bottom).offset(Margin)
@@ -123,17 +124,26 @@ extension SX_EmploymentJobsCell {
             STYLE.font = UIFont.systemFont(ofSize: 12)
             STYLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
-
+        
         self.employmentDetail = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-
-        }).config({ (DRTAIL) in
-
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(25.FloatValue.IPAD_XValue)
+            make.width.equalTo(80.FloatValue.IPAD_XValue)
+        }).config({ (DETAIL) in
+            
         })
-
-        self.employmentPay = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-
-        }).config({ (PAY) in
-
-        })
+        
+//        self.employmentNotiBtn = SX_UnderlineBtn().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//
+//        }).config({ (NOTIBTN) in
+//
+//        })
+//
+//        self.employmentPay = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//
+//        }).config({ (PAY) in
+//
+//        })
     }
 }
