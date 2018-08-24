@@ -37,7 +37,6 @@
 		45452E5C21265C8F002CC995 /* SX_UserAgreementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45452E5B21265C8F002CC995 /* SX_UserAgreementController.swift */; };
 		45454BCD2118184F002B9EBC /* SX_LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BCC2118184F002B9EBC /* SX_LoginController.swift */; };
 		45454BD42118390D002B9EBC /* SX_MineMyCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD32118390D002B9EBC /* SX_MineMyCollectionController.swift */; };
-		45454BD62118393B002B9EBC /* SX_MinePaymentRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD52118393B002B9EBC /* SX_MinePaymentRecordController.swift */; };
 		45454BD821183965002B9EBC /* SX_MinePersonalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD721183965002B9EBC /* SX_MinePersonalController.swift */; };
 		45454BDA2118398C002B9EBC /* SX_MineFixPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */; };
 		45454BE1211989EC002B9EBC /* SX_VocationalTrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */; };
@@ -70,6 +69,7 @@
 		45B19334210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */; };
 		45B19336210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */; };
 		45B19339211056C700EFF422 /* SX_ProjectDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19338211056C700EFF422 /* SX_ProjectDetailModel.swift */; };
+		45B8E4E6212FE9D4002061D5 /* SX_PaymentRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8E4E5212FE9D4002061D5 /* SX_PaymentRecordController.swift */; };
 		45BAD4A82111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD4A72111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift */; };
 		45BAD4AA2111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD4A92111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift */; };
 		45BAD4AC2112A3FF003DBD02 /* SX_PorjectDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD4AB2112A3FF003DBD02 /* SX_PorjectDetailTableView.swift */; };
@@ -143,7 +143,6 @@
 		45452E5B21265C8F002CC995 /* SX_UserAgreementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_UserAgreementController.swift; sourceTree = "<group>"; };
 		45454BCC2118184F002B9EBC /* SX_LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_LoginController.swift; sourceTree = "<group>"; };
 		45454BD32118390D002B9EBC /* SX_MineMyCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineMyCollectionController.swift; sourceTree = "<group>"; };
-		45454BD52118393B002B9EBC /* SX_MinePaymentRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MinePaymentRecordController.swift; sourceTree = "<group>"; };
 		45454BD721183965002B9EBC /* SX_MinePersonalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MinePersonalController.swift; sourceTree = "<group>"; };
 		45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineFixPasswordController.swift; sourceTree = "<group>"; };
 		45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_VocationalTrainingCell.swift; sourceTree = "<group>"; };
@@ -182,6 +181,7 @@
 		45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailTripCollectionViewCell.swift; sourceTree = "<group>"; };
 		45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailStarTimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		45B19338211056C700EFF422 /* SX_ProjectDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailModel.swift; sourceTree = "<group>"; };
+		45B8E4E5212FE9D4002061D5 /* SX_PaymentRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PaymentRecordController.swift; sourceTree = "<group>"; };
 		45BAD4A72111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailScheduleCell.swift; sourceTree = "<group>"; };
 		45BAD4A92111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailCostInformationCell.swift; sourceTree = "<group>"; };
 		45BAD4AB2112A3FF003DBD02 /* SX_PorjectDetailTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PorjectDetailTableView.swift; sourceTree = "<group>"; };
@@ -606,8 +606,8 @@
 		45E573BB212A6104007A4DCD /* SX_Pay */ = {
 			isa = PBXGroup;
 			children = (
-				45454BD52118393B002B9EBC /* SX_MinePaymentRecordController.swift */,
 				45E573BC212A61FE007A4DCD /* SX_OrderDetailsController.swift */,
+				45B8E4E5212FE9D4002061D5 /* SX_PaymentRecordController.swift */,
 			);
 			path = SX_Pay;
 			sourceTree = "<group>";
@@ -990,7 +990,7 @@
 				458A0030210875B300D38014 /* SX_trainingApplyCell.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
-				45454BD62118393B002B9EBC /* SX_MinePaymentRecordController.swift in Sources */,
+				45B8E4E6212FE9D4002061D5 /* SX_PaymentRecordController.swift in Sources */,
 				458A00262106FBC600D38014 /* SX_UsInOverseaCell.swift in Sources */,
 				45E573C6212D2B6F007A4DCD /* UIView+Gradient.m in Sources */,
 				4527F91121226B29000EAEB9 /* SX_ApplyProgressDetailController.swift in Sources */,
