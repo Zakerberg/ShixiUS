@@ -49,7 +49,6 @@ extension SX_ApplyEmploymentJobsController {
     func fetchData() {
         
         SXLog("fetchData")
-        
     }
 }
 

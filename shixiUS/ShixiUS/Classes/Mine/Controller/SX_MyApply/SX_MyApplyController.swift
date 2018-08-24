@@ -114,9 +114,9 @@ extension SX_MyApplyController {
         
         /// pageMenu.selectedItemIndex 就是选中的item下标
         if (self.pageMenu?.selectedItemIndex)! < 3 {
-            
             let viewCotroller = self.myChildViewControllers[Int((self.pageMenu?.selectedItemIndex)! as UInt)] as! UIViewController
             scrollView?.addSubview(viewCotroller.view)
+        
             viewCotroller.view.frame = CGRect(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
             scrollView?.contentOffset =  CGPoint(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0)
             scrollView?.contentSize = CGSize(width: self.dataArr.count.FloatValue*SCREEN_WIDTH, height: 0)
@@ -145,7 +145,7 @@ extension SX_MyApplyController: SPPageMenuDelegate {
         if self.myChildViewControllers.count <= toIndex {return}
         
         let targetViewController = self.myChildViewControllers[toIndex] as! UIViewController
-        targetViewController.view.frame = CGRect(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0, width: SCREEN_WIDTH, height: scrollViewHeight)
+        targetViewController.view.frame = CGRect(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
         self.scrollView?.addSubview(targetViewController.view)
     }
 }

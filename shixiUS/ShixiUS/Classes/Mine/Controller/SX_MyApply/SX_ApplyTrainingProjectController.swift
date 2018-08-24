@@ -8,7 +8,7 @@
 
 import UIKit
 
-let tainingCellID = "tainingCellID"
+let TRAININGCELLID = "tainingCellID"
 
 class SX_ApplyTrainingProjectController: UIViewController {
     
@@ -66,7 +66,8 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = SX_MyApplyTrainingProjectCell(style: .default, reuseIdentifier: tainingCellID)
+        let cell = SX_MyApplyTrainingProjectCell(style: .default, reuseIdentifier: TRAININGCELLID)
+        cell.selectionStyle         = .none
         cell.projectTitle?.text     = "华尔街投行实地项目"
         cell.projectAddress?.text   = "Los Angles"
         cell.projectDate?.text      = "2018.03.03"
@@ -107,10 +108,8 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        SXLog("进入就业岗位的申请详情")
+        SXLog("进入实训项目的申请详情")
     }
-    
 }
 
 
