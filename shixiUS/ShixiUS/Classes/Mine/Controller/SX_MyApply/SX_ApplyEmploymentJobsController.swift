@@ -13,7 +13,7 @@ let employCellID = "employCellID"
 class SX_ApplyEmploymentJobsController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 6)
-   
+    
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
         tableView.backgroundColor              = UIColor.SX_BackGroundColor()
@@ -86,7 +86,7 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
             cell.employmentDetail?.titleLabel?.textAlignment = .center
             cell.employmentDetail?.setTitle("查看详情", for: .normal)
             cell.employmentDetail?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
-
+            
             cell.employmentDetail?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("查看详情 ++++")
             }, onError: { (error) in
@@ -111,7 +111,7 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
-
+            
             /// 支付定金
             cell.employmentPay?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.employmentPay?.titleLabel?.textAlignment = .center
@@ -188,7 +188,7 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
-
+            
             break
         default: break
             
@@ -218,7 +218,7 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+        
         SXLog("进入就业岗位的申请详情")
     }
 }

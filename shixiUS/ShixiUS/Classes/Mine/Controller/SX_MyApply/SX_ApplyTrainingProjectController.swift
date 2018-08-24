@@ -73,15 +73,68 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
         cell.projectDate?.text      = "2018.03.03"
         cell.projectTime?.text      = "5Day"
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        switch indexPath.section {
+        case 0:
+            cell.projectCancel?.isHidden       = true
+            cell.projectPayAndRefund?.isHidden = true
+            
+            cell.projectStyle?.text   = "申请成功"
+            cell.projectContact?.text = "等待客服联系"
+            
+            
+            break
+        case 1:
+            cell.projectContact?.isHidden = true
+            cell.projectPayAndRefund?.isHidden = true
+            
+            cell.projectCancel?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.projectCancel?.titleLabel?.textAlignment = .center
+            cell.projectCancel?.setTitle("取消申请", for: .normal)
+            cell.projectCancel?.setlineColor(color: UIColor.colorWithHexString(hex: "666666", alpha: 1))
+            cell.projectCancel?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+            
+            cell.projectCancel?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("取消申请 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+            
+            break
+        case 2:
+            cell.projectContact?.isHidden = true
+            cell.projectCancel?.isHidden  = true
+            
+            
+            cell.projectPayAndRefund?.setTitle("去支付", for: .normal)
+            cell.projectPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.projectPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
+            cell.projectPayAndRefund?.backgroundColor  = UIColor.SX_MainColor()
+            cell.projectPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("去支付 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+            
+            break
+        case 3:
+            cell.projectContact?.isHidden = true
+            cell.projectCancel?.isHidden  = true
+            
+            
+            cell.projectPayAndRefund?.setTitle("退款", for: .normal)
+            cell.projectPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.projectPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
+            cell.projectPayAndRefund?.backgroundColor  = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
+            cell.projectPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("退款 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+            
+            break
+        default:
+            break
+        }
         
         return cell
     }

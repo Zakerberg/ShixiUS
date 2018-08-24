@@ -113,29 +113,43 @@ extension SX_MyApplyTrainingProjectCell {
         
 // ---------------------------------------------------------------------------------------------------------------------------
         
-//        self.projectStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//
-//        }).config({ (Style) in
-//
-//        })
-//
-//        self.projectContact = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//
-//        }).config({ (Contact) in
-//
-//        })
-//
-//        self.projectCancel = SX_UnderlineBtn(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//
-//        }).config({ (Cancel) in
-//
-//        })
-//
-//        self.projectPayAndRefund = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//
-//        }).config({ (Pay) in
-//
-//        })
+        self.projectStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(lineView.snp.bottom).offset(Margin)
+            make.left.equalTo(self.projectTitle!)
+            make.height.equalTo(13)
+        }).config({ (STYLE) in
+            STYLE.sizeToFit()
+            STYLE.font = UIFont.systemFont(ofSize: 12)
+            STYLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+        })
+
+        self.projectContact = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(13)
+        }).config({ (CONTACT) in
+            CONTACT.sizeToFit()
+            CONTACT.font = UIFont.systemFont(ofSize: 12)
+            CONTACT.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+        })
+
+        self.projectCancel = SX_UnderlineBtn(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(25.FloatValue.IPAD_XValue)
+            make.width.equalTo(80.FloatValue.IPAD_XValue)
+        }).config({ (Cancel) in
+
+        })
+
+        self.projectPayAndRefund = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(25.FloatValue.IPAD_XValue)
+            make.width.equalTo(80.FloatValue.IPAD_XValue)
+        }).config({ (Pay) in
+
+        })
     }
 }
 
