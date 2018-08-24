@@ -220,6 +220,8 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         SXLog("进入就业岗位的申请详情")
+        let vc = SX_ApplyDetailController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

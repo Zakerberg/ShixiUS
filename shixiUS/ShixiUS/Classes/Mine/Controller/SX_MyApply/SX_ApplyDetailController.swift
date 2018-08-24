@@ -44,7 +44,6 @@ extension SX_ApplyDetailController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
-        
     }
     
     func fetchData() {
@@ -87,8 +86,13 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
             
         } else if indexPath.section == 1 {
             
-            let cell = UITableViewCell(style: .default, reuseIdentifier: applyDetailCellID)
-            
+            let cell = SX_EmploymentJobsCell(style: .default, reuseIdentifier: applyDetailCellID)
+            cell.backgroundColor           = UIColor.white
+            cell.selectionStyle            = .none
+            cell.employmentTitle?.text     = "美国金融实习岗位-信托和过桥基金业务"
+            cell.employmentDate?.text      = "2018.03.03"
+            cell.employmentAddress?.text   = "美国/纽约"
+            cell.employmentNature?.text    = "正式"
             
             return cell
         }
@@ -113,6 +117,8 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 0 {
             
             return UILabel.SX_getSpaceLabelHeight("等待客服联系这是测试的数据为了显示换行,确实要换行啊,还要多少字?换行了吧!", font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 80
+        } else if indexPath.section == 1{
+            return 80.FloatValue.IPAD_XValue
         }
         
         return 45.FloatValue.IPAD_XValue
@@ -133,11 +139,5 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
 // MARK: -
 // ========================================================================================================================
 extension SX_ApplyDetailController {
-    
-    
-    
-    
-    
-    
     
 }
