@@ -4,21 +4,25 @@
 //
 //  Created by Michael 柏 on 8/7/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  职业培训  
+//  我的申请 ---> 职业培训
 
 import UIKit
 
 class SX_VocationalTrainingCell: UITableViewCell {
     
-    var vocationalTitle   : UILabel?
-    var vocationalPeriod  : UILabel?  // 第一期 + 后面的时间
-    var vocationalDate    : UILabel?
+    var vocationalTitle        : UILabel?
     
-    var vocationalStyle   : UILabel?
-    var vocationalContact : UILabel?  // 申请成功,等待客服联系
-    var vocationalCancel  : UIButton?
-    var vocationalPay     : UIButton?
-    var vocationalRfund   : UIButton? // 退款
+    /// 第一期 + 后面的时间
+    var vocationalPeriod       : UILabel?
+    var vocationalDate         : UILabel?
+    
+    /// 申请成功
+    var vocationalStyle        : UILabel?
+    /// 等待客服联系
+    var vocationalContact      : UILabel?
+    var vocationalCancel       : SX_UnderlineBtn?
+    var vocationalPayAndRefund : UIButton?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -92,22 +96,17 @@ extension SX_VocationalTrainingCell {
             
         })
         
-        self.vocationalPay = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.vocationalPayAndRefund = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
         }).config({ (Pay) in
             
         })
         
-        self.vocationalCancel = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.vocationalCancel = SX_UnderlineBtn(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             
         }).config({ (Cancel) in
             
         })
-        
-        self.vocationalRfund = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (Refund) in
-            
-        })
+
     }
 }

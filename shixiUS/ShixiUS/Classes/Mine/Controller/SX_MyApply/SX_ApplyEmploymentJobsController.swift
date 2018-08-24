@@ -42,7 +42,6 @@ class SX_ApplyEmploymentJobsController: UIViewController {
 extension SX_ApplyEmploymentJobsController {
     
     func setUI() {
-        title = "我的申请"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
     }
