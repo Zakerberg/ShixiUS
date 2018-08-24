@@ -125,7 +125,7 @@ extension SX_EmploymentJobsCell {
             STYLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
-        self.employmentDetail = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.employmentDetail = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(25.FloatValue.IPAD_XValue)
@@ -134,12 +134,15 @@ extension SX_EmploymentJobsCell {
             
         })
         
-//        self.employmentNotiBtn = SX_UnderlineBtn().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//
-//        }).config({ (NOTIBTN) in
-//
-//        })
-//
+        self.employmentNotiBtn = SX_UnderlineBtn(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(25.FloatValue.IPAD_XValue)
+            make.width.equalTo(80.FloatValue.IPAD_XValue)
+        }).config({ (NOTIBTN) in
+
+        })
+        
 //        self.employmentPay = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
 //
 //        }).config({ (PAY) in

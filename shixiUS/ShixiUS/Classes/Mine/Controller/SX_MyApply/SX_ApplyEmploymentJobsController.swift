@@ -79,7 +79,11 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
         
         switch indexPath.section {
         case 0: // 申请成功, 查看详情
+            cell.employmentPay?.isHidden     = true
+            cell.employmentNotiBtn?.isHidden = true
+            
             cell.employmentStyle?.text = "申请成功"
+            
             cell.employmentDetail?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.employmentDetail?.titleLabel?.textAlignment = .center
             cell.employmentDetail?.setTitle("查看详情", for: .normal)
@@ -93,22 +97,42 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
             
             break
         case 1: //支付定金, 取消申请
-            cell.employmentDetail?.isHidden = true
+            cell.employmentDetail?.isHidden  = true
             
+            
+            cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
+            cell.employmentNotiBtn?.setTitle("取消申请", for: .normal)
+            cell.employmentNotiBtn?.setlineColor(color: UIColor.colorWithHexString(hex: "666666", alpha: 1))
+            cell.employmentNotiBtn?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+            
+            cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("取消申请 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+
             break
         case 2: // 面试通知
             cell.employmentDetail?.isHidden = true
+            cell.employmentPay?.isHidden    = true
             
             break
         case 3: // 等待面试反馈
-            cell.employmentDetail?.isHidden = true
+            cell.employmentDetail?.isHidden  = true
+            cell.employmentPay?.isHidden     = true
+            cell.employmentNotiBtn?.isHidden = true
             
             break
         case 4: // 录用通知
             cell.employmentDetail?.isHidden = true
+            cell.employmentPay?.isHidden    = true
             
             break
         case 5: // 退款
+            cell.employmentPay?.isHidden     = true
+            cell.employmentNotiBtn?.isHidden = true
+            
             cell.employmentDetail?.setTitle("退款", for: .normal)
             cell.employmentDetail?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.employmentDetail?.setTitleColor(UIColor.white, for: .normal)
@@ -150,7 +174,6 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
         SXLog("进入就业岗位的申请详情")
-    
     }
 }
 
@@ -158,6 +181,9 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
 // MARK: - 
 // =======================================================================================================================
 extension SX_ApplyEmploymentJobsController {
+    
+    
+    
     
     
     

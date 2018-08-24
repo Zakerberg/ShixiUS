@@ -14,6 +14,7 @@ class SX_UnderlineBtn: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        lineColor = UIColor.white
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -21,8 +22,8 @@ class SX_UnderlineBtn: UIButton {
     }
     
     func setlineColor(color: UIColor) {
-        lineColor = color.copy() as? UIColor
         self.setNeedsDisplay()
+        lineColor = color
     }
     
     override func draw(_ rect: CGRect) {
@@ -30,7 +31,7 @@ class SX_UnderlineBtn: UIButton {
         let contextRef = UIGraphicsGetCurrentContext()
         let descender = self.titleLabel?.font.descender
         
-        if (lineColor?.isKind(of: UIColor.self))! {
+        if self.lineColor!.isKind(of: UIColor.self) {
             contextRef?.setStrokeColor(lineColor!.cgColor)
         }
         
