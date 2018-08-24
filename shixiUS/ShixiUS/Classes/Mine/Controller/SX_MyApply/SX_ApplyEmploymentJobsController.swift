@@ -98,7 +98,9 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
             break
         case 1: //支付定金, 取消申请
             cell.employmentDetail?.isHidden  = true
+            cell.employmentDetail?.isHidden  = true
             
+            cell.employmentStyle?.text = "等待面试通知"
             
             cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
@@ -112,26 +114,72 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
 
+            /// 支付定金
+            cell.employmentPay?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.employmentPay?.titleLabel?.textAlignment = .center
+            cell.employmentPay?.backgroundColor = UIColor.SX_MainColor()
+            cell.employmentPay?.setTitle("支付定金", for: .normal)
+            cell.employmentPay?.setTitleColor(UIColor.white, for: .normal)
+            
+            cell.employmentPay?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("支付定金 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+            
             break
         case 2: // 面试通知
-            cell.employmentDetail?.isHidden = true
-            cell.employmentPay?.isHidden    = true
+            cell.employmentDetail?.isHidden  = true
+            cell.employmentPay?.isHidden     = true
+            cell.employmentPay?.isHidden     = true
+            
+            
+            cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 14)
+            cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
+            cell.employmentNotiBtn?.setTitle("面试通知", for: .normal)
+            cell.employmentNotiBtn?.setlineColor(color: UIColor.colorWithHexString(hex: "72a21b", alpha: 1))
+            cell.employmentNotiBtn?.setTitleColor(UIColor.colorWithHexString(hex: "72a21b", alpha: 1), for: .normal)
+            
+            cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("面试通知 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
             
             break
         case 3: // 等待面试反馈
             cell.employmentDetail?.isHidden  = true
             cell.employmentPay?.isHidden     = true
             cell.employmentNotiBtn?.isHidden = true
+            cell.employmentPay?.isHidden     = true
+            
+            cell.employmentStyle?.text = "等待面试通知"
             
             break
         case 4: // 录用通知
-            cell.employmentDetail?.isHidden = true
-            cell.employmentPay?.isHidden    = true
+            cell.employmentDetail?.isHidden  = true
+            cell.employmentPay?.isHidden     = true
+            cell.employmentPay?.isHidden     = true
+            
+            cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 14)
+            cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
+            cell.employmentNotiBtn?.setTitle("录用通知", for: .normal)
+            cell.employmentNotiBtn?.setlineColor(color: UIColor.SX_MainColor())
+            cell.employmentNotiBtn?.setTitleColor(UIColor.SX_MainColor(), for: .normal)
+            
+            cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("录用通知 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
             
             break
         case 5: // 退款
             cell.employmentPay?.isHidden     = true
             cell.employmentNotiBtn?.isHidden = true
+            cell.employmentPay?.isHidden     = true
+            
+            cell.employmentStyle?.text = "应聘失败"
             
             cell.employmentDetail?.setTitle("退款", for: .normal)
             cell.employmentDetail?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
@@ -181,13 +229,6 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
 // MARK: - 
 // =======================================================================================================================
 extension SX_ApplyEmploymentJobsController {
-    
-    
-    
-    
-    
-    
-    
     
     
     

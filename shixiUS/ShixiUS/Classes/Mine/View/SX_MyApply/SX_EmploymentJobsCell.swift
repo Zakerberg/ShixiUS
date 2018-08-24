@@ -143,10 +143,13 @@ extension SX_EmploymentJobsCell {
 
         })
         
-//        self.employmentPay = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//
-//        }).config({ (PAY) in
-//
-//        })
+        self.employmentPay = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalTo(self.employmentNotiBtn!.snp.left).offset(10.FloatValue.IPAD_XValue)
+            make.height.equalTo(25.FloatValue.IPAD_XValue)
+            make.width.equalTo(80.FloatValue.IPAD_XValue)
+        }).config({ (PAY) in
+
+        })
     }
 }
