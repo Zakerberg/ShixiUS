@@ -78,13 +78,13 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
             cell.projectCancel?.isHidden       = true
             cell.projectPayAndRefund?.isHidden = true
             
-            cell.projectStyle?.text   = "申请成功"
-            cell.projectContact?.text = "等待客服联系"
+            cell.projectStyle?.text            = "申请成功"
+            cell.projectContact?.text          = "等待客服联系"
             
             
             break
         case 1:
-            cell.projectContact?.isHidden = true
+            cell.projectContact?.isHidden      = true
             cell.projectPayAndRefund?.isHidden = true
             
             cell.projectCancel?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
@@ -108,7 +108,7 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
             cell.projectPayAndRefund?.setTitle("去支付", for: .normal)
             cell.projectPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.projectPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
-            cell.projectPayAndRefund?.backgroundColor  = UIColor.SX_MainColor()
+            cell.projectPayAndRefund?.backgroundColor   = UIColor.SX_MainColor()
             cell.projectPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("去支付 ++++")
             }, onError: { (error) in
@@ -124,7 +124,7 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
             cell.projectPayAndRefund?.setTitle("退款", for: .normal)
             cell.projectPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.projectPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
-            cell.projectPayAndRefund?.backgroundColor  = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
+            cell.projectPayAndRefund?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
             cell.projectPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("退款 ++++")
             }, onError: { (error) in
@@ -164,6 +164,3 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
         SXLog("进入实训项目的申请详情")
     }
 }
-
-
-

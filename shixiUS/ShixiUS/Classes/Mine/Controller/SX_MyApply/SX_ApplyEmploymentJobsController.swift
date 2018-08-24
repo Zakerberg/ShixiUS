@@ -182,7 +182,7 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
             cell.employmentDetail?.setTitle("退款", for: .normal)
             cell.employmentDetail?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.employmentDetail?.setTitleColor(UIColor.white, for: .normal)
-            cell.employmentDetail?.backgroundColor  = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
+            cell.employmentDetail?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
             cell.employmentDetail?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("退款 ++++")
             }, onError: { (error) in

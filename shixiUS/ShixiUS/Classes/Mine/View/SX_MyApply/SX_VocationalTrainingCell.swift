@@ -53,60 +53,87 @@ extension SX_VocationalTrainingCell {
     func ConfigCell() {
         
         self.vocationalTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (Title) in
-            
+            make.top.left.equalToSuperview().offset(Margin)
+            make.height.equalTo(16)
+        }).config({ (TITLE) in
+            TITLE.sizeToFit()
+            TITLE.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            TITLE.font = UIFont.boldSystemFont(ofSize: 15)
         })
         
         let periodImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (periodImage) in
-            
+            make.top.equalTo(self.vocationalTitle!.snp.bottom).offset(Margin)
+            make.left.equalTo(self.vocationalTitle!)
+            make.height.width.equalTo(11.FloatValue.IPAD_XValue)
+        }).config({ (PERIODIMAGE) in
+            PERIODIMAGE.image = #imageLiteral(resourceName: "Apply_ClassTime")
         })
         
         self.vocationalPeriod = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (Period) in
-            
+            make.centerY.height.equalTo(periodImage)
+            make.left.equalTo(periodImage.snp.right).offset(2.FloatValue.IPAD_XValue)
+        }).config({ (PEROID) in
+            PEROID.sizeToFit()
+            PEROID.font = UIFont.systemFont(ofSize: 11)
+            PEROID.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
         })
         
         self.vocationalDate = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (Date) in
-            
+            make.centerY.height.equalTo(periodImage)
+            make.right.equalToSuperview().offset(-Margin)
+        }).config({ (DATE) in
+            DATE.sizeToFit()
+            DATE.font = UIFont.systemFont(ofSize: 11)
+            DATE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
         let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (line) in
-            
+            make.top.equalTo(self.vocationalPeriod!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.left.equalTo(periodImage)
+            make.right.equalTo(self.vocationalDate!)
+            make.height.equalTo(0.5)
+        }).config({ (LINE) in
+            LINE.backgroundColor = UIColor.SX_LineColor()
         })
         
 //--------------------------------------------------------------------------------------------------------------------------
         
         self.vocationalStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (Style) in
-            
+            make.top.equalTo(lineView.snp.bottom).offset(Margin)
+            make.left.equalTo(self.vocationalTitle!)
+            make.height.equalTo(13)
+        }).config({ (STYLE) in
+            STYLE.sizeToFit()
+            STYLE.font = UIFont.systemFont(ofSize: 12)
+            STYLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
         self.vocationalContact = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (Contact) in
-            
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(13)
+        }).config({ (CONTACT) in
+            CONTACT.sizeToFit()
+            CONTACT.font = UIFont.systemFont(ofSize: 12)
+            CONTACT.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
         self.vocationalPayAndRefund = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(25.FloatValue.IPAD_XValue)
+            make.width.equalTo(80.FloatValue.IPAD_XValue)
         }).config({ (Pay) in
             
         })
         
         self.vocationalCancel = SX_UnderlineBtn(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(25.FloatValue.IPAD_XValue)
+            make.width.equalTo(80.FloatValue.IPAD_XValue)
         }).config({ (Cancel) in
             
         })
-
     }
 }
