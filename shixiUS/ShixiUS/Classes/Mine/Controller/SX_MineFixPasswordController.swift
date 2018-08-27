@@ -50,9 +50,9 @@ class SX_MineFixPasswordController: UIViewController {
 extension SX_MineFixPasswordController {
     
     func setUI() {
+        title = "修改密码"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(self.fixTable)
-        
     }
     
     func fetchData() {

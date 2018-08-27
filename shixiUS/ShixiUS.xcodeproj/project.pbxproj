@@ -15,7 +15,6 @@
 		45215E762111816500AED771 /* SX_ProjectDetailMoreDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45215E752111816500AED771 /* SX_ProjectDetailMoreDateController.swift */; };
 		4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F872211A8970000EAEB9 /* SX_ApplyDetailController.swift */; };
 		4527F875211A8A95000EAEB9 /* SX_ApplyProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */; };
-		4527F879211ACA91000EAEB9 /* SX_ApplyAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F878211ACA91000EAEB9 /* SX_ApplyAmountCell.swift */; };
 		4527F8FA211BE532000EAEB9 /* SX_PersonalIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F8F9211BE532000EAEB9 /* SX_PersonalIconCell.swift */; };
 		4527F8FC211BE93D000EAEB9 /* SX_PersonalMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F8FB211BE93D000EAEB9 /* SX_PersonalMessageCell.swift */; };
 		4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F8FF211D2645000EAEB9 /* SX_ProgressDetailCell.swift */; };
@@ -120,7 +119,6 @@
 		45215E752111816500AED771 /* SX_ProjectDetailMoreDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailMoreDateController.swift; sourceTree = "<group>"; };
 		4527F872211A8970000EAEB9 /* SX_ApplyDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyDetailController.swift; sourceTree = "<group>"; };
 		4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyProgressCell.swift; sourceTree = "<group>"; };
-		4527F878211ACA91000EAEB9 /* SX_ApplyAmountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyAmountCell.swift; sourceTree = "<group>"; };
 		4527F8F9211BE532000EAEB9 /* SX_PersonalIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PersonalIconCell.swift; sourceTree = "<group>"; };
 		4527F8FB211BE93D000EAEB9 /* SX_PersonalMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PersonalMessageCell.swift; sourceTree = "<group>"; };
 		4527F8FF211D2645000EAEB9 /* SX_ProgressDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProgressDetailCell.swift; sourceTree = "<group>"; };
@@ -236,6 +234,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32E804952133D0E300B3957C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4527F8F8211BE4EC000EAEB9 /* SX_Personal */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,7 +352,6 @@
 		45454BDF21198995002B9EBC /* SX_MyApply */ = {
 			isa = PBXGroup;
 			children = (
-				4527F878211ACA91000EAEB9 /* SX_ApplyAmountCell.swift */,
 				4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */,
 				4527F8FF211D2645000EAEB9 /* SX_ProgressDetailCell.swift */,
 				45454BE0211989EC002B9EBC /* SX_VocationalTrainingCell.swift */,
@@ -465,7 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				45454BCE211834A2002B9EBC /* Controller */,
-				45556B6F20D8A51A0035FCA6 /* Model */,
+				32E804952133D0E300B3957C /* Model */,
 				45556B7120D8A51A0035FCA6 /* View */,
 			);
 			path = Mine;
@@ -546,13 +550,6 @@
 			children = (
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		45556B6F20D8A51A0035FCA6 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		45556B7120D8A51A0035FCA6 /* View */ = {
@@ -994,7 +991,6 @@
 				458A00262106FBC600D38014 /* SX_UsInOverseaCell.swift in Sources */,
 				45E573C6212D2B6F007A4DCD /* UIView+Gradient.m in Sources */,
 				4527F91121226B29000EAEB9 /* SX_ApplyProgressDetailController.swift in Sources */,
-				4527F879211ACA91000EAEB9 /* SX_ApplyAmountCell.swift in Sources */,
 				4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */,
 				4505982620FC8CB900504B6E /* SX_OverseaCell.swift in Sources */,
 				4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */,

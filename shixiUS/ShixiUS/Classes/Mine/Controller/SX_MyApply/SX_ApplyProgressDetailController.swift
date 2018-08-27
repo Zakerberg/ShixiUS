@@ -21,6 +21,17 @@ class SX_ApplyProgressDetailController: UIViewController {
 
     var dataArr = [Int](repeating: 8, count: 5)
     
+    lazy var table: UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
+        tableView.backgroundColor              = UIColor.SX_BackGroundColor()
+        tableView.showsVerticalScrollIndicator = false
+        tableView.isScrollEnabled              = false
+        tableView.delegate                     = self
+        tableView.dataSource                   = self
+        
+        return tableView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -59,7 +70,7 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: progressDetailCellID)
+        let cell = SX_ProgressDetailCell(style: .default, reuseIdentifier: progressDetailCellID)
         
         
         

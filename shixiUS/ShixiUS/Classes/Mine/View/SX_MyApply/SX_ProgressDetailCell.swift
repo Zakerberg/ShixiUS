@@ -10,6 +10,10 @@ import UIKit
 
 class SX_ProgressDetailCell: UITableViewCell {
 
+    var progressTitle : UILabel?
+    var progressDes   : UILabel?
+    var progressDate  : UILabel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,6 +42,22 @@ extension SX_ProgressDetailCell{
     
     func ConfigCell() {
         
+        self.progressTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (TITLE) in
+            
+        })
         
+        self.progressDes = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (TITLE) in
+            
+        })
+        
+        self.progressDate = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (TITLE) in
+            
+        })
     }
 }
