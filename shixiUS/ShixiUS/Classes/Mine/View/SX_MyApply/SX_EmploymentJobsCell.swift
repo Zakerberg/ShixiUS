@@ -15,6 +15,8 @@ class SX_EmploymentJobsCell : UITableViewCell {
     var employmentNature    : UILabel?
     var employmentDate      : UILabel?
     
+    var lineView            : UIView?
+    
     /// 岗位申请的状态
     var employmentStyle     : UILabel?
     
@@ -104,7 +106,7 @@ extension SX_EmploymentJobsCell {
             DATE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
-        let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.employmentAddress!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(addressImage)
             make.right.equalTo(self.employmentDate!)
@@ -116,7 +118,7 @@ extension SX_EmploymentJobsCell {
 // -------------------------------------------------------------------------------------------------------------------
         
         self.employmentStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(Margin)
+            make.top.equalTo(lineView!.snp.bottom).offset(Margin)
             make.left.equalTo(self.employmentTitle!)
             make.height.equalTo(13)
         }).config({ (STYLE) in
@@ -126,7 +128,7 @@ extension SX_EmploymentJobsCell {
         })
         
         self.employmentDetail = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.top.equalTo(lineView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)
@@ -135,7 +137,7 @@ extension SX_EmploymentJobsCell {
         })
         
         self.employmentNotiBtn = SX_UnderlineBtn(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.top.equalTo(lineView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)
@@ -144,7 +146,7 @@ extension SX_EmploymentJobsCell {
         })
         
         self.employmentPay = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.top.equalTo(lineView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalTo(self.employmentNotiBtn!.snp.left).offset(10.FloatValue.IPAD_XValue)
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)
