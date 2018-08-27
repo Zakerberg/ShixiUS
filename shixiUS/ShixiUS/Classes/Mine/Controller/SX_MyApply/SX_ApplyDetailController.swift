@@ -51,7 +51,6 @@ extension SX_ApplyDetailController {
     
     func fetchData() {
         
-        
     }
 }
 
@@ -168,6 +167,49 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        if section == 2 {
+            let view = UIView()
+            
+            self.payBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+                make.top.equalToSuperview().offset(Margin)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+                make.height.equalTo(50.FloatValue.IPAD_XValue)
+            }).config({ (PAY) in
+                PAY.backgroundColor     = UIColor.SX_MainColor()
+                PAY.layer.masksToBounds = true
+                PAY.layer.cornerRadius  = 5
+                PAY.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
+                PAY.setTitle("支付服务预定金", for: .normal)
+                PAY.setTitleColor(UIColor.white, for: .normal)
+                PAY.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("支付服务预定金 +++ + ")
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
+            
+            self.cancelBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+                make.top.equalTo(self.payBtn!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.height.left.right.equalTo(self.payBtn!)
+            }).config({ (CANCEL) in
+                CANCEL.backgroundColor     = UIColor.colorWithHexString(hex: "cccccc", alpha: 1)
+                CANCEL.layer.masksToBounds = true
+                CANCEL.layer.cornerRadius  = 5
+                CANCEL.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
+                CANCEL.setTitle("取消订单", for: .normal)
+                CANCEL.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+                CANCEL.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("取消订单 +++ + ")
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
+            
+            return view
+        }
+        
         return UIView()
     }
     
@@ -187,22 +229,21 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
         return 45.FloatValue.IPAD_XValue
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 2 {
+            return 120.FloatValue.IPAD_XValue
+        }
+        return 10.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10.FloatValue.IPAD_XValue
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             SXLog("进入申请进度详情界面")
-            
-        } else {
-            
         }
     }
 }
 
-// ===============================================================================================================
-// MARK: -
-// ===============================================================================================================
-extension SX_ApplyDetailController {
-    
-    
-
-
-}
