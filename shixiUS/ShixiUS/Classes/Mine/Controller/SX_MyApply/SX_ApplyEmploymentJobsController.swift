@@ -224,13 +224,3 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-// =======================================================================================================================
-// MARK: - 
-// =======================================================================================================================
-extension SX_ApplyEmploymentJobsController {
-    
-    
-    
-}
-
