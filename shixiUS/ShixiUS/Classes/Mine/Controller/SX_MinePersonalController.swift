@@ -6,6 +6,13 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  个人信息
 
+/*
+ 想打张白条给你
+ 上面就写着:
+ 我欠你一声温柔半世呵护
+ 分期一万年
+ */
+
 import UIKit
 
 class SX_MinePersonalController: UIViewController {

@@ -6,6 +6,15 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  申请详情界面
 
+/*
+ 听过最撩人的一句话:
+ 我之前没有爱过别人
+ 你是第一个
+ 我怕我做的不好
+ 让你觉得
+ 爱情不过如此
+*/
+
 import UIKit
 
 let applyDetailCellID = "applyDetailCellID"
@@ -45,6 +54,7 @@ class SX_ApplyDetailController: UIViewController {
 extension SX_ApplyDetailController {
     
     func setUI() {
+        title = "申请详情"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
     }
@@ -243,6 +253,8 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             SXLog("进入申请进度详情界面")
+            let vc = SX_ApplyProgressDetailController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

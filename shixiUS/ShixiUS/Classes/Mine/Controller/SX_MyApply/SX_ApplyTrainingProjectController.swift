@@ -6,6 +6,14 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的申请 ---> 实训项目
 
+/*
+ 别为了不属于你的观众
+ 演绎你不擅长的人生
+ 反正谢幕后的每次相逢
+ 都有我捧着鲜花
+ 把你拥入怀中
+*/
+
 import UIKit
 
 let TRAININGCELLID = "tainingCellID"

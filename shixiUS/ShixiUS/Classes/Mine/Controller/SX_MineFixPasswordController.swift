@@ -6,6 +6,15 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  修改密码
 
+/*
+ 你身上的味道真好闻
+ 你身上的味道真好闻
+ 你身上的味道真好闻
+ 重要的事情要说三遍
+ 你总是问我我喜欢你什么
+ 其实有时候没什么道理,我只是觉得你很好看也很好闻
+ */
+
 import UIKit
 
 class SX_MineFixPasswordController: UIViewController {

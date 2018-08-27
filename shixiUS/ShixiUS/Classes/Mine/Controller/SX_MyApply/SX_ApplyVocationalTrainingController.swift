@@ -6,6 +6,15 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的申请 ---> 职业培训
 
+/*
+ 我爱你
+ 又很遗憾没有人能证明
+ 可这份爱已经如鲸向海
+ 如鸟投林
+ 无可避免
+ 退无可退了
+*/
+
 import UIKit
 
 let vocationalCellID = "vocationalCellID"

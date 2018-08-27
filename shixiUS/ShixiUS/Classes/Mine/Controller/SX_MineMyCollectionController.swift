@@ -6,6 +6,17 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的收藏
 
+/*
+ 等你时
+ 我觉得一日不见
+ 如隔三秋
+ 
+ 你朝我笑
+ 我又觉得
+ 三秋未见
+ 不过一日
+ */
+
 import UIKit
 
 class SX_MineMyCollectionController: UIViewController {
