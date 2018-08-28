@@ -9,10 +9,9 @@
 import UIKit
 
 class SX_ProgressDetailCell: UITableViewCell {
-
-    var progressTitle : UILabel?
-    var progressDes   : UILabel?
-    var progressDate  : UILabel?
+    
+    var progressTitle   : UILabel?
+    var progressDes     : UILabel? // 详情
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +29,7 @@ class SX_ProgressDetailCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 }
@@ -43,21 +42,23 @@ extension SX_ProgressDetailCell{
     func ConfigCell() {
         
         self.progressTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.top.equalToSuperview().offset(Margin)
+            make.left.equalToSuperview().offset(50.FloatValue.IPAD_XValue)
+            make.height.equalTo(15.FloatValue.IPAD_XValue)
         }).config({ (TITLE) in
-            
+            TITLE.sizeToFit()
+            TITLE.font = UIFont.boldSystemFont(ofSize: 14)
         })
         
         self.progressDes = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (TITLE) in
-            
-        })
-        
-        self.progressDate = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (TITLE) in
-            
+            make.top.equalTo(self.progressTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.height.left.equalTo(self.progressTitle!)
+            make.width.equalTo(250.FloatValue.IPAD_XValue)
+        }).config({ (DES) in
+            DES.sizeToFit()
+            DES.numberOfLines = 0
+            DES.lineBreakMode = .byWordWrapping
+            DES.font = UIFont.systemFont(ofSize: 14)
         })
     }
 }

@@ -43,21 +43,21 @@ extension SX_UsInOverseaCell {
             make.top.equalToSuperview().offset(Margin)
             make.width.centerX.equalToSuperview()
             make.height.equalTo(15)
-        }).config({ (titleLabel) in
-            titleLabel.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-            titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
-            titleLabel.textAlignment = .center
-            titleLabel.sizeToFit()
+        }).config({ (TITLE) in
+            TITLE.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            TITLE.font = UIFont.boldSystemFont(ofSize: 15)
+            TITLE.textAlignment = .center
+            TITLE.sizeToFit()
         })
         
         self.contentLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
-        }).config({ (contentLabel) in
-            contentLabel.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-            contentLabel.font = UIFont.systemFont(ofSize: 13)
-            contentLabel.numberOfLines = 0
+        }).config({ (CONTENT) in
+            CONTENT.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            CONTENT.font = UIFont.systemFont(ofSize: 13)
+            CONTENT.numberOfLines = 0
         })
     }
 }
