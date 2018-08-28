@@ -20,7 +20,6 @@ let progressDetailCellID = "progressDetailCellID"
 class SX_ApplyProgressDetailController: UIViewController {
 
     var dataArr = [Int](repeating: 8, count: 5)
-    
     var progressTitleArr  = ["支付尾款, 获取入职通知", "完成面试, 等待回馈", "预定金已经支付", "就业顾问已沟通", "申请提交成功"]
     var progressDesArr    = ["恭喜您入职成功!", "请耐心等待企业反馈, 祝您入职成功", "您的申请已经发生, 因为人力公司回馈,请耐心等待面试通知,===您的申请已经发生, 因为人力公司回馈,请耐心等待面试通知---您的申请已经发生, 因为人力公司回馈,请耐心等待面试通知", "", "等待我们的就业顾问联系您,进一步了解您的求职意向,帮助您更好的向企业进行推荐,以获得面试机会"]
     
@@ -78,42 +77,42 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
         
         switch indexPath.row {
         case 0:
-           cell.progressTitle?.text      = self.progressTitleArr[indexPath.row]
+           cell.progressTitle?.text      = progressTitleArr[indexPath.row]
            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
            
-           cell.progressDes?.text        = self.progressDesArr[indexPath.row]
+           cell.progressDes?.text        = progressDesArr[indexPath.row]
            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
            
             break
         case 1:
-            cell.progressTitle?.text      = self.progressTitleArr[indexPath.row]
+            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
             cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             
-            cell.progressDes?.text        = self.progressDesArr[indexPath.row]
+            cell.progressDes?.text        = progressDesArr[indexPath.row]
             cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             
             break
         case 2:
-            cell.progressTitle?.text      = self.progressTitleArr[indexPath.row]
+            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
             cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             
-            cell.progressDes?.text        = self.progressDesArr[indexPath.row]
+            cell.progressDes?.text        = progressDesArr[indexPath.row]
             cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             
             break
         case 3:
-            cell.progressTitle?.text      = self.progressTitleArr[indexPath.row]
+            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
             cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             
-            cell.progressDes?.text        = self.progressDesArr[indexPath.row]
+            cell.progressDes?.text        = progressDesArr[indexPath.row]
             cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             
             break
         case 4:
-            cell.progressTitle?.text      = self.progressTitleArr[indexPath.row]
+            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
             cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             
-            cell.progressDes?.text        = self.progressDesArr[indexPath.row]
+            cell.progressDes?.text        = progressDesArr[indexPath.row]
             cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             
             break
@@ -126,6 +125,7 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UILabel.SX_getSpaceLabelHeight(self.progressDesArr[indexPath.row] as NSString, font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 50.FloatValue.IPAD_XValue
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -145,16 +145,5 @@ extension SX_ApplyProgressDetailController {
     
     
 }
-
-// ======================================================================================================================
-// MARK: -
-// ======================================================================================================================
-extension SX_ApplyProgressDetailController {
-    
-    
-    
-}
-
-
 
 

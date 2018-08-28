@@ -6,6 +6,13 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  申请进度详情Cell
 
+/*
+ 无论世界多污秽
+ 有多少虚伪不纯粹
+ 都有我在你身边
+ 拼死给你一方碧海蓝天
+ */
+
 import UIKit
 
 class SX_ProgressDetailCell: UITableViewCell {

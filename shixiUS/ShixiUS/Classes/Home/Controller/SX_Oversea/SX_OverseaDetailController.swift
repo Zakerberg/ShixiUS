@@ -6,6 +6,13 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  海外就业详情界面
 
+/*
+ 我无法确定你是否把我推开
+ 我可以确定的是
+ 无论你把我推开多少次
+ 我都会回来
+ */
+
 import UIKit
 
 private let ArrowTag = 3000

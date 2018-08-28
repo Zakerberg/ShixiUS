@@ -6,6 +6,15 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的申请 ---> 职业培训
 
+/*
+ 我爱你
+ 可最后我们都要长大
+ 从满腔热血变成满头白发
+ 终将有晚辈再出发
+ 不求陪你仗剑天涯
+ 可绝不在你启程时勒住你的马
+ */
+
 import UIKit
 
 class SX_VocationalTrainingCell: UITableViewCell {
