@@ -6,6 +6,14 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  登录
 
+/*
+ 愿你所有的温柔
+ 都能换来
+ 岁月的情深意浓
+ 可以不必回首
+ 相扶白头
+ */
+
 import UIKit
 
 class SX_LoginController: UIViewController {

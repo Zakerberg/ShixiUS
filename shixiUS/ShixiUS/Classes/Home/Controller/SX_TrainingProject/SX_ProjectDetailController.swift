@@ -6,6 +6,11 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  实训项目详情
 
+/*
+ 就算你一身污秽如刺猬
+ 也有我双手拥抱不忌讳
+ */
+
 import UIKit
 
 let projectDetailTitleCellID    = "projectDetailTitleCellID"

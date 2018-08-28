@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  实训项目
 
+/*
+ 希望你可以把自己挂在淘宝上
+ 因为你们淘宝承诺过
+ 淘宝 要淘我喜欢的
+ */
+ 
 import UIKit
 
 private let ArrowTag = 3000

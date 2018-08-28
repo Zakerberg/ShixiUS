@@ -12,11 +12,6 @@ class SX_VIPCenterVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        
-        
-        
         
     }
 }

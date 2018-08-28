@@ -65,17 +65,7 @@ extension SX_ProgressDetailCell{
             TITLE.sizeToFit()
             TITLE.font = UIFont.boldSystemFont(ofSize: 14)
         })
-        
-        
-//        let _ = UIView().addhere(toSuperView: self.contentView).layout { (make) in
-//            make.top.equalTo(self.progressPoint!.snp.bottom)
-//            make.centerX.equalTo(self.progressPoint!)
-//            make.width.equalTo(1)
-//            make.height.equalToSuperview()
-//            }.config { (LINEVIEW) in
-//                LINEVIEW.setGradientBackgroundWith([UIColor.gray, UIColor.white], locations: nil, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 1, y: 0))
-//        }
-        
+
         self.progressDes = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.progressTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(self.progressTitle!)
@@ -86,5 +76,14 @@ extension SX_ProgressDetailCell{
             DES.lineBreakMode = .byWordWrapping
             DES.font = UIFont.systemFont(ofSize: 14)
         })
+        
+//        let _ = UIView().addhere(toSuperView: self.contentView).layout { (make) in
+//            make.top.equalTo(self.progressPoint!.snp.bottom)
+//            make.centerX.equalTo(self.progressPoint!)
+//            make.width.equalTo(1)
+//            make.height.equalTo(self.progressDes!)
+//            }.config { (LINEVIEW) in
+//                LINEVIEW.setGradientBackgroundWith([UIColor.gray, UIColor.white], locations: nil, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 1, y: 0))
+//        }
     }
 }
