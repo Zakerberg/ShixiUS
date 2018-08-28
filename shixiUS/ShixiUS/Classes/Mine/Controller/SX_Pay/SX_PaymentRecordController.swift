@@ -12,8 +12,8 @@ class SX_PaymentRecordController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "付款记录"
-        self.view.backgroundColor = UIColor.SX_MainColor()
+        setUI()
+        fetchData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,3 +21,47 @@ class SX_PaymentRecordController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
+
+// ======================================================================================================================
+// MARK: -
+// ======================================================================================================================
+extension SX_PaymentRecordController {
+    
+    func setUI() {
+        title = "付款记录"
+        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+    }
+    
+    func fetchData() {
+        
+
+    }
+}
+
+// ======================================================================================================================
+// MARK: -
+// ======================================================================================================================
+extension SX_PaymentRecordController {
+    
+    
+    
+  
+    
+    
+    
+}
+
+// ======================================================================================================================
+// MARK: -
+// ======================================================================================================================
+extension SX_PaymentRecordController {
+    
+    
+    
+    
+    
+    
+}
+
+
+
