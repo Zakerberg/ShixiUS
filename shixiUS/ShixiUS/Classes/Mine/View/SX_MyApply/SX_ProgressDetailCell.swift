@@ -20,6 +20,8 @@ class SX_ProgressDetailCell: UITableViewCell {
     var progressTitle   : UILabel?
     var progressDes     : UILabel? // 详情
     
+    var progressPoint   : UIImageView?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -48,19 +50,36 @@ extension SX_ProgressDetailCell{
     
     func ConfigCell() {
         
+        self.progressPoint = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.left.top.equalToSuperview().offset(Margin)
+            
+        }).config({ (POINT) in
+            POINT.sizeToFit()
+        })
+        
         self.progressTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(Margin)
-            make.left.equalToSuperview().offset(50.FloatValue.IPAD_XValue)
+            make.centerY.equalTo(self.progressPoint!)
+            make.left.equalTo(self.progressPoint!.snp.right).offset(Margin)
             make.height.equalTo(15.FloatValue.IPAD_XValue)
         }).config({ (TITLE) in
             TITLE.sizeToFit()
             TITLE.font = UIFont.boldSystemFont(ofSize: 14)
         })
         
+        
+//        let _ = UIView().addhere(toSuperView: self.contentView).layout { (make) in
+//            make.top.equalTo(self.progressPoint!.snp.bottom)
+//            make.centerX.equalTo(self.progressPoint!)
+//            make.width.equalTo(1)
+//            make.height.equalToSuperview()
+//            }.config { (LINEVIEW) in
+//                LINEVIEW.setGradientBackgroundWith([UIColor.gray, UIColor.white], locations: nil, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 1, y: 0))
+//        }
+        
         self.progressDes = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.progressTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
-            make.height.left.equalTo(self.progressTitle!)
-            make.width.equalTo(250.FloatValue.IPAD_XValue)
+            make.left.equalTo(self.progressTitle!)
+            make.right.equalToSuperview().offset(-Margin)
         }).config({ (DES) in
             DES.sizeToFit()
             DES.numberOfLines = 0

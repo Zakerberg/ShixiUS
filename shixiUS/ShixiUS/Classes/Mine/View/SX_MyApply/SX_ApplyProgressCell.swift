@@ -93,15 +93,15 @@ extension SX_ApplyProgressCell {
             STATUS.font = UIFont.systemFont(ofSize: 14)
             STATUS.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         })
-        
-        let _ = UIView().addhere(toSuperView: self.progressNormalBgView!).layout { (make) in
-            make.top.equalTo(self.progressImageV!.snp.bottom)
-            make.centerX.equalTo(self.progressImageV!)
-            make.width.equalTo(1)
-            make.height.equalTo(self.progressStatus!).offset(-Margin)
-            }.config { (LINEVIEW) in
-                LINEVIEW.setGradientBackgroundWith([UIColor.gray, UIColor.white], locations: nil, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 1, y: 0))
-        }
+//        
+//        let _ = UIView().addhere(toSuperView: self.progressNormalBgView!).layout { (make) in
+//            make.top.equalTo(self.progressImageV!.snp.bottom)
+//            make.centerX.equalTo(self.progressImageV!)
+//            make.width.equalTo(1)
+//            make.height.equalTo(self.progressStatus!).offset(-Margin)
+//            }.config { (LINEVIEW) in
+//                LINEVIEW.setGradientBackgroundWith([UIColor.gray, UIColor.white], locations: nil, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 1, y: 0))
+//        }
         
         self.progressTime = UILabel().addhere(toSuperView: self.progressNormalBgView!).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.progressStatus!.snp.bottom).offset(5.FloatValue.IPAD_XValue)
