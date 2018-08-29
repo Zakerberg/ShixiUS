@@ -18,6 +18,7 @@ let employCellID = "employCellID"
 class SX_MineEmploymentJobsController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 6)
+    var notiStr = ""
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
@@ -29,12 +30,17 @@ class SX_MineEmploymentJobsController: UIViewController {
         return tableView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        noti()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
         fetchData()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -45,6 +51,18 @@ class SX_MineEmploymentJobsController: UIViewController {
 // MARK: - Other Method
 // =======================================================================================================================
 extension SX_MineEmploymentJobsController {
+    
+    func noti() {
+        
+        let _ = NotificationCenter.default.rx.notification(Notification.Name(rawValue: "ApplyNoti")).takeUntil(self.rx.deallocated).subscribe(onNext: { (notification) in
+            
+            let userInfo = notification.userInfo as! [String: AnyObject]
+            self.notiStr = userInfo["str"] as! String
+            
+            
+            
+        })
+    }
     
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()

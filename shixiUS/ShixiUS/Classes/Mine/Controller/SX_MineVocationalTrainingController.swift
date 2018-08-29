@@ -61,7 +61,7 @@ extension SX_MineVocationalTrainingController {
 }
 
 // =======================================================================================================================
-// MARK: -
+// MARK: - UITableViewDelegate
 // =======================================================================================================================
 extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewDataSource {
     

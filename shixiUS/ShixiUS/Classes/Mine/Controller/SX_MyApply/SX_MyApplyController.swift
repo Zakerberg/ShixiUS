@@ -67,6 +67,7 @@ class SX_MyApplyController: UIViewController {
 // MARK: - Other Method
 // ===================================================================================================================
 extension SX_MyApplyController {
+
     func setUI() {
         title = "我的申请"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()

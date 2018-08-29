@@ -147,6 +147,8 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 SXLog("进入我的申请Conroller")
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "ApplyNoti"), object: self, userInfo: ["str":"apply"])
+
                 self.hidesBottomBarWhenPushed = true
                 let vc = SX_MyApplyController()
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -154,6 +156,10 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             }else {
                 SXLog("进入我的收藏Conroller")
                 self.hidesBottomBarWhenPushed = true
+                
+                // 加通知 ! ! !
+                
+                
                 let vc = SX_MineMyCollectionController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 self.hidesBottomBarWhenPushed = false
@@ -162,6 +168,12 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 SXLog("进入付款记录Conroller")
                 self.hidesBottomBarWhenPushed = true
+                
+                
+                
+                // 加通知 ! ! !
+                
+                
                 let vc = SX_PaymentRecordController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 self.hidesBottomBarWhenPushed = false
