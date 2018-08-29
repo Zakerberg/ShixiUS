@@ -141,13 +141,15 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        var dic = NSDictionary()
         
         if indexPath.section == 0 {
             
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 SXLog("进入我的申请Conroller")
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "ApplyNoti"), object: self, userInfo: ["str":"apply"])
+                dic = ["str":"apply"]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "NOTI"), object: self, userInfo: dic as? [AnyHashable : Any])
 
                 self.hidesBottomBarWhenPushed = true
                 let vc = SX_MyApplyController()
@@ -167,6 +169,11 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 2 {
             if indexPath.row == 0 {
                 SXLog("进入付款记录Conroller")
+                dic = ["str":"payment"]
+                 NotificationCenter.default.post(name: Notification.Name(rawValue: "NOTI"), object: self, userInfo: dic as? [AnyHashable : Any])
+                
+                
+                
                 self.hidesBottomBarWhenPushed = true
                 
                 

@@ -54,7 +54,7 @@ extension SX_MineEmploymentJobsController {
     
     func noti() {
         
-        let _ = NotificationCenter.default.rx.notification(Notification.Name(rawValue: "ApplyNoti")).takeUntil(self.rx.deallocated).subscribe(onNext: { (notification) in
+        let _ = NotificationCenter.default.rx.notification(Notification.Name(rawValue: "NOTI")).takeUntil(self.rx.deallocated).subscribe(onNext: { (notification) in
             
             let userInfo = notification.userInfo as! [String: AnyObject]
             self.notiStr = userInfo["str"] as! String

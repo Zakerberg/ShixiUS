@@ -22,8 +22,14 @@ class SX_PaymentRecordController: UIViewController {
     var page: NSInteger?
     var status: NSInteger?
     var pageMenu: SPPageMenu?
+    var notiStr = ""
     var dataArr = ["就业岗位", "实训项目", "职业培训"]
     var myChildViewControllers = NSMutableArray()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNoti()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +47,15 @@ class SX_PaymentRecordController: UIViewController {
 // MARK: - Other Method 
 // ======================================================================================================================
 extension SX_PaymentRecordController {
+    
+    func setNoti() {
+        let _ = NotificationCenter.default.rx.notification(Notification.Name(rawValue: "NOTI")).takeUntil(self.rx.deallocated).subscribe(onNext: { (notification) in
+            
+            let userInfo = notification.userInfo as! [String: AnyObject]
+            self.notiStr = userInfo["str"] as! String
+            
+        })
+    }
     
     func setUI() {
         title = "付款记录"
