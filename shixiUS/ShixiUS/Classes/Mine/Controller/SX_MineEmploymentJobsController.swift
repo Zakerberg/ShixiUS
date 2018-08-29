@@ -1,21 +1,21 @@
 //
-//  SX_ApplyEmploymentJobsController.swift
+//  SX_MineEmploymentJobsController.swift
 //  ShixiUS
 //
 //  Created by Michael 柏 on 8/14/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  我的申请 ---> 就业岗位
+//  我的申请,我的收藏,付款记录 ---> 就业岗位
 
 /*
  你用半生温柔相濡以沫陪我赌
  我又怎么可能让你输
-*/
+ */
 
 import UIKit
 
 let employCellID = "employCellID"
 
-class SX_ApplyEmploymentJobsController: UIViewController {
+class SX_MineEmploymentJobsController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 6)
     
@@ -44,7 +44,7 @@ class SX_ApplyEmploymentJobsController: UIViewController {
 // =======================================================================================================================
 // MARK: - Other Method
 // =======================================================================================================================
-extension SX_ApplyEmploymentJobsController {
+extension SX_MineEmploymentJobsController {
     
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
@@ -60,7 +60,7 @@ extension SX_ApplyEmploymentJobsController {
 // =======================================================================================================================
 // MARK: - UITableViewDelegate
 // =======================================================================================================================
-extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewDataSource {
+extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataArr.count
@@ -229,3 +229,4 @@ extension SX_ApplyEmploymentJobsController: UITableViewDelegate, UITableViewData
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+

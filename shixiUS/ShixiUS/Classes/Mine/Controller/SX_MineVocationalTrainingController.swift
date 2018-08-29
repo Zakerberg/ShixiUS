@@ -1,24 +1,25 @@
 //
-//  SX_ApplyTrainingProjectController.swift
+//  SX_MineVocationalTrainingController.swift
 //  ShixiUS
 //
 //  Created by Michael 柏 on 8/14/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  我的申请 ---> 实训项目
+//  我的申请,我的收藏,付款记录 ---> 职业培训
 
 /*
- 别为了不属于你的观众
- 演绎你不擅长的人生
- 反正谢幕后的每次相逢
- 都有我捧着鲜花
- 把你拥入怀中
-*/
+ 我爱你
+ 又很遗憾没有人能证明
+ 可这份爱已经如鲸向海
+ 如鸟投林
+ 无可避免
+ 退无可退了
+ */
 
 import UIKit
 
-let TRAININGCELLID = "tainingCellID"
+let vocationalCellID = "vocationalCellID"
 
-class SX_ApplyTrainingProjectController: UIViewController {
+class SX_MineVocationalTrainingController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 4)
     
@@ -45,9 +46,9 @@ class SX_ApplyTrainingProjectController: UIViewController {
 }
 
 // =======================================================================================================================
-// MARK: -
+// MARK: - Other Method
 // =======================================================================================================================
-extension SX_ApplyTrainingProjectController {
+extension SX_MineVocationalTrainingController {
     
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
@@ -60,9 +61,9 @@ extension SX_ApplyTrainingProjectController {
 }
 
 // =======================================================================================================================
-// MARK: - UITableViewDelegate
+// MARK: -
 // =======================================================================================================================
-extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDataSource {
+extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataArr.count
@@ -74,34 +75,33 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = SX_MyApplyTrainingProjectCell(style: .default, reuseIdentifier: TRAININGCELLID)
-        cell.selectionStyle         = .none
-        cell.projectTitle?.text     = "华尔街投行实地项目"
-        cell.projectAddress?.text   = "Los Angles"
-        cell.projectDate?.text      = "2018.03.03"
-        cell.projectTime?.text      = "5Day"
+        let cell = SX_VocationalTrainingCell(style: .default, reuseIdentifier: vocationalCellID)
+        cell.selectionStyle            = .none
+        cell.vocationalTitle?.text     = "算法工程师培训"
+        cell.vocationalPeriod?.text    = "第一期 | 2018-02-16"
+        cell.vocationalDate?.text      = "2018.03.03"
+        
         
         switch indexPath.section {
         case 0:
-            cell.projectCancel?.isHidden       = true
-            cell.projectPayAndRefund?.isHidden = true
+            cell.vocationalCancel?.isHidden       = true
+            cell.vocationalPayAndRefund?.isHidden = true
             
-            cell.projectStyle?.text            = "申请成功"
-            cell.projectContact?.text          = "等待客服联系"
-            
+            cell.vocationalStyle?.text            = "申请成功"
+            cell.vocationalContact?.text          = "等待客服联系"
             
             break
         case 1:
-            cell.projectContact?.isHidden      = true
-            cell.projectPayAndRefund?.isHidden = true
+            cell.vocationalContact?.isHidden      = true
+            cell.vocationalPayAndRefund?.isHidden = true
             
-            cell.projectCancel?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
-            cell.projectCancel?.titleLabel?.textAlignment = .center
-            cell.projectCancel?.setTitle("取消申请", for: .normal)
-            cell.projectCancel?.setlineColor(color: UIColor.colorWithHexString(hex: "666666", alpha: 1))
-            cell.projectCancel?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+            cell.vocationalCancel?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.vocationalCancel?.titleLabel?.textAlignment = .center
+            cell.vocationalCancel?.setTitle("取消申请", for: .normal)
+            cell.vocationalCancel?.setlineColor(color: UIColor.colorWithHexString(hex: "666666", alpha: 1))
+            cell.vocationalCancel?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
             
-            cell.projectCancel?.rx.tap.subscribe(onNext: { (_) in
+            cell.vocationalCancel?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("取消申请 ++++")
             }, onError: { (error) in
                 SXLog(error)
@@ -109,15 +109,15 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
             
             break
         case 2:
-            cell.projectContact?.isHidden = true
-            cell.projectCancel?.isHidden  = true
+            cell.vocationalContact?.isHidden = true
+            cell.vocationalCancel?.isHidden  = true
             
             
-            cell.projectPayAndRefund?.setTitle("去支付", for: .normal)
-            cell.projectPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
-            cell.projectPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
-            cell.projectPayAndRefund?.backgroundColor   = UIColor.SX_MainColor()
-            cell.projectPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
+            cell.vocationalPayAndRefund?.setTitle("去支付", for: .normal)
+            cell.vocationalPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.vocationalPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
+            cell.vocationalPayAndRefund?.backgroundColor  = UIColor.SX_MainColor()
+            cell.vocationalPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("去支付 ++++")
             }, onError: { (error) in
                 SXLog(error)
@@ -125,15 +125,15 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
             
             break
         case 3:
-            cell.projectContact?.isHidden = true
-            cell.projectCancel?.isHidden  = true
+            cell.vocationalContact?.isHidden = true
+            cell.vocationalCancel?.isHidden  = true
             
             
-            cell.projectPayAndRefund?.setTitle("退款", for: .normal)
-            cell.projectPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
-            cell.projectPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
-            cell.projectPayAndRefund?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
-            cell.projectPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
+            cell.vocationalPayAndRefund?.setTitle("退款", for: .normal)
+            cell.vocationalPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.vocationalPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
+            cell.vocationalPayAndRefund?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
+            cell.vocationalPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("退款 ++++")
             }, onError: { (error) in
                 SXLog(error)
@@ -169,8 +169,9 @@ extension SX_ApplyTrainingProjectController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        SXLog("进入实训项目的申请详情")
+        SXLog("进入职业培训的申请详情")
         let vc = SX_ApplyDetailController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+

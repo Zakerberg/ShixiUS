@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0F24381F419BB7C6CDD0046C /* Pods_ShixiUSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */; };
+		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
+		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
+		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
 		4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982120F6F11C00504B6E /* SX_CertificationController.swift */; };
 		4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */; };
 		4505982620FC8CB900504B6E /* SX_OverseaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982520FC8CB900504B6E /* SX_OverseaCell.swift */; };
@@ -20,11 +23,8 @@
 		4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F8FF211D2645000EAEB9 /* SX_ProgressDetailCell.swift */; };
 		4527F902211D5D97000EAEB9 /* SX_HeadPortraitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F901211D5D97000EAEB9 /* SX_HeadPortraitCell.swift */; };
 		4527F908212181B1000EAEB9 /* SPPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 4527F907212181B0000EAEB9 /* SPPageMenu.m */; };
-		4527F90F21226AF1000EAEB9 /* SX_ApplyEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F90E21226AF1000EAEB9 /* SX_ApplyEmploymentJobsController.swift */; };
 		4527F91121226B29000EAEB9 /* SX_ApplyProgressDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F91021226B29000EAEB9 /* SX_ApplyProgressDetailController.swift */; };
 		4527F91321226B70000EAEB9 /* SX_MyApplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */; };
-		4527F91721226BFC000EAEB9 /* SX_ApplyTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F91621226BFC000EAEB9 /* SX_ApplyTrainingProjectController.swift */; };
-		4527F91921226C2D000EAEB9 /* SX_ApplyVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F91821226C2D000EAEB9 /* SX_ApplyVocationalTrainingController.swift */; };
 		45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */; };
 		45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2F20F48C240099CDDD /* SX_LoadingView.swift */; };
 		453C5B51210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C5B50210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift */; };
@@ -112,6 +112,9 @@
 		1190C349599AFF1C16E19BBE /* Pods-ShixiUS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShixiUS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShixiUS/Pods-ShixiUS.release.xcconfig"; sourceTree = "<group>"; };
 		1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
+		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
+		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
 		4505982120F6F11C00504B6E /* SX_CertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CertificationController.swift; sourceTree = "<group>"; };
 		4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BasePopSelectedView.swift; sourceTree = "<group>"; };
 		4505982520FC8CB900504B6E /* SX_OverseaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaCell.swift; sourceTree = "<group>"; };
@@ -125,11 +128,8 @@
 		4527F901211D5D97000EAEB9 /* SX_HeadPortraitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HeadPortraitCell.swift; sourceTree = "<group>"; };
 		4527F906212181B0000EAEB9 /* SPPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPageMenu.h; sourceTree = "<group>"; };
 		4527F907212181B0000EAEB9 /* SPPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPageMenu.m; sourceTree = "<group>"; };
-		4527F90E21226AF1000EAEB9 /* SX_ApplyEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyEmploymentJobsController.swift; sourceTree = "<group>"; };
 		4527F91021226B29000EAEB9 /* SX_ApplyProgressDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyProgressDetailController.swift; sourceTree = "<group>"; };
 		4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MyApplyController.swift; sourceTree = "<group>"; };
-		4527F91621226BFC000EAEB9 /* SX_ApplyTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyTrainingProjectController.swift; sourceTree = "<group>"; };
-		4527F91821226C2D000EAEB9 /* SX_ApplyVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyVocationalTrainingController.swift; sourceTree = "<group>"; };
 		45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TopSelectedView.swift; sourceTree = "<group>"; };
 		45341D2F20F48C240099CDDD /* SX_LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_LoadingView.swift; sourceTree = "<group>"; };
 		453C5B50210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailTitleCell.swift; sourceTree = "<group>"; };
@@ -234,13 +234,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		32E804952133D0E300B3957C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		4527F8F8211BE4EC000EAEB9 /* SX_Personal */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,9 +249,6 @@
 				4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */,
 				4527F872211A8970000EAEB9 /* SX_ApplyDetailController.swift */,
 				4527F91021226B29000EAEB9 /* SX_ApplyProgressDetailController.swift */,
-				4527F90E21226AF1000EAEB9 /* SX_ApplyEmploymentJobsController.swift */,
-				4527F91621226BFC000EAEB9 /* SX_ApplyTrainingProjectController.swift */,
-				4527F91821226C2D000EAEB9 /* SX_ApplyVocationalTrainingController.swift */,
 			);
 			path = SX_MyApply;
 			sourceTree = "<group>";
@@ -345,6 +335,9 @@
 				45454BD32118390D002B9EBC /* SX_MineMyCollectionController.swift */,
 				45454BD721183965002B9EBC /* SX_MinePersonalController.swift */,
 				45454BD92118398C002B9EBC /* SX_MineFixPasswordController.swift */,
+				329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */,
+				329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */,
+				329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -457,10 +450,7 @@
 		45556B5920D89D290035FCA6 /* VIP Center */ = {
 			isa = PBXGroup;
 			children = (
-				45556B6920D8A4B70035FCA6 /* Model */,
-				45556B6B20D8A4B70035FCA6 /* Service */,
 				45556B6A20D8A4B70035FCA6 /* View */,
-				45556B6820D8A4B70035FCA6 /* ViewModel */,
 			);
 			path = "VIP Center";
 			sourceTree = "<group>";
@@ -469,7 +459,6 @@
 			isa = PBXGroup;
 			children = (
 				45454BCE211834A2002B9EBC /* Controller */,
-				32E804952133D0E300B3957C /* Model */,
 				45556B7120D8A51A0035FCA6 /* View */,
 			);
 			path = Mine;
@@ -523,33 +512,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		45556B6820D8A4B70035FCA6 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		45556B6920D8A4B70035FCA6 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		45556B6A20D8A4B70035FCA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				45556B6C20D8A4D50035FCA6 /* SX_VIPCenterVC.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		45556B6B20D8A4B70035FCA6 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		45556B7120D8A51A0035FCA6 /* View */ = {
@@ -973,9 +941,9 @@
 				45440EFE20E0C40D00058978 /* SX_PageControl.swift in Sources */,
 				45454BD42118390D002B9EBC /* SX_MineMyCollectionController.swift in Sources */,
 				4527F875211A8A95000EAEB9 /* SX_ApplyProgressCell.swift in Sources */,
-				4527F90F21226AF1000EAEB9 /* SX_ApplyEmploymentJobsController.swift in Sources */,
 				45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */,
 				45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */,
+				329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */,
 				4527F8FA211BE532000EAEB9 /* SX_PersonalIconCell.swift in Sources */,
 				45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */,
 				45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */,
@@ -1015,6 +983,7 @@
 				45B19339211056C700EFF422 /* SX_ProjectDetailModel.swift in Sources */,
 				45454BCD2118184F002B9EBC /* SX_LoginController.swift in Sources */,
 				45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */,
+				329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */,
 				45454BD821183965002B9EBC /* SX_MinePersonalController.swift in Sources */,
 				453C5B51210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift in Sources */,
 				45B19334210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift in Sources */,
@@ -1027,15 +996,14 @@
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
 				458A002E21086A7300D38014 /* SX_BaseSuccessController.swift in Sources */,
 				4527F8FC211BE93D000EAEB9 /* SX_PersonalMessageCell.swift in Sources */,
+				329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */,
 				458A002C2108535A00D38014 /* SX_TrainingApplyController.swift in Sources */,
-				4527F91721226BFC000EAEB9 /* SX_ApplyTrainingProjectController.swift in Sources */,
 				45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */,
 				45440F0020E0C4E700058978 /* SX_CycleCell.swift in Sources */,
 				4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */,
 				4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */,
 				4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */,
 				45E573C2212A70AC007A4DCD /* SX_OrderInfoCell.swift in Sources */,
-				4527F91921226C2D000EAEB9 /* SX_ApplyVocationalTrainingController.swift in Sources */,
 				45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

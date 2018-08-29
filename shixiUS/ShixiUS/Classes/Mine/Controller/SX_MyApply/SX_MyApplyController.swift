@@ -82,7 +82,7 @@ extension SX_MyApplyController {
         self.pageMenu = pageMenu
         
         // 就业岗位, 培训项目, 职业认证
-        let controllerClassNames = ["SX_ApplyEmploymentJobsController", "SX_ApplyTrainingProjectController", "SX_ApplyVocationalTrainingController"]
+        let controllerClassNames = ["SX_MineEmploymentJobsController", "SX_MineTrainingProjectController", "SX_MineVocationalTrainingController"]
         
         for index in 0...self.dataArr.count {
             if controllerClassNames.count > index{
