@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 8/14/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  我的申请,我的收藏,付款记录 ---> 实训项目
+//  我的申请 ---> 实训项目
 
 /*
  别为了不属于你的观众

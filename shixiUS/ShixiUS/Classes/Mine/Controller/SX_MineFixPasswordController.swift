@@ -27,15 +27,16 @@ class SX_MineFixPasswordController: UIViewController {
         tableView.backgroundColor = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
-        tableView.delegate   = self
-        tableView.dataSource = self
+        tableView.delegate        = self
+        tableView.dataSource      = self
         
         return tableView
     }()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,6 +57,8 @@ extension SX_MineFixPasswordController {
     }
     
     func fetchData() {
+        
+        
         
     }
 }
@@ -90,14 +93,14 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
         }
         
         if indexPath.section == 0 {
-            cell.textLabel?.text = "原密码"
-            TF.placeholder = "输入旧密码"
+            cell.textLabel?.text    = "原密码"
+            TF.placeholder          = "输入旧密码"
         } else if indexPath.section == 1 && indexPath.row == 0 {
-            cell.textLabel?.text = "新密码"
-            TF.placeholder = "新密码"
+            cell.textLabel?.text    = "新密码"
+            TF.placeholder          = "新密码"
         }else{
-            cell.textLabel?.text = "确认密码"
-            TF.placeholder = "再次输入新密码"
+            cell.textLabel?.text    = "确认密码"
+            TF.placeholder          = "再次输入新密码"
         }
         
         return cell

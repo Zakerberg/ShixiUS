@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 8/14/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  我的申请,我的收藏,付款记录 ---> 就业岗位
+//  我的申请 ---> 就业岗位
 
 /*
  你用半生温柔相濡以沫陪我赌
@@ -18,7 +18,8 @@ let employCellID = "employCellID"
 class SX_MineEmploymentJobsController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 6)
-    var notiStr = ""
+    var str : String?
+    
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
@@ -32,7 +33,6 @@ class SX_MineEmploymentJobsController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        noti()
     }
     
     override func viewDidLoad() {
@@ -51,18 +51,6 @@ class SX_MineEmploymentJobsController: UIViewController {
 // MARK: - Other Method
 // =======================================================================================================================
 extension SX_MineEmploymentJobsController {
-    
-    func noti() {
-        
-        let _ = NotificationCenter.default.rx.notification(Notification.Name(rawValue: "NOTI")).takeUntil(self.rx.deallocated).subscribe(onNext: { (notification) in
-            
-            let userInfo = notification.userInfo as! [String: AnyObject]
-            self.notiStr = userInfo["str"] as! String
-            
-            
-            
-        })
-    }
     
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()

@@ -22,14 +22,8 @@ class SX_PaymentRecordController: UIViewController {
     var page: NSInteger?
     var status: NSInteger?
     var pageMenu: SPPageMenu?
-    var notiStr = ""
     var dataArr = ["就业岗位", "实训项目", "职业培训"]
     var myChildViewControllers = NSMutableArray()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNoti()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,15 +42,6 @@ class SX_PaymentRecordController: UIViewController {
 // ======================================================================================================================
 extension SX_PaymentRecordController {
     
-    func setNoti() {
-        let _ = NotificationCenter.default.rx.notification(Notification.Name(rawValue: "NOTI")).takeUntil(self.rx.deallocated).subscribe(onNext: { (notification) in
-            
-            let userInfo = notification.userInfo as! [String: AnyObject]
-            self.notiStr = userInfo["str"] as! String
-            
-        })
-    }
-    
     func setUI() {
         title = "付款记录"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
@@ -71,7 +56,7 @@ extension SX_PaymentRecordController {
         self.pageMenu = pageMenu
         
         // 就业岗位, 培训项目, 职业认证
-         let controllerClassNames = ["SX_MineEmploymentJobsController", "SX_MineTrainingProjectController", "SX_MineVocationalTrainingController"]
+         let controllerClassNames = ["SX_PayEmploymentJobsController", "SX_PayTrainingProjectController", "SX_PayVocationalTrainingController"]
         
         for index in 0...self.dataArr.count {
             if controllerClassNames.count > index{
@@ -105,6 +90,7 @@ extension SX_PaymentRecordController {
             scrollView?.addSubview(viewCotroller.view)
             
             viewCotroller.view.frame = CGRect(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+            
             scrollView?.contentOffset =  CGPoint(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0)
             scrollView?.contentSize = CGSize(width: self.dataArr.count.FloatValue*SCREEN_WIDTH, height: 0)
         }

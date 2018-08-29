@@ -141,16 +141,11 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        var dic = NSDictionary()
-        
+
         if indexPath.section == 0 {
             
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                SXLog("进入我的申请Conroller")
-                dic = ["str":"apply"]
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "NOTI"), object: self, userInfo: dic as? [AnyHashable : Any])
-
                 self.hidesBottomBarWhenPushed = true
                 let vc = SX_MyApplyController()
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -158,10 +153,6 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             }else {
                 SXLog("进入我的收藏Conroller")
                 self.hidesBottomBarWhenPushed = true
-                
-                // 加通知 ! ! !
-                
-                
                 let vc = SX_MineMyCollectionController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 self.hidesBottomBarWhenPushed = false
@@ -169,18 +160,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 2 {
             if indexPath.row == 0 {
                 SXLog("进入付款记录Conroller")
-                dic = ["str":"payment"]
-                 NotificationCenter.default.post(name: Notification.Name(rawValue: "NOTI"), object: self, userInfo: dic as? [AnyHashable : Any])
-                
-                
-                
                 self.hidesBottomBarWhenPushed = true
-                
-                
-                
-                // 加通知 ! ! !
-                
-                
                 let vc = SX_PaymentRecordController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 self.hidesBottomBarWhenPushed = false
