@@ -18,8 +18,6 @@ let employCellID = "employCellID"
 class SX_MineEmploymentJobsController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 6)
-    var str : String?
-    
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
