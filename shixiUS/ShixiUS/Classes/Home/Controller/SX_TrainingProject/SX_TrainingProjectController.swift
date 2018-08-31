@@ -279,7 +279,7 @@ extension SX_TrainingProjectController {
             }
         }
     }
-    
+     
     /// 展示隐藏动画
     func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
         

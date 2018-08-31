@@ -428,7 +428,6 @@
 			isa = PBXGroup;
 			children = (
 				45ACF3F82105BEF1001DAE5A /* LogIn */,
-				45EBB89920D8DB0100863544 /* LogInAndGuide */,
 				45556B5720D89D290035FCA6 /* Home */,
 				45556B5820D89D290035FCA6 /* Other */,
 				45556B5920D89D290035FCA6 /* VIP Center */,
@@ -580,6 +579,7 @@
 			children = (
 				45454BCC2118184F002B9EBC /* SX_LoginController.swift */,
 				45452E5B21265C8F002CC995 /* SX_UserAgreementController.swift */,
+				45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -604,14 +604,6 @@
 				32E49D2121378FAD005633F2 /* SX_PaymentCell.swift */,
 			);
 			path = SX_Pay;
-			sourceTree = "<group>";
-		};
-		45EBB89920D8DB0100863544 /* LogInAndGuide */ = {
-			isa = PBXGroup;
-			children = (
-				45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */,
-			);
-			path = LogInAndGuide;
 			sourceTree = "<group>";
 		};
 		45FDD9A32126AEAD00E336F9 /* NetManager */ = {
