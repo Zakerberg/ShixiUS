@@ -1271,6 +1271,7 @@
             trackerW = _trackerWidth ? _trackerWidth : (selectedButtonWidth+trackerH*0.5);
             trackerX = selectedButton.frame.origin.x;
             trackerY = (_itemScrollViewH-trackerH)*0.5;
+            
             self.tracker.frame = CGRectMake(trackerX, trackerY, trackerW, trackerH);
             self.tracker.layer.cornerRadius = MIN(trackerW, trackerH)*0.5;
             self.tracker.layer.masksToBounds = YES;
