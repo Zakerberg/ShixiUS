@@ -89,7 +89,6 @@
 		45E573BD212A61FE007A4DCD /* SX_OrderDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E573BC212A61FE007A4DCD /* SX_OrderDetailsController.swift */; };
 		45E573C0212A7094007A4DCD /* SX_OrderPayInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E573BF212A7094007A4DCD /* SX_OrderPayInfoCell.swift */; };
 		45E573C2212A70AC007A4DCD /* SX_OrderInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E573C1212A70AC007A4DCD /* SX_OrderInfoCell.swift */; };
-		45E573C6212D2B6F007A4DCD /* UIView+Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E573C4212D2B6F007A4DCD /* UIView+Gradient.m */; };
 		45E57406212E9847007A4DCD /* SX_UnderlineBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E57405212E9847007A4DCD /* SX_UnderlineBtn.swift */; };
 		45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */; };
 		45FDD9A52126AEC300E336F9 /* SX_NetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FDD9A42126AEC300E336F9 /* SX_NetManager.swift */; };
@@ -207,8 +206,6 @@
 		45E573BC212A61FE007A4DCD /* SX_OrderDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OrderDetailsController.swift; sourceTree = "<group>"; };
 		45E573BF212A7094007A4DCD /* SX_OrderPayInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OrderPayInfoCell.swift; sourceTree = "<group>"; };
 		45E573C1212A70AC007A4DCD /* SX_OrderInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OrderInfoCell.swift; sourceTree = "<group>"; };
-		45E573C4212D2B6F007A4DCD /* UIView+Gradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Gradient.m"; sourceTree = "<group>"; };
-		45E573C5212D2B6F007A4DCD /* UIView+Gradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Gradient.h"; sourceTree = "<group>"; };
 		45E57405212E9847007A4DCD /* SX_UnderlineBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_UnderlineBtn.swift; sourceTree = "<group>"; };
 		45EBB89520D8D87200863544 /* ShixiUS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShixiUS-Bridging-Header.h"; sourceTree = "<group>"; };
 		45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuideViewController.swift; sourceTree = "<group>"; };
@@ -472,8 +469,6 @@
 				45E57405212E9847007A4DCD /* SX_UnderlineBtn.swift */,
 				4527F906212181B0000EAEB9 /* SPPageMenu.h */,
 				4527F907212181B0000EAEB9 /* SPPageMenu.m */,
-				45E573C5212D2B6F007A4DCD /* UIView+Gradient.h */,
-				45E573C4212D2B6F007A4DCD /* UIView+Gradient.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -991,7 +986,6 @@
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
 				45B8E4E6212FE9D4002061D5 /* SX_PaymentRecordController.swift in Sources */,
 				458A00262106FBC600D38014 /* SX_UsInOverseaCell.swift in Sources */,
-				45E573C6212D2B6F007A4DCD /* UIView+Gradient.m in Sources */,
 				32E49D1C21369DB0005633F2 /* SX_PayEmploymentJobsController.swift in Sources */,
 				4527F91121226B29000EAEB9 /* SX_ApplyProgressDetailController.swift in Sources */,
 				4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */,
