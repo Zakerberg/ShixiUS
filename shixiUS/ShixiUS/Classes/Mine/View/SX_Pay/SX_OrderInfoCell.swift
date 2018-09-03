@@ -6,6 +6,13 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  订单详情页面 --- 订单信息
 
+/*
+ 假如真有来世，
+ 我愿生生世世为人，只做芸芸众生中的一个，
+ 哪怕一生贫困清苦，浪迹天涯，只要能爱恨歌哭，只要能心遂所愿。
+   仓央嘉措
+ */
+
 import UIKit
 
 class SX_OrderInfoCell: UITableViewCell {

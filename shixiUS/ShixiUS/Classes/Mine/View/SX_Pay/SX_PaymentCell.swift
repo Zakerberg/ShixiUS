@@ -6,6 +6,24 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  付款记录
 
+/*
+ 这么多年
+ 你一直在我心口幽居
+ 我放下过天地，却从未放下过你
+ 渐悟也好，顿悟也罢
+ 世间事除了生死, 哪一件事不是闲事
+ 我独坐须弥山巅, 将万里浮云一眼看开
+ 一个人在雪中弹琴
+ 另一个人在雪中知音
+ 生命中的千山万水任你一一告别
+ 殉葬的花朵，开合有度
+ 菩提的果实，奏响了空山
+ 告诉我
+ 你藏在落叶下的那些脚印
+ 暗示着多少祭日，专供我法外逍遥
+    仓央嘉措
+ */
+
 import UIKit
 
 class SX_PaymentCell: UITableViewCell {

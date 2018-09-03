@@ -6,6 +6,14 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  订单详情页面 --- 支付信息 (0,1)
 
+/*
+ 我生命中的千山万水,
+ 任你一一告别。
+ 世间事，除了生死，
+ 哪一件不是闲事。
+   仓央嘉措
+ */
+
 import UIKit
 
 class SX_OrderPayInfoCell: UITableViewCell {
