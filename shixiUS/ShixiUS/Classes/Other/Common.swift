@@ -41,7 +41,7 @@
     class func SX_LineColor() -> UIColor {
         return colorWithHexString(hex: "e5e5e5", alpha: 1.0)
     }
-
+    
     static func colorWithHexString(hex: String, alpha: CGFloat) -> UIColor {
         
         var cString: NSString = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased() as NSString
@@ -154,9 +154,9 @@
  //使用,前面是十六进制值,后面是透明度(粉嫩色...)
  // self.view.backgroundColor = HexColor(0xFF335B,1.0f);
  
-// ======================================================================================================================
-//MARK: - NSString Extension
-// ======================================================================================================================
+ // ======================================================================================================================
+ //MARK: - NSString Extension
+ // ======================================================================================================================
  extension NSString  {
     
     var md5: NSString! {
@@ -218,7 +218,7 @@
      *  @return 高度
      *  @param zpace  字间距 --> @10 这样设置  默认的话设置 0 就ok
      */
-   class func SX_getSpaceLabelHeight(_ text: NSString, font: UIFont, width: CGFloat, space: CGFloat, zpace: NSNumber) -> CGFloat {
+    class func SX_getSpaceLabelHeight(_ text: NSString, font: UIFont, width: CGFloat, space: CGFloat, zpace: NSNumber) -> CGFloat {
         
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment              = .left
@@ -241,7 +241,7 @@
         let size = text.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedStringKey : Any], context: nil)
         
         return size.height
-    
+        
     }
  }
  
@@ -289,7 +289,7 @@
  // ===================================================================================================================
  extension UIButton {
     
-     func addTimer(_ timeOut: Int, btn: UIButton){
+    func addTimer(_ timeOut: Int, btn: UIButton){
         //倒计时时间
         var timeout = timeOut
         let queue:DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
@@ -317,4 +317,84 @@
         _timer.resume()
     }
  }
+ 
+ 
+ // ===================================================================================================================
+ // MARK: - UIView Extension
+ // ===================================================================================================================
+ extension UIView {
+ 
+    var x: CGFloat {
+        get{
+            return frame.origin.x
+        }
+        set(newValue){
+            frame.origin.x = newValue
+        }
+    }
+    
+    var y: CGFloat {
+        get{
+            return frame.origin.y
+        }
+        set(newValue){
+            frame.origin.y = newValue
+        }
+    }
+    
+    var centerX: CGFloat {
+        get{
+            return center.x
+        }
+        set(newValue){
+            center.x = newValue
+        }
+    }
+    
+    var centerY: CGFloat {
+        get{
+            return center.y
+        }
+        set(newValue){
+            center.y = newValue
+        }
+    }
+    
+    var width: CGFloat {
+        get{
+            return frame.size.width
+        }
+        set(newValue){
+            frame.size.width = newValue
+        }
+    }
+    
+    var height: CGFloat {
+        get{
+            return frame.size.height
+        }
+        set(newValue){
+            frame.size.height = newValue
+        }
+    }
+    
+    var size: CGSize {
+        get{
+            return bounds.size
+        }
+        set(newValue){
+            frame.size = newValue
+        }
+    }
+    
+    var origin: CGPoint {
+        get{
+            return frame.origin
+        }
+        set(newValue){
+            frame.origin = newValue
+        }
+    }
+ }
+ 
  

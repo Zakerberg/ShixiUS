@@ -100,7 +100,7 @@ extension SX_ApplyProgressCell {
             make.width.equalTo(1)
             make.height.equalTo(self.progressStatus!).offset(-Margin)
             }.config { (LINEVIEW) in
-                LINEVIEW.setGradientBackgroundWith([UIColor.gray, UIColor.white], locations: nil, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 1, y: 0))
+             //   LINEVIEW.setGradientBackgroundWith([UIColor.gray, UIColor.white], locations: nil, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 1, y: 0))
         }
         
         self.progressTime = UILabel().addhere(toSuperView: self.progressNormalBgView!).layout(snapKitMaker: { (make) in

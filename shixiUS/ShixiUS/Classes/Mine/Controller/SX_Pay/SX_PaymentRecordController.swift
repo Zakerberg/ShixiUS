@@ -18,10 +18,10 @@ import UIKit
 
 class SX_PaymentRecordController: UIViewController {
     
-    var scrollView: UIScrollView?
-    var page: NSInteger?
-    var status: NSInteger?
-    var pageMenu: SPPageMenu?
+    var scrollView : UIScrollView?
+    var page       : NSInteger?
+    var status     : NSInteger?
+    var pageMenu   : SPPageMenu?
     var dataArr = ["就业岗位", "实训项目", "职业培训"]
     var myChildViewControllers = NSMutableArray()
     
@@ -56,7 +56,7 @@ extension SX_PaymentRecordController {
         self.pageMenu = pageMenu
         
         // 就业岗位, 培训项目, 职业认证
-         let controllerClassNames = ["SX_PayEmploymentJobsController", "SX_PayTrainingProjectController", "SX_PayVocationalTrainingController"]
+        let controllerClassNames = ["SX_PayEmploymentJobsController", "SX_PayTrainingProjectController", "SX_PayVocationalTrainingController"]
         
         for index in 0...self.dataArr.count {
             if controllerClassNames.count > index{
