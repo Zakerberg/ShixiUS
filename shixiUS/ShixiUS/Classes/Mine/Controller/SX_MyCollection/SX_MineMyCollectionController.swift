@@ -67,7 +67,7 @@ extension SX_MineMyCollectionController {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         
         // 就业岗位, 培训项目, 职业认证
-        let controllerClassNames = ["SX_CollectionEmploymentJobsController", "SX_CollectionTrainingProjectController", "SX_CollectionVocationalTrainingController"]
+        let controllerClassNames = ["SX_CollextionEmploymentJobsController", "SX_CollectionTrainingProjectController", "SX_CollectionVocationalTrainingController"]
         
         for index in 0..<self.dataArr.count {
             if controllerClassNames.count > index {
