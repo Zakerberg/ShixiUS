@@ -20,8 +20,7 @@ class SX_CollextionEmploymentJobsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,3 +28,17 @@ class SX_CollextionEmploymentJobsController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
+
+// ===================================================================================================================
+// MARK: - Other Method
+// ===================================================================================================================
+extension SX_CollextionEmploymentJobsController {
+    
+    func setUI() {
+        self.view.backgroundColor = UIColor.red
+    }
+}
+
+
+
+

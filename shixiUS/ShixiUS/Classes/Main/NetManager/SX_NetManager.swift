@@ -4,7 +4,8 @@
 //
 //  Created by Michael 柏 on 8/17/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//
+//  Net
+
 /*
  
  那一天，
@@ -56,22 +57,6 @@ typealias successCallback = ((String) -> (Void))
 typealias failedCallback = ((String) -> (Void))
 ///网络错误的回调
 typealias errorCallback = (() -> (Void))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
