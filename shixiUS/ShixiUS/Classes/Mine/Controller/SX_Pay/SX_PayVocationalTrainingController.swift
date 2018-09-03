@@ -26,7 +26,6 @@ class SX_PayVocationalTrainingController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,8 +33,6 @@ class SX_PayVocationalTrainingController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-
-
 
 // ======================================================================================================================
 // MARK: - Other Method
@@ -49,11 +46,12 @@ extension SX_PayVocationalTrainingController {
     
     func fetchData() {
         
+        
     }
 }
 
 // ======================================================================================================================
-// MARK: -
+// MARK: - UITableViewDelegate
 // ======================================================================================================================
 extension SX_PayVocationalTrainingController: UITableViewDataSource,UITableViewDelegate {
     

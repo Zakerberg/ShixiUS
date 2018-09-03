@@ -23,7 +23,6 @@ class SX_PayEmploymentJobsController: UIViewController {
         
         return tableView
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +52,7 @@ extension SX_PayEmploymentJobsController {
 }
 
 // ======================================================================================================================
-// MARK: -
+// MARK: - UITableViewDelegate
 // ======================================================================================================================
 extension SX_PayEmploymentJobsController: UITableViewDelegate, UITableViewDataSource {
     
@@ -72,12 +71,10 @@ extension SX_PayEmploymentJobsController: UITableViewDelegate, UITableViewDataSo
         cell.payDate?.text   = "2018.03.03"
         cell.payMoney?.text  = "$600.00"
         
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 85.FloatValue.IPAD_XValue
     }
     
@@ -97,23 +94,3 @@ extension SX_PayEmploymentJobsController: UITableViewDelegate, UITableViewDataSo
         return 10.FloatValue.IPAD_XValue
     }
 }
-
-// ======================================================================================================================
-// MARK: -
-// ======================================================================================================================
-extension SX_PayEmploymentJobsController {
-    
-    
-    
-    
-    
-    
-    
-    
-}
-
-
-
-
-
-

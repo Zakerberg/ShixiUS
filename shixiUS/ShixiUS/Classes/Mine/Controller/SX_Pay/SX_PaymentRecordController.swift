@@ -18,12 +18,29 @@ import UIKit
 
 class SX_PaymentRecordController: UIViewController {
     
-    var scrollView : UIScrollView?
-    var page       : NSInteger?
-    var status     : NSInteger?
-    var pageMenu   : SPPageMenu?
     var dataArr = ["就业岗位", "实训项目", "职业培训"]
     var myChildViewControllers = NSMutableArray()
+    var vc = [UIViewController]()
+    
+    private lazy var pageTitleView: SX_PageTitleView = {
+        let config                = SX_PageTitleViewConfig()
+        config.titleColor         = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+        config.titleSelectedColor = UIColor.SX_MainColor()
+        
+        let pageTitleView = SX_PageTitleView(frame: CGRect(x: 0, y: navHeight, width: SCREEN_WIDTH, height: 41), titles: self.dataArr, config: config)
+        pageTitleView.pageTitleViewDelegate = self
+        
+        return pageTitleView
+    }()
+    
+    private lazy var pageContentView: SX_PageContentView = {
+        
+        let pageContentViewY = pageTitleView.frame.maxY
+        let pageContentView = SX_PageContentView(frame: CGRect(x: 0, y: pageContentViewY, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-pageContentViewY), parentVC: self, childVCs: vc)
+        pageContentView.pageContentViewDelegate = self
+        
+        return pageContentView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,55 +62,32 @@ extension SX_PaymentRecordController {
     func setUI() {
         title = "付款记录"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
-        // trackerStyle 跟踪器的样式
-        let pageMenu = SPPageMenu(frame: CGRect(x: 0, y: kNavH, width: SCREEN_WIDTH, height: PageMenuH), trackerStyle: .lineLongerThanItem)
-        // 传递数组,默任选择第1个
-        pageMenu.setItems(self.dataArr, selectedItemIndex: 0)
-        pageMenu.needTextColorGradients = false
-        
-        pageMenu.delegate = self
-        self.view.addSubview(pageMenu)
-        self.pageMenu = pageMenu
         
         // 就业岗位, 培训项目, 职业认证
         let controllerClassNames = ["SX_PayEmploymentJobsController", "SX_PayTrainingProjectController", "SX_PayVocationalTrainingController"]
         
-        for index in 0...self.dataArr.count {
-            if controllerClassNames.count > index{
+        for index in 0..<self.dataArr.count {
+            if controllerClassNames.count > index {
                 guard let spaceName = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {
                     SXLog("获取命名空间失败!")
                     return
                 }
+                
                 let viewController: AnyClass? = NSClassFromString(spaceName + ".\(controllerClassNames[index])")
-                guard let typeClass = viewController as? UIViewController.Type else{
+                guard let typeClass = viewController as? UIViewController.Type else {
                     SXLog("viewController不能当做UIViewController!")
                     return
                 }
+                
                 let vc = typeClass.init()
                 self.addChildViewController(vc)
                 self.myChildViewControllers.add(vc)
+                self.vc.append(vc)
+                //self.vc = [vc]
             }
         }
-        
-        self.scrollView = UIScrollView(frame: CGRect(x: 0, y: kNavH+PageMenuH, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
-        scrollView?.delegate = self
-        scrollView?.isPagingEnabled = true
-        scrollView?.showsHorizontalScrollIndicator = false
-        self.view.addSubview(scrollView!)
-        
-        /// 这一行赋值, 可以实现pageMenu的跟踪器时刻跟随scrollView 滑动的效果 ! ! !
-        self.pageMenu?.bridgeScrollView = self.scrollView!
-        
-        /// pageMenu.selectedItemIndex 就是选中的item下标
-        if (self.pageMenu?.selectedItemIndex)! < 3 {
-            let viewCotroller = self.myChildViewControllers[Int((self.pageMenu?.selectedItemIndex)! as UInt)] as! UIViewController
-            scrollView?.addSubview(viewCotroller.view)
-            
-            viewCotroller.view.frame = CGRect(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-            
-            scrollView?.contentOffset =  CGPoint(x: SCREEN_WIDTH*CGFloat((self.pageMenu?.selectedItemIndex)!), y: 0)
-            scrollView?.contentSize = CGSize(width: self.dataArr.count.FloatValue*SCREEN_WIDTH, height: 0)
-        }
+        view.addSubview(pageTitleView)
+        view.addSubview(pageContentView)
     }
     
     func fetchData() {
@@ -102,41 +96,19 @@ extension SX_PaymentRecordController {
 }
 
 // ======================================================================================================================
-// MARK: - SPPageMenuDelegate
+// MARK: - SXPageTitleViewDelegate
 // ======================================================================================================================
-extension SX_PaymentRecordController: SPPageMenuDelegate {
-    
-    func pageMenu(_ pageMenu: SPPageMenu, itemSelectedAt index: Int) {
-        SXLog(index)
-    }
-    
-    func pageMenu(_ pageMenu: SPPageMenu, itemSelectedFrom fromIndex: Int, to toIndex: Int) {
-        SXLog("\(fromIndex) ---- \(toIndex)")
-        
-        // 如果formIndex和toIndex之差>=2 ,说明跨界面移动了, 此时不动画
-        if labs(toIndex - fromIndex) >= 2 {
-            self.scrollView?.setContentOffset(CGPoint(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0), animated: false)
-        } else {
-            self.scrollView?.setContentOffset(CGPoint(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0), animated: true)
-        }
-        if self.myChildViewControllers.count <= toIndex {return}
-        
-        let targetViewController = self.myChildViewControllers[toIndex] as! UIViewController
-        targetViewController.view.frame = CGRect(x: SCREEN_WIDTH*toIndex.FloatValue, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-        self.scrollView?.addSubview(targetViewController.view)
+extension SX_PaymentRecordController: SXPageTitleViewDelegate {
+    func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
+        self.pageContentView.setPageContentViewCurrentIndex(currentIndex: selectedIndex)
     }
 }
 
 // ======================================================================================================================
-// MARK: - UIScrollViewDelegate
+// MARK: - SXPageContentViewDelegate
 // ======================================================================================================================
-extension SX_PaymentRecordController: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // 这一步是实现跟踪器时刻跟随scrollView滑动的效果,如果对self.pageMenu.scrollView赋了值，这一步可省
-        //  self.pageMenu?.moveTrackerFollow(scrollView)
+extension SX_PaymentRecordController : SXPageContentViewDelegate {
+    func pageContentViewScroll(progress: CGFloat, originalIndex: Int, targetIndex: Int) {
+        self.pageTitleView.setPageTitleView(progress: progress, originalIndex: originalIndex, targetIndex: targetIndex)
     }
 }
-
-
-

@@ -20,7 +20,6 @@ class SX_PayTrainingProjectController: UIViewController {
         
         return tableView
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +31,7 @@ class SX_PayTrainingProjectController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }
-
 
 // ======================================================================================================================
 // MARK: - Other Method
@@ -51,9 +48,8 @@ extension SX_PayTrainingProjectController {
     }
 }
 
-
 // ======================================================================================================================
-// MARK: -
+// MARK: - UITableViewDelegate
 // ======================================================================================================================
 extension SX_PayTrainingProjectController: UITableViewDelegate, UITableViewDataSource {
     
@@ -96,18 +92,3 @@ extension SX_PayTrainingProjectController: UITableViewDelegate, UITableViewDataS
         return 10.FloatValue.IPAD_XValue
     }
 }
-
-
-// ======================================================================================================================
-// MARK: -
-// ======================================================================================================================
-extension SX_PayTrainingProjectController {
-    
-    
-    
-    
-    
-    
-}
-
-
