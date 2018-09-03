@@ -6,6 +6,17 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  付款记录 --> 就业岗位
 
+/*
+ 我爱你
+ 那样狂欢又美好的时光
+ 像小时候偷喝了蜜糖
+ 踩在云端 甜在心里
+ 尽管一年只有一次
+ 等了太久
+ 可我还是愿意
+ 愿意再等等你
+ */
+
 import UIKit
 
 let paymentCellID = "paymentCellID"

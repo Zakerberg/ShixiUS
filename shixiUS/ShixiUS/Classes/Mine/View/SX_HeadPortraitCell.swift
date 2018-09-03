@@ -6,6 +6,13 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  头像Cell
 
+/*
+ 我爱你
+ 不想做你的观众，也不想打探你的人生
+ 只是偶尔会期望我们的相逢会在一个午后
+ 蔷薇热烈，你对着我的狗点了点头
+ */
+
 import UIKit
 
 class SX_HeadPortraitCell: UITableViewCell {
@@ -49,7 +56,7 @@ extension SX_HeadPortraitCell {
             headPortrait.image = #imageLiteral(resourceName: "icon")
             headPortrait.isUserInteractionEnabled = true
         })
-
+        
         self.logInButton = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.left.equalTo(self.headPortraitImageView!.snp.right).offset(10.FloatValue.IPAD_XValue)
             make.centerY.equalTo(self.headPortraitImageView!)

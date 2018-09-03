@@ -6,6 +6,15 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  付款记录 --> 实训项目
 
+/*
+ 我爱你
+ 所以我把我整个灵魂都给了你
+ 连同他的怪癖，耍小脾气忽明忽暗
+ 一千八百种坏毛病 它真讨厌
+ 只有一点真好
+ 爱你
+ */
+
 import UIKit
 
 class SX_PayTrainingProjectController: UIViewController {

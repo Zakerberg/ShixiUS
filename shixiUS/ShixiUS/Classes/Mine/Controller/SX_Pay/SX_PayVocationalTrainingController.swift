@@ -6,6 +6,13 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  付款记录 --> 职业培训
 
+/*
+ 我爱你
+ 一直都很爱
+ 只是你离开后我偶尔也会喜欢他人
+ 在他人像你的时候
+ */
+
 import UIKit
 
 class SX_PayVocationalTrainingController: UIViewController {
