@@ -214,7 +214,7 @@ open class SX_GuidePageControl: UIPageControl {
     }
     
     // MARK: - Private functions
-    
+
     fileprivate func commonInit() {
         
         // Content View
