@@ -396,5 +396,18 @@
         }
     }
  }
+
+ // ===================================================================================================================
+ // MARK: - String Extension
+ // ===================================================================================================================
+ extension String {
+    
+    func SX_widthWithString(font: UIFont, size: CGSize) -> CGFloat {
+        let rect = NSString(string: self).boundingRect(with: CGSize(width: size.width, height: size.height), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
+        return ceil(rect.width)
+    }
+ }
+ 
+ 
  
  

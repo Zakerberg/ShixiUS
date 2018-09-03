@@ -2,7 +2,7 @@
 //  SX_GuidePageControl.swift
 //  ShixiUS
 //
-//  Created by heather on 2018/8/31.
+//  Created by Michael 柏 on 2018/8/31.
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 

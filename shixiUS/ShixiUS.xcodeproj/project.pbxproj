@@ -11,6 +11,9 @@
 		323E99A421392585006038F5 /* SX_GifImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99A321392585006038F5 /* SX_GifImageOperation.swift */; };
 		323E99A621392618006038F5 /* SX_GuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99A521392618006038F5 /* SX_GuidePageView.swift */; };
 		323E99AA21392819006038F5 /* SX_GuidePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99A921392819006038F5 /* SX_GuidePageControl.swift */; };
+		323E99AD213CCDEB006038F5 /* SX_PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99AC213CCDEB006038F5 /* SX_PageTitleView.swift */; };
+		323E99AF213CCE1A006038F5 /* SX_PageTitleViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99AE213CCE1A006038F5 /* SX_PageTitleViewConfig.swift */; };
+		323E99B1213CCE44006038F5 /* SX_PageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99B0213CCE44006038F5 /* SX_PageContentView.swift */; };
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
 		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
 		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
@@ -121,6 +124,9 @@
 		323E99A321392585006038F5 /* SX_GifImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GifImageOperation.swift; sourceTree = "<group>"; };
 		323E99A521392618006038F5 /* SX_GuidePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuidePageView.swift; sourceTree = "<group>"; };
 		323E99A921392819006038F5 /* SX_GuidePageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuidePageControl.swift; sourceTree = "<group>"; };
+		323E99AC213CCDEB006038F5 /* SX_PageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PageTitleView.swift; sourceTree = "<group>"; };
+		323E99AE213CCE1A006038F5 /* SX_PageTitleViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PageTitleViewConfig.swift; sourceTree = "<group>"; };
+		323E99B0213CCE44006038F5 /* SX_PageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PageContentView.swift; sourceTree = "<group>"; };
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
 		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
 		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
@@ -253,6 +259,16 @@
 				323E99A921392819006038F5 /* SX_GuidePageControl.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		323E99AB213CCDBC006038F5 /* SX_PageTitleView */ = {
+			isa = PBXGroup;
+			children = (
+				323E99AC213CCDEB006038F5 /* SX_PageTitleView.swift */,
+				323E99AE213CCE1A006038F5 /* SX_PageTitleViewConfig.swift */,
+				323E99B0213CCE44006038F5 /* SX_PageContentView.swift */,
+			);
+			path = SX_PageTitleView;
 			sourceTree = "<group>";
 		};
 		32E49D1A21369D6C005633F2 /* SX_MyCollection */ = {
@@ -464,6 +480,7 @@
 		45556B5820D89D290035FCA6 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				323E99AB213CCDBC006038F5 /* SX_PageTitleView */,
 				45556B6020D8A0370035FCA6 /* Defines.swift */,
 				45D3520E20D8B3F600D7300A /* Common.swift */,
 				45E57405212E9847007A4DCD /* SX_UnderlineBtn.swift */,
@@ -979,6 +996,7 @@
 				459B334C21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift in Sources */,
 				453C5B53210B04A1009F9CB9 /* SX_ProjectDetailDescriptionCell.swift in Sources */,
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
+				323E99AD213CCDEB006038F5 /* SX_PageTitleView.swift in Sources */,
 				45215E762111816500AED771 /* SX_ProjectDetailMoreDateController.swift in Sources */,
 				45454BE1211989EC002B9EBC /* SX_VocationalTrainingCell.swift in Sources */,
 				458A0030210875B300D38014 /* SX_trainingApplyCell.swift in Sources */,
@@ -989,6 +1007,7 @@
 				32E49D1C21369DB0005633F2 /* SX_PayEmploymentJobsController.swift in Sources */,
 				4527F91121226B29000EAEB9 /* SX_ApplyProgressDetailController.swift in Sources */,
 				4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */,
+				323E99B1213CCE44006038F5 /* SX_PageContentView.swift in Sources */,
 				4505982620FC8CB900504B6E /* SX_OverseaCell.swift in Sources */,
 				4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */,
 				45BAD4A82111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift in Sources */,
@@ -1003,6 +1022,7 @@
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
 				458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */,
 				45FDD9A52126AEC300E336F9 /* SX_NetManager.swift in Sources */,
+				323E99AF213CCE1A006038F5 /* SX_PageTitleViewConfig.swift in Sources */,
 				45BAD4AC2112A3FF003DBD02 /* SX_PorjectDetailTableView.swift in Sources */,
 				45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */,
 				45B19336210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift in Sources */,
