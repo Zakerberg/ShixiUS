@@ -28,7 +28,7 @@ let navHeight: CGFloat = {
 }()
 
 class SX_PageTitleViewConfig: NSObject {
-
+    
     /** 是否显示底部分割线，默认为true */
     var showBottomSeparator: Bool = true
     /** 按钮之间的间距，默认为 20.0f */

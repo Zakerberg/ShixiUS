@@ -24,7 +24,7 @@ class SX_PageContentView: UIView {
     // 外界父控制器
     weak private var parentViewController: UIViewController?
     // 存储子控制器
-    private var childViewControllers = [UIViewController]()
+    private var childViewControllers  = [UIViewController]()
     //记录加载的上一个控制器
     private var lastVC: UIViewController?
     //记录刚开始时的偏移量
@@ -32,12 +32,14 @@ class SX_PageContentView: UIView {
     //scrollView
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: self.bounds)
-        scrollView.delegate = self
-        scrollView.bounces = false
-        scrollView.isPagingEnabled = true
-        scrollView.showsVerticalScrollIndicator = false
+        
+        scrollView.delegate                       = self
+        scrollView.bounces                        = false
+        scrollView.isPagingEnabled                = true
+        scrollView.showsVerticalScrollIndicator   = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.contentSize = CGSize(width: CGFloat(self.childViewControllers.count) * self.width, height: 0)
+        
         return scrollView
     }()
     
@@ -115,9 +117,9 @@ extension SX_PageContentView: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var progress: CGFloat = 0
+        var progress: CGFloat  = 0
         var originalIndex: Int = 0
-        var targetIndex: Int = 0
+        var targetIndex: Int   = 0
         //判断是左滑还是右滑
         let currentOffsetX: CGFloat = scrollView.contentOffset.x
         let scrollViewW: CGFloat = scrollView.width
@@ -146,7 +148,4 @@ extension SX_PageContentView: UIScrollViewDelegate {
         pageContentViewDelegate?.pageContentViewScroll(progress: progress, originalIndex: originalIndex, targetIndex: targetIndex)
     }
 }
-
-
-
 
