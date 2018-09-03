@@ -6,6 +6,18 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 我爱你
+ 사랑해
+ jet'aime
+ tequiero
+ ichliebe dich
+ eute amo
+ tiamo
+ 爱している
+ I LOVE YOU
+ */
+
 import UIKit
 import CoreData
 
