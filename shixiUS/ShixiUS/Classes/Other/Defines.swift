@@ -6,6 +6,16 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 我爱你
+ 听过最动听的情歌
+ 是你轻哼的摇篮曲
+ 最可口的美食
+ 是你做的烧带鱼
+ 你用毕生温柔
+ 却只盼我无忧一生 
+ */
+
 import UIKit
 
 let SCREEN_BOUNDS = UIScreen.main.bounds

@@ -6,6 +6,14 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 如果你执意去远方寻找宝藏
+ 就让我化身战车
+ 跟在你身旁
+ 我来承受道路曲折
+ 你只管完成你的梦想
+ */
+
 import UIKit
 
 class SX_TabBarController: UITabBarController {

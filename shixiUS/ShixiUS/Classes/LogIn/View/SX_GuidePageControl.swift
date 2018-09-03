@@ -6,6 +6,14 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 我爱你
+ 我们都曾想做勇者
+ 可生活把一切变得苦涩
+ 如果金钱是你梦想的绊脚石
+ 记得来找我
+ */
+
 import UIKit
 
 @IBDesignable

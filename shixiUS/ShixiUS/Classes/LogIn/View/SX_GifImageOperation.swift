@@ -6,6 +6,14 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 我爱你
+ 愿此生都有人爱你如初
+ 疼你如骨
+ 你给出的深情
+ 都不敢被辜负
+ */
+
 import UIKit
 
 public enum DataType: String {

@@ -6,6 +6,14 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 我爱你
+ 我不想做你的英雄
+ 因为英雄
+ 善始
+ 不善终
+ */
+
 import UIKit
 
 public class SX_GuidePageView: UIView {
