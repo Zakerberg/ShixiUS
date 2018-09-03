@@ -32,7 +32,6 @@
 		4527F8FC211BE93D000EAEB9 /* SX_PersonalMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F8FB211BE93D000EAEB9 /* SX_PersonalMessageCell.swift */; };
 		4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F8FF211D2645000EAEB9 /* SX_ProgressDetailCell.swift */; };
 		4527F902211D5D97000EAEB9 /* SX_HeadPortraitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F901211D5D97000EAEB9 /* SX_HeadPortraitCell.swift */; };
-		4527F908212181B1000EAEB9 /* SPPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 4527F907212181B0000EAEB9 /* SPPageMenu.m */; };
 		4527F91121226B29000EAEB9 /* SX_ApplyProgressDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F91021226B29000EAEB9 /* SX_ApplyProgressDetailController.swift */; };
 		4527F91321226B70000EAEB9 /* SX_MyApplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */; };
 		45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */; };
@@ -145,8 +144,6 @@
 		4527F8FB211BE93D000EAEB9 /* SX_PersonalMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PersonalMessageCell.swift; sourceTree = "<group>"; };
 		4527F8FF211D2645000EAEB9 /* SX_ProgressDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProgressDetailCell.swift; sourceTree = "<group>"; };
 		4527F901211D5D97000EAEB9 /* SX_HeadPortraitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HeadPortraitCell.swift; sourceTree = "<group>"; };
-		4527F906212181B0000EAEB9 /* SPPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPageMenu.h; sourceTree = "<group>"; };
-		4527F907212181B0000EAEB9 /* SPPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPageMenu.m; sourceTree = "<group>"; };
 		4527F91021226B29000EAEB9 /* SX_ApplyProgressDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyProgressDetailController.swift; sourceTree = "<group>"; };
 		4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MyApplyController.swift; sourceTree = "<group>"; };
 		45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TopSelectedView.swift; sourceTree = "<group>"; };
@@ -484,8 +481,6 @@
 				45556B6020D8A0370035FCA6 /* Defines.swift */,
 				45D3520E20D8B3F600D7300A /* Common.swift */,
 				45E57405212E9847007A4DCD /* SX_UnderlineBtn.swift */,
-				4527F906212181B0000EAEB9 /* SPPageMenu.h */,
-				4527F907212181B0000EAEB9 /* SPPageMenu.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1016,7 +1011,6 @@
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
 				45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */,
 				45454BE321198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift in Sources */,
-				4527F908212181B1000EAEB9 /* SPPageMenu.m in Sources */,
 				45E57406212E9847007A4DCD /* SX_UnderlineBtn.swift in Sources */,
 				45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */,
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
