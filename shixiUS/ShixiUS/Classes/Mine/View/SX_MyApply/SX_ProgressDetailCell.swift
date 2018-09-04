@@ -17,11 +17,17 @@ import UIKit
 
 class SX_ProgressDetailCell: UITableViewCell {
     
-    var progressTitle   : UILabel?
-    var progressDes     : UILabel? // 详情
+//    var progressTitle   : UILabel?
+//    var progressDes     : UILabel? // 详情
+//    var progressPoint   : UIImageView?
+
     
-    var progressPoint   : UIImageView?
-    
+    var leftRoundImageView: UIImageView?
+    var leftLineView: UIView?
+    var progressTitle: UILabel?
+    var contentLabel: UILabel?
+    var bottomLine: UIView?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,7 +35,8 @@ class SX_ProgressDetailCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        ConfigCell()
+     //   ConfigCell()
+        configCell1()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,42 +55,53 @@ class SX_ProgressDetailCell: UITableViewCell {
 // ======================================================================================================================
 extension SX_ProgressDetailCell{
     
-    func ConfigCell() {
-        
-        self.progressPoint = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.top.equalToSuperview().offset(Margin)
-            
-        }).config({ (POINT) in
-            POINT.sizeToFit()
-        })
-        
-        self.progressTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.centerY.equalTo(self.progressPoint!)
-            make.left.equalTo(self.progressPoint!.snp.right).offset(Margin)
-            make.height.equalTo(15.FloatValue.IPAD_XValue)
-        }).config({ (TITLE) in
-            TITLE.sizeToFit()
-            TITLE.font = UIFont.boldSystemFont(ofSize: 14)
-        })
+//    func ConfigCell() {
+//
+//        self.progressPoint = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.left.top.equalToSuperview().offset(Margin)
+//
+//        }).config({ (POINT) in
+//            POINT.sizeToFit()
+//        })
+//
+//        self.progressTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.centerY.equalTo(self.progressPoint!)
+//            make.left.equalTo(self.progressPoint!.snp.right).offset(Margin)
+//            make.height.equalTo(15.FloatValue.IPAD_XValue)
+//        }).config({ (TITLE) in
+//            TITLE.sizeToFit()
+//            TITLE.font = UIFont.boldSystemFont(ofSize: 14)
+//        })
+//
+//        self.progressDes = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.top.equalTo(self.progressTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+//            make.left.equalTo(self.progressTitle!)
+//            make.right.equalToSuperview().offset(-Margin)
+//        }).config({ (DES) in
+//            DES.sizeToFit()
+//            DES.numberOfLines = 0
+//            DES.lineBreakMode = .byWordWrapping
+//            DES.font = UIFont.systemFont(ofSize: 14)
+//        })
+//    }
+}
 
-        self.progressDes = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.progressTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
-            make.left.equalTo(self.progressTitle!)
-            make.right.equalToSuperview().offset(-Margin)
-        }).config({ (DES) in
-            DES.sizeToFit()
-            DES.numberOfLines = 0
-            DES.lineBreakMode = .byWordWrapping
-            DES.font = UIFont.systemFont(ofSize: 14)
-        })
+
+// ===================================================================================================================
+// MARK: -
+// ===================================================================================================================
+extension SX_ProgressDetailCell {
+    
+    func configCell1() {
+
         
-//        let _ = UIView().addhere(toSuperView: self.contentView).layout { (make) in
-//            make.top.equalTo(self.progressPoint!.snp.bottom)
-//            make.centerX.equalTo(self.progressPoint!)
-//            make.width.equalTo(1)
-//            make.height.equalTo(self.progressDes!)
-//            }.config { (LINEVIEW) in
-//                LINEVIEW.setGradientBackgroundWith([UIColor.gray, UIColor.white], locations: nil, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 1, y: 0))
-//        }
+        
+        
+        
     }
 }
+
+
+
+
+

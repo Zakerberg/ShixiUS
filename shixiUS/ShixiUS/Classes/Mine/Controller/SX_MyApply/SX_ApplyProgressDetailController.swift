@@ -75,60 +75,60 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
         let cell = SX_ProgressDetailCell(style: .default, reuseIdentifier: progressDetailCellID)
         cell.selectionStyle = .none
         
-        switch indexPath.row {
-        case 0:
-            cell.progressPoint?.image     = UIImage(named:"progress")
-            
-            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
-            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-            
-            cell.progressDes?.text        = progressDesArr[indexPath.row]
-            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
-            
-            break
-        case 1:
-            cell.progressPoint?.image     = UIImage(named:"progress1")
-            
-            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
-            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
-            
-            cell.progressDes?.text        = progressDesArr[indexPath.row]
-            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
-            
-            break
-        case 2:
-            cell.progressPoint?.image     = UIImage(named:"progress1")
-            
-            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
-            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
-            
-            cell.progressDes?.text        = progressDesArr[indexPath.row]
-            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
-            
-            break
-        case 3:
-            cell.progressPoint?.image     = UIImage(named:"progress1")
-            
-            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
-            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
-            
-            cell.progressDes?.text        = progressDesArr[indexPath.row]
-            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
-            
-            break
-        case 4:
-            cell.progressPoint?.image     = UIImage(named:"progress1")
-            
-            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
-            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
-            
-            cell.progressDes?.text        = progressDesArr[indexPath.row]
-            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
-            
-            break
-        default:
-            break
-        }
+//        switch indexPath.row {
+//        case 0:
+//            cell.progressPoint?.image     = UIImage(named:"progress")
+//
+//            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
+//            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+//
+//            cell.progressDes?.text        = progressDesArr[indexPath.row]
+//            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
+//
+//            break
+//        case 1:
+//            cell.progressPoint?.image     = UIImage(named:"progress1")
+//
+//            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
+//            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+//
+//            cell.progressDes?.text        = progressDesArr[indexPath.row]
+//            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+//
+//            break
+//        case 2:
+//            cell.progressPoint?.image     = UIImage(named:"progress1")
+//
+//            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
+//            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+//
+//            cell.progressDes?.text        = progressDesArr[indexPath.row]
+//            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+//
+//            break
+//        case 3:
+//            cell.progressPoint?.image     = UIImage(named:"progress1")
+//
+//            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
+//            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+//
+//            cell.progressDes?.text        = progressDesArr[indexPath.row]
+//            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+//
+//            break
+//        case 4:
+//            cell.progressPoint?.image     = UIImage(named:"progress1")
+//
+//            cell.progressTitle?.text      = progressTitleArr[indexPath.row]
+//            cell.progressTitle?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+//
+//            cell.progressDes?.text        = progressDesArr[indexPath.row]
+//            cell.progressDes?.textColor   = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+//
+//            break
+//        default:
+//            break
+//        }
         
         return cell
     }
@@ -146,17 +146,4 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
         return 0.FloatValue
     }
 }
-
-// ======================================================================================================================
-// MARK: -
-// ======================================================================================================================
-extension SX_ApplyProgressDetailController {
-    
-    
-    
-    
-    
-    
-}
-
 

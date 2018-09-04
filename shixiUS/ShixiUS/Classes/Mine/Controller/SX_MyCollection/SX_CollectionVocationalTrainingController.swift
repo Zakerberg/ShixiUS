@@ -33,7 +33,3 @@ class SX_CollectionVocationalTrainingController: UIViewController {
 
 
 
-
-
-
-
