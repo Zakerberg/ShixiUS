@@ -148,7 +148,6 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 110.FloatValue.IPAD_XValue
     }
     

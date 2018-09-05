@@ -32,7 +32,6 @@ class SX_MineTrainingProjectController: UIViewController {
         return tableView
     }()
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -153,7 +152,6 @@ extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 110.FloatValue.IPAD_XValue
     }
     

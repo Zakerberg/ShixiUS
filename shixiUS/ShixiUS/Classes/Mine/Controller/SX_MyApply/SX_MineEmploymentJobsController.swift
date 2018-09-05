@@ -206,7 +206,6 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 110.FloatValue.IPAD_XValue
     }
     
@@ -227,7 +226,6 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         SXLog("进入就业岗位的申请详情")
         let vc = SX_ApplyDetailController()
         self.navigationController?.pushViewController(vc, animated: true)

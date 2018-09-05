@@ -17,30 +17,100 @@
 
 import UIKit
 
-class SX_CollectionTrainingProjectController: UIViewController {
+let collectionTrainingCellID = "collectionTrainingCellID"
 
+class SX_CollectionTrainingProjectController: UIViewController {
+    
+    var dataArr = [Int](repeating: 0, count: 4)
+    lazy var table: UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
+        tableView.backgroundColor              = UIColor.SX_BackGroundColor()
+        tableView.showsVerticalScrollIndicator = false
+        tableView.delegate                     = self
+        tableView.dataSource                   = self
+        
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.gray
+        setUI()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 }
 
-
-
-
-
+// ===================================================================================================================
+// MARK: - Other Method
+// ===================================================================================================================
 extension SX_CollectionTrainingProjectController {
-    
-    
-    
-    
+    func setUI() {
+        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        self.view.addSubview(table)
+    }
     
 }
 
-
+// ===================================================================================================================
+// MARK: - UITableViewDelegate
+// ===================================================================================================================
+extension SX_CollectionTrainingProjectController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dataArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = SX_MyApplyTrainingProjectCell(style: .default, reuseIdentifier: collectionTrainingCellID)
+        cell.selectionStyle         = .none
+        cell.projectTitle?.text     = "华尔街投行实地项目"
+        cell.projectAddress?.text   = "Los Angles"
+        cell.projectDate?.text      = "2018.03.03"
+        cell.projectTime?.text      = "5Day"
+        
+        cell.projectContact?.isHidden = true
+        cell.projectCancel?.isHidden  = true
+        
+        cell.projectPayAndRefund?.setTitle("立即申请", for: .normal)
+        cell.projectPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+        cell.projectPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
+        cell.projectPayAndRefund?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
+        cell.projectPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
+            SXLog("立即申请 ++++")
+        }, onError: { (error) in
+            SXLog(error)
+        }, onCompleted: nil, onDisposed: nil)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 110.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10.FloatValue.IPAD_XValue
+    }
+}
 

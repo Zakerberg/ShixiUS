@@ -48,7 +48,7 @@ class SX_ProjectDetailFrameModel: NSObject {
             ///计算控件frame
             let maxSize = CGSize(width: SCREEN_WIDTH-60.FloatValue.IPAD_XValue, height: CGFloat(MAXFLOAT))
   
-            let contentLayout = 
+//            let contentLayout =
             
             
         /*
@@ -114,19 +114,8 @@ class SX_ProjectDetailFrameModel: NSObject {
              leftLineViewH = _cellHeight;
              }
              _leftLineViewF = CGRectMake(leftLineViewX, leftLineViewY, leftLineViewW, leftLineViewH);
-
-             
-             
-             
              
              */
-        
-        
-        
-        
-        
-        
-        
         
         }
     }
