@@ -215,7 +215,7 @@
     var IPAD_XValue:CGFloat{return CGFloat(self*SCREEN_WIDTH)/375}
  }
  
- //打印信息
+  //打印信息
  func SXLog<T>(_ message : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
     #if DEBUG
     let fileName = (file as NSString).lastPathComponent

@@ -21,6 +21,7 @@ class SX_CollextionEmploymentJobsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +38,9 @@ extension SX_CollextionEmploymentJobsController {
     func setUI() {
         self.view.backgroundColor = UIColor.red
     }
+    
+    
+    
 }
 
 
