@@ -31,7 +31,6 @@ class SX_CollectionTrainingProjectController: UIViewController {
         
         return tableView
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()

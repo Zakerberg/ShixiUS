@@ -23,7 +23,7 @@ class SX_CollextionEmploymentJobsController: UIViewController {
     var dataArr = [Int](repeating: 0, count: 6)
     
     lazy var table: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
         tableView.backgroundColor              = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate                     = self
@@ -31,7 +31,6 @@ class SX_CollextionEmploymentJobsController: UIViewController {
         
         return tableView
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
