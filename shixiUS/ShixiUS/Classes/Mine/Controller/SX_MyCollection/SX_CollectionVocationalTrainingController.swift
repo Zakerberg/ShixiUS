@@ -52,7 +52,6 @@ extension SX_CollectionVocationalTrainingController {
         self.view.addSubview(table)
     }
     
-    
 }
 
 // ===================================================================================================================

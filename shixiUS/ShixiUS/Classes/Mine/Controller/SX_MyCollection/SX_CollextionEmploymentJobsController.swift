@@ -90,6 +90,8 @@ extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableVie
         
         cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
             SXLog("立即申请 ++++")
+            let vc = SX_ApplyEmpListController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }, onError: { (error) in
             SXLog(error)
         }, onCompleted: nil, onDisposed: nil)
@@ -116,5 +118,10 @@ extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
 }

@@ -20,15 +20,14 @@ import UIKit
 class SX_MineFixPasswordController: UIViewController {
     
     var fixBtn   : UIButton?
-    
     lazy var fixTable: UITableView = {
         
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
-        tableView.backgroundColor = UIColor.SX_BackGroundColor()
+        tableView.backgroundColor  = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
-        tableView.isScrollEnabled = false
-        tableView.delegate        = self
-        tableView.dataSource      = self
+        tableView.isScrollEnabled  = false
+        tableView.delegate         = self
+        tableView.dataSource       = self
         
         return tableView
     }()
@@ -57,8 +56,6 @@ extension SX_MineFixPasswordController {
     }
     
     func fetchData() {
-        
-        
         
     }
 }
@@ -115,6 +112,7 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
         if section == 0 {
             return UIView()
         } else {
+            
             let view = UIView()
             
             self.fixBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
@@ -122,11 +120,11 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
                 make.right.equalToSuperview().offset(-Margin)
                 make.height.equalTo(45.FloatValue.IPAD_XValue)
             }).config({ (FIX) in
-                FIX.backgroundColor = UIColor.SX_MainColor()
-                FIX.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+                FIX.backgroundColor     = UIColor.SX_MainColor()
+                FIX.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 20)
                 FIX.setTitle("修改", for: .normal)
                 FIX.layer.masksToBounds = true
-                FIX.layer.cornerRadius = 10
+                FIX.layer.cornerRadius  = 10
                 FIX.rx.tap.subscribe(onNext: { (_) in
                     SXLog("修改密码 +++ + ")
                 }, onError: { (error) in
