@@ -29,6 +29,7 @@
 		3248484B21411F9600B6049E /* SX_AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3248484A21411F9600B6049E /* SX_AddressModel.swift */; };
 		3248484D21411FCB00B6049E /* SX_AddressPickViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3248484C21411FCB00B6049E /* SX_AddressPickViewCell.swift */; };
 		3248484F21411FFF00B6049E /* SX_AdressPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3248484E21411FFF00B6049E /* SX_AdressPickerView.swift */; };
+		32484851214124BB00B6049E /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32484850214124BB00B6049E /* area.plist */; };
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
 		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
 		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
@@ -156,6 +157,7 @@
 		3248484A21411F9600B6049E /* SX_AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_AddressModel.swift; sourceTree = "<group>"; };
 		3248484C21411FCB00B6049E /* SX_AddressPickViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_AddressPickViewCell.swift; sourceTree = "<group>"; };
 		3248484E21411FFF00B6049E /* SX_AdressPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_AdressPickerView.swift; sourceTree = "<group>"; };
+		32484850214124BB00B6049E /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
 		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
 		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 				45556B2F20D89C600035FCA6 /* Assets.xcassets */,
 				45556B3120D89C600035FCA6 /* LaunchScreen.storyboard */,
 				45556B3420D89C600035FCA6 /* Info.plist */,
+				32484850214124BB00B6049E /* area.plist */,
 				45556B2C20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld */,
 			);
 			path = ShixiUS;
@@ -838,6 +841,7 @@
 			files = (
 				45556B3320D89C600035FCA6 /* LaunchScreen.storyboard in Resources */,
 				45556B3020D89C600035FCA6 /* Assets.xcassets in Resources */,
+				32484851214124BB00B6049E /* area.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
