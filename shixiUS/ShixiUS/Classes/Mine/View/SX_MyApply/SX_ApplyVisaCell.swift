@@ -1,0 +1,31 @@
+//
+//  SX_ApplyVisaCell.swift
+//  ShixiUS
+//
+//  Created by Michael 柏 on 2018/9/6.
+//  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
+//  申请表里面的 (是否有签证 & 是否在校)
+
+/*
+   南风起
+ 南风和着微光
+ 掀起你的发梢，拂过你的脸庞
+ 最后，穿过我的胸膛
+ */
+
+import UIKit
+
+class SX_ApplyVisaCell: UITableViewCell {
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}

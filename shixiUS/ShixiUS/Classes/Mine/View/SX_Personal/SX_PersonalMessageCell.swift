@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  个人信息Cell
 
+/*
+ 你是最绚丽的烟花
+ 不过那一刹那
+ 便燃尽了我的青春年华
+ */
+
 import UIKit
 
 class SX_PersonalMessageCell: UITableViewCell {

@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  
 
+/*
+ 那些一生一世一辈子
+ 细细想来也真是虚无缥缈
+ 可没有这些，爱情又会显的多么不浪漫
+ */
+
 import UIKit
 
 class SX_PersonalIconCell: UITableViewCell {

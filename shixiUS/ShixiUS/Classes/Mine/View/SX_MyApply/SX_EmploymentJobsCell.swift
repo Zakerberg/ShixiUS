@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的申请 ----> 就业岗位Cell
 
+/*
+ 你不懂，就是有那么一瞬间
+ 我感觉，现实正在把你从我的生活里慢慢抽离
+ 也就是这么一瞬间，竟使我长夜难眠
+ */
+
 import UIKit
 
 class SX_EmploymentJobsCell : UITableViewCell {

@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的申请 ----> 实训项目cell
 
+/*
+ 世界就像巨大的夹娃娃机
+ 我隔着玻璃
+ 只想得到你
+ */
+
 import UIKit
 
 class SX_MyApplyTrainingProjectCell: UITableViewCell {

@@ -16,7 +16,7 @@ import UIKit
 
 class SX_ApplyTrainListController: UIViewController {
     
-    var dataArr = [Int](repeating: 0, count: 16)
+    var dataArr = [Int](repeating: 0, count: 14)
     lazy var fixTable: UITableView = {
         
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -67,17 +67,31 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 { /// 标题: 全球公民学院
-            
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.textLabel?.text = "全球公民学院"
+            
             
             return cell
         }else if indexPath.row == 5 || indexPath.row == 6 { // 单选按钮cell (是否有签证)
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            
+           
+            
+            
+            return cell
+        } else if indexPath.row == 2 || indexPath.row == 12 { // 国家选择 & 地址选择
+            
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            
+            
+            
+            return cell
+        } else if indexPath.row == 13 || indexPath.row == 14 { // 上传简历 & 求职信
             
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             
             return cell
-            
-        }else{
+        } else {
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             cell.selectionStyle = .none
             let TF = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
@@ -92,63 +106,49 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             switch indexPath.row {
                 
             case 1:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
-                
-                break
-            case 2:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
+                cell.textLabel?.text = "姓名"
+                TF.placeholder       = "输入您的姓名"
                 
                 break
             case 3:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
+                cell.textLabel?.text = "手机"
+                TF.placeholder       = "输入您的手机号"
+                TF.keyboardType      = .phonePad
                 
                 break
             case 4:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
+                cell.textLabel?.text = "邮箱"
+                TF.placeholder       = "输入您的邮箱"
                 
                 break
             case 7:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
+                cell.textLabel?.text = "微信"
+                TF.placeholder       = "输入您的微信"
                 
                 break
             case 8:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
+                cell.textLabel?.text = "年龄"
+                TF.placeholder       = "输入您的年龄"
                 
                 break
             case 9:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
+                cell.textLabel?.text = "学校"
+                TF.placeholder       = "输入您的学校"
                 
                 break
             case 10:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
+                cell.textLabel?.text = "专业"
+                TF.placeholder       = "输入您的专业"
                 
                 break
             case 11:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
-                
-                break
-            case 12:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
+                cell.textLabel?.text = "年级"
+                TF.placeholder       = "输入您的年级"
                 
                 break
             case 15:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
-                
-                break
-            case 16:
-                cell.textLabel?.text = ""
-                TF.placeholder       = ""
+                cell.textLabel?.text = "推荐人"
+                TF.placeholder       = "输入推荐人(选填)"
                 
                 break
             default:
@@ -164,6 +164,12 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
 // MARK: -
 // ===================================================================================================================
 extension SX_ApplyTrainListController {
+    
+    
+    
+    
+    
+    
     
     
     

@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  我的申请里面 所有的 申请进度Cell 申请详情里面的申请进度
 
+/*
+ 我一直在这里
+ 等风 等雨
+ 更等你
+ */
+
 import UIKit
 
 class SX_ApplyProgressCell: UITableViewCell {
