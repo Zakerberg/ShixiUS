@@ -36,11 +36,6 @@ extension SX_ApplyVocationListController {
         
         
     }
-    
-    
-    
-    
-    
 }
 
 
