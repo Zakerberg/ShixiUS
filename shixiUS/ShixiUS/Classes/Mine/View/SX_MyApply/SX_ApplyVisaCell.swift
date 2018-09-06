@@ -45,9 +45,8 @@ extension SX_ApplyVisaCell {
     
     func ConfigCell() {
         
-        
+
     }
-    
 }
 
 

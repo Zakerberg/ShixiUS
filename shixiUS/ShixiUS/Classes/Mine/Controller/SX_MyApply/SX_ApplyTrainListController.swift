@@ -68,19 +68,20 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
         
         if indexPath.row == 0 { /// 标题: 全球公民学院
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            cell.textLabel?.text = "全球公民学院"
-            
+            cell.textLabel?.text          = "全球公民学院"
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.font          = UIFont.boldSystemFont(ofSize: 16)
+            cell.textLabel?.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
             
             return cell
         }else if indexPath.row == 5 || indexPath.row == 6 { // 单选按钮cell (是否有签证)
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             
-           
+            
             
             
             return cell
         } else if indexPath.row == 2 || indexPath.row == 12 { // 国家选择 & 地址选择
-            
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             
             
@@ -164,12 +165,6 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
 // MARK: -
 // ===================================================================================================================
 extension SX_ApplyTrainListController {
-    
-    
-    
-    
-    
-    
     
     
     
