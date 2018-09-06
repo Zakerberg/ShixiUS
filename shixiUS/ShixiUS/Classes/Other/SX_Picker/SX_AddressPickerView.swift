@@ -1,14 +1,15 @@
 //
-//  SX_AdressPickerView.swift
+//  SX_AddressPickerView.swift
 //  ShixiUS
 //
-//  Created by Michael 柏 on 2018/9/6.
+//  Created by heather on 2018/9/6.
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
 import UIKit
 
-class SX_AdressPickerView: UIView {
+class SX_AddressPickerView: UIView {
+
 
     
     
@@ -19,5 +20,4 @@ class SX_AdressPickerView: UIView {
     
     
     
-
 }
