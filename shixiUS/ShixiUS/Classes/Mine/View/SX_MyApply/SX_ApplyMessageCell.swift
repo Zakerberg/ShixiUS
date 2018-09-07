@@ -1,24 +1,17 @@
 //
-//  SX_ApplyAddressCell.swift
+//  SX_ApplyMessageCell.swift
 //  ShixiUS
 //
-//  Created by Michael 柏 on 2018/9/6.
+//  Created by Michael 柏 on 2018/9/7.
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  申请表里面的 (国家 & 地址) 选择
-
-/*
- 幸运
- 我也暗自欢喜
- 原来曾经以为的遥不可及
- 也不过两趟火车加一趟高铁的距离
- */
+//  申请表里面的其他填写的信息
 
 import UIKit
 
-class SX_ApplyAddressCell: UITableViewCell {
+class SX_ApplyMessageCell: UITableViewCell {
     
     var title: UILabel?
-    var addressBtn: UIButton?
+    var TF: UITextField?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +29,7 @@ class SX_ApplyAddressCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
         // Configure the view for the selected state
     }
 }
@@ -43,10 +37,9 @@ class SX_ApplyAddressCell: UITableViewCell {
 // ===================================================================================================================
 // MARK: - ConfigCell
 // ===================================================================================================================
-extension SX_ApplyAddressCell {
+extension SX_ApplyMessageCell {
     
     func ConfigCell() {
-    
         self.title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.left.top.equalToSuperview().offset(Margin)
             make.height.equalTo(15)
@@ -56,18 +49,17 @@ extension SX_ApplyAddressCell {
             TITLE.font = UIFont.systemFont(ofSize: 14)
         })
         
-        self.addressBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.height.equalTo(self.title!)
-            make.left.equalTo(self.title!.snp.right).offset(Margin)
-        }).config({ (ADDRESS) in
-            ADDRESS.sizeToFit()
-            ADDRESS.setTitle("请选择", for: .normal)
-            ADDRESS.setImage(UIImage.init(named: "Apply_arrow"), for: .normal)
-            ADDRESS.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-            ADDRESS.setTitleColor(UIColor.colorWithRGB(r: 204, g: 204, b: 204), for: .normal)
-            ADDRESS.titleEdgeInsets = UIEdgeInsetsMake(0, -ADDRESS.imageView!.bounds.size.width, 0, ADDRESS.imageView!.bounds.size.width)
-            ADDRESS.imageEdgeInsets = UIEdgeInsetsMake(0, ADDRESS.titleLabel!.bounds.size.width, 0, -ADDRESS.titleLabel!.bounds.size.width)
-        })
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
 

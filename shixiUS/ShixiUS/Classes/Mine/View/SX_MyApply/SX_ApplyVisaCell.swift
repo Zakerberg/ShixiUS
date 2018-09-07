@@ -17,6 +17,9 @@ import UIKit
 
 class SX_ApplyVisaCell: UITableViewCell {
 
+    var title: UILabel?
+    var btn: UIButton?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -45,9 +48,26 @@ extension SX_ApplyVisaCell {
     
     func ConfigCell() {
         
+        self.title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.left.top.equalToSuperview().offset(Margin)
+            make.height.equalTo(15)
+        }).config({ (TITLE) in
+            TITLE.sizeToFit()
+            TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+            TITLE.font = UIFont.systemFont(ofSize: 14)
+        })
 
+        
+        
+        
+        
+        
     }
 }
+
+
+
+
 
 
 

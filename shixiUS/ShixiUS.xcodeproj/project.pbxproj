@@ -30,6 +30,7 @@
 		32484851214124BB00B6049E /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32484850214124BB00B6049E /* area.plist */; };
 		32484853214129AD00B6049E /* SX_AddressPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32484852214129AD00B6049E /* SX_AddressPickerView.swift */; };
 		32484855214218CA00B6049E /* SX_ApplyAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32484854214218CA00B6049E /* SX_ApplyAddressCell.swift */; };
+		324848572142197C00B6049E /* SX_ApplyMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324848562142197C00B6049E /* SX_ApplyMessageCell.swift */; };
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
 		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
 		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
@@ -158,6 +159,7 @@
 		32484850214124BB00B6049E /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		32484852214129AD00B6049E /* SX_AddressPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_AddressPickerView.swift; sourceTree = "<group>"; };
 		32484854214218CA00B6049E /* SX_ApplyAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyAddressCell.swift; sourceTree = "<group>"; };
+		324848562142197C00B6049E /* SX_ApplyMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyMessageCell.swift; sourceTree = "<group>"; };
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
 		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
 		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				45454BE421198A95002B9EBC /* SX_EmploymentJobsCell.swift */,
 				324848412141021B00B6049E /* SX_ApplyVisaCell.swift */,
 				32484854214218CA00B6049E /* SX_ApplyAddressCell.swift */,
+				324848562142197C00B6049E /* SX_ApplyMessageCell.swift */,
 			);
 			path = SX_MyApply;
 			sourceTree = "<group>";
@@ -1035,6 +1038,7 @@
 				45556B6720D8A1180035FCA6 /* SX_HomeVC.swift in Sources */,
 				323E99A621392618006038F5 /* SX_GuidePageView.swift in Sources */,
 				45BAD4AA2111BE5D003DBD02 /* SX_ProjectDetailCostInformationCell.swift in Sources */,
+				324848572142197C00B6049E /* SX_ApplyMessageCell.swift in Sources */,
 				45E573BD212A61FE007A4DCD /* SX_OrderDetailsController.swift in Sources */,
 				323E99AA21392819006038F5 /* SX_GuidePageControl.swift in Sources */,
 				32E49D2221378FAD005633F2 /* SX_PaymentCell.swift in Sources */,

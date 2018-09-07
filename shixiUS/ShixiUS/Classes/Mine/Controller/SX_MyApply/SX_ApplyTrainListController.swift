@@ -15,6 +15,7 @@
 import UIKit
 
 let applyListIdentifier = "applyListIdentifier"
+let applyAddressCellID  = "applyAddressCellID"
 
 class SX_ApplyTrainListController: UIViewController {
     
@@ -70,6 +71,8 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
         
         if indexPath.row == 0 { /// 标题: 全球公民学院
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.selectionStyle = .none
+            
             cell.textLabel?.text          = "全球公民学院"
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.font          = UIFont.boldSystemFont(ofSize: 16)
@@ -78,33 +81,43 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             return cell
         }else if indexPath.row == 5 || indexPath.row == 6 { // 单选按钮cell (是否有签证)
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            
-            
-            
+            cell.selectionStyle = .none
             
             return cell
         } else if indexPath.row == 2 || indexPath.row == 12 { // 国家选择 & 地址选择
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            
-            
-            
-            
-            
+            let cell = SX_ApplyAddressCell(style: .default, reuseIdentifier: applyAddressCellID)
+            cell.selectionStyle = .none
             
             if indexPath.row == 2 {
-                cell.textLabel?.text = "所在国家"
+                cell.title?.text = "所在国家"
             } else {
-                cell.textLabel?.text = "地址"
+                cell.title?.text = "地址"
             }
+            
+            cell.addressBtn?.rx.tap.subscribe(onNext: { (self) in
+                SXLog("地址选择")
+                let addressPicker = SX_AddressViewController()
+                addressPicker.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+                // 返回选择数据,地址,省,市,区
+                addressPicker.backLocationStringController = { (address,province,city,area) in
+                    cell.addressBtn?.setTitle(address, for: .normal)
+                }
+                
+//                SX_ApplyTrainListController.present(addressPicker)
+                
+                
+            }, onError: { (error) in
+                
+            }, onCompleted: nil, onDisposed: nil)
     
             return cell
-            
         } else if indexPath.row == 13 || indexPath.row == 14 { // 上传简历 & 求职信
             
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.selectionStyle = .none
+            
             
             return cell
-            
         } else {
             let cell = UITableViewCell(style: .default, reuseIdentifier: applyListIdentifier)
             cell.selectionStyle = .none
