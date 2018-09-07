@@ -7,7 +7,7 @@
 //  申请表里面的 (国家 & 地址) 选择
 
 /*
-   幸运
+ 幸运
  我也暗自欢喜
  原来曾经以为的遥不可及
  也不过两趟火车加一趟高铁的距离
@@ -16,7 +16,7 @@
 import UIKit
 
 class SX_ApplyAddressCell: UITableViewCell {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -44,8 +44,7 @@ extension SX_ApplyAddressCell {
     
     func ConfigCell() {
         
-
+        
     }
 }
-
 

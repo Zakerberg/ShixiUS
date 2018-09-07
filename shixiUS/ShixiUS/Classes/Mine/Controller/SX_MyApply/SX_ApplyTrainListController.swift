@@ -14,6 +14,8 @@
 
 import UIKit
 
+let applyListIdentifier = "applyListIdentifier"
+
 class SX_ApplyTrainListController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 14)
@@ -86,14 +88,25 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             
             
             
+            
+            
+            
+            if indexPath.row == 2 {
+                cell.textLabel?.text = "所在国家"
+            } else {
+                cell.textLabel?.text = "地址"
+            }
+    
             return cell
+            
         } else if indexPath.row == 13 || indexPath.row == 14 { // 上传简历 & 求职信
             
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             
             return cell
+            
         } else {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            let cell = UITableViewCell(style: .default, reuseIdentifier: applyListIdentifier)
             cell.selectionStyle = .none
             let TF = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
                 make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
