@@ -152,7 +152,7 @@ class SX_AddressPickerView: UIView {
     
     let rightCancelButton: UIButton = {
         let button = UIButton(frame: CGRect(x: SCREEN_WIDTH - 42, y: 11, width: 18, height: 18))
-        button.setImage(UIImage(named: "BaseVC_cancel"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icon_close"), for: .normal)
         return button
     }()
     

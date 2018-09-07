@@ -218,6 +218,10 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
         return UIView()
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
     
 }
 

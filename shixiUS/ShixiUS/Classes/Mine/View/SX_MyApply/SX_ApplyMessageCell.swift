@@ -51,15 +51,12 @@ extension SX_ApplyMessageCell {
         })
 
         self.TF = UITextField().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.centerY.top.equalTo(self)
+            make.centerY.top.equalTo(self.title!)
+            make.left.equalTo(self.title!.snp.right).offset(Margin)
         }).config({ (TF) in
            TF.sizeToFit()
             
         })
     }
-    
-    
-    
-    
 }
 

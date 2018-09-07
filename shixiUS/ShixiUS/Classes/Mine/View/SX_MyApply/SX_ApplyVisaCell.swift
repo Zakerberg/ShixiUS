@@ -50,7 +50,8 @@ extension SX_ApplyVisaCell {
     func ConfigCell() {
         
         self.title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.top.equalToSuperview().offset(Margin)
+            make.left.equalToSuperview().offset(Margin)
+            make.centerY.equalToSuperview()
             make.height.equalTo(15)
         }).config({ (TITLE) in
             TITLE.sizeToFit()
