@@ -20,12 +20,12 @@ let applyAddressCellID  = "applyAddressCellID"
 class SX_ApplyTrainListController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 14)
-    lazy var fixTable: UITableView = {
+   
+    lazy var table: UITableView = {
         
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor  = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
-        tableView.isScrollEnabled  = false
         tableView.delegate         = self
         tableView.dataSource       = self
         
@@ -51,11 +51,14 @@ extension SX_ApplyTrainListController {
     func setUI() {
         title = "实训项目申请"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        self.view.addSubview(table)
     }
     
     func fetchData() {
+     
         
     }
+    
 }
 
 // ===================================================================================================================
@@ -80,8 +83,36 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             
             return cell
         }else if indexPath.row == 5 || indexPath.row == 6 { // 单选按钮cell (是否有签证)
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            let cell = SX_ApplyVisaCell(style: .default, reuseIdentifier: nil)
             cell.selectionStyle = .none
+            
+            if indexPath.row == 5 {
+                cell.title?.text = "是否有美国签证"
+                cell.trueBtn?.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("有美国签证")
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+                
+                cell.falseBtn?.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("没有美国签证")
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            } else {
+                cell.title?.text = "是否在校"
+                cell.trueBtn?.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("在校")
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+                
+                cell.falseBtn?.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("不在校")
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            }
             
             return cell
         } else if indexPath.row == 2 || indexPath.row == 12 { // 国家选择 & 地址选择
@@ -94,7 +125,7 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                 cell.title?.text = "地址"
             }
             
-            cell.addressBtn?.rx.tap.subscribe(onNext: { (self) in
+            cell.addressBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("地址选择")
                 let addressPicker = SX_AddressViewController()
                 addressPicker.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
@@ -102,80 +133,69 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                 addressPicker.backLocationStringController = { (address,province,city,area) in
                     cell.addressBtn?.setTitle(address, for: .normal)
                 }
-                
-//                SX_ApplyTrainListController.present(addressPicker)
-                
-                
+                self.present(addressPicker, animated: true, completion: nil)
             }, onError: { (error) in
-                
+                SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
-    
+            
+            
             return cell
         } else if indexPath.row == 13 || indexPath.row == 14 { // 上传简历 & 求职信
-            
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             cell.selectionStyle = .none
-            
+            cell.textLabel?.text = "上传简历"
             
             return cell
         } else {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: applyListIdentifier)
+            let cell = SX_ApplyMessageCell(style: .default, reuseIdentifier: applyListIdentifier)
             cell.selectionStyle = .none
-            let TF = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
-                make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
-                make.centerY.equalToSuperview()
-                make.height.equalTo(45.FloatValue.IPAD_XValue)
-                }.config { (TF) in
-                    TF.tintColor = UIColor.SX_MainColor()
-                    TF.textAlignment = .left
-            }
             
             switch indexPath.row {
                 
             case 1:
-                cell.textLabel?.text = "姓名"
-                TF.placeholder       = "输入您的姓名"
+                cell.title?.text           = "姓名"
+                cell.TF?.placeholder       = "输入您的姓名"
                 
                 break
             case 3:
-                cell.textLabel?.text = "手机"
-                TF.placeholder       = "输入您的手机号"
-                TF.keyboardType      = .phonePad
+                cell.title?.text           = "手机"
+                cell.TF?.placeholder       = "输入您的手机号"
+                cell.TF?.keyboardType      = .phonePad
                 
                 break
             case 4:
-                cell.textLabel?.text = "邮箱"
-                TF.placeholder       = "输入您的邮箱"
+                cell.title?.text           = "邮箱"
+                cell.TF?.placeholder       = "输入您的邮箱"
                 
                 break
             case 7:
-                cell.textLabel?.text = "微信"
-                TF.placeholder       = "输入您的微信"
+                cell.title?.text           = "微信"
+                cell.TF?.placeholder       = "输入您的微信"
                 
                 break
             case 8:
-                cell.textLabel?.text = "年龄"
-                TF.placeholder       = "输入您的年龄"
+                cell.title?.text           = "年龄"
+                cell.TF?.placeholder       = "输入您的年龄"
                 
                 break
             case 9:
-                cell.textLabel?.text = "学校"
-                TF.placeholder       = "输入您的学校"
+                cell.title?.text           = "学校"
+                cell.TF?.placeholder       = "输入您的学校"
                 
                 break
             case 10:
-                cell.textLabel?.text = "专业"
-                TF.placeholder       = "输入您的专业"
+                cell.title?.text           = "专业"
+                cell.TF?.placeholder       = "输入您的专业"
                 
                 break
             case 11:
-                cell.textLabel?.text = "年级"
-                TF.placeholder       = "输入您的年级"
+                cell.title?.text           = "年级"
+                cell.TF?.placeholder       = "输入您的年级"
                 
                 break
             case 15:
-                cell.textLabel?.text = "推荐人"
-                TF.placeholder       = "输入推荐人(选填)"
+                cell.title?.text           = "推荐人"
+                cell.TF?.placeholder       = "输入推荐人(选填)"
                 
                 break
             default:
@@ -185,6 +205,20 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    
 }
 
 // ===================================================================================================================

@@ -41,25 +41,25 @@ extension SX_ApplyMessageCell {
     
     func ConfigCell() {
         self.title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.top.equalToSuperview().offset(Margin)
+            make.left.equalToSuperview().offset(Margin)
+            make.centerY.equalToSuperview()
             make.height.equalTo(15)
         }).config({ (TITLE) in
             TITLE.sizeToFit()
             TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
             TITLE.font = UIFont.systemFont(ofSize: 14)
         })
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+        self.TF = UITextField().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.centerY.top.equalTo(self)
+        }).config({ (TF) in
+           TF.sizeToFit()
+            
+        })
     }
+    
+    
+    
+    
 }
 

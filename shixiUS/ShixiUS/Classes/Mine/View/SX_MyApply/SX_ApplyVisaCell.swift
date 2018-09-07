@@ -16,9 +16,10 @@
 import UIKit
 
 class SX_ApplyVisaCell: UITableViewCell {
-
+    
     var title: UILabel?
-    var btn: UIButton?
+    var trueBtn: UIButton?
+    var falseBtn:UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,10 +34,10 @@ class SX_ApplyVisaCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 }
@@ -56,19 +57,28 @@ extension SX_ApplyVisaCell {
             TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
             TITLE.font = UIFont.systemFont(ofSize: 14)
         })
-
         
+        self.trueBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.centerY.equalTo(self.title!)
+            make.left.equalTo(self.title!.snp.right).offset(Margin)
+            make.height.equalTo(55.FloatValue.IPAD_XValue)
+            make.width.equalTo(120.FloatValue.IPAD_XValue)
+        }).config({ (TRUE) in
+            TRUE.sizeToFit()
+            TRUE.layer.cornerRadius = 5
+            TRUE.layer.borderColor  = UIColor.colorWithRGB(r: 204, g: 204, b: 204).cgColor
+            TRUE.layer.borderWidth  = 0.6
+            TRUE.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
+        })
         
-        
-        
-        
+        self.falseBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.width.height.equalTo(self.trueBtn!)
+            make.left.equalTo(self.trueBtn!.snp.right).offset(30.FloatValue.IPAD_XValue)
+        }).config({ (FALSE) in
+            FALSE.layer.cornerRadius = 5
+            FALSE.layer.borderColor  = UIColor.colorWithRGB(r: 204, g: 204, b: 204).cgColor
+            FALSE.layer.borderWidth  = 0.6
+            FALSE.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
+        })
     }
 }
-
-
-
-
-
-
-
-

@@ -219,7 +219,6 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
             
             return view
         }
-        
         return UIView()
     }
     
