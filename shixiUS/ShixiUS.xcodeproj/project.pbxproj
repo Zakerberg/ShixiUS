@@ -51,6 +51,8 @@
 		4527F902211D5D97000EAEB9 /* SX_HeadPortraitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F901211D5D97000EAEB9 /* SX_HeadPortraitCell.swift */; };
 		4527F91121226B29000EAEB9 /* SX_ApplyProgressDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F91021226B29000EAEB9 /* SX_ApplyProgressDetailController.swift */; };
 		4527F91321226B70000EAEB9 /* SX_MyApplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */; };
+		452F3E8B21435E1D005696E0 /* SX_URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452F3E8A21435E1D005696E0 /* SX_URL.swift */; };
+		452F3E8D21435E53005696E0 /* SX_NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452F3E8C21435E53005696E0 /* SX_NetworkProvider.swift */; };
 		45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */; };
 		45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45341D2F20F48C240099CDDD /* SX_LoadingView.swift */; };
 		453C5B51210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C5B50210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift */; };
@@ -180,6 +182,8 @@
 		4527F901211D5D97000EAEB9 /* SX_HeadPortraitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HeadPortraitCell.swift; sourceTree = "<group>"; };
 		4527F91021226B29000EAEB9 /* SX_ApplyProgressDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyProgressDetailController.swift; sourceTree = "<group>"; };
 		4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MyApplyController.swift; sourceTree = "<group>"; };
+		452F3E8A21435E1D005696E0 /* SX_URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_URL.swift; sourceTree = "<group>"; };
+		452F3E8C21435E53005696E0 /* SX_NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_NetworkProvider.swift; sourceTree = "<group>"; };
 		45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TopSelectedView.swift; sourceTree = "<group>"; };
 		45341D2F20F48C240099CDDD /* SX_LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_LoadingView.swift; sourceTree = "<group>"; };
 		453C5B50210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailTitleCell.swift; sourceTree = "<group>"; };
@@ -701,6 +705,8 @@
 			isa = PBXGroup;
 			children = (
 				45FDD9A42126AEC300E336F9 /* SX_NetManager.swift */,
+				452F3E8A21435E1D005696E0 /* SX_URL.swift */,
+				452F3E8C21435E53005696E0 /* SX_NetworkProvider.swift */,
 			);
 			path = NetManager;
 			sourceTree = "<group>";
@@ -961,6 +967,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -975,6 +982,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -1057,6 +1065,7 @@
 				45454BD42118390D002B9EBC /* SX_MineMyCollectionController.swift in Sources */,
 				4527F875211A8A95000EAEB9 /* SX_ApplyProgressCell.swift in Sources */,
 				45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */,
+				452F3E8D21435E53005696E0 /* SX_NetworkProvider.swift in Sources */,
 				45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */,
 				329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */,
 				4527F8FA211BE532000EAEB9 /* SX_PersonalIconCell.swift in Sources */,
@@ -1112,6 +1121,7 @@
 				45B19339211056C700EFF422 /* SX_ProjectDetailModel.swift in Sources */,
 				45454BCD2118184F002B9EBC /* SX_LoginController.swift in Sources */,
 				45CF169220EF3F4400188F42 /* SX_BaseWebController.swift in Sources */,
+				452F3E8B21435E1D005696E0 /* SX_URL.swift in Sources */,
 				329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */,
 				45454BD821183965002B9EBC /* SX_MinePersonalController.swift in Sources */,
 				453C5B51210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift in Sources */,
