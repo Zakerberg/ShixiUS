@@ -17,6 +17,8 @@ pod 'SwiftyJSON'
 pod 'Alamofire'
 pod 'Result'
 pod 'Kingfisher'
+pod 'IQKeyboardManagerSwift'
+pod 'ESPullToRefresh'
   
   target 'ShixiUSTests' do
     inherit! :search_paths
