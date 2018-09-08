@@ -35,7 +35,7 @@ public class SX_NetworkProvider {
             case let .success(response):
                 do {
                     let mapjson = try response.mapJSON()
-                    let json = JSON(mapjson)
+                    let json    = JSON(mapjson)
                     guard let _ = json.dictionaryObject else{
                         failClosure(self.failInfo)
                         return
@@ -52,14 +52,14 @@ public class SX_NetworkProvider {
     
     
     /// 请求对象JSON数据
-    func requestDataWithTargetModelJSON<T:TargetType,M:Mappable>(target:T,model:M,successClosure:@escaping SuccessModelClosure,failClosure: @escaping FailClosure) {
+    func requestDataWithTargetModelJSON<T:TargetType,M:Mappable>(target:T,model:M,successClosure: @escaping SuccessModelClosure,failClosure: @escaping FailClosure) {
         let requestProvider = MoyaProvider<T>(requestClosure:requestTimeoutClosure(target: target))
-        let _=requestProvider.request(target) { (result) -> () in
+        let _ = requestProvider.request(target) { (result) -> () in
             switch result{
             case let .success(response):
                 do {
-                    let json = try response.mapJSON()
-                    let model=Mapper<M>().map(JSONObject:JSON(json).object)
+                    let json  = try response.mapJSON()
+                    let model = Mapper<M>().map(JSONObject:JSON(json).object)
                     successClosure(model)
                 } catch {
                     failClosure(self.failInfo)
@@ -72,9 +72,9 @@ public class SX_NetworkProvider {
     
     
     /// 请求String数据
-    func requestDataWithTargetString<T:TargetType>(target:T,successClosure:@escaping SuccessStringClosure,failClosure: @escaping FailClosure) {
+    func requestDataWithTargetString<T:TargetType>(target:T,successClosure: @escaping SuccessStringClosure,failClosure: @escaping FailClosure) {
         let requestProvider = MoyaProvider<T>(requestClosure:requestTimeoutClosure(target: target))
-        let _=requestProvider.request(target) { (result) -> () in
+        let _ = requestProvider.request(target) { (result) -> () in
             switch result{
             case let .success(response):
                 do {
@@ -86,7 +86,6 @@ public class SX_NetworkProvider {
             case let .failure(error):
                 failClosure(error.errorDescription)
             }
-            
         }
     }
     
