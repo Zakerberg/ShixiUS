@@ -45,18 +45,78 @@
  */
 
 import UIKit
-import Moya
 import SwiftyJSON
 import Alamofire
 
-/// 超时时长
-private var requestTimeOut:Double = 30
-///成功数据的回调
-typealias successCallback = ((String) -> (Void))
-///失败的回调
-typealias failedCallback = ((String) -> (Void))
-///网络错误的回调
-typealias errorCallback = (() -> (Void))
+let SX_DOUYU_TOKEN : String = "SX_DOUYU_TOKEN"
 
+enum SXMethod {
+    case GET
+    case POST
+}
 
+class SX_NetManager {
+    class func requestData(type : SXMethod, URlString: String, parameters : [String : String]? = nil,  finishCallBack : @escaping (_ responseCall : Data)->()){
+        
+        let type = type == SXMethod.GET ? HTTPMethod.get : HTTPMethod.post
+        // 配置 HTTPHeaders
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "charset":"utf-8",
+            ]
+        
+        Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            // 处理 cookie
+            let headerFields = response.response?.allHeaderFields as! [String: String]
+            let url = response.request?.url
+            let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
+            var cookieArray = [ [HTTPCookiePropertyKey : Any ] ]()
+            for cookie in cookies {
+                cookieArray.append(cookie.properties!)
+            }
+            if !(UserDefaults.standard.object(forKey: SX_DOUYU_TOKEN) != nil){
+                // 保存 cookie
+                UserDefaults.standard.set(cookieArray, forKey: SX_DOUYU_TOKEN)
+            }else{
+                print("token\(String(describing: UserDefaults.standard.object(forKey: SX_DOUYU_TOKEN)))")
+            }
+            print("Method:\(type)请求\nURL: \(URlString)\n请求参数: \(String(describing: parameters))")
+            if parameters != nil{
+                print(response.request?.url ?? "url")
+                
+                print(parameters ?? String())
+            }
+            
+            guard let result = response.result.value else {
+                print(response.result.error ?? "错误❌")
+                return
+            }
+            
+            guard let dict = result as? [String : Any] else {
+                return
+            }
+            
+            // 返回字典类型 Data
+            if let dataDict = dict["data"] as? [String : Any] {
+                
+                let jsonData = try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
+                print(dict)
+                if jsonData != nil {
+                    finishCallBack(jsonData!)
+                    return
+                }
+            }
+            
+            // 返回数组类型Data
+            if ((dict["data"] as? [Any]) != nil) {
+                let arrData = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+                print(dict)
+                if arrData != nil {
+                    finishCallBack(arrData!)
+                }
+            }
+            
+        }
+    }
+}
 
