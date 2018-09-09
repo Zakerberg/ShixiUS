@@ -80,7 +80,7 @@ class SX_NetManager {
             }else{
                 print("token\(String(describing: UserDefaults.standard.object(forKey: SX_DOUYU_TOKEN)))")
             }
-            print("Method:\(type)请求\nURL: \(URlString)\n请求参数: \(String(describing: parameters))")
+            SXLog("Method:\(type)请求\nURL: \(URlString)\n请求参数: \(String(describing: parameters))")
             if parameters != nil{
                 print(response.request?.url ?? "url")
                 
@@ -100,7 +100,7 @@ class SX_NetManager {
             if let dataDict = dict["data"] as? [String : Any] {
                 
                 let jsonData = try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
-                print(dict)
+                SXLog(dict)
                 if jsonData != nil {
                     finishCallBack(jsonData!)
                     return
@@ -110,7 +110,7 @@ class SX_NetManager {
             // 返回数组类型Data
             if ((dict["data"] as? [Any]) != nil) {
                 let arrData = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-                print(dict)
+                SXLog(dict)
                 if arrData != nil {
                     finishCallBack(arrData!)
                 }
