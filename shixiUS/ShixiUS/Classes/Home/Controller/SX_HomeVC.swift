@@ -177,12 +177,25 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 1 {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
             cell.selectionStyle = .none
+            
             return cell
         }
         
         let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
         shixiTrainingCell.selectionStyle = .none
         shixiTrainingCell.delegate = self
+        
+        shixiTrainingCell.moreButton?.rx.tap.subscribe(onNext: { (_) in
+            SXLog("首页热门实训更多按钮")
+            
+            let vc = SX_TrainingProjectController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }, onError: { (error) in
+            SXLog(error)
+        }, onCompleted: nil, onDisposed: nil)
+    
+        
         return shixiTrainingCell
     }
     
@@ -229,11 +242,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                             self.hidesBottomBarWhenPushed = false
                         }else if i == 2 {
                             SXLog("进入培训认证\(i)")
-                            //                            self.hidesBottomBarWhenPushed = true
-                            //                            let vc = SX_CertificationController()
-                            //                            self.navigationController?.pushViewController(vc, animated: true)
-                            //                            self.hidesBottomBarWhenPushed = false
-                            
                             let vc = SX_LoginController()
                             self.navigationController?.present(vc, animated: true)
                         }
@@ -271,8 +279,10 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
                     moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
                     moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
-                    moreButton.rx.tap.subscribe(onNext: { (self) in
+                    moreButton.rx.tap.subscribe(onNext: { (_) in
                         SXLog("进入更多界面")
+                       let vc = SX_MoreHotJobController()
+                       self.navigationController?.pushViewController(vc, animated: true)
                     }, onError: { (error) in
                         
                     }, onCompleted: nil, onDisposed: nil)

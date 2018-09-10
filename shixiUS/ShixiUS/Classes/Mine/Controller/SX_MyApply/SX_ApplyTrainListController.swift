@@ -19,7 +19,7 @@ let applyAddressCellID  = "applyAddressCellID"
 
 class SX_ApplyTrainListController: UIViewController {
     
-    var dataArr = [Int](repeating: 0, count: 14)
+    var dataArr = [Int](repeating: 0, count: 16)
    
     lazy var table: UITableView = {
         

@@ -1,17 +1,10 @@
 //
-//  SX_OverseaDetailController.swift
+//  SX_MoreHotJobController.swift
 //  ShixiUS
 //
-//  Created by Michael 柏 on 7/23/18.
-//  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  海外就业详情界面
-
-/*
- 我无法确定你是否把我推开
- 我可以确定的是
- 无论你把我推开多少次
- 我都会回来
- */
+//  Created by heather on 2018/9/10.
+//  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
+//  热门岗位的更多界面
 
 import UIKit
 
@@ -19,9 +12,9 @@ private let ArrowTag = 3000
 private let ControlTag = 1000
 private let LabelTag = 2000
 
-let overseaCellID = "overseaCellID"
+let hotJobCellID = "hotJobCellID"
 
-class SX_OverseaDetailController: UIViewController {
+class SX_MoreHotJobController: UIViewController {
     
 // =========================================================================================================================
 //  MARK: - lazy
@@ -50,9 +43,11 @@ class SX_OverseaDetailController: UIViewController {
     
     /// 工作时常View
     private lazy var workTimeView: UIView = {
+       
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
+        
         positionView.dataArr = ["1","2","3"]
         positionView.isHidden = true
         
@@ -82,9 +77,6 @@ class SX_OverseaDetailController: UIViewController {
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
     
-// ===================================================================================================================
-// MARK: - O
-// ===================================================================================================================
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -95,20 +87,17 @@ class SX_OverseaDetailController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     deinit {
         overseaTableView.delegate = nil
         print("overseaTableView ---deinit")
-   }
+    }
 }
 
-// ===========================================================================================================================
-// MARK: - Other Method
-// ===========================================================================================================================
-extension SX_OverseaDetailController {
+extension SX_MoreHotJobController {
     
     func setUI() {
-        self.title = "海外就业"
+        self.title = "热门岗位"
         self.view.backgroundColor = UIColor.white
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -124,7 +113,6 @@ extension SX_OverseaDetailController {
     
     /// .....
     func fetchData() {
-        
         
         
     }
@@ -183,10 +171,9 @@ extension SX_OverseaDetailController {
     }
 }
 
-// =========================================================================================================================
-// MARK: - Other Method 2 响应
-// =========================================================================================================================
-extension SX_OverseaDetailController {
+
+extension SX_MoreHotJobController {
+    
     /// 调出PickerView
     @objc func topSelectedBtnClick(control: UIControl) {
         if control.isSelected == true {
@@ -368,18 +355,15 @@ extension SX_OverseaDetailController {
     }
 }
 
-// ===========================================================================================================================
-// MARK: - UITableViewDelegate
-// ===========================================================================================================================
-extension SX_OverseaDetailController: UITableViewDelegate, UITableViewDataSource {
-    
+
+extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 40
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = SX_OverseaCell(style: .default, reuseIdentifier: overseaCellID)
+        let cell = SX_OverseaCell(style: .default, reuseIdentifier: hotJobCellID)
         cell.jobName?.text = "[金融] 美国金融岗位美国金融岗位美国金融岗位"
         cell.address?.text = "美国/New York"
         cell.nature?.text = "全职1"
@@ -401,5 +385,3 @@ extension SX_OverseaDetailController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
-

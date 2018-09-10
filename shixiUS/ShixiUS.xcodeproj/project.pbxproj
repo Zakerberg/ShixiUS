@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0F24381F419BB7C6CDD0046C /* Pods_ShixiUSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */; };
+		322FC80221461059005347E8 /* SX_MoreHotJobController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC80121461059005347E8 /* SX_MoreHotJobController.swift */; };
+		322FC804214613BA005347E8 /* SX_HotJobDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC803214613BA005347E8 /* SX_HotJobDetailController.swift */; };
 		323E99A421392585006038F5 /* SX_GifImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99A321392585006038F5 /* SX_GifImageOperation.swift */; };
 		323E99A621392618006038F5 /* SX_GuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99A521392618006038F5 /* SX_GuidePageView.swift */; };
 		323E99AA21392819006038F5 /* SX_GuidePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99A921392819006038F5 /* SX_GuidePageControl.swift */; };
@@ -82,7 +84,6 @@
 		45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B6C20D8A4D50035FCA6 /* SX_VIPCenterVC.swift */; };
 		45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */; };
 		4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561F03D20DA027800C64878 /* SX_HomeModel.swift */; };
-		45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */; };
 		458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */; };
 		458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458805212100751F006FCDC7 /* SX_BaseViewController.swift */; };
 		458A00262106FBC600D38014 /* SX_UsInOverseaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458A00252106FBC600D38014 /* SX_UsInOverseaCell.swift */; };
@@ -92,7 +93,6 @@
 		459B334A210965EA00B2EBB0 /* SX_MoreDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B3349210965EA00B2EBB0 /* SX_MoreDateController.swift */; };
 		459B334C21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B334B21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift */; };
 		45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */; };
-		45ACF3F72105BC44001DAE5A /* SX_OverseaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F62105BC44001DAE5A /* SX_OverseaDetailController.swift */; };
 		45B19334210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */; };
 		45B19336210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */; };
 		45B19339211056C700EFF422 /* SX_ProjectDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B19338211056C700EFF422 /* SX_ProjectDetailModel.swift */; };
@@ -139,6 +139,8 @@
 		1190C349599AFF1C16E19BBE /* Pods-ShixiUS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShixiUS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShixiUS/Pods-ShixiUS.release.xcconfig"; sourceTree = "<group>"; };
 		1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		322FC80121461059005347E8 /* SX_MoreHotJobController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MoreHotJobController.swift; sourceTree = "<group>"; };
+		322FC803214613BA005347E8 /* SX_HotJobDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobDetailController.swift; sourceTree = "<group>"; };
 		323E99A321392585006038F5 /* SX_GifImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GifImageOperation.swift; sourceTree = "<group>"; };
 		323E99A521392618006038F5 /* SX_GuidePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuidePageView.swift; sourceTree = "<group>"; };
 		323E99A921392819006038F5 /* SX_GuidePageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuidePageControl.swift; sourceTree = "<group>"; };
@@ -219,7 +221,6 @@
 		45556B6C20D8A4D50035FCA6 /* SX_VIPCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_VIPCenterVC.swift; sourceTree = "<group>"; };
 		45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVC.swift; sourceTree = "<group>"; };
 		4561F03D20DA027800C64878 /* SX_HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeModel.swift; sourceTree = "<group>"; };
-		45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeAPI.swift; sourceTree = "<group>"; };
 		458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailController.swift; sourceTree = "<group>"; };
 		458805212100751F006FCDC7 /* SX_BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseViewController.swift; sourceTree = "<group>"; };
 		458A00252106FBC600D38014 /* SX_UsInOverseaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_UsInOverseaCell.swift; sourceTree = "<group>"; };
@@ -229,7 +230,6 @@
 		459B3349210965EA00B2EBB0 /* SX_MoreDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MoreDateController.swift; sourceTree = "<group>"; };
 		459B334B21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailDateCell.swift; sourceTree = "<group>"; };
 		45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_NavigationBar.swift; sourceTree = "<group>"; };
-		45ACF3F62105BC44001DAE5A /* SX_OverseaDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaDetailController.swift; sourceTree = "<group>"; };
 		45B19333210EBE5300EFF422 /* SX_ProjectDetailTripCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailTripCollectionViewCell.swift; sourceTree = "<group>"; };
 		45B19335210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailStarTimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		45B19338211056C700EFF422 /* SX_ProjectDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailModel.swift; sourceTree = "<group>"; };
@@ -386,7 +386,6 @@
 			isa = PBXGroup;
 			children = (
 				45CF168B20EF11BC00188F42 /* SX_OverseaController.swift */,
-				45ACF3F62105BC44001DAE5A /* SX_OverseaDetailController.swift */,
 			);
 			path = SX_Oversea;
 			sourceTree = "<group>";
@@ -416,13 +415,6 @@
 				458A00252106FBC600D38014 /* SX_UsInOverseaCell.swift */,
 			);
 			path = SX_Oversea;
-			sourceTree = "<group>";
-		};
-		453C5B59210B0736009F9CB9 /* SX_Certification */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SX_Certification;
 			sourceTree = "<group>";
 		};
 		45440EF820E0B98900058978 /* SX_CycleScrollerView */ = {
@@ -536,7 +528,6 @@
 			isa = PBXGroup;
 			children = (
 				45556B6520D8A0D00035FCA6 /* Model */,
-				45556B6320D8A0CF0035FCA6 /* Service */,
 				45556B6220D8A0CF0035FCA6 /* View */,
 				45CF168820EF10E400188F42 /* Controller */,
 			);
@@ -596,19 +587,10 @@
 			children = (
 				45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */,
 				45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */,
-				453C5B59210B0736009F9CB9 /* SX_Certification */,
 				453C5B58210B0736009F9CB9 /* SX_Oversea */,
 				453C5B57210B0736009F9CB9 /* SX_TrainingProject */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		45556B6320D8A0CF0035FCA6 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				45699E6C20DB999D00D5CFDB /* SX_HomeAPI.swift */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		45556B6520D8A0D00035FCA6 /* Model */ = {
@@ -661,6 +643,8 @@
 			isa = PBXGroup;
 			children = (
 				45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */,
+				322FC80121461059005347E8 /* SX_MoreHotJobController.swift */,
+				322FC803214613BA005347E8 /* SX_HotJobDetailController.swift */,
 				453C5B55210B0667009F9CB9 /* SX_TrainingProject */,
 				453C5B56210B0667009F9CB9 /* SX_Oversea */,
 				453C5B54210B0667009F9CB9 /* SX_Certification */,
@@ -1058,7 +1042,6 @@
 				459B334A210965EA00B2EBB0 /* SX_MoreDateController.swift in Sources */,
 				324848422141021B00B6049E /* SX_ApplyVisaCell.swift in Sources */,
 				45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */,
-				45ACF3F72105BC44001DAE5A /* SX_OverseaDetailController.swift in Sources */,
 				45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */,
 				45440EFE20E0C40D00058978 /* SX_PageControl.swift in Sources */,
 				323E99B5213D1616006038F5 /* SX_CollectionTrainingProjectController.swift in Sources */,
@@ -1071,7 +1054,6 @@
 				4527F8FA211BE532000EAEB9 /* SX_PersonalIconCell.swift in Sources */,
 				45556B2E20D89C5D0035FCA6 /* ShixiUS.xcdatamodeld in Sources */,
 				323E99A421392585006038F5 /* SX_GifImageOperation.swift in Sources */,
-				45699E6D20DB999D00D5CFDB /* SX_HomeAPI.swift in Sources */,
 				459B334C21096E1500B2EBB0 /* SX_ProjectDetailDateCell.swift in Sources */,
 				453C5B53210B04A1009F9CB9 /* SX_ProjectDetailDescriptionCell.swift in Sources */,
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
@@ -1094,6 +1076,7 @@
 				3248484D21411FCB00B6049E /* SX_AddressPickViewCell.swift in Sources */,
 				323E99B3213D15E2006038F5 /* SX_CollextionEmploymentJobsController.swift in Sources */,
 				45BAD4A82111BA96003DBD02 /* SX_ProjectDetailScheduleCell.swift in Sources */,
+				322FC804214613BA005347E8 /* SX_HotJobDetailController.swift in Sources */,
 				45E573C0212A7094007A4DCD /* SX_OrderPayInfoCell.swift in Sources */,
 				3248484921411F5800B6049E /* SX_AddressViewController.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
@@ -1101,6 +1084,7 @@
 				45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */,
 				45454BE321198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift in Sources */,
 				45E57406212E9847007A4DCD /* SX_UnderlineBtn.swift in Sources */,
+				322FC80221461059005347E8 /* SX_MoreHotJobController.swift in Sources */,
 				45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */,
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
 				323E99B7213D1635006038F5 /* SX_CollectionVocationalTrainingController.swift in Sources */,
@@ -1318,7 +1302,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShixiUS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShixiUS/ShixiUS-Bridging-Header.h";
@@ -1339,7 +1326,10 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShixiUS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShixiUS/ShixiUS-Bridging-Header.h";
@@ -1357,7 +1347,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1375,7 +1369,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1392,7 +1390,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1409,7 +1411,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S938B7RCX3;
 				INFOPLIST_FILE = ShixiUSUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Shixi.ShixiUSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
