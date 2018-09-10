@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "我的申请的副本.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "形状-31-拷贝@2x.png",
+      "filename" : "我的申请@2x的副本.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "形状-31-拷贝@3x.png",
+      "filename" : "我的申请@3x的副本.png",
       "scale" : "3x"
     }
   ],
