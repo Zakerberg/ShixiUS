@@ -88,12 +88,14 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             
             if indexPath.row == 5 {
                 cell.title?.text = "是否有美国签证"
+                cell.trueBtn?.setTitle("有", for: .normal)
                 cell.trueBtn?.rx.tap.subscribe(onNext: { (_) in
                     SXLog("有美国签证")
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
                 
+                cell.falseBtn?.setTitle("否", for: .normal)
                 cell.falseBtn?.rx.tap.subscribe(onNext: { (_) in
                     SXLog("没有美国签证")
                 }, onError: { (error) in
@@ -101,12 +103,14 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                 }, onCompleted: nil, onDisposed: nil)
             } else {
                 cell.title?.text = "是否在校"
+                cell.trueBtn?.setTitle("在校", for: .normal)
                 cell.trueBtn?.rx.tap.subscribe(onNext: { (_) in
                     SXLog("在校")
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
                 
+                cell.falseBtn?.setTitle("毕业", for: .normal)
                 cell.falseBtn?.rx.tap.subscribe(onNext: { (_) in
                     SXLog("不在校")
                 }, onError: { (error) in
