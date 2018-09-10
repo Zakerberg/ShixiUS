@@ -20,7 +20,8 @@ let applyAddressCellID  = "applyAddressCellID"
 class SX_ApplyTrainListController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 16)
-   
+    var confirmBtn: UIButton?
+    
     lazy var table: UITableView = {
         
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -55,10 +56,9 @@ extension SX_ApplyTrainListController {
     }
     
     func fetchData() {
-     
+        
         
     }
-    
 }
 
 // ===================================================================================================================
@@ -223,17 +223,36 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        let view = UIView()
+        self.confirmBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+            make.top.left.equalToSuperview().offset(Margin)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(45.FloatValue.IPAD_XValue)
+        }).config({ (CONFIRM) in
+            CONFIRM.backgroundColor     = UIColor.SX_MainColor()
+            CONFIRM.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 20)
+            CONFIRM.setTitle("确定", for: .normal)
+            CONFIRM.layer.masksToBounds = true
+            CONFIRM.layer.cornerRadius  = 10
+            CONFIRM.rx.tap.subscribe(onNext: { (_) in
+                SXLog("确定申请 +++ + ")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+        })
+        
+        return view
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 80.FloatValue.IPAD_XValue
+    }
 }
 
 // ===================================================================================================================
 // MARK: -
 // ===================================================================================================================
 extension SX_ApplyTrainListController {
-    
     
     
 }
