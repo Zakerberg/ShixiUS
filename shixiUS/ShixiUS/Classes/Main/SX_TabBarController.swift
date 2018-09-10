@@ -27,7 +27,7 @@ class SX_TabBarController: UITabBarController {
         firstNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Home"), selectedImage: UIImage(named: "Home_Selected"))
         firstNavController.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, -10, 0)
 
-        let vipCenterVC = SX_VIPCenterVC()
+        let vipCenterVC = SX_MyApplyController()
         let secondNavController = SX_NavigationController(rootViewController: vipCenterVC)
         secondNavController.navigationBar.tintColor = UIColor.SX_MainColor()
         secondNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Application"), selectedImage: UIImage(named: "Application_Selected"))

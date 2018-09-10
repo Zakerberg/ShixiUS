@@ -81,7 +81,6 @@
 		45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B5E20D89FE00035FCA6 /* SX_NavigationController.swift */; };
 		45556B6120D8A0370035FCA6 /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B6020D8A0370035FCA6 /* Defines.swift */; };
 		45556B6720D8A1180035FCA6 /* SX_HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */; };
-		45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B6C20D8A4D50035FCA6 /* SX_VIPCenterVC.swift */; };
 		45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */; };
 		4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561F03D20DA027800C64878 /* SX_HomeModel.swift */; };
 		458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */; };
@@ -218,7 +217,6 @@
 		45556B5E20D89FE00035FCA6 /* SX_NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_NavigationController.swift; sourceTree = "<group>"; };
 		45556B6020D8A0370035FCA6 /* Defines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeVC.swift; sourceTree = "<group>"; };
-		45556B6C20D8A4D50035FCA6 /* SX_VIPCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_VIPCenterVC.swift; sourceTree = "<group>"; };
 		45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVC.swift; sourceTree = "<group>"; };
 		4561F03D20DA027800C64878 /* SX_HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeModel.swift; sourceTree = "<group>"; };
 		458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailController.swift; sourceTree = "<group>"; };
@@ -286,6 +284,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		322FC80521461AF4005347E8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		322FC80621461AF4005347E8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */,
+				4527F909212269F1000EAEB9 /* SX_MyApply */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		323E99A22139255A006038F5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,7 +364,6 @@
 		4527F909212269F1000EAEB9 /* SX_MyApply */ = {
 			isa = PBXGroup;
 			children = (
-				4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */,
 				4527F872211A8970000EAEB9 /* SX_ApplyDetailController.swift */,
 				323E99BD213FA6E6006038F5 /* SX_ApplyEmpListController.swift */,
 				323E99BF213FA721006038F5 /* SX_ApplyTrainListController.swift */,
@@ -432,7 +445,6 @@
 			isa = PBXGroup;
 			children = (
 				32E49D1A21369D6C005633F2 /* SX_MyCollection */,
-				4527F909212269F1000EAEB9 /* SX_MyApply */,
 				45E573BB212A6104007A4DCD /* SX_Pay */,
 				45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */,
 				45454BD721183965002B9EBC /* SX_MinePersonalController.swift */,
@@ -549,6 +561,8 @@
 		45556B5920D89D290035FCA6 /* VIP Center */ = {
 			isa = PBXGroup;
 			children = (
+				322FC80621461AF4005347E8 /* Controller */,
+				322FC80521461AF4005347E8 /* Model */,
 				45556B6A20D8A4B70035FCA6 /* View */,
 			);
 			path = "VIP Center";
@@ -606,7 +620,7 @@
 		45556B6A20D8A4B70035FCA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				45556B6C20D8A4D50035FCA6 /* SX_VIPCenterVC.swift */,
+				45454BDF21198995002B9EBC /* SX_MyApply */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -617,7 +631,6 @@
 				4527F901211D5D97000EAEB9 /* SX_HeadPortraitCell.swift */,
 				45E573BE212A6234007A4DCD /* SX_Pay */,
 				4527F8F8211BE4EC000EAEB9 /* SX_Personal */,
-				45454BDF21198995002B9EBC /* SX_MyApply */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1098,7 +1111,6 @@
 				45BAD4AC2112A3FF003DBD02 /* SX_PorjectDetailTableView.swift in Sources */,
 				45BEF63D20DA2B7000B71FAC /* SX_ADScrollModel.swift in Sources */,
 				45B19336210F03E500EFF422 /* SX_ProjectDetailStarTimeCollectionViewCell.swift in Sources */,
-				45556B6D20D8A4D50035FCA6 /* SX_VIPCenterVC.swift in Sources */,
 				4527F91321226B70000EAEB9 /* SX_MyApplyController.swift in Sources */,
 				323E99BC213E5942006038F5 /* SX_ProjectDetailFrameModel.swift in Sources */,
 				45452E5C21265C8F002CC995 /* SX_UserAgreementController.swift in Sources */,
