@@ -20,41 +20,31 @@ class SX_TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let homeVc = SX_HomeVC()
-        let firstNavController = SX_NavigationController(rootViewController: homeVc)
-        firstNavController.navigationBar.barTintColor = UIColor.SX_MainColor()
-        firstNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Home"), selectedImage: UIImage(named: "Home_Selected"))
-        firstNavController.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, -10, 0)
-
-        let vipCenterVC = SX_MyApplyController()
-        let secondNavController = SX_NavigationController(rootViewController: vipCenterVC)
-        secondNavController.navigationBar.tintColor = UIColor.SX_MainColor()
-        secondNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Application"), selectedImage: UIImage(named: "Application_Selected"))
-        secondNavController.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0 , -10, 0)
-
-        let mineVC = SX_MineVC()
-        let thirdNavController = SX_NavigationController(rootViewController: mineVC)
-        thirdNavController.navigationBar.tintColor = UIColor.SX_MainColor()
-        thirdNavController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Mine"), selectedImage: UIImage(named: "Mine_Selected"))
-        thirdNavController.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0 , -10, 0)
-
-        setTbaBarApperence()
-        self.setViewControllers([firstNavController,secondNavController,thirdNavController], animated: true)
-    
-       setTbaBarApperence()
+        setUpAllViewController()
+        self.tabBar.tintColor = UIColor.SX_MainColor()
     }
 }
 
 extension SX_TabBarController {
     
-    func setTbaBarApperence() {
-        let tabBarApperence = UITabBar.appearance()
-        tabBarApperence.shadowImage = UIImage()
-        tabBarApperence.tintColor = UIColor.SX_MainColor()
+    // 添加所有控件
+    func setUpAllViewController() -> Void {
+        setUpChildController(SX_HomeVC(), "首页","Home","Home_Selected")
+        setUpChildController(SX_MyApplyController(), "我的申请",  "Application",  "Application_Selected")
+        setUpChildController(SX_MineVC(), "我的",  "Mine",  "Mine_Selected")
+    }
+    
+    // 设置子控件属性
+    private func setUpChildController(_ controller : UIViewController,_ title : String,_ norImage : String,_ selectedImage : String){
+        
+        controller.tabBarItem.title = title
+        // 修改TabBar标题位置
+        controller.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -3)
+        controller.tabBarItem.image = UIImage(named: norImage)
+        controller.tabBarItem.selectedImage = UIImage(named: selectedImage)
+        // 设置 NavigationController
+        let nav = SX_NavigationController(rootViewController: controller)
+        controller.title = title
+        self.addChildViewController(nav)
     }
 }
-
-
-
-
