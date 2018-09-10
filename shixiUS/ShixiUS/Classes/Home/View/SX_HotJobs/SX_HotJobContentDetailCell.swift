@@ -9,7 +9,7 @@
 import UIKit
 
 class SX_HotJobContentDetailCell: UITableViewCell {
-
+    
     var titleLabel : UILabel?
     var contentLabel : UILabel?
     
@@ -21,15 +21,15 @@ class SX_HotJobContentDetailCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 }
@@ -40,19 +40,28 @@ class SX_HotJobContentDetailCell: UITableViewCell {
 extension SX_HotJobContentDetailCell {
     
     func configCell() {
-    
+        
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(Margin)
-            make.width.centerX.equalToSuperview()
-            make.height.equalTo(15)
+            make.left.top.equalToSuperview().offset(Margin)
+            make.width.equalToSuperview()
+            make.height.equalTo(17)
         }).config({ (TITLE) in
-            TITLE.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-            TITLE.font = UIFont.boldSystemFont(ofSize: 15)
+            TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+            TITLE.font = UIFont.boldSystemFont(ofSize: 16)
             TITLE.sizeToFit()
         })
         
+        let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(self.titleLabel!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.height.equalTo(0.5)
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
+        }).config({ (LINE) in
+            LINE.backgroundColor = UIColor.SX_LineColor()
+        })
+        
         self.contentLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
+            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }).config({ (CONTENT) in
@@ -62,7 +71,3 @@ extension SX_HotJobContentDetailCell {
         })
     }
 }
-
-
-
-

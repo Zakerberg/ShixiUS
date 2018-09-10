@@ -294,6 +294,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        let vc = SX_HotJobDetailController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -362,11 +364,4 @@ extension SX_HomeVC: SX_TrainingCellDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-
-
-
-
-
-
 
