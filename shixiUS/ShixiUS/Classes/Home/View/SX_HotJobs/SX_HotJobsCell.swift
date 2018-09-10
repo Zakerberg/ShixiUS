@@ -17,7 +17,7 @@ class SX_HotJobsCell: UITableViewCell {
     var eduLabel:UILabel?
     var addImageView:UIImageView?
     var eduImageView:UIImageView?
-   // var logoImageView:UIImageView?
+    // var logoImageView:UIImageView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +31,17 @@ class SX_HotJobsCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
+    }
+}
+
+// ==================================================================================================================
+// MARK: - configCell()
+// =================================================================================================================
+extension SX_HotJobsCell {
     
     func configCell() {
         
@@ -91,13 +102,13 @@ class SX_HotJobsCell: UITableViewCell {
             eduLabel.sizeToFit()
         })
         
-//        self.logoImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//            make.top.equalTo(self.jobsLabel!)
-//            make.right.equalToSuperview().offset(-Margin)
-//            make.width.height.equalTo(60)
-//        }).config({ (logoImageView) in
-//            logoImageView.image = #imageLiteral(resourceName: "logo")
-//        })
+        //        self.logoImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        //            make.top.equalTo(self.jobsLabel!)
+        //            make.right.equalToSuperview().offset(-Margin)
+        //            make.width.height.equalTo(60)
+        //        }).config({ (logoImageView) in
+        //            logoImageView.image = #imageLiteral(resourceName: "logo")
+        //        })
     }
     
     func reloadData(jobs: NSString, insduty: NSString,address: NSString,edu: NSString, logo: NSString)  {
@@ -106,9 +117,5 @@ class SX_HotJobsCell: UITableViewCell {
         self.eduLabel?.text = edu as String
         //self.logoImageView?.kf.setImage(with: URL(string: logo as String))
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
 }
+

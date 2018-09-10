@@ -10,6 +10,8 @@
 		0F24381F419BB7C6CDD0046C /* Pods_ShixiUSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */; };
 		322FC80221461059005347E8 /* SX_MoreHotJobController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC80121461059005347E8 /* SX_MoreHotJobController.swift */; };
 		322FC804214613BA005347E8 /* SX_HotJobDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC803214613BA005347E8 /* SX_HotJobDetailController.swift */; };
+		322FC80A21464164005347E8 /* SX_HotJobDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC80921464164005347E8 /* SX_HotJobDetailCell.swift */; };
+		322FC80C2146428D005347E8 /* SX_HotJobContentDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC80B2146428D005347E8 /* SX_HotJobContentDetailCell.swift */; };
 		323E99A421392585006038F5 /* SX_GifImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99A321392585006038F5 /* SX_GifImageOperation.swift */; };
 		323E99A621392618006038F5 /* SX_GuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99A521392618006038F5 /* SX_GuidePageView.swift */; };
 		323E99AA21392819006038F5 /* SX_GuidePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99A921392819006038F5 /* SX_GuidePageControl.swift */; };
@@ -140,6 +142,8 @@
 		274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		322FC80121461059005347E8 /* SX_MoreHotJobController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MoreHotJobController.swift; sourceTree = "<group>"; };
 		322FC803214613BA005347E8 /* SX_HotJobDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobDetailController.swift; sourceTree = "<group>"; };
+		322FC80921464164005347E8 /* SX_HotJobDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobDetailCell.swift; sourceTree = "<group>"; };
+		322FC80B2146428D005347E8 /* SX_HotJobContentDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobContentDetailCell.swift; sourceTree = "<group>"; };
 		323E99A321392585006038F5 /* SX_GifImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GifImageOperation.swift; sourceTree = "<group>"; };
 		323E99A521392618006038F5 /* SX_GuidePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuidePageView.swift; sourceTree = "<group>"; };
 		323E99A921392819006038F5 /* SX_GuidePageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_GuidePageControl.swift; sourceTree = "<group>"; };
@@ -298,6 +302,25 @@
 				4527F909212269F1000EAEB9 /* SX_MyApply */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		322FC807214640D0005347E8 /* SX_HotJobs */ = {
+			isa = PBXGroup;
+			children = (
+				322FC80121461059005347E8 /* SX_MoreHotJobController.swift */,
+				322FC803214613BA005347E8 /* SX_HotJobDetailController.swift */,
+			);
+			path = SX_HotJobs;
+			sourceTree = "<group>";
+		};
+		322FC808214640FB005347E8 /* SX_HotJobs */ = {
+			isa = PBXGroup;
+			children = (
+				45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */,
+				322FC80921464164005347E8 /* SX_HotJobDetailCell.swift */,
+				322FC80B2146428D005347E8 /* SX_HotJobContentDetailCell.swift */,
+			);
+			path = SX_HotJobs;
 			sourceTree = "<group>";
 		};
 		323E99A22139255A006038F5 /* View */ = {
@@ -599,8 +622,8 @@
 		45556B6220D8A0CF0035FCA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				45BEF64020DA4FB000B71FAC /* SX_HotJobsCell.swift */,
 				45341D2D20F44E7F0099CDDD /* SX_TopSelectedView.swift */,
+				322FC808214640FB005347E8 /* SX_HotJobs */,
 				453C5B58210B0736009F9CB9 /* SX_Oversea */,
 				453C5B57210B0736009F9CB9 /* SX_TrainingProject */,
 			);
@@ -656,8 +679,7 @@
 			isa = PBXGroup;
 			children = (
 				45556B6620D8A1180035FCA6 /* SX_HomeVC.swift */,
-				322FC80121461059005347E8 /* SX_MoreHotJobController.swift */,
-				322FC803214613BA005347E8 /* SX_HotJobDetailController.swift */,
+				322FC807214640D0005347E8 /* SX_HotJobs */,
 				453C5B55210B0667009F9CB9 /* SX_TrainingProject */,
 				453C5B56210B0667009F9CB9 /* SX_Oversea */,
 				453C5B54210B0667009F9CB9 /* SX_Certification */,
@@ -1053,6 +1075,7 @@
 				32E49D2221378FAD005633F2 /* SX_PaymentCell.swift in Sources */,
 				32E49D1E21369DC1005633F2 /* SX_PayTrainingProjectController.swift in Sources */,
 				459B334A210965EA00B2EBB0 /* SX_MoreDateController.swift in Sources */,
+				322FC80C2146428D005347E8 /* SX_HotJobContentDetailCell.swift in Sources */,
 				324848422141021B00B6049E /* SX_ApplyVisaCell.swift in Sources */,
 				45440EFC20E0C2CE00058978 /* SX_Proxy.swift in Sources */,
 				45BEF64120DA4FB000B71FAC /* SX_HotJobsCell.swift in Sources */,
@@ -1103,6 +1126,7 @@
 				323E99B7213D1635006038F5 /* SX_CollectionVocationalTrainingController.swift in Sources */,
 				458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */,
 				45FDD9A52126AEC300E336F9 /* SX_NetManager.swift in Sources */,
+				322FC80A21464164005347E8 /* SX_HotJobDetailCell.swift in Sources */,
 				323E99BA213D2F6A006038F5 /* SX_ProgressDetailModel.swift in Sources */,
 				323E99C2213FA73E006038F5 /* SX_ApplyVocationListController.swift in Sources */,
 				3248484721411AC400B6049E /* SX_AddressPickerPresentAnimated.swift in Sources */,
