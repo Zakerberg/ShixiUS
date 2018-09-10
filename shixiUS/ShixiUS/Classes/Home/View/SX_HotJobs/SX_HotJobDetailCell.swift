@@ -54,10 +54,22 @@ extension SX_HotJobDetailCell {
     func configCell() {
         
         self.jobName = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-        }).config({ (Name) in
-
+            make.left.top.equalToSuperview().offset(Margin-1)
+            make.height.equalTo(19.FloatValue.IPAD_XValue)
+        }).config({ (NAME) in
+            NAME.sizeToFit()
+            NAME.font      = UIFont.boldSystemFont(ofSize: 18)
+            NAME.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
         })
         
+        let Time = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        
+          
+        }).config({ (TIME) in
+            TIME.text = "发布时间:"
+        })
+        
+            
         self.jobReleaseTime = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
         }).config({ (RELEASE) in
             
@@ -74,7 +86,6 @@ extension SX_HotJobDetailCell {
         }).config({ (PLACE) in
             
         })
-        
         
         self.jobPeopleCount = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
         }).config({ (COUNT) in

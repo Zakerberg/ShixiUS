@@ -50,8 +50,6 @@ extension SX_CollextionEmploymentJobsController {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
     }
-    
-    
 }
 
 // ===================================================================================================================
