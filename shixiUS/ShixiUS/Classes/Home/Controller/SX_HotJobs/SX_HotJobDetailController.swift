@@ -61,17 +61,34 @@ extension SX_HotJobDetailController {
         self.collectionBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.left.bottom.equalToSuperview()
             make.height.equalTo(50)
+            make.width.equalTo(SCREEN_WIDTH/2)
         }).config({ (COLLECTION) in
-            COLLECTION.setImage(UIImage.init(named: "more"), for: .normal)
-            COLLECTION.setTitle("更多 ", for: .normal)
-            COLLECTION.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            COLLECTION.setImage(#imageLiteral(resourceName: "icon_hotJob_collection"), for: .normal)
+            COLLECTION.setImage(#imageLiteral(resourceName: "icon_hotJob_collectionHL"), for: .selected)
+            COLLECTION.setTitle("  收藏", for: .normal)
+            COLLECTION.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             COLLECTION.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
+            COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
+            
+            COLLECTION.rx.tap.subscribe(onNext: { (_) in
+                SXLog("收藏按钮的点击")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
         })
         
         self.applyBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
-            
+            make.right.bottom.equalToSuperview()
+            make.height.width.equalTo(self.collectionBtn!)
         }).config({ (APPLY) in
-            
+            APPLY.backgroundColor     = UIColor.SX_MainColor()
+            APPLY.titleLabel?.font    = UIFont.systemFont(ofSize: 15)
+            APPLY.setTitle("立即申请", for: .normal)
+            APPLY.rx.tap.subscribe(onNext: { (_) in
+                SXLog("立即申请 +++ + ")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
         })
     }
     
