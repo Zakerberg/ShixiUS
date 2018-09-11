@@ -138,21 +138,22 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             
             return titleCell
             
-        } else if indexPath.section == 1 {
-            let dateTripCell = SX_ProjectDetailDateCell(style: .default, reuseIdentifier: projectDetailDateTripCellID)
-            dateTripCell.selectionStyle = .none
-            dateTripCell.accessoryType  = .none
-            
-            dateTripCell.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
-                
-                SXLog("进入更多日期界面++++++, 坑啊, 填不完了.......|| _ ||")
-                
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-            
-            return dateTripCell
         }
+//        else if indexPath.section == 1 {
+//            let dateTripCell = SX_ProjectDetailDateCell(style: .default, reuseIdentifier: projectDetailDateTripCellID)
+//            dateTripCell.selectionStyle = .none
+//            dateTripCell.accessoryType  = .none
+//
+//            dateTripCell.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
+//
+//                SXLog("进入更多日期界面++++++, 坑啊, 填不完了.......|| _ ||")
+//
+//            }, onError: { (error) in
+//                SXLog(error)
+//            }, onCompleted: nil, onDisposed: nil)
+//
+//            return dateTripCell
+//        }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: projectDetailCellID)
         

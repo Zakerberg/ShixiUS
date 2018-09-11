@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 7/17/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  
+//  首页的CollectionViewCell
 
 import UIKit
 
@@ -26,7 +26,7 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
 }
 
 // =================================================================================================================================
-// MARK: - Other Method 
+// MARK: - Other Method
 // =================================================================================================================================
 extension SX_TrainingCollectionViewCell {
     func configCell() {
