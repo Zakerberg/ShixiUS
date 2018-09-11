@@ -299,7 +299,7 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
 }
 
 // ===================================================================================================================
-// MARK: -
+// MARK: - @objc
 // ===================================================================================================================
 extension SX_ApplyTrainListController {
     @objc func BtnClick(btn: UIButton) {

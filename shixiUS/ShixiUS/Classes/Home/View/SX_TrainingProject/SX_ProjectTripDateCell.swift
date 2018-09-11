@@ -41,9 +41,6 @@ extension SX_ProjectTripDateCell {
         
         
     }
-    
-    
-    
 }
 
 
