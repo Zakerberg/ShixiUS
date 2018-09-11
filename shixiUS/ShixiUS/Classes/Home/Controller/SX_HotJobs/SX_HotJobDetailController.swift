@@ -24,6 +24,9 @@ class SX_HotJobDetailController: UIViewController {
     
     var DATA = "1）传媒，广告，新闻，文学，艺术和电影等相关专业；\n 2）具有媒体音频视频策划剪辑制作经验，具有新闻传媒写作编辑和新媒体运营和市场拓展经验 ；\n 3）熟悉国内知名内容平台和音频视频平台，具有良好网感；\n 4）对新媒体行业有热情愿意学习并积极主动全心投入工作。"
     
+    var intrStr = "我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理"
+    
+    
     var collectionBtn : UIButton?
     var applyBtn: UIButton?
     
@@ -122,6 +125,8 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
             cell.jobFullTime?.text    = "全职"
             cell.jobInterShip?.text   = "实习"
             cell.jobSalary?.text      = "面议"
+            cell.jobIntroduce?.text   = self.intrStr
+            
             
             return cell
         }
@@ -148,7 +153,7 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 130.FloatValue.IPAD_XValue
+            return UILabel.SX_getSpaceLabelHeight(self.intrStr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 95
         } else if indexPath.section == 1 {
             return UILabel.SX_getSpaceLabelHeight(self.dataArr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60
         }
