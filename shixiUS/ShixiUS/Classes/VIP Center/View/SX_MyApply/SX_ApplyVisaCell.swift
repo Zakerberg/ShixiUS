@@ -58,6 +58,3 @@ extension SX_ApplyVisaCell {
         })
     }
 }
-
-
-

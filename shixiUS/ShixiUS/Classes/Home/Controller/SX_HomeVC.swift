@@ -194,7 +194,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         }, onError: { (error) in
             SXLog(error)
         }, onCompleted: nil, onDisposed: nil)
-    
+        
         
         return shixiTrainingCell
     }
@@ -242,8 +242,10 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                             self.hidesBottomBarWhenPushed = false
                         }else if i == 2 {
                             SXLog("进入培训认证\(i)")
-                            let vc = SX_LoginController()
-                            self.navigationController?.present(vc, animated: true)
+                            self.hidesBottomBarWhenPushed = true
+                            let vc = SX_CertificationController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                            self.hidesBottomBarWhenPushed = false
                         }
                         
                     }, onError: { (error) in
@@ -281,8 +283,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
                     moreButton.rx.tap.subscribe(onNext: { (_) in
                         SXLog("进入更多界面")
-                       let vc = SX_MoreHotJobController()
-                       self.navigationController?.pushViewController(vc, animated: true)
+                        let vc = SX_MoreHotJobController()
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }, onError: { (error) in
                         
                     }, onCompleted: nil, onDisposed: nil)

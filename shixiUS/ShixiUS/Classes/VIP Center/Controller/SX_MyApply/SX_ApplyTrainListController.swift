@@ -76,7 +76,6 @@ extension SX_ApplyTrainListController {
     
     func fetchData() {
         
-        
     }
 }
 
