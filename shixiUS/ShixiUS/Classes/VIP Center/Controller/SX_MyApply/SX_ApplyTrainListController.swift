@@ -12,6 +12,7 @@
  守城的卫士告诉我，在等黎明
  */
 
+
 import UIKit
 
 let applyListIdentifier = "applyListIdentifier"
@@ -41,8 +42,7 @@ class SX_ApplyTrainListController: UIViewController {
         return arr2
     }()
     
-    lazy var table: UITableView = {
-        
+    lazy var table: UITableView    = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor  = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
@@ -51,6 +51,11 @@ class SX_ApplyTrainListController: UIViewController {
         
         return tableView
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,12 +122,16 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                             BTN.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
                             BTN.setTitleColor(UIColor.SX_MainColor(), for: .selected)
                             BTN.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
-                            BTN.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+                            BTN.titleLabel?.font          = UIFont.systemFont(ofSize: 13)
                             BTN.titleLabel?.textAlignment = .center
-                            BTN.tag = index+1000
-                            BTN.layer.cornerRadius = 5
-                            BTN.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
-                            BTN.layer.borderWidth = 0.6
+                            BTN.tag                       = index+1000
+                            BTN.layer.cornerRadius        = 5
+                            BTN.layer.borderColor         = UIColor.init(white: 0.6, alpha: 1).cgColor
+                            BTN.layer.borderWidth         = 0.6
+                            if index == 0{
+                                BTN.isSelected            = true
+                                BTN.layer.borderColor     = UIColor.SX_MainColor().cgColor
+                            }
                             
                             BTN.addTarget(self, action: #selector(BtnClick), for: .touchUpInside)
                     }
@@ -137,15 +146,19 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                         make.left.equalTo(cell.title!.snp.right).offset(CGFloat(index) * 80.FloatValue.IPAD_XValue + 10.FloatValue.IPAD_XValue)
                         }.config { (BTN) in
                             BTN.setTitle(self.graduationArr[index]["title"], for: .normal)
-                            BTN.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
                             BTN.setTitleColor(UIColor.SX_MainColor(), for: .selected)
+                            BTN.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
                             BTN.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
-                            BTN.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+                            BTN.titleLabel?.font          = UIFont.systemFont(ofSize: 13)
                             BTN.titleLabel?.textAlignment = .center
-                            BTN.tag = index+2000
-                            BTN.layer.cornerRadius = 5
-                            BTN.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
-                            BTN.layer.borderWidth = 0.6
+                            BTN.tag                       = index+2000
+                            BTN.layer.cornerRadius        = 5
+                            BTN.layer.borderColor         = UIColor.init(white: 0.6, alpha: 1).cgColor
+                            BTN.layer.borderWidth         = 0.6
+                            if index == 0{
+                                BTN.isSelected            = true
+                                BTN.layer.borderColor     = UIColor.SX_MainColor().cgColor
+                            }
                             
                             BTN.addTarget(self, action: #selector(graduationBtnClick), for: .touchUpInside)
                     }
@@ -158,12 +171,12 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             let cell = SX_ApplyAddressCell(style: .default, reuseIdentifier: applyAddressCellID)
             cell.selectionStyle = .none
             
-            cell.title?.text = "所在国家"
+            cell.title?.text    = "所在国家"
             
             cell.addressBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("地址选择")
                 let addressPicker = SX_AddressViewController()
-                addressPicker.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+                addressPicker.view.backgroundColor         = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
                 // 返回选择数据,地址,省,市,区
                 addressPicker.backLocationStringController = { (address,province,city,area) in
                     cell.addressBtn?.setTitle(address, for: .normal)
@@ -177,13 +190,13 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             return cell
         } else if indexPath.row == 13 || indexPath.row == 14 { // 上传简历 & 求职信
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            cell.selectionStyle = .none
+            cell.selectionStyle  = .none
             cell.textLabel?.text = "上传简历"
             
             return cell
         } else {
             let cell = SX_ApplyMessageCell(style: .default, reuseIdentifier: applyListIdentifier)
-            cell.selectionStyle = .none
+            cell.selectionStyle            = .none
             
             switch indexPath.row {
                 
@@ -296,12 +309,12 @@ extension SX_ApplyTrainListController {
             if button?.tag != btn.tag {
                 button?.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
                 button?.layer.borderWidth = 0.6
-                button?.isSelected   = false
+                button?.isSelected        = false
             }else{
                 button?.layer.borderColor = UIColor.SX_MainColor().cgColor
                 button?.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
                 button?.layer.borderWidth = 0.6
-                button?.isSelected = true
+                button?.isSelected        = true
                 let dic = self.VisaArr[index] as [String:String]
                 self.visaStr = dic["value"]
                 SXLog(visaStr)
@@ -316,12 +329,12 @@ extension SX_ApplyTrainListController {
             if button?.tag != btn.tag {
                 button?.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
                 button?.layer.borderWidth = 0.6
-                button?.isSelected   = false
+                button?.isSelected        = false
             }else{
                 button?.layer.borderColor = UIColor.SX_MainColor().cgColor
                 button?.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
                 button?.layer.borderWidth = 0.6
-                button?.isSelected = true
+                button?.isSelected        = true
                 let dic = self.graduationArr[index] as [String:String]
                 self.gradStr = dic["value"]
                 SXLog(gradStr)

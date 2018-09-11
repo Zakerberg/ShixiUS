@@ -30,6 +30,7 @@ extension SX_ProjectDetailTripCollectionViewCell {
     
     func configCell() {
         
+        /// 行程A
         self.tripName = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalToSuperview().offset(8.FloatValue.IPAD_XValue)
             make.width.equalToSuperview()
@@ -41,6 +42,7 @@ extension SX_ProjectDetailTripCollectionViewCell {
             tripName.font = UIFont.boldSystemFont(ofSize: 15)
        })
         
+        /// 5天日程安排
         self.tripArrange = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.tripName!.snp.bottom).offset(8.FloatValue.IPAD_XValue)
             make.width.equalTo(self.tripName!)

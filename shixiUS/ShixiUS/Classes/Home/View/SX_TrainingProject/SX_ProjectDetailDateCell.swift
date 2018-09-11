@@ -156,6 +156,11 @@ extension SX_ProjectDetailDateCell: UICollectionViewDelegate,UICollectionViewDat
         
         if collectionView.tag == 0 {
             SXLog("点击项目详情界面 行程CollectionView  ---- \(indexPath.row)")
+            
+            
+            
+            
+            
         }
         
         SXLog("点击项目详情界面 出发时间CollectionView  ---- \(indexPath.row)")
@@ -211,3 +216,4 @@ class SX_CollectionViewFlowLayout: UICollectionViewFlowLayout {
         return true
     }
 }
+
