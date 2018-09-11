@@ -84,7 +84,10 @@ extension SX_CollectionVocationalTrainingController:UITableViewDelegate, UITable
         cell.vocationalPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
         cell.vocationalPayAndRefund?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
         cell.vocationalPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
-            SXLog("立即申请 ++++")
+            SXLog("职位培训的立即申请 ++++")
+            let vc = SX_ApplyVocationListController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }, onError: { (error) in
             SXLog(error)
         }, onCompleted: nil, onDisposed: nil)
