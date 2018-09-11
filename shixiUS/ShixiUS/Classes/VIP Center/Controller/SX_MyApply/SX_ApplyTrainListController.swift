@@ -22,6 +22,9 @@ class SX_ApplyTrainListController: UIViewController {
     var dataArr = [Int](repeating: 0, count: 16)
     var confirmBtn: UIButton?
     
+    var trueBtn: UIButton?
+    
+    
     lazy var table: UITableView = {
         
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -89,23 +92,25 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             if indexPath.row == 5 {
                 cell.title?.text = "是否有美国签证"
                 cell.trueBtn?.setTitle("有", for: .normal)
-                cell.trueBtn?.rx.tap.subscribe(onNext: { (_) in
-                    SXLog("有美国签证")
-                }, onError: { (error) in
-                    SXLog(error)
-                }, onCompleted: nil, onDisposed: nil)
+                cell.trueBtn?.setTitleColor(UIColor.SX_MainColor(), for: .selected)
+                
+                cell.trueBtn?.tag = 1000
+                cell.trueBtn?.addTarget(self, action: #selector(BtnClick), for: .touchUpInside)
                 
                 cell.falseBtn?.setTitle("否", for: .normal)
-                cell.falseBtn?.rx.tap.subscribe(onNext: { (_) in
-                    SXLog("没有美国签证")
-                }, onError: { (error) in
-                    SXLog(error)
-                }, onCompleted: nil, onDisposed: nil)
+                cell.falseBtn?.tag = 1000
+                cell.falseBtn?.setTitleColor(UIColor.SX_MainColor(), for: .selected)
+                cell.falseBtn?.addTarget(self, action: #selector(BtnClick), for: .touchUpInside)
+                
+                
+                
             } else {
                 cell.title?.text = "是否在校"
                 cell.trueBtn?.setTitle("在校", for: .normal)
                 cell.trueBtn?.rx.tap.subscribe(onNext: { (_) in
                     SXLog("在校")
+                    
+                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
@@ -113,21 +118,19 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                 cell.falseBtn?.setTitle("毕业", for: .normal)
                 cell.falseBtn?.rx.tap.subscribe(onNext: { (_) in
                     SXLog("不在校")
+                    
+                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
             }
             
             return cell
-        } else if indexPath.row == 2 || indexPath.row == 12 { // 国家选择 & 地址选择
+        } else if indexPath.row == 2 { // 国家选择
             let cell = SX_ApplyAddressCell(style: .default, reuseIdentifier: applyAddressCellID)
             cell.selectionStyle = .none
             
-            if indexPath.row == 2 {
                 cell.title?.text = "所在国家"
-            } else {
-                cell.title?.text = "地址"
-            }
             
             cell.addressBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("地址选择")
@@ -197,9 +200,14 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                 cell.TF?.placeholder       = "输入您的年级"
                 
                 break
+            case 12:
+                cell.title?.text           = "地址"
+                cell.TF?.placeholder       = "输入您的地址(例如: 北京东城区)"
+                
+                break
             case 15:
                 cell.title?.text           = "推荐人"
-                cell.TF?.placeholder       = "输入推荐人(选填)"
+                cell.TF?.placeholder       = "输入推荐人"
                 
                 break
             default:
@@ -254,5 +262,18 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
 // ===================================================================================================================
 extension SX_ApplyTrainListController {
     
-    
+    @objc func BtnClick(btn: UIButton) {
+        
+        let button = self.view.viewWithTag(1000) as? UIButton
+        if button?.tag != btn.tag{
+            btn.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
+            btn.layer.borderWidth = 0.6
+            btn.isSelected   = false
+        }else{
+            btn.layer.borderColor = UIColor.SX_MainColor().cgColor
+            btn.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
+            btn.layer.borderWidth = 0.6
+            btn.isSelected = true
+        }
+    }
 }

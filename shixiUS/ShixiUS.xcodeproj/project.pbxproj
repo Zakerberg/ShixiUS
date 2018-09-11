@@ -38,6 +38,7 @@
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
 		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
 		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
+		32D0DFBD214752DA00A6549B /* SX_TrueFalseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D0DFBC214752DA00A6549B /* SX_TrueFalseView.swift */; };
 		32E49D1C21369DB0005633F2 /* SX_PayEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1B21369DB0005633F2 /* SX_PayEmploymentJobsController.swift */; };
 		32E49D1E21369DC1005633F2 /* SX_PayTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1D21369DC1005633F2 /* SX_PayTrainingProjectController.swift */; };
 		32E49D2021369DDC005633F2 /* SX_PayVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1F21369DDC005633F2 /* SX_PayVocationalTrainingController.swift */; };
@@ -170,6 +171,7 @@
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
 		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
 		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
+		32D0DFBC214752DA00A6549B /* SX_TrueFalseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrueFalseView.swift; sourceTree = "<group>"; };
 		32E49D1B21369DB0005633F2 /* SX_PayEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayEmploymentJobsController.swift; sourceTree = "<group>"; };
 		32E49D1D21369DC1005633F2 /* SX_PayTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayTrainingProjectController.swift; sourceTree = "<group>"; };
 		32E49D1F21369DDC005633F2 /* SX_PayVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayVocationalTrainingController.swift; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 				324848412141021B00B6049E /* SX_ApplyVisaCell.swift */,
 				32484854214218CA00B6049E /* SX_ApplyAddressCell.swift */,
 				324848562142197C00B6049E /* SX_ApplyMessageCell.swift */,
+				32D0DFBC214752DA00A6549B /* SX_TrueFalseView.swift */,
 			);
 			path = SX_MyApply;
 			sourceTree = "<group>";
@@ -1159,6 +1162,7 @@
 				329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */,
 				32E49D2021369DDC005633F2 /* SX_PayVocationalTrainingController.swift in Sources */,
 				458A002C2108535A00D38014 /* SX_TrainingApplyController.swift in Sources */,
+				32D0DFBD214752DA00A6549B /* SX_TrueFalseView.swift in Sources */,
 				32484853214129AD00B6049E /* SX_AddressPickerView.swift in Sources */,
 				45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */,
 				45440F0020E0C4E700058978 /* SX_CycleCell.swift in Sources */,
