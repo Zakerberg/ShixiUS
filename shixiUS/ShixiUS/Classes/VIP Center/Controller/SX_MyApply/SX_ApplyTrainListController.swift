@@ -22,8 +22,24 @@ class SX_ApplyTrainListController: UIViewController {
     var dataArr = [Int](repeating: 0, count: 16)
     var confirmBtn: UIButton?
     
-    var trueBtn: UIButton?
+    var visaStr: String?
+    var gradStr: String?
     
+    /// 是否有签证Arr
+    var VisaArr :Array = { () -> [[String : String]] in
+        let arr1 = [["title":"有", "value":"1"],
+                    ["title":"否", "value":"0"]]
+        
+        return arr1
+    }()
+    
+    /// 是否毕业Arr
+    var graduationArr: Array = { () -> [[String : String]] in
+        let arr2 = [["title":"在校", "value":"1"],
+                    ["title":"毕业", "value":"0"]]
+        
+        return arr2
+    }()
     
     lazy var table: UITableView = {
         
@@ -91,46 +107,59 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             
             if indexPath.row == 5 {
                 cell.title?.text = "是否有美国签证"
-                cell.trueBtn?.setTitle("有", for: .normal)
-                cell.trueBtn?.setTitleColor(UIColor.SX_MainColor(), for: .selected)
-                
-                cell.trueBtn?.tag = 1000
-                cell.trueBtn?.addTarget(self, action: #selector(BtnClick), for: .touchUpInside)
-                
-                cell.falseBtn?.setTitle("否", for: .normal)
-                cell.falseBtn?.tag = 1000
-                cell.falseBtn?.setTitleColor(UIColor.SX_MainColor(), for: .selected)
-                cell.falseBtn?.addTarget(self, action: #selector(BtnClick), for: .touchUpInside)
-                
-                
-                
-            } else {
+                for index in 0...1 {
+                    let _ = UIButton(type: .custom).addhere(toSuperView: cell.contentView).layout { (make) in
+                        make.centerY.equalToSuperview()
+                        make.width.equalTo(60.FloatValue.IPAD_XValue)
+                        make.height.equalTo(28.FloatValue.IPAD_XValue)
+                        make.left.equalTo(cell.title!.snp.right).offset(CGFloat(index) * 80.FloatValue.IPAD_XValue + 10.FloatValue.IPAD_XValue)
+                        }.config { (BTN) in
+                            BTN.setTitle(self.VisaArr[index]["title"], for: .normal)
+                            BTN.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+                            BTN.setTitleColor(UIColor.SX_MainColor(), for: .selected)
+                            BTN.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
+                            BTN.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+                            BTN.titleLabel?.textAlignment = .center
+                            BTN.tag = index+1000
+                            BTN.layer.cornerRadius = 5
+                            BTN.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
+                            BTN.layer.borderWidth = 0.6
+                            
+                            BTN.addTarget(self, action: #selector(BtnClick), for: .touchUpInside)
+                    }
+                }
+            } else if indexPath.row == 6 {
                 cell.title?.text = "是否在校"
-                cell.trueBtn?.setTitle("在校", for: .normal)
-                cell.trueBtn?.rx.tap.subscribe(onNext: { (_) in
-                    SXLog("在校")
-                    
-                    
-                }, onError: { (error) in
-                    SXLog(error)
-                }, onCompleted: nil, onDisposed: nil)
-                
-                cell.falseBtn?.setTitle("毕业", for: .normal)
-                cell.falseBtn?.rx.tap.subscribe(onNext: { (_) in
-                    SXLog("不在校")
-                    
-                    
-                }, onError: { (error) in
-                    SXLog(error)
-                }, onCompleted: nil, onDisposed: nil)
+                for index in 0...1 {
+                    let _ = UIButton(type: .custom).addhere(toSuperView: cell.contentView).layout { (make) in
+                        make.centerY.equalToSuperview()
+                        make.width.equalTo(60.FloatValue.IPAD_XValue)
+                        make.height.equalTo(28.FloatValue.IPAD_XValue)
+                        make.left.equalTo(cell.title!.snp.right).offset(CGFloat(index) * 80.FloatValue.IPAD_XValue + 10.FloatValue.IPAD_XValue)
+                        }.config { (BTN) in
+                            BTN.setTitle(self.graduationArr[index]["title"], for: .normal)
+                            BTN.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+                            BTN.setTitleColor(UIColor.SX_MainColor(), for: .selected)
+                            BTN.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
+                            BTN.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+                            BTN.titleLabel?.textAlignment = .center
+                            BTN.tag = index+2000
+                            BTN.layer.cornerRadius = 5
+                            BTN.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
+                            BTN.layer.borderWidth = 0.6
+                            
+                            BTN.addTarget(self, action: #selector(graduationBtnClick), for: .touchUpInside)
+                    }
+                }
             }
             
             return cell
+            
         } else if indexPath.row == 2 { // 国家选择
             let cell = SX_ApplyAddressCell(style: .default, reuseIdentifier: applyAddressCellID)
             cell.selectionStyle = .none
             
-                cell.title?.text = "所在国家"
+            cell.title?.text = "所在国家"
             
             cell.addressBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("地址选择")
@@ -261,19 +290,43 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
 // MARK: -
 // ===================================================================================================================
 extension SX_ApplyTrainListController {
-    
     @objc func BtnClick(btn: UIButton) {
-        
-        let button = self.view.viewWithTag(1000) as? UIButton
-        if button?.tag != btn.tag{
-            btn.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
-            btn.layer.borderWidth = 0.6
-            btn.isSelected   = false
-        }else{
-            btn.layer.borderColor = UIColor.SX_MainColor().cgColor
-            btn.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
-            btn.layer.borderWidth = 0.6
-            btn.isSelected = true
+        for index in 0...1 {
+            let button = self.view.viewWithTag(1000+index) as? UIButton
+            
+            if button?.tag != btn.tag {
+                button?.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
+                button?.layer.borderWidth = 0.6
+                button?.isSelected   = false
+            }else{
+                button?.layer.borderColor = UIColor.SX_MainColor().cgColor
+                button?.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
+                button?.layer.borderWidth = 0.6
+                button?.isSelected = true
+                let dic = self.VisaArr[index] as [String:String]
+                self.visaStr = dic["value"]
+                SXLog(visaStr)
+            }
+        }
+    }
+    
+    @objc func graduationBtnClick(btn: UIButton) {
+        for index in 0...1 {
+            let button = self.view.viewWithTag(2000+index) as? UIButton
+            
+            if button?.tag != btn.tag {
+                button?.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
+                button?.layer.borderWidth = 0.6
+                button?.isSelected   = false
+            }else{
+                button?.layer.borderColor = UIColor.SX_MainColor().cgColor
+                button?.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
+                button?.layer.borderWidth = 0.6
+                button?.isSelected = true
+                let dic = self.graduationArr[index] as [String:String]
+                self.gradStr = dic["value"]
+                SXLog(gradStr)
+            }
         }
     }
 }

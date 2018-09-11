@@ -115,7 +115,6 @@ class SX_NetManager {
                     finishCallBack(arrData!)
                 }
             }
-            
         }
     }
 }

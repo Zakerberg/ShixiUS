@@ -18,8 +18,6 @@ import UIKit
 class SX_ApplyVisaCell: UITableViewCell {
     
     var title: UILabel?
-    var trueBtn: UIButton?
-    var falseBtn:UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,33 +55,6 @@ extension SX_ApplyVisaCell {
             TITLE.sizeToFit()
             TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
             TITLE.font = UIFont.systemFont(ofSize: 14)
-        })
-        
-        self.trueBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.centerY.equalTo(self.title!)
-            make.left.equalTo(self.title!.snp.right).offset(Margin)
-            make.height.equalTo(30.FloatValue.IPAD_XValue)
-            make.width.equalTo(60.FloatValue.IPAD_XValue)
-        }).config({ (TRUE) in
-            TRUE.sizeToFit()
-            TRUE.layer.cornerRadius = 5
-            TRUE.layer.borderWidth  = 0.6
-            TRUE.layer.borderColor  = UIColor.colorWithRGB(r: 204, g: 204, b: 204).cgColor
-            TRUE.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
-            TRUE.titleLabel?.font   = UIFont.systemFont(ofSize: 13)
-            TRUE.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
-        })
-        
-        self.falseBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.width.height.equalTo(self.trueBtn!)
-            make.left.equalTo(self.trueBtn!.snp.right).offset(30.FloatValue.IPAD_XValue)
-        }).config({ (FALSE) in
-            FALSE.layer.cornerRadius = 5
-            FALSE.layer.borderWidth  = 0.6
-            FALSE.layer.borderColor  = UIColor.colorWithRGB(r: 204, g: 204, b: 204).cgColor
-            FALSE.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
-            FALSE.titleLabel?.font   = UIFont.systemFont(ofSize: 13)
-            FALSE.setBackgroundImage(#imageLiteral(resourceName: "Apply_hook"), for: .selected)
         })
     }
 }
