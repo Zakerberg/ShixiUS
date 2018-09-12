@@ -12,8 +12,7 @@ class SX_ProjectDetailMoreDateController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,3 +21,30 @@ class SX_ProjectDetailMoreDateController: UIViewController {
     }
 }
 
+// =================================================================================================================
+// MARK: - Other Method
+// =================================================================================================================
+extension SX_ProjectDetailMoreDateController {
+    func setUI() {
+        
+    }
+}
+
+// =================================================================================================================
+// MARK: -
+// =================================================================================================================
+extension SX_ProjectDetailMoreDateController {
+    
+    
+    
+}
+
+// =================================================================================================================
+// MARK: -
+// =================================================================================================================
+extension SX_ProjectDetailMoreDateController {
+    
+    
+    
+    
+}
