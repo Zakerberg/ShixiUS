@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  项目详情 title Cell
 
+/*
+ 你的名字是世间最温柔的结
+ 将一笔一画都绑在了我的心里
+ 我解不开，也不想解
+ */
+
 import UIKit
 
 class SX_ProjectDetailTitleCell: UITableViewCell {

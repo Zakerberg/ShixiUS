@@ -52,7 +52,7 @@ class SX_HotJobDetailController: UIViewController {
 }
 
 // =================================================================================================================
-// MARK: - Other Meyhod
+// MARK: - Other Method
 // =================================================================================================================
 extension SX_HotJobDetailController {
     func setUI() {

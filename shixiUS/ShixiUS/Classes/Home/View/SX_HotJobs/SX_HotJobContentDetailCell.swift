@@ -6,6 +6,12 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  热门岗位的 工作职责 应聘要求
 
+/*
+ 你是我的前因
+ 我又是谁的果报
+ 灯火阑珊，为你写下情诗三行
+ */
+
 import UIKit
 
 class SX_HotJobContentDetailCell: UITableViewCell {

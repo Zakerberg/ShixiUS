@@ -94,6 +94,9 @@ class SX_MoreHotJobController: UIViewController {
     }
 }
 
+// =================================================================================================================
+// MARK: - Other Method
+// =================================================================================================================
 extension SX_MoreHotJobController {
     
     func setUI() {
@@ -168,7 +171,9 @@ extension SX_MoreHotJobController {
     }
 }
 
-
+// =================================================================================================================
+// MARK: - @objc
+// =================================================================================================================
 extension SX_MoreHotJobController {
     
     /// 调出PickerView
@@ -352,6 +357,9 @@ extension SX_MoreHotJobController {
     }
 }
 
+// =================================================================================================================
+// MARK: - UITableViewDelegate
+// =================================================================================================================
 extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 40

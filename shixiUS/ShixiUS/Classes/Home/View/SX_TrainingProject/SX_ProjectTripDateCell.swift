@@ -6,6 +6,12 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  项目详情的 行程出发时间cell
 
+/*
+ 江南小镇风景秀丽
+ 我行至烟雨长廊的尽头，驻目远望
+ 你若在，风景应是你
+ */
+
 import UIKit
 
 class SX_ProjectTripDateCell: UITableViewCell {

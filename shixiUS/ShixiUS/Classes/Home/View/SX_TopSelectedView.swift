@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  头部选择View
 
+/*
+ 未来，你躺若离去
+ 我写情诗
+ 回忆世间的美好
+ */
+
 import UIKit
 
 class SX_TopSelectedView: UIView {

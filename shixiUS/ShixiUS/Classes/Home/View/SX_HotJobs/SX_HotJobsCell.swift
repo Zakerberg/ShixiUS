@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  热门岗位Cell
 
+/*
+ 现在，你相伴身旁
+ 我写情诗
+ 描绘世间的美好
+ */
+
 import UIKit
 import Kingfisher
 

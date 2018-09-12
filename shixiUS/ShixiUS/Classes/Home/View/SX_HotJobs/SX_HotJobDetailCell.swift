@@ -6,6 +6,12 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  热门岗位详情  职位信息Cell
 
+/*
+ 过去，你未曾出现
+ 我写情诗
+ 寻找世间的美好
+ */
+
 import UIKit
 
 class SX_HotJobDetailCell: UITableViewCell {

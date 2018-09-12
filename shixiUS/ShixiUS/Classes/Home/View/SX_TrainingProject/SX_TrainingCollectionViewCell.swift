@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  首页的CollectionViewCell
 
+/*
+ 问佛为何求不得，答曰无缘
+ 却为何又心心念念
+ 不执着不生娑婆
+ */
+
 import UIKit
 
 class SX_TrainingCollectionViewCell: UICollectionViewCell {

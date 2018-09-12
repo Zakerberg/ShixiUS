@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  热门实训,培训认证,实习户外 tableViewCell
 
+/*
+ 你在，我的情诗为你
+ 你走，我写自己
+ 写我想你
+ */
+
 import UIKit
 
 let CollectionViewCellID = "CollectionViewCellID"
