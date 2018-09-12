@@ -184,7 +184,7 @@ extension SX_HotJobDetailCell {
             SALARY.textColor = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
         })
         
-        // ---------------------------------------------//-----------------------------------//-------------------------------------
+// ---------------------------------------------//-----------------------------------//-------------------------------------
         
         let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(industryImage.snp.bottom).offset(10.FloatValue.IPAD_XValue)

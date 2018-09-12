@@ -20,11 +20,11 @@ let projectDetailCellID = "projectDetailCellID"
 class SX_ProjectDetailController: UIViewController {
     
     var row:NSInteger?
+    var Arr = ["21", "3", "44", "5"]
     
-// ============================================================================================================================
-// MARK: - Lazy
-// ===========================================================================================================================
-    
+    // ============================================================================================================================
+    // MARK: - Lazy
+    // ===========================================================================================================================
     /// 主 TbaleView
     lazy var tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-kTabBarHeight), style: .grouped)
@@ -68,22 +68,16 @@ class SX_ProjectDetailController: UIViewController {
         return headerBtnView
     }()
     
-    
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        self.setRightItem("share")
-        self.setLeftItem("leftBack")
         
-        let localImgs = ["localImg4","localImg6","localImg3"]
-        
-        detailScrollerView.localImgArray = localImgs
-        view.addSubview(tableView)
-        tableView.addSubview(detailScrollerView)
-        tableView.addSubview(projectBgView)
-        navBarBackgroundAlpha = 0
+        fetchData()
+        setUI()
     }
     
     deinit {
@@ -102,13 +96,22 @@ class SX_ProjectDetailController: UIViewController {
 // ===========================================================================================================================
 extension SX_ProjectDetailController {
     
+    func setUI() {
+        view.backgroundColor = UIColor.white
+        self.setRightItem("share")
+        self.setLeftItem("leftBack")
+        
+        let localImgs = ["localImg4","localImg6","localImg3"]
+        
+        detailScrollerView.localImgArray = localImgs
+        view.addSubview(tableView)
+        tableView.addSubview(detailScrollerView)
+        tableView.addSubview(projectBgView)
+        navBarBackgroundAlpha = 0
+        
+    }
+    
     func fetchData() {
-        
-        
-        
-        
-        
-        
         
     }
 }
@@ -131,6 +134,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         if indexPath.section == 0 {
             
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
+            titleCell.selectionStyle = .none
+            // MARK: - 此处换成李雪静的接口 --------
             titleCell.projectName!.text = "联合国新兴全球领导人和公民培养计划-测试"
             titleCell.projectContent!.text = "包含:课程,签证,机票,活动,食宿,保险 - 测试"
             titleCell.projectCity!.text = "出发城市: 北京 - 测试"
@@ -138,26 +143,18 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             
             return titleCell
             
+        } else if indexPath.section == 1 {
+            let cell = SX_ProjectTripDateCell()
+            cell.selectionStyle = .none
+            // MARK: - 此处换成李雪静的接口 --------
+            cell.tripArr = self.Arr
+            cell.dateArr = self.Arr
+            
+            return cell
         }
-//        else if indexPath.section == 1 {
-//            let dateTripCell = SX_ProjectDetailDateCell(style: .default, reuseIdentifier: projectDetailDateTripCellID)
-//            dateTripCell.selectionStyle = .none
-//            dateTripCell.accessoryType  = .none
-//
-//            dateTripCell.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
-//
-//                SXLog("进入更多日期界面++++++, 坑啊, 填不完了.......|| _ ||")
-//
-//            }, onError: { (error) in
-//                SXLog(error)
-//            }, onCompleted: nil, onDisposed: nil)
-//
-//            return dateTripCell
-//        }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: projectDetailCellID)
         
-        // cell.addSubview(self.subView)
         cell.selectionStyle = .none
         
         return cell
@@ -257,5 +254,3 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
         })
     }
 }
-
-
