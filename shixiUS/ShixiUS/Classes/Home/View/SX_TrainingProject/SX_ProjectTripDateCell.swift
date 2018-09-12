@@ -77,7 +77,6 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 DATES.showsHorizontalScrollIndicator = false
                 DATES.scrollsToTop = false
                 DATES.bounces = true
-                DATES.backgroundColor = UIColor.green
             })
             
             for i in 0..<(self.dateArr?.count ?? 0) {
@@ -91,9 +90,11 @@ class SX_ProjectTripDateCell: UITableViewCell {
             }
             
             self.moreDate = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-                make.centerY.equalTo(self.dateBtn!)
-                make
+                make.height.centerY.equalTo(self.dateBtn!)
+                make.right.equalToSuperview().offset(-Margin)
+                make.width.equalTo(50.FloatValue.IPAD_XValue)
             }).config({ (MORE) in
+                MORE.backgroundColor = UIColor.blue
                 
             })
         }
