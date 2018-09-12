@@ -131,7 +131,6 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
             })
-            
             return view
         }
     }
