@@ -122,12 +122,8 @@ extension SX_ProjectDetailController {
             COLLECTION.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             COLLECTION.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
             COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
-            
-            COLLECTION.rx.tap.subscribe(onNext: { (_) in
-                SXLog("收藏按钮的点击")
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
+
+            COLLECTION.addTarget(self, action: #selector(collectionBtnClick), for: .touchUpInside)
         })
         
         self.applyBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -201,10 +197,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             cell.titleLabel?.text = "预定须知"
         }
         
-        
         cell.titleLabel?.textAlignment = .center
         cell.contentLabel?.text = self.ProjectLightStr
-        
         
         return cell
     }
@@ -232,6 +226,9 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
+        
+        
+        
         return view
     }
     
@@ -296,3 +293,20 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
         })
     }
 }
+
+// ============================================================================================================================
+// MARK: - @objc
+// ============================================================================================================================
+extension SX_ProjectDetailController {
+    @objc func collectionBtnClick() {
+        
+        if self.collectionBtn?.isSelected == true {
+            SXLog("已收藏,点击取消收藏")
+            self.collectionBtn?.isSelected = false
+        }else {
+            SXLog("未收藏,点击收藏职位")
+            self.collectionBtn?.isSelected = true
+        }
+    }
+}
+

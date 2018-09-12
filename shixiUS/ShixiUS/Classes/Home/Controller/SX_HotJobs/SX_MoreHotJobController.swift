@@ -65,8 +65,8 @@ class SX_MoreHotJobController: UIViewController {
         return positionView
     }()
     
-    private lazy var overseaTableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 35, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
+    private lazy var TableView: UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: Int(kNavH)+45, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)-Int((kNavH+45))), style: .plain)
         tableView.backgroundColor = UIColor.white
         tableView.delegate = self
         tableView.dataSource = self
@@ -89,7 +89,7 @@ class SX_MoreHotJobController: UIViewController {
     }
     
     deinit {
-        overseaTableView.delegate = nil
+        TableView.delegate = nil
         print("overseaTableView ---deinit")
     }
 }
@@ -106,20 +106,17 @@ extension SX_MoreHotJobController {
         self.workNatureView.isHidden  = true
         self.releaseDateView.isHidden = true
         
-        self.view.insertSubview(self.overseaTableView, belowSubview: self.positionView)
-        
+        self.view.insertSubview(self.TableView, belowSubview: self.positionView)
         setTopSelectedView()
     }
     
     /// .....
     func fetchData() {
         
-        
     }
     
     /// 顶部4个按钮
     func setTopSelectedView() {
-        
         self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
             topSelectedView.backgroundColor = UIColor.white
         })
@@ -130,7 +127,7 @@ extension SX_MoreHotJobController {
         
         var titleArr = ["职位分类","工作性质","工作时长","发布日期"]
         for index in 0..<4 {
-            let view = creatBtnView(titleArr[index], frame: CGRect(x: Int((SCREEN_WIDTH/4)) * index, y: 0, width: Int(SCREEN_WIDTH/4), height: 44), tag: index)
+            let view = creatBtnView(titleArr[index], frame: CGRect(x: Int((SCREEN_WIDTH/4)) * index, y: Int(kNavH), width: Int(SCREEN_WIDTH/4), height: 44), tag: index)
             view.isUserInteractionEnabled = true
             self.topSelectedView?.addSubview(view)
             
