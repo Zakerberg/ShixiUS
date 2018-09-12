@@ -8,3 +8,10 @@
 
 import UIKit
 
+let shixi = "http://api.shixigroup.com"
+
+
+
+
+
+
