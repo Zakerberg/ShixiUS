@@ -64,7 +64,7 @@ class SX_PageContentView: UIView {
 // ===================================================================================================================
 extension SX_PageContentView {
     
-    //给外界用以获取MFPageTitleView选中按钮的下标
+    //给外界用以获取PageTitleView选中按钮的下标
     func setPageContentViewCurrentIndex(currentIndex: NSInteger) {
         if self.lastVC != nil {
             self.lastVC?.beginAppearanceTransition(false, animated: false)

@@ -17,17 +17,25 @@ let projectDetailTitleCellID    = "projectDetailTitleCellID"
 let projectDetailDateTripCellID = "projectDetailDateTripCellID"
 
 let projectDetailCellID = "projectDetailCellID"
+
+/// 悬浮view的高度
+let verticaListViewHeight: CGFloat = 60
+/// 悬浮固定Section的index
+let verticaListSectionIndex = 1
+
 class SX_ProjectDetailController: UIViewController {
     
     var row:NSInteger?
-    var Arr = ["21", "3", "44", "5"]
+    var Arr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
     
-    // ============================================================================================================================
-    // MARK: - Lazy
-    // ===========================================================================================================================
+    var ProjectLightStr = "Overriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keyword"
+    
+    var collectionBtn : UIButton?
+    var applyBtn: UIButton?
+    
     /// 主 TbaleView
     lazy var tableView: UITableView = {
-        let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-kTabBarHeight), style: .grouped)
+        let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-50.FloatValue.IPAD_XValue), style: .grouped)
         table.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
         table.delegate = self
         table.dataSource = self
@@ -68,14 +76,8 @@ class SX_ProjectDetailController: UIViewController {
         return headerBtnView
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchData()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         fetchData()
         setUI()
     }
@@ -109,6 +111,38 @@ extension SX_ProjectDetailController {
         tableView.addSubview(projectBgView)
         navBarBackgroundAlpha = 0
         
+        self.collectionBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+            make.left.bottom.equalToSuperview()
+            make.height.equalTo(50)
+            make.width.equalTo(SCREEN_WIDTH/2)
+        }).config({ (COLLECTION) in
+            COLLECTION.setImage(#imageLiteral(resourceName: "icon_hotJob_collection"), for: .normal)
+            COLLECTION.setImage(#imageLiteral(resourceName: "icon_hotJob_collectionHL"), for: .selected)
+            COLLECTION.setTitle("  收藏", for: .normal)
+            COLLECTION.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            COLLECTION.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
+            COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
+            
+            COLLECTION.rx.tap.subscribe(onNext: { (_) in
+                SXLog("收藏按钮的点击")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+        })
+        
+        self.applyBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+            make.right.bottom.equalToSuperview()
+            make.height.width.equalTo(self.collectionBtn!)
+        }).config({ (APPLY) in
+            APPLY.backgroundColor     = UIColor.SX_MainColor()
+            APPLY.titleLabel?.font    = UIFont.systemFont(ofSize: 15)
+            APPLY.setTitle("立即申请", for: .normal)
+            APPLY.rx.tap.subscribe(onNext: { (_) in
+                SXLog("立即申请 +++ + ")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+        })        
     }
     
     func fetchData() {
@@ -122,7 +156,7 @@ extension SX_ProjectDetailController {
 extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -153,9 +187,24 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             return cell
         }
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: projectDetailCellID)
-        
+        let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
         cell.selectionStyle = .none
+        
+        if indexPath.section == 2 {
+            cell.titleLabel?.text = "项目亮点"
+        }else if indexPath.section == 3 {
+            
+            cell.titleLabel?.text = "日程安排"
+        }else if indexPath.section == 4 {
+            cell.titleLabel?.text = "费用说明"
+        }else{
+            cell.titleLabel?.text = "预定须知"
+        }
+        
+        
+        cell.titleLabel?.textAlignment = .center
+        cell.contentLabel?.text = self.ProjectLightStr
+        
         
         return cell
     }
@@ -168,21 +217,13 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             
         case 1:
             return 185.FloatValue.IPAD_XValue
-            
         default:
-            return 50.FloatValue.IPAD_XValue
+            return UILabel.SX_getSpaceLabelHeight(self.ProjectLightStr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        if section == 0 {
-            return 0.01
-        } else if section == 2 {
-            return 50.FloatValue.IPAD_XValue
-        }
-        
-        return Margin-5
+        return 5.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -190,7 +231,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
+        let view = UIView()
+        return view
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -26,7 +26,6 @@ class SX_HotJobDetailController: UIViewController {
     
     var intrStr = "我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理"
     
-    
     var collectionBtn : UIButton?
     var applyBtn: UIButton?
     
