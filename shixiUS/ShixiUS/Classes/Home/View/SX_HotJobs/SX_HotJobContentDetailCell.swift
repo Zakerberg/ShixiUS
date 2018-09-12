@@ -49,7 +49,7 @@ extension SX_HotJobContentDetailCell {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.left.top.equalToSuperview().offset(Margin)
-            make.width.equalToSuperview()
+            make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(17)
         }).config({ (TITLE) in
             TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
@@ -68,8 +68,7 @@ extension SX_HotJobContentDetailCell {
         
         self.contentLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(-15)
+            make.left.right.equalTo(lineView)
         }).config({ (CONTENT) in
             CONTENT.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
             CONTENT.font = UIFont.systemFont(ofSize: 13)
