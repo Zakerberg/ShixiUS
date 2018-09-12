@@ -21,6 +21,7 @@ class SX_MinePersonalController: UIViewController {
     var contentArr = ["", "请输入姓名", "请输入手机号", "请选择国家和地区", "请输入微信", "请输入邮箱"]
     var getUrlDataArr: Array<Any>?
     var headPortrait: UIImage?
+    var saveBtn: UIButton?
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
@@ -34,13 +35,6 @@ class SX_MinePersonalController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "个人信息"
-        self.view.backgroundColor = UIColor.SX_BackGroundColor()
-        let tap = UIGestureRecognizer(target: self, action: #selector(selfInfoTapClick))
-        // 默认 true
-        tap.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tap)
-        self.view.addSubview(self.table)
         setUI()
         fetchData()
     }
@@ -57,24 +51,16 @@ class SX_MinePersonalController: UIViewController {
 extension SX_MinePersonalController {
     
     func setUI() {
-//        let saveBtn = UIButton(type: .custom).addhere(toSuperView: self.table.tableFooterView!).layout { (make) in
-//            
-//            }.config { (Save) in
-//                Save.backgroundColor = UIColor.SX_MainColor()
-//                Save.layer.cornerRadius = 10.FloatValue.IPAD_XValue
-//                Save.layer.masksToBounds = true
-//                Save.rx.tap.subscribe(onNext: { (_) in
-//                    SXLog("保存个人信息---")
-//                    
-//                    
-//                }, onError: { (error) in
-//                    SXLog(error)
-//                }, onCompleted: nil, onDisposed: nil)
-//        }
+        title = "个人信息"
+        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        let tap = UIGestureRecognizer(target: self, action: #selector(selfInfoTapClick))
+        // 默认 true
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+        self.view.addSubview(self.table)
     }
     
     func fetchData() {
-        
         
     }
 }
@@ -100,12 +86,12 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row == 0 {
             let singleTap = UIGestureRecognizer(target: self, action: #selector(alterHeadPortrait))
             
-            let cell = SX_HeadPortraitCell(style: .default, reuseIdentifier: nil)
+            let cell = SX_PersonalHeadPortraitCell(style: .default, reuseIdentifier: nil)
+            cell.textLabel?.text = "头像"
+            
             cell.selectionStyle = .none
-            cell.headPortraitImageView?.image = headPortrait
-            cell.logInButton?.isHidden = true
-            cell.nameTitle?.isHidden   = true
-          //  cell.headPortraitImageView?.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+            cell.headPortraitImageV?.image = headPortrait
+            
             cell.addGestureRecognizer(singleTap)
             
             return cell
@@ -122,7 +108,33 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        let view = UIView()
+        
+        self.saveBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+            make.top.left.equalToSuperview().offset(Margin)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(45.FloatValue.IPAD_XValue)
+        }).config({ (SAVE) in
+            SAVE.backgroundColor     = UIColor.SX_MainColor()
+            SAVE.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 20)
+            SAVE.setTitle("保存", for: .normal)
+            SAVE.layer.masksToBounds = true
+            SAVE.layer.cornerRadius  = 10
+            SAVE.rx.tap.subscribe(onNext: { (_) in
+                SXLog("保存个人信息 +++ + ")
+                /// 加提示 !
+                
+                self.navigationController?.popViewController(animated: true)
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+        })
+        
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 100.FloatValue.IPAD_XValue
     }
 }
 
@@ -163,18 +175,18 @@ extension SX_MinePersonalController: UIGestureRecognizerDelegate {
 extension SX_MinePersonalController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     
-//    - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-//    //定义一个newPhoto，用来存放我们选择的图片。
-//    UIImage *newPhoto = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-//    _myHeadPortrait.image = newPhoto;
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//    }
-   
+    //    - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    //    //定义一个newPhoto，用来存放我们选择的图片。
+    //    UIImage *newPhoto = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    //    _myHeadPortrait.image = newPhoto;
+    //    [self dismissViewControllerAnimated:YES completion:nil];
+    //    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let newPhoto = info.index(forKey: "UIImagePickerControllerEditedImage")
         
-//      self.headPortrait = newPhoto
+        //      self.headPortrait = newPhoto
         self.dismiss(animated: true, completion: nil)
         
     }
