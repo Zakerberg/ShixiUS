@@ -79,6 +79,18 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             
             cell.nameTitle?.isHidden = true
             cell.selectionStyle   = .none
+            
+            cell.logInButton?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("注册登陆 +++ + ")
+                let vc = SX_LoginController()
+                self.present(vc, animated: true, completion: {
+                    /// 存 token
+                })
+                
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+        
             return cell
         }
         

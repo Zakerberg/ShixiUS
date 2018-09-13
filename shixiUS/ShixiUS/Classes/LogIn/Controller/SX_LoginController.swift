@@ -21,8 +21,8 @@ class SX_LoginController: UIViewController {
     var numTF          : UITextField?
     var backBtn        : UIButton?
     var passCodeTF     : UITextField?
-    var messageCodeBtn : UIButton?
-    var countryCodeBtn : UIButton?
+    //    var messageCodeBtn : UIButton?
+    //    var countryCodeBtn : UIButton?
     
     var logInBtn       : UIButton?
     var forgetBtn      : UIButton?
@@ -72,91 +72,33 @@ extension SX_LoginController {
             }.config { (Logo) in
         }
         
-        self.countryCodeBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+        self.numTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(logoView.snp.bottom).offset(50.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(Margin*2.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin*2.FloatValue.IPAD_XValue)
             make.height.equalTo(40.FloatValue.IPAD_XValue)
-        }).config({ (CountryCode) in
-            CountryCode.setTitleColor(UIColor.SX_MainColor(), for: .normal)
-            CountryCode.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            CountryCode.setTitle("+86", for: .normal)
-            CountryCode.contentHorizontalAlignment = .left
-            CountryCode.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-            CountryCode.layer.masksToBounds = true
-            CountryCode.layer.borderColor  = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
-            CountryCode.layer.borderWidth  = 0.5
-            CountryCode.layer.cornerRadius = 10
             
-            CountryCode.rx.tap.subscribe(onNext: { (_) in
-                SXLog("countryCode")
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-        })
-        
-        let line = UIImageView().addhere(toSuperView: self.countryCodeBtn!).layout { (make) in
-            make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
-            make.bottom.equalToSuperview().offset(-10.FloatValue.IPAD_XValue)
-            make.width.equalTo(0.5)
-            make.left.equalToSuperview().offset(60.FloatValue.IPAD_XValue)
-            }.config { (Line) in
-                Line.image = UIImage.imageWithColor(color: UIColor.colorWithHexString(hex: "cccccc", alpha: 1), size: CGSize(width: 1, height: 30.FloatValue.IPAD_XValue))
-        }
-        
-        self.numTF = UITextField().addhere(toSuperView: self.countryCodeBtn!).layout(snapKitMaker: { (make) in
-            make.top.bottom.right.equalToSuperview()
-            make.left.equalTo(line.snp.right).offset(Margin)
         }).config({ (Num) in
-            Num.keyboardType = .numberPad
             Num.tintColor = UIColor.SX_MainColor()
             Num.layer.masksToBounds = true
-            Num.layer.borderColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
-            Num.layer.cornerRadius = 10
-            Num.placeholder = "请输入您的手机号码"
-            Num.textAlignment = .left
+            Num.layer.borderColor   = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
+            Num.layer.borderWidth   = 0.5
+            Num.layer.cornerRadius  = 10
+            Num.placeholder         = "请输入用户名"
+            Num.textAlignment       = .left
         })
         
         self.passCodeTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.numTF!.snp.bottom).offset(Margin)
-            make.height.left.width.equalTo(self.countryCodeBtn!)
+            make.height.left.width.equalTo(self.numTF!)
         }).config({ (PassCode) in
-            PassCode.keyboardType = .numberPad
             PassCode.tintColor = UIColor.SX_MainColor()
             PassCode.layer.masksToBounds = true
             PassCode.layer.borderColor   = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
             PassCode.layer.borderWidth   = 0.5
             PassCode.layer.cornerRadius  = 10
-            PassCode.placeholder = "请输入验证码"
+            PassCode.placeholder = "请输入密码"
             PassCode.textAlignment = .left
-        })
-        
-        let line2 = UIImageView().addhere(toSuperView: self.passCodeTF!).layout { (make) in
-            make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
-            make.bottom.equalToSuperview().offset(-10.FloatValue.IPAD_XValue)
-            make.width.equalTo(0.5)
-            make.right.equalToSuperview().offset(-100.FloatValue.IPAD_XValue)
-            }.config { (Line2) in
-                Line2.image = UIImage.imageWithColor(color: UIColor.colorWithHexString(hex: "cccccc", alpha: 1), size: CGSize(width: 1, height: 30.FloatValue.IPAD_XValue))
-        }
-        
-        self.messageCodeBtn = UIButton(type: .custom).addhere(toSuperView: self.passCodeTF!).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
-            make.bottom.equalToSuperview().offset(-10.FloatValue.IPAD_XValue)
-            make.left.equalTo(line2.snp.right).offset(10)
-            make.right.equalToSuperview().offset(5)
-        }).config({ (MessageCode) in
-            MessageCode.sizeToFit()
-            MessageCode.setTitle("获取验证码", for: .normal)
-            MessageCode.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            MessageCode.setTitleColor(UIColor.colorWithHexString(hex: "cccccc", alpha: 1), for: .normal)
-            MessageCode.contentHorizontalAlignment = .left
-            MessageCode.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-            MessageCode.rx.tap.subscribe(onNext: { (_) in
-                SXLog("短信验证码 R - R - R")
-            }, onError: { (error) in
-                
-            }, onCompleted: nil, onDisposed: nil)
         })
         
         self.forgetBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -176,7 +118,7 @@ extension SX_LoginController {
         
         self.logInBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.forgetBtn!.snp.bottom).offset(40.FloatValue.IPAD_XValue)
-            make.height.left.width.equalTo(self.countryCodeBtn!)
+            make.height.left.width.equalTo(self.numTF!)
         }).config({ (LogIn) in
             LogIn.backgroundColor = UIColor.SX_MainColor()
             LogIn.setTitle("登录", for: .normal)
@@ -192,7 +134,7 @@ extension SX_LoginController {
         
         self.registerBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.logInBtn!.snp.bottom).offset(Margin)
-            make.height.left.width.equalTo(self.countryCodeBtn!)
+            make.height.left.width.equalTo(self.logInBtn!)
         }).config({ (Register) in
             Register.backgroundColor = UIColor.white
             Register.setTitle("注册", for: .normal)
@@ -201,7 +143,6 @@ extension SX_LoginController {
             Register.layer.cornerRadius  = 10
             Register.layer.borderWidth   = 0.5
             Register.layer.borderColor   = UIColor.SX_MainColor().cgColor
-            
             
             Register.rx.tap.subscribe(onNext: { (_) in
                 SXLog("LOGIN")
@@ -244,7 +185,6 @@ extension SX_LoginController: UITextFieldDelegate {
             if textField.text == filtered {
                 
             } else {
-                
                 SXLog("仅限数字----")
             }
         }
@@ -254,7 +194,6 @@ extension SX_LoginController: UITextFieldDelegate {
 class SX_TextField: UITextField {
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        
         return bounds.insetBy(dx: 10, dy: 0)
     }
     
