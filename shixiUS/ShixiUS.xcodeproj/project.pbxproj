@@ -26,6 +26,7 @@
 		323E99C0213FA721006038F5 /* SX_ApplyTrainListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99BF213FA721006038F5 /* SX_ApplyTrainListController.swift */; };
 		323E99C2213FA73E006038F5 /* SX_ApplyVocationListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99C1213FA73D006038F5 /* SX_ApplyVocationListController.swift */; };
 		324482DE214923F900037533 /* SX_PersonalHeadPortraitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324482DD214923F900037533 /* SX_PersonalHeadPortraitCell.swift */; };
+		324482E1214A050C00037533 /* SX_RegisterContrller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324482E0214A050C00037533 /* SX_RegisterContrller.swift */; };
 		324848422141021B00B6049E /* SX_ApplyVisaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324848412141021B00B6049E /* SX_ApplyVisaCell.swift */; };
 		3248484721411AC400B6049E /* SX_AddressPickerPresentAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3248484621411AC400B6049E /* SX_AddressPickerPresentAnimated.swift */; };
 		3248484921411F5800B6049E /* SX_AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3248484821411F5800B6049E /* SX_AddressViewController.swift */; };
@@ -150,6 +151,7 @@
 		323E99BF213FA721006038F5 /* SX_ApplyTrainListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyTrainListController.swift; sourceTree = "<group>"; };
 		323E99C1213FA73D006038F5 /* SX_ApplyVocationListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyVocationListController.swift; sourceTree = "<group>"; };
 		324482DD214923F900037533 /* SX_PersonalHeadPortraitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PersonalHeadPortraitCell.swift; sourceTree = "<group>"; };
+		324482E0214A050C00037533 /* SX_RegisterContrller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_RegisterContrller.swift; sourceTree = "<group>"; };
 		324848412141021B00B6049E /* SX_ApplyVisaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyVisaCell.swift; sourceTree = "<group>"; };
 		3248484621411AC400B6049E /* SX_AddressPickerPresentAnimated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_AddressPickerPresentAnimated.swift; sourceTree = "<group>"; };
 		3248484821411F5800B6049E /* SX_AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_AddressViewController.swift; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 			isa = PBXGroup;
 			children = (
 				45454BCC2118184F002B9EBC /* SX_LoginController.swift */,
+				324482E0214A050C00037533 /* SX_RegisterContrller.swift */,
 				45452E5B21265C8F002CC995 /* SX_UserAgreementController.swift */,
 				45EBB89A20D8DB2100863544 /* SX_GuideViewController.swift */,
 			);
@@ -1047,6 +1050,7 @@
 				324848572142197C00B6049E /* SX_ApplyMessageCell.swift in Sources */,
 				45E573BD212A61FE007A4DCD /* SX_OrderDetailsController.swift in Sources */,
 				323E99AA21392819006038F5 /* SX_GuidePageControl.swift in Sources */,
+				324482E1214A050C00037533 /* SX_RegisterContrller.swift in Sources */,
 				32E49D2221378FAD005633F2 /* SX_PaymentCell.swift in Sources */,
 				32E49D1E21369DC1005633F2 /* SX_PayTrainingProjectController.swift in Sources */,
 				459B334A210965EA00B2EBB0 /* SX_MoreDateController.swift in Sources */,

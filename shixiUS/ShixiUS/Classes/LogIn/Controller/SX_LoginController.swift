@@ -18,11 +18,9 @@ import UIKit
 
 class SX_LoginController: UIViewController {
     
-    var numTF          : UITextField?
+    var userNameTF     : SX_TextField?
     var backBtn        : UIButton?
-    var passCodeTF     : UITextField?
-    //    var messageCodeBtn : UIButton?
-    //    var countryCodeBtn : UIButton?
+    var passWordTF     : SX_TextField?
     
     var logInBtn       : UIButton?
     var forgetBtn      : UIButton?
@@ -72,7 +70,7 @@ extension SX_LoginController {
             }.config { (Logo) in
         }
         
-        self.numTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+        self.userNameTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(logoView.snp.bottom).offset(50.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(Margin*2.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin*2.FloatValue.IPAD_XValue)
@@ -88,9 +86,9 @@ extension SX_LoginController {
             Num.textAlignment       = .left
         })
         
-        self.passCodeTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.numTF!.snp.bottom).offset(Margin)
-            make.height.left.width.equalTo(self.numTF!)
+        self.passWordTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+            make.top.equalTo(self.userNameTF!.snp.bottom).offset(Margin)
+            make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (PassCode) in
             PassCode.tintColor = UIColor.SX_MainColor()
             PassCode.layer.masksToBounds = true
@@ -102,8 +100,8 @@ extension SX_LoginController {
         })
         
         self.forgetBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.passCodeTF!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
-            make.right.equalTo(self.passCodeTF!)
+            make.top.equalTo(self.passWordTF!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.right.equalTo(self.passWordTF!)
         }).config({ (Forget) in
             Forget.setTitleColor(UIColor.SX_MainColor(), for: .normal)
             Forget.setTitle("忘记密码?", for: .normal)
@@ -118,7 +116,7 @@ extension SX_LoginController {
         
         self.logInBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.forgetBtn!.snp.bottom).offset(40.FloatValue.IPAD_XValue)
-            make.height.left.width.equalTo(self.numTF!)
+            make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (LogIn) in
             LogIn.backgroundColor = UIColor.SX_MainColor()
             LogIn.setTitle("登录", for: .normal)
@@ -127,6 +125,12 @@ extension SX_LoginController {
             
             LogIn.rx.tap.subscribe(onNext: { (_) in
                 SXLog("LOGIN")
+                /// 请求
+   
+                
+                
+                
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -136,8 +140,9 @@ extension SX_LoginController {
             make.top.equalTo(self.logInBtn!.snp.bottom).offset(Margin)
             make.height.left.width.equalTo(self.logInBtn!)
         }).config({ (Register) in
-            Register.backgroundColor = UIColor.white
-            Register.setTitle("注册", for: .normal)
+            
+            Register.setTitle("快速注册", for: .normal)
+            Register.backgroundColor     = UIColor.white
             Register.setTitleColor(UIColor.SX_MainColor(), for: .normal)
             Register.layer.masksToBounds = true
             Register.layer.cornerRadius  = 10
@@ -145,14 +150,17 @@ extension SX_LoginController {
             Register.layer.borderColor   = UIColor.SX_MainColor().cgColor
             
             Register.rx.tap.subscribe(onNext: { (_) in
-                SXLog("LOGIN")
+                SXLog("注册 ++++ ")
+                
+                let vc = SX_RegisterContrller()
+                self.present(vc, animated: true, completion: nil)
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
         })
     }
 }
-
 
 // =====================================================================================================================
 // MARK: - UIPickerViewDelegate
@@ -164,30 +172,6 @@ extension SX_LoginController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return 10
-    }
-}
-
-// =====================================================================================================================
-// MARK: - UITextFieldDelegate
-// =====================================================================================================================
-extension SX_LoginController: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        
-        if textField == self.passCodeTF {
-            if (textField.text?.lengthOfBytes(using: .utf8))! > 6 {
-                //                textField.text =
-            }
-            
-            let cs = NSCharacterSet(charactersIn: "0123456789").inverted
-            // 按cs分离出数组, 数组按""分离出字符串
-            let filtered = textField.text?.components(separatedBy: cs).joined(separator: "")
-            if textField.text == filtered {
-                
-            } else {
-                SXLog("仅限数字----")
-            }
-        }
     }
 }
 
