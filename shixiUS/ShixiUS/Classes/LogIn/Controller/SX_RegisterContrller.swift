@@ -7,6 +7,7 @@
 //  注册
 
 import UIKit
+import SwiftyJSON
 
 class SX_RegisterContrller: UIViewController {
     
@@ -108,13 +109,38 @@ extension SX_RegisterContrller {
             make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (REG) in
             REG.setTitle("快速注册", for: .normal)
-            REG.backgroundColor         = UIColor.SX_MainColor()
-            REG.layer.masksToBounds     = true
-            REG.layer.cornerRadius      = 10
+            REG.backgroundColor          = UIColor.SX_MainColor()
+            REG.layer.masksToBounds      = true
+            REG.layer.cornerRadius       = 10
             
             REG.rx.tap.subscribe(onNext: { (_) in
                 SXLog("快速注册")
-                self.navigationController?.popViewController(animated: true)
+                
+                if self.userNameTF?.text == "" {
+                    // 提示 !
+                }
+                
+                let param = ["name":self.userNameTF?.text,
+                             "email":self.mailTF?.text,
+                             "password":self.passWordTF?.text
+                ]
+
+                SX_NetManager.requestData(type: .POST, URlString: SX_Register, parameters: param as? [String : String], finishCallBack: { (result) in
+                    do{
+                        let json = try JSON(data: result)
+                        if json["status"] == 200 {
+                            /// 成功
+                            SXLog("注册成功! ")
+                            self.navigationController?.popViewController(animated: true)
+                        } else if json["status"] == 202 {
+                            /// 错误状态
+                            SXLog("错误状态! ")
+                        } else if json["status"] == 203 {
+                            /// 超时, 重新登录
+                            SXLog("超时, 重新登录! ")
+                        }
+                    } catch{ }
+                })
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)

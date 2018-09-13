@@ -15,6 +15,7 @@
  */
 
 import UIKit
+import SwiftyJSON
 
 class SX_LoginController: UIViewController {
     
@@ -78,12 +79,12 @@ extension SX_LoginController {
             
         }).config({ (Num) in
             Num.tintColor = UIColor.SX_MainColor()
-            Num.layer.masksToBounds = true
-            Num.layer.borderColor   = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
-            Num.layer.borderWidth   = 0.5
-            Num.layer.cornerRadius  = 10
-            Num.placeholder         = "请输入用户名"
-            Num.textAlignment       = .left
+            Num.layer.masksToBounds      = true
+            Num.layer.borderColor        = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
+            Num.layer.borderWidth        = 0.5
+            Num.layer.cornerRadius       = 10
+            Num.placeholder              = "请输入用户名"
+            Num.textAlignment            = .left
         })
         
         self.passWordTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -95,8 +96,8 @@ extension SX_LoginController {
             PassCode.layer.borderColor   = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
             PassCode.layer.borderWidth   = 0.5
             PassCode.layer.cornerRadius  = 10
-            PassCode.placeholder = "请输入密码"
-            PassCode.textAlignment = .left
+            PassCode.placeholder         = "请输入密码"
+            PassCode.textAlignment       = .left
         })
         
         self.forgetBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -126,10 +127,33 @@ extension SX_LoginController {
             LogIn.rx.tap.subscribe(onNext: { (_) in
                 SXLog("LOGIN")
                 /// 请求
-   
+                let param = ["name":self.userNameTF?.text,
+                             "password":self.passWordTF?.text
+                ]
                 
+                if self.userNameTF?.text == "" {
+                    /// 提示! 
+                }
                 
-                
+                SX_NetManager.requestData(type: .POST, URlString: SX_LogIn, parameters: param as? [String : String], finishCallBack: { (result) in
+                    do{
+                        let json = try JSON(data: result)
+                        
+                        if json["status"] == 200 {
+                            USERDEFAULTS.set("yes", forKey: "login")
+                            USERDEFAULTS.set(json["data"]["token"], forKey: "token")
+                            USERDEFAULTS.set(json["data"]["user_id"], forKey: "user_id")
+                        } else if json["status"] == 202 { // 错误状态
+                            /// 提示
+                        } else if json["status"] == 203 { // 超时, 重新登录
+                            ///
+                            USERDEFAULTS.set("no", forKey: "login")
+                            USERDEFAULTS.set(json["data"]["token"], forKey: "")
+                            USERDEFAULTS.set(json["data"]["user_id"], forKey: "")
+                        }
+                        
+                    } catch{ }
+                })
                 
             }, onError: { (error) in
                 SXLog(error)
@@ -151,7 +175,6 @@ extension SX_LoginController {
             
             Register.rx.tap.subscribe(onNext: { (_) in
                 SXLog("注册 ++++ ")
-                
                 let vc = SX_RegisterContrller()
                 self.present(vc, animated: true, completion: nil)
                 
@@ -162,17 +185,13 @@ extension SX_LoginController {
     }
 }
 
-// =====================================================================================================================
-// MARK: - UIPickerViewDelegate
-// =====================================================================================================================
-extension SX_LoginController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 10
-    }
+// ======================================================================================================================
+// MARK: - Other Method 2
+// ======================================================================================================================
+extension SX_LoginController {
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
-    }
+    
+    
 }
 
 class SX_TextField: UITextField {
@@ -185,4 +204,6 @@ class SX_TextField: UITextField {
         return bounds.insetBy(dx: 10, dy: 0)
     }
 }
+
+
 

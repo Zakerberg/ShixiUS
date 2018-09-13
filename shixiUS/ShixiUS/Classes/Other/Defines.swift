@@ -20,7 +20,8 @@ import UIKit
 
 let SCREEN_BOUNDS = UIScreen.main.bounds
 let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
-let SCREEN_WIDTH = UIScreen.main.bounds.size.width
+let SCREEN_WIDTH  = UIScreen.main.bounds.size.width
+let USERDEFAULTS  = UserDefaults.standard
 
 let iphoneX = (SCREEN_WIDTH == 375 && SCREEN_HEIGHT == 812 ?  true : false)
 let kNavH = (SCREEN_HEIGHT == 812 ? 88 : 64).FloatValue

@@ -45,10 +45,9 @@
  */
 
 import UIKit
-import SwiftyJSON
 import Alamofire
 
-let SX_DOUYU_TOKEN : String = "SX_DOUYU_TOKEN"
+let SX_GROUP_TOKEN : String = "SX_GROUP_TOKEN"
 
 enum SXMethod {
     case GET
@@ -74,11 +73,11 @@ class SX_NetManager {
             for cookie in cookies {
                 cookieArray.append(cookie.properties!)
             }
-            if !(UserDefaults.standard.object(forKey: SX_DOUYU_TOKEN) != nil){
+            if !(UserDefaults.standard.object(forKey: SX_GROUP_TOKEN) != nil){
                 // 保存 cookie
-                UserDefaults.standard.set(cookieArray, forKey: SX_DOUYU_TOKEN)
+                UserDefaults.standard.set(cookieArray, forKey: SX_GROUP_TOKEN)
             }else{
-                print("token\(String(describing: UserDefaults.standard.object(forKey: SX_DOUYU_TOKEN)))")
+                print("token\(String(describing: UserDefaults.standard.object(forKey: SX_GROUP_TOKEN)))")
             }
             SXLog("Method:\(type)请求\nURL: \(URlString)\n请求参数: \(String(describing: parameters))")
             if parameters != nil{

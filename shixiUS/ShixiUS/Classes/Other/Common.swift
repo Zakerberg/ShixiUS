@@ -91,7 +91,7 @@
     }
     
     /// RGB Color
-   class func colorWithRGB(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
+    class func colorWithRGB(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
         return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1)
     }
     
@@ -214,7 +214,7 @@
     var IPAD_XValue:CGFloat{return CGFloat(self*SCREEN_WIDTH)/375}
  }
  
-  //打印信息
+ //打印信息
  func SXLog<T>(_ message : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
     #if DEBUG
     let fileName = (file as NSString).lastPathComponent
@@ -341,7 +341,7 @@
  // MARK: - UIView Extension
  // ===================================================================================================================
  extension UIView {
- 
+    
     var x: CGFloat {
         get{
             return frame.origin.x
@@ -414,15 +414,36 @@
         }
     }
  }
-
+ 
  // ===================================================================================================================
  // MARK: - String Extension
  // ===================================================================================================================
  extension String {
     
+    /// 计算文字宽度 ?
     func SX_widthWithString(font: UIFont, size: CGSize) -> CGFloat {
         let rect = NSString(string: self).boundingRect(with: CGSize(width: size.width, height: size.height), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
         return ceil(rect.width)
+    }
+    
+    /// base 64
+    func SX_base64() -> String? {
+        
+        let decodeData:Data? = Data.init(base64Encoded: self, options: Data.Base64DecodingOptions.init(rawValue: 0))
+        
+        guard let utf8Data = decodeData else{
+            return nil
+            
+            
+        
+        }
+        
+        let decodedStr:String? = String.init(data: utf8Data, encoding: String.Encoding.utf8)
+        return decodedStr
+        
+        
+        
+    
     }
  }
  
