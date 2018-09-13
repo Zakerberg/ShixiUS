@@ -13,7 +13,7 @@ class SX_RegisterContrller: UIViewController {
     
     var userNameTF     : SX_TextField?
     var passWordTF     : SX_TextField?
-    var mailTF         : SX_TextField?
+    var email         : SX_TextField?
     
     var backBtn        : UIButton?
     var regBtn         : UIButton?
@@ -91,7 +91,7 @@ extension SX_RegisterContrller {
             PASSWORD.textAlignment       = .left
         })
         
-        self.mailTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+        self.email = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.passWordTF!.snp.bottom).offset(Margin)
             make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (MAIL) in
@@ -105,7 +105,7 @@ extension SX_RegisterContrller {
         })
         
         self.regBtn = UIButton().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.mailTF!.snp.bottom).offset(50.FloatValue.IPAD_XValue)
+            make.top.equalTo(self.email!.snp.bottom).offset(50.FloatValue.IPAD_XValue)
             make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (REG) in
             REG.setTitle("快速注册", for: .normal)
@@ -119,11 +119,13 @@ extension SX_RegisterContrller {
                 if self.userNameTF?.text == "" {
                     // 提示 !
                 }
+
+                let str = String(data: (self.passWordTF?.text?.data(using: .utf8)?.base64EncodedData())!, encoding: .utf8)
                 
                 let param = ["name":self.userNameTF?.text,
-                             "email":self.mailTF?.text,
-                             "password":self.passWordTF?.text
-                ]
+                             "email":self.email?.text,
+                             "password":str
+                            ]
 
                 SX_NetManager.requestData(type: .POST, URlString: SX_Register, parameters: param as? [String : String], finishCallBack: { (result) in
                     do{
@@ -141,6 +143,7 @@ extension SX_RegisterContrller {
                         }
                     } catch{ }
                 })
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)

@@ -17,6 +17,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SwiftyJSON
 
 private let identifier:String = "hotJobsCell"
 private let shixiTrainingCellID = "shixiTrainingCellID"
@@ -62,6 +63,21 @@ class SX_HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
+        fetchData()
+    }
+    
+    deinit {
+        homeTableView.delegate = nil
+        print("deinit-----")
+    }
+}
+
+// ==========================================================================================================================
+// MARK: - setUI
+// ==========================================================================================================================
+extension SX_HomeVC {
+    func setUI() {
         view.backgroundColor = UIColor.white
         /**** ======================================================================================================
          let NetImgArr = Array<Any>()
@@ -91,9 +107,72 @@ class SX_HomeVC: UIViewController {
         // 设置导航栏按钮和标题颜色
         navBarTintColor = .white
     }
-    deinit {
-        homeTableView.delegate = nil
-        print("deinit-----")
+    
+    func fetchData() {
+        
+        SX_NetManager.requestData(type: .GET, URlString: SX_HomeAD, parameters:  nil, finishCallBack: { (result) in
+            do{
+                let json = try JSON(data: result)
+                if json["status"] == 200 {
+                    /// 成功
+                    SXLog("成功")
+                } else if json["status"] == 202 {
+                    /// 错误状态
+                    SXLog("错误状态! ")
+                } else if json["status"] == 203 {
+                    /// 超时, 重新登录
+                    SXLog("超时, 重新登录! ")
+                }
+            } catch{ }
+        })
+    
+    
+    
+    
+    
+    
+    
+    
+    }
+}
+
+// ========================================================================================================================
+// MARK: - Other Method
+// ========================================================================================================================
+extension SX_HomeVC {
+    
+    /// Alert
+    func showMessage(_ text:String) {
+        let alertController = UIAlertController(title: text, message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    /// Version
+    func judgeAppVersion() {
+        let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! NSString
+        do {
+            _ = NSError()
+            var response = try NSURLConnection.sendSynchronousRequest(URLRequest(url: URL(fileURLWithPath: "https://itunes.apple.com/cn/lookup?id=1044254573")), returning: nil)
+            if response == nil {
+                print("没连接网络")
+                
+                return
+            }
+            
+            let appInfoDic = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary
+            print(appInfoDic)
+            let array = appInfoDic["results"] as! NSArray
+            if array.count < 1 {
+                print("此App未提交")
+                
+                return
+            }
+            let dic = array[0] as! NSDictionary
+            let appStoreVersion = dic["version"]
+            print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
+        } catch { }
     }
 }
 
@@ -120,14 +199,6 @@ extension SX_HomeVC {
             title = "首页"
         }
     }
-    
-    // 改变图片框的大小 (上滑的时候不改变)
-    // 这里不能使用offsetY，因为当（offsetY < LIMIT_OFFSET_Y）的时候，y = LIMIT_OFFSET_Y 不等于 offsetY
-    //        let newOffsetY = scrollView.contentOffset.y
-    //        if (newOffsetY < -IMAGE_HEIGHT) {
-    //            cycleScrollerView.frame = CGRect(x: 0, y: newOffsetY, width: CGFloat(SCREEN_WIDTH), height: -newOffsetY)
-    //        }
-    //    }
     
     fileprivate func imgsScaledToSize(image: UIImage, newSize: CGSize) -> UIImage {
         UIGraphicsBeginImageContext(CGSize(width: newSize.width * 2.0, height: newSize.height * 2.0))
@@ -314,46 +385,6 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
     func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
         
         SXLog("点击了轮播\(index)")
-    }
-}
-
-// ========================================================================================================================
-// MARK: - Other Method
-// ========================================================================================================================
-extension SX_HomeVC {
-    
-    /// Alert
-    func showMessage(_ text:String) {
-        let alertController = UIAlertController(title: text, message: nil, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    /// Version
-    func judgeAppVersion() {
-        let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! NSString
-        do {
-            _ = NSError()
-            var response = try NSURLConnection.sendSynchronousRequest(URLRequest(url: URL(fileURLWithPath: "https://itunes.apple.com/cn/lookup?id=1044254573")), returning: nil)
-            if response == nil {
-                print("没连接网络")
-                
-                return
-            }
-            
-            let appInfoDic = try JSONSerialization.jsonObject(with: response, options: .mutableLeaves) as! NSDictionary
-            print(appInfoDic)
-            let array = appInfoDic["results"] as! NSArray
-            if array.count < 1 {
-                print("此App未提交")
-                
-                return
-            }
-            let dic = array[0] as! NSDictionary
-            let appStoreVersion = dic["version"]
-            print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
-        } catch { }
     }
 }
 
