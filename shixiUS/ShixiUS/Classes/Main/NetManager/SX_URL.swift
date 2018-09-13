@@ -8,7 +8,13 @@
 
 import UIKit
 
-let shixi = "http://api.shixigroup.com"
+let SHIXIUS = "http://api.shixigroup.com"
+
+
+
+
+
+
 
 
 
