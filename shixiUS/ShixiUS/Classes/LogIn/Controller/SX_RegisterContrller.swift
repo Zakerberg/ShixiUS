@@ -117,7 +117,7 @@ extension SX_RegisterContrller {
                 SXLog("快速注册")
                 
                 if self.userNameTF?.text == "" {
-                    // 提示 !
+                    // 提示 ! ! !
                 }
 
                 let str = String(data: (self.passWordTF?.text?.data(using: .utf8)?.base64EncodedData())!, encoding: .utf8)
