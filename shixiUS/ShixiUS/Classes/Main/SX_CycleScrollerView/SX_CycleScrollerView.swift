@@ -18,10 +18,10 @@ import UIKit
 
 class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollProtocol {
     
-//==========================================================================================================
-// MARK: 对外提供的属性
-//==========================================================================================================
-   weak var delegate: SXCycleScrollerViewDelegate?
+    //==========================================================================================================
+    // MARK: 对外提供的属性
+    //==========================================================================================================
+    weak var delegate: SXCycleScrollerViewDelegate?
     
     var outerPageControlFrame:CGRect? {
         didSet {
@@ -195,8 +195,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     ///   - imgs:  localImgArray / serverImgArray     default:nil
     ///   - descs: descTextArray                      default:nil
     
-    init(frame: CGRect, type:ImgType = .SERVER, imgs:[String]? = nil, descs:[String]? = nil, defaultDotImage:UIImage? = nil, currentDotImage:UIImage? = nil, placeholderImage:UIImage? = nil)
-    {
+    init(frame: CGRect, type:ImgType = .SERVER, imgs:[String]? = nil, descs:[String]? = nil, defaultDotImage:UIImage? = nil, currentDotImage:UIImage? = nil, placeholderImage:UIImage? = nil) {
         super.init(frame: frame)
         setupCollectionView()
         defaultPageDotImage = defaultDotImage
@@ -207,8 +206,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
             if let server = imgs {
                 proxy = SXProxy(type: .SERVER, array: server)
             }
-        }
-        else {
+        }else{
             if let local = imgs {
                 proxy = SXProxy(type: .LOCAL, array: local)
             }
@@ -234,8 +232,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
 //=============================================================================================================
 // MARK: 内部方法（layoutSubviews、willMove）
 //=============================================================================================================
-    override func layoutSubviews()
-    {
+    override func layoutSubviews() {
         super.layoutSubviews()
         // 解决WRCycleCell自动偏移问题
         collectionView?.contentInset = .zero
@@ -256,8 +253,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
         }
     }
     
-    override func willMove(toSuperview newSuperview: UIView?)
-    {   // 解决定时器导致的循环引用
+    override func willMove(toSuperview newSuperview: UIView?) {   // 解决定时器导致的循环引用
         super.willMove(toSuperview: newSuperview)
         // 展现的时候newSuper不为nil，离开的时候newSuper为nil
         guard let _ = newSuperview else {
@@ -271,16 +267,13 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
 //===========================================================================================================
 // MARK-: - 定时器、自动滚动、scrollView代理方法
 //===========================================================================================================
-extension SX_CycleScrollerView
-{
-    func setupTimer()
-    {
+extension SX_CycleScrollerView {
+    func setupTimer() {
         timer = Timer(timeInterval: autoScrollInterval, target: self, selector: #selector(autoChangeCycleCell), userInfo: nil, repeats: true)
         RunLoop.main.add(timer!, forMode: .commonModes)
     }
     
-    @objc func autoChangeCycleCell()
-    {
+    @objc func autoChangeCycleCell() {
         if canChangeCycleCell == true {
             changeCycleCell(collectionView: collectionView!)
         }
@@ -290,8 +283,7 @@ extension SX_CycleScrollerView
         timer?.invalidate()
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-    {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if isAutoScroll == true {
             setupTimer()
         }
@@ -301,8 +293,7 @@ extension SX_CycleScrollerView
         scrollViewDidEndScrollingAnimation(scrollView)
     }
     
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView)
-    {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         guard canChangeCycleCell else {
             return
         }
@@ -313,8 +304,7 @@ extension SX_CycleScrollerView
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView)
-    {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard canChangeCycleCell else {
             return
         }
@@ -325,13 +315,10 @@ extension SX_CycleScrollerView
 //===========================================================================================================================
 // MARK: - pageControl页面
 //============================================================================================================================
-extension SX_CycleScrollerView
-{
-    fileprivate func setupPageControl()
-    {
+extension SX_CycleScrollerView {
+    fileprivate func setupPageControl() {
         pageControl?.removeFromSuperview()
-        if showPageControl == true
-        {
+        if showPageControl == true {
             pageControl = SX_PageControl(frame: CGRect.zero, currentImage: currentPageDotImage, defaultImage: defaultPageDotImage)
             pageControl?.numberOfPages = imgsCount
             pageControl?.hidesForSinglePage = true
@@ -352,10 +339,8 @@ extension SX_CycleScrollerView
 //============================================================================================================
 // MARK: - SXCycleCell 相关
 //============================================================================================================
-extension SX_CycleScrollerView: UICollectionViewDelegate,UICollectionViewDataSource
-{
-    fileprivate func setupCollectionView()
-    {
+extension SX_CycleScrollerView: UICollectionViewDelegate,UICollectionViewDataSource {
+    fileprivate func setupCollectionView() {
         flowLayout = UICollectionViewFlowLayout()
         flowLayout?.itemSize = frame.size
         flowLayout?.minimumLineSpacing = 0
@@ -372,21 +357,18 @@ extension SX_CycleScrollerView: UICollectionViewDelegate,UICollectionViewDataSou
         addSubview(collectionView!)
     }
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemsInSection
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let curIndex = indexPath.item % imgsCount
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! SX_CycleCell
         cell.placeholderImage = placeholderImage
         cell.imgSource = proxy[curIndex]
         cell.descText = descTextArray?[curIndex]
         
-        if let _ = descTextArray
-        {
+        if let _ = descTextArray {
             cell.imageContentModel = (imageContentModel == nil) ? cell.imageContentModel : imageContentModel!
             cell.descLabelFont = (descLabelFont == nil) ? cell.descLabelFont : descLabelFont!
             cell.descLabelTextColor = (descLabelTextColor == nil) ? cell.descLabelTextColor : descLabelTextColor!
@@ -397,9 +379,8 @@ extension SX_CycleScrollerView: UICollectionViewDelegate,UICollectionViewDataSou
         return cell
     }
     
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
-    {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-       delegate?.cycleScrollViewDidSelect(at: indexOnPageControl, cycleScrollView: self)
+        delegate?.cycleScrollViewDidSelect(at: indexOnPageControl, cycleScrollView: self)
     }
 }

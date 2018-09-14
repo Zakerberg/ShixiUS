@@ -20,8 +20,7 @@ enum ImgType:Int {
     case LOCAL = 1
 }
 
-struct SXProxy
-{
+struct SXProxy {
     var imgType:ImgType = .SERVER
     var imgArray:[ImgSource] = [ImgSource]()
     
@@ -33,17 +32,13 @@ struct SXProxy
     }
     
     // 构造方法
-    init(type:ImgType, array:[String])
-    {
+    init(type:ImgType, array:[String]) {
         imgType = type
-        if imgType == .SERVER
-        {
+        if imgType == .SERVER {
             imgArray = array.map({ (urlStr) -> ImgSource in
                 return ImgSource.SERVER(url: URL(string: urlStr)!)
             })
-        }
-        else
-        {
+        }else{
             imgArray = array.map({ (name) -> ImgSource in
                 return ImgSource.LOCAL(name: name)
             })
@@ -51,9 +46,9 @@ struct SXProxy
     }
 }
 
-//=========================================================================================================================================
+//=================================================================================================================
 // MARK: - pageControl 相关
-//=========================================================================================================================================
+//===============================================================================================================
 private let SXPageControlMargin: CGFloat = 15
 private let SXPageControlPointWidth: CGFloat = 2
 
@@ -63,20 +58,16 @@ enum PageControlAliment {
     case LeftBottom
 }
 
-protocol PageControlAlimentProtocol
-{
+protocol PageControlAlimentProtocol {
     var pageControlAliment: PageControlAliment { get set }
     var pageControlPointSpace: CGFloat { get set }
     func relayoutPageControl(pageControl: SX_PageControl)
     func relayoutPageControl(pageControl: SX_PageControl, outerFrame:CGRect)
 }
 
-extension PageControlAlimentProtocol where Self : UIView
-{   // TODO: 等待优化
-    func relayoutPageControl(pageControl: SX_PageControl)
-    {
-        if pageControl.isHidden == false
-        {
+extension PageControlAlimentProtocol where Self : UIView {   // TODO: 等待优化
+    func relayoutPageControl(pageControl: SX_PageControl) {
+        if pageControl.isHidden == false {
             let pageH:CGFloat = 20 //pageControl.pageSize.height
             let pageY = bounds.height - pageH
             let pageW = pageControl.pageSize.width
@@ -93,17 +84,16 @@ extension PageControlAlimentProtocol where Self : UIView
             pageControl.frame = CGRect(x:pageX, y:pageY, width:pageW, height:pageH)
         }
     }
-    func relayoutPageControl(pageControl: SX_PageControl, outerFrame:CGRect)
-    {
+    func relayoutPageControl(pageControl: SX_PageControl, outerFrame:CGRect) {
         if pageControl.isHidden == false {
             pageControl.frame = CGRect(x:outerFrame.origin.x, y:outerFrame.origin.y, width:pageControl.pageSize.width, height:pageControl.pageSize.height)
         }
     }
 }
 
-//=========================================================================================================================================
+//================================================================================================================
 // MARK: - 无限轮播 相关
-//=========================================================================================================================================
+//=============================================================================================================
 protocol EndlessScrollProtocol {
     /// 是否自动滚动
     var isAutoScroll: Bool { get set }
@@ -126,30 +116,24 @@ protocol EndlessScrollProtocol {
     func changeToFirstCycleCell(animated: Bool, collectionView: UICollectionView)
 }
 
-extension EndlessScrollProtocol where Self : UIView
-{
-    func changeCycleCell(collectionView: UICollectionView)
-    {
+extension EndlessScrollProtocol where Self : UIView {
+    func changeCycleCell(collectionView: UICollectionView) {
         guard itemsInSection != 0 else {
             return
         }
         
         let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let curItem = Int(collectionView.contentOffset.x / flowLayout.itemSize.width)
-        if curItem == itemsInSection - 1
-        {
+        if curItem == itemsInSection - 1 {
             let animated = (isEndlessScroll == true) ? false : true
             changeToFirstCycleCell(animated: animated, collectionView: collectionView)
-        }
-        else
-        {
+        }else{
             let indexPath = IndexPath(item: curItem + 1, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .init(rawValue: 0), animated: true)
         }
     }
     
-    func changeToFirstCycleCell(animated: Bool, collectionView: UICollectionView)
-    {
+    func changeToFirstCycleCell(animated: Bool, collectionView: UICollectionView) {
         guard itemsInSection != 0 else {
             return
         }

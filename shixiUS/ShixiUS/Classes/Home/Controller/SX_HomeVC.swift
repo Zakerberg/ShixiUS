@@ -30,6 +30,14 @@ struct InterShipPreview {
 }
 
 class SX_HomeVC: UIViewController {
+ 
+    /// ad
+    var adImages: [String]?
+    var adURLs:[String]?
+    var adTitles:[String]?
+    var adIDs:[String]?
+    /// ad
+    
     
     private lazy var homeButton: UIButton = {
         let button = UIButton()
@@ -98,7 +106,6 @@ extension SX_HomeVC {
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
         homeTableView.addSubview(cycleScrollerView)
         view.addSubview(homeTableView)
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "··· ", style: .done, target: nil, action: nil)
         
         // 设置导航栏颜色
         navBarBarTintColor = UIColor.SX_MainColor()
@@ -109,13 +116,16 @@ extension SX_HomeVC {
     }
     
     func fetchData() {
-        
         SX_NetManager.requestData(type: .GET, URlString: SX_HomeAD, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
                 if json["status"] == 200 {
-                    /// 成功
-                    SXLog("成功")
+                    for (key, subJSON) : (String, JSON) in json["data"] {
+                        SXLog("\(key) ---> \(subJSON["title"]) ----> \(subJSON["image"]) ----> \(subJSON["url"])")
+                        self.adIDs?.append(<#T##newElement: String##String#>)
+                        
+                    }
+
                 } else if json["status"] == 202 {
                     /// 错误状态
                     SXLog("错误状态! ")
@@ -125,14 +135,6 @@ extension SX_HomeVC {
                 }
             } catch{ }
         })
-    
-    
-    
-    
-    
-    
-    
-    
     }
 }
 
@@ -280,8 +282,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             
             for i in 0..<namesArr.count {
                 let index = i % 3
-                // let page = i / 3
-                // homeButton.frame = CGRect(x: index*Int(SCREEN_WIDTH/3), y: page*(85), width: Int(SCREEN_WIDTH/3), height: 100)
                 homeButton = UIButton(type: .custom).addhere(toSuperView: headerView1).layout(snapKitMaker: { (make) in
                     make.top.equalToSuperview().offset(Margin)
                     make.left.equalToSuperview().offset(index*Int(SCREEN_WIDTH/3)+30)
@@ -383,7 +383,6 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
     }
     
     func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
-        
         SXLog("点击了轮播\(index)")
     }
 }
@@ -397,4 +396,3 @@ extension SX_HomeVC: SX_TrainingCellDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-

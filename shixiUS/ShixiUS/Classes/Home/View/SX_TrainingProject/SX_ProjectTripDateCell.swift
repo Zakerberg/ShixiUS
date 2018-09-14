@@ -254,8 +254,6 @@ extension SX_ProjectTripDateCell {
             }else{
                 button?.layer.borderColor = UIColor.SX_MainColor().cgColor
                 button?.layer.borderWidth = 0.6
-//                self.date?.textColor = UIColor.SX_MainColor()
-//                self.price?.textColor = UIColor.SX_MainColor()
                 button?.isSelected = true
             }
         }
