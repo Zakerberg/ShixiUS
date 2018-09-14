@@ -121,7 +121,6 @@ extension SX_RegisterContrller {
                 }
 
                 let str = String(data: (self.passWordTF?.text?.data(using: .utf8)?.base64EncodedData())!, encoding: .utf8)
-                
                 let param = ["name":self.userNameTF?.text,
                              "email":self.email?.text,
                              "password":str
