@@ -30,8 +30,9 @@ class SX_ProjectDetailController: UIViewController {
     var ProjectLightStr = "Overriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keyword"
     
     var tripTitleArr = ["行程A", "行程B", "行程C", "行程D"]
-    var datwTArr     = ["06.12", "06.14", "08.19 " ]
-    var priceTArr:[String]?
+    
+    var dateTArr     = ["06.12", "06.14", "08.19", "09.16"]
+    var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
     var collectionBtn : UIButton?
@@ -126,7 +127,7 @@ extension SX_ProjectDetailController {
             COLLECTION.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             COLLECTION.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
             COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
-
+            
             COLLECTION.addTarget(self, action: #selector(collectionBtnClick), for: .touchUpInside)
         })
         
@@ -146,6 +147,9 @@ extension SX_ProjectDetailController {
     }
     
     func fetchData() {
+        
+        
+        
         
     }
 }
@@ -181,33 +185,28 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             let cell = SX_ProjectTripDateCell()
             cell.selectionStyle = .none
             // MARK: - 接口 --------
-            cell.tripArr = self.Arr
-            cell.dateArr = self.Arr
+            cell.tripArr      = self.tripTitleArr
+            cell.dateArr      = self.Arr
+            
+            
+            cell.dateTArr     = self.dateTArr
+            cell.priceTArr    = self.priceTArr
             // MARK: - 接口 --------
             
             
-            cell.tripBtn?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("行程按钮的点击 +++ + ")
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-        
+            cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
+            
+
             
             cell.dateBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("出发日期 按钮的点击 +++ + ")
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
- 
-            
-            
-            
-            
             
             
             return cell
         }
-  
         
         let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
         cell.selectionStyle = .none
@@ -251,11 +250,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
         
-        
-        
-        return view
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -321,7 +317,7 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
 }
 
 // =========================================================================================================
-// MARK: - @objc
+// MARK: - @objc 收藏
 // =========================================================================================================
 extension SX_ProjectDetailController {
     @objc func collectionBtnClick() {
@@ -336,3 +332,21 @@ extension SX_ProjectDetailController {
     }
 }
 
+// =========================================================================================================
+// MARK: - @objc 行程Btn
+// =========================================================================================================
+extension SX_ProjectDetailController {
+    @objc func tripBtnClick(btn: UIButton) {
+    
+        SXLog(btn.tag)
+ 
+        for index in 0...self.tripTitleArr.count {
+            let button = self.view.viewWithTag(100+index) as? UIButton
+            if button?.tag != btn.tag {
+                button?.isSelected = false
+            }else{
+                button?.isSelected = true
+            }
+        }
+    }
+}

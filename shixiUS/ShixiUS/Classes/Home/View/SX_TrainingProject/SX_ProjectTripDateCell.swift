@@ -21,7 +21,6 @@ class SX_ProjectTripDateCell: UITableViewCell {
     
     var tripScrollView: UIScrollView?
     var dateScrollView: UIScrollView?
-
     
     var tripBtn: UIButton?
     var dateBtn: UIButton?
@@ -29,19 +28,12 @@ class SX_ProjectTripDateCell: UITableViewCell {
     var moreDate: UIButton?
     
     /// 行程A
-    var tripTitle: UILabel?
+    /// tripBtn 直接设置title
     
     /// 06.12
     var date: UILabel?
     /// $5252
-    var peice: UILabel?
-    
-    //////// 替换接口
-    var tripTitleArr:[String]?
-    var datwTArr:[String]?
-    var priceTArr:[String]?
-    //////////
-    
+    var price: UILabel?
     
     /// 行程
     var tripArr: [String]? {
@@ -56,10 +48,11 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 make.right.equalToSuperview().offset(-Margin)
                 make.height.equalTo(45.FloatValue.IPAD_XValue)
             }).config({ (TRIPS) in
-                TRIPS.contentSize = CGSize(width: (TRIPBTNWIDTH+20)*(self.tripArr?.count ?? 0), height: 0)
-                TRIPS.showsVerticalScrollIndicator = false
+                TRIPS.contentSize                    = CGSize(width: (TRIPBTNWIDTH+20)*(self.tripArr?.count ?? 0), height: 0)
+                TRIPS.showsVerticalScrollIndicator   = false
                 TRIPS.showsHorizontalScrollIndicator = false
-                TRIPS.bounces = true
+                TRIPS.bounces                        = true
+                TRIPS.isUserInteractionEnabled       = true
             })
             
             for index in 0..<(self.tripArr?.count ?? 0) {
@@ -68,31 +61,18 @@ class SX_ProjectTripDateCell: UITableViewCell {
                     make.left.equalToSuperview().offset(index*(TRIPBTNWIDTH+20))
                     make.width.equalTo(TRIPBTNWIDTH.FloatValue.IPAD_XValue)
                 }).config({ (TRIPBTN) in
+                    TRIPBTN.setTitle(self.tripArr?[index], for: .normal)
+                    TRIPBTN.setTitleColor(UIColor.white, for: .selected)
+                    TRIPBTN.setTitleColor(UIColor.colorWithRGB(r: 51, g: 51, b: 51), for: .normal)
+                    TRIPBTN.titleLabel?.font          = UIFont.boldSystemFont(ofSize: 15)
+                    TRIPBTN.titleLabel?.textAlignment = .center
                     TRIPBTN.setBackgroundImage(#imageLiteral(resourceName: "icon_projectDetail_Gray"), for: .normal)
                     TRIPBTN.setBackgroundImage(#imageLiteral(resourceName: "icon_projectDetail_MainColor"), for: .selected)
-                    TRIPBTN.tag = 1000+index
+                    TRIPBTN.tag = 100+index
                     if index == 0 {
                         TRIPBTN.isSelected = true
                     }
-//                    TRIPBTN.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
                 })
-            
-            /// 行程A
-                self.tripTitle = UILabel().addhere(toSuperView: self.tripScrollView!).layout(snapKitMaker: { (make) in
-                    make.height.equalTo(Margin+1)
-//                    make.left.equalToSuperview().offset(index*(TRIPBTNWIDTH+40))
-                    make.centerX.equalTo(self.tripBtn!)
-                    make.top.equalToSuperview().offset(Margin)
-                }).config({ (TRIPTITLE) in
-                    TRIPTITLE.sizeToFit()
-                    TRIPTITLE.font      = UIFont.boldSystemFont(ofSize: 15)
-                    TRIPTITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-                })
-
-                
-                
-                
-                
             }
         }
     }
@@ -135,15 +115,15 @@ class SX_ProjectTripDateCell: UITableViewCell {
                     make.left.equalToSuperview().offset(i*(DATEBTNWIDTH+8))
                     make.width.equalTo(DATEBTNWIDTH.FloatValue.IPAD_XValue)
                 }).config({ (DATE) in
-                    DATE.backgroundColor = UIColor.yellow
+                    DATE.tag                       = i+200
+                    DATE.layer.cornerRadius        = 5
+                    DATE.layer.borderColor         = UIColor.init(white: 0.6, alpha: 1).cgColor
+                    DATE.layer.borderWidth         = 0.6
+                    if i == 0 {
+                        DATE.isSelected            = true
+                        DATE.layer.borderColor     = UIColor.SX_MainColor().cgColor
+                    }
                 })
-                
-                
-                /// 加  日期  + 价钱 Label
-                
-                
-                
-                
             }
             
             self.moreDate = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -154,6 +134,63 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 MORE.backgroundColor = UIColor.blue
                 
             })
+        }
+    }
+    
+    /// 出发时间Btn 的dateArr
+    var dateTArr:[String]? {
+        willSet{
+            if dateTArr == newValue {
+                return
+            }
+            dateTArr = newValue
+            
+            for index in 0..<(self.dateArr?.count ?? 0) {
+                /// 加 date Label
+                self.date = UILabel().addhere(toSuperView: self.dateScrollView!).layout(snapKitMaker: { (make) in
+                    make.top.equalToSuperview().offset(Margin)
+                    make.left.equalToSuperview().offset(index*(DATEBTNWIDTH+8)+Int(Margin))
+                    make.height.equalTo(13.FloatValue.IPAD_XValue)
+                }).config({ (DATE) in
+                    DATE.sizeToFit()
+                    if self.dateBtn?.isSelected == true || index == 0 {
+                        DATE.font = UIFont.boldSystemFont(ofSize: 12)
+                        DATE.textColor = UIColor.SX_MainColor()
+                    }else{
+                        DATE.font = UIFont.systemFont(ofSize: 12)
+                        DATE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                    }
+                    DATE.text = self.dateTArr?[index]
+                })
+            }
+        }
+    }
+    
+    /// 出发时间Btn 的priceTArr
+    var priceTArr:[String]? {
+        willSet{
+            if priceTArr == newValue {
+                return
+            }
+            priceTArr = newValue
+            /// 加 price Label
+            for index in 0..<(self.priceTArr?.count ?? 0) {
+                self.price = UILabel().addhere(toSuperView: self.dateScrollView!).layout(snapKitMaker: { (make) in
+                    make.top.equalTo(self.date!.snp.bottom).offset(Margin)
+                    make.height.equalTo(self.date!)
+                    make.left.equalToSuperview().offset(index*(DATEBTNWIDTH+8)+Int(Margin))
+                }).config({ (PRICE) in
+                    PRICE.sizeToFit()
+                    if self.dateBtn?.isSelected == true || index == 0 {
+                        PRICE.font = UIFont.boldSystemFont(ofSize: 12)
+                        PRICE.textColor = UIColor.SX_MainColor()
+                    }else{
+                        PRICE.font = UIFont.systemFont(ofSize: 12)
+                        PRICE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                    }
+                    PRICE.text = self.priceTArr?[index]
+                })
+            }
         }
     }
     
@@ -182,9 +219,8 @@ class SX_ProjectTripDateCell: UITableViewCell {
 // MARK: - 
 // =================================================================================================================
 extension SX_ProjectTripDateCell {
-
+    
+    
+    
     
 }
-
-
-
