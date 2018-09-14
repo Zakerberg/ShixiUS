@@ -135,6 +135,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             self.quitBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
                 make.top.equalToSuperview().offset(Margin)
                 make.width.equalTo(SCREEN_WIDTH)
+                make.height.equalTo(60.FloatValue.IPAD_XValue)
             }).config({ (QUIT) in
                 QUIT.backgroundColor   = UIColor.white
                 QUIT.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 18)
@@ -142,6 +143,12 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     SXLog("退出登录 +++ + ")
+                    
+                    
+                    
+                    
+                    
+                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)

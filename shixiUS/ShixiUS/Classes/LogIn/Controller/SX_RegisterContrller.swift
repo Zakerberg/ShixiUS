@@ -132,7 +132,7 @@ extension SX_RegisterContrller {
                         if json["status"] == 200 {
                             /// 成功
                             SXLog("注册成功! ")
-                            self.navigationController?.popViewController(animated: true)
+                            self.dismiss(animated: true, completion: nil)
                         } else if json["status"] == 202 {
                             /// 错误状态
                             SXLog("错误状态! ")
@@ -142,7 +142,6 @@ extension SX_RegisterContrller {
                         }
                     } catch{ }
                 })
-                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
