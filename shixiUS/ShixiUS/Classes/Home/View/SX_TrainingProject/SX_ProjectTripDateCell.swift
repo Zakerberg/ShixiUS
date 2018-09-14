@@ -60,7 +60,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
                     make.height.top.equalToSuperview()
                     make.left.equalToSuperview().offset(index*(TRIPBTNWIDTH+20))
                     make.width.equalTo(TRIPBTNWIDTH.FloatValue.IPAD_XValue)
-                }).config({ (TRIPBTN) in
+                }).config { (TRIPBTN) in
                     TRIPBTN.setTitle(self.tripArr?[index], for: .normal)
                     TRIPBTN.setTitleColor(UIColor.white, for: .selected)
                     TRIPBTN.setTitleColor(UIColor.colorWithRGB(r: 51, g: 51, b: 51), for: .normal)
@@ -68,11 +68,14 @@ class SX_ProjectTripDateCell: UITableViewCell {
                     TRIPBTN.titleLabel?.textAlignment = .center
                     TRIPBTN.setBackgroundImage(#imageLiteral(resourceName: "icon_projectDetail_Gray"), for: .normal)
                     TRIPBTN.setBackgroundImage(#imageLiteral(resourceName: "icon_projectDetail_MainColor"), for: .selected)
-                    TRIPBTN.tag = 100+index
+                    TRIPBTN.tag                       = 5000+index
+                    SXLog(TRIPBTN.tag)
                     if index == 0 {
                         TRIPBTN.isSelected = true
                     }
-                })
+                    
+                    TRIPBTN.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
+                }
             }
         }
     }
@@ -90,40 +93,43 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 make.top.equalTo(self.tripScrollView!.snp.bottom).offset(Margin)
                 make.left.equalTo(self.tripScrollView!)
                 make.height.equalTo(Margin)
-            }).config({ (TITLE) in
+            }).config{ (TITLE) in
                 TITLE.sizeToFit()
-                TITLE.text = "出发时间"
+                TITLE.text      = "出发时间"
                 TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-                TITLE.font = UIFont.systemFont(ofSize: 15)
-            })
+                TITLE.font      = UIFont.systemFont(ofSize: 15)
+            }
             
             self.dateScrollView = UIScrollView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
                 make.top.equalTo(title.snp.bottom).offset(Margin)
                 make.left.equalTo(title)
                 make.height.equalTo(65.FloatValue.IPAD_XValue)
                 make.right.equalToSuperview().offset(-50.FloatValue.IPAD_XValue)
-            }).config({ (DATES) in
+            }).config { (DATES) in
                 DATES.showsVerticalScrollIndicator = false
                 DATES.showsHorizontalScrollIndicator = false
                 DATES.scrollsToTop = false
-                DATES.bounces = true
-            })
+                DATES.bounces      = true
+            }
             
             for i in 0..<(self.dateArr?.count ?? 0) {
                 self.dateBtn = UIButton(type: .custom).addhere(toSuperView: self.dateScrollView!).layout(snapKitMaker: { (make) in
                     make.height.top.equalToSuperview()
                     make.left.equalToSuperview().offset(i*(DATEBTNWIDTH+8))
                     make.width.equalTo(DATEBTNWIDTH.FloatValue.IPAD_XValue)
-                }).config({ (DATE) in
-                    DATE.tag                       = i+200
+                }).config { (DATE) in
+                    DATE.tag                       = i+3000
                     DATE.layer.cornerRadius        = 5
                     DATE.layer.borderColor         = UIColor.init(white: 0.6, alpha: 1).cgColor
                     DATE.layer.borderWidth         = 0.6
+                    
+                    SXLog(DATE.tag)
                     if i == 0 {
-                        DATE.isSelected            = true
-                        DATE.layer.borderColor     = UIColor.SX_MainColor().cgColor
+                        DATE.isSelected = true
                     }
-                })
+                    
+                    DATE.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
+                }
             }
             
             self.moreDate = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -131,7 +137,10 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 make.right.equalToSuperview().offset(-Margin)
                 make.width.equalTo(50.FloatValue.IPAD_XValue)
             }).config({ (MORE) in
-                MORE.backgroundColor = UIColor.blue
+                
+                
+                
+                
                 
             })
         }
@@ -151,9 +160,9 @@ class SX_ProjectTripDateCell: UITableViewCell {
                     make.top.equalToSuperview().offset(Margin)
                     make.left.equalToSuperview().offset(index*(DATEBTNWIDTH+8)+Int(Margin))
                     make.height.equalTo(13.FloatValue.IPAD_XValue)
-                }).config({ (DATE) in
+                }).config { (DATE) in
                     DATE.sizeToFit()
-                    if self.dateBtn?.isSelected == true || index == 0 {
+                    if self.dateBtn?.isSelected == true {
                         DATE.font = UIFont.boldSystemFont(ofSize: 12)
                         DATE.textColor = UIColor.SX_MainColor()
                     }else{
@@ -161,7 +170,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
                         DATE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                     }
                     DATE.text = self.dateTArr?[index]
-                })
+                }
             }
         }
     }
@@ -181,7 +190,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
                     make.left.equalToSuperview().offset(index*(DATEBTNWIDTH+8)+Int(Margin))
                 }).config({ (PRICE) in
                     PRICE.sizeToFit()
-                    if self.dateBtn?.isSelected == true || index == 0 {
+                    if self.dateBtn?.isSelected == true  {
                         PRICE.font = UIFont.boldSystemFont(ofSize: 12)
                         PRICE.textColor = UIColor.SX_MainColor()
                     }else{
@@ -219,8 +228,36 @@ class SX_ProjectTripDateCell: UITableViewCell {
 // MARK: - 
 // =================================================================================================================
 extension SX_ProjectTripDateCell {
+    @objc func tripBtnClick(btn: UIButton) {
+        SXLog(btn.tag)
+        for index in 0...(self.tripArr?.count ?? 0) {
+            let button = self.viewWithTag(5000+index) as? UIButton
+            if button?.tag != btn.tag {
+                button?.setBackgroundImage(#imageLiteral(resourceName: "icon_projectDetail_Gray"), for: .normal)
+                button?.isSelected = false
+            }else{
+                button?.setBackgroundImage(#imageLiteral(resourceName: "icon_projectDetail_MainColor"), for: .selected)
+                button?.isSelected = true
+            }
+        }
+    }
     
-    
-    
-    
+    /// 出发日期 Btn
+    @objc func dateBtnClick(btn: UIButton) {
+        SXLog(btn.tag)
+        for index in 0...(self.dateArr?.count ?? 0) {
+            let button = self.viewWithTag(3000+index) as? UIButton
+            if button?.tag != btn.tag {
+                button?.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor
+                button?.layer.borderWidth = 0.6
+                button?.isSelected = false
+            }else{
+                button?.layer.borderColor = UIColor.SX_MainColor().cgColor
+                button?.layer.borderWidth = 0.6
+//                self.date?.textColor = UIColor.SX_MainColor()
+//                self.price?.textColor = UIColor.SX_MainColor()
+                button?.isSelected = true
+            }
+        }
+    }
 }

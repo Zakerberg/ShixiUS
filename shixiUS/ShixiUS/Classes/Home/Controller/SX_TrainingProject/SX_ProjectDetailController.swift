@@ -147,8 +147,7 @@ extension SX_ProjectDetailController {
     }
     
     func fetchData() {
-        
-        
+
         
         
     }
@@ -193,17 +192,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             cell.priceTArr    = self.priceTArr
             // MARK: - 接口 --------
             
-            
-            cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
-            
-
-            
-            cell.dateBtn?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("出发日期 按钮的点击 +++ + ")
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-            
+//            cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
+//            cell.dateBtn?.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
             
             return cell
         }
@@ -264,6 +254,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
 // ==========================================================================================================
 extension SX_ProjectDetailController: SXCycleScrollerViewDelegate {
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
+        
         
     }
     
@@ -333,20 +324,8 @@ extension SX_ProjectDetailController {
 }
 
 // =========================================================================================================
-// MARK: - @objc 行程Btn
+// MARK: - @objc
 // =========================================================================================================
 extension SX_ProjectDetailController {
-    @objc func tripBtnClick(btn: UIButton) {
     
-        SXLog(btn.tag)
- 
-        for index in 0...self.tripTitleArr.count {
-            let button = self.view.viewWithTag(100+index) as? UIButton
-            if button?.tag != btn.tag {
-                button?.isSelected = false
-            }else{
-                button?.isSelected = true
-            }
-        }
-    }
 }
