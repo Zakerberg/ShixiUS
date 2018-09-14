@@ -25,10 +25,14 @@ let verticaListSectionIndex = 1
 
 class SX_ProjectDetailController: UIViewController {
     
-    var row:NSInteger?
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     var Arr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
-    
     var ProjectLightStr = "Overriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keyword"
+    
+    var tripTitleArr = ["行程A", "行程B", "行程C", "行程D"]
+    var datwTArr     = ["06.12", "06.14", "08.19 " ]
+    var priceTArr:[String]?
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     
     var collectionBtn : UIButton?
     var applyBtn: UIButton?
@@ -93,9 +97,9 @@ class SX_ProjectDetailController: UIViewController {
     }
 }
 
-// =============================================================================================================================
+// ========================================================================================================
 // MARK: - Other Method
-// ===========================================================================================================================
+// ========================================================================================================
 extension SX_ProjectDetailController {
     
     func setUI() {
@@ -146,9 +150,9 @@ extension SX_ProjectDetailController {
     }
 }
 
-// ============================================================================================================================
+// =======================================================================================================
 // MARK: - UITableViewDelegate
-// ============================================================================================================================
+// =======================================================================================================
 extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -165,7 +169,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle = .none
-            // MARK: - 此处换成李雪静的接口 --------
+            // MARK: - 接口 --------
             titleCell.projectName!.text = "联合国新兴全球领导人和公民培养计划-测试"
             titleCell.projectContent!.text = "包含:课程,签证,机票,活动,食宿,保险 - 测试"
             titleCell.projectCity!.text = "出发城市: 北京 - 测试"
@@ -176,12 +180,34 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         } else if indexPath.section == 1 {
             let cell = SX_ProjectTripDateCell()
             cell.selectionStyle = .none
-            // MARK: - 此处换成李雪静的接口 --------
+            // MARK: - 接口 --------
             cell.tripArr = self.Arr
             cell.dateArr = self.Arr
+            // MARK: - 接口 --------
+            
+            
+            cell.tripBtn?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("行程按钮的点击 +++ + ")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+        
+            
+            cell.dateBtn?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("出发日期 按钮的点击 +++ + ")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+ 
+            
+            
+            
+            
+            
             
             return cell
         }
+  
         
         let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
         cell.selectionStyle = .none
@@ -237,9 +263,9 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
-// ============================================================================================================================
+// ===========================================================================================================
 // MARK: - SXCycleScrollerViewDelegate
-// ============================================================================================================================
+// ==========================================================================================================
 extension SX_ProjectDetailController: SXCycleScrollerViewDelegate {
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
         
@@ -250,9 +276,9 @@ extension SX_ProjectDetailController: SXCycleScrollerViewDelegate {
     }
 }
 
-// ============================================================================================================================
+// ==========================================================================================================
 // MARK: - UIScrollViewDelegate
-// ============================================================================================================================
+// ===========================================================================================================
 extension SX_ProjectDetailController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -294,9 +320,9 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
     }
 }
 
-// ============================================================================================================================
+// =========================================================================================================
 // MARK: - @objc
-// ============================================================================================================================
+// =========================================================================================================
 extension SX_ProjectDetailController {
     @objc func collectionBtnClick() {
         

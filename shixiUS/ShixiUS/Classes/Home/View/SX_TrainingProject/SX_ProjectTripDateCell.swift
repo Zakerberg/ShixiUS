@@ -21,6 +21,27 @@ class SX_ProjectTripDateCell: UITableViewCell {
     
     var tripScrollView: UIScrollView?
     var dateScrollView: UIScrollView?
+
+    
+    var tripBtn: UIButton?
+    var dateBtn: UIButton?
+    /// 更多日期
+    var moreDate: UIButton?
+    
+    /// 行程A
+    var tripTitle: UILabel?
+    
+    /// 06.12
+    var date: UILabel?
+    /// $5252
+    var peice: UILabel?
+    
+    //////// 替换接口
+    var tripTitleArr:[String]?
+    var datwTArr:[String]?
+    var priceTArr:[String]?
+    //////////
+    
     
     /// 行程
     var tripArr: [String]? {
@@ -46,9 +67,32 @@ class SX_ProjectTripDateCell: UITableViewCell {
                     make.height.top.equalToSuperview()
                     make.left.equalToSuperview().offset(index*(TRIPBTNWIDTH+20))
                     make.width.equalTo(TRIPBTNWIDTH.FloatValue.IPAD_XValue)
-                }).config({ (TRIP) in
-                    TRIP.backgroundColor = UIColor.cyan
+                }).config({ (TRIPBTN) in
+                    TRIPBTN.setBackgroundImage(#imageLiteral(resourceName: "icon_projectDetail_Gray"), for: .normal)
+                    TRIPBTN.setBackgroundImage(#imageLiteral(resourceName: "icon_projectDetail_MainColor"), for: .selected)
+                    TRIPBTN.tag = 1000+index
+                    if index == 0 {
+                        TRIPBTN.isSelected = true
+                    }
+//                    TRIPBTN.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
                 })
+            
+            /// 行程A
+                self.tripTitle = UILabel().addhere(toSuperView: self.tripScrollView!).layout(snapKitMaker: { (make) in
+                    make.height.equalTo(Margin+1)
+//                    make.left.equalToSuperview().offset(index*(TRIPBTNWIDTH+40))
+                    make.centerX.equalTo(self.tripBtn!)
+                    make.top.equalToSuperview().offset(Margin)
+                }).config({ (TRIPTITLE) in
+                    TRIPTITLE.sizeToFit()
+                    TRIPTITLE.font      = UIFont.boldSystemFont(ofSize: 15)
+                    TRIPTITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                })
+
+                
+                
+                
+                
             }
         }
     }
@@ -93,6 +137,13 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 }).config({ (DATE) in
                     DATE.backgroundColor = UIColor.yellow
                 })
+                
+                
+                /// 加  日期  + 价钱 Label
+                
+                
+                
+                
             }
             
             self.moreDate = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -106,14 +157,9 @@ class SX_ProjectTripDateCell: UITableViewCell {
         }
     }
     
-    var tripBtn: UIButton?
-    var dateBtn: UIButton?
-    /// 更多日期
-    var moreDate: UIButton?
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        ConfigCell()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -133,12 +179,11 @@ class SX_ProjectTripDateCell: UITableViewCell {
 }
 
 // ==================================================================================================================
-// MARK: - ConfigCell()
+// MARK: - 
 // =================================================================================================================
 extension SX_ProjectTripDateCell {
-    func ConfigCell() {
-        
-    }
+
+    
 }
 
 
