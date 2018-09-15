@@ -54,7 +54,7 @@ class SX_PageTitleView: UIView {
     }()
     
     //标题数组
-    private var titles = [String]()
+    var titles = [String]()
     //存储标题按钮的数组
     private var btnArr = [UIButton]()
     //标记按钮下标

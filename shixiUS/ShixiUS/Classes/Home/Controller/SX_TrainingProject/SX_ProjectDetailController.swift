@@ -35,6 +35,22 @@ class SX_ProjectDetailController: UIViewController {
     var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
+  
+     lazy var pageTitleView: SX_PageTitleView = {
+        let config                = SX_PageTitleViewConfig()
+        config.titleColor         = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+        config.titleSelectedColor = UIColor.SX_MainColor()
+        
+        let pageTitleView = SX_PageTitleView(frame: CGRect(x: 0, y: 200, width: SCREEN_WIDTH, height: 41), titles: self.Arr, config: config)
+        
+        pageTitleView.config = config
+        pageTitleView.titles = self.Arr
+
+        pageTitleView.pageTitleViewDelegate = self
+        
+        return pageTitleView
+    }()
+
     var collectionBtn : UIButton?
     var applyBtn: UIButton?
     
@@ -159,7 +175,7 @@ extension SX_ProjectDetailController {
 extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -225,27 +241,40 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             return 135.FloatValue.IPAD_XValue
             
         case 1:
-            return 185.FloatValue.IPAD_XValue
+            return 190.FloatValue.IPAD_XValue
         default:
             return UILabel.SX_getSpaceLabelHeight(self.ProjectLightStr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if  section == 2 {
+            return 40.FloatValue.IPAD_XValue
+        }
+        
         return 5.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        return 10.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        if section == 2 {
+            let view = self.pageTitleView
+            tableView.tableHeaderView?.addSubview(view)
+            
+            return view
+        }
         return UIView()
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        let view = UIView()
+        
+        return view
     }
 }
 
@@ -324,8 +353,22 @@ extension SX_ProjectDetailController {
 }
 
 // =========================================================================================================
-// MARK: - @objc
+// MARK: -  SXPageTitleViewDelegate
 // =========================================================================================================
-extension SX_ProjectDetailController {
-    
+extension SX_ProjectDetailController: SXPageTitleViewDelegate {
+   
+    func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
+          SXLog(selectedIndex)
+        if self.Arr.count > 0 {
+            if selectedIndex == 0 {
+    //                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+            } else if selectedIndex == 1 {
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 3), at: .top, animated: true)
+            } else if selectedIndex == 2 {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 4), at: .top, animated: true)
+            }  else if selectedIndex == 3 {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 5), at: .top, animated: true)
+            }
+        }
+    }
 }
