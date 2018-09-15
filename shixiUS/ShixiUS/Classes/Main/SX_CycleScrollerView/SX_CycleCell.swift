@@ -83,17 +83,18 @@ class SX_CycleCell: UICollectionViewCell{
 //=======================================================================================================================
 // MARK: 构造方法
 //=======================================================================================================================
-    override init(frame: CGRect)
-    {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
         setupImgView()
         setupDescLabel()
         setupBottomView()
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     deinit {
         print("SX_CycleCell  deinit")
     }
@@ -101,13 +102,11 @@ class SX_CycleCell: UICollectionViewCell{
 //=======================================================================================================================
 // MARK: 内部方法（layoutSubviews）
 //=======================================================================================================================
-    override func layoutSubviews()
-    {
+    override func layoutSubviews() {
         super.layoutSubviews()
         imgView.frame = self.bounds
         
-        if let _ = descText
-        {
+        if let _ = descText {
             let margin:CGFloat = 16
             let labelWidth     = imgView.bounds.width - 2 * margin
             let labelHeight    = descLabelHeight
@@ -131,8 +130,7 @@ extension SX_CycleCell {
         addSubview(imgView)
     }
     
-    fileprivate func setupDescLabel()
-    {
+    fileprivate func setupDescLabel() {
         descLabel = UILabel()
         descLabel.text = descText
         descLabel.numberOfLines = 0
@@ -144,8 +142,7 @@ extension SX_CycleCell {
         descLabel.isHidden = true
     }
     
-    fileprivate func setupBottomView()
-    {
+    fileprivate func setupBottomView() {
         bottomView = UIView()
         bottomView.backgroundColor = bottomViewBackgroundColor
         addSubview(bottomView)

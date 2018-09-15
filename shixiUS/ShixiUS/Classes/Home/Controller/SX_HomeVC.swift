@@ -32,31 +32,30 @@ struct InterShipPreview {
 class SX_HomeVC: UIViewController {
  
     /// ad
-    var adImages: [String]?
-    var adURLs:[String]?
-    var adTitles:[String]?
-    var adIDs:[String]?
+    var adImages = [String]()
+    var adURLs   = [String]()
+    var adTitles = [String]()
+    var adIDs    = [Int]()
     /// ad
-    
     
     private lazy var homeButton: UIButton = {
         let button = UIButton()
-        button.imageView?.frame = CGRect(x: 20, y: 20, width: 55, height: 55)
-        button.imageView?.center = CGPoint(x: SCREEN_WIDTH/3, y: 40)
-        button.titleLabel?.frame = CGRect(x: 0, y: 50, width: button.frame.size.width, height: 50)
-        button.titleLabel?.textAlignment = .center
+        button.imageView?.frame           = CGRect(x: 20, y: 20, width: 55, height: 55)
+        button.imageView?.center          = CGPoint(x: SCREEN_WIDTH/3, y: 40)
+        button.titleLabel?.frame          = CGRect(x: 0, y: 50, width: button.frame.size.width, height: 50)
+        button.titleLabel?.textAlignment  = .center
         
         return button
     }()
     
     private lazy var homeTableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
-        tableView.contentInset = UIEdgeInsetsMake(CGFloat(IMAGE_HEIGHT-kNavH), 0, 0, 0)
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.showsVerticalScrollIndicator = false
-        tableView.estimatedRowHeight = 200
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.contentInset                  = UIEdgeInsetsMake(CGFloat(IMAGE_HEIGHT-kNavH), 0, 0, 0)
+        tableView.rowHeight                     = UITableViewAutomaticDimension
+        tableView.showsVerticalScrollIndicator  = false
+        tableView.estimatedRowHeight            = 200
+        tableView.delegate                      = self
+        tableView.dataSource                    = self
         
         return tableView
     }()
@@ -64,15 +63,21 @@ class SX_HomeVC: UIViewController {
     /// 轮播
     lazy var cycleScrollerView: SX_CycleScrollerView = {
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
-        let cycleView = SX_CycleScrollerView(frame: frame, type: .LOCAL, imgs: nil, descs: nil)
+        let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: nil, descs: nil)
+        
         cycleView.delegate = self
         return cycleView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+       super.viewWillAppear(animated)
+        fetchData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        fetchData()
+//        fetchData()
     }
     
     deinit {
@@ -94,15 +99,15 @@ extension SX_HomeVC {
          cycleScrollerView.descTextArray  = descLabelArr as? [String]
          ====================================================================================================== *****/
         
-        let localImgs = ["localImg6","localImg7","localImg8","localImg9","localImg10"]
-        let descLabels = ["韩国防部回应停止部署萨德:遵照最高统帅指导方针",
-                          "勒索病毒攻击再次爆发 国内校园网大面积感染",
-                          "Win10秋季更新重磅功能：跟安卓与iOS无缝连接",
-                          "《琅琊榜2》为何没有胡歌？胡歌：我看过剧本，离开是种保护",
-                          "阿米尔汗在印度的影响力，我国的哪位影视明星能与之齐名呢？"]
+//        let localImgs = ["localImg6","localImg7","localImg8","localImg9","localImg10"]
+//        let descLabels = ["韩国防部回应停止部署萨德:遵照最高统帅指导方针",
+//                          "勒索病毒攻击再次爆发 国内校园网大面积感染",
+//                          "Win10秋季更新重磅功能：跟安卓与iOS无缝连接",
+//                          "《琅琊榜2》为何没有胡歌？胡歌：我看过剧本，离开是种保护",
+//                          "阿米尔汗在印度的影响力，我国的哪位影视明星能与之齐名呢？"]
         
-        cycleScrollerView.localImgArray = localImgs
-        cycleScrollerView.descTextArray = descLabels
+        cycleScrollerView.serverImgArray = self.adImages
+        cycleScrollerView.descTextArray = self.adTitles
         cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
         homeTableView.addSubview(cycleScrollerView)
         view.addSubview(homeTableView)
@@ -118,12 +123,20 @@ extension SX_HomeVC {
     func fetchData() {
         SX_NetManager.requestData(type: .GET, URlString: SX_HomeAD, parameters:  nil, finishCallBack: { (result) in
             do{
+                /// SwiftyJSON 在这里 !
                 let json = try JSON(data: result)
                 if json["status"] == 200 {
-                    for (key, subJSON) : (String, JSON) in json["data"] {
-                        SXLog("\(key) ---> \(subJSON["title"]) ----> \(subJSON["image"]) ----> \(subJSON["url"])")
-                        self.adIDs?.append(<#T##newElement: String##String#>)
+                    for (_, subJSON) : (String, JSON) in json["data"] {
+
                         
+//                        let image = UIImage(data: subJSON["image"].string)
+//                        let image = UIImage()
+//                        self.adImages.append(image)
+                        self.adIDs.append(subJSON["id"].int!)
+                        
+//                        self.adImages =
+                        
+                        self.adTitles.append(subJSON["title"].string!)
                     }
 
                 } else if json["status"] == 202 {
