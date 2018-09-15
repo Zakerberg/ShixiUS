@@ -127,14 +127,14 @@ extension SX_HomeVC {
                 let json = try JSON(data: result)
                 if json["status"] == 200 {
                     for (_, subJSON) : (String, JSON) in json["data"] {
+//                       self.adIDs.append(subJSON["id"].int!)
 
                         
-//                        let image = UIImage(data: subJSON["image"].string)
-//                        let image = UIImage()
-//                        self.adImages.append(image)
-                        self.adIDs.append(subJSON["id"].int!)
                         
-//                        self.adImages =
+                        /// YY 转模型
+ 
+                        
+                        
                         
                         self.adTitles.append(subJSON["title"].string!)
                     }

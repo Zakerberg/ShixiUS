@@ -37,6 +37,8 @@
 		32484853214129AD00B6049E /* SX_AddressPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32484852214129AD00B6049E /* SX_AddressPickerView.swift */; };
 		32484855214218CA00B6049E /* SX_ApplyAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32484854214218CA00B6049E /* SX_ApplyAddressCell.swift */; };
 		324848572142197C00B6049E /* SX_ApplyMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324848562142197C00B6049E /* SX_ApplyMessageCell.swift */; };
+		328225D8214CB42700E247C3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328225D6214CB42700E247C3 /* ImageHelper.swift */; };
+		328225D9214CB42700E247C3 /* ImageVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328225D7214CB42700E247C3 /* ImageVIewExtension.swift */; };
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
 		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
 		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
@@ -163,6 +165,8 @@
 		32484852214129AD00B6049E /* SX_AddressPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_AddressPickerView.swift; sourceTree = "<group>"; };
 		32484854214218CA00B6049E /* SX_ApplyAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyAddressCell.swift; sourceTree = "<group>"; };
 		324848562142197C00B6049E /* SX_ApplyMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyMessageCell.swift; sourceTree = "<group>"; };
+		328225D6214CB42700E247C3 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		328225D7214CB42700E247C3 /* ImageVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVIewExtension.swift; sourceTree = "<group>"; };
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
 		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
 		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
@@ -565,6 +569,8 @@
 				45556B6020D8A0370035FCA6 /* Defines.swift */,
 				45D3520E20D8B3F600D7300A /* Common.swift */,
 				45E57405212E9847007A4DCD /* SX_UnderlineBtn.swift */,
+				328225D6214CB42700E247C3 /* ImageHelper.swift */,
+				328225D7214CB42700E247C3 /* ImageVIewExtension.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1103,10 +1109,12 @@
 				45E573C0212A7094007A4DCD /* SX_OrderPayInfoCell.swift in Sources */,
 				3248484921411F5800B6049E /* SX_AddressViewController.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
+				328225D8214CB42700E247C3 /* ImageHelper.swift in Sources */,
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
 				45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */,
 				45454BE321198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift in Sources */,
 				45E57406212E9847007A4DCD /* SX_UnderlineBtn.swift in Sources */,
+				328225D9214CB42700E247C3 /* ImageVIewExtension.swift in Sources */,
 				322FC80221461059005347E8 /* SX_MoreHotJobController.swift in Sources */,
 				45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */,
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
