@@ -13,13 +13,32 @@ class SX_MoreDateController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
 }
+
+// ==============================================================================================
+// MARK: - Other Method
+// ==============================================================================================
+extension SX_MoreDateController {
+    func setUI() {
+        title = "更多日期"
+        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+    }
+}
+
+// ==============================================================================================
+// MARK: -
+// ==============================================================================================
+
+
+
+
+
+
+
+

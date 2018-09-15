@@ -37,6 +37,27 @@
 		32484853214129AD00B6049E /* SX_AddressPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32484852214129AD00B6049E /* SX_AddressPickerView.swift */; };
 		32484855214218CA00B6049E /* SX_ApplyAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32484854214218CA00B6049E /* SX_ApplyAddressCell.swift */; };
 		324848572142197C00B6049E /* SX_ApplyMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324848562142197C00B6049E /* SX_ApplyMessageCell.swift */; };
+		3262126F214CE13E000C1A6C /* UIView+CustomFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262124E214CE13E000C1A6C /* UIView+CustomFrame.m */; };
+		32621270214CE13E000C1A6C /* NSDate+RMCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262124F214CE13E000C1A6C /* NSDate+RMCalendarLogic.m */; };
+		32621271214CE13E000C1A6C /* CalendarPreviousMonth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621251214CE13E000C1A6C /* CalendarPreviousMonth@2x.png */; };
+		32621272214CE13E000C1A6C /* CalendarSelectedDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621252214CE13E000C1A6C /* CalendarSelectedDate@2x.png */; };
+		32621273214CE13E000C1A6C /* CalendarSelectedDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621253214CE13E000C1A6C /* CalendarSelectedDate.png */; };
+		32621274214CE13E000C1A6C /* CalendarTodaysDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621254214CE13E000C1A6C /* CalendarTodaysDate@2x.png */; };
+		32621275214CE13E000C1A6C /* CalendarRow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621255214CE13E000C1A6C /* CalendarRow@2x.png */; };
+		32621276214CE13E000C1A6C /* CalendarPreviousMonth.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621256214CE13E000C1A6C /* CalendarPreviousMonth.png */; };
+		32621277214CE13E000C1A6C /* CalendarRow.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621257214CE13E000C1A6C /* CalendarRow.png */; };
+		32621278214CE13E000C1A6C /* CalendarNormalDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621258214CE13E000C1A6C /* CalendarNormalDate.png */; };
+		32621279214CE13E000C1A6C /* CalendarRowBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621259214CE13E000C1A6C /* CalendarRowBottom.png */; };
+		3262127A214CE13E000C1A6C /* CalendarDisableDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3262125A214CE13E000C1A6C /* CalendarDisableDate.png */; };
+		3262127B214CE13E000C1A6C /* CalendarRowBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3262125B214CE13E000C1A6C /* CalendarRowBottom@2x.png */; };
+		3262127C214CE13E000C1A6C /* CalendarTodaysDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3262125C214CE13E000C1A6C /* CalendarTodaysDate.png */; };
+		3262127D214CE13E000C1A6C /* RMCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262125F214CE13E000C1A6C /* RMCalendarLogic.m */; };
+		3262127E214CE13E000C1A6C /* RMCalendarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32621262214CE13E000C1A6C /* RMCalendarController.m */; };
+		3262127F214CE13E000C1A6C /* TicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32621266214CE13E000C1A6C /* TicketModel.m */; };
+		32621280214CE13E000C1A6C /* RMCalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32621267214CE13E000C1A6C /* RMCalendarModel.m */; };
+		32621281214CE13E000C1A6C /* RMCalendarMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126A214CE13E000C1A6C /* RMCalendarMonthHeaderView.m */; };
+		32621282214CE13E000C1A6C /* RMCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126B214CE13E000C1A6C /* RMCollectionCell.m */; };
+		32621283214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126C214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m */; };
 		328225D8214CB42700E247C3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328225D6214CB42700E247C3 /* ImageHelper.swift */; };
 		328225D9214CB42700E247C3 /* ImageVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328225D7214CB42700E247C3 /* ImageVIewExtension.swift */; };
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
@@ -51,7 +72,6 @@
 		4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */; };
 		4505982620FC8CB900504B6E /* SX_OverseaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982520FC8CB900504B6E /* SX_OverseaCell.swift */; };
 		4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982720FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift */; };
-		45215E762111816500AED771 /* SX_ProjectDetailMoreDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45215E752111816500AED771 /* SX_ProjectDetailMoreDateController.swift */; };
 		4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F872211A8970000EAEB9 /* SX_ApplyDetailController.swift */; };
 		4527F875211A8A95000EAEB9 /* SX_ApplyProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */; };
 		4527F8FA211BE532000EAEB9 /* SX_PersonalIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527F8F9211BE532000EAEB9 /* SX_PersonalIconCell.swift */; };
@@ -165,6 +185,36 @@
 		32484852214129AD00B6049E /* SX_AddressPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_AddressPickerView.swift; sourceTree = "<group>"; };
 		32484854214218CA00B6049E /* SX_ApplyAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyAddressCell.swift; sourceTree = "<group>"; };
 		324848562142197C00B6049E /* SX_ApplyMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyMessageCell.swift; sourceTree = "<group>"; };
+		3262124C214CE13E000C1A6C /* NSDate+RMCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RMCalendarLogic.h"; sourceTree = "<group>"; };
+		3262124D214CE13E000C1A6C /* UIView+CustomFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CustomFrame.h"; sourceTree = "<group>"; };
+		3262124E214CE13E000C1A6C /* UIView+CustomFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CustomFrame.m"; sourceTree = "<group>"; };
+		3262124F214CE13E000C1A6C /* NSDate+RMCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RMCalendarLogic.m"; sourceTree = "<group>"; };
+		32621251214CE13E000C1A6C /* CalendarPreviousMonth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarPreviousMonth@2x.png"; sourceTree = "<group>"; };
+		32621252214CE13E000C1A6C /* CalendarSelectedDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarSelectedDate@2x.png"; sourceTree = "<group>"; };
+		32621253214CE13E000C1A6C /* CalendarSelectedDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarSelectedDate.png; sourceTree = "<group>"; };
+		32621254214CE13E000C1A6C /* CalendarTodaysDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTodaysDate@2x.png"; sourceTree = "<group>"; };
+		32621255214CE13E000C1A6C /* CalendarRow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRow@2x.png"; sourceTree = "<group>"; };
+		32621256214CE13E000C1A6C /* CalendarPreviousMonth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarPreviousMonth.png; sourceTree = "<group>"; };
+		32621257214CE13E000C1A6C /* CalendarRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarRow.png; sourceTree = "<group>"; };
+		32621258214CE13E000C1A6C /* CalendarNormalDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarNormalDate.png; sourceTree = "<group>"; };
+		32621259214CE13E000C1A6C /* CalendarRowBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarRowBottom.png; sourceTree = "<group>"; };
+		3262125A214CE13E000C1A6C /* CalendarDisableDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarDisableDate.png; sourceTree = "<group>"; };
+		3262125B214CE13E000C1A6C /* CalendarRowBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRowBottom@2x.png"; sourceTree = "<group>"; };
+		3262125C214CE13E000C1A6C /* CalendarTodaysDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTodaysDate.png; sourceTree = "<group>"; };
+		3262125E214CE13E000C1A6C /* RMCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarLogic.h; sourceTree = "<group>"; };
+		3262125F214CE13E000C1A6C /* RMCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarLogic.m; sourceTree = "<group>"; };
+		32621261214CE13E000C1A6C /* RMCalendarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarController.h; sourceTree = "<group>"; };
+		32621262214CE13E000C1A6C /* RMCalendarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarController.m; sourceTree = "<group>"; };
+		32621264214CE13E000C1A6C /* TicketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketModel.h; sourceTree = "<group>"; };
+		32621265214CE13E000C1A6C /* RMCalendarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarModel.h; sourceTree = "<group>"; };
+		32621266214CE13E000C1A6C /* TicketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketModel.m; sourceTree = "<group>"; };
+		32621267214CE13E000C1A6C /* RMCalendarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarModel.m; sourceTree = "<group>"; };
+		32621269214CE13E000C1A6C /* RMCalendarCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarCollectionViewLayout.h; sourceTree = "<group>"; };
+		3262126A214CE13E000C1A6C /* RMCalendarMonthHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarMonthHeaderView.m; sourceTree = "<group>"; };
+		3262126B214CE13E000C1A6C /* RMCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCollectionCell.m; sourceTree = "<group>"; };
+		3262126C214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
+		3262126D214CE13E000C1A6C /* RMCalendarMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarMonthHeaderView.h; sourceTree = "<group>"; };
+		3262126E214CE13E000C1A6C /* RMCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCollectionCell.h; sourceTree = "<group>"; };
 		328225D6214CB42700E247C3 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		328225D7214CB42700E247C3 /* ImageVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVIewExtension.swift; sourceTree = "<group>"; };
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
@@ -179,7 +229,6 @@
 		4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BasePopSelectedView.swift; sourceTree = "<group>"; };
 		4505982520FC8CB900504B6E /* SX_OverseaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaCell.swift; sourceTree = "<group>"; };
 		4505982720FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingCollectionViewCell.swift; sourceTree = "<group>"; };
-		45215E752111816500AED771 /* SX_ProjectDetailMoreDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailMoreDateController.swift; sourceTree = "<group>"; };
 		4527F872211A8970000EAEB9 /* SX_ApplyDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyDetailController.swift; sourceTree = "<group>"; };
 		4527F874211A8A95000EAEB9 /* SX_ApplyProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyProgressCell.swift; sourceTree = "<group>"; };
 		4527F8F9211BE532000EAEB9 /* SX_PersonalIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PersonalIconCell.swift; sourceTree = "<group>"; };
@@ -363,6 +412,99 @@
 			path = SX_Picker;
 			sourceTree = "<group>";
 		};
+		32621249214CE12E000C1A6C /* SX_Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				3262124A214CE13E000C1A6C /* Class */,
+			);
+			path = SX_Calendar;
+			sourceTree = "<group>";
+		};
+		3262124A214CE13E000C1A6C /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				3262124B214CE13E000C1A6C /* Category */,
+				32621250214CE13E000C1A6C /* Other */,
+				3262125D214CE13E000C1A6C /* Logic */,
+				32621260214CE13E000C1A6C /* Controller */,
+				32621263214CE13E000C1A6C /* Model */,
+				32621268214CE13E000C1A6C /* View */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		3262124B214CE13E000C1A6C /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				3262124C214CE13E000C1A6C /* NSDate+RMCalendarLogic.h */,
+				3262124D214CE13E000C1A6C /* UIView+CustomFrame.h */,
+				3262124E214CE13E000C1A6C /* UIView+CustomFrame.m */,
+				3262124F214CE13E000C1A6C /* NSDate+RMCalendarLogic.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		32621250214CE13E000C1A6C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				32621251214CE13E000C1A6C /* CalendarPreviousMonth@2x.png */,
+				32621252214CE13E000C1A6C /* CalendarSelectedDate@2x.png */,
+				32621253214CE13E000C1A6C /* CalendarSelectedDate.png */,
+				32621254214CE13E000C1A6C /* CalendarTodaysDate@2x.png */,
+				32621255214CE13E000C1A6C /* CalendarRow@2x.png */,
+				32621256214CE13E000C1A6C /* CalendarPreviousMonth.png */,
+				32621257214CE13E000C1A6C /* CalendarRow.png */,
+				32621258214CE13E000C1A6C /* CalendarNormalDate.png */,
+				32621259214CE13E000C1A6C /* CalendarRowBottom.png */,
+				3262125A214CE13E000C1A6C /* CalendarDisableDate.png */,
+				3262125B214CE13E000C1A6C /* CalendarRowBottom@2x.png */,
+				3262125C214CE13E000C1A6C /* CalendarTodaysDate.png */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		3262125D214CE13E000C1A6C /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				3262125E214CE13E000C1A6C /* RMCalendarLogic.h */,
+				3262125F214CE13E000C1A6C /* RMCalendarLogic.m */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		32621260214CE13E000C1A6C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				32621261214CE13E000C1A6C /* RMCalendarController.h */,
+				32621262214CE13E000C1A6C /* RMCalendarController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		32621263214CE13E000C1A6C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				32621264214CE13E000C1A6C /* TicketModel.h */,
+				32621265214CE13E000C1A6C /* RMCalendarModel.h */,
+				32621266214CE13E000C1A6C /* TicketModel.m */,
+				32621267214CE13E000C1A6C /* RMCalendarModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		32621268214CE13E000C1A6C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				32621269214CE13E000C1A6C /* RMCalendarCollectionViewLayout.h */,
+				3262126A214CE13E000C1A6C /* RMCalendarMonthHeaderView.m */,
+				3262126B214CE13E000C1A6C /* RMCollectionCell.m */,
+				3262126C214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m */,
+				3262126D214CE13E000C1A6C /* RMCalendarMonthHeaderView.h */,
+				3262126E214CE13E000C1A6C /* RMCollectionCell.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		32E49D1A21369D6C005633F2 /* SX_MyCollection */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,7 +553,6 @@
 			children = (
 				45CF168920EF112600188F42 /* SX_TrainingProjectController.swift */,
 				458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */,
-				45215E752111816500AED771 /* SX_ProjectDetailMoreDateController.swift */,
 			);
 			path = SX_TrainingProject;
 			sourceTree = "<group>";
@@ -563,6 +704,7 @@
 		45556B5820D89D290035FCA6 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				32621249214CE12E000C1A6C /* SX_Calendar */,
 				324482E2214A348E00037533 /* SX_AlertView */,
 				3248484521411AA400B6049E /* SX_Picker */,
 				323E99AB213CCDBC006038F5 /* SX_PageTitleView */,
@@ -863,8 +1005,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3262127B214CE13E000C1A6C /* CalendarRowBottom@2x.png in Resources */,
+				32621276214CE13E000C1A6C /* CalendarPreviousMonth.png in Resources */,
+				32621273214CE13E000C1A6C /* CalendarSelectedDate.png in Resources */,
+				3262127A214CE13E000C1A6C /* CalendarDisableDate.png in Resources */,
+				32621275214CE13E000C1A6C /* CalendarRow@2x.png in Resources */,
 				45556B3320D89C600035FCA6 /* LaunchScreen.storyboard in Resources */,
 				45556B3020D89C600035FCA6 /* Assets.xcassets in Resources */,
+				32621271214CE13E000C1A6C /* CalendarPreviousMonth@2x.png in Resources */,
+				32621274214CE13E000C1A6C /* CalendarTodaysDate@2x.png in Resources */,
+				32621279214CE13E000C1A6C /* CalendarRowBottom.png in Resources */,
+				32621272214CE13E000C1A6C /* CalendarSelectedDate@2x.png in Resources */,
+				32621278214CE13E000C1A6C /* CalendarNormalDate.png in Resources */,
+				3262127C214CE13E000C1A6C /* CalendarTodaysDate.png in Resources */,
+				32621277214CE13E000C1A6C /* CalendarRow.png in Resources */,
 				32484851214124BB00B6049E /* area.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1063,10 +1217,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				45556B6720D8A1180035FCA6 /* SX_HomeVC.swift in Sources */,
+				3262126F214CE13E000C1A6C /* UIView+CustomFrame.m in Sources */,
 				323E99A621392618006038F5 /* SX_GuidePageView.swift in Sources */,
 				324848572142197C00B6049E /* SX_ApplyMessageCell.swift in Sources */,
 				45E573BD212A61FE007A4DCD /* SX_OrderDetailsController.swift in Sources */,
 				323E99AA21392819006038F5 /* SX_GuidePageControl.swift in Sources */,
+				32621280214CE13E000C1A6C /* RMCalendarModel.m in Sources */,
 				324482E1214A050C00037533 /* SX_RegisterContrller.swift in Sources */,
 				32E49D2221378FAD005633F2 /* SX_PaymentCell.swift in Sources */,
 				32E49D1E21369DC1005633F2 /* SX_PayTrainingProjectController.swift in Sources */,
@@ -1089,13 +1245,13 @@
 				323E99A421392585006038F5 /* SX_GifImageOperation.swift in Sources */,
 				45556B5F20D89FE00035FCA6 /* SX_NavigationController.swift in Sources */,
 				323E99AD213CCDEB006038F5 /* SX_PageTitleView.swift in Sources */,
-				45215E762111816500AED771 /* SX_ProjectDetailMoreDateController.swift in Sources */,
 				45454BE1211989EC002B9EBC /* SX_VocationalTrainingCell.swift in Sources */,
 				323E99BE213FA6E6006038F5 /* SX_ApplyEmpListController.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
 				45B8E4E6212FE9D4002061D5 /* SX_PaymentRecordController.swift in Sources */,
 				458A00262106FBC600D38014 /* SX_UsInOverseaCell.swift in Sources */,
+				3262127E214CE13E000C1A6C /* RMCalendarController.m in Sources */,
 				32E49D1C21369DB0005633F2 /* SX_PayEmploymentJobsController.swift in Sources */,
 				4527F91121226B29000EAEB9 /* SX_ApplyProgressDetailController.swift in Sources */,
 				4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */,
@@ -1106,6 +1262,7 @@
 				3248484D21411FCB00B6049E /* SX_AddressPickViewCell.swift in Sources */,
 				323E99B3213D15E2006038F5 /* SX_CollextionEmploymentJobsController.swift in Sources */,
 				322FC804214613BA005347E8 /* SX_HotJobDetailController.swift in Sources */,
+				32621270214CE13E000C1A6C /* NSDate+RMCalendarLogic.m in Sources */,
 				45E573C0212A7094007A4DCD /* SX_OrderPayInfoCell.swift in Sources */,
 				3248484921411F5800B6049E /* SX_AddressViewController.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
@@ -1117,6 +1274,7 @@
 				328225D9214CB42700E247C3 /* ImageVIewExtension.swift in Sources */,
 				322FC80221461059005347E8 /* SX_MoreHotJobController.swift in Sources */,
 				45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */,
+				32621281214CE13E000C1A6C /* RMCalendarMonthHeaderView.m in Sources */,
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
 				323E99B7213D1635006038F5 /* SX_CollectionVocationalTrainingController.swift in Sources */,
 				458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */,
@@ -1142,9 +1300,11 @@
 				45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */,
 				458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */,
 				4527F902211D5D97000EAEB9 /* SX_HeadPortraitCell.swift in Sources */,
+				3262127D214CE13E000C1A6C /* RMCalendarLogic.m in Sources */,
 				324482DE214923F900037533 /* SX_PersonalHeadPortraitCell.swift in Sources */,
 				45556B5D20D89DAD0035FCA6 /* SX_TabBarController.swift in Sources */,
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
+				32621283214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m in Sources */,
 				458A002E21086A7300D38014 /* SX_BaseSuccessController.swift in Sources */,
 				4527F8FC211BE93D000EAEB9 /* SX_PersonalMessageCell.swift in Sources */,
 				324482E4214A34F300037533 /* SX_ProgressHUD.swift in Sources */,
@@ -1153,12 +1313,14 @@
 				32E49D2021369DDC005633F2 /* SX_PayVocationalTrainingController.swift in Sources */,
 				32484853214129AD00B6049E /* SX_AddressPickerView.swift in Sources */,
 				45CF168C20EF11BC00188F42 /* SX_OverseaController.swift in Sources */,
+				32621282214CE13E000C1A6C /* RMCollectionCell.m in Sources */,
 				45440F0020E0C4E700058978 /* SX_CycleCell.swift in Sources */,
 				4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */,
 				4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */,
 				4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */,
 				45E573C2212A70AC007A4DCD /* SX_OrderInfoCell.swift in Sources */,
 				45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */,
+				3262127F214CE13E000C1A6C /* TicketModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

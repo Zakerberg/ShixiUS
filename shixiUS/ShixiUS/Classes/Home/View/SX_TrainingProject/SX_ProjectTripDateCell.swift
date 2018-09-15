@@ -104,7 +104,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 make.top.equalTo(title.snp.bottom).offset(Margin)
                 make.left.equalTo(title)
                 make.height.equalTo(65.FloatValue.IPAD_XValue)
-                make.right.equalToSuperview().offset(-50.FloatValue.IPAD_XValue)
+                make.right.equalToSuperview().offset(-65.FloatValue.IPAD_XValue)
             }).config { (DATES) in
                 DATES.showsVerticalScrollIndicator = false
                 DATES.showsHorizontalScrollIndicator = false
@@ -132,16 +132,18 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 }
             }
             
+            /// 更多日期Btn
             self.moreDate = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
                 make.height.centerY.equalTo(self.dateBtn!)
                 make.right.equalToSuperview().offset(-Margin)
                 make.width.equalTo(50.FloatValue.IPAD_XValue)
             }).config({ (MORE) in
-                
-                
-                
-                
-                
+                MORE.setImage(#imageLiteral(resourceName: "arrow"), for: .normal)
+                MORE.setTitle("更多", for: .normal)
+                MORE.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+                MORE.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
+                MORE.titleEdgeInsets = UIEdgeInsetsMake(0, -MORE.imageView!.bounds.size.width, 0, MORE.imageView!.bounds.size.width)
+                MORE.imageEdgeInsets = UIEdgeInsetsMake(0, MORE.titleLabel!.bounds.size.width, 0, -MORE.titleLabel!.bounds.size.width)
             })
         }
     }

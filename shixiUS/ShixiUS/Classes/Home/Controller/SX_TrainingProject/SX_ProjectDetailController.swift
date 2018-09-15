@@ -203,13 +203,20 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             cell.tripArr      = self.tripTitleArr
             cell.dateArr      = self.Arr
             
-            
             cell.dateTArr     = self.dateTArr
             cell.priceTArr    = self.priceTArr
             // MARK: - 接口 --------
             
 //            cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
 //            cell.dateBtn?.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
+            
+            cell.moreDate?.rx.tap.subscribe(onNext: { (_) in
+                SXLog(" +++ + ")
+                let vc = SX_MoreDateController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
             
             return cell
         }
