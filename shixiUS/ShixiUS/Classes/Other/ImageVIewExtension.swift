@@ -24,8 +24,8 @@ public extension UIImageView {
      
      - Returns A new image
      */
-    func imageFromURL(_ url: String, placeholder: UIImage, fadeIn: Bool = true, shouldCacheImage: Bool = true, closure: ((_ image: UIImage?) -> ())? = nil)
-    {
+    func imageFromURL(_ url: String, placeholder: UIImage, fadeIn: Bool = true, shouldCacheImage: Bool = true, closure: ((_ image: UIImage?) -> ())? = nil) {
+        
         self.image = UIImage.image(fromURL: url, placeholder: placeholder, shouldCacheImage: shouldCacheImage) {
             (image: UIImage?) in
             if image == nil {
@@ -42,7 +42,5 @@ public extension UIImageView {
             closure?(image)
         }
     }
-    
-    
 }
- 
+

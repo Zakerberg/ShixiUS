@@ -73,13 +73,13 @@ class SX_HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchData()
+        fetchADData()
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
+        fetchADData()
         setUI()
         
     }
@@ -109,8 +109,7 @@ extension SX_HomeVC {
         
     }
     
-    
-    func fetchData() {
+    func fetchADData() {
         SX_NetManager.requestData(type: .GET, URlString: SX_HomeAD, parameters:  nil, finishCallBack: { (result) in
             do{
                 /// SwiftyJSON 在这里 ! ! !
@@ -135,6 +134,14 @@ extension SX_HomeVC {
                 }
             } catch{ }
         })
+    }
+    
+    /// 首页数据
+    func fetchHomeData() {
+        
+        
+        
+        
     }
 }
 
@@ -287,17 +294,17 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                     make.left.equalToSuperview().offset(index*Int(SCREEN_WIDTH/3)+30)
                     make.height.lessThanOrEqualTo(100)
                     make.width.lessThanOrEqualTo(70)
-                }).config({ (homeButton) in
-                    homeButton.setTitleColor(UIColor.black, for: .normal)
-                    homeButton.setTitle(namesArr[i], for: .normal)
-                    homeButton.titleLabel?.sizeToFit()
-                    homeButton.titleEdgeInsets = UIEdgeInsets(top: homeButton.imageView!.frame.size.height+70, left: -homeButton.imageView!.frame.size.width-60, bottom: 0, right: 0)
-                    homeButton.contentHorizontalAlignment = .center
-                    homeButton.titleLabel?.textAlignment = NSTextAlignment(rawValue: 1)!
-                    homeButton.adjustsImageWhenDisabled = false
-                    homeButton.setImage(UIImage(named: imagesArr[i]), for: .normal)
-                    homeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-                    homeButton.rx.tap.subscribe(onNext: { (_) in
+                }).config({ (HOMEBTN) in
+                    HOMEBTN.setTitleColor(UIColor.black, for: .normal)
+                    HOMEBTN.setTitle(namesArr[i], for: .normal)
+                    HOMEBTN.titleLabel?.sizeToFit()
+                    HOMEBTN.titleEdgeInsets = UIEdgeInsets(top: HOMEBTN.imageView!.frame.size.height+70, left: -HOMEBTN.imageView!.frame.size.width-60, bottom: 0, right: 0)
+                    HOMEBTN.contentHorizontalAlignment = .center
+                    HOMEBTN.titleLabel?.textAlignment = NSTextAlignment(rawValue: 1)!
+                    HOMEBTN.adjustsImageWhenDisabled = false
+                    HOMEBTN.setImage(UIImage(named: imagesArr[i]), for: .normal)
+                    HOMEBTN.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+                    HOMEBTN.rx.tap.subscribe(onNext: { (_) in
                         SXLog("首页按钮的点击\(i)")
                         if i == 0 {
                             SXLog("进入实训项目\(i)")
@@ -334,25 +341,25 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             let hotTitle = UILabel().addhere(toSuperView: hotJobHeaderView).layout { (make) in
                 make.top.left.equalTo(hotJobHeaderView).offset(Margin)
                 make.height.lessThanOrEqualTo(Margin)
-                }.config { (hotTitle) in
-                    hotTitle.sizeToFit()
-                    hotTitle.text = "热门岗位--测试"
-                    hotTitle.font = UIFont.systemFont(ofSize: 15)
-                    hotTitle.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+                }.config { (HOTTITLE) in
+                    HOTTITLE.sizeToFit()
+                    HOTTITLE.text = "热门岗位--测试"
+                    HOTTITLE.font = UIFont.systemFont(ofSize: 15)
+                    HOTTITLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             }
             
             let _ = UIButton().addhere(toSuperView: hotJobHeaderView).layout { (make) in
                 make.top.equalTo(hotTitle.snp.top)
                 make.height.centerY.equalTo(hotTitle)
                 make.right.equalToSuperview().offset(-Margin)
-                }.config { (moreButton) in
-                    moreButton.setImage(UIImage.init(named: "more"), for: .normal)
-                    moreButton.setTitle("更多", for: .normal)
-                    moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-                    moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
-                    moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
-                    moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
-                    moreButton.rx.tap.subscribe(onNext: { (_) in
+                }.config { (MORE) in
+                    MORE.setImage(UIImage.init(named: "more"), for: .normal)
+                    MORE.setTitle("更多", for: .normal)
+                    MORE.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+                    MORE.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
+                    MORE.titleEdgeInsets = UIEdgeInsetsMake(0, -MORE.imageView!.bounds.size.width, 0, MORE.imageView!.bounds.size.width)
+                    MORE.imageEdgeInsets = UIEdgeInsetsMake(0, MORE.titleLabel!.bounds.size.width, 0, -MORE.titleLabel!.bounds.size.width)
+                    MORE.rx.tap.subscribe(onNext: { (_) in
                         SXLog("进入更多界面")
                         let vc = SX_MoreHotJobController()
                         self.navigationController?.pushViewController(vc, animated: true)
