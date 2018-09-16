@@ -71,12 +71,11 @@ class SX_HomeVC: UIViewController {
         return cycleView
     }()
     
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(animated)
-    //        fetchData()
-    //
-    //
-    //    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
