@@ -21,7 +21,6 @@ pod 'Kingfisher'
 pod 'IQKeyboardManagerSwift'
 pod 'ESPullToRefresh'
 pod 'MJExtension'
-pod 'YYKit'
 pod 'MBProgressHUD'
 
   

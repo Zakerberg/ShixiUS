@@ -18,6 +18,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SwiftyJSON
+import Kingfisher
 
 private let identifier:String = "hotJobsCell"
 private let shixiTrainingCellID = "shixiTrainingCellID"
@@ -30,7 +31,7 @@ struct InterShipPreview {
 }
 
 class SX_HomeVC: UIViewController {
- 
+    
     /// ad
     var adImages = [String]()
     var adURLs   = [String]()
@@ -63,21 +64,25 @@ class SX_HomeVC: UIViewController {
     /// 轮播
     lazy var cycleScrollerView: SX_CycleScrollerView = {
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
-        let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: nil, descs: nil)
+        let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: self.adImages, descs: self.adTitles)
+        cycleView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
         
         cycleView.delegate = self
         return cycleView
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-       super.viewWillAppear(animated)
-        fetchData()
-    }
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //        fetchData()
+    //
+    //
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
         setUI()
-//        fetchData()
+        
     }
     
     deinit {
@@ -92,25 +97,6 @@ class SX_HomeVC: UIViewController {
 extension SX_HomeVC {
     func setUI() {
         view.backgroundColor = UIColor.white
-        /**** ======================================================================================================
-         let NetImgArr = Array<Any>()
-         let descLabelArr = Array<Any>()
-         cycleScrollerView.serverImgArray = NetImgArr as? [String]
-         cycleScrollerView.descTextArray  = descLabelArr as? [String]
-         ====================================================================================================== *****/
-        
-//        let localImgs = ["localImg6","localImg7","localImg8","localImg9","localImg10"]
-//        let descLabels = ["韩国防部回应停止部署萨德:遵照最高统帅指导方针",
-//                          "勒索病毒攻击再次爆发 国内校园网大面积感染",
-//                          "Win10秋季更新重磅功能：跟安卓与iOS无缝连接",
-//                          "《琅琊榜2》为何没有胡歌？胡歌：我看过剧本，离开是种保护",
-//                          "阿米尔汗在印度的影响力，我国的哪位影视明星能与之齐名呢？"]
-        
-        cycleScrollerView.serverImgArray = self.adImages
-        cycleScrollerView.descTextArray = self.adTitles
-        cycleScrollerView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
-        homeTableView.addSubview(cycleScrollerView)
-        view.addSubview(homeTableView)
         
         // 设置导航栏颜色
         navBarBarTintColor = UIColor.SX_MainColor()
@@ -118,7 +104,12 @@ extension SX_HomeVC {
         navBarBackgroundAlpha = 0
         // 设置导航栏按钮和标题颜色
         navBarTintColor = .white
+        
+        view.addSubview(homeTableView)
+        homeTableView.addSubview(self.cycleScrollerView)
+        
     }
+    
     
     func fetchData() {
         SX_NetManager.requestData(type: .GET, URlString: SX_HomeAD, parameters:  nil, finishCallBack: { (result) in
@@ -127,15 +118,15 @@ extension SX_HomeVC {
                 let json = try JSON(data: result)
                 if json["status"] == 200 {
                     for (_, subJSON) : (String, JSON) in json["data"] {
-//                       self.adIDs.append(subJSON["id"].int!)
                         
-                        
-                        /// YY 转模型
-                        
-                        
+                        self.adImages.append(subJSON["image"].string!)
                         self.adTitles.append(subJSON["title"].string!)
                     }
-
+                    
+                    self.cycleScrollerView.serverImgArray = self.adImages
+                    self.cycleScrollerView.descTextArray = self.adTitles
+                    self.cycleScrollerView.reloadData()
+                    
                 } else if json["status"] == 202 {
                     /// 错误状态
                     SXLog("错误状态! ")
