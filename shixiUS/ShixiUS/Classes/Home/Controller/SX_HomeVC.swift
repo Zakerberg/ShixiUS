@@ -123,17 +123,14 @@ extension SX_HomeVC {
     func fetchData() {
         SX_NetManager.requestData(type: .GET, URlString: SX_HomeAD, parameters:  nil, finishCallBack: { (result) in
             do{
-                /// SwiftyJSON 在这里 !
+                /// SwiftyJSON 在这里 ! ! !
                 let json = try JSON(data: result)
                 if json["status"] == 200 {
                     for (_, subJSON) : (String, JSON) in json["data"] {
 //                       self.adIDs.append(subJSON["id"].int!)
-
                         
                         
                         /// YY 转模型
- 
-                        
                         
                         
                         self.adTitles.append(subJSON["title"].string!)
