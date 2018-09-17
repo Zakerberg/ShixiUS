@@ -13,6 +13,7 @@
  */
 
 import UIKit
+import SwiftyJSON
 
 private let ArrowTag = 3000
 private let ControlTag = 1000
@@ -25,9 +26,9 @@ class SX_TrainingProjectController: UIViewController {
     var loadingView: SX_LoadingView?
     var collectionView: UICollectionView?
     
-// ==============================================================================================
-//  MARK: - lazy
-// ==============================================================================================
+    // ==============================================================================================
+    //  MARK: - lazy
+    // ==============================================================================================
     // 综合排序View
     lazy var comprehensiveView: UIView = {
         let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
@@ -81,49 +82,14 @@ class SX_TrainingProjectController: UIViewController {
     }
 }
 
-// =============================================================================================================================
-// MARK: - UICollectionViewDelegateFlowLayout
-// =============================================================================================================================
-extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
-        
-        cell.layer.shadowColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
-        cell.layer.masksToBounds = true
-        cell.layer.cornerRadius = 5
-        cell.backgroundColor = UIColor.white
-        
-        cell.sourceImageView?.image = UIImage.init(named: "localImg3")
-        cell.priceLabel?.text = "￥" + "2998.00"
-        cell.sourceName?.text = "课程名称课程名称测试"
-        cell.certificateLabel?.text = "职业技术证书"
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
-    }
-}
-
-// =============================================================================================================================
+// =======================================================================================
 // MARK: - Other Method
-// =============================================================================================================================
+// =======================================================================================
 extension SX_TrainingProjectController {
     
     func setUI() {
-        self.title = "实训项目"
-        self.view.backgroundColor = UIColor.white
+        title = "实训项目"
+        view.backgroundColor = UIColor.white
         self.trainingView.isHidden = true
         self.comprehensiveView.isHidden = true
         self.countryView.isHidden = true
@@ -211,13 +177,66 @@ extension SX_TrainingProjectController {
     }
 }
 
+// =================================================================================
+// MARK: - UICollectionViewDelegateFlowLayout
+// =================================================================================
+extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
+        
+        cell.layer.shadowColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 5
+        cell.backgroundColor = UIColor.white
+        
+        cell.sourceImageView?.image = UIImage.init(named: "localImg3")
+        cell.priceLabel?.text = "￥" + "2998.00"
+        cell.sourceName?.text = "课程名称课程名称测试"
+        cell.certificateLabel?.text = "职业技术证书"
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
+    }
+}
+
 // ==============================================================================================
 // MARK: - Other Method 2 响应
 // ==============================================================================================
 extension SX_TrainingProjectController {
-    
     func fetchData()  {
         
+        SX_NetManager.requestData(type: .GET, URlString: SX_TrainingList, parameters: nil) { (result) in
+            
+            do{
+                let json = try JSON(data: result)
+                if json["status"] == 200 {
+                    /// 成功
+                    SXLog("成功! ")
+                    self.dismiss(animated: true, completion: nil)
+                } else if json["status"] == 202 {
+                    /// 错误状态
+                    SXLog("状态! ")
+                } else if json["status"] == 203 {
+                    /// 超时, 重新登录
+                    SXLog("超时, 重新登录! ")
+                }
+            } catch{ }
+            
+            
+        }
         
     }
     
@@ -385,3 +404,10 @@ extension SX_TrainingProjectController {
     }
 }
 
+extension SX_TrainingProjectController {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        hideViewWithAnimation(view: self.comprehensiveView)
+        hideViewWithAnimation(view: self.trainingView)
+        hideViewWithAnimation(view: self.countryView)
+    }
+}

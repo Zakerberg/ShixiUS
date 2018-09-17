@@ -59,7 +59,6 @@ class SX_AddressPickerPresentAnimated: NSObject,UIViewControllerAnimatedTransiti
             }
             
         case .dismiss:
-            
             let toVC : SX_AddressViewController = transitionContext.viewController(forKey: .from) as! SX_AddressViewController
     
             UIView.animate(withDuration: 0.25, animations: {

@@ -9,18 +9,10 @@
 import UIKit
 
 class SX_LoadingView: UIView {
-
-    typealias LoadingFailedClosure = ((_ button: UIButton) -> ())
-
-    //    /// 请求成功Closure
-    //    typealias HttpRequestSuccessClosure = ((_ responseData: Any) -> ())?
-    //    /// 请求失败的Closure
-    //    typealias HttpRequestFailClosure    = ((_ Error: NSError) -> ())?
-    //    /// 请求响应Closure
-    //    typealias HttpRequestClosure        = ((_ dataObj: Any, _ error: NSError) -> ())?
-    //    /// 监听进度响应Closure
-    //    typealias HttpProgressClosure       = ((_ progress: Progress) -> ())?
-
+    
+    typealias LoadingFailClosure = ((_ btn: UIButton)->())
+    
+    var loadingFailedBClosure: LoadingFailClosure?
     var indicatorView: UIImageView?
     var failIndicatorLabel: UILabel?
     var failView: UIImageView?
@@ -37,23 +29,23 @@ class SX_LoadingView: UIView {
     }
 }
 
-// ==================================================================================================================================
+// =======================================================================================
 //  Other Method
-// ==================================================================================================================================
+// ========================================================================================
 extension SX_LoadingView  {
     
     func setUI() {
         self.backgroundColor = UIColor.colorWithHexString(hex: "f3f4f8", alpha: 1)
         self.indicatorView = UIImageView(frame: CGRect(x: SCREEN_WIDTH/2-418/4, y: SCREEN_HEIGHT/2-106/4-50, width: 418/2, height: 106/2))
         self.addSubview(self.indicatorView!)
-    
+        
         let imageArr = NSMutableArray()
         for index in 0...55 {
             let image = UIImage.init(named: "loadingView-\(index)")
-            imageArr.add(image)
+            imageArr.add(image!)
         }
         
-        self.indicatorView?.animationImages = imageArr as! [UIImage]
+        self.indicatorView?.animationImages = imageArr as? [UIImage]
         self.indicatorView?.animationDuration = 0.3 * Double(imageArr.count)
         self.indicatorView?.animationRepeatCount = 0
         indicatorView?.startAnimating()
@@ -75,7 +67,6 @@ extension SX_LoadingView  {
             failLabel.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
         })
         
-        
         self.reloadButton = UIButton(type: .custom).addhere(toSuperView: self).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.failLabel!.snp.bottom).offset(23)
             make.centerX.equalToSuperview()
@@ -86,7 +77,7 @@ extension SX_LoadingView  {
             reloadButton.layer.borderWidth = 0.5
             reloadButton.layer.cornerRadius = 3
             reloadButton.layer.borderColor = UIColor.colorWithHexString(hex: "999999", alpha: 1).cgColor
-
+            
             reloadButton.alpha = 0
             reloadButton.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
             reloadButton.addTarget(self, action: #selector(reloadButtonClick), for: .touchUpInside)
@@ -96,7 +87,7 @@ extension SX_LoadingView  {
     /// hideLoadingView
     func hideLoadingView() {
         UIView.animate(withDuration: 0.1, animations: {
-        self.alpha = 0
+            self.alpha = 0
         }) { (finished) in
             self.removeFromSuperview()
         }
@@ -112,7 +103,13 @@ extension SX_LoadingView  {
     
     ///
     @objc func reloadButtonClick(btn: UIButton) {
-      
+        if self.loadingFailedBClosure != nil {
+            self.loadingFailedBClosure!(btn)
+        }
         
+        self.indicatorView?.startAnimating()
+        self.failView?.alpha = 0
+        self.failLabel?.alpha = 0
+        self.reloadButton?.alpha = 0
     }
 }

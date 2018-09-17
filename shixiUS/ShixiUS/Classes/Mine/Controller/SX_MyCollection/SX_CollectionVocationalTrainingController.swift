@@ -51,7 +51,6 @@ extension SX_CollectionVocationalTrainingController {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
     }
-    
 }
 
 // ===============================================================================

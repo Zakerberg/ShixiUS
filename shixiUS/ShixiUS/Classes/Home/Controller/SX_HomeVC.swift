@@ -72,17 +72,10 @@ class SX_HomeVC: UIViewController {
         return cycleView
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchADData()
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchADData()
         setUI()
-        
     }
     
     deinit {
@@ -141,21 +134,12 @@ extension SX_HomeVC {
     func fetchHomeData() {
         SX_NetManager.requestData(type: .POST, URlString: SX_Home, parameters:  nil, finishCallBack: { (result) in
             do{
-                /// SwiftyJSON 在这里 ! ! !
+                
                 let json = try JSON(data: result)
                 if json["status"] == 200 {
                     SXLog("成功")
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+          
                     
                     
                 } else if json["status"] == 202 {
@@ -242,9 +226,9 @@ extension SX_HomeVC {
     }
 }
 
-// ======================================================================================================
+// =======================================================================================
 // MARK: - UITableViewDelegate
-// =======================================================================================================
+// =======================================================================================
 extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
