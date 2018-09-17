@@ -45,9 +45,9 @@ class SX_MinePersonalController: UIViewController {
     }
 }
 
-// ======================================================================================================================
+// =============================================================================================
 // MARK: - Other method
-// =======================================================================================================================
+// ============================================================================================
 extension SX_MinePersonalController {
     
     func setUI() {
@@ -65,9 +65,9 @@ extension SX_MinePersonalController {
     }
 }
 
-// ===================================================================================================================
+// =============================================================================================
 // MARK: - UITableViewDelegate
-// =====================================================================================================================
+// =============================================================================================
 extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -138,9 +138,9 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-// ======================================================================================================================
+// =============================================================================================
 // MARK: - UITextFieldDelegate
-// ===================================================================================================================
+// =============================================================================================
 extension SX_MinePersonalController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -157,10 +157,9 @@ extension SX_MinePersonalController: UITextFieldDelegate {
     }
 }
 
-
-// =====================================================================================================================
+// =============================================================================================
 // MARK: - UIGestureRecognizerDelegate
-// ====================================================================================================================
+// =============================================================================================
 extension SX_MinePersonalController: UIGestureRecognizerDelegate {
     
     @objc func selfInfoTapClick() {
@@ -169,9 +168,9 @@ extension SX_MinePersonalController: UIGestureRecognizerDelegate {
     }
 }
 
-// ====================================================================================================================
+// =============================================================================================
 // MARK: - UINavigationControllerDelegate
-// ====================================================================================================================
+// =============================================================================================
 extension SX_MinePersonalController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     
@@ -184,17 +183,19 @@ extension SX_MinePersonalController: UINavigationControllerDelegate, UIImagePick
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        let newPhoto = info.index(forKey: "UIImagePickerControllerEditedImage")
         
-        //      self.headPortrait = newPhoto
-        self.dismiss(animated: true, completion: nil)
+        
+        
+        
+        
+        
         
     }
 }
 
-// ======================================================================================================================
+// =============================================================================================
 // MARK: - UIActionSheetDelegate
-// ======================================================================================================================
+// =============================================================================================
 extension SX_MinePersonalController: UIAlertViewDelegate {
     
     @objc func alterHeadPortrait() {

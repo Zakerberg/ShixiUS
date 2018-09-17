@@ -42,9 +42,9 @@ class SX_CollextionEmploymentJobsController: UIViewController {
     }
 }
 
-// ===================================================================================================================
+// ===========================================================================
 // MARK: - Other Method
-// ===================================================================================================================
+// ===========================================================================
 extension SX_CollextionEmploymentJobsController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
@@ -52,9 +52,9 @@ extension SX_CollextionEmploymentJobsController {
     }
 }
 
-// ===================================================================================================================
+// ===========================================================================
 // MARK: - UITableViewDelegate
-// ===================================================================================================================
+// ===========================================================================
 extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

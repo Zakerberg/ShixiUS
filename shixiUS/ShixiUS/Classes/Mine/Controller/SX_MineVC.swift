@@ -144,9 +144,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     SXLog("退出登录 +++ + ")
                     
-                    
-                    
-                    
+
                     
                     
                 }, onError: { (error) in

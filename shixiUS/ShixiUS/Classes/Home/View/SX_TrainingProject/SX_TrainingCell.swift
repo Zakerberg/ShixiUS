@@ -28,7 +28,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     // delegate
     var delegate: SX_TrainingCellDelegate?
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -52,9 +52,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-// ==============================================================================================================
+// ===============================================================================
 // MARK: - UICollectionViewDelegate
-// ===============================================================================================================
+// ===============================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -74,10 +74,15 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
         
-//        let tapSingle = UITapGestureRecognizer(target: self, action: #selector(Tap(_:)))
-//        tapSingle.numberOfTapsRequired = 1
-//        tapSingle.numberOfTouchesRequired = 1
-//        cell.addGestureRecognizer(tapSingle)
+        /*
+         **
+         *** 此方法对应下面的Extension
+         
+         let tapSingle = UITapGestureRecognizer(target: self, action: #selector(Tap(_:)))
+         tapSingle.numberOfTapsRequired = 1
+         tapSingle.numberOfTouchesRequired = 1
+         cell.addGestureRecognizer(tapSingle)
+         */
         
         cell.sourceImageView?.image = #imageLiteral(resourceName: "localImg3")
         cell.priceLabel?.text = "￥" + "2998.00"
@@ -89,7 +94,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         SXLog("点击了CollectionView的\(indexPath.section)---\(indexPath.row)")
-
+        
         self.delegate?.clickCell(item: indexPath.section)
     }
     
@@ -98,20 +103,20 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-// ==================================================================================================================================
-// MARK: - UICollectionViewDelegateFlowLayout
-// ==================================================================================================================================
+    // =============================================================================================
+    // MARK: - UICollectionViewDelegateFlowLayout
+    // =============================================================================================
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
-
-// ===============================================================================================================
-// MARK: - configCell
-// ===============================================================================================================
+    
+    // =============================================================================================
+    // MARK: - configCell
+    // =============================================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -153,39 +158,39 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     /// reloadData
     func reloadData() {
         
+        
+        
+        
     }
 }
 
-// ===============================================================================================================
+// =============================================================================================
 // MARK: - 查找所在的ViewController
-// ===============================================================================================================
+// =============================================================================================
 extension SX_TrainingCell {
     
-    // MARK: - 查找所在的ViewController
-//    func responderViewController() -> UIViewController? {
-//        for view in sequence(first: self.superview, next: {$0?.superview}) {
-//            if let responder = view?.next {
-//                if responder.isKind(of: UIViewController.self) {
-//                    return responder as? UIViewController
-//                }
-//            }
-//        }
-//        return nil
-//    }
-//
-//    @objc func Tap(_ recognizer:UITapGestureRecognizer) {
-//        // MARK: - secondVC是目标页面
-//        let secondVC = SX_ProjectDetailController()
-//        // MARK: - firstVC是所在页面
-//        let firstVC = self.responderViewController()
-//        firstVC?.navigationController?.pushViewController(secondVC, animated: true)
-//    }
+/*
+     MARK: - 查找所在的ViewController
+     func responderViewController() -> UIViewController? {
+     for view in sequence(first: self.superview, next: {$0?.superview}) {
+     if let responder = view?.next {
+     if responder.isKind(of: UIViewController.self) {
+     return responder as? UIViewController
+     }
+     }
+     }
+     return nil
+     }
+     
+     @objc func Tap(_ recognizer:UITapGestureRecognizer) {
+     // MARK: - secondVC是目标页面
+     let secondVC = SX_ProjectDetailController()
+     // MARK: - firstVC是所在页面
+     let firstVC = self.responderViewController()
+     firstVC?.navigationController?.pushViewController(secondVC, animated: true)
+     }
+     */
+
 }
-
-
-
-
-
-
 
 

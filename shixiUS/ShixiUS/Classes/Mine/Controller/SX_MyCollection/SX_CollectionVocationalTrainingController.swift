@@ -43,9 +43,9 @@ class SX_CollectionVocationalTrainingController: UIViewController {
     }
 }
 
-// ===================================================================================================================
+// ===============================================================================
 // MARK: - Other Method
-// ===================================================================================================================
+// ===============================================================================
 extension SX_CollectionVocationalTrainingController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
@@ -54,9 +54,9 @@ extension SX_CollectionVocationalTrainingController {
     
 }
 
-// ===================================================================================================================
+// ===============================================================================
 // MARK: - UITableViewDelegate
-// ===================================================================================================================
+// ===============================================================================
 extension SX_CollectionVocationalTrainingController:UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

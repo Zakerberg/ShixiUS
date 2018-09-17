@@ -42,9 +42,9 @@ class SX_CollectionTrainingProjectController: UIViewController {
     }
 }
 
-// ===================================================================================================================
+// ================================================================================
 // MARK: - Other Method
-// ===================================================================================================================
+// ================================================================================
 extension SX_CollectionTrainingProjectController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
@@ -53,9 +53,9 @@ extension SX_CollectionTrainingProjectController {
     
 }
 
-// ===================================================================================================================
+// ================================================================================
 // MARK: - UITableViewDelegate
-// ===================================================================================================================
+// ================================================================================
 extension SX_CollectionTrainingProjectController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
