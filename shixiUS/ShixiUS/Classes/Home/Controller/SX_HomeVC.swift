@@ -132,18 +132,18 @@ extension SX_HomeVC {
     
     /// 首页数据
     func fetchHomeData() {
-        SX_NetManager.requestData(type: .POST, URlString: SX_Home, parameters:  nil, finishCallBack: { (result) in
+        SX_NetManager.requestData(type: .GET, URlString: SX_Home, parameters:  nil, finishCallBack: { (result) in
             do{
-                
                 let json = try JSON(data: result)
                 if json["status"] == 200 {
                     SXLog("成功")
-                    
-          
+               
                     
                     
                 } else if json["status"] == 202 {
                     /// 错误状态
+                
+                    
                     SXLog("错误状态! ")
                 } else if json["status"] == 203 {
                     /// 超时, 重新登录
@@ -250,8 +250,9 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         return 0
     }
     
+    ///
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -267,12 +268,18 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
             cell.selectionStyle = .none
             
+            
+            
+            
             return cell
         }
         
         let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
         shixiTrainingCell.selectionStyle = .none
         shixiTrainingCell.delegate = self
+        
+        
+        
         
         shixiTrainingCell.moreButton?.rx.tap.subscribe(onNext: { (_) in
             SXLog("首页热门实训更多按钮")
@@ -283,7 +290,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         }, onError: { (error) in
             SXLog(error)
         }, onCompleted: nil, onDisposed: nil)
-        
         
         return shixiTrainingCell
     }

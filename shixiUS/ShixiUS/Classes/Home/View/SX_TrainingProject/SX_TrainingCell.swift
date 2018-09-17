@@ -190,7 +190,6 @@ extension SX_TrainingCell {
      firstVC?.navigationController?.pushViewController(secondVC, animated: true)
      }
      */
-
 }
 
 
