@@ -40,7 +40,7 @@ extension SX_LoadingView  {
         self.addSubview(self.indicatorView!)
         
         let imageArr = NSMutableArray()
-        for index in 0...55 {
+        for index in 0..<54 {
             let image = UIImage.init(named: "loadingView-\(index)")
             imageArr.add(image!)
         }

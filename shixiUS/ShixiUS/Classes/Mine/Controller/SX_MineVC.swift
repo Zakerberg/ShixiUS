@@ -27,6 +27,9 @@ class SX_MineVC: UIViewController {
     var mineTitleArr = [["st"], ["我的申请", "我的收藏"], ["付费记录", "个人信息"], ["修改密码"]]
     var quitBtn: UIButton?
     
+    var titleNameLabel: UILabel?
+    var logInBtn: UIButton?
+
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor              = UIColor.SX_BackGroundColor()
@@ -40,6 +43,8 @@ class SX_MineVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeTitle), name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil)
+        
         setUI()
     }
 }
@@ -80,7 +85,13 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             cell.nameTitle?.isHidden = true
             cell.selectionStyle   = .none
             
-            cell.logInButton?.rx.tap.subscribe(onNext: { (_) in
+            self.titleNameLabel = cell.nameTitle
+            self.logInBtn = cell.logInButton
+            
+            
+            
+            
+            self.logInBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("注册登陆 +++ + ")
                 let vc = SX_LoginController()
                 self.present(vc, animated: true, completion: {
@@ -144,7 +155,8 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     SXLog("退出登录 +++ + ")
                     
-
+                    
+                    
                     
                     
                 }, onError: { (error) in
@@ -197,3 +209,22 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+
+
+// =========================================================================================
+// MARK: - Noti
+// =========================================================================================
+extension SX_MineVC {
+   @objc func changeTitle(sender: NSNotification) {
+    
+    self.logInBtn?.isHidden = true
+    self.titleNameLabel?.isHidden = false
+    
+    let dict = sender.userInfo
+    self.titleNameLabel?.text = dict?["Data"] as! String
+    
+    }
+}
+
+
+

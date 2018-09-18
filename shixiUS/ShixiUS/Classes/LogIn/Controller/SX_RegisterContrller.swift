@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import MBProgressHUD
 
 class SX_RegisterContrller: UIViewController {
     
@@ -117,31 +118,43 @@ extension SX_RegisterContrller {
                 SXLog("快速注册")
                 
                 if self.userNameTF?.text == "" {
-                    // 提示 ! ! !
+                    let hub = MBProgressHUD()
+                    hub.label.text = "请填写用户名"
+                    
+                }else if self.passWordTF?.text == "" {
+               //  MBProgressHUD.show("请填写密码")
+                    
+                }else if self.email?.text == "" {
+               //  MBProgressHUD.show("请填写邮箱")
+                    
+                }else {
+                    let str = String(data: (self.passWordTF?.text?.data(using: .utf8)?.base64EncodedData())!, encoding: .utf8)
+                    let param = ["name":self.userNameTF?.text,
+                                 "email":self.email?.text,
+                                 "password":str
+                    ]
+                    
+                    SX_NetManager.requestData(type: .POST, URlString: SX_Register, parameters: param as? [String : String], finishCallBack: { (result) in
+                        do{
+                            let json = try JSON(data: result)
+                            if json["status"] == 200 {
+                                /// 成功
+                                SXLog("注册成功! ")
+                                
+                                
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: self, userInfo: ["str":self.userNameTF?.text!])
+                                
+                                self.dismiss(animated: true, completion: nil)
+                            } else if json["status"] == 202 {
+                                /// 错误状态
+                                SXLog("错误状态! ")
+                            } else if json["status"] == 203 {
+                                /// 超时, 重新登录
+                                SXLog("超时, 重新登录! ")
+                            }
+                        } catch{ }
+                    })
                 }
-
-                let str = String(data: (self.passWordTF?.text?.data(using: .utf8)?.base64EncodedData())!, encoding: .utf8)
-                let param = ["name":self.userNameTF?.text,
-                             "email":self.email?.text,
-                             "password":str
-                            ]
-
-                SX_NetManager.requestData(type: .POST, URlString: SX_Register, parameters: param as? [String : String], finishCallBack: { (result) in
-                    do{
-                        let json = try JSON(data: result)
-                        if json["status"] == 200 {
-                            /// 成功
-                            SXLog("注册成功! ")
-                            self.dismiss(animated: true, completion: nil)
-                        } else if json["status"] == 202 {
-                            /// 错误状态
-                            SXLog("错误状态! ")
-                        } else if json["status"] == 203 {
-                            /// 超时, 重新登录
-                            SXLog("超时, 重新登录! ")
-                        }
-                    } catch{ }
-                })
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)

@@ -191,14 +191,6 @@ extension SX_LoginController {
 extension SX_LoginController {
     
     
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 class SX_TextField: UITextField {
@@ -211,6 +203,3 @@ class SX_TextField: UITextField {
         return bounds.insetBy(dx: 10, dy: 0)
     }
 }
-
-
-

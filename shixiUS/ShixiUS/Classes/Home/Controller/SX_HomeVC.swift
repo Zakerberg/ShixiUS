@@ -34,11 +34,20 @@ struct InterShipPreview {
 class SX_HomeVC: UIViewController {
     
     /// ad
+    var adModel:SX_HomeADModel?
     var adImages = [String]()
     var adURLs   = [String]()
     var adTitles = [String]()
     var adIDs    = [Int]()
     /// ad
+    
+    var homeModel: SX_HomeModel?
+    var trainingModel: SX_HomeTrainingModel?
+    var jobsModel: SX_HomeJobsModel?
+    var trainModel: SX_HomeTrainModel?
+
+    
+    var loadingView: SX_LoadingView?
     
     private lazy var homeButton: UIButton = {
         let button = UIButton()
@@ -75,7 +84,9 @@ class SX_HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchADData()
+        fetchHomeData()
         setUI()
+        showLoadingView()
     }
     
     deinit {
@@ -100,7 +111,6 @@ extension SX_HomeVC {
         
         view.addSubview(homeTableView)
         homeTableView.addSubview(self.cycleScrollerView)
-        
     }
     
     func fetchADData() {
@@ -109,12 +119,13 @@ extension SX_HomeVC {
                 /// SwiftyJSON 在这里 ! ! !
                 let json = try JSON(data: result)
                 if json["status"] == 200 {
+                    /// 移除LoadingView
+                    self.hideLoadingView()                    
+                    
                     for (_, subJSON) : (String, JSON) in json["data"] {
-                        
                         self.adImages.append(subJSON["image"].string!)
                         self.adTitles.append(subJSON["title"].string!)
                     }
-                    
                     self.cycleScrollerView.serverImgArray = self.adImages
                     self.cycleScrollerView.descTextArray = self.adTitles
                     self.cycleScrollerView.reloadData()
@@ -135,20 +146,19 @@ extension SX_HomeVC {
         SX_NetManager.requestData(type: .GET, URlString: SX_Home, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
-                if json["status"] == 200 {
-                    SXLog("成功")
                
-                    
-                    
-                } else if json["status"] == 202 {
-                    /// 错误状态
                 
-                    
-                    SXLog("错误状态! ")
-                } else if json["status"] == 203 {
-                    /// 超时, 重新登录
-                    SXLog("超时, 重新登录! ")
-                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
             } catch{ }
         })
     }
@@ -191,6 +201,17 @@ extension SX_HomeVC {
             let appStoreVersion = dic["version"]
             print("当前版本号\(localVersion),商店版本号\(String(describing: appStoreVersion))")
         } catch { }
+    }
+    
+    func showLoadingView() {
+        if self.loadingView == nil {
+            self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
+        }
+        UIApplication.shared.keyWindow?.addSubview(self.loadingView!)
+    }
+    
+    func hideLoadingView() {
+        self.loadingView?.removeFromSuperview()
     }
 }
 
@@ -250,7 +271,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         return 0
     }
     
-    ///
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
@@ -268,17 +288,18 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
             cell.selectionStyle = .none
             
-            
-            
-            
             return cell
         }
         
         let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
         shixiTrainingCell.selectionStyle = .none
+        if indexPath.section == 2 {
+            shixiTrainingCell.titleLabel?.text = "培训认证"
+        }else{
+            shixiTrainingCell.titleLabel?.text = "热门实训"
+        }
+        
         shixiTrainingCell.delegate = self
-        
-        
         
         
         shixiTrainingCell.moreButton?.rx.tap.subscribe(onNext: { (_) in
@@ -358,7 +379,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                 make.height.lessThanOrEqualTo(Margin)
                 }.config { (HOTTITLE) in
                     HOTTITLE.sizeToFit()
-                    HOTTITLE.text = "热门岗位--测试"
+                    HOTTITLE.text = "热门岗位"
                     HOTTITLE.font = UIFont.systemFont(ofSize: 15)
                     HOTTITLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             }
@@ -416,3 +437,108 @@ extension SX_HomeVC: SX_TrainingCellDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+
+
+
+
+/*
+ {
+     "status": 200,
+     "msg": "请求成功",
+     "data": {
+         "training": [
+         {
+         "id": 11,
+         "title": "22222222",
+         "price": "0.00",
+         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031037233614.jpg"
+         },
+         {
+         "id": 12,
+         "title": "22222222",
+         "price": "0.00",
+         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031037233614.jpg"
+         },
+         {
+         "id": 14,
+         "title": "项目11",
+         "price": "0.00",
+         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031115561254.jpg"
+         },
+         {
+         "id": 15,
+         "title": "项目11",
+         "price": "0.01",
+         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031115561254.jpg"
+         }
+         ],
+         "jobs": [
+         {
+         "id": 32,
+         "name": "hou",
+         "trade": "IT/互联网",
+         "address": "中国/北京市/朝阳区",
+         "nature": "实习"
+         },
+         {
+         "id": 33,
+         "name": "UI设计",
+         "trade": "IT/互联网",
+         "address": "中国/北京市/东城区",
+         "nature": "实习"
+         },
+         {
+         "id": 34,
+         "name": "hou",
+         "trade": "IT/互联网",
+         "address": "中国/北京市/朝阳区",
+         "nature": "实习"
+         },
+         {
+         "id": 35,
+         "name": "hou",
+         "trade": "IT/互联网",
+         "address": "中国/北京市/朝阳区",
+         "nature": "实习"
+         }
+         ],
+         "train": [
+         {
+         "id": 60,
+         "name": "柏柏柏111",
+         "category": "培训分类2",
+         "price": "0.01",
+         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031051064622.jpg"
+         },
+         {
+         "id": 61,
+         "name": "柏柏柏111",
+         "category": "培训分类2",
+         "price": "0.01",
+         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031051064622.jpg"
+         },
+         {
+         "id": 61,
+         "name": "柏柏柏111",
+         "category": "培训分类2",
+         "price": "0.01",
+         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031051064622.jpg"
+         },
+         {
+         "id": 61,
+         "name": "柏柏柏111",
+         "category": "培训分类2",
+         "price": "0.01",
+         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031051064622.jpg"
+         }
+         ]
+     }
+ }
+ 
+ 
+ 
+ */
+
+
+

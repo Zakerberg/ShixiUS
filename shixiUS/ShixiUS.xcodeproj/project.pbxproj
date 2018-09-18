@@ -59,6 +59,7 @@
 		32621282214CE13E000C1A6C /* RMCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126B214CE13E000C1A6C /* RMCollectionCell.m */; };
 		32621283214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126C214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m */; };
 		32998873214FB28600DC9ED3 /* SX_ApplySucceedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */; };
+		3299887521509C9F00DC9ED3 /* SX_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3299887421509C9F00DC9ED3 /* SX_Utils.swift */; };
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
 		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
 		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
@@ -212,6 +213,7 @@
 		3262126D214CE13E000C1A6C /* RMCalendarMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarMonthHeaderView.h; sourceTree = "<group>"; };
 		3262126E214CE13E000C1A6C /* RMCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCollectionCell.h; sourceTree = "<group>"; };
 		32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplySucceedController.swift; sourceTree = "<group>"; };
+		3299887421509C9F00DC9ED3 /* SX_Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_Utils.swift; sourceTree = "<group>"; };
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
 		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
 		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 				45556B6020D8A0370035FCA6 /* Defines.swift */,
 				45D3520E20D8B3F600D7300A /* Common.swift */,
 				45E57405212E9847007A4DCD /* SX_UnderlineBtn.swift */,
+				3299887421509C9F00DC9ED3 /* SX_Utils.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1298,6 +1301,7 @@
 				4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */,
 				4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */,
 				4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */,
+				3299887521509C9F00DC9ED3 /* SX_Utils.swift in Sources */,
 				45E573C2212A70AC007A4DCD /* SX_OrderInfoCell.swift in Sources */,
 				45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */,
 				3262127F214CE13E000C1A6C /* TicketModel.m in Sources */,

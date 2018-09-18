@@ -122,11 +122,10 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.left.lessThanOrEqualTo(Margin)
             make.height.lessThanOrEqualTo(Margin)
-        }).config({ (titleLabel) in
-            titleLabel.sizeToFit()
-            titleLabel.text = "热门实训--测试"
-            titleLabel.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
-            titleLabel.font = UIFont.systemFont(ofSize: 15)
+        }).config({ (TITLE) in
+            TITLE.sizeToFit()
+            TITLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+            TITLE.font = UIFont.systemFont(ofSize: 15)
         })
         
         self.moreButton = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
