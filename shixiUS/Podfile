@@ -22,6 +22,7 @@ pod 'IQKeyboardManagerSwift'
 pod 'ESPullToRefresh'
 pod 'MJExtension'
 pod 'MBProgressHUD'
+pod 'YYModel'
 
   
   target 'ShixiUSTests' do
