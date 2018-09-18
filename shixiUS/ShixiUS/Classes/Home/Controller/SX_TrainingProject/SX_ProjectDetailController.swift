@@ -35,6 +35,7 @@ class SX_ProjectDetailController: UIViewController {
     var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
+    var moreDateBtn : UIButton?
   
      lazy var pageTitleView: SX_PageTitleView = {
         let config                = SX_PageTitleViewConfig()
@@ -210,13 +211,25 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
 //            cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
 //            cell.dateBtn?.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
             
-            cell.moreDate?.rx.tap.subscribe(onNext: { (_) in
-                SXLog(" +++ + ")
+            self.moreDateBtn = cell.moreDate
+            
+            
+            self.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("更多日期 ")
+                
                 let vc = SX_MoreDateController()
+//                vc?.isEnable = false
+//
+//
+//
+//                vc?.title = "更多日期"
                 self.navigationController?.pushViewController(vc, animated: true)
+                
+                
+                
             }, onError: { (error) in
                 SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
+            }, onCompleted: nil, onDisposed: nil).dispose()
             
             return cell
         }

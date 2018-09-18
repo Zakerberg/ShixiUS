@@ -165,7 +165,6 @@ extension SX_HomeVC {
                 
                 /// 遍历jobs
                 self.jobsModel = SX_HomeJobsModel(jsonData: json["jobs"])
-                
                 for (_, subJSON): (String, JSON) in json["jobs"] {
                     self.jobsNameArr.append(subJSON["name"].string!)
                     self.jobsTradeArr.append(subJSON["trade"].string!)

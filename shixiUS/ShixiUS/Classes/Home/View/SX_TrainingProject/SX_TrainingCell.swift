@@ -25,6 +25,8 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     var titleLabel: UILabel?
     var moreButton: UIButton?
     var collectionView: UICollectionView?
+     
+   
     
     // delegate
     var delegate: SX_TrainingCellDelegate?
@@ -74,18 +76,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         
 //        cell.sourceImageView?.image = #imageLiteral(resourceName: "localImg3")

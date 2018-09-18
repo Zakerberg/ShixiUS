@@ -40,9 +40,6 @@
 		3262126F214CE13E000C1A6C /* UIView+CustomFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262124E214CE13E000C1A6C /* UIView+CustomFrame.m */; };
 		32621270214CE13E000C1A6C /* NSDate+RMCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262124F214CE13E000C1A6C /* NSDate+RMCalendarLogic.m */; };
 		32621271214CE13E000C1A6C /* CalendarPreviousMonth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621251214CE13E000C1A6C /* CalendarPreviousMonth@2x.png */; };
-		32621272214CE13E000C1A6C /* CalendarSelectedDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621252214CE13E000C1A6C /* CalendarSelectedDate@2x.png */; };
-		32621273214CE13E000C1A6C /* CalendarSelectedDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621253214CE13E000C1A6C /* CalendarSelectedDate.png */; };
-		32621274214CE13E000C1A6C /* CalendarTodaysDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621254214CE13E000C1A6C /* CalendarTodaysDate@2x.png */; };
 		32621275214CE13E000C1A6C /* CalendarRow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621255214CE13E000C1A6C /* CalendarRow@2x.png */; };
 		32621276214CE13E000C1A6C /* CalendarPreviousMonth.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621256214CE13E000C1A6C /* CalendarPreviousMonth.png */; };
 		32621277214CE13E000C1A6C /* CalendarRow.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621257214CE13E000C1A6C /* CalendarRow.png */; };
@@ -50,7 +47,6 @@
 		32621279214CE13E000C1A6C /* CalendarRowBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 32621259214CE13E000C1A6C /* CalendarRowBottom.png */; };
 		3262127A214CE13E000C1A6C /* CalendarDisableDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3262125A214CE13E000C1A6C /* CalendarDisableDate.png */; };
 		3262127B214CE13E000C1A6C /* CalendarRowBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3262125B214CE13E000C1A6C /* CalendarRowBottom@2x.png */; };
-		3262127C214CE13E000C1A6C /* CalendarTodaysDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3262125C214CE13E000C1A6C /* CalendarTodaysDate.png */; };
 		3262127D214CE13E000C1A6C /* RMCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262125F214CE13E000C1A6C /* RMCalendarLogic.m */; };
 		3262127E214CE13E000C1A6C /* RMCalendarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32621262214CE13E000C1A6C /* RMCalendarController.m */; };
 		3262127F214CE13E000C1A6C /* TicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32621266214CE13E000C1A6C /* TicketModel.m */; };
@@ -60,6 +56,10 @@
 		32621283214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126C214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m */; };
 		32998873214FB28600DC9ED3 /* SX_ApplySucceedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */; };
 		3299887521509C9F00DC9ED3 /* SX_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3299887421509C9F00DC9ED3 /* SX_Utils.swift */; };
+		3299888521511BC700DC9ED3 /* CalendarTodaysDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3299888121511BC700DC9ED3 /* CalendarTodaysDate.png */; };
+		3299888621511BC700DC9ED3 /* CalendarTodaysDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3299888221511BC700DC9ED3 /* CalendarTodaysDate@2x.png */; };
+		3299888721511BC700DC9ED3 /* CalendarSelectedDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3299888321511BC700DC9ED3 /* CalendarSelectedDate.png */; };
+		3299888821511BC700DC9ED3 /* CalendarSelectedDate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3299888421511BC700DC9ED3 /* CalendarSelectedDate@2x.png */; };
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
 		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
 		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
@@ -187,9 +187,6 @@
 		3262124E214CE13E000C1A6C /* UIView+CustomFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CustomFrame.m"; sourceTree = "<group>"; };
 		3262124F214CE13E000C1A6C /* NSDate+RMCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RMCalendarLogic.m"; sourceTree = "<group>"; };
 		32621251214CE13E000C1A6C /* CalendarPreviousMonth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarPreviousMonth@2x.png"; sourceTree = "<group>"; };
-		32621252214CE13E000C1A6C /* CalendarSelectedDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarSelectedDate@2x.png"; sourceTree = "<group>"; };
-		32621253214CE13E000C1A6C /* CalendarSelectedDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarSelectedDate.png; sourceTree = "<group>"; };
-		32621254214CE13E000C1A6C /* CalendarTodaysDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTodaysDate@2x.png"; sourceTree = "<group>"; };
 		32621255214CE13E000C1A6C /* CalendarRow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRow@2x.png"; sourceTree = "<group>"; };
 		32621256214CE13E000C1A6C /* CalendarPreviousMonth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarPreviousMonth.png; sourceTree = "<group>"; };
 		32621257214CE13E000C1A6C /* CalendarRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarRow.png; sourceTree = "<group>"; };
@@ -197,7 +194,6 @@
 		32621259214CE13E000C1A6C /* CalendarRowBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarRowBottom.png; sourceTree = "<group>"; };
 		3262125A214CE13E000C1A6C /* CalendarDisableDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarDisableDate.png; sourceTree = "<group>"; };
 		3262125B214CE13E000C1A6C /* CalendarRowBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRowBottom@2x.png"; sourceTree = "<group>"; };
-		3262125C214CE13E000C1A6C /* CalendarTodaysDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTodaysDate.png; sourceTree = "<group>"; };
 		3262125E214CE13E000C1A6C /* RMCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarLogic.h; sourceTree = "<group>"; };
 		3262125F214CE13E000C1A6C /* RMCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarLogic.m; sourceTree = "<group>"; };
 		32621261214CE13E000C1A6C /* RMCalendarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarController.h; sourceTree = "<group>"; };
@@ -214,6 +210,10 @@
 		3262126E214CE13E000C1A6C /* RMCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCollectionCell.h; sourceTree = "<group>"; };
 		32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplySucceedController.swift; sourceTree = "<group>"; };
 		3299887421509C9F00DC9ED3 /* SX_Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_Utils.swift; sourceTree = "<group>"; };
+		3299888121511BC700DC9ED3 /* CalendarTodaysDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTodaysDate.png; sourceTree = "<group>"; };
+		3299888221511BC700DC9ED3 /* CalendarTodaysDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTodaysDate@2x.png"; sourceTree = "<group>"; };
+		3299888321511BC700DC9ED3 /* CalendarSelectedDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarSelectedDate.png; sourceTree = "<group>"; };
+		3299888421511BC700DC9ED3 /* CalendarSelectedDate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarSelectedDate@2x.png"; sourceTree = "<group>"; };
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
 		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
 		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
@@ -441,10 +441,11 @@
 		32621250214CE13E000C1A6C /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				3299888321511BC700DC9ED3 /* CalendarSelectedDate.png */,
+				3299888421511BC700DC9ED3 /* CalendarSelectedDate@2x.png */,
+				3299888121511BC700DC9ED3 /* CalendarTodaysDate.png */,
+				3299888221511BC700DC9ED3 /* CalendarTodaysDate@2x.png */,
 				32621251214CE13E000C1A6C /* CalendarPreviousMonth@2x.png */,
-				32621252214CE13E000C1A6C /* CalendarSelectedDate@2x.png */,
-				32621253214CE13E000C1A6C /* CalendarSelectedDate.png */,
-				32621254214CE13E000C1A6C /* CalendarTodaysDate@2x.png */,
 				32621255214CE13E000C1A6C /* CalendarRow@2x.png */,
 				32621256214CE13E000C1A6C /* CalendarPreviousMonth.png */,
 				32621257214CE13E000C1A6C /* CalendarRow.png */,
@@ -452,7 +453,6 @@
 				32621259214CE13E000C1A6C /* CalendarRowBottom.png */,
 				3262125A214CE13E000C1A6C /* CalendarDisableDate.png */,
 				3262125B214CE13E000C1A6C /* CalendarRowBottom@2x.png */,
-				3262125C214CE13E000C1A6C /* CalendarTodaysDate.png */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -497,6 +497,13 @@
 				3262126E214CE13E000C1A6C /* RMCollectionCell.h */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		329988762151197200DC9ED3 /* SX_HUD */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SX_HUD;
 			sourceTree = "<group>";
 		};
 		32E49D1A21369D6C005633F2 /* SX_MyCollection */ = {
@@ -697,6 +704,7 @@
 		45556B5820D89D290035FCA6 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				329988762151197200DC9ED3 /* SX_HUD */,
 				32621249214CE12E000C1A6C /* SX_Calendar */,
 				324482E2214A348E00037533 /* SX_AlertView */,
 				3248484521411AA400B6049E /* SX_Picker */,
@@ -990,17 +998,17 @@
 			files = (
 				3262127B214CE13E000C1A6C /* CalendarRowBottom@2x.png in Resources */,
 				32621276214CE13E000C1A6C /* CalendarPreviousMonth.png in Resources */,
-				32621273214CE13E000C1A6C /* CalendarSelectedDate.png in Resources */,
 				3262127A214CE13E000C1A6C /* CalendarDisableDate.png in Resources */,
 				32621275214CE13E000C1A6C /* CalendarRow@2x.png in Resources */,
 				45556B3320D89C600035FCA6 /* LaunchScreen.storyboard in Resources */,
 				45556B3020D89C600035FCA6 /* Assets.xcassets in Resources */,
 				32621271214CE13E000C1A6C /* CalendarPreviousMonth@2x.png in Resources */,
-				32621274214CE13E000C1A6C /* CalendarTodaysDate@2x.png in Resources */,
 				32621279214CE13E000C1A6C /* CalendarRowBottom.png in Resources */,
-				32621272214CE13E000C1A6C /* CalendarSelectedDate@2x.png in Resources */,
+				3299888821511BC700DC9ED3 /* CalendarSelectedDate@2x.png in Resources */,
+				3299888621511BC700DC9ED3 /* CalendarTodaysDate@2x.png in Resources */,
 				32621278214CE13E000C1A6C /* CalendarNormalDate.png in Resources */,
-				3262127C214CE13E000C1A6C /* CalendarTodaysDate.png in Resources */,
+				3299888721511BC700DC9ED3 /* CalendarSelectedDate.png in Resources */,
+				3299888521511BC700DC9ED3 /* CalendarTodaysDate.png in Resources */,
 				32621277214CE13E000C1A6C /* CalendarRow.png in Resources */,
 				32484851214124BB00B6049E /* area.plist in Resources */,
 			);
