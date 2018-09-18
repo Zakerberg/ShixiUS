@@ -71,3 +71,27 @@ extension SX_TrainingCollectionViewCell {
         })
     }
 }
+
+
+extension SX_TrainingCollectionViewCell {
+    
+    /// training
+    func configCell(trainingModel: SX_HomeTrainingModel) {
+        
+        self.priceLabel?.text = trainingModel.price
+        self.sourceName?.text = trainingModel.title
+        /// 还有个Image
+        
+        
+    }
+    
+    /// train
+    func configCell(trainModel: SX_HomeTrainModel) {
+        self.priceLabel?.text = trainModel.price
+        self.sourceName?.text = trainModel.name
+        self.certificateLabel?.text = trainModel.category
+        /// 还有个Image
+        
+        
+    }
+}

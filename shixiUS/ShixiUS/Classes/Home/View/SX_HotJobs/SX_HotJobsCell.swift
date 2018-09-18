@@ -102,26 +102,23 @@ extension SX_HotJobsCell {
             make.left.equalTo(self.eduImageView!.snp.right).offset(5)
             make.top.height.equalTo(self.addImageView!)
         }).config({ (eduLabel) in
-            eduLabel.text = "本科-测试"
             eduLabel.font = UIFont.systemFont(ofSize: 10)
             eduLabel.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             eduLabel.sizeToFit()
         })
-        
-        //        self.logoImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-        //            make.top.equalTo(self.jobsLabel!)
-        //            make.right.equalToSuperview().offset(-Margin)
-        //            make.width.height.equalTo(60)
-        //        }).config({ (logoImageView) in
-        //            logoImageView.image = #imageLiteral(resourceName: "logo")
-        //        })
     }
     
     func reloadData(jobs: NSString, insduty: NSString,address: NSString,edu: NSString, logo: NSString)  {
         self.jobsLabel?.text = jobs as String
         self.addressLabel?.text = address as String
         self.eduLabel?.text = edu as String
-        //self.logoImageView?.kf.setImage(with: URL(string: logo as String))
+    }
+    
+    func configCell(jobsModel: SX_HomeJobsModel) {
+        self.jobsLabel?.text = jobsModel.name
+        self.insduryLabel?.text = jobsModel.nature
+        self.addressLabel?.text = jobsModel.address
+        self.eduLabel?.text = jobsModel.trade
     }
 }
 

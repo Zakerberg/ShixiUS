@@ -47,6 +47,15 @@ class SX_HomeVC: UIViewController {
     var trainModel: SX_HomeTrainModel?
 
     
+    /// jobs
+    var jobsArr = [Any]()
+    var jobsNameArr = [String]()
+    var jobsTradeArr = [String]()
+    var jobsAddressArr = [String]()
+    var jobsNatureArr = [String]()
+    ///
+    
+    
     var loadingView: SX_LoadingView?
     
     private lazy var homeButton: UIButton = {
@@ -146,19 +155,26 @@ extension SX_HomeVC {
         SX_NetManager.requestData(type: .GET, URlString: SX_Home, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
-               
+                self.trainingModel = SX_HomeTrainingModel(jsonData: json["training"])
+                self.jobsArr = json["jobs"].array!
+                ///遍历training
+                for (_, subJSON) : (String, JSON) in json["training"] {
+
+                    self.trainingModel?.title = subJSON["title"].string
+                }
+                
+                /// 遍历jobs
+                self.jobsModel = SX_HomeJobsModel(jsonData: json["jobs"])
+                
+                for (_, subJSON): (String, JSON) in json["jobs"] {
+                    self.jobsNameArr.append(subJSON["name"].string!)
+                    self.jobsTradeArr.append(subJSON["trade"].string!)
+                    self.jobsNatureArr.append(subJSON["nature"].string!)
+                    self.jobsAddressArr.append(subJSON["address"].string!)
+                }
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                self.homeTableView.reloadData()
             } catch{ }
         })
     }
@@ -277,7 +293,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if  section == 1 {
-            return 4
+            return self.jobsArr.count
         }
         return 1
     }
@@ -287,6 +303,12 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 1 {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
             cell.selectionStyle = .none
+            
+            cell.jobsLabel?.text = self.jobsNameArr[indexPath.row]
+            cell.insduryLabel?.text = self.jobsTradeArr[indexPath.row]
+            cell.addressLabel?.text = self.jobsAddressArr[indexPath.row]
+            cell.eduLabel?.text = self.jobsNatureArr[indexPath.row]
+            
             
             return cell
         }
@@ -300,7 +322,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         }
         
         shixiTrainingCell.delegate = self
-        
+        shixiTrainingCell.collectionView?.reloadData()
         
         shixiTrainingCell.moreButton?.rx.tap.subscribe(onNext: { (_) in
             SXLog("首页热门实训更多按钮")
@@ -437,108 +459,3 @@ extension SX_HomeVC: SX_TrainingCellDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-
-
-
-
-/*
- {
-     "status": 200,
-     "msg": "请求成功",
-     "data": {
-         "training": [
-         {
-         "id": 11,
-         "title": "22222222",
-         "price": "0.00",
-         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031037233614.jpg"
-         },
-         {
-         "id": 12,
-         "title": "22222222",
-         "price": "0.00",
-         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031037233614.jpg"
-         },
-         {
-         "id": 14,
-         "title": "项目11",
-         "price": "0.00",
-         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031115561254.jpg"
-         },
-         {
-         "id": 15,
-         "title": "项目11",
-         "price": "0.01",
-         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031115561254.jpg"
-         }
-         ],
-         "jobs": [
-         {
-         "id": 32,
-         "name": "hou",
-         "trade": "IT/互联网",
-         "address": "中国/北京市/朝阳区",
-         "nature": "实习"
-         },
-         {
-         "id": 33,
-         "name": "UI设计",
-         "trade": "IT/互联网",
-         "address": "中国/北京市/东城区",
-         "nature": "实习"
-         },
-         {
-         "id": 34,
-         "name": "hou",
-         "trade": "IT/互联网",
-         "address": "中国/北京市/朝阳区",
-         "nature": "实习"
-         },
-         {
-         "id": 35,
-         "name": "hou",
-         "trade": "IT/互联网",
-         "address": "中国/北京市/朝阳区",
-         "nature": "实习"
-         }
-         ],
-         "train": [
-         {
-         "id": 60,
-         "name": "柏柏柏111",
-         "category": "培训分类2",
-         "price": "0.01",
-         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031051064622.jpg"
-         },
-         {
-         "id": 61,
-         "name": "柏柏柏111",
-         "category": "培训分类2",
-         "price": "0.01",
-         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031051064622.jpg"
-         },
-         {
-         "id": 61,
-         "name": "柏柏柏111",
-         "category": "培训分类2",
-         "price": "0.01",
-         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031051064622.jpg"
-         },
-         {
-         "id": 61,
-         "name": "柏柏柏111",
-         "category": "培训分类2",
-         "price": "0.01",
-         "image": "http://training.shixi.com/uploads/admin/images/20180903/201809031051064622.jpg"
-         }
-         ]
-     }
- }
- 
- 
- 
- */
-
-
-

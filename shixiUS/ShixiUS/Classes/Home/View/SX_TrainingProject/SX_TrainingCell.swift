@@ -73,22 +73,26 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
+
         
-        /*
-         **
-         *** 此方法对应下面的Extension
-         
-         let tapSingle = UITapGestureRecognizer(target: self, action: #selector(Tap(_:)))
-         tapSingle.numberOfTapsRequired = 1
-         tapSingle.numberOfTouchesRequired = 1
-         cell.addGestureRecognizer(tapSingle)
-         */
         
-        cell.sourceImageView?.image = #imageLiteral(resourceName: "localImg3")
-        cell.priceLabel?.text = "￥" + "2998.00"
-        cell.sourceName?.text = "课程名称课程名称测试"
-        cell.certificateLabel?.text = "职业技术证书"
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        cell.sourceImageView?.image = #imageLiteral(resourceName: "localImg3")
+//        cell.priceLabel?.text = "￥" + "2998.00"
+//        cell.sourceName?.text = "课程名称课程名称测试"
+//        cell.certificateLabel?.text = "职业技术证书"
+//
         return cell
     }
     
@@ -103,9 +107,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-    // =============================================================================================
-    // MARK: - UICollectionViewDelegateFlowLayout
-    // =============================================================================================
+// =============================================================================================
+// MARK: - UICollectionViewDelegateFlowLayout
+// =============================================================================================
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
     }
@@ -114,9 +118,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
     
-    // =============================================================================================
-    // MARK: - configCell
-    // =============================================================================================
+// =============================================================================================
+// MARK: - configCell
+// =============================================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -153,18 +157,10 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             collectionView.backgroundColor = UIColor.SX_BackGroundColor()
         })
     }
-    
-    /// reloadData
-    func reloadData() {
-        
-        
-        
-        
-    }
 }
 
 // =============================================================================================
-// MARK: - 查找所在的ViewController
+// MARK: - 1.查找所在的ViewController
 // =============================================================================================
 extension SX_TrainingCell {
     
@@ -190,5 +186,8 @@ extension SX_TrainingCell {
      }
      */
 }
+
+
+
 
 
