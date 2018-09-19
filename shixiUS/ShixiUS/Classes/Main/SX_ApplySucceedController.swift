@@ -41,7 +41,7 @@ extension SX_ApplySucceedController {
     
         let imageV = UIImageView(image: #imageLiteral(resourceName: "icon_ApplySucceed")).addhere(toSuperView: self.view).layout { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(Margin)
+            make.top.equalToSuperview().offset(Margin+kNavH)
             make.width.height.equalTo(45.FloatValue.IPAD_XValue)
             }.config { (SUCCEED) in
                 
@@ -70,17 +70,18 @@ extension SX_ApplySucceedController {
         }
 
         let contentL = UILabel().addhere(toSuperView: self.view).layout { (make) in
-            make.top.equalTo(applyNum).offset(5.FloatValue.IPAD_XValue)
+            make.top.equalTo(applyNum).offset(Margin)
             make.left.equalTo(applyNum)
-            make.height.equalTo(UILabel.SX_getSpaceLabelHeight(self.str as NSString, font: UIFont.systemFont(ofSize: 12), width: SCREEN_WIDTH-40, space: SCREEN_WIDTH-40, zpace: 0))
+            make.height.equalTo(UILabel.SX_getSpaceLabelHeight(self.str as NSString, font: UIFont.systemFont(ofSize: 12), width: SCREEN_WIDTH-20, space: 0, zpace: 0))
             }.config { (CONTENT) in
                 CONTENT.sizeToFit()
                 CONTENT.text = self.str
+                CONTENT.numberOfLines = 0
                 CONTENT.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                 CONTENT.font = UIFont.systemFont(ofSize: 14)
         }
 
-        let ConfirmBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout { (make) in
+        _ = UIButton(type: .custom).addhere(toSuperView: self.view).layout { (make) in
             make.top.equalTo(contentL.snp.bottom).offset(35.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(Margin)
             make.right.equalToSuperview().offset(-Margin)
@@ -92,8 +93,7 @@ extension SX_ApplySucceedController {
                 CONFIRM.layer.masksToBounds = true
                 CONFIRM.layer.cornerRadius  = 10
                 CONFIRM.rx.tap.subscribe(onNext: { (_) in
-                    
-                    
+
                     self.navigationController?.popViewController(animated: true)
                     
                 }, onError: { (error) in

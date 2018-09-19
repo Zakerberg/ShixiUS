@@ -157,6 +157,14 @@ extension SX_ProjectDetailController {
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
+                
+                
+                let vc = SX_ApplySucceedController()
+                vc.ApplyNum.text = "SB123456789"
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+                
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
