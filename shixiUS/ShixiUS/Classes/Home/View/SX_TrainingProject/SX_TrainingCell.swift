@@ -27,10 +27,8 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     var moreButton: UIButton?
     var collectionView: UICollectionView?
     
-    var trainingPriceArr = [String]()
-    
-    var trainingNameArr = [String]()
-    
+    var trainModel: SX_HomeTrainModel?
+    var trainingModel:SX_HomeTrainingModel?
 
     // delegate
     var delegate: SX_TrainingCellDelegate?
@@ -85,8 +83,10 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         //var sourceName: UILabel?
         //var certificateLabel: UILabel?
 
+        cell.certificateLabel?.text = self.trainingModel?.price
         
-       
+        
+        
         
         
 

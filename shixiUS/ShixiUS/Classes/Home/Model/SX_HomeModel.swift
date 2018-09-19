@@ -14,8 +14,8 @@ import UIKit
 import ObjectMapper
 import SwiftyJSON
 
-class SX_HomeADModel {
-    
+struct SX_HomeADModel {
+
     var title: String?
     var url: String?
     var image: String?
@@ -29,20 +29,16 @@ class SX_HomeADModel {
     }
 }
 
-@objcMembers
-class SX_HomeModel: NSObject {
+struct SX_HomeModel {
 
-    var training: SX_HomeTrainingModel?
-    var jobs: SX_HomeJobsModel?
-    var train:SX_HomeTrainModel?
+    var training: SX_HomeTrainingModel
+    var jobs: SX_HomeJobsModel
+    var train:SX_HomeTrainModel
 
-    init(dic: [String: Any]) {
-        super.init()
-        setValuesForKeys(dic)
-    }    
-    
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {
-        print(key)
+    init(jsonData: JSON) {
+        training = SX_HomeTrainingModel(jsonData: jsonData["training"])
+        jobs     = SX_HomeJobsModel(jsonData: jsonData["jobs"])
+        train    = SX_HomeTrainModel(jsonData: jsonData["train"])
     }
 }
 
@@ -74,7 +70,7 @@ struct SX_HomeJobsModel {
     }
 }
 
-class SX_HomeTrainModel {
+struct SX_HomeTrainModel {
 
     var name:String?
     var price:String?
@@ -82,10 +78,10 @@ class SX_HomeTrainModel {
     var category:String?
 
     init(jsonData: JSON) {
-        name     = jsonData["name"].string
-        price    = jsonData["price"].string
-        category = jsonData["price"].string
-        image    = jsonData["image"].string
+        name     = jsonData["train"]["name"].string
+        price    = jsonData["train"]["price"].string
+        category = jsonData["train"]["category"].string
+        image    = jsonData["train"]["image"].string
     }
 }
 

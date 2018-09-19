@@ -108,9 +108,9 @@ class SX_HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
         fetchADData()
         fetchHomeData()
-        setUI()
         showLoadingView()
     }
     
@@ -172,20 +172,25 @@ extension SX_HomeVC {
             do{
                 let json = try JSON(data: result)
                 
-                self.jobsArr = json["jobs"].array!
-                self.trainingArr = json["training"].array!
-                self.trainArr = json["train"].array!
+//                self.jobsArr = json["jobs"].array!
+//                self.trainingArr = json["training"].array!
+//                self.trainArr = json["train"].array!
                 
+                
+                
+                    let trainModel = SX_HomeTrainModel(jsonData: json["train"])
+                    self.trainArr.append(trainModel)
+                    
+                    
+
+            
                 
                 ///遍历training
                 for (_, subJSON) : (String, JSON) in json["training"] {
                     self.trainingTitleArr.append(subJSON["title"].string!)
                     self.trainingPriceArr.append(subJSON["price"].string!)
                     self.trainingImageArr.append(subJSON["image"].string!)
-                    self.trainingModel?.price = subJSON["title"].string!
                 }
-                
-                
                 
                 /// 遍历jobs
                 self.jobsModel = SX_HomeJobsModel(jsonData: json["jobs"])
@@ -203,9 +208,9 @@ extension SX_HomeVC {
                     self.trainImageArr.append(subJSON["image"].string!)
                     self.trainCategoryArr.append(subJSON["category"].string!)
                 }
-
                 
                 self.homeTableView.reloadData()
+                
             } catch{ }
         })
     }
@@ -347,22 +352,23 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         shixiTrainingCell.selectionStyle = .none
         if indexPath.section == 2 {
             shixiTrainingCell.titleLabel?.text = "培训认证"
-            shixiTrainingCell.trainingPriceArr = self.trainingPriceArr
+
+            shixiTrainingCell.trainModel = self.trainModel
 
             
             
             
-            
-            
-            
-            
-            
-           shixiTrainingCell.collectionView?.reloadData()
-            
-            
-            
-        }else{
+        }else{ /// 0
             shixiTrainingCell.titleLabel?.text = "热门实训"
+
+            
+            //  shixiTrainingCell.trainingModel = self.trainingModel!
+            
+            
+            
+            
+            
+            
         }
         
         shixiTrainingCell.delegate = self
