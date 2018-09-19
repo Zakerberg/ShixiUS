@@ -96,6 +96,34 @@ extension SX_HotJobDetailController {
     
     func fetchData() {
         
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
 
@@ -125,7 +153,6 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
             cell.jobInterShip?.text   = "实习"
             cell.jobSalary?.text      = "面议"
             cell.jobIntroduce?.text   = self.intrStr
-            
             
             return cell
         }

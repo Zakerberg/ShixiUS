@@ -20,6 +20,8 @@ import RxCocoa
 import SwiftyJSON
 import Kingfisher
 import MBProgressHUD
+import YYModel
+import MJExtension
 
 private let identifier:String = "hotJobsCell"
 private let shixiTrainingCellID = "shixiTrainingCellID"
@@ -45,15 +47,29 @@ class SX_HomeVC: UIViewController {
     var trainingModel: SX_HomeTrainingModel?
     var jobsModel: SX_HomeJobsModel?
     var trainModel: SX_HomeTrainModel?
-
     
     /// jobs
-    var jobsArr = [Any]()
-    var jobsNameArr = [String]()
-    var jobsTradeArr = [String]()
-    var jobsAddressArr = [String]()
-    var jobsNatureArr = [String]()
-    ///
+    var jobsArr           = [Any]()
+    var jobsNameArr       = [String]()
+    var jobsTradeArr      = [String]()
+    var jobsAddressArr    = [String]()
+    var jobsNatureArr     = [String]()
+    /// jobs
+    
+    /// training
+    var trainingArr       = [Any]()
+    var trainingPriceArr  = [String]()
+    var trainingImageArr  = [String]()
+    var trainingTitleArr  = [String]()
+    /// training
+    
+    /// train
+    var trainArr          = [[String:String]]()
+    var trainNameArr      = [String]()
+    var trainPriceArr     = [String]()
+    var trainImageArr     = [String]()
+    var trainCategoryArr  = [String]()
+    /// train
     
     
     var loadingView: SX_LoadingView?
@@ -155,12 +171,16 @@ extension SX_HomeVC {
         SX_NetManager.requestData(type: .GET, URlString: SX_Home, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
-                self.trainingModel = SX_HomeTrainingModel(jsonData: json["training"])
+                
                 self.jobsArr = json["jobs"].array!
+                self.trainingArr = json["training"].array!
+                self.trainArr = json["train"].arrayObject! as! [[String : String]]
+                
                 ///遍历training
                 for (_, subJSON) : (String, JSON) in json["training"] {
-
-                    self.trainingModel?.title = subJSON["title"].string
+                    self.trainingTitleArr.append(subJSON["title"].string!)
+                    self.trainingPriceArr.append(subJSON["price"].string!)
+                    self.trainingImageArr.append(subJSON["image"].string!)
                 }
                 
                 /// 遍历jobs
@@ -172,6 +192,13 @@ extension SX_HomeVC {
                     self.jobsAddressArr.append(subJSON["address"].string!)
                 }
                 
+                /// 遍历train
+                for (_, subJSON) : (String, JSON) in json["train"] {
+                    self.trainNameArr.append(subJSON["name"].string!)
+                    self.trainPriceArr.append(subJSON["price"].string!)
+                    self.trainImageArr.append(subJSON["image"].string!)
+                    self.trainCategoryArr.append(subJSON["category"].string!)
+                }
                 
                 self.homeTableView.reloadData()
             } catch{ }
@@ -307,7 +334,6 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             cell.insduryLabel?.text = self.jobsTradeArr[indexPath.row]
             cell.addressLabel?.text = self.jobsAddressArr[indexPath.row]
             cell.eduLabel?.text = self.jobsNatureArr[indexPath.row]
-            
             
             return cell
         }

@@ -25,8 +25,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     var titleLabel: UILabel?
     var moreButton: UIButton?
     var collectionView: UICollectionView?
-     
-   
+    
+    var trainingArr = [[String:String]]()
+    var trainAr = [[String:String]]()
     
     // delegate
     var delegate: SX_TrainingCellDelegate?
@@ -75,15 +76,11 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
+        
+//        cell.configCell(model: <#T##SX_HomeTrainingModel#>)
 
 
-        
-        
-//        cell.sourceImageView?.image = #imageLiteral(resourceName: "localImg3")
-//        cell.priceLabel?.text = "￥" + "2998.00"
-//        cell.sourceName?.text = "课程名称课程名称测试"
-//        cell.certificateLabel?.text = "职业技术证书"
-//
+
         return cell
     }
     

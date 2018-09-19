@@ -71,3 +71,30 @@ extension SX_TrainingCollectionViewCell {
         })
     }
 }
+
+
+
+extension SX_TrainingCollectionViewCell {
+    func configCell(model: SX_HomeTrainingModel) {
+        self.sourceName?.text  = model.title
+        self.sourceImageView?.image = #imageLiteral(resourceName: "icon")
+        self.priceLabel?.text = model.price
+        
+    }
+    
+    func configCellWithTrainModel(model:SX_HomeTrainModel) {
+        self.certificateLabel?.text = model.category
+        self.priceLabel?.text = model.price
+        self.sourceImageView?.image = #imageLiteral(resourceName: "icon")
+        self.sourceName?.text = model.name
+    }
+}
+
+
+
+
+
+
+
+
+
