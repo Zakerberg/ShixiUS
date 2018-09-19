@@ -13,6 +13,7 @@
  */
 
 import UIKit
+import SwiftyJSON
 
 let CollectionViewCellID = "CollectionViewCellID"
 
@@ -26,9 +27,11 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     var moreButton: UIButton?
     var collectionView: UICollectionView?
     
-    var trainingArr = [[String:String]]()
-    var trainAr = [[String:String]]()
+    var trainingPriceArr = [String]()
     
+    var trainingNameArr = [String]()
+    
+
     // delegate
     var delegate: SX_TrainingCellDelegate?
     
@@ -55,9 +58,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-// ===============================================================================
-// MARK: - UICollectionViewDelegate
-// ===============================================================================
+    // ===============================================================================
+    // MARK: - UICollectionViewDelegate
+    // ===============================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -77,9 +80,15 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
         
-//        cell.configCell(model: <#T##SX_HomeTrainingModel#>)
+        //var sourceImageView: UIImageView?
+        //var priceLabel: UILabel?
+        //var sourceName: UILabel?
+        //var certificateLabel: UILabel?
 
-
+        
+       
+        
+        
 
         return cell
     }
@@ -95,9 +104,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-// =============================================================================================
-// MARK: - UICollectionViewDelegateFlowLayout
-// =============================================================================================
+    // =============================================================================================
+    // MARK: - UICollectionViewDelegateFlowLayout
+    // =============================================================================================
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
     }
@@ -106,9 +115,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
     
-// =============================================================================================
-// MARK: - configCell
-// =============================================================================================
+    // =============================================================================================
+    // MARK: - configCell
+    // =============================================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -152,7 +161,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
 // =============================================================================================
 extension SX_TrainingCell {
     
-/*
+    /*
      MARK: - 查找所在的ViewController
      func responderViewController() -> UIViewController? {
      for view in sequence(first: self.superview, next: {$0?.superview}) {
@@ -174,8 +183,3 @@ extension SX_TrainingCell {
      }
      */
 }
-
-
-
-
-

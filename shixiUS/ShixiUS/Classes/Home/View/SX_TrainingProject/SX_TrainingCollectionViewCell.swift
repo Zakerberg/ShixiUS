@@ -72,14 +72,11 @@ extension SX_TrainingCollectionViewCell {
     }
 }
 
-
-
 extension SX_TrainingCollectionViewCell {
     func configCell(model: SX_HomeTrainingModel) {
         self.sourceName?.text  = model.title
-        self.sourceImageView?.image = #imageLiteral(resourceName: "icon")
+//        self.sourceImageView?.image = UIImageView.get
         self.priceLabel?.text = model.price
-        
     }
     
     func configCellWithTrainModel(model:SX_HomeTrainModel) {
@@ -89,12 +86,5 @@ extension SX_TrainingCollectionViewCell {
         self.sourceName?.text = model.name
     }
 }
-
-
-
-
-
-
-
 
 

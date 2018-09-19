@@ -64,7 +64,7 @@ class SX_HomeVC: UIViewController {
     /// training
     
     /// train
-    var trainArr          = [[String:String]]()
+    var trainArr          = [Any]()
     var trainNameArr      = [String]()
     var trainPriceArr     = [String]()
     var trainImageArr     = [String]()
@@ -174,14 +174,18 @@ extension SX_HomeVC {
                 
                 self.jobsArr = json["jobs"].array!
                 self.trainingArr = json["training"].array!
-                self.trainArr = json["train"].arrayObject! as! [[String : String]]
+                self.trainArr = json["train"].array!
+                
                 
                 ///遍历training
                 for (_, subJSON) : (String, JSON) in json["training"] {
                     self.trainingTitleArr.append(subJSON["title"].string!)
                     self.trainingPriceArr.append(subJSON["price"].string!)
                     self.trainingImageArr.append(subJSON["image"].string!)
+                    self.trainingModel?.price = subJSON["title"].string!
                 }
+                
+                
                 
                 /// 遍历jobs
                 self.jobsModel = SX_HomeJobsModel(jsonData: json["jobs"])
@@ -199,6 +203,7 @@ extension SX_HomeVC {
                     self.trainImageArr.append(subJSON["image"].string!)
                     self.trainCategoryArr.append(subJSON["category"].string!)
                 }
+
                 
                 self.homeTableView.reloadData()
             } catch{ }
@@ -268,15 +273,15 @@ extension SX_HomeVC {
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(SX_NavigationBar.navBarBottom())
             navBarBackgroundAlpha = alpha
-            navBarTintColor = UIColor.white.withAlphaComponent(alpha)
+            navBarTintColor  = UIColor.white.withAlphaComponent(alpha)
             navBarTitleColor = UIColor.white.withAlphaComponent(alpha)
-            statusBarStyle = .default
+            statusBarStyle   = .default
             title = "首页"
         } else {
             navBarBackgroundAlpha = 0
-            navBarTintColor = .clear
+            navBarTintColor  = .clear
             navBarTitleColor = .clear
-            statusBarStyle = .lightContent
+            statusBarStyle   = .lightContent
             title = "首页"
         }
     }
@@ -342,6 +347,20 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         shixiTrainingCell.selectionStyle = .none
         if indexPath.section == 2 {
             shixiTrainingCell.titleLabel?.text = "培训认证"
+            shixiTrainingCell.trainingPriceArr = self.trainingPriceArr
+
+            
+            
+            
+            
+            
+            
+            
+            
+           shixiTrainingCell.collectionView?.reloadData()
+            
+            
+            
         }else{
             shixiTrainingCell.titleLabel?.text = "热门实训"
         }

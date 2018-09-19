@@ -81,12 +81,12 @@ class SX_HomeTrainModel {
     var image:String?
     var category:String?
 
-//    init(jsonData: JSON) {
-//        name     = jsonData["name"].string
-//        price    = jsonData["price"].string
-//        category = jsonData["price"].string
-//        image    = jsonData["image"].string
-//    }
+    init(jsonData: JSON) {
+        name     = jsonData["name"].string
+        price    = jsonData["price"].string
+        category = jsonData["price"].string
+        image    = jsonData["image"].string
+    }
 }
 
 
