@@ -80,23 +80,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
         
-        var index = 9;
-        
-//        if indexPath.section == 0 {
-//            if indexPath.item == 0 {
-//                index = 0
-//            }else{
-//                index = 1
-//            }
-//        }else{
-//            if indexPath.section == 1 {
-//                if indexPath.item == 0{
-//                    index = 2
-//                }else{
-//                    index = 3
-//                }
-//            }
-//        }
+        var index = 0; 
         
         if indexPath.section == 0 && indexPath.row == 0 {
             index = 0
