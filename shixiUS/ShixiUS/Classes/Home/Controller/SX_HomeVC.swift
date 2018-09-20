@@ -49,28 +49,13 @@ class SX_HomeVC: UIViewController {
     var trainModel: SX_HomeTrainModel?
     
     /// jobs
-    var jobsArr           = JSON()
-    var jobsNameArr       = [String]()
-    var jobsTradeArr      = [String]()
-    var jobsAddressArr    = [String]()
-    var jobsNatureArr     = [String]()
-    /// jobs
+    var jobsArr      = JSON()
     
     /// training
-    var trainingArr       = [Any]()
-    var trainingPriceArr  = [String]()
-    var trainingImageArr  = [String]()
-    var trainingTitleArr  = [String]()
-    /// training
+    var trainingArr  = [SX_HomeTrainingModel]()
     
     /// train
-    var trainArr          = [SX_HomeTrainModel]()
-    var trainNameArr      = [String]()
-    var trainPriceArr     = [String]()
-    var trainImageArr     = [String]()
-    var trainCategoryArr  = [String]()
-    /// train
-    
+    var trainArr     = [SX_HomeTrainModel]()
     
     var loadingView: SX_LoadingView?
     
@@ -171,48 +156,17 @@ extension SX_HomeVC {
         SX_NetManager.requestData(type: .GET, URlString: SX_Home, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
-                
-                
                 self.jobsArr = JSON(arrayLiteral: json["jobs"].array ?? [])[0]
-                
                 for item in json["train"].array ?? [] {
                     let trainModel = SX_HomeTrainModel(jsonData: item)
                     self.trainArr.append(trainModel)
                 }
                 
-                
-                
-                
-                
-                
-                
-                
-                ///遍历training
-                for (_, subJSON) : (String, JSON) in json["training"] {
-                    self.trainingTitleArr.append(subJSON["title"].string!)
-                    self.trainingPriceArr.append(subJSON["price"].string!)
-                    self.trainingImageArr.append(subJSON["image"].string!)
+                for item in json["training"].array ?? [] {
+                    let trainingModel = SX_HomeTrainingModel(jsonData: item)
+                    self.trainingArr.append(trainingModel)
                 }
-                
-                /// 遍历jobs
-                self.jobsModel = SX_HomeJobsModel(jsonData: json["jobs"])
-                for (_, subJSON): (String, JSON) in json["jobs"] {
-                    self.jobsNameArr.append(subJSON["name"].string!)
-                    self.jobsTradeArr.append(subJSON["trade"].string!)
-                    self.jobsNatureArr.append(subJSON["nature"].string!)
-                    self.jobsAddressArr.append(subJSON["address"].string!)
-                }
-                
-                /// 遍历train
-                for (_, subJSON) : (String, JSON) in json["train"] {
-                    self.trainNameArr.append(subJSON["name"].string!)
-                    self.trainPriceArr.append(subJSON["price"].string!)
-                    self.trainImageArr.append(subJSON["image"].string!)
-                    self.trainCategoryArr.append(subJSON["category"].string!)
-                }
-                
                 self.homeTableView.reloadData()
-                
             } catch{ }
         })
     }
@@ -354,15 +308,13 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         
         let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
         shixiTrainingCell.selectionStyle = .none
-        if indexPath.section == 2 {
+        if indexPath.section == 2 { // 2 培训认证
             shixiTrainingCell.titleLabel?.text = "培训认证"
             shixiTrainingCell.trainModels = self.trainArr
             
-        }else{ /// 0
+        }else{ /// 0 热门实训
             shixiTrainingCell.titleLabel?.text = "热门实训"
-            
-            
-            
+            shixiTrainingCell.trainingModels = self.trainingArr
         }
         
         shixiTrainingCell.delegate = self

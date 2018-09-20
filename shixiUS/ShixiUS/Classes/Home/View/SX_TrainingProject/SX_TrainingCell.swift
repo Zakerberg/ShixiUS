@@ -60,12 +60,12 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     // MARK: - UICollectionViewDelegate
     // ===============================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.trainModels?.count ?? 2
+        return self.trainModels?.count ?? self.trainingModels?.count ?? 2
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return self.trainModels?.count ?? 2
+        return self.trainModels?.count ?? self.trainingModels?.count ?? 2
     }
     
     /// 返回对应的单元格
@@ -77,7 +77,6 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
-        
         
         var index = 0;
         
@@ -97,7 +96,6 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         }
         
         if let trainModels = trainModels, trainModels.count >= 4 {
-            
             let model = trainModels[index]
             cell.certificateLabel?.text = model.category
             if let url = URL(string: model.image ?? ""){
@@ -107,7 +105,19 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             }
             cell.priceLabel?.text = model.price
             cell.sourceName?.text = model.name
+        }
+        
+        if let trainingModels = trainingModels, trainingModels.count >= 4 {
+            let model = trainingModels[index]
             
+            if let url = URL(string: model.image ?? ""){
+                cell.sourceImageView?.kf.setImage(with: url)
+            }else{
+                cell.sourceImageView?.image = #imageLiteral(resourceName: "icon_placeholdericon_Image")
+            }
+            
+            cell.sourceName?.text = model.title
+            cell.priceLabel?.text = model.price
         }
         
         return cell
