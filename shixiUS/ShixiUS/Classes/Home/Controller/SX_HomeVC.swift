@@ -439,6 +439,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
 extension SX_HomeVC: SXCycleScrollerViewDelegate {
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
         
+        
+        
     }
     
     func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {

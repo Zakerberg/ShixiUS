@@ -106,24 +106,6 @@ extension SX_HotJobDetailController {
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }
 

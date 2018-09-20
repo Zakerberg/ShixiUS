@@ -88,9 +88,6 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             self.titleNameLabel = cell.nameTitle
             self.logInBtn = cell.logInButton
             
-            
-            
-            
             self.logInBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("注册登陆 +++ + ")
                 let vc = SX_LoginController()
@@ -154,9 +151,6 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     SXLog("退出登录 +++ + ")
-                    
-                    
-                    
                     
                     
                 }, onError: { (error) in

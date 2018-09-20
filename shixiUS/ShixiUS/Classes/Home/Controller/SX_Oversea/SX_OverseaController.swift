@@ -17,34 +17,20 @@
 import UIKit
 
 class SX_OverseaController: UIViewController {
-    
-    // ================================================================================
-    // MARK: - Lazy
-    // ================================================================================
+
     lazy var tableView: UITableView = {
-        let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: self.view.bounds.height), style: .grouped)
-        table.contentInset = UIEdgeInsetsMake(-CGFloat(kNavH), 0, 0, 0);
+        let table:UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         table.delegate = self
         table.dataSource = self
         return table
     }()
     
-    lazy var overseaScrollerView: SX_CycleScrollerView = {
-        let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
-        let cycleView = SX_CycleScrollerView(frame: frame, type: .LOCAL, imgs: nil, descs: nil)
-        cycleView.delegate = self
-        return cycleView
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
         
-        let localImgs = ["image11","image12","image13","image14","image15"]
-        
-        overseaScrollerView.localImgArray = localImgs
-        view.addSubview(tableView)
-        tableView.tableHeaderView = overseaScrollerView
+        setUI()
+        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,11 +49,18 @@ class SX_OverseaController: UIViewController {
 // ==================================================================================
 extension SX_OverseaController {
     
-  
+    func setUI() {
+        view.backgroundColor = UIColor.white
+        title = "海外就业"
+        self.view.addSubview(tableView)
+        
+    }
     
-    
-    
-    
+    func fetchData() {
+        
+        
+        
+    }
 }
 
 // =========================================================================================
@@ -150,41 +143,9 @@ extension SX_OverseaController: UITableViewDelegate, UITableViewDataSource {
 }
 
 // ==========================================================================================
-// MARK: - UIScrollViewDelegate
+// MARK: -
 // ==========================================================================================
-extension SX_OverseaController: UIScrollViewDelegate {
+extension SX_OverseaController {
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView)
-    {
-        let offsetY = scrollView.contentOffset.y
-        if (offsetY > NAVBAR_COLORCHANGE_POINT) {
-            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavH)
-            navBarBackgroundAlpha = alpha
-            navBarTintColor = UIColor.white.withAlphaComponent(alpha)
-            navBarTitleColor = UIColor.white.withAlphaComponent(alpha)
-            statusBarStyle = .default
-            title = "海外就业"
-        } else {
-            navBarBackgroundAlpha = 0
-            navBarTintColor = .clear
-            navBarTitleColor = .clear
-            statusBarStyle = .lightContent
-            title = "海外就业"
-        }
-    }
-}
-
-// =====================================================================================
-// MARK: - SXCycleScrollerViewDelegate
-// =====================================================================================
-extension SX_OverseaController: SXCycleScrollerViewDelegate {
     
-    func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
-        
-        
-    }
-    
-    func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
-        SXLog("点击了oversea\(index)")
-    }
 }
