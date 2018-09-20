@@ -11,9 +11,7 @@
  */
 
 import UIKit
-import ObjectMapper
 import SwiftyJSON
-
 
 // ==============================================================================================
 // MARK: - 首页
@@ -48,11 +46,13 @@ struct SX_HomeModel {
 
 struct SX_HomeTrainingModel {
     
+    var id:String?
     var title:String?
     var price:String?
     var image:String?
     
     init(jsonData: JSON) {
+        id    = jsonData["id"].string
         title = jsonData["title"].string
         price = jsonData["price"].string
         image = jsonData["image"].string
@@ -61,12 +61,14 @@ struct SX_HomeTrainingModel {
 
 struct SX_HomeJobsModel {
     
+    var id:Int?
     var name: String?
     var trade:String?
     var address:String?
     var nature:String?
     
     init(jsonData: JSON) {
+        id      = jsonData["id"].int
         name    = jsonData["name"].string
         trade   = jsonData["trade"].string
         address = jsonData["address"].string
@@ -76,12 +78,14 @@ struct SX_HomeJobsModel {
 
 struct SX_HomeTrainModel {
     
+    var id:String?
     var name:String?
     var price:String?
     var image:String?
     var category:String?
     
     init(jsonData: JSON) {
+        id       = jsonData["id"].string
         name     = jsonData["name"].string
         price    = jsonData["price"].string
         category = jsonData["category"].string
@@ -192,26 +196,49 @@ struct SX_TrainingDetailModel {
     var collection:Int?
     var collection_type:String?
     
-
-    
 }
 
 struct TrainingDetailTrainingModel {
     
+    var id: String?
+    var title:String?
     
+    init(jsonData: JSON) {
+        id   = jsonData["id"].string
+        title = jsonData["title"].string
+    }
 }
 
 struct TrainingDetailDetailsModel {
     
+    var id: String?
+    var date:String?
+    var price:String?
     
-    
-    
-    
+    init(jsonData: JSON) {
+        id    = jsonData["id"].string
+        date  = jsonData["date"].string
+        price = jsonData["price"].string
+    }
 }
 
 struct TrainingDetailScheduleModel {
     
+    var sort:Int?
+    var title:String?
+    var location:String?
+    var repast:String?
+    var traffic:String?
+    var content:String?
     
+    init(jsonData: JSON) {
+        sort     = jsonData["sort"].int
+        title    = jsonData["title"].string
+        location = jsonData["location"].string
+        repast   = jsonData["repast"].string
+        traffic  = jsonData["traffic"].string
+        content  = jsonData["content"].string
+    }
 }
 
 // ==============================================================================================

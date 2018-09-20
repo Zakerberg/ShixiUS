@@ -18,7 +18,7 @@ import SwiftyJSON
 let CollectionViewCellID = "CollectionViewCellID"
 
 protocol SX_TrainingCellDelegate {
-    func clickCell(item: Int)
+    func clickCell(item: String)
 }
 
 class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -32,6 +32,8 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     // delegate
     var delegate: SX_TrainingCellDelegate?
+    
+    var id:String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -78,24 +80,36 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
         
-        var index = 0;
+        var index = 9;
         
-        if indexPath.section == 0 {
-            if indexPath.item == 0{
-                index = 0
-            }else{
-                index = 1
-            }
-            
-        }else{
-            if indexPath.item == 0 {
-                index = 3
-            }else{
-                index = 4
-            }
+//        if indexPath.section == 0 {
+//            if indexPath.item == 0 {
+//                index = 0
+//            }else{
+//                index = 1
+//            }
+//        }else{
+//            if indexPath.section == 1 {
+//                if indexPath.item == 0{
+//                    index = 2
+//                }else{
+//                    index = 3
+//                }
+//            }
+//        }
+        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            index = 0
+        }else if indexPath.section == 0 && indexPath.row == 1 {
+            index = 1
+        }else if indexPath.section == 0 && indexPath.row == 2 {
+            index = 2
+        }else if indexPath.section == 0 && indexPath.row == 3 {
+            index = 3
         }
-        
+    
         if let trainModels = trainModels, trainModels.count >= 4 {
+          
             let model = trainModels[index]
             cell.certificateLabel?.text = model.category
             if let url = URL(string: model.image ?? ""){
@@ -105,17 +119,18 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             }
             cell.priceLabel?.text = model.price
             cell.sourceName?.text = model.name
+            self.id               = model.id
         }
         
         if let trainingModels = trainingModels, trainingModels.count >= 4 {
             let model = trainingModels[index]
-            
+
             if let url = URL(string: model.image ?? ""){
                 cell.sourceImageView?.kf.setImage(with: url)
             }else{
                 cell.sourceImageView?.image = #imageLiteral(resourceName: "icon_placeholdericon_Image")
             }
-            
+            self.id               = model.id
             cell.sourceName?.text = model.title
             cell.priceLabel?.text = model.price
         }
@@ -126,7 +141,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         SXLog("点击了CollectionView的\(indexPath.section)---\(indexPath.row)")
         
-        self.delegate?.clickCell(item: indexPath.section)
+        
+        
+        self.delegate?.clickCell(item: self.id ?? "0")
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

@@ -12,6 +12,7 @@
  */
 
 import UIKit
+import SwiftyJSON
 
 let projectDetailTitleCellID    = "projectDetailTitleCellID"
 let projectDetailDateTripCellID = "projectDetailDateTripCellID"
@@ -34,6 +35,8 @@ class SX_ProjectDetailController: UIViewController {
     var dateTArr     = ["06.12", "06.14", "08.19", "09.16"]
     var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
     ///////////////////////////////////////////////////////////////////////////////////////////////
+    
+    var id:String?
     
     var moreDateBtn : UIButton?
   
@@ -157,14 +160,9 @@ extension SX_ProjectDetailController {
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
-                
-                
                 let vc = SX_ApplySucceedController()
                 vc.ApplyNum.text = "SB123456789"
                 self.navigationController?.pushViewController(vc, animated: true)
-                
-                
-                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -172,8 +170,23 @@ extension SX_ProjectDetailController {
     }
     
     func fetchData() {
-
         
+      let str = SX_TrainingDetail + self.id!
+        
+        
+        
+        SX_NetManager.requestData(type: .GET, URlString: str, parameters:  nil, finishCallBack: { (result) in
+            
+            
+            
+            do{
+                /// SwiftyJSON 在这里 ! ! !
+                let json = try JSON(data: result)
+                
+                
+                    
+            } catch{ }
+        })
         
     }
 }
@@ -227,8 +240,6 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
                 
                 let vc = SX_MoreDateController()
 //                vc?.isEnable = false
-//
-//
 //
 //                vc?.title = "更多日期"
                 self.navigationController?.pushViewController(vc, animated: true)

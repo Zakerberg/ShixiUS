@@ -448,8 +448,9 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
 // MARK: - SX_TrainingCellDelegate
 // ================================================================================================
 extension SX_HomeVC: SX_TrainingCellDelegate {
-    func clickCell(item: Int) {
+    func clickCell(item: String) {
         let vc = SX_ProjectDetailController()
+        vc.id = item
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
