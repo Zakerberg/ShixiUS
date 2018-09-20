@@ -218,21 +218,26 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
 extension SX_TrainingProjectController {
     func fetchData()  {
         
-        SX_NetManager.requestData(type: .GET, URlString: SX_TrainingList, parameters: nil) { (result) in
+        SX_NetManager.requestData(type: .GET, URlString: SX_TrainIndex, parameters: nil) { (result) in
             
             do{
                 let json = try JSON(data: result)
-                if json["status"] == 200 {
                     /// 成功
                     SXLog("成功! ")
-                    self.dismiss(animated: true, completion: nil)
-                } else if json["status"] == 202 {
-                    /// 错误状态
-                    SXLog("状态! ")
-                } else if json["status"] == 203 {
-                    /// 超时, 重新登录
-                    SXLog("超时, 重新登录! ")
-                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+             
             } catch{ }
             
             

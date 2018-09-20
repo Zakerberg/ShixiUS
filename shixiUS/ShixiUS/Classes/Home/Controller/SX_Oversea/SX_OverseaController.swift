@@ -25,7 +25,6 @@ class SX_OverseaController: UIViewController {
         return table
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

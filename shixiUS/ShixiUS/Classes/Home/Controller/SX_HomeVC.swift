@@ -18,10 +18,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SwiftyJSON
-import Kingfisher
-import MBProgressHUD
-import YYModel
-import MJExtension
 
 private let identifier:String = "hotJobsCell"
 private let shixiTrainingCellID = "shixiTrainingCellID"

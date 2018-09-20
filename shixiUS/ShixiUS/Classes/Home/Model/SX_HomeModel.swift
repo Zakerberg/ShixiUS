@@ -14,6 +14,10 @@ import UIKit
 import ObjectMapper
 import SwiftyJSON
 
+
+// ==============================================================================================
+// MARK: - 首页
+// ==============================================================================================
 struct SX_HomeADModel {
     
     var title: String?
@@ -84,6 +88,141 @@ struct SX_HomeTrainModel {
         image    = jsonData["image"].string
     }
 }
+
+// ==============================================================================================
+// MARK: - 实训项目 ! ! !
+// ==============================================================================================
+struct SX_TrainingModel {
+    
+    var search: TrainingSearchModel
+    var lists:TrainingListModel
+    var type:TrainingTypeModel
+    var country:TrainingCountryModel
+    var sort:TrainingSortModel
+    
+    init(jsonData: JSON) {
+        search  = TrainingSearchModel(jsonData: jsonData["search"])
+        lists   = TrainingListModel(jsonData: jsonData["lists"])
+        type    = TrainingTypeModel(jsonData: jsonData["type"])
+        country =  TrainingCountryModel(jsonData: jsonData["country"])
+        sort    = TrainingSortModel(jsonData: jsonData["sort"])
+    }
+}
+
+struct TrainingSearchModel {
+    
+    var type:Int?
+    var country:Int?
+    var sort:String?
+    var order:String?
+    
+    init(jsonData: JSON) {
+        type    = jsonData["type"].int
+        country = jsonData["country"].int
+        sort    = jsonData["sort"].string
+        order   = jsonData["order"].string
+    }
+}
+
+struct TrainingListModel {
+    
+    var id: String?
+    var title:String?
+    var image:String?
+    var price:String?
+    
+    init(jsonData: JSON) {
+        id    = jsonData["id"].string
+        title = jsonData["title"].string
+        image = jsonData["image"].string
+        price = jsonData["price"].string
+    }
+}
+
+struct TrainingTypeModel {
+    var id: String?
+    var name:String?
+    
+    init(jsonData: JSON) {
+        id   = jsonData["id"].string
+        name = jsonData["name"].string
+    }
+}
+
+struct TrainingCountryModel {
+    
+    var id: String?
+    var name:String?
+    var en_name:String?
+    
+    init(jsonData: JSON) {
+        id      = jsonData["id"].string
+        name    = jsonData["name"].string
+        en_name = jsonData["en_name"].string
+    }
+}
+
+struct TrainingSortModel {
+    
+    var name:String?
+    var sort:String?
+    var order:String?
+    
+    init(jsonData: JSON) {
+        name  = jsonData["name"].string
+        sort  = jsonData["sort"].string
+        order = jsonData["order"].string
+    }
+}
+
+// ==============================================================================================
+// MARK: - 实训项目详情
+// ==============================================================================================
+struct SX_TrainingDetailModel {
+    
+    var id:Int?
+    var image:String?
+    var title:String?
+    var outset_city:String?
+    var features:String?
+    var destine:String?
+    var training: TrainingDetailTrainingModel
+    var details: TrainingDetailDetailsModel
+    var schedule:TrainingDetailScheduleModel
+    var collection:Int?
+    var collection_type:String?
+    
+
+    
+}
+
+struct TrainingDetailTrainingModel {
+    
+    
+}
+
+struct TrainingDetailDetailsModel {
+    
+    
+    
+    
+    
+}
+
+struct TrainingDetailScheduleModel {
+    
+    
+}
+
+// ==============================================================================================
+// MARK: -
+// ==============================================================================================
+
+
+
+
+
+
 
 
 
