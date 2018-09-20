@@ -27,9 +27,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     var moreButton: UIButton?
     var collectionView: UICollectionView?
     
-    var trainModel: SX_HomeTrainModel?
-    var trainingModel:SX_HomeTrainingModel?
-
+    var trainModels: [SX_HomeTrainModel]?
+    var trainingModels:[SX_HomeTrainingModel]?
+    
     // delegate
     var delegate: SX_TrainingCellDelegate?
     
@@ -60,12 +60,12 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     // MARK: - UICollectionViewDelegate
     // ===============================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return self.trainModels?.count ?? 2
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return self.trainModels?.count ?? 2
     }
     
     /// 返回对应的单元格
@@ -78,18 +78,38 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
         
-        //var sourceImageView: UIImageView?
-        //var priceLabel: UILabel?
-        //var sourceName: UILabel?
-        //var certificateLabel: UILabel?
-
-        cell.certificateLabel?.text = self.trainingModel?.price
         
+        var index = 0;
         
+        if indexPath.section == 0 {
+            if indexPath.item == 0{
+                index = 0
+            }else{
+                index = 1
+            }
+            
+        }else{
+            if indexPath.item == 0 {
+                index = 3
+            }else{
+                index = 4
+            }
+        }
         
+        if let trainModels = trainModels, trainModels.count >= 4 {
+            
+            let model = trainModels[index]
+            cell.certificateLabel?.text = model.category
+            if let url = URL(string: model.image ?? ""){
+                cell.sourceImageView?.kf.setImage(with: url)
+            }else{
+                cell.sourceImageView?.image = #imageLiteral(resourceName: "icon_placeholdericon_Image")
+            }
+            cell.priceLabel?.text = model.price
+            cell.sourceName?.text = model.name
+            
+        }
         
-        
-
         return cell
     }
     

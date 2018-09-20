@@ -49,7 +49,7 @@ class SX_HomeVC: UIViewController {
     var trainModel: SX_HomeTrainModel?
     
     /// jobs
-    var jobsArr           = [Any]()
+    var jobsArr           = JSON()
     var jobsNameArr       = [String]()
     var jobsTradeArr      = [String]()
     var jobsAddressArr    = [String]()
@@ -64,7 +64,7 @@ class SX_HomeVC: UIViewController {
     /// training
     
     /// train
-    var trainArr          = [Any]()
+    var trainArr          = [SX_HomeTrainModel]()
     var trainNameArr      = [String]()
     var trainPriceArr     = [String]()
     var trainImageArr     = [String]()
@@ -172,18 +172,20 @@ extension SX_HomeVC {
             do{
                 let json = try JSON(data: result)
                 
-//                self.jobsArr = json["jobs"].array!
-//                self.trainingArr = json["training"].array!
-//                self.trainArr = json["train"].array!
                 
+                self.jobsArr = JSON(arrayLiteral: json["jobs"].array ?? [])[0]
                 
-                
-                    let trainModel = SX_HomeTrainModel(jsonData: json["train"])
+                for item in json["train"].array ?? [] {
+                    let trainModel = SX_HomeTrainModel(jsonData: item)
                     self.trainArr.append(trainModel)
-                    
-                    
-
-            
+                }
+                
+                
+                
+                
+                
+                
+                
                 
                 ///遍历training
                 for (_, subJSON) : (String, JSON) in json["training"] {
@@ -340,10 +342,12 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
             let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
             cell.selectionStyle = .none
             
-            cell.jobsLabel?.text = self.jobsNameArr[indexPath.row]
-            cell.insduryLabel?.text = self.jobsTradeArr[indexPath.row]
-            cell.addressLabel?.text = self.jobsAddressArr[indexPath.row]
-            cell.eduLabel?.text = self.jobsNatureArr[indexPath.row]
+            let model = jobsArr[indexPath.row]
+            
+            cell.jobsLabel?.text = model["name"].string
+            cell.insduryLabel?.text = model["trade"].string
+            cell.addressLabel?.text = model["address"].string
+            cell.eduLabel?.text = model["nature"].string
             
             return cell
         }
@@ -352,20 +356,10 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         shixiTrainingCell.selectionStyle = .none
         if indexPath.section == 2 {
             shixiTrainingCell.titleLabel?.text = "培训认证"
-
-            shixiTrainingCell.trainModel = self.trainModel
-
-            
-            
+            shixiTrainingCell.trainModels = self.trainArr
             
         }else{ /// 0
             shixiTrainingCell.titleLabel?.text = "热门实训"
-
-            
-            //  shixiTrainingCell.trainingModel = self.trainingModel!
-            
-            
-            
             
             
             
