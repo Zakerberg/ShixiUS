@@ -62,6 +62,7 @@ class SX_NetManager {
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "charset":"utf-8",
+            
             ]
         
         Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in

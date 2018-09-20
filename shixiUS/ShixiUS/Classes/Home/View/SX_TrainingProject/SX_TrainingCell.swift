@@ -58,9 +58,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-    // ===============================================================================
-    // MARK: - UICollectionViewDelegate
-    // ===============================================================================
+// ===============================================================================
+// MARK: - UICollectionViewDelegate
+// ===============================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.trainModels?.count ?? self.trainingModels?.count ?? 2
     }
@@ -80,7 +80,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
         
-        var index = 0; 
+        var index = 0;
         
         if indexPath.section == 0 && indexPath.row == 0 {
             index = 0
@@ -124,9 +124,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         SXLog("点击了CollectionView的\(indexPath.section)---\(indexPath.row)")
-        
-        
-        
+
         self.delegate?.clickCell(item: self.id ?? "0")
     }
     

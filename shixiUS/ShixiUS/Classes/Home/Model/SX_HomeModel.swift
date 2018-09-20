@@ -14,7 +14,7 @@ import UIKit
 import SwiftyJSON
 
 // ==============================================================================================
-// MARK: - 首页
+// MARK: - 首页广告 index/AD
 // ==============================================================================================
 struct SX_HomeADModel {
     
@@ -31,6 +31,9 @@ struct SX_HomeADModel {
     }
 }
 
+// ==============================================================================================
+// MARK: - 首页 index/index
+// ==============================================================================================
 struct SX_HomeModel {
     
     var training: SX_HomeTrainingModel
@@ -94,7 +97,7 @@ struct SX_HomeTrainModel {
 }
 
 // ==============================================================================================
-// MARK: - 实训项目 ! ! !
+// MARK: - 实训项目列表页 ! ! ! /training/index
 // ==============================================================================================
 struct SX_TrainingModel {
     
@@ -180,11 +183,11 @@ struct TrainingSortModel {
 }
 
 // ==============================================================================================
-// MARK: - 实训项目详情
+// MARK: - 实训项目详情 /training/view/id/实训id
 // ==============================================================================================
 struct SX_TrainingDetailModel {
     
-    var id:Int?
+    var id:String?
     var image:String?
     var title:String?
     var outset_city:String?
@@ -196,6 +199,11 @@ struct SX_TrainingDetailModel {
     var collection:Int?
     var collection_type:String?
     
+    init(jsonData: JSON) {
+        training = TrainingDetailTrainingModel(jsonData: jsonData["training"])
+        details = TrainingDetailDetailsModel(jsonData: ["details"])
+        schedule = TrainingDetailScheduleModel(jsonData: ["schedule"])
+    }
 }
 
 struct TrainingDetailTrainingModel {
@@ -242,8 +250,96 @@ struct TrainingDetailScheduleModel {
 }
 
 // ==============================================================================================
-// MARK: -
+// MARK: - 实训报名页 /training/apply
 // ==============================================================================================
+struct SX_TrainingApplyModel {
+    
+    var uid:String?
+    var training:String?
+    var detail:String?
+    var title:String?
+    var country:TrainingApplyCountryModel
+    var member:TrainingApplyMemberModel
+    
+    init(jsonData: JSON) {
+        uid      = jsonData["uid"].string
+        training = jsonData["training"].string
+        detail   = jsonData["detail"].string
+        title    = jsonData["title"].string
+        country  = TrainingApplyCountryModel(jsonData: jsonData["country"])
+        member   = TrainingApplyMemberModel(jsonData: jsonData["member"])
+    }
+}
+
+struct TrainingApplyCountryModel {
+    
+    var id:String?
+    var name:String?
+    var en_name:String?
+    
+    init(jsonData: JSON) {
+        id   = jsonData["id"].string
+        name = jsonData["name"].string
+        en_name = jsonData["en_name"].string
+    }
+}
+
+struct TrainingApplyMemberModel {
+    
+    var fullname:String?
+    var intl_code:String?
+    var telephone:String?
+    var wechat:String?
+    var email:String?
+    
+    init(jsonData: JSON) {
+        fullname = jsonData["fullname"].string
+        intl_code = jsonData["intl_code"].string
+        telephone = jsonData["telephone"].string
+        wechat =  jsonData["wechat"].string
+        email = jsonData["email"].string
+    }
+}
+
+
+// ==============================================================================================
+// MARK: - 实训报名提交 /training/apply
+// ==============================================================================================
+struct SX_TrainingApplyConfirmModel {
+    
+    var number: String?
+    
+    init(jsonData: JSON) {
+     number = jsonData["number"].string
+    }
+}
+
+// ==============================================================================================
+// MARK: - 培训列表页面 /train/index
+// ==============================================================================================
+struct SX_TrainModel {
+    
+    
+    
+    
+    
+    
+    
+}
+
+// ==============================================================================================
+// MARK: - 培训详情页 /train/view/id/培训id
+// ==============================================================================================
+struct SX_TrainDetailModel {
+    
+    
+    
+    
+}
+
+
+
+
 
 
 
