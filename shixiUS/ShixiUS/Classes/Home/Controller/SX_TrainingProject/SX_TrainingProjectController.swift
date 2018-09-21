@@ -225,18 +225,7 @@ extension SX_TrainingProjectController {
                     /// 成功
                     SXLog("成功! ")
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                    
+
              
             } catch{ }
             

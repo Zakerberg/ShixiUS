@@ -192,6 +192,7 @@ struct SX_TrainingDetailModel {
     var title:String?
     var outset_city:String?
     var features:String?
+    var expense:String?
     var destine:String?
     var training: TrainingDetailTrainingModel
     var details: TrainingDetailDetailsModel
@@ -317,9 +318,6 @@ struct SX_TrainingApplyConfirmModel {
 // MARK: - 培训列表页面 /train/index
 // ==============================================================================================
 struct SX_TrainModel {
-    
-    
-    
     
     
     

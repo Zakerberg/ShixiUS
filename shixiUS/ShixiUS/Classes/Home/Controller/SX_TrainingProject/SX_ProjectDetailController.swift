@@ -26,8 +26,9 @@ let verticaListSectionIndex = 1
 
 class SX_ProjectDetailController: UIViewController {
     
-    ///////////////////////////////////////////////////////////////////////////////////////////////
     var Arr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     var ProjectLightStr = "Overriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keyword"
     
     var tripTitleArr = ["行程A", "行程B", "行程C", "行程D"]
@@ -37,10 +38,13 @@ class SX_ProjectDetailController: UIViewController {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
     var id:String?
+    var serverImgs = [String]()
+    
+    var projectDetailArr = JSON()
     
     var moreDateBtn : UIButton?
-  
-     lazy var pageTitleView: SX_PageTitleView = {
+    
+    lazy var pageTitleView: SX_PageTitleView = {
         let config                = SX_PageTitleViewConfig()
         config.titleColor         = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         config.titleSelectedColor = UIColor.SX_MainColor()
@@ -49,12 +53,12 @@ class SX_ProjectDetailController: UIViewController {
         
         pageTitleView.config = config
         pageTitleView.titles = self.Arr
-
+        
         pageTitleView.pageTitleViewDelegate = self
         
         return pageTitleView
     }()
-
+    
     var collectionBtn : UIButton?
     var applyBtn: UIButton?
     
@@ -73,7 +77,7 @@ class SX_ProjectDetailController: UIViewController {
     /// 项目详情的轮播
     lazy var detailScrollerView: SX_CycleScrollerView = {
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
-        let cycleView = SX_CycleScrollerView(frame: frame, type: .LOCAL, imgs: nil, descs: nil)
+        let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: self.serverImgs, descs: nil)
         cycleView.delegate = self
         
         return cycleView
@@ -128,9 +132,6 @@ extension SX_ProjectDetailController {
         self.setRightItem("share")
         self.setLeftItem("leftBack")
         
-        let localImgs = ["localImg4","localImg6","localImg3"]
-        
-        detailScrollerView.localImgArray = localImgs
         view.addSubview(tableView)
         tableView.addSubview(detailScrollerView)
         tableView.addSubview(projectBgView)
@@ -170,24 +171,22 @@ extension SX_ProjectDetailController {
     }
     
     func fetchData() {
-        
-      let str = SX_TrainingDetail + self.id!
-        
-        
-        
-        SX_NetManager.requestData(type: .GET, URlString: str, parameters:  nil, finishCallBack: { (result) in
-            
-            
-            
+        SX_NetManager.requestData(type: .GET, URlString: (SX_TrainingDetail + self.id!), parameters:  nil, finishCallBack: { (result) in
             do{
                 /// SwiftyJSON 在这里 ! ! !
                 let json = try JSON(data: result)
+                self.serverImgs.append(json["image"].string!)
+                self.detailScrollerView.serverImgArray = self.serverImgs
+                self.projectDetailArr = JSON(arrayLiteral: json.dictionary ?? [:])
+                for item in json.array ?? [] {
+//                    let Model = SX_TrainingDetailModel(jsonData: item)
+                }
+
+                self.detailScrollerView.reloadData()
+                self.tableView.reloadData()
                 
-                
-                    
             } catch{ }
         })
-        
     }
 }
 
@@ -211,9 +210,13 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle = .none
             // MARK: - 接口 --------
-            titleCell.projectName!.text = "联合国新兴全球领导人和公民培养计划-测试"
-            titleCell.projectContent!.text = "包含:课程,签证,机票,活动,食宿,保险 - 测试"
-            titleCell.projectCity!.text = "出发城市: 北京 - 测试"
+            
+            
+            let model = self.projectDetailArr[indexPath.section]
+            
+            titleCell.projectName!.text = model["title"].string ?? ""
+//          titleCell.projectContent!.text = model.
+            titleCell.projectCity!.text = model["outset_city"].string ?? ""
             titleCell.projectPrice!.text = "$" + "1500" + "起/人"
             
             return titleCell
@@ -221,6 +224,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         } else if indexPath.section == 1 {
             let cell = SX_ProjectTripDateCell()
             cell.selectionStyle = .none
+            
             // MARK: - 接口 --------
             cell.tripArr      = self.tripTitleArr
             cell.dateArr      = self.Arr
@@ -229,8 +233,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             cell.priceTArr    = self.priceTArr
             // MARK: - 接口 --------
             
-//            cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
-//            cell.dateBtn?.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
+            //            cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
+            //            cell.dateBtn?.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
             
             self.moreDateBtn = cell.moreDate
             
@@ -239,9 +243,9 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
                 SXLog("更多日期 ")
                 
                 let vc = SX_MoreDateController()
-//                vc?.isEnable = false
-//
-//                vc?.title = "更多日期"
+                //                vc?.isEnable = false
+                //
+                //                vc?.title = "更多日期"
                 self.navigationController?.pushViewController(vc, animated: true)
                 
                 
@@ -395,18 +399,18 @@ extension SX_ProjectDetailController {
 // MARK: -  SXPageTitleViewDelegate
 // =========================================================================================================
 extension SX_ProjectDetailController: SXPageTitleViewDelegate {
-   
+    
     func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
-          SXLog(selectedIndex)
+        SXLog(selectedIndex)
         if self.Arr.count > 0 {
             if selectedIndex == 0 {
-    //                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+                //                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
             } else if selectedIndex == 1 {
                 self.tableView.scrollToRow(at: IndexPath(row: 0, section: 3), at: .top, animated: true)
             } else if selectedIndex == 2 {
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 4), at: .top, animated: true)
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 4), at: .top, animated: true)
             }  else if selectedIndex == 3 {
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 5), at: .top, animated: true)
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 5), at: .top, animated: true)
             }
         }
     }
