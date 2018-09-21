@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 6/20/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  HomeModel
+//
 
 /*
  
@@ -24,16 +24,16 @@ struct SX_HomeADModel {
     var type: String?
     
     init(jsonData: JSON) {
-        title = jsonData["title"].string
-        url   = jsonData["url"].string
-        image = jsonData["image"].string
-        type  = jsonData["type"].string
+        title          = jsonData["title"].string
+        url            = jsonData["url"].string
+        image          = jsonData["image"].string
+        type           = jsonData["type"].string
     }
 }
 
-// ==============================================================================================
+// ==============================================================================================++++++++++++++++++++++++++++
 // MARK: - 首页 index/index
-// ==============================================================================================
+// ==============================================================================================++++++++++++++++++++++++++++
 struct SX_HomeModel {
     
     var training: SX_HomeTrainingModel
@@ -41,9 +41,9 @@ struct SX_HomeModel {
     var train:SX_HomeTrainModel
     
     init(jsonData: JSON) {
-        training = SX_HomeTrainingModel(jsonData: jsonData["training"])
-        jobs     = SX_HomeJobsModel(jsonData: jsonData["jobs"])
-        train    = SX_HomeTrainModel(jsonData: jsonData["train"])
+        training       = SX_HomeTrainingModel(jsonData: jsonData["training"])
+        jobs           = SX_HomeJobsModel(jsonData: jsonData["jobs"])
+        train          = SX_HomeTrainModel(jsonData: jsonData["train"])
     }
 }
 
@@ -55,10 +55,10 @@ struct SX_HomeTrainingModel {
     var image:String?
     
     init(jsonData: JSON) {
-        id    = jsonData["id"].string
-        title = jsonData["title"].string
-        price = jsonData["price"].string
-        image = jsonData["image"].string
+        id             = jsonData["id"].string
+        title          = jsonData["title"].string
+        price          = jsonData["price"].string
+        image          = jsonData["image"].string
     }
 }
 
@@ -71,11 +71,11 @@ struct SX_HomeJobsModel {
     var nature:String?
     
     init(jsonData: JSON) {
-        id      = jsonData["id"].int
-        name    = jsonData["name"].string
-        trade   = jsonData["trade"].string
-        address = jsonData["address"].string
-        nature  = jsonData["nature"].string
+        id             = jsonData["id"].int
+        name           = jsonData["name"].string
+        trade          = jsonData["trade"].string
+        address        = jsonData["address"].string
+        nature         = jsonData["nature"].string
     }
 }
 
@@ -88,11 +88,11 @@ struct SX_HomeTrainModel {
     var category:String?
     
     init(jsonData: JSON) {
-        id       = jsonData["id"].string
-        name     = jsonData["name"].string
-        price    = jsonData["price"].string
-        category = jsonData["category"].string
-        image    = jsonData["image"].string
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
+        price          = jsonData["price"].string
+        category       = jsonData["category"].string
+        image          = jsonData["image"].string
     }
 }
 
@@ -108,11 +108,11 @@ struct SX_TrainingModel {
     var sort:TrainingSortModel
     
     init(jsonData: JSON) {
-        search  = TrainingSearchModel(jsonData: jsonData["search"])
-        lists   = TrainingListModel(jsonData: jsonData["lists"])
-        type    = TrainingTypeModel(jsonData: jsonData["type"])
-        country =  TrainingCountryModel(jsonData: jsonData["country"])
-        sort    = TrainingSortModel(jsonData: jsonData["sort"])
+        search         = TrainingSearchModel(jsonData: jsonData["search"])
+        lists          = TrainingListModel(jsonData: jsonData["lists"])
+        type           = TrainingTypeModel(jsonData: jsonData["type"])
+        country        = TrainingCountryModel(jsonData: jsonData["country"])
+        sort           = TrainingSortModel(jsonData: jsonData["sort"])
     }
 }
 
@@ -124,10 +124,10 @@ struct TrainingSearchModel {
     var order:String?
     
     init(jsonData: JSON) {
-        type    = jsonData["type"].int
-        country = jsonData["country"].int
-        sort    = jsonData["sort"].string
-        order   = jsonData["order"].string
+        type           = jsonData["type"].int
+        country        = jsonData["country"].int
+        sort           = jsonData["sort"].string
+        order          = jsonData["order"].string
     }
 }
 
@@ -139,10 +139,10 @@ struct TrainingListModel {
     var price:String?
     
     init(jsonData: JSON) {
-        id    = jsonData["id"].string
-        title = jsonData["title"].string
-        image = jsonData["image"].string
-        price = jsonData["price"].string
+        id             = jsonData["id"].string
+        title          = jsonData["title"].string
+        image          = jsonData["image"].string
+        price          = jsonData["price"].string
     }
 }
 
@@ -151,8 +151,8 @@ struct TrainingTypeModel {
     var name:String?
     
     init(jsonData: JSON) {
-        id   = jsonData["id"].string
-        name = jsonData["name"].string
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
     }
 }
 
@@ -163,9 +163,9 @@ struct TrainingCountryModel {
     var en_name:String?
     
     init(jsonData: JSON) {
-        id      = jsonData["id"].string
-        name    = jsonData["name"].string
-        en_name = jsonData["en_name"].string
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
+        en_name        = jsonData["en_name"].string
     }
 }
 
@@ -176,9 +176,9 @@ struct TrainingSortModel {
     var order:String?
     
     init(jsonData: JSON) {
-        name  = jsonData["name"].string
-        sort  = jsonData["sort"].string
-        order = jsonData["order"].string
+        name           = jsonData["name"].string
+        sort           = jsonData["sort"].string
+        order          = jsonData["order"].string
     }
 }
 
@@ -201,9 +201,9 @@ struct SX_TrainingDetailModel {
     var collection_type:String?
     
     init(jsonData: JSON) {
-        training = TrainingDetailTrainingModel(jsonData: jsonData["training"])
-        details = TrainingDetailDetailsModel(jsonData: ["details"])
-        schedule = TrainingDetailScheduleModel(jsonData: ["schedule"])
+        training       = TrainingDetailTrainingModel(jsonData: jsonData["training"])
+        details        = TrainingDetailDetailsModel(jsonData: ["details"])
+        schedule       = TrainingDetailScheduleModel(jsonData: ["schedule"])
     }
 }
 
@@ -213,8 +213,8 @@ struct TrainingDetailTrainingModel {
     var title:String?
     
     init(jsonData: JSON) {
-        id   = jsonData["id"].string
-        title = jsonData["title"].string
+        id             = jsonData["id"].string
+        title          = jsonData["title"].string
     }
 }
 
@@ -225,9 +225,9 @@ struct TrainingDetailDetailsModel {
     var price:String?
     
     init(jsonData: JSON) {
-        id    = jsonData["id"].string
-        date  = jsonData["date"].string
-        price = jsonData["price"].string
+        id             = jsonData["id"].string
+        date           = jsonData["date"].string
+        price          = jsonData["price"].string
     }
 }
 
@@ -241,12 +241,12 @@ struct TrainingDetailScheduleModel {
     var content:String?
     
     init(jsonData: JSON) {
-        sort     = jsonData["sort"].int
-        title    = jsonData["title"].string
-        location = jsonData["location"].string
-        repast   = jsonData["repast"].string
-        traffic  = jsonData["traffic"].string
-        content  = jsonData["content"].string
+        sort           = jsonData["sort"].int
+        title          = jsonData["title"].string
+        location       = jsonData["location"].string
+        repast         = jsonData["repast"].string
+        traffic        = jsonData["traffic"].string
+        content        = jsonData["content"].string
     }
 }
 
@@ -263,12 +263,12 @@ struct SX_TrainingApplyModel {
     var member:TrainingApplyMemberModel
     
     init(jsonData: JSON) {
-        uid      = jsonData["uid"].string
-        training = jsonData["training"].string
-        detail   = jsonData["detail"].string
-        title    = jsonData["title"].string
-        country  = TrainingApplyCountryModel(jsonData: jsonData["country"])
-        member   = TrainingApplyMemberModel(jsonData: jsonData["member"])
+        uid             = jsonData["uid"].string
+        training        = jsonData["training"].string
+        detail          = jsonData["detail"].string
+        title           = jsonData["title"].string
+        country         = TrainingApplyCountryModel(jsonData: jsonData["country"])
+        member          = TrainingApplyMemberModel(jsonData: jsonData["member"])
     }
 }
 
@@ -279,9 +279,9 @@ struct TrainingApplyCountryModel {
     var en_name:String?
     
     init(jsonData: JSON) {
-        id   = jsonData["id"].string
-        name = jsonData["name"].string
-        en_name = jsonData["en_name"].string
+        id              = jsonData["id"].string
+        name            = jsonData["name"].string
+        en_name         = jsonData["en_name"].string
     }
 }
 
@@ -294,11 +294,11 @@ struct TrainingApplyMemberModel {
     var email:String?
     
     init(jsonData: JSON) {
-        fullname = jsonData["fullname"].string
-        intl_code = jsonData["intl_code"].string
-        telephone = jsonData["telephone"].string
-        wechat =  jsonData["wechat"].string
-        email = jsonData["email"].string
+        fullname        = jsonData["fullname"].string
+        intl_code       = jsonData["intl_code"].string
+        telephone       = jsonData["telephone"].string
+        wechat          =  jsonData["wechat"].string
+        email           = jsonData["email"].string
     }
 }
 
@@ -310,7 +310,7 @@ struct SX_TrainingApplyConfirmModel {
     var number: String?
     
     init(jsonData: JSON) {
-     number = jsonData["number"].string
+        number          = jsonData["number"].string
     }
 }
 
@@ -333,3 +333,128 @@ struct SX_TrainDetailModel {
     
     
 }
+
+// ==============================================================================================
+// MARK: - 职位详情页 /job/view/id/职位id
+// ==============================================================================================
+struct SX_JobDetailModel {
+    
+    var id: String?
+    var title:String?
+    var time:String?
+    var trade_name:String?
+    var address:String?
+    var amount:String?
+    var duration:String?
+    var duration_id:String?  // 1.兼职 2.全职
+    var duration_name:String?
+    var nature_id:String?    // 1.兼职 2.全职
+    var nature_name:String?
+    var wages:String?
+    var duty:String?
+    var requirement:String?
+    var collection:String?
+    var collection_type:String?
+    
+    init(jsonData: JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        time            = jsonData["time"].string
+        trade_name      = jsonData["trade_name"].string
+        address         = jsonData["address"].string
+        amount          = jsonData["amount"].string
+        duration        = jsonData["duration"].string
+        duration_id     = jsonData["duration_id"].string
+        duration_name   = jsonData["duration_name"].string
+        nature_id       = jsonData["nature_id"].string
+        nature_name     = jsonData["nature_name"].string
+        wages           = jsonData["wages"].string
+        duty            = jsonData["duty"].string
+        requirement     = jsonData["requirement"].string
+        collection      = jsonData["collection"].string
+        collection_type = jsonData["collection_type"].string
+    }
+}
+
+// =======================================================================================
+// MARK: - 海外就业报名页 /job/apply
+// =======================================================================================
+struct SX_OverseaApplyModel {
+    
+    var uid:String?
+    var job:String?
+    var title:String?
+    var member:OverseaMemberModel
+    
+    init(jsonData: JSON) {
+        uid             = jsonData["uid"].string
+        job             = jsonData["job"].string
+        title           = jsonData["title"].string
+        member          = OverseaMemberModel(jsonData: jsonData["member"])
+    }
+}
+
+struct OverseaMemberModel {
+    
+    var intl_code:String?
+    var telephone:String?
+    var wechat:String?
+    
+    init(jsonData: JSON) {
+        intl_code       = jsonData["intl_code"].string
+        telephone       = jsonData["telephone"].string
+        wechat          = jsonData["wechat"].string
+    }
+}
+
+struct OverseaApplyCommit {
+    
+    var number:String?
+    
+    init(jsonData: JSON) {
+        number          = jsonData["number"].string
+    }
+}
+
+// =======================================================================================++++++++++++++++++++++++++++
+// MARK: - 会员中心 ! ! !
+// =======================================================================================++++++++++++++++++++++++++++
+struct VIPCenterModel {
+    
+    var job:VIPCenterJobModel
+    var training:VIPCenterTrainingModel
+    var train:VIPCenterTrainModel
+    
+    
+    
+    
+    
+}
+
+
+struct VIPCenterJobModel {
+    
+    
+    
+    
+    
+    
+}
+
+struct VIPCenterTrainingModel {
+    
+    
+    
+    
+}
+
+struct VIPCenterTrainModel {
+    
+    
+    
+}
+
+
+
+
+
