@@ -21,7 +21,6 @@
 		323E99B3213D15E2006038F5 /* SX_CollextionEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99B2213D15E2006038F5 /* SX_CollextionEmploymentJobsController.swift */; };
 		323E99B5213D1616006038F5 /* SX_CollectionTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99B4213D1616006038F5 /* SX_CollectionTrainingProjectController.swift */; };
 		323E99B7213D1635006038F5 /* SX_CollectionVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99B6213D1635006038F5 /* SX_CollectionVocationalTrainingController.swift */; };
-		323E99BA213D2F6A006038F5 /* SX_ProgressDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99B9213D2F6A006038F5 /* SX_ProgressDetailModel.swift */; };
 		323E99BE213FA6E6006038F5 /* SX_ApplyEmpListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99BD213FA6E6006038F5 /* SX_ApplyEmpListController.swift */; };
 		323E99C0213FA721006038F5 /* SX_ApplyTrainListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99BF213FA721006038F5 /* SX_ApplyTrainListController.swift */; };
 		323E99C2213FA73E006038F5 /* SX_ApplyVocationListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E99C1213FA73D006038F5 /* SX_ApplyVocationListController.swift */; };
@@ -164,7 +163,6 @@
 		323E99B2213D15E2006038F5 /* SX_CollextionEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CollextionEmploymentJobsController.swift; sourceTree = "<group>"; };
 		323E99B4213D1616006038F5 /* SX_CollectionTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CollectionTrainingProjectController.swift; sourceTree = "<group>"; };
 		323E99B6213D1635006038F5 /* SX_CollectionVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CollectionVocationalTrainingController.swift; sourceTree = "<group>"; };
-		323E99B9213D2F6A006038F5 /* SX_ProgressDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProgressDetailModel.swift; sourceTree = "<group>"; };
 		323E99BD213FA6E6006038F5 /* SX_ApplyEmpListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyEmpListController.swift; sourceTree = "<group>"; };
 		323E99BF213FA721006038F5 /* SX_ApplyTrainListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyTrainListController.swift; sourceTree = "<group>"; };
 		323E99C1213FA73D006038F5 /* SX_ApplyVocationListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplyVocationListController.swift; sourceTree = "<group>"; };
@@ -377,7 +375,6 @@
 		323E99B8213D2F40006038F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				323E99B9213D2F6A006038F5 /* SX_ProgressDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1269,7 +1266,6 @@
 				458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */,
 				45FDD9A52126AEC300E336F9 /* SX_NetManager.swift in Sources */,
 				322FC80A21464164005347E8 /* SX_HotJobDetailCell.swift in Sources */,
-				323E99BA213D2F6A006038F5 /* SX_ProgressDetailModel.swift in Sources */,
 				323E99C2213FA73E006038F5 /* SX_ApplyVocationListController.swift in Sources */,
 				3248484721411AC400B6049E /* SX_AddressPickerPresentAnimated.swift in Sources */,
 				323E99AF213CCE1A006038F5 /* SX_PageTitleViewConfig.swift in Sources */,

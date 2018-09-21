@@ -7,7 +7,12 @@
 //
 
 /*
- 
+ 纵使高原上的风 吹不散  执着的背影
+ 纵使清晨前的霜 融不化  心头的温热
+ 你静守在月下
+ 悄悄地来
+ 悄悄地走
+ 仓央嘉措
  */
 
 import UIKit
@@ -425,34 +430,76 @@ struct VIPCenterModel {
     var training:VIPCenterTrainingModel
     var train:VIPCenterTrainModel
     
-    
-    
-    
-    
+    init(jsonData: JSON) {
+        job             = VIPCenterJobModel(jsonData: jsonData["job"])
+        training        = VIPCenterTrainingModel(jsonData: jsonData["training"])
+        train           = VIPCenterTrainModel(jsonData: jsonData["train"])
+    }
 }
-
 
 struct VIPCenterJobModel {
     
+    var id:String?
+    var title:String?
+    var trade_name:String?
+    var address:String?
+    var duration_id:String?
+    var duration_name:String?
     
-    
-    
-    
-    
+    init(jsonData: JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        trade_name      = jsonData["trade_name"].string
+        address         = jsonData["address"].string
+        duration_id     = jsonData["duration_id"].string
+        duration_name   = jsonData["duration_name"].string
+    }
 }
 
 struct VIPCenterTrainingModel {
     
+    var id:String?
+    var title:String?
+    var outset_city:String?
+    var count:String?
+    
+    init(jsonData: JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        outset_city     = jsonData["outset_city"].string
+        count           = jsonData["count"].string
+    }
+}
+
+struct VIPCenterTrainModel {
+    
+    var id:String?
+    var title:String?
+    var time:String?
+    
+    init(jsonData: JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        time            = jsonData["time"].string
+    }
+}
+
+// =======================================================================================++++++++++++++++++++++++++++
+// MARK: - 我的 ! ! !
+// =======================================================================================++++++++++++++++++++++++++++
+struct SX_MineModel {
+    
+    
+    
+    
+    
+    
     
     
     
 }
 
-struct VIPCenterTrainModel {
-    
-    
-    
-}
+
 
 
 
