@@ -16,9 +16,9 @@ let hotJobCellID = "hotJobCellID"
 
 class SX_MoreHotJobController: UIViewController {
     
-// =========================================================================================================================
-//  MARK: - lazy
-// =========================================================================================================================
+    // =========================================================================================================================
+    //  MARK: - lazy
+    // =========================================================================================================================
     /// 职位分类View
     private lazy var positionView: UIView = {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 440)).addhere(toSuperView: self.view).config({ (positionView) in
@@ -43,7 +43,7 @@ class SX_MoreHotJobController: UIViewController {
     
     /// 工作时常View
     private lazy var workTimeView: UIView = {
-       
+        
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
