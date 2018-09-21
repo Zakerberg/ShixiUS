@@ -132,9 +132,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-    // =============================================================================================
-    // MARK: - UICollectionViewDelegateFlowLayout
-    // =============================================================================================
+// =============================================================================================
+// MARK: - UICollectionViewDelegateFlowLayout
+// =============================================================================================
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
     }
@@ -143,9 +143,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
     
-    // =============================================================================================
-    // MARK: - configCell
-    // =============================================================================================
+// =============================================================================================
+// MARK: - configCell
+// =============================================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -190,7 +190,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
 extension SX_TrainingCell {
     
     /*
-     MARK: - 查找所在的ViewController
+     // MARK: - 查找所在的ViewController
      func responderViewController() -> UIViewController? {
      for view in sequence(first: self.superview, next: {$0?.superview}) {
      if let responder = view?.next {
