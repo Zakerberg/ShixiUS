@@ -18,12 +18,6 @@ let projectDetailTitleCellID    = "projectDetailTitleCellID"
 let projectDetailDateTripCellID = "projectDetailDateTripCellID"
 
 let projectDetailCellID = "projectDetailCellID"
-
-/// 悬浮view的高度
-let verticaListViewHeight: CGFloat = 60
-/// 悬浮固定Section的index
-let verticaListSectionIndex = 1
-
 class SX_ProjectDetailController: UIViewController {
     
     var Arr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
@@ -45,6 +39,7 @@ class SX_ProjectDetailController: UIViewController {
     var moreDateBtn : UIButton?
     
     lazy var pageTitleView: SX_PageTitleView = {
+       
         let config                = SX_PageTitleViewConfig()
         config.titleColor         = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         config.titleSelectedColor = UIColor.SX_MainColor()
@@ -69,7 +64,6 @@ class SX_ProjectDetailController: UIViewController {
         table.delegate = self
         table.dataSource = self
         table.showsVerticalScrollIndicator = false
-        table.tableFooterView = UIView()
         
         return table
     }()
@@ -83,27 +77,16 @@ class SX_ProjectDetailController: UIViewController {
         return cycleView
     }()
     
-    lazy var projectBgView: UIView = {
-        let projectBgView = UIImageView(image: UIImage.init(named: "Bg")).addhere(toSuperView: self.tableView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.detailScrollerView.snp.bottom).offset(-20)
-            make.height.equalTo(Margin+10)
-            make.width.equalToSuperview()
-        }).config({ (projectBgView) in
-            
-        })
-        return projectBgView
-    }()
-    
-    lazy var headerBtnView: UIView = {
-        
-        let headerBtnView = UIView().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
-            
-        }).config({ (headerBtnView) in
-            
-        })
-        
-        return headerBtnView
-    }()
+//    lazy var projectBgView: UIView = {
+//        let projectBgView = UIImageView(image: UIImage.init(named: "Bg")).addhere(toSuperView: self.tableView).layout(snapKitMaker: { (make) in
+//            make.top.equalTo(self.detailScrollerView.snp.bottom).offset(-20)
+//            make.height.equalTo(Margin+10)
+//            make.width.equalToSuperview()
+//        }).config({ (projectBgView) in
+//            
+//        })
+//        return projectBgView
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,7 +117,7 @@ extension SX_ProjectDetailController {
         
         view.addSubview(tableView)
         tableView.addSubview(detailScrollerView)
-        tableView.addSubview(projectBgView)
+      //  tableView.addSubview(projectBgView)
         navBarBackgroundAlpha = 0
         
         self.collectionBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -179,9 +162,9 @@ extension SX_ProjectDetailController {
                 self.detailScrollerView.serverImgArray = self.serverImgs
                 self.projectDetailArr = JSON(arrayLiteral: json.dictionary ?? [:])
                 for item in json.array ?? [] {
-//                    let Model = SX_TrainingDetailModel(jsonData: item)
+//                let Model = SX_TrainingDetailModel(jsonData: item)
                 }
-
+                
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
                 
@@ -210,8 +193,6 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle = .none
             // MARK: - 接口 --------
-            
-            
             let model = self.projectDetailArr[indexPath.section]
             
             titleCell.projectName!.text = model["title"].string ?? ""
@@ -233,23 +214,19 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             cell.priceTArr    = self.priceTArr
             // MARK: - 接口 --------
             
-            //            cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
-            //            cell.dateBtn?.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
+            //   cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
+            //   cell.dateBtn?.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
             
             self.moreDateBtn = cell.moreDate
-            
             
             self.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("更多日期 ")
                 
                 let vc = SX_MoreDateController()
-                //                vc?.isEnable = false
-                //
-                //                vc?.title = "更多日期"
+                //        vc?.isEnable = false
+                //        vc?.title = "更多日期"
                 self.navigationController?.pushViewController(vc, animated: true)
-                
-                
-                
+
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil).dispose()
@@ -281,7 +258,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         
         switch indexPath.section {
         case 0:
-            return 135.FloatValue.IPAD_XValue
+            return 130.FloatValue.IPAD_XValue
             
         case 1:
             return 190.FloatValue.IPAD_XValue
@@ -315,9 +292,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        
-        return view
+        return UIView()
     }
 }
 
@@ -370,8 +345,7 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
             {
                 if (isClear == true) {
                     weakSelf.navBarBackgroundAlpha = 0
-                }
-                else {
+                } else {
                     weakSelf.navBarBackgroundAlpha = 1.0
                 }
             }

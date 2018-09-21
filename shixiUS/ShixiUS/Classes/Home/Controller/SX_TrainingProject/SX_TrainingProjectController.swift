@@ -222,16 +222,11 @@ extension SX_TrainingProjectController {
             
             do{
                 let json = try JSON(data: result)
-                    /// 成功
-                    SXLog("成功! ")
+                /// 成功
+                SXLog("成功! ")
                 
-
-             
             } catch{ }
-            
-            
         }
-        
     }
     
     /// 调出PickerView

@@ -17,7 +17,7 @@ import UIKit
 class SX_ProjectDetailTitleCell: UITableViewCell {
     
     var projectName    : UILabel?
-    var projectContent : UILabel?
+//    var projectContent : UILabel?
     var projectCity    : UILabel?
     var projectPrice   : UILabel?
     
@@ -59,18 +59,18 @@ extension SX_ProjectDetailTitleCell {
             projectName.textColor = UIColor.black
         })
         
-        self.projectContent = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.projectName!.snp.bottom).offset(Margin)
-            make.left.equalTo(self.projectName!)
-            make.height.equalTo(Margin-1)
-        }).config({ (projectContent) in
-            projectContent.sizeToFit()
-            projectContent.textColor = UIColor.gray
-            projectContent.font = UIFont.systemFont(ofSize: 14)
-        })
+//        self.projectContent = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.top.equalTo(self.projectName!.snp.bottom).offset(Margin)
+//            make.left.equalTo(self.projectName!)
+//            make.height.equalTo(Margin-1)
+//        }).config({ (projectContent) in
+//            projectContent.sizeToFit()
+//            projectContent.textColor = UIColor.gray
+//            projectContent.font = UIFont.systemFont(ofSize: 14)
+//        })
         
         self.projectCity = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.projectContent!.snp.bottom).offset(Margin)
+            make.top.equalTo(self.projectName!.snp.bottom).offset(Margin)
             make.left.equalTo(self.projectName!)
         }).config({ (projectCity) in
             projectCity.sizeToFit()
