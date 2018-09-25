@@ -20,13 +20,10 @@ let projectDetailDateTripCellID = "projectDetailDateTripCellID"
 let projectDetailCellID = "projectDetailCellID"
 class SX_ProjectDetailController: UIViewController {
     
-    var Arr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
+    var topArr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
     
     ///////////////////////////////////////////////////////////////////////////////////////////////
     var ProjectLightStr = "Overriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keyword"
-    
-  //  var tripTitleArr = ["行程A", "行程B", "行程C", "行程D"]
-    
 //    var dateTArr     = ["06.12", "06.14", "08.19", "09.16"]
 //    var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,10 +46,10 @@ class SX_ProjectDetailController: UIViewController {
         config.titleColor         = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         config.titleSelectedColor = UIColor.SX_MainColor()
         
-        let pageTitleView = SX_PageTitleView(frame: CGRect(x: 0, y: 200, width: SCREEN_WIDTH, height: 41), titles: self.Arr, config: config)
+        let pageTitleView = SX_PageTitleView(frame: CGRect(x: 0, y: 200, width: SCREEN_WIDTH, height: 41), titles: self.topArr, config: config)
         
         pageTitleView.config = config
-        pageTitleView.titles = self.Arr
+        pageTitleView.titles = self.topArr
         
         pageTitleView.pageTitleViewDelegate = self
         
@@ -160,10 +157,15 @@ extension SX_ProjectDetailController {
                     self.tripTitleArr.append(item["title"].string ?? "")
                 }
                 
-//                for item in json["details"].array ?? [] {
-//                    self.tripDateArr.append(item["date"].string ?? "")
-//                    self.tripPriceArr.append(item["price"].string ?? "")
-//                }
+                for item in json["details"].array ?? [] {
+                    self.tripDateArr.append(item["date"].string ?? "")
+                    self.tripPriceArr.append(item["price"].string ?? "")
+                }
+                
+                
+                
+                
+                
                 
                 
                 self.detailScrollerView.reloadData()
@@ -205,26 +207,9 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         } else if indexPath.section == 1 {
             let cell = SX_ProjectTripDateCell(style: .default, reuseIdentifier: "111")
             cell.selectionStyle = .none
-    
-
-            // MARK: - 接口 --------
             cell.tripArr      = self.tripTitleArr
-           // cell.dateArr      = self.Arr
-            // MARK: - 接口 --------
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            cell.dateArr      = self.tripDateArr
+            cell.priceArr     = self.tripPriceArr
             
             
             
@@ -384,7 +369,7 @@ extension SX_ProjectDetailController: SXPageTitleViewDelegate {
     
     func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
         SXLog(selectedIndex)
-        if self.Arr.count > 0 {
+        if self.topArr.count > 0 {
             if selectedIndex == 0 {
                 //                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
             } else if selectedIndex == 1 {
