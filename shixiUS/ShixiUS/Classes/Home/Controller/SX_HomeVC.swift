@@ -37,6 +37,7 @@ class SX_HomeVC: UIViewController {
     var adURLs   = [String]()
     var adTitles = [String]()
     var adIDs    = [Int]()
+    var adTypes  = [String]()
     /// ad
     
     var homeModel: SX_HomeModel?
@@ -129,8 +130,9 @@ extension SX_HomeVC {
                     self.hideLoadingView()                    
                     
                     for (_, subJSON) : (String, JSON) in json["data"] {
-                        self.adImages.append(subJSON["image"].string!)
-                        self.adTitles.append(subJSON["title"].string!)
+                        self.adImages.append(subJSON["image"].string ?? "")
+                        self.adTitles.append(subJSON["title"].string ?? "")
+                        self.adTypes.append(subJSON["type"].string ?? "")
                     }
                     self.cycleScrollerView.serverImgArray = self.adImages
                     self.cycleScrollerView.descTextArray = self.adTitles
@@ -433,15 +435,22 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
 // MARK: - SXCycleScrollerViewDelegate
 // ================================================================================================
 extension SX_HomeVC: SXCycleScrollerViewDelegate {
-   
+    
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
-        
-        
+     
         
     }
     
     func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
-        SXLog("点击了轮播\(index)")
+        if self.adTypes[index] == "training" {
+            SXLog("跳转实训详情")
+        } else if self.adTypes[index] == "train" {
+            SXLog("跳转培训详情")
+        }else if self.adTypes[index] == "jobs" {
+            SXLog("跳转职位详情")
+        }else if self.adTypes[index] == "link" {
+            SXLog("网页")
+        }
     }
 }
 

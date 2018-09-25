@@ -281,7 +281,7 @@
     func setLeftItem(_ imageName: String) {
         
         let btn = UIButton(type: .custom)
-        btn.frame = CGRect(x: 0, y: 0, width: 15, height: 20)
+        btn.frame = CGRect(x: 0, y: 0, width: 30.FloatValue.IPAD_XValue, height: 30.FloatValue.IPAD_XValue)
         btn.setBackgroundImage(UIImage.init(named: "mask"), for: .normal)
         btn.setImage(UIImage.init(named: imageName), for: .normal)
         btn.addTarget(self, action: #selector(leftBackAction), for: .touchUpInside)

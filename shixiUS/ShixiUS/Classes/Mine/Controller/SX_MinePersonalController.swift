@@ -85,12 +85,10 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let singleTap = UIGestureRecognizer(target: self, action: #selector(alterHeadPortrait))
-            
             let cell = SX_PersonalHeadPortraitCell(style: .default, reuseIdentifier: nil)
-            cell.textLabel?.text = "头像"
             
             cell.selectionStyle = .none
-            cell.headPortraitImageV?.image = headPortrait
+            cell.titleLabel?.text = self.titleArr[indexPath.row]
             
             cell.addGestureRecognizer(singleTap)
             

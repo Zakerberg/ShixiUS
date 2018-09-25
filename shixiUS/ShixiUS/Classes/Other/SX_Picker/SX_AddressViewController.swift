@@ -87,6 +87,7 @@ extension SX_AddressViewController: UIViewControllerTransitioningDelegate {
         
         return animated
     }
+    
     /// 推出动画
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let animated = SX_AddressPickerPresentAnimated(type: .dismiss)

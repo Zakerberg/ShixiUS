@@ -50,7 +50,7 @@ extension SX_ProjectDetailTitleCell {
     func configCell() {
         
         self.projectName = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(Margin)
             make.left.equalToSuperview().offset(Margin)
             make.height.equalTo(Margin+2)
         }).config({ (projectName) in

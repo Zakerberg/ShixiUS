@@ -29,7 +29,8 @@ class SX_MineVC: UIViewController {
     
     var titleNameLabel: UILabel?
     var logInBtn: UIButton?
-
+    var headPortraitImageView: UIImageView?
+    
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor              = UIColor.SX_BackGroundColor()
@@ -80,13 +81,19 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(changeIconImageView))
+            
             let cell = SX_HeadPortraitCell(style: .default, reuseIdentifier: mineIconCellID)
             
             cell.nameTitle?.isHidden = true
             cell.selectionStyle   = .none
-            
+            cell.headPortraitImageView?.addGestureRecognizer(tap)
+            self.headPortraitImageView  = cell.headPortraitImageView
             self.titleNameLabel = cell.nameTitle
             self.logInBtn = cell.logInButton
+            
+            
+            
             
             self.logInBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("注册登陆 +++ + ")
@@ -94,11 +101,10 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 self.present(vc, animated: true, completion: {
                     /// 存 token
                 })
-                
             }, onError: { (error) in
                 SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-        
+            }, onCompleted: nil, onDisposed: nil).dispose()
+            
             return cell
         }
         
@@ -151,8 +157,6 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     SXLog("退出登录 +++ + ")
-                    
-                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
@@ -164,7 +168,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         if indexPath.section == 0 {
             
         } else if indexPath.section == 1 {
@@ -204,21 +208,127 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
 // =========================================================================================
 // MARK: - Noti
 // =========================================================================================
 extension SX_MineVC {
-   @objc func changeTitle(sender: NSNotification) {
+    @objc func changeTitle(sender: NSNotification) {
+        
+        self.logInBtn?.isHidden = true
+        self.titleNameLabel?.isHidden = false
+        
+        let dict = sender.userInfo
+        self.titleNameLabel?.text = dict?["Data"] as! String
+        
+    }
     
-    self.logInBtn?.isHidden = true
-    self.titleNameLabel?.isHidden = false
-    
-    let dict = sender.userInfo
-    self.titleNameLabel?.text = dict?["Data"] as! String
-    
+    @objc func changeIconImageView(tap: UITapGestureRecognizer) {
+        //底部弹出来个actionSheet来选择拍照或者相册选择
+        let sheetAlert = UIAlertController(title: "选择上传类型", message: nil, preferredStyle: .actionSheet)
+        let albumAction = UIAlertAction(title: "手机相册选择", style: .default) { (action) in
+            SXLog("相册选择")
+            //这里加一个判断，是否是来自图片库
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = true
+                imagePicker.sourceType = .savedPhotosAlbum
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        // 相机拍摄
+        let photoAction = UIAlertAction(title: "相机拍摄", style: .default) { (ACTION) in
+            SXLog("相机拍摄")
+            if UIImagePickerController.isSourceTypeAvailable(.camera)  {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = true
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (cancel) in
+            SXLog("取消")
+        }
+        
+        sheetAlert.addAction(albumAction)
+        sheetAlert.addAction(photoAction)
+        sheetAlert.addAction(cancelAction)
+        
+        self.present(sheetAlert, animated: true, completion: nil)
     }
 }
+
+// =========================================================================================
+// MARK: - UIImagePickerControllerDelegate , UINavigationControllerDelegate
+// =========================================================================================
+extension SX_MineVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+     
+        let img = (info as NSDictionary).object(forKey: UIImagePickerControllerEditedImage)
+        self.headPortraitImageView?.image = img as? UIImage
+        let compressImg = imageWithImageSimple(img as! UIImage, newSize:CGSize(width: 60, height: 60))
+     //   transportImgToServer(img: compressImg)
+        self.dismiss(animated: true, completion: nil)
+
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+// =========================================================================================
+// MARK: - 头像相关
+// =========================================================================================
+extension SX_MineVC {
+    
+    /// 图片压缩
+    func imageWithImageSimple(_ img: UIImage, newSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(newSize)
+        img.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImg!
+    }
+    
+    /// 上传到服务器
+    func transportImgToServer(img: UIImage) {
+
+        var imageData: Data
+        var mineType: String
+        
+        if UIImagePNGRepresentation(img) != nil {
+            mineType = "image/png"
+            imageData = UIImagePNGRepresentation(img)!
+        } else {
+            mineType = "image/jpeg"
+            imageData = UIImageJPEGRepresentation(img, 1.0)!
+        }
+        
+//        let iconStr = NSString(data: imageData, encoding: String.Encoding.utf8.rawValue)
+        let dic = ["image":imageData]
+        
+        
+        
+        
+//        SX_NetManager.requestData(type: .POST, URlString: SX_Mine_UploadImage, parameters: dic) { (Result) in
+//            
+//            let str = "avatar"
+//            var fileName = NSString()
+//            if UIImagePNGRepresentation(img) != nil {
+//                fileName = str + ".png" as NSString
+//            }else{
+//                fileName = str + ".jpeg" as NSString
+//            }
+//        }
+    }
+}
+
+
 
 
 

@@ -25,18 +25,23 @@ class SX_ProjectDetailController: UIViewController {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     var ProjectLightStr = "Overriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keyword"
     
-    var tripTitleArr = ["行程A", "行程B", "行程C", "行程D"]
+  //  var tripTitleArr = ["行程A", "行程B", "行程C", "行程D"]
     
-    var dateTArr     = ["06.12", "06.14", "08.19", "09.16"]
-    var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
+//    var dateTArr     = ["06.12", "06.14", "08.19", "09.16"]
+//    var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
     var id:String?
     var serverImgs = [String]()
-    
     var projectDetailArr = JSON()
-    
     var moreDateBtn : UIButton?
+    
+    /// 行程标题
+    var tripTitleArr = [String]()
+    /// 日期
+    var tripDateArr =  [String]()
+    /// 价格
+    var tripPriceArr = [String]()
     
     lazy var pageTitleView: SX_PageTitleView = {
        
@@ -77,17 +82,6 @@ class SX_ProjectDetailController: UIViewController {
         return cycleView
     }()
     
-//    lazy var projectBgView: UIView = {
-//        let projectBgView = UIImageView(image: UIImage.init(named: "Bg")).addhere(toSuperView: self.tableView).layout(snapKitMaker: { (make) in
-//            make.top.equalTo(self.detailScrollerView.snp.bottom).offset(-20)
-//            make.height.equalTo(Margin+10)
-//            make.width.equalToSuperview()
-//        }).config({ (projectBgView) in
-//            
-//        })
-//        return projectBgView
-//    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
@@ -112,7 +106,7 @@ extension SX_ProjectDetailController {
     
     func setUI() {
         view.backgroundColor = UIColor.white
-        self.setRightItem("share")
+        //self.setRightItem("share") 
         self.setLeftItem("leftBack")
         
         view.addSubview(tableView)
@@ -161,9 +155,16 @@ extension SX_ProjectDetailController {
                 self.serverImgs.append(json["image"].string!)
                 self.detailScrollerView.serverImgArray = self.serverImgs
                 self.projectDetailArr = JSON(arrayLiteral: json.dictionary ?? [:])
-                for item in json.array ?? [] {
-//                let Model = SX_TrainingDetailModel(jsonData: item)
+                
+                for item in json["training"].array ?? [] {
+                    self.tripTitleArr.append(item["title"].string ?? "")
                 }
+                
+//                for item in json["details"].array ?? [] {
+//                    self.tripDateArr.append(item["date"].string ?? "")
+//                    self.tripPriceArr.append(item["price"].string ?? "")
+//                }
+                
                 
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
@@ -190,41 +191,48 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         
         if indexPath.section == 0 {
             
+            let model = self.projectDetailArr[indexPath.section]
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle = .none
             // MARK: - 接口 --------
-            let model = self.projectDetailArr[indexPath.section]
             
             titleCell.projectName!.text = model["title"].string ?? ""
-//          titleCell.projectContent!.text = model.
             titleCell.projectCity!.text = model["outset_city"].string ?? ""
             titleCell.projectPrice!.text = "$" + "1500" + "起/人"
             
             return titleCell
             
         } else if indexPath.section == 1 {
-            let cell = SX_ProjectTripDateCell()
+            let cell = SX_ProjectTripDateCell(style: .default, reuseIdentifier: "111")
             cell.selectionStyle = .none
-            
+    
+
             // MARK: - 接口 --------
             cell.tripArr      = self.tripTitleArr
-            cell.dateArr      = self.Arr
-            
-            cell.dateTArr     = self.dateTArr
-            cell.priceTArr    = self.priceTArr
+           // cell.dateArr      = self.Arr
             // MARK: - 接口 --------
+
             
-            //   cell.tripBtn?.addTarget(self, action: #selector(tripBtnClick), for: .touchUpInside)
-            //   cell.dateBtn?.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             self.moreDateBtn = cell.moreDate
-            
             self.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("更多日期 ")
                 
                 let vc = SX_MoreDateController()
-                //        vc?.isEnable = false
-                //        vc?.title = "更多日期"
                 self.navigationController?.pushViewController(vc, animated: true)
 
             }, onError: { (error) in
@@ -258,7 +266,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         
         switch indexPath.section {
         case 0:
-            return 130.FloatValue.IPAD_XValue
+            return 110.FloatValue.IPAD_XValue
             
         case 1:
             return 190.FloatValue.IPAD_XValue
