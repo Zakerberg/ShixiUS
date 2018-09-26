@@ -100,7 +100,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             }else{
                 cell.sourceImageView?.image = #imageLiteral(resourceName: "icon_placeholdericon_Image")
             }
-            cell.priceLabel?.text = model.price
+            cell.priceLabel?.text = ("￥" + model.price!)
             cell.sourceName?.text = model.name
             self.id               = model.id
         }
@@ -115,7 +115,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             }
             self.id               = model.id
             cell.sourceName?.text = model.title
-            cell.priceLabel?.text = model.price
+            cell.priceLabel?.text = ("￥" + model.price!)
         }
         
         return cell

@@ -13,6 +13,7 @@
  */
 
 import UIKit
+import SwiftyJSON
 
 let cellID1 = "cellID"
 
@@ -27,9 +28,12 @@ class SX_CertificationController: UIViewController {
     var loadingView: SX_LoadingView?
     var collectionView: UICollectionView?
     
-// =================================================================================================================
-//  MARK: - lazy
-// =====================================================================================================================
+    var certicationModels = [TrainListModel]()
+    
+    
+    // =================================================================================================================
+    //  MARK: - lazy
+    // =====================================================================================================================
     // 综合排序View
     lazy var comprehensiveView: UIView = {
         let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
@@ -164,9 +168,21 @@ extension SX_CertificationController {
 extension SX_CertificationController {
     
     func fetchData() {
-        
-        
-        
+        SX_NetManager.requestData(type: .GET, URlString: SX_TrainIndex, parameters: nil) { (result) in
+            
+            do{
+                let json = try JSON(data: result)
+                /// 成功
+                SXLog("成功! ")
+                
+                for item in json["lists"].array ?? [] {
+                    let listModel = TrainListModel(jsonData: item)
+                    self.certicationModels.append(listModel)
+                }
+                
+                self.collectionView?.reloadData()
+            } catch{ }
+        }
     }
     
     /// 调出PickerView
@@ -333,7 +349,7 @@ extension SX_CertificationController {
 extension SX_CertificationController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return self.certicationModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -345,10 +361,17 @@ extension SX_CertificationController: UICollectionViewDelegate, UICollectionView
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
         
-        cell.sourceImageView?.image = UIImage.init(named: "localImg3")
-        cell.priceLabel?.text = "￥" + "2998.00"
-        cell.sourceName?.text = "课程名称课程名称测试"
-        cell.certificateLabel?.text = "职业技术证书"
+        let model = certicationModels[indexPath.item]
+        
+        if let url = URL(string: model.image ?? ""){
+            cell.sourceImageView?.kf.setImage(with: url)
+        }else{
+            cell.sourceImageView?.image = #imageLiteral(resourceName: "icon_placeholdericon_Image")
+        }
+        
+        cell.sourceName?.text = model.series_name ?? "测试项目"
+        cell.certificateLabel?.text = model.category_name ?? "测试分类"
+        cell.priceLabel?.text = ("￥" + model.price!)
         
         return cell
     }

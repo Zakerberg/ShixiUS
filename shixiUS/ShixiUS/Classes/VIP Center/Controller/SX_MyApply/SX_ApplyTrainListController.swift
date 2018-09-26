@@ -285,6 +285,18 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             CONFIRM.layer.cornerRadius  = 10
             CONFIRM.rx.tap.subscribe(onNext: { (_) in
                 SXLog("确定申请 +++ + ")
+                
+                /// 申请成功 ! 获取订单号
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)

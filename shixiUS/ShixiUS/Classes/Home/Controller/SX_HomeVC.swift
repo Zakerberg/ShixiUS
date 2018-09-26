@@ -155,14 +155,15 @@ extension SX_HomeVC {
             do{
                 let json = try JSON(data: result)
                 self.jobsArr = JSON(arrayLiteral: json["jobs"].array ?? [])[0]
-                for item in json["train"].array ?? [] {
-                    let trainModel = SX_HomeTrainModel(jsonData: item)
-                    self.trainArr.append(trainModel)
-                }
                 
                 for item in json["training"].array ?? [] {
                     let trainingModel = SX_HomeTrainingModel(jsonData: item)
                     self.trainingArr.append(trainingModel)
+                }
+                
+                for item in json["train"].array ?? [] {
+                    let trainModel = SX_HomeTrainModel(jsonData: item)
+                    self.trainArr.append(trainModel)
                 }
                 self.homeTableView.reloadData()
             } catch{ }

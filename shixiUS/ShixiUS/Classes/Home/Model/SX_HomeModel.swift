@@ -324,10 +324,89 @@ struct SX_TrainingApplyConfirmModel {
 // ==============================================================================================
 struct SX_TrainModel {
     
+    var search: TrainSearchModel
+    var lists:TrainListModel
+    var type:TrainTypeModel
+    var course:TrainCourseModel
+    var sort:TrainSortModel
     
-    
-    
+    init(jsonData: JSON) {
+        search         = TrainSearchModel(jsonData: jsonData["search"])
+        lists          = TrainListModel(jsonData: jsonData["lists"])
+        type           = TrainTypeModel(jsonData: jsonData["type"])
+        course         = TrainCourseModel(jsonData: jsonData["course"])
+        sort           = TrainSortModel(jsonData: jsonData["sort"])
+    }
 }
+
+struct TrainSearchModel {
+    
+    var type:String?
+    var course:String?
+    var sort:String?
+    var order:String?
+    
+    init(jsonData: JSON) {
+        type           = jsonData["type"].string
+        course         = jsonData["course"].string
+        sort           = jsonData["sort"].string
+        order          = jsonData["order"].string
+    }
+}
+
+struct TrainListModel {
+    
+    var id: String?
+    var name:String?
+    var series_name:String?
+    var category_name:String?
+    var image:String?
+    var price:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        name           = jsonData["title"].string
+        series_name    = jsonData["series_name"].string
+        category_name  = jsonData["category_name"].string
+        image          = jsonData["image"].string
+        price          = jsonData["price"].string
+    }
+}
+
+struct TrainTypeModel {
+    var id: String?
+    var name:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
+    }
+}
+
+struct TrainCourseModel {
+    
+    var id: String?
+    var name:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
+    }
+}
+
+struct TrainSortModel {
+    
+    var name:String?
+    var sort:String?
+    var order:String?
+    
+    init(jsonData: JSON) {
+        name           = jsonData["name"].string
+        sort           = jsonData["sort"].string
+        order          = jsonData["order"].string
+    }
+}
+
 
 // ==============================================================================================
 // MARK: - 培训详情页 /train/view/id/培训id

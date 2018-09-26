@@ -209,7 +209,7 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
         }
         
         cell.sourceName?.text = model.title ?? "测试项目"
-        cell.priceLabel?.text = model.price ?? "测试项目"
+        cell.priceLabel?.text = ("￥" + model.price!) ?? "测试项目"
         
         return cell
     }
@@ -229,7 +229,7 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
 extension SX_TrainingProjectController {
     func fetchData()  {
         
-        SX_NetManager.requestData(type: .GET, URlString: SX_TrainIndex, parameters: nil) { (result) in
+        SX_NetManager.requestData(type: .GET, URlString: SX_TrainingList, parameters: nil) { (result) in
             
             do{
                 let json = try JSON(data: result)

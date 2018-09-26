@@ -135,9 +135,13 @@ extension SX_ProjectDetailController {
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
-                let vc = SX_ApplySucceedController()
-                vc.ApplyNum.text = "SB123456789"
-                self.navigationController?.pushViewController(vc, animated: true)
+//                if SX_Utils.getSign_token() == "" {
+//                    SXLog("前去登陆")
+//                }else{
+                    let vc =  SX_ApplyTrainListController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+//                }
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -161,13 +165,7 @@ extension SX_ProjectDetailController {
                     self.tripDateArr.append(item["date"].string ?? "")
                     self.tripPriceArr.append(item["price"].string ?? "")
                 }
-                
-                
-                
-                
-                
-                
-                
+
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
                 

@@ -10,11 +10,11 @@ import UIKit
 
 class SX_Utils: NSObject {
     
-    class func getSign_token() -> NSString{
+    class func getSign_token() -> NSString {
         return (USERDEFAULTS.object(forKey: "token") as! NSString)
     }
     
-    class func getSign_userID() -> NSString{
+    class func getSign_userID() -> NSString {
         
         return (USERDEFAULTS.object(forKey: "userId") as! NSString)
     }
