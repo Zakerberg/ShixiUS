@@ -56,24 +56,11 @@ extension SX_BasePopSelectedView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         SXLog("点击了basePopSelectedView 的\(indexPath.section)  ===== \(indexPath.row)")
+
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
 }
-
-// ==========================================================================================================================
-// MARK: - Other Method
-// ==========================================================================================================================
-extension SX_BasePopSelectedView {
-    
-    func fetchData() {
-
-        
-    }
-}
-
-
-
-

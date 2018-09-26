@@ -96,21 +96,14 @@ extension SX_HotJobDetailController {
     
     func fetchData() {
         
-        SX_NetManager.requestData(type: .GET, URlString: SX_JobIndex, parameters:  nil, finishCallBack: { (result) in
-            do{
-
-           
-                
-                
-                
-
-
-
         
-
-                self.table.reloadData()
-            } catch{ }
-        })
+        
+        
+        
+        
+        
+        
+        
     }
 }
 

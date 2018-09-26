@@ -28,12 +28,8 @@ class SX_TrainingProjectController: UIViewController {
     
     var compreArr = [String]()
     
-    
     var listsModels = [TrainingListModel]()
     
-    // ==============================================================================================
-    //  MARK: - lazy
-    // ==============================================================================================
     // 综合排序View
     lazy var comprehensiveView: UIView = {
         let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
@@ -68,9 +64,6 @@ class SX_TrainingProjectController: UIViewController {
         return countryView
     }()
     
-    // ==============================================================================================
-    // MARK: - O
-    // ==============================================================================================
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -400,7 +393,6 @@ extension SX_TrainingProjectController {
     /// hideLoadingView
     func hideLoadingView() {
         let delaySeconds = 0.5
-        
     }
     
     @objc func TapClick() {

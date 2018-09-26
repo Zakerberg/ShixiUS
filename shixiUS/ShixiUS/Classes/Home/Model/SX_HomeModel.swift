@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 6/20/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//
+//  SX_Model 
 
 /*
  纵使高原上的风 吹不散  执着的背影
@@ -417,6 +417,108 @@ struct SX_TrainDetailModel {
     
     
 }
+
+
+// ==============================================================================================
+// MARK: - 职位列表页 /job/index
+// ==============================================================================================
+
+struct SX_JobModel {
+    
+    var search: JobSearchModel
+    var lists:JobListModel
+    var type:JobTypeModel
+    var nature:JobNatureModel
+    var duration:JobDurationModel
+    var setter:JobSetterModel
+    
+    init(jsonData: JSON) {
+        search         = JobSearchModel(jsonData: jsonData["search"])
+        lists          = JobListModel(jsonData: jsonData["lists"])
+        type           = JobTypeModel(jsonData: jsonData["type"])
+        nature         = JobNatureModel(jsonData: jsonData["nature"])
+        duration       = JobDurationModel(jsonData: ["duration"])
+        setter         = JobSetterModel(jsonData: jsonData["setter"])
+    }
+}
+
+struct JobSearchModel {
+    
+    var type:String?
+    var nature:String?
+    var duration:String?
+    var setter:String?
+    
+    init(jsonData: JSON) {
+        type           = jsonData["type"].string
+        nature         = jsonData["nature"].string
+        duration       = jsonData["duration"].string
+        setter         = jsonData["setter"].string
+    }
+}
+
+struct JobListModel {
+    
+    var id: String?
+    var title:String?
+    var address:String?
+    var duration:String?
+    var nature:String?
+    var time:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        title          = jsonData["title"].string
+        address        = jsonData["address"].string
+        duration       = jsonData["duration"].string
+        nature         = jsonData["nature"].string
+        time           = jsonData["time"].string
+    }
+}
+
+struct JobTypeModel {
+    var id: String?
+    var name:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
+    }
+}
+
+struct JobNatureModel {
+    
+    var id: String?
+    var name:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
+    }
+}
+
+struct JobDurationModel {
+    
+    var id: String?
+    var name:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
+    }
+}
+
+struct JobSetterModel {
+    
+    var id: String?
+    var name:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
+    }
+}
+
 
 // ==============================================================================================
 // MARK: - 职位详情页 /job/view/id/职位id

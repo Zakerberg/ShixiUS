@@ -16,9 +16,8 @@ let hotJobCellID = "hotJobCellID"
 
 class SX_MoreHotJobController: UIViewController {
     
-    // =========================================================================================================================
-    //  MARK: - lazy
-    // =========================================================================================================================
+    var jobListsModel = [SX_JobModel]()
+    
     /// 职位分类View
     private lazy var positionView: UIView = {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 440)).addhere(toSuperView: self.view).config({ (positionView) in
@@ -113,9 +112,16 @@ extension SX_MoreHotJobController {
         setTopSelectedView()
     }
     
-    /// .....
     func fetchData() {
         
+        SX_NetManager.requestData(type: .GET, URlString: SX_JobIndex, parameters:  nil, finishCallBack: { (result) in
+            do{
+
+
+
+                self.TableView.reloadData()
+            } catch{ }
+        })
     }
     
     /// 顶部4个按钮
@@ -368,11 +374,18 @@ extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = SX_OverseaCell(style: .default, reuseIdentifier: hotJobCellID)
-        cell.jobName?.text = "[金融] 美国金融岗位美国金融岗位美国金融岗位"
-        cell.address?.text = "美国/New York"
-        cell.nature?.text = "全职1"
-        cell.duration?.text = "实习2"
-        cell.date?.text = "2018.18.18"
+        cell.selectionStyle = .none
+        
+        
+        
+        
+        
+        
+//        cell.jobName?.text = "[金融] 美国金融岗位美国金融岗位美国金融岗位"
+//        cell.address?.text = "美国/New York"
+//        cell.nature?.text = "全职1"
+//        cell.duration?.text = "实习2"
+//        cell.date?.text = "2018.18.18"
         
         return cell
     }
