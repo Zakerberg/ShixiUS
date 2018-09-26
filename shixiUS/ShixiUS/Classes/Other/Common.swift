@@ -443,15 +443,17 @@
  extension NSDate {
 
     /// 计算这个月有多少天
-//    func numberOfDaysInCurrentMonth() -> NSInteger {
-     // 频繁调用 NSCalendar.current 可能有性能问题
+//    func numberOfDaysInCurrentMonth() -> Int {
+        // 频繁调用 NSCalendar.current 可能有性能问题
 //        return NSCalendar.current.range(of: Calendar.Component.day, in: Calendar.Component.month, for: self as Date)
 //    }
-//
+    
+    
 //    func numberOfWeeksInCurrentMonth() -> NSInteger {
 //
 //    }
-//
+
+    
 //    func weeklyOrdinality() -> NSInteger {
 //
 //    }
@@ -515,3 +517,68 @@
 //
 //    }
  }
+ 
+ extension UIViewController {
+    
+    func logOut() {
+        let loginVC = SX_LoginController()
+        let mainVc  = UINavigationController(rootViewController: loginVC)
+        mainVc.modalTransitionStyle = .partialCurl
+        self.present(mainVc, animated: true, completion: nil)
+    }
+ }
+ 
+ extension UITextField {
+    
+    func setTextField(_ font: CGFloat, color: UIColor, aligment: NSTextAlignment, title: NSString, placeHolder: NSString) {
+        let rightImageBtn = UIButton()
+        self.isSecureTextEntry = true
+        rightImageBtn.setBackgroundImage(#imageLiteral(resourceName: "icon"), for: .normal)
+        rightImageBtn.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+        rightImageBtn.centerY = self.centerY
+        self.rightView = rightImageBtn
+        self.rightViewMode = .always
+        rightImageBtn.rx.tap.subscribe(onNext: { (_) in
+            
+        }, onError: { (error) in
+            SXLog(error)
+        }, onCompleted: nil, onDisposed: nil)
+        self.font = UIFont.systemFont(ofSize: font)
+        
+        
+    }
+    
+    /*
+     [rightImageV addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
+     self.font = [UIFont systemFontOfSize:font];
+     self.textColor = color == nil ? [UIColor blackColor] : color;
+     self.textAlignment = alignment;
+     self.borderStyle = UITextBorderStyleNone;
+     self.text = title == nil ? @"" : title;
+     self.placeholder = placeholder == nil ? @"" : placeholder;
+     }
+     //监听右边按钮的点击,切换密码输入明暗文状态
+     -(void)btnClick:(UIButton *)btn{
+     //解决明暗文切换后面空格的问题的两种方式
+     //NSString* text = self.text;
+     //self.text = @" ";
+     //self.text = text;
+     //[self becomeFirstResponder];
+     [self resignFirstResponder];//取消第一响应者
+     btn.selected = !btn.selected;
+     if (!btn.selected) {
+     self.font = [UIFont systemFontOfSize:16];
+     [btn setBackgroundImage:[UIImage imageNamed:@"me_invisible"] forState:UIControlStateNormal];
+     self.secureTextEntry = YES;
+     }else{
+     self.font = [UIFont systemFontOfSize:16];
+     [btn setBackgroundImage:[UIImage imageNamed:@"me_visible"] forState:UIControlStateSelected];
+     self.secureTextEntry = NO;
+     }
+     [self becomeFirstResponder];//放弃第一响应者
+     }
+     */
+ }
+ 
+ 
+ 

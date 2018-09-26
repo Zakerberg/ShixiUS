@@ -110,6 +110,7 @@ extension SX_LoginController {
             Forget.sizeToFit()
             Forget.rx.tap.subscribe(onNext: { (_) in
                 SXLog("忘记密码怎么办?")
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -151,7 +152,6 @@ extension SX_LoginController {
                             USERDEFAULTS.set(json["data"]["token"], forKey: "")
                             USERDEFAULTS.set(json["data"]["user_id"], forKey: "")
                         }
-                        
                     } catch{ }
                 })
                 
@@ -189,6 +189,8 @@ extension SX_LoginController {
 // MARK: - Other Method 2
 // =========================================================================================
 extension SX_LoginController {
+    
+    
     
     
 }

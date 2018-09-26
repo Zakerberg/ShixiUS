@@ -99,11 +99,14 @@ extension SX_HotJobDetailController {
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
-                
-                let vc = SX_ApplyEmpListController()
-                
-                self.navigationController?.pushViewController(vc, animated: true)
-                
+             
+                if (USERDEFAULTS.value(forKey: "login") as! String) == "yes" {
+                    let vc = SX_ApplyEmpListController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    self.logOut()
+                }
+            
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -196,3 +199,7 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
         return 5.FloatValue.IPAD_XValue
     }
 }
+
+
+
+

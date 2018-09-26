@@ -90,20 +90,17 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             cell.headPortraitImageView?.addGestureRecognizer(tap)
             self.headPortraitImageView  = cell.headPortraitImageView
             self.titleNameLabel = cell.nameTitle
-            self.logInBtn = cell.logInButton
-            
-            
-            
-            
-            self.logInBtn?.rx.tap.subscribe(onNext: { (_) in
+
+            cell.logInButton?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("注册登陆 +++ + ")
                 let vc = SX_LoginController()
                 self.present(vc, animated: true, completion: {
-                    /// 存 token
+                    
                 })
+                
             }, onError: { (error) in
                 SXLog(error)
-            }, onCompleted: nil, onDisposed: nil).dispose()
+            }, onCompleted: nil, onDisposed: nil)
             
             return cell
         }
@@ -316,7 +313,7 @@ extension SX_MineVC {
         
         
 //        SX_NetManager.requestData(type: .POST, URlString: SX_Mine_UploadImage, parameters: dic) { (Result) in
-//            
+//
 //            let str = "avatar"
 //            var fileName = NSString()
 //            if UIImagePNGRepresentation(img) != nil {

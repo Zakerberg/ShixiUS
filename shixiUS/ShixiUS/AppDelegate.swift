@@ -20,6 +20,7 @@
 
 import UIKit
 import CoreData
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame:SCREEN_BOUNDS)
         self.window?.backgroundColor = UIColor.white
-        
+//        IQKeyboardManager.shared.enable = true
 //        if !UserDefaults.standard.bool(forKey: "firstLaunch") {
 //            UserDefaults.standard.bool(forKey: "firstLaunch")
 //            SXLog("首次启动")
