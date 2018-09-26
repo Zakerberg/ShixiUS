@@ -131,6 +131,7 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
         
         if indexPath.section == 0 {
             let cell = SX_HotJobDetailCell(style: .default, reuseIdentifier: hotJobDetailCellID)
+            cell.selectionStyle       = .none
             cell.jobName?.text        = "美国金融实习岗位- 信托和过桥基金业务"
             cell.jobReleaseTime?.text = "2018.03.06"
             cell.jobIndustry?.text    = "金融"
@@ -145,6 +146,7 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
         }
         
         let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: hotJobContentDetailCellID)
+        cell.selectionStyle  = .none
         if indexPath.section == 1 {
             cell.titleLabel?.text = "工作职责"
             cell.contentLabel?.text = self.dataArr

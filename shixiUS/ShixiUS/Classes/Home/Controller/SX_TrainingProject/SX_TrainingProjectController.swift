@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 7/6/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  实训项目
+//  实训项目列表页
 
 /*
  希望你可以把自己挂在淘宝上
@@ -25,6 +25,11 @@ class SX_TrainingProjectController: UIViewController {
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
     var collectionView: UICollectionView?
+    
+    var compreArr = [String]()
+    
+    
+    var listsModels = [TrainingListModel]()
     
     // ==============================================================================================
     //  MARK: - lazy
@@ -183,7 +188,7 @@ extension SX_TrainingProjectController {
 extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return self.listsModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -195,10 +200,16 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
         
-        cell.sourceImageView?.image = UIImage.init(named: "localImg3")
-        cell.priceLabel?.text = "￥" + "2998.00"
-        cell.sourceName?.text = "课程名称课程名称测试"
-        cell.certificateLabel?.text = "职业技术证书"
+        
+        let model = listsModels[indexPath.item]
+        if let url = URL(string: model.image ?? ""){
+            cell.sourceImageView?.kf.setImage(with: url)
+        }else{
+            cell.sourceImageView?.image = #imageLiteral(resourceName: "icon_placeholdericon_Image")
+        }
+        
+        cell.sourceName?.text = model.title ?? "测试项目"
+        cell.priceLabel?.text = model.price ?? "测试项目"
         
         return cell
     }
@@ -225,6 +236,12 @@ extension SX_TrainingProjectController {
                 /// 成功
                 SXLog("成功! ")
                 
+                for item in json["lists"].array ?? [] {
+                    let listModel = TrainingListModel(jsonData: item)
+                    self.listsModels.append(listModel)
+                }
+                
+                self.collectionView?.reloadData()
             } catch{ }
         }
     }

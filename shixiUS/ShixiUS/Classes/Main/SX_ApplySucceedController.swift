@@ -18,7 +18,7 @@ class SX_ApplySucceedController: UIViewController {
     
     /// 申请序号
     var ApplyNum = UILabel()
-    var str = "实习网就业顾问 将在俩个工作日内联系您 \n (因为时差问题请谅解)"
+    var str = "实习网就业顾问 将在俩个工作日内联系您 (因为时差问题请谅解)"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,9 +72,8 @@ extension SX_ApplySucceedController {
         let contentL = UILabel().addhere(toSuperView: self.view).layout { (make) in
             make.top.equalTo(applyNum).offset(Margin)
             make.left.equalTo(applyNum)
-            make.height.equalTo(UILabel.SX_getSpaceLabelHeight(self.str as NSString, font: UIFont.systemFont(ofSize: 12), width: SCREEN_WIDTH-20, space: 0, zpace: 0))
+//            make.height.equalTo(UILabel.SX_getSpaceLabelHeight(self.str as NSString, font: UIFont.systemFont(ofSize: 12), width: SCREEN_WIDTH-20, space: 0, zpace: 0))
             }.config { (CONTENT) in
-                CONTENT.sizeToFit()
                 CONTENT.text = self.str
                 CONTENT.numberOfLines = 0
                 CONTENT.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
