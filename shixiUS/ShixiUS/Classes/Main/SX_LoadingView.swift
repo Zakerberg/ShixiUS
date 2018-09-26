@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  加载界面
 
+/*
+ 我以前不写情诗
+ 怕每一次动笔之时
+ 想你想得神智不清
+ */
+
 import UIKit
 
 class SX_LoadingView: UIView {

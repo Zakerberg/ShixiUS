@@ -7,8 +7,9 @@
 //
 
 import UIKit
-
-// 1. 定义 SXAwakeProtocol 协议
+// =======================================================================================
+// MARK: - 1. 定义 SXAwakeProtocol 协议
+// =======================================================================================
 public protocol SXAwakeProtocol: class {
     static func sxAwake()
 }
@@ -138,9 +139,9 @@ class SX_NavigationBar {
 
 
 
-// =================================================================================================================================
+// =======================================================================================
 // MARK: - UINavigationController
-// =================================================================================================================================
+// =======================================================================================
 extension UINavigationController: SXFatherAwakeProtocol {
     
     override open var preferredStatusBarStyle: UIStatusBarStyle {
@@ -192,10 +193,10 @@ extension UINavigationController: SXFatherAwakeProtocol {
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
         // change navBarTitleColor
-//                let fromTitleColor = fromVC?.navBarTitleColor ?? SX_NavigationBar.defaultNavBarTitleColor
-//                let toTitleColor = toVC?.navBarTitleColor ?? SX_NavigationBar.defaultNavBarTitleColor
-//                let newTitleColor = SX_NavigationBar.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: progress)
-//                setNeedsNavigationBarUpdate(titleColor: newTitleColor)
+        //                let fromTitleColor = fromVC?.navBarTitleColor ?? SX_NavigationBar.defaultNavBarTitleColor
+        //                let toTitleColor = toVC?.navBarTitleColor ?? SX_NavigationBar.defaultNavBarTitleColor
+        //                let newTitleColor = SX_NavigationBar.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: progress)
+        //                setNeedsNavigationBarUpdate(titleColor: newTitleColor)
         
         // change navBar _UIBarBackground alpha
         let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? SX_NavigationBar.defaultBackgroundAlpha
@@ -226,9 +227,9 @@ extension UINavigationController: SXFatherAwakeProtocol {
         }
     }
     
-// ==================================================================================================================================
+// ===================================================================================
 // MARK: swizzling pop
-// ==================================================================================================================================
+// =======================================================================================
     struct popProperties {
         fileprivate static let popDuration = 0.13
         fileprivate static var displayCount = 0
@@ -238,9 +239,11 @@ extension UINavigationController: SXFatherAwakeProtocol {
             return current / all
         }
     }
-// ==================================================================================================================================
+    
+// =======================================================================================
 // swizzling system method: popToViewController
-// ==================================================================================================================================
+// =======================================================================================
+    
     @objc func sx_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBarUpdate(titleColor: viewController.navBarTitleColor)
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
@@ -258,9 +261,10 @@ extension UINavigationController: SXFatherAwakeProtocol {
         CATransaction.commit()
         return vcs
     }
-// ==================================================================================================================================
+// =======================================================================================
 // swizzling system method: popToRootViewControllerAnimated
-// ==================================================================================================================================
+// =======================================================================================
+    
     @objc func sx_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
         displayLink?.add(to: RunLoop.main, forMode: .commonModes)
@@ -292,9 +296,9 @@ extension UINavigationController: SXFatherAwakeProtocol {
     }
     
     
-// ==================================================================================================================================
+// =======================================================================================
 // MARK: swizzling push
-// ==================================================================================================================================
+// =======================================================================================
     struct pushProperties {
         fileprivate static let pushDuration = 0.13
         fileprivate static var displayCount = 0
@@ -338,9 +342,9 @@ extension UINavigationController: SXFatherAwakeProtocol {
     }
 }
 
-// ==================================================================================================================================
+// =======================================================================================
 // MARK: - deal the gesture of return
-// ==================================================================================================================================
+// =======================================================================================
 extension UINavigationController: UINavigationBarDelegate {
     public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
         if let topVC = topViewController,
@@ -609,8 +613,7 @@ extension UIViewController: SXAwakeProtocol {
     // swizzling two system methods: viewWillAppear(_:) and viewWillDisappear(_:)
     private static let onceToken = UUID().uuidString
     @objc public static func sxAwake() {
-        DispatchQueue.once(token: onceToken)
-        {
+        DispatchQueue.once(token: onceToken) {
             let needSwizzleSelectors = [
                 #selector(viewWillAppear(_:)),
                 #selector(viewWillDisappear(_:)),
@@ -833,10 +836,11 @@ extension UINavigationBar: SXAwakeProtocol {
             }
         }
     }
-    
-// ==================================================================================================================================
+
+// =======================================================================================
 // MARK: swizzling pop
-// ==================================================================================================================================
+// =======================================================================================
+    
     @objc func sx_setTitleTextAttributes(_ newTitleTextAttributes:[String : Any]?) {
         guard var attributes = newTitleTextAttributes else {
             return
@@ -867,9 +871,9 @@ extension UINavigationBar: SXAwakeProtocol {
     }
 }
 
-// ==================================================================================================================================
+// =======================================================================================
 // MARK: - Swizzling会改变全局状态,所以用 DispatchQueue.once 来确保无论多少线程都只会被执行一次
-// ==================================================================================================================================
+// =======================================================================================
 extension DispatchQueue {
     
     private static var onceTracker = [String]()
