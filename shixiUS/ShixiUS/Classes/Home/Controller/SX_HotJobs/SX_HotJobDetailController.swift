@@ -99,6 +99,11 @@ extension SX_HotJobDetailController {
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
+                
+                let vc = SX_ApplyEmpListController()
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -149,19 +154,22 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
             cell.jobFullTime?.text    = model.duration_name ?? "全职测试"
             cell.jobInterShip?.text   = model.nature_name ?? "实习测试"
             cell.jobSalary?.text      = model.wages ?? "面"
-            cell.jobIntroduce?.text   = self.intrStr
+            cell.jobIntroduce?.text   =       self.intrStr
             
             return cell
         }
         
         let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: hotJobContentDetailCellID)
         cell.selectionStyle  = .none
+        
+        let model = detailModels[indexPath.row]
+        
         if indexPath.section == 1 {
             cell.titleLabel?.text = "工作职责"
-            cell.contentLabel?.text = self.dataArr
+            cell.contentLabel?.text = model.duty ?? self.dataArr
         }else if indexPath.section == 2{
             cell.titleLabel?.text = "应聘要求"
-            cell.contentLabel?.text = self.DATA
+            cell.contentLabel?.text = model.requirement ?? self.DATA
         }
         
         return cell
@@ -177,11 +185,11 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return UILabel.SX_getSpaceLabelHeight(self.intrStr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 95
+            return UILabel.SX_getSpaceLabelHeight(self.intrStr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 110.FloatValue.IPAD_XValue
         } else if indexPath.section == 1 {
-            return UILabel.SX_getSpaceLabelHeight(self.dataArr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60
+            return UILabel.SX_getSpaceLabelHeight(self.dataArr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
         }
-        return UILabel.SX_getSpaceLabelHeight(self.DATA as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60
+        return UILabel.SX_getSpaceLabelHeight(self.DATA as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

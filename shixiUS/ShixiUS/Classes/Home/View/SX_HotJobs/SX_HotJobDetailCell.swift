@@ -87,9 +87,28 @@ extension SX_HotJobDetailCell {
             RELEASE.textColor = UIColor.colorWithRGB(r: 153, g: 153, b: 153)
         })
         
+        
+        let palceImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(Time.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.width.height.equalTo(14)
+            make.left.equalTo(self.jobName!)
+        }).config({ (PLACEIV) in
+            PLACEIV.image = #imageLiteral(resourceName: "address")
+        })
+        
+        /// 美国洛杉矶
+        self.jobPlace = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.height.centerY.equalTo(palceImage)
+            make.left.equalTo(palceImage.snp.right).offset(5)
+        }).config({ (PLACE) in
+            PLACE.sizeToFit()
+            PLACE.font      = UIFont.systemFont(ofSize: 13)
+            PLACE.textColor = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
+        })
+        
         let industryImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.left.equalTo(self.jobName!)
-            make.top.equalTo(self.jobReleaseTime!.snp.bottom).offset(Margin)
+            make.top.equalTo(palceImage.snp.bottom).offset(Margin)
             make.width.height.equalTo(14)
         }).config({ (INDUSTRYIV) in
             INDUSTRYIV.image = #imageLiteral(resourceName: "icon_hotJob_industry")
@@ -105,29 +124,14 @@ extension SX_HotJobDetailCell {
             INDUSTRY.textColor = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
         })
         
-        let palceImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.height.centerY.equalTo(industryImage)
-            make.left.equalTo(self.jobIndustry!.snp.right).offset(5)
-        }).config({ (PLACEIV) in
-            PLACEIV.image = #imageLiteral(resourceName: "address")
-        })
-        
-        self.jobPlace = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.height.centerY.equalTo(industryImage)
-            make.left.equalTo(palceImage.snp.right).offset(5)
-        }).config({ (PLACE) in
-            PLACE.sizeToFit()
-            PLACE.font      = UIFont.systemFont(ofSize: 13)
-            PLACE.textColor = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
-        })
-        
         let countImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.height.centerY.equalTo(industryImage)
-            make.left.equalTo(self.jobPlace!.snp.right).offset(5)
+            make.left.equalTo(self.jobIndustry!.snp.right).offset(5)
         }).config({ (COUNTIV) in
             COUNTIV.image = #imageLiteral(resourceName: "icon_hotJob_peopleCount")
         })
         
+        /// 人数
         self.jobPeopleCount = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.height.centerY.equalTo(industryImage)
             make.left.equalTo(countImage.snp.right).offset(5)
@@ -138,7 +142,7 @@ extension SX_HotJobDetailCell {
         })
         
         let fulltimeImage = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.height.centerY.equalTo(industryImage)
+            make.height.width.centerY.equalTo(industryImage)
             make.left.equalTo(self.jobPeopleCount!.snp.right).offset(5)
         }).config({ (FULLTIMEIV) in
             FULLTIMEIV.image = #imageLiteral(resourceName: "icon_hotJob_fullTime")
