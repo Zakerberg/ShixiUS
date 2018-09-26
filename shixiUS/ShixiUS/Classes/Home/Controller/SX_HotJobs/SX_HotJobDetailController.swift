@@ -73,7 +73,14 @@ extension SX_HotJobDetailController {
             COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
             
             COLLECTION.rx.tap.subscribe(onNext: { (_) in
-                SXLog("收藏按钮的点击")
+                if self.collectionBtn?.isSelected == true {
+                    SXLog("已收藏,点击取消收藏")
+                    self.collectionBtn?.isSelected = false
+                }else {
+                    SXLog("未收藏,点击收藏职位")
+                    self.collectionBtn?.isSelected = true
+                }
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -95,12 +102,6 @@ extension SX_HotJobDetailController {
     }
     
     func fetchData() {
-        
-        
-        
-        
-        
-        
         
         
         

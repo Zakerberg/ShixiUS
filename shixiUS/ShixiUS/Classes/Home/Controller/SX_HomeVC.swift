@@ -366,9 +366,8 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
                             self.navigationController?.pushViewController(vc, animated: true)
                             self.hidesBottomBarWhenPushed = false
                         }else if i == 1 {
-                            SXLog("进入海外就业\(i)")
                             self.hidesBottomBarWhenPushed = true
-                            let vc = SX_OverseaController()
+                            let vc = SX_MoreHotJobController()
                             self.navigationController?.pushViewController(vc, animated: true)
                             self.hidesBottomBarWhenPushed = false
                         }else if i == 2 {

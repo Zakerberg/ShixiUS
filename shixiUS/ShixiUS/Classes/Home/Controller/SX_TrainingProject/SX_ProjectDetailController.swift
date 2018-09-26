@@ -24,8 +24,8 @@ class SX_ProjectDetailController: UIViewController {
     
     ///////////////////////////////////////////////////////////////////////////////////////////////
     var ProjectLightStr = "Overriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keyword"
-//    var dateTArr     = ["06.12", "06.14", "08.19", "09.16"]
-//    var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
+    //    var dateTArr     = ["06.12", "06.14", "08.19", "09.16"]
+    //    var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
     var id:String?
@@ -41,7 +41,7 @@ class SX_ProjectDetailController: UIViewController {
     var tripPriceArr = [String]()
     
     lazy var pageTitleView: SX_PageTitleView = {
-       
+        
         let config                = SX_PageTitleViewConfig()
         config.titleColor         = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         config.titleSelectedColor = UIColor.SX_MainColor()
@@ -108,7 +108,7 @@ extension SX_ProjectDetailController {
         
         view.addSubview(tableView)
         tableView.addSubview(detailScrollerView)
-      //  tableView.addSubview(projectBgView)
+        //  tableView.addSubview(projectBgView)
         navBarBackgroundAlpha = 0
         
         self.collectionBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -123,7 +123,18 @@ extension SX_ProjectDetailController {
             COLLECTION.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
             COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
             
-            COLLECTION.addTarget(self, action: #selector(collectionBtnClick), for: .touchUpInside)
+            COLLECTION.rx.tap.subscribe(onNext: { (_) in
+                if self.collectionBtn?.isSelected == true {
+                    SXLog("已收藏,点击取消收藏")
+                    self.collectionBtn?.isSelected = false
+                }else {
+                    SXLog("未收藏,点击收藏职位")
+                    self.collectionBtn?.isSelected = true
+                }
+                
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
         })
         
         self.applyBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -135,12 +146,12 @@ extension SX_ProjectDetailController {
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
-//                if SX_Utils.getSign_token() == "" {
-//                    SXLog("前去登陆")
-//                }else{
-                    let vc =  SX_ApplyTrainListController()
-                    self.navigationController?.pushViewController(vc, animated: true)
-//                }
+                //                if SX_Utils.getSign_token() == "" {
+                //                    SXLog("前去登陆")
+                //                }else{
+                let vc =  SX_ApplyTrainListController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                //                }
                 
             }, onError: { (error) in
                 SXLog(error)
@@ -165,7 +176,7 @@ extension SX_ProjectDetailController {
                     self.tripDateArr.append(item["date"].string ?? "")
                     self.tripPriceArr.append(item["price"].string ?? "")
                 }
-
+                
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
                 
@@ -217,7 +228,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
                 
                 let vc = SX_MoreDateController()
                 self.navigationController?.pushViewController(vc, animated: true)
-
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil).dispose()
@@ -341,22 +352,6 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
                 }
             }
         })
-    }
-}
-
-// =========================================================================================================
-// MARK: - @objc 收藏
-// =========================================================================================================
-extension SX_ProjectDetailController {
-    @objc func collectionBtnClick() {
-        
-        if self.collectionBtn?.isSelected == true {
-            SXLog("已收藏,点击取消收藏")
-            self.collectionBtn?.isSelected = false
-        }else {
-            SXLog("未收藏,点击收藏职位")
-            self.collectionBtn?.isSelected = true
-        }
     }
 }
 
