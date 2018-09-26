@@ -14,6 +14,7 @@
  */
 
 import UIKit
+import SwiftyJSON
 
 let hotJobDetailCellID = "hotJobDetailCellID"
 let hotJobContentDetailCellID = "hotJobContentDetailCellID"
@@ -28,6 +29,9 @@ class SX_HotJobDetailController: UIViewController {
     
     var collectionBtn : UIButton?
     var applyBtn: UIButton?
+    
+    var id:String?
+    var detailModels = [SX_JobDetailModel]()
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-50.FloatValue.IPAD_XValue)), style: .grouped)
@@ -102,9 +106,17 @@ extension SX_HotJobDetailController {
     }
     
     func fetchData() {
-        
-        
-        
+        SX_NetManager.requestData(type: .GET, URlString: (SX_JobDetail + self.id!), parameters:  nil, finishCallBack: { (result) in
+            do{
+                /// SwiftyJSON 在这里 ! ! !
+                let json = try JSON(data: result)
+                SXLog("成功!")
+                let model = SX_JobDetailModel(jsonData: json)
+                self.detailModels.append(model)
+                
+                self.table.reloadData()
+            } catch{ }
+        })
     }
 }
 
@@ -118,7 +130,7 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.detailModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,14 +138,17 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.section == 0 {
             let cell = SX_HotJobDetailCell(style: .default, reuseIdentifier: hotJobDetailCellID)
             cell.selectionStyle       = .none
-            cell.jobName?.text        = "美国金融实习岗位- 信托和过桥基金业务"
-            cell.jobReleaseTime?.text = "2018.03.06"
-            cell.jobIndustry?.text    = "金融"
-            cell.jobPlace?.text       = "美国/加利福尼亚/洛杉矶"
-            cell.jobPeopleCount?.text = "6" + "人"
-            cell.jobFullTime?.text    = "全职"
-            cell.jobInterShip?.text   = "实习"
-            cell.jobSalary?.text      = "面议"
+            
+            let model = detailModels[indexPath.row]
+            
+            cell.jobName?.text        = model.title ?? "美国金融测试岗位"
+            cell.jobReleaseTime?.text = model.time ?? "测试时间"
+            cell.jobIndustry?.text    = model.trade_name ?? "测试"
+            cell.jobPlace?.text       = model.address ?? "美国/测试/洛杉矶"
+            cell.jobPeopleCount?.text = (model.amount ?? "10(测试)") + "人"
+            cell.jobFullTime?.text    = model.duration_name ?? "全职测试"
+            cell.jobInterShip?.text   = model.nature_name ?? "实习测试"
+            cell.jobSalary?.text      = model.wages ?? "面"
             cell.jobIntroduce?.text   = self.intrStr
             
             return cell

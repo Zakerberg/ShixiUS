@@ -66,9 +66,6 @@ let SX_Oversea_Apply          = SHIXIUS + "/job/apply"
 /// 海外就业报名页 (post)
 let SX_Oversea_Apply_Confirm  = SHIXIUS + "/job/apply"
 
-
-
-
 // =======================================================================================
 // MARK: - 会员中心 ! ! !
 // =======================================================================================
@@ -77,18 +74,9 @@ let SX_VIPCenter_MyCollection = SHIXIUS + "/mycollection/index"
 /// 添加我的收藏 (get)
 let SX_VIPCenter_Add          = SHIXIUS + "/mycollection/add"
 
-
 // =======================================================================================
 // MARK: - 我的 ! ! !
 // =======================================================================================
 /// 上传图片 (post)
 let SX_Mine_UploadImage       = SHIXIUS + "/common/uploadimage"
-
-
-
-
-
-
-
-
 

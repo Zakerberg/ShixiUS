@@ -426,7 +426,9 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        let model = jobsArr[indexPath.row]
         let vc = SX_HotJobDetailController()
+        vc.id  = model["id"].string
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -437,7 +439,7 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
 extension SX_HomeVC: SXCycleScrollerViewDelegate {
     
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
-     
+        
         
     }
     

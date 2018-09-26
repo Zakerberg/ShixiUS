@@ -531,7 +531,6 @@ struct SX_JobDetailModel {
     var trade_name:String?
     var address:String?
     var amount:String?
-    var duration:String?
     var duration_id:String?  // 1.兼职 2.全职
     var duration_name:String?
     var nature_id:String?    // 1.兼职 2.全职
@@ -540,6 +539,7 @@ struct SX_JobDetailModel {
     var duty:String?
     var requirement:String?
     var collection:String?
+    var apply:String?
     var collection_type:String?
     
     init(jsonData: JSON) {
@@ -549,7 +549,6 @@ struct SX_JobDetailModel {
         trade_name      = jsonData["trade_name"].string
         address         = jsonData["address"].string
         amount          = jsonData["amount"].string
-        duration        = jsonData["duration"].string
         duration_id     = jsonData["duration_id"].string
         duration_name   = jsonData["duration_name"].string
         nature_id       = jsonData["nature_id"].string
@@ -558,6 +557,7 @@ struct SX_JobDetailModel {
         duty            = jsonData["duty"].string
         requirement     = jsonData["requirement"].string
         collection      = jsonData["collection"].string
+        apply           = jsonData["apply"].string
         collection_type = jsonData["collection_type"].string
     }
 }
