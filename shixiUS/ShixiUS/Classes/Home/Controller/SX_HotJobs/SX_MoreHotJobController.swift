@@ -7,6 +7,7 @@
 //  热门岗位的更多界面
 
 import UIKit
+import SwiftyJSON
 
 private let ArrowTag = 3000
 private let ControlTag = 1000
@@ -16,7 +17,7 @@ let hotJobCellID = "hotJobCellID"
 
 class SX_MoreHotJobController: UIViewController {
     
-    var jobListsModel = [SX_JobModel]()
+    var jobListsMlodel = [JobListModel]()
     
     /// 职位分类View
     private lazy var positionView: UIView = {
@@ -65,7 +66,7 @@ class SX_MoreHotJobController: UIViewController {
     }()
     
     private lazy var TableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: Int(kNavH)+45, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)-Int((kNavH+45))), style: .plain)
+        let tableView = UITableView(frame: CGRect(x: 0, y: Int(kNavH), width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)-Int((kNavH+45))), style: .plain)
         tableView.backgroundColor = UIColor.white
         tableView.delegate = self
         tableView.dataSource = self
@@ -113,15 +114,20 @@ extension SX_MoreHotJobController {
     }
     
     func fetchData() {
-        
-        SX_NetManager.requestData(type: .GET, URlString: SX_JobIndex, parameters:  nil, finishCallBack: { (result) in
+        SX_NetManager.requestData(type: .GET, URlString: SX_JobIndex, parameters: nil) { (result) in
+            
             do{
-
-
-
+                let json = try JSON(data: result)
+                /// 成功
+                SXLog("成功! ")
+                
+                for item in json["lists"].array ?? [] {
+                    let Model = JobListModel(jsonData: item)
+                    self.jobListsMlodel.append(Model)
+                }
                 self.TableView.reloadData()
             } catch{ }
-        })
+        }
     }
     
     /// 顶部4个按钮
@@ -368,24 +374,20 @@ extension SX_MoreHotJobController {
 // =================================================================================================================
 extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 40
+        return self.jobListsMlodel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = SX_OverseaCell(style: .default, reuseIdentifier: hotJobCellID)
         cell.selectionStyle = .none
+        let model = jobListsMlodel[indexPath.row]
         
-        
-        
-        
-        
-        
-//        cell.jobName?.text = "[金融] 美国金融岗位美国金融岗位美国金融岗位"
-//        cell.address?.text = "美国/New York"
-//        cell.nature?.text = "全职1"
-//        cell.duration?.text = "实习2"
-//        cell.date?.text = "2018.18.18"
+        cell.jobName?.text  = model.title ?? "测试名字"
+        cell.address?.text  = model.address ?? "测试地址"
+        cell.nature?.text   = model.nature ?? "测试"
+        cell.date?.text     = model.time ?? "测试时间"
+        cell.duration?.text = model.duration ?? "测试"
         
         return cell
     }

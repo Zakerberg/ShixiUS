@@ -128,7 +128,7 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
             cell.jobName?.text        = "美国金融实习岗位- 信托和过桥基金业务"
             cell.jobReleaseTime?.text = "2018.03.06"
             cell.jobIndustry?.text    = "金融"
-            cell.jobPlace?.text       = "美国纽约"
+            cell.jobPlace?.text       = "美国/加利福尼亚/洛杉矶"
             cell.jobPeopleCount?.text = "6" + "人"
             cell.jobFullTime?.text    = "全职"
             cell.jobInterShip?.text   = "实习"
