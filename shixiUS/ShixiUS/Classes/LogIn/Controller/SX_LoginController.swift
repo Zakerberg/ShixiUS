@@ -16,6 +16,7 @@
 
 import UIKit
 import SwiftyJSON
+import MBProgressHUD
 
 class SX_LoginController: UIViewController {
     
@@ -112,8 +113,8 @@ extension SX_LoginController {
                 SXLog("忘记密码怎么办?")
                 let fixVC = SX_MineFixPasswordController()
                 self.navigationController?.show(fixVC, sender: nil)
-
-
+                
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -131,12 +132,24 @@ extension SX_LoginController {
             LogIn.rx.tap.subscribe(onNext: { (_) in
                 SXLog("LOGIN")
                 /// 请求
+                let str = self.passWordTF?.text?.base64
+                let str1 = str?.replacingOccurrences(of: "\n", with: "")
+                let str2 = str1?.replacingOccurrences(of: "\t", with: "")
                 let param = ["name":self.userNameTF?.text,
-                             "password":self.passWordTF?.text
-                ]
+                             "password":str2]
                 
                 if self.userNameTF?.text == "" {
-                    /// 提示! 
+                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode = .text
+                    hud.isSquare = true
+                    hud.label.text = "请输入用户名"
+                    return
+                } else if self.passWordTF?.text == "" {
+                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode = .text
+                    hud.isSquare = true
+                    hud.label.text = "请输入密码"
+                    return
                 }
                 
                 SX_NetManager.requestData(type: .POST, URlString: SX_LogIn, parameters: param as? [String : String], finishCallBack: { (result) in
@@ -195,6 +208,7 @@ extension SX_LoginController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.passWordTF?.resignFirstResponder()
         self.userNameTF?.resignFirstResponder()
+        self.backBtn?.resignFirstResponder()
     }
 }
 

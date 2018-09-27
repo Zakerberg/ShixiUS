@@ -12,12 +12,13 @@ import MBProgressHUD
 
 class SX_RegisterContrller: UIViewController {
     
-    var userNameTF     : SX_TextField?
-    var passWordTF     : SX_TextField?
-    var email         : SX_TextField?
+    var userNameTF: SX_TextField?
+    var passWordTF: SX_TextField?
+    var email: SX_TextField?
     
-    var backBtn        : UIButton?
-    var regBtn         : UIButton?
+    var backBtn: UIButton?
+    var regBtn: UIButton?
+//    var eyeBtn: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +39,6 @@ extension SX_RegisterContrller {
         
         title = "快速注册"
         self.view.backgroundColor = UIColor.white
-        
-        //        self.setRightItem("Close")
-        
         self.backBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalToSuperview().offset(50.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-30.FloatValue.IPAD_XValue)
@@ -92,6 +90,7 @@ extension SX_RegisterContrller {
             PASSWORD.layer.cornerRadius  = 10
             PASSWORD.placeholder         = "请输入密码"
             PASSWORD.textAlignment       = .left
+            PASSWORD.isSecureTextEntry   = true
         })
         
         self.email = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -106,6 +105,26 @@ extension SX_RegisterContrller {
             MAIL.placeholder             = "请输入邮箱"
             MAIL.textAlignment           = .left
         })
+    
+        /*
+         self.eyeBtn = UIButton(type: .custom).addhere(toSuperView: self.email!).layout(snapKitMaker: { (make) in
+         make.right.equalToSuperview().offset(-Margin)
+         make.center.equalToSuperview()
+         make.width.height.equalTo(35.FloatValue.IPAD_XValue)
+         }).config({ (EYE) in
+         EYE.setImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
+         EYE.rx.tap.subscribe(onNext: { (_) in
+         self.passWordTF!.isSecureTextEntry = !(self.passWordTF!.isSecureTextEntry)
+         if (self.passWordTF?.isSecureTextEntry)! {
+         self.eyeBtn?.setImage(#imageLiteral(resourceName: "zhuce_btn_yincang"), for: .normal)
+         }else{
+         self.eyeBtn?.setImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
+         }
+         }, onError: { (error) in
+         SXLog(error)
+         }, onCompleted: nil, onDisposed: nil)
+         })
+         */
         
         self.regBtn = UIButton().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.email!.snp.bottom).offset(50.FloatValue.IPAD_XValue)
@@ -137,17 +156,56 @@ extension SX_RegisterContrller {
                      "email":self.email?.text,
                      "password":str2]
         
+        if self.passWordTF?.text == "" {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.mode = .text
+            hud.isSquare = true
+            hud.label.text = "请输入密码"
+            hud.hide(animated: true, afterDelay: 1.0)
+            return
+        }else if self.userNameTF?.text == "" {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.mode = .text
+            hud.isSquare = true
+            hud.label.text = "请输入用户名"
+            hud.hide(animated: true, afterDelay: 1.0)
+            return
+        } else if self.email?.text == "" {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.mode = .text
+            hud.isSquare = true
+            hud.label.text = "请输入注册邮箱"
+            hud.hide(animated: true, afterDelay: 1.0)
+            return
+        }else if (self.email?.text?.isValiteEmail())! == false {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.mode = .text
+            hud.isSquare = true
+            hud.label.text = "输入邮箱格式不正确"
+            hud.hide(animated: true, afterDelay: 1.0)
+            return
+        }
+        
         SX_NetManager.requestData(type: .POST, URlString: SX_Register, parameters: param as? [String : String], finishCallBack: { (result) in
             do{
-                
                 let json = try JSON(data: result)
-                
                 if json["status"] == 200 {
-                    self.dismiss(animated: true, completion: {
-                        SXLog("注册成功!")
-                    })
+                    SXLog("注册成功!")
+                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode = .text
+                    hud.isSquare = true
+                    hud.label.text = json["msg"].string
+                    self.dismiss(animated: true, completion: nil)
+                }else if json["status"] == 202 {
+                    SXLog("存在")
+                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode = .text
+                    hud.isSquare = true
+                    hud.label.text = json["msg"].string
+                    self.dismiss(animated: true, completion: nil)
                 }
             } catch{ }
         })
     }
 }
+

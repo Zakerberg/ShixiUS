@@ -426,17 +426,7 @@
     }
     
     /// base 64
-//    func SX_base64() -> String? {
-//        let decodeData:Data? = Data.init(base64Encoded: self, options: Data.Base64DecodingOptions.init(rawValue: 0))
-//        guard let utf8Data = decodeData else{
-//            return nil
-//        }
-//        let decodedStr:String? = String.init(data: utf8Data, encoding: String.Encoding.utf8)
-//        return decodedStr
-//    }
-    
     var base64 :String{
-        
         get{
             let strData = self.data(using: .utf8)
             let data64 = strData?.base64EncodedData()
@@ -445,6 +435,12 @@
         }
     }
     
+    func isValiteEmail() -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let emailTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailTest.evaluate(with: self)
+    }
+
     
     
  }
