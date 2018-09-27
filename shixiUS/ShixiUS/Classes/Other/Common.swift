@@ -193,15 +193,15 @@
         return String(format: hash as String) as NSString
     }
     
-//    class func jsonStringToDictionary (jsonstr: NSString) -> NSDictionary {
-//        do{
-//            let json = try JSONSerialization.jsonObject(with: jsonstr.data(using: String.Encoding.utf8.rawValue)!, options: .allowFragments)
-//            return json as! NSDictionary
-//        }catch{ }
-//
-//        let str = NSDictionary()
-//        return str
-//    }
+    //    class func jsonStringToDictionary (jsonstr: NSString) -> NSDictionary {
+    //        do{
+    //            let json = try JSONSerialization.jsonObject(with: jsonstr.data(using: String.Encoding.utf8.rawValue)!, options: .allowFragments)
+    //            return json as! NSDictionary
+    //        }catch{ }
+    //
+    //        let str = NSDictionary()
+    //        return str
+    //    }
  }
  
  extension Int {
@@ -441,81 +441,81 @@
  // MARK: - NSDate Extension CalendarLogic
  // ==============================================================================
  extension NSDate {
-
+    
     /// 计算这个月有多少天
-//    func numberOfDaysInCurrentMonth() -> Int {
-        // 频繁调用 NSCalendar.current 可能有性能问题
-//        return NSCalendar.current.range(of: Calendar.Component.day, in: Calendar.Component.month, for: self as Date)
-//    }
+    //    func numberOfDaysInCurrentMonth() -> Int {
+    // 频繁调用 NSCalendar.current 可能有性能问题
+    //        return NSCalendar.current.range(of: Calendar.Component.day, in: Calendar.Component.month, for: self as Date)
+    //    }
     
     
-//    func numberOfWeeksInCurrentMonth() -> NSInteger {
-//
-//    }
-
+    //    func numberOfWeeksInCurrentMonth() -> NSInteger {
+    //
+    //    }
     
-//    func weeklyOrdinality() -> NSInteger {
-//
-//    }
-//
-//    func firstDayOfCurrentMonth() -> NSDate {
-//
-//    }
-//
-//    func lastDayOfCurrentMonth() -> NSDate {
-//
-//    }
-//
-//    func dayInThePreviousMonth() -> NSDate {
-//
-//    }
-//
-//    func dayInFollowingMonth() -> NSDate {
-//
-//    }
-//
-//    /// 获取当前日期之前后的几个月
-//    func dayInTheFollowingMonth(month: Int) -> NSDate {
-//
-//    }
-//
-//    /// 获取当前日期之前后的几天
-//    func dayInTheFollowingDay(day: Int) -> NSDate {
-//
-//
-//    }
-//
-//    func YMDComponents() {
-//
-//    }
-//
-//    /// NSString 转 NSDate
-//    func dateFormString(dateString: NSString) -> NSDate {
-//
-//    }
-//
-//    /// NSDate 转 NSString
-//    func stringFormDate(date: NSDate) -> NSString {
-//
-//    }
-//
-//    class func getDayNumbertoDay(_ today: NSDate, beforeDay: NSDate) -> Int {
-//
-//    }
-//
-//    func getweekInValueWithDate() -> Int {
-//
-//    }
-//
-//    /// 判断日期是今天,明天,后天,周几
-//    func compareIfTodayWithDate() -> NSString {
-//
-//    }
-//
-//    /// 通过数字返回星期几
-//    class func getWeekStringFormInteger(week:Int) -> NSString {
-//
-//    }
+    
+    //    func weeklyOrdinality() -> NSInteger {
+    //
+    //    }
+    //
+    //    func firstDayOfCurrentMonth() -> NSDate {
+    //
+    //    }
+    //
+    //    func lastDayOfCurrentMonth() -> NSDate {
+    //
+    //    }
+    //
+    //    func dayInThePreviousMonth() -> NSDate {
+    //
+    //    }
+    //
+    //    func dayInFollowingMonth() -> NSDate {
+    //
+    //    }
+    //
+    //    /// 获取当前日期之前后的几个月
+    //    func dayInTheFollowingMonth(month: Int) -> NSDate {
+    //
+    //    }
+    //
+    //    /// 获取当前日期之前后的几天
+    //    func dayInTheFollowingDay(day: Int) -> NSDate {
+    //
+    //
+    //    }
+    //
+    //    func YMDComponents() {
+    //
+    //    }
+    //
+    //    /// NSString 转 NSDate
+    //    func dateFormString(dateString: NSString) -> NSDate {
+    //
+    //    }
+    //
+    //    /// NSDate 转 NSString
+    //    func stringFormDate(date: NSDate) -> NSString {
+    //
+    //    }
+    //
+    //    class func getDayNumbertoDay(_ today: NSDate, beforeDay: NSDate) -> Int {
+    //
+    //    }
+    //
+    //    func getweekInValueWithDate() -> Int {
+    //
+    //    }
+    //
+    //    /// 判断日期是今天,明天,后天,周几
+    //    func compareIfTodayWithDate() -> NSString {
+    //
+    //    }
+    //
+    //    /// 通过数字返回星期几
+    //    class func getWeekStringFormInteger(week:Int) -> NSString {
+    //
+    //    }
  }
  
  extension UIViewController {
@@ -530,7 +530,7 @@
  
  extension UITextField {
     
-    func setTextField(_ font: CGFloat, color: UIColor, aligment: NSTextAlignment, title: NSString, placeHolder: NSString) {
+    func setTextField(_ font: CGFloat, color: UIColor, aligment: NSTextAlignment, title: String, placeHolder: String) {
         let rightImageBtn = UIButton()
         self.isSecureTextEntry = true
         rightImageBtn.setBackgroundImage(#imageLiteral(resourceName: "icon"), for: .normal)
@@ -538,47 +538,33 @@
         rightImageBtn.centerY = self.centerY
         self.rightView = rightImageBtn
         self.rightViewMode = .always
-        rightImageBtn.rx.tap.subscribe(onNext: { (_) in
-            
-        }, onError: { (error) in
-            SXLog(error)
-        }, onCompleted: nil, onDisposed: nil)
+        rightImageBtn.addTarget(self, action: #selector(btnClick), for: .touchUpInside)
+        
         self.font = UIFont.systemFont(ofSize: font)
-        
-        
+        self.textColor = color
+        self.textAlignment = aligment
+        self.borderStyle = .none
+        self.text = title
+        self.placeholder = placeHolder
     }
     
-    /*
-     [rightImageV addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
-     self.font = [UIFont systemFontOfSize:font];
-     self.textColor = color == nil ? [UIColor blackColor] : color;
-     self.textAlignment = alignment;
-     self.borderStyle = UITextBorderStyleNone;
-     self.text = title == nil ? @"" : title;
-     self.placeholder = placeholder == nil ? @"" : placeholder;
-     }
-     //监听右边按钮的点击,切换密码输入明暗文状态
-     -(void)btnClick:(UIButton *)btn{
-     //解决明暗文切换后面空格的问题的两种方式
-     //NSString* text = self.text;
-     //self.text = @" ";
-     //self.text = text;
-     //[self becomeFirstResponder];
-     [self resignFirstResponder];//取消第一响应者
-     btn.selected = !btn.selected;
-     if (!btn.selected) {
-     self.font = [UIFont systemFontOfSize:16];
-     [btn setBackgroundImage:[UIImage imageNamed:@"me_invisible"] forState:UIControlStateNormal];
-     self.secureTextEntry = YES;
-     }else{
-     self.font = [UIFont systemFontOfSize:16];
-     [btn setBackgroundImage:[UIImage imageNamed:@"me_visible"] forState:UIControlStateSelected];
-     self.secureTextEntry = NO;
-     }
-     [self becomeFirstResponder];//放弃第一响应者
-     }
-     */
+    @objc func btnClick(btn: UIButton) {
+        //监听右边按钮的点击,切换密码输入明暗文状态
+        let text  = self.text
+        self.text = ""
+        self.text = text
+        self.resignFirstResponder()
+        btn.isSelected  = !btn.isSelected
+        if !btn.isSelected {
+            self.font = UIFont.systemFont(ofSize: 16)
+            btn.setBackgroundImage(#imageLiteral(resourceName: "icon"), for: .normal)
+            self.isSecureTextEntry = true
+        }else{
+            self.font = UIFont.systemFont(ofSize: 16)
+            btn.setBackgroundImage(#imageLiteral(resourceName: "icon"), for: .selected)
+            self.isSecureTextEntry = false
+        }
+        self.becomeFirstResponder()
+    }
  }
- 
- 
  
