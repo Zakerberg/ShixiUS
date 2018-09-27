@@ -110,7 +110,25 @@ extension SX_LoginController {
             Forget.sizeToFit()
             Forget.rx.tap.subscribe(onNext: { (_) in
                 SXLog("忘记密码怎么办?")
+
                 
+                
+                
+                let backItem = UIBarButtonItem()
+                backItem.title = "返回"
+                backItem.image = #imageLiteral(resourceName: "Close")
+                self.navigationItem.backBarButtonItem = backItem
+                
+                
+                
+                
+                
+                
+                
+                let fixVC = SX_MineFixPasswordController()
+                self.navigationController?.show(fixVC, sender: nil)
+                
+
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -189,10 +207,10 @@ extension SX_LoginController {
 // MARK: - Other Method 2
 // =========================================================================================
 extension SX_LoginController {
-    
-    
-    
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.passWordTF?.resignFirstResponder()
+        self.userNameTF?.resignFirstResponder()
+    }
 }
 
 class SX_TextField: UITextField {

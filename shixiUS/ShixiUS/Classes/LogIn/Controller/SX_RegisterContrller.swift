@@ -36,15 +36,17 @@ class SX_RegisterContrller: UIViewController {
 extension SX_RegisterContrller {
     func setUI() {
         
-        title                     = "快速注册"
+        title = "快速注册"
         self.view.backgroundColor = UIColor.white
+        
+//        self.setRightItem("Close")
         
         self.backBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalToSuperview().offset(50.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-30.FloatValue.IPAD_XValue)
             make.height.width.equalTo(18.FloatValue.IPAD_XValue)
         }).config({ (Back) in
-            Back.setImage(UIImage.init(named: "Close"), for: .normal)
+            Back.setImage(#imageLiteral(resourceName: "Close"), for: .normal)
             Back.rx.tap.subscribe(onNext: { (_) in
                 SXLog("Back")
                 self.dismiss(animated: true, completion: {
@@ -116,11 +118,8 @@ extension SX_RegisterContrller {
             
             REG.rx.tap.subscribe(onNext: { (_) in
                 SXLog("快速注册")
-                
                 if self.userNameTF?.text == "" {
-                    let hub = MBProgressHUD()
-                    hub.label.text = "请填写用户名"
-                    
+
                 }else if self.passWordTF?.text == "" {
                     //  MBProgressHUD.show("请填写密码")
                     
@@ -128,19 +127,28 @@ extension SX_RegisterContrller {
                     //  MBProgressHUD.show("请填写邮箱")
                     
                 }else {
-                    let str = String(data: (self.passWordTF?.text?.data(using: .utf8)?.base64EncodedData())!, encoding: .utf8)
+                    let str = self.passWordTF?.text?.base64
+                    
+                    
+                    let str1 = str?.replacingOccurrences(of: "\n", with: "")
+                    let str2 = str1?.replacingOccurrences(of: "\t", with: "")
                     let param = ["name":self.userNameTF?.text,
                                  "email":self.email?.text,
-                                 "password":str
-                    ]
+                                 "password":str2]
 
+
+                    
                     SX_NetManager.requestData(type: .POST, URlString: SX_Register, parameters: param as? [String : String], finishCallBack: { (result) in
                         do{
                             let json = try JSON(data: result)
                             if json["status"] == 200 {
                                 /// 成功
                                 SXLog("注册成功! ")
-                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: self, userInfo: ["str":self.userNameTF?.text!])
+                                
+                                
+                                
+                                
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: self, userInfo: ["str":self.userNameTF?.text! ?? ""])
                                 
                                 self.dismiss(animated: true, completion: nil)
                             } else if json["status"] == 202 {
@@ -151,6 +159,7 @@ extension SX_RegisterContrller {
                                 SXLog("超时, 重新登录! ")
                             }
                         } catch{ }
+                        
                     })
                 }
             }, onError: { (error) in
@@ -158,4 +167,24 @@ extension SX_RegisterContrller {
             }, onCompleted: nil, onDisposed: nil)
         })
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.passWordTF?.resignFirstResponder()
+        self.email?.resignFirstResponder()
+        self.userNameTF?.resignFirstResponder()
+    }
+    
+    /// 替换base64加密后的转义字符
+//    func replaceStr(str: String) -> String {
+    
+//        var resultStr = ""
+//        for i in 0..<str.characters.count {
+//            if str[i] == "\n" {
+//                resultStr.append("")
+//            }else{
+//                resultStr.append(str[i] as Character)
+//            }
+//
+//        }
+//    }
 }

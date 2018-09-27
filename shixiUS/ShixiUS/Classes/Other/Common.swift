@@ -426,15 +426,27 @@
     }
     
     /// base 64
-    func SX_base64() -> String? {
-        let decodeData:Data? = Data.init(base64Encoded: self, options: Data.Base64DecodingOptions.init(rawValue: 0))
-        guard let utf8Data = decodeData else{
-            return nil
-        }
+//    func SX_base64() -> String? {
+//        let decodeData:Data? = Data.init(base64Encoded: self, options: Data.Base64DecodingOptions.init(rawValue: 0))
+//        guard let utf8Data = decodeData else{
+//            return nil
+//        }
+//        let decodedStr:String? = String.init(data: utf8Data, encoding: String.Encoding.utf8)
+//        return decodedStr
+//    }
+    
+    var base64 :String{
         
-        let decodedStr:String? = String.init(data: utf8Data, encoding: String.Encoding.utf8)
-        return decodedStr
+        get{
+            let strData = self.data(using: .utf8)
+            let data64 = strData?.base64EncodedData()
+            let str64 = String(data: data64!, encoding: .utf8)
+            return str64 ?? ""
+        }
     }
+    
+    
+    
  }
  
  // ==============================================================================
