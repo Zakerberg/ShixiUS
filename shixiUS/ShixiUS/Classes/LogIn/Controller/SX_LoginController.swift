@@ -155,11 +155,12 @@ extension SX_LoginController {
                 SX_NetManager.requestData(type: .POST, URlString: SX_LogIn, parameters: param as? [String : String], finishCallBack: { (result) in
                     do{
                         let json = try JSON(data: result)
-                        
                         if json["status"] == 200 {
-                            USERDEFAULTS.set("yes", forKey: "login")
+                            //USERDEFAULTS.set("yes", forKey: "login")
                             USERDEFAULTS.set(json["data"]["token"], forKey: "token")
                             USERDEFAULTS.set(json["data"]["user_id"], forKey: "user_id")
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil, userInfo: ["text": self.userNameTF!.text])
+                            self.dismiss(animated: true, completion: nil)
                         } else if json["status"] == 202 { // 错误状态
                             /// 提示
                         } else if json["status"] == 203 { // 超时, 重新登录

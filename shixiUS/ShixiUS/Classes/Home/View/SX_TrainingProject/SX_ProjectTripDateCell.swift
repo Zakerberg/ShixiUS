@@ -167,7 +167,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
                         PRICE.font = UIFont.systemFont(ofSize: 12)
                         PRICE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                     }
-                    PRICE.text = self.tripArr?[index]
+                    PRICE.text = self.tripArr?[index] ?? ""
                 })
             }
         }

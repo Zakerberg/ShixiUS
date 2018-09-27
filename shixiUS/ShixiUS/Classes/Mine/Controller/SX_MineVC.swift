@@ -44,7 +44,10 @@ class SX_MineVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(changeTitle), name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil)
+        
+        NotificationCenter.default.addObserver(forName:  NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil, queue: OperationQueue.main) { (text) in
+            self.titleNameLabel?.text = "\(String(describing: text.userInfo?["text"]))"
+        }
         
         setUI()
     }
@@ -82,25 +85,33 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0 {
             let tap = UITapGestureRecognizer(target: self, action: #selector(changeIconImageView))
-            
             let cell = SX_HeadPortraitCell(style: .default, reuseIdentifier: mineIconCellID)
-            
-            cell.nameTitle?.isHidden = true
             cell.selectionStyle   = .none
-            cell.headPortraitImageView?.addGestureRecognizer(tap)
+            
+            if USERDEFAULTS.object(forKey: "token") == nil { //未登录
+                
+            }else{
+                cell.headPortraitImageView?.addGestureRecognizer(tap)
+            }
             self.headPortraitImageView  = cell.headPortraitImageView
             self.titleNameLabel = cell.nameTitle
-
-            cell.logInButton?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("注册登陆 +++ + ")
-                let vc = SX_LoginController()
-                self.present(vc, animated: true, completion: {
+            
+           if USERDEFAULTS.object(forKey: "token") == nil { //未登录
+                cell.nameTitle?.isHidden = true
+                cell.logInButton?.rx.tap.subscribe(onNext: { (_) in
+                    let vc = SX_LoginController()
+                    self.present(vc, animated: true, completion: {
+                    })
                     
-                })
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
                 
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
+            }else{
+                cell.logInButton?.isHidden = true
+                cell.nameTitle?.isHidden = false
+                cell.nameTitle?.text = self.titleNameLabel?.text
+            }
             
             return cell
         }
@@ -209,15 +220,6 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
 // MARK: - Noti
 // =========================================================================================
 extension SX_MineVC {
-    @objc func changeTitle(sender: NSNotification) {
-        
-        self.logInBtn?.isHidden = true
-        self.titleNameLabel?.isHidden = false
-        
-        let dict = sender.userInfo
-        self.titleNameLabel?.text = dict?["Data"] as! String
-        
-    }
     
     @objc func changeIconImageView(tap: UITapGestureRecognizer) {
         //底部弹出来个actionSheet来选择拍照或者相册选择
@@ -264,13 +266,13 @@ extension SX_MineVC {
 extension SX_MineVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-     
+        
         let img = (info as NSDictionary).object(forKey: UIImagePickerControllerEditedImage)
         self.headPortraitImageView?.image = img as? UIImage
         let compressImg = imageWithImageSimple(img as! UIImage, newSize:CGSize(width: 60, height: 60))
-     //   transportImgToServer(img: compressImg)
+        //   transportImgToServer(img: compressImg)
         self.dismiss(animated: true, completion: nil)
-
+        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -294,7 +296,7 @@ extension SX_MineVC {
     
     /// 上传到服务器
     func transportImgToServer(img: UIImage) {
-
+        
         var imageData: Data
         var mineType: String
         
@@ -306,26 +308,8 @@ extension SX_MineVC {
             imageData = UIImageJPEGRepresentation(img, 1.0)!
         }
         
-//        let iconStr = NSString(data: imageData, encoding: String.Encoding.utf8.rawValue)
+        //        let iconStr = NSString(data: imageData, encoding: String.Encoding.utf8.rawValue)
         let dic = ["image":imageData]
         
-        
-        
-        
-//        SX_NetManager.requestData(type: .POST, URlString: SX_Mine_UploadImage, parameters: dic) { (Result) in
-//
-//            let str = "avatar"
-//            var fileName = NSString()
-//            if UIImagePNGRepresentation(img) != nil {
-//                fileName = str + ".png" as NSString
-//            }else{
-//                fileName = str + ".jpeg" as NSString
-//            }
-//        }
     }
 }
-
-
-
-
-
