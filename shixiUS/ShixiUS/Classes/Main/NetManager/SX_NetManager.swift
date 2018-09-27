@@ -66,19 +66,24 @@ class SX_NetManager {
         
         Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
             // 处理 cookie
-            let headerFields = response.response?.allHeaderFields as! [String: String]
-            let url = response.request?.url
-            let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
-            var cookieArray = [ [HTTPCookiePropertyKey : Any ] ]()
-            for cookie in cookies {
-                cookieArray.append(cookie.properties!)
+            
+            if let headerFields = response.response?.allHeaderFields as? [String: String] {
+                let url = response.request?.url
+                let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
+                var cookieArray = [ [HTTPCookiePropertyKey : Any ] ]()
+                for cookie in cookies {
+                    cookieArray.append(cookie.properties!)
+                }
+                if !(UserDefaults.standard.object(forKey: SX_GROUP_TOKEN) != nil){
+                    // 保存 cookie
+                    UserDefaults.standard.set(cookieArray, forKey: SX_GROUP_TOKEN)
+                }else{
+                    print("token\(String(describing: UserDefaults.standard.object(forKey: SX_GROUP_TOKEN)))")
+                }
             }
-            if !(UserDefaults.standard.object(forKey: SX_GROUP_TOKEN) != nil){
-                // 保存 cookie
-                UserDefaults.standard.set(cookieArray, forKey: SX_GROUP_TOKEN)
-            }else{
-                print("token\(String(describing: UserDefaults.standard.object(forKey: SX_GROUP_TOKEN)))")
-            }
+            
+            //  let headerFields = response.response?.allHeaderFields as! [String: String]
+            
             SXLog("Method:\(type)请求\nURL: \(URlString)\n请求参数: \(String(describing: parameters))")
             if parameters != nil{
                 print(response.request?.url ?? "url")
@@ -112,6 +117,16 @@ class SX_NetManager {
                 SXLog(dict)
                 if arrData != nil {
                     finishCallBack(arrData!)
+                }
+            }
+            
+            if let Dict = dict as? [String : Any] {
+                
+                let Data = try? JSONSerialization.data(withJSONObject: Dict, options: .prettyPrinted)
+                SXLog(dict)
+                if Data != nil {
+                    finishCallBack(Data!)
+                    return
                 }
             }
         }

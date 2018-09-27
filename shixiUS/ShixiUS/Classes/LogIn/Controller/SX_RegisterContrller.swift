@@ -39,7 +39,7 @@ extension SX_RegisterContrller {
         title = "快速注册"
         self.view.backgroundColor = UIColor.white
         
-//        self.setRightItem("Close")
+        //        self.setRightItem("Close")
         
         self.backBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalToSuperview().offset(50.FloatValue.IPAD_XValue)
@@ -116,55 +116,7 @@ extension SX_RegisterContrller {
             REG.layer.masksToBounds      = true
             REG.layer.cornerRadius       = 10
             
-            REG.rx.tap.subscribe(onNext: { (_) in
-                SXLog("快速注册")
-                if self.userNameTF?.text == "" {
-
-                }else if self.passWordTF?.text == "" {
-                    //  MBProgressHUD.show("请填写密码")
-                    
-                }else if self.email?.text == "" {
-                    //  MBProgressHUD.show("请填写邮箱")
-                    
-                }else {
-                    let str = self.passWordTF?.text?.base64
-                    
-                    
-                    let str1 = str?.replacingOccurrences(of: "\n", with: "")
-                    let str2 = str1?.replacingOccurrences(of: "\t", with: "")
-                    let param = ["name":self.userNameTF?.text,
-                                 "email":self.email?.text,
-                                 "password":str2]
-
-
-                    
-                    SX_NetManager.requestData(type: .POST, URlString: SX_Register, parameters: param as? [String : String], finishCallBack: { (result) in
-                        do{
-                            let json = try JSON(data: result)
-                            if json["status"] == 200 {
-                                /// 成功
-                                SXLog("注册成功! ")
-                                
-                                
-                                
-                                
-                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: self, userInfo: ["str":self.userNameTF?.text! ?? ""])
-                                
-                                self.dismiss(animated: true, completion: nil)
-                            } else if json["status"] == 202 {
-                                /// 错误状态
-                                SXLog("错误状态! ")
-                            } else if json["status"] == 203 {
-                                /// 超时, 重新登录
-                                SXLog("超时, 重新登录! ")
-                            }
-                        } catch{ }
-                        
-                    })
-                }
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
+            REG.addTarget(self, action: #selector(regClick), for: .touchUpInside)
         })
     }
     
@@ -172,19 +124,30 @@ extension SX_RegisterContrller {
         self.passWordTF?.resignFirstResponder()
         self.email?.resignFirstResponder()
         self.userNameTF?.resignFirstResponder()
+        self.backBtn?.resignFirstResponder()
     }
     
-    /// 替换base64加密后的转义字符
-//    func replaceStr(str: String) -> String {
     
-//        var resultStr = ""
-//        for i in 0..<str.characters.count {
-//            if str[i] == "\n" {
-//                resultStr.append("")
-//            }else{
-//                resultStr.append(str[i] as Character)
-//            }
-//
-//        }
-//    }
+    @objc func regClick() {
+        SXLog("快速注册")
+        let str = self.passWordTF?.text?.base64
+        let str1 = str?.replacingOccurrences(of: "\n", with: "")
+        let str2 = str1?.replacingOccurrences(of: "\t", with: "")
+        let param = ["name":self.userNameTF?.text,
+                     "email":self.email?.text,
+                     "password":str2]
+        
+        SX_NetManager.requestData(type: .POST, URlString: SX_Register, parameters: param as? [String : String], finishCallBack: { (result) in
+            do{
+                
+                let json = try JSON(data: result)
+                
+                if json["status"] == 200 {
+                    self.dismiss(animated: true, completion: {
+                        SXLog("注册成功!")
+                    })
+                }
+            } catch{ }
+        })
+    }
 }
