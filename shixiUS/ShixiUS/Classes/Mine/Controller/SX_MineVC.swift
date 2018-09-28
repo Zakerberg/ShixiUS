@@ -45,7 +45,7 @@ class SX_MineVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName:  NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil, queue: OperationQueue.main) { (text) in
+        NotificationCenter.default.addObserver(forName:  NSNotification.Name(rawValue: "LOGINSUCCEED"), object: nil, queue: OperationQueue.main) { (text) in
             self.titleNameLabel?.text = "\(String(describing: text.userInfo?["text"]))"
             
 
@@ -167,10 +167,10 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     SXLog("退出登录 +++ + ")
-//                    
+//
 //                    let AlertView = UIAlertController
-//                    
-//                    
+//
+//
                     
                     
                     

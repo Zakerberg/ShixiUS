@@ -197,11 +197,20 @@ extension SX_LoginController {
                 SX_NetManager.requestData(type: .POST, URlString: SX_LogIn, parameters: param as? [String : String], finishCallBack: { (result) in
                     do{
                         let json = try JSON(data: result)
-                        if json["status"] == 200 {
+                        
+                        
+                        
+                        
+                        if json["status"].int == 200 {
                         SXLog("登录成功! ----> \(json["msg"])")
+                            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                            hud.mode = .text
+                            hud.isSquare = true
+                            hud.label.text = "登陆成功"
+                            hud.hide(animated: true, afterDelay: 1.0)
                         USERDEFAULTS.set(json["token"].rawString(), forKey: "token")
                         USERDEFAULTS.set(json["userId"].rawString(), forKey: "userId")
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil, userInfo: ["text": json["userName"].rawString()!])
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINSUCCEED"), object: nil, userInfo: ["text": json["userName"].rawString()!])
                         self.dismiss(animated: true, completion: nil)
                         }else{
                             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)

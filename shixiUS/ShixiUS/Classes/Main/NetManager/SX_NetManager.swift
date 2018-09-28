@@ -101,7 +101,7 @@ class SX_NetManager {
             }
             
             // 返回字典类型 Data
-            if let dataDict = dict["data"] as? [String : Any] {
+            if let dataDict = dict as? [String : Any] {
                 
                 let jsonData = try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
                 SXLog(dict)
@@ -117,16 +117,6 @@ class SX_NetManager {
                 SXLog(dict)
                 if arrData != nil {
                     finishCallBack(arrData!)
-                }
-            }
-            
-            if let Dict = dict as? [String : Any] {
-                
-                let Data = try? JSONSerialization.data(withJSONObject: Dict, options: .prettyPrinted)
-                SXLog(dict)
-                if Data != nil {
-                    finishCallBack(Data!)
-                    return
                 }
             }
         }

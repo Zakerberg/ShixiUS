@@ -175,7 +175,7 @@ extension SX_CertificationController {
                 /// 成功
                 SXLog("成功! ")
                 
-                for item in json["lists"].array ?? [] {
+                for item in json["data"]["lists"].array ?? [] {
                     let listModel = TrainListModel(jsonData: item)
                     self.certicationModels.append(listModel)
                 }

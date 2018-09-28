@@ -229,7 +229,7 @@ extension SX_TrainingProjectController {
                 /// 成功
                 SXLog("成功! ")
                 
-                for item in json["lists"].array ?? [] {
+                for item in json["data"]["lists"].array ?? [] {
                     let listModel = TrainingListModel(jsonData: item)
                     self.listsModels.append(listModel)
                 }

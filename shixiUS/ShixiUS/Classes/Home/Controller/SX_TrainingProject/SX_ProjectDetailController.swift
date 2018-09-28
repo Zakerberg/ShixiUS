@@ -164,15 +164,15 @@ extension SX_ProjectDetailController {
             do{
                 /// SwiftyJSON 在这里 ! ! !
                 let json = try JSON(data: result)
-                self.serverImgs.append(json["image"].string!)
+                self.serverImgs.append(json["data"]["image"].string!)
                 self.detailScrollerView.serverImgArray = self.serverImgs
                 self.projectDetailArr = JSON(arrayLiteral: json.dictionary ?? [:])
                 
-                for item in json["training"].array ?? [] {
+                for item in json["data"]["training"].array ?? [] {
                     self.tripTitleArr.append(item["title"].string ?? "")
                 }
                 
-                for item in json["details"].array ?? [] {
+                for item in json["data"]["details"].array ?? [] {
                     self.tripDateArr.append(item["date"].string ?? "")
                     self.tripPriceArr.append(item["price"].string ?? "")
                 }

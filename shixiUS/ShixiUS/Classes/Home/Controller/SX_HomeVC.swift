@@ -154,14 +154,14 @@ extension SX_HomeVC {
         SX_NetManager.requestData(type: .GET, URlString: SX_Home, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
-                self.jobsArr = JSON(arrayLiteral: json["jobs"].array ?? [])[0]
+                self.jobsArr = JSON(arrayLiteral: json["data"]["jobs"].array ?? [])[0]
                 
-                for item in json["training"].array ?? [] {
+                for item in json["data"]["training"].array ?? [] {
                     let trainingModel = SX_HomeTrainingModel(jsonData: item)
                     self.trainingArr.append(trainingModel)
                 }
                 
-                for item in json["train"].array ?? [] {
+                for item in json["data"]["train"].array ?? [] {
                     let trainModel = SX_HomeTrainModel(jsonData: item)
                     self.trainArr.append(trainModel)
                 }
