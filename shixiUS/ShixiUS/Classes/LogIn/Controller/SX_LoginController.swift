@@ -28,6 +28,9 @@ class SX_LoginController: UIViewController {
     var forgetBtn      : UIButton?
     var registerBtn    : UIButton?
     
+    typealias SuccessClosure = (String, String) ->()
+    var closure: SuccessClosure!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -36,6 +39,10 @@ class SX_LoginController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "LOGINSUCCEED"), object: nil)
     }
 }
 
@@ -197,10 +204,6 @@ extension SX_LoginController {
                 SX_NetManager.requestData(type: .POST, URlString: SX_LogIn, parameters: param as? [String : String], finishCallBack: { (result) in
                     do{
                         let json = try JSON(data: result)
-                        
-                        
-                        
-                        
                         if json["status"].int == 200 {
                         SXLog("登录成功! ----> \(json["msg"])")
                             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -210,8 +213,14 @@ extension SX_LoginController {
                             hud.hide(animated: true, afterDelay: 1.0)
                         USERDEFAULTS.set(json["token"].rawString(), forKey: "token")
                         USERDEFAULTS.set(json["userId"].rawString(), forKey: "userId")
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINSUCCEED"), object: nil, userInfo: ["text": json["userName"].rawString()!])
-                        self.dismiss(animated: true, completion: nil)
+                        USERDEFAULTS.set("true", forKey: "Login")
+                            let statusStr = "1"
+                            guard(self.closure != nil) else{
+                                return
+                            }
+                            
+                            self.closure(json["data"]["userName"].rawString()!,statusStr)
+                            self.dismiss(animated: true, completion: nil)
                         }else{
                             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
                             hud.mode = .text
@@ -259,6 +268,10 @@ extension SX_LoginController {
         self.passWordTF?.resignFirstResponder()
         self.userNameTF?.resignFirstResponder()
         self.backBtn?.resignFirstResponder()
+    }
+    
+    func callBack(closure :@escaping SuccessClosure) {
+        self.closure = closure
     }
 }
 

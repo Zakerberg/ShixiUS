@@ -44,20 +44,13 @@ class SX_MineVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(forName:  NSNotification.Name(rawValue: "LOGINSUCCEED"), object: nil, queue: OperationQueue.main) { (text) in
-            self.titleNameLabel?.text = "\(String(describing: text.userInfo?["text"]))"
-            
-
-        }
-        
         setUI()
     }
 }
 
-// =================================================================================================================
+// ============================================================
 // MARK: - Other Method
-// =================================================================================================================
+// ============================================================
 extension SX_MineVC {
     
     func setUI() {
@@ -89,32 +82,29 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             let tap = UITapGestureRecognizer(target: self, action: #selector(changeIconImageView))
             let cell = SX_HeadPortraitCell(style: .default, reuseIdentifier: mineIconCellID)
             cell.selectionStyle   = .none
-            
-            if USERDEFAULTS.object(forKey: "token") == nil { //未登录
-                
-            }else{
-                cell.headPortraitImageView?.addGestureRecognizer(tap)
-            }
+            cell.nameTitle?.isHidden = true
+            cell.headPortraitImageView?.addGestureRecognizer(tap)
             self.headPortraitImageView  = cell.headPortraitImageView
             self.titleNameLabel = cell.nameTitle
+            self.logInBtn = cell.logInButton
             
-           if USERDEFAULTS.object(forKey: "token") == nil { //未登录
-                cell.nameTitle?.isHidden = true
-                cell.logInButton?.rx.tap.subscribe(onNext: { (_) in
-                    let vc = SX_LoginController()
-                    self.present(vc, animated: true, completion: {
-                    })
-                    
-                }, onError: { (error) in
-                    SXLog(error)
-                }, onCompleted: nil, onDisposed: nil)
+            self.logInBtn?.rx.tap.subscribe(onNext: { (_) in
+                let vc = SX_LoginController()
+                // 闭包回掉在这里!
+                vc.callBack(closure: { (name, status) in
+                    if status == "1" { // 登陆
+                        self.titleNameLabel?.isHidden = false
+                        self.logInBtn?.isHidden = true
+                        self.quitBtn?.isHidden  = false
+                        self.titleNameLabel?.text = name
+                    }
+                })
                 
-            }else{
-                cell.logInButton?.isHidden = true
-                cell.nameTitle?.isHidden = false
-                cell.nameTitle?.text = self.titleNameLabel?.text
-            }
-            
+                self.present(vc, animated: true, completion: nil)
+                
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
             return cell
         }
         
@@ -164,14 +154,10 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.backgroundColor   = UIColor.white
                 QUIT.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 18)
                 QUIT.setTitle("退出登录", for: .normal)
+                QUIT.isHidden = true
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     SXLog("退出登录 +++ + ")
-//
-//                    let AlertView = UIAlertController
-//
-//
-                    
                     
                     
                     
