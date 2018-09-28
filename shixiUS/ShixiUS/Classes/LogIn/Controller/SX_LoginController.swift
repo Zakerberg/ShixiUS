@@ -86,6 +86,16 @@ extension SX_LoginController {
             NUM.layer.cornerRadius       = 10
             NUM.placeholder              = "请输入用户名"
             NUM.textAlignment            = .left
+            NUM.rx.controlEvent(.editingDidBegin).asObservable().subscribe({ [weak self] (_) in
+                SXLog("开始编辑....")
+                
+            })
+            
+            // 按下return
+            NUM.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
+                [weak self] (_) in
+                self?.passWordTF?.becomeFirstResponder()
+            })
         })
         
         self.passWordTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -98,8 +108,19 @@ extension SX_LoginController {
             PASSWORD.layer.borderWidth   = 0.5
             PASSWORD.layer.cornerRadius  = 10
             PASSWORD.placeholder         = "请输入密码"
+            PASSWORD.keyboardType        = .default
             PASSWORD.textAlignment       = .left
             PASSWORD.isSecureTextEntry   = true
+            
+            PASSWORD.rx.controlEvent(.editingDidBegin).asObservable().subscribe({ [weak self] (_) in
+                SXLog("开始编辑....")
+            })
+            
+            // 按下return
+            PASSWORD.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
+                [weak self] (_) in
+                self?.passWordTF?.becomeFirstResponder()
+            })
         })
         
         self.forgetBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -158,11 +179,11 @@ extension SX_LoginController {
                 SX_NetManager.requestData(type: .POST, URlString: SX_LogIn, parameters: param as? [String : String], finishCallBack: { (result) in
                     do{
                         let json = try JSON(data: result)
-                            SXLog("登录成功! ----> \(json["msg"])")
-                            USERDEFAULTS.set(json["token"].rawString(), forKey: "token")
-                            USERDEFAULTS.set(json["userId"].rawString(), forKey: "userId")
+                        SXLog("登录成功! ----> \(json["msg"])")
+                        USERDEFAULTS.set(json["token"].rawString(), forKey: "token")
+                        USERDEFAULTS.set(json["userId"].rawString(), forKey: "userId")
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil, userInfo: ["text": json["userName"].rawString()!])
-                            self.dismiss(animated: true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     } catch{ }
                 })
                 

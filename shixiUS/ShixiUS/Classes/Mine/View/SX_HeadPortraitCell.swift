@@ -78,7 +78,7 @@ extension SX_HeadPortraitCell {
             Name.sizeToFit()
             Name.font = UIFont.systemFont(ofSize: 15)
             Name.textColor = UIColor.colorWithHexString(hex: "2d2d2d", alpha: 1)
-            Name.text = "LLY19920924"
+//            Name.text = "LLY19920924"
         })
     }
 }

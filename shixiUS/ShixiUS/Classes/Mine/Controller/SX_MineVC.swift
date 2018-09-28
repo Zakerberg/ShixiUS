@@ -48,9 +48,7 @@ class SX_MineVC: UIViewController {
         NotificationCenter.default.addObserver(forName:  NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil, queue: OperationQueue.main) { (text) in
             self.titleNameLabel?.text = "\(String(describing: text.userInfo?["text"]))"
             
-            
-            
-            
+
         }
         
         setUI()
@@ -169,6 +167,14 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     SXLog("退出登录 +++ + ")
+                    
+                    let AlertView = UIAlertController
+                    
+                    
+                    
+                    
+                    
+                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
