@@ -17,6 +17,8 @@
  */
 
 import UIKit
+import SwiftyJSON
+import MBProgressHUD
 
 let mineCellID = "mineCellID"
 let mineIconCellID = "mineIconCellID"
@@ -30,6 +32,7 @@ class SX_MineVC: UIViewController {
     var titleNameLabel: UILabel?
     var logInBtn: UIButton?
     var headPortraitImageView: UIImageView?
+    var statusStr = ""
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -92,7 +95,8 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 let vc = SX_LoginController()
                 // 闭包回掉在这里!
                 vc.callBack(closure: { (name, status) in
-                    if status == "1" { // 登陆
+                    self.statusStr = status
+                    if self.statusStr == "1" { // 登陆
                         self.titleNameLabel?.isHidden = false
                         self.logInBtn?.isHidden = true
                         self.quitBtn?.isHidden  = false
@@ -158,14 +162,41 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     
-                    
-                    
-                    SX_NetManager.requestData(type: .GET, URlString: SX_LogOut, finishCallBack: { (result) in
-                        do{     
-                            
-                            
-                        }catch { }
+                    let alertController = SX_BaseAlertController(title: "提示", message: "您确定退出吗?", preferredStyle: .alert)
+                    let cancelAction    = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+                    let okAction        = UIAlertAction(title: "离开", style: .default, handler: { (action) in
+                        SXLog("退出登录!")
+                        SX_NetManager.requestData(type: .GET, URlString: SX_LogOut, finishCallBack: { (result) in
+                            do{
+                                let json = try JSON(data: result)
+                                if json["status"].int == 200 {
+                                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                    hud.mode = .text
+                                    hud.isSquare = true
+                                    hud.label.text = "退出成功"
+                                    hud.hide(animated: true, afterDelay: 1.0)
+                                    self.statusStr = "0"
+                                    USERDEFAULTS.set("", forKey: "token")
+                                    USERDEFAULTS.set("", forKey: "userId")
+                                    
+                                    self.titleNameLabel?.isHidden = true
+                                    self.logInBtn?.isHidden = false
+                                    self.quitBtn?.isHidden  = true
+                                    
+                                    self.table.reloadData()
+                                } else {
+                                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                    hud.mode = .text
+                                    hud.isSquare = true
+                                    hud.label.text = json["msg"].string
+                                    hud.hide(animated: true, afterDelay: 1.0)
+                                }
+                            }catch { }
+                        })
                     })
+                    alertController.addAction(cancelAction)
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)

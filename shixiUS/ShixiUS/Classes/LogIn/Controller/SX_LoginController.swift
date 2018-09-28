@@ -213,7 +213,6 @@ extension SX_LoginController {
                             hud.hide(animated: true, afterDelay: 1.0)
                             USERDEFAULTS.set(json["token"].rawString(), forKey: "token")
                             USERDEFAULTS.set(json["userId"].rawString(), forKey: "userId")
-                            USERDEFAULTS.set("true", forKey: "Login")
                             let statusStr = "1"
                             guard(self.closure != nil) else{
                                 return
