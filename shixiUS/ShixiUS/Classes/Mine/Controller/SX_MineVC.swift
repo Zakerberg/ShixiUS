@@ -167,10 +167,10 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
                 QUIT.rx.tap.subscribe(onNext: { (_) in
                     SXLog("退出登录 +++ + ")
-                    
-                    let AlertView = UIAlertController
-                    
-                    
+//                    
+//                    let AlertView = UIAlertController
+//                    
+//                    
                     
                     
                     

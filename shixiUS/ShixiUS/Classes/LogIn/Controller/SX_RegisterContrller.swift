@@ -2,7 +2,7 @@
 //  SX_RegisterContrller.swift
 //  ShixiUS
 //
-//  Created by heather on 2018/9/13.
+//  Created by Michael 柏 on 2018/9/13.
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  注册
 
@@ -18,7 +18,7 @@ class SX_RegisterContrller: UIViewController {
     
     var backBtn: UIButton?
     var regBtn: UIButton?
-//    var eyeBtn: UIButton?
+    //    var eyeBtn: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +77,23 @@ extension SX_RegisterContrller {
             USERNAME.layer.cornerRadius  = 10
             USERNAME.placeholder         = "请输入用户名"
             USERNAME.textAlignment       = .left
+            
+            USERNAME.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
+                SXLog("开始编辑密码....")
+                if ((self?.userNameTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.passWordTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.email?.text?.lengthOfBytes(using: .utf8)) != 0) {
+                    self?.regBtn?.isEnabled = true
+                    self?.regBtn?.backgroundColor = UIColor.SX_MainColor()
+                }else{
+                    self?.regBtn?.isEnabled = false
+                    self?.regBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
+                }
+            })
+            
+            // 按下return
+            USERNAME.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
+                [weak self] (_) in
+                self?.passWordTF?.becomeFirstResponder()
+            })
         })
         
         self.passWordTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -91,49 +108,65 @@ extension SX_RegisterContrller {
             PASSWORD.placeholder         = "请输入密码"
             PASSWORD.textAlignment       = .left
             PASSWORD.isSecureTextEntry   = true
+            
+            PASSWORD.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
+                SXLog("开始编辑密码....")
+                if ((self?.userNameTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.passWordTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.email?.text?.lengthOfBytes(using: .utf8)) != 0) {
+                    self?.regBtn?.isEnabled = true
+                    self?.regBtn?.backgroundColor = UIColor.SX_MainColor()
+                }else{
+                    self?.regBtn?.isEnabled = false
+                    self?.regBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
+                }
+            })
+            
+            // 按下return
+            PASSWORD.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
+                [weak self] (_) in
+                self?.email?.becomeFirstResponder()
+            })
         })
         
         self.email = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.passWordTF!.snp.bottom).offset(Margin)
             make.height.left.width.equalTo(self.userNameTF!)
-        }).config({ (MAIL) in
-            MAIL.tintColor               = UIColor.SX_MainColor()
-            MAIL.layer.masksToBounds     = true
-            MAIL.layer.borderColor       = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
-            MAIL.layer.borderWidth       = 0.5
-            MAIL.layer.cornerRadius      = 10
-            MAIL.placeholder             = "请输入邮箱"
-            MAIL.textAlignment           = .left
+        }).config({ (EMAIL) in
+            EMAIL.tintColor               = UIColor.SX_MainColor()
+            EMAIL.layer.masksToBounds     = true
+            EMAIL.layer.borderColor       = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
+            EMAIL.layer.borderWidth       = 0.5
+            EMAIL.layer.cornerRadius      = 10
+            EMAIL.placeholder             = "请输入邮箱"
+            EMAIL.textAlignment           = .left
+            
+            EMAIL.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
+                SXLog("开始编辑密码....")
+                
+                if ((self?.userNameTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.passWordTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.email?.text?.lengthOfBytes(using: .utf8)) != 0) {
+                    self?.regBtn?.isEnabled = true
+                    self?.regBtn?.backgroundColor = UIColor.SX_MainColor()
+                }else{
+                    self?.regBtn?.isEnabled = false
+                    self?.regBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
+                }
+            })
+            
+            // 按下return
+            EMAIL.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
+                [weak self] (_) in
+            })
         })
-    
-        /*
-         self.eyeBtn = UIButton(type: .custom).addhere(toSuperView: self.email!).layout(snapKitMaker: { (make) in
-         make.right.equalToSuperview().offset(-Margin)
-         make.center.equalToSuperview()
-         make.width.height.equalTo(35.FloatValue.IPAD_XValue)
-         }).config({ (EYE) in
-         EYE.setImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
-         EYE.rx.tap.subscribe(onNext: { (_) in
-         self.passWordTF!.isSecureTextEntry = !(self.passWordTF!.isSecureTextEntry)
-         if (self.passWordTF?.isSecureTextEntry)! {
-         self.eyeBtn?.setImage(#imageLiteral(resourceName: "zhuce_btn_yincang"), for: .normal)
-         }else{
-         self.eyeBtn?.setImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
-         }
-         }, onError: { (error) in
-         SXLog(error)
-         }, onCompleted: nil, onDisposed: nil)
-         })
-         */
         
         self.regBtn = UIButton().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.email!.snp.bottom).offset(50.FloatValue.IPAD_XValue)
             make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (REG) in
+            REG.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
             REG.setTitle("快速注册", for: .normal)
-            REG.backgroundColor          = UIColor.SX_MainColor()
-            REG.layer.masksToBounds      = true
-            REG.layer.cornerRadius       = 10
+            REG.setTitleColor(UIColor.white, for: .normal)
+            REG.layer.masksToBounds = true
+            REG.layer.cornerRadius  = 10
+            REG.isEnabled           = false
             
             REG.addTarget(self, action: #selector(regClick), for: .touchUpInside)
         })
@@ -197,14 +230,12 @@ extension SX_RegisterContrller {
                     hud.label.text = "注册成功"
                     hud.hide(animated: true, afterDelay: 1.0)
                     self.dismiss(animated: true, completion: nil)
-                }else if json["status"] == 202 {
-                    SXLog("存在")
+                }else {
                     let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
                     hud.mode = .text
                     hud.isSquare = true
                     hud.label.text = json["msg"].string
                     hud.hide(animated: true, afterDelay: 1.0)
-                    self.dismiss(animated: true, completion: nil)
                 }
             } catch{ }
         })

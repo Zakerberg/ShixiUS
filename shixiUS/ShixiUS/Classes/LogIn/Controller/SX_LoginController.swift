@@ -86,9 +86,15 @@ extension SX_LoginController {
             NUM.layer.cornerRadius       = 10
             NUM.placeholder              = "请输入用户名"
             NUM.textAlignment            = .left
-            NUM.rx.controlEvent(.editingDidBegin).asObservable().subscribe({ [weak self] (_) in
-                SXLog("开始编辑....")
-                
+            NUM.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
+                SXLog("开始编辑账号....")
+                if ((self?.userNameTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.passWordTF?.text?.lengthOfBytes(using: .utf8)) != 0) {
+                    self?.logInBtn?.isEnabled = true
+                    self?.logInBtn?.backgroundColor = UIColor.SX_MainColor()
+                }else{
+                    self?.logInBtn?.isEnabled = false
+                    self?.logInBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
+                }
             })
             
             // 按下return
@@ -103,23 +109,33 @@ extension SX_LoginController {
             make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (PASSWORD) in
             PASSWORD.tintColor = UIColor.SX_MainColor()
-            PASSWORD.layer.masksToBounds = true
-            PASSWORD.layer.borderColor   = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
-            PASSWORD.layer.borderWidth   = 0.5
-            PASSWORD.layer.cornerRadius  = 10
-            PASSWORD.placeholder         = "请输入密码"
-            PASSWORD.keyboardType        = .default
-            PASSWORD.textAlignment       = .left
-            PASSWORD.isSecureTextEntry   = true
+            PASSWORD.layer.masksToBounds           = true
+            PASSWORD.layer.borderColor             = UIColor.colorWithHexString(hex: "cccccc", alpha: 1).cgColor
+            PASSWORD.layer.borderWidth             = 0.5
+            PASSWORD.layer.cornerRadius            = 10
+            PASSWORD.placeholder                   = "请输入密码"
+            PASSWORD.returnKeyType                 = .done
+            PASSWORD.textAlignment                 = .left
+            PASSWORD.enablesReturnKeyAutomatically = true
+            PASSWORD.clearButtonMode               = .whileEditing
+            PASSWORD.isSecureTextEntry             = true
             
-            PASSWORD.rx.controlEvent(.editingDidBegin).asObservable().subscribe({ [weak self] (_) in
-                SXLog("开始编辑....")
+            PASSWORD.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
+                SXLog("开始编辑密码....")
+                
+                if ((self?.userNameTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.passWordTF?.text?.lengthOfBytes(using: .utf8)) != 0) {
+                    self?.logInBtn?.isEnabled = true
+                    self?.logInBtn?.backgroundColor = UIColor.SX_MainColor()
+                }else{
+                    self?.logInBtn?.isEnabled = false
+                    self?.logInBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
+                }
             })
             
             // 按下return
             PASSWORD.rx.controlEvent(.editingDidEndOnExit).subscribe(onNext: {
                 [weak self] (_) in
-                self?.passWordTF?.becomeFirstResponder()
+                
             })
         })
         
@@ -146,10 +162,12 @@ extension SX_LoginController {
             make.top.equalTo(self.forgetBtn!.snp.bottom).offset(40.FloatValue.IPAD_XValue)
             make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (LOGIN) in
-            LOGIN.backgroundColor = UIColor.SX_MainColor()
+            LOGIN.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
             LOGIN.setTitle("登录", for: .normal)
+            LOGIN.setTitleColor(UIColor.white, for: .normal)
             LOGIN.layer.masksToBounds = true
-            LOGIN.layer.cornerRadius = 10
+            LOGIN.layer.cornerRadius  = 10
+            LOGIN.isEnabled           = false
             
             LOGIN.rx.tap.subscribe(onNext: { (_) in
                 SXLog("LOGIN")
@@ -179,11 +197,19 @@ extension SX_LoginController {
                 SX_NetManager.requestData(type: .POST, URlString: SX_LogIn, parameters: param as? [String : String], finishCallBack: { (result) in
                     do{
                         let json = try JSON(data: result)
+                        if json["status"] == 200 {
                         SXLog("登录成功! ----> \(json["msg"])")
                         USERDEFAULTS.set(json["token"].rawString(), forKey: "token")
                         USERDEFAULTS.set(json["userId"].rawString(), forKey: "userId")
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil, userInfo: ["text": json["userName"].rawString()!])
                         self.dismiss(animated: true, completion: nil)
+                        }else{
+                            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                            hud.mode = .text
+                            hud.isSquare = true
+                            hud.label.text = json["msg"].stringValue
+                            hud.hide(animated: true, afterDelay: 1.0)
+                        }
                     } catch{ }
                 })
                 
