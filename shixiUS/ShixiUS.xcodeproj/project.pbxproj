@@ -326,6 +326,9 @@
 			isa = PBXGroup;
 			children = (
 				4527F91221226B70000EAEB9 /* SX_MyApplyController.swift */,
+				329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */,
+				329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */,
+				329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */,
 				4527F909212269F1000EAEB9 /* SX_MyApply */,
 			);
 			path = Controller;
@@ -489,13 +492,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		329988762151197200DC9ED3 /* SX_HUD */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SX_HUD;
-			sourceTree = "<group>";
-		};
 		32E49D1A21369D6C005633F2 /* SX_MyCollection */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,9 +520,7 @@
 				323E99BF213FA721006038F5 /* SX_ApplyTrainListController.swift */,
 				323E99C1213FA73D006038F5 /* SX_ApplyVocationListController.swift */,
 				4527F91021226B29000EAEB9 /* SX_ApplyProgressDetailController.swift */,
-				329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */,
-				329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */,
-				329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */,
+				322FC80521461AF4005347E8 /* Model */,
 			);
 			path = SX_MyApply;
 			sourceTree = "<group>";
@@ -686,7 +680,6 @@
 		45556B5820D89D290035FCA6 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				329988762151197200DC9ED3 /* SX_HUD */,
 				32621249214CE12E000C1A6C /* SX_Calendar */,
 				324482E2214A348E00037533 /* SX_AlertView */,
 				3248484521411AA400B6049E /* SX_Picker */,
@@ -703,7 +696,6 @@
 			isa = PBXGroup;
 			children = (
 				322FC80621461AF4005347E8 /* Controller */,
-				322FC80521461AF4005347E8 /* Model */,
 				45556B6A20D8A4B70035FCA6 /* View */,
 			);
 			path = "VIP Center";

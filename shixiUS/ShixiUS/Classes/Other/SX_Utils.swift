@@ -15,7 +15,6 @@ class SX_Utils: NSObject {
     }
     
     class func getSign_userID() -> NSString {
-        
         return (USERDEFAULTS.object(forKey: "userId") as! NSString)
     }
 }

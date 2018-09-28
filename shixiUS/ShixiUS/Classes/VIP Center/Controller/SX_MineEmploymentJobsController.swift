@@ -12,6 +12,7 @@
  */
 
 import UIKit
+import SwiftyJSON
 
 let employCellID = "employCellID"
 

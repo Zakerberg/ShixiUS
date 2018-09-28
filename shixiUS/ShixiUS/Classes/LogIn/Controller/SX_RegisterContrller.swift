@@ -194,7 +194,8 @@ extension SX_RegisterContrller {
                     let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
                     hud.mode = .text
                     hud.isSquare = true
-                    hud.label.text = json["msg"].string
+                    hud.label.text = "注册成功"
+                    hud.hide(animated: true, afterDelay: 1.0)
                     self.dismiss(animated: true, completion: nil)
                 }else if json["status"] == 202 {
                     SXLog("存在")
@@ -202,6 +203,7 @@ extension SX_RegisterContrller {
                     hud.mode = .text
                     hud.isSquare = true
                     hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
                     self.dismiss(animated: true, completion: nil)
                 }
             } catch{ }

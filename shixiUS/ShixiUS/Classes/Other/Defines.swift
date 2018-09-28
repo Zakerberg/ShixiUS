@@ -23,8 +23,8 @@ let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 let SCREEN_WIDTH  = UIScreen.main.bounds.size.width
 let USERDEFAULTS  = UserDefaults.standard
 
-let iphoneX = (SCREEN_WIDTH == 375 && SCREEN_HEIGHT == 812 ?  true : false)
-let kNavH = (SCREEN_HEIGHT == 812 ? 88 : 64).FloatValue
+let iphoneX       = (SCREEN_WIDTH == 375 && SCREEN_HEIGHT == 812 ?  true : false)
+let kNavH         = (SCREEN_HEIGHT == 812 ? 88 : 64).FloatValue
 let kTabBarHeight = (iphoneX ? 83.FloatValue : 49.FloatValue)
 
 // 间距
@@ -37,27 +37,27 @@ let NAVBAR_COLORCHANGE_POINT = IMAGE_HEIGHT - CGFloat(kNavH * 2)
 
 // 下拉距离
 let SCROLL_DOWN_LIMIT:CGFloat = 100
-let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
+let LIMIT_OFFSET_Y:CGFloat    = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 
 extension SX_NavigationBar {
+    
     class func isIphoneX() -> Bool {
         return UIScreen.main.bounds.equalTo(CGRect(x: 0, y: 0, width: 375, height: 812))
     }
+    
     class func navBarBottom() -> Int {
         return self.isIphoneX() ? 88 : 64;
     }
+    
     class func tabBarHeight() -> Int {
         return self.isIphoneX() ? 83 : 49;
     }
+    
     class func screenWidth() -> Int {
         return Int(UIScreen.main.bounds.size.width)
     }
+    
     class func screenHeight() -> Int {
         return Int(UIScreen.main.bounds.size.height)
     }
 }
-
-
-
-
-

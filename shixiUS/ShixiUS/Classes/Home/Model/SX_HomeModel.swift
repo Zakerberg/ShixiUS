@@ -665,18 +665,101 @@ struct VIPCenterTrainModel {
     }
 }
 
+// =======================================================================================
+// MARK: -  会员中心我的收藏
+// =======================================================================================
+struct SX_MyCollectionJobModel {
+    
+    var lists: JobCollectionListModel
+    
+    init(jsonData: JSON) {
+        lists = JobCollectionListModel(jsonData: jsonData["lists"])
+    }
+}
+
+struct JobCollectionListModel {
+    
+    var id:String?
+    var title:String?
+    var trade_name:String?
+    var address:String?
+    var duration_id:String?
+    var duration_name:String?
+    
+    init(jsonData:JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        trade_name      = jsonData["trade_name"].string
+        address         = jsonData["address"].string
+        duration_id     = jsonData["duration_id"].string
+        duration_name   = jsonData["duration_name"].string
+    }
+}
+
+struct SX_MyCollectionTrainModel {
+    
+    var lists: TrainCollectionListModel
+    
+    init(jsonData: JSON) {
+        lists = TrainCollectionListModel(jsonData: jsonData["lists"])
+    }
+}
+
+struct TrainCollectionListModel {
+    
+    var id:String?
+    var title:String?
+    var outset_city:String?
+    var count:String?
+    
+    init(jsonData:JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        outset_city     = jsonData["outset_city"].string
+        count           = jsonData["count"].string
+    }
+}
+
+struct SX_MyCollectionTrainingModel {
+    
+    var lists: TrainingCollectionListModel
+    
+    init(jsonData: JSON) {
+        lists = TrainingCollectionListModel(jsonData: jsonData["lists"])
+    }
+}
+
+struct TrainingCollectionListModel {
+    
+    var id:String?
+    var title:String?
+    var time:String?
+    
+    init(jsonData:JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        time            = jsonData["time"].string
+    }
+}
+
+
 // =======================================================================================++++++++++++++++++++++++++++
 // MARK: - 我的 ! ! !
 // =======================================================================================++++++++++++++++++++++++++++
 struct SX_MineModel {
-   
-    
-    
-    
-    
     
     
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

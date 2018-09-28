@@ -47,6 +47,10 @@ class SX_MineVC: UIViewController {
         
         NotificationCenter.default.addObserver(forName:  NSNotification.Name(rawValue: "REGISTRSUCCEED"), object: nil, queue: OperationQueue.main) { (text) in
             self.titleNameLabel?.text = "\(String(describing: text.userInfo?["text"]))"
+            
+            
+            
+            
         }
         
         setUI()

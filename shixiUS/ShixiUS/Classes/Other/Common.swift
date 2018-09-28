@@ -440,7 +440,7 @@
         let emailTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailTest.evaluate(with: self)
     }
-
+    
     
     
  }
@@ -456,11 +456,9 @@
     //        return NSCalendar.current.range(of: Calendar.Component.day, in: Calendar.Component.month, for: self as Date)
     //    }
     
-    
     //    func numberOfWeeksInCurrentMonth() -> NSInteger {
     //
     //    }
-    
     
     //    func weeklyOrdinality() -> NSInteger {
     //
@@ -541,7 +539,7 @@
     func setTextField(_ font: CGFloat, color: UIColor, aligment: NSTextAlignment, title: String, placeHolder: String) {
         let rightImageBtn = UIButton()
         self.isSecureTextEntry = true
-        rightImageBtn.setBackgroundImage(#imageLiteral(resourceName: "icon"), for: .normal)
+        rightImageBtn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
         rightImageBtn.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
         rightImageBtn.centerY = self.centerY
         self.rightView = rightImageBtn
@@ -565,11 +563,11 @@
         btn.isSelected  = !btn.isSelected
         if !btn.isSelected {
             self.font = UIFont.systemFont(ofSize: 16)
-            btn.setBackgroundImage(#imageLiteral(resourceName: "icon"), for: .normal)
+            btn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
             self.isSecureTextEntry = true
         }else{
             self.font = UIFont.systemFont(ofSize: 16)
-            btn.setBackgroundImage(#imageLiteral(resourceName: "icon"), for: .selected)
+            btn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_yincang"), for: .selected)
             self.isSecureTextEntry = false
         }
         self.becomeFirstResponder()
