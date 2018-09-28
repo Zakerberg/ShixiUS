@@ -157,10 +157,15 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.isHidden = true
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
                 QUIT.rx.tap.subscribe(onNext: { (_) in
-                    SXLog("退出登录 +++ + ")
                     
                     
                     
+                    SX_NetManager.requestData(type: .GET, URlString: SX_LogOut, finishCallBack: { (result) in
+                        do{     
+                            
+                            
+                        }catch { }
+                    })
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)

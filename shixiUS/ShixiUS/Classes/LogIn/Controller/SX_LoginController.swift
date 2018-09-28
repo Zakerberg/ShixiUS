@@ -205,15 +205,15 @@ extension SX_LoginController {
                     do{
                         let json = try JSON(data: result)
                         if json["status"].int == 200 {
-                        SXLog("登录成功! ----> \(json["msg"])")
+                            SXLog("登录成功! ----> \(json["msg"])")
                             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
                             hud.mode = .text
                             hud.isSquare = true
                             hud.label.text = "登陆成功"
                             hud.hide(animated: true, afterDelay: 1.0)
-                        USERDEFAULTS.set(json["token"].rawString(), forKey: "token")
-                        USERDEFAULTS.set(json["userId"].rawString(), forKey: "userId")
-                        USERDEFAULTS.set("true", forKey: "Login")
+                            USERDEFAULTS.set(json["token"].rawString(), forKey: "token")
+                            USERDEFAULTS.set(json["userId"].rawString(), forKey: "userId")
+                            USERDEFAULTS.set("true", forKey: "Login")
                             let statusStr = "1"
                             guard(self.closure != nil) else{
                                 return

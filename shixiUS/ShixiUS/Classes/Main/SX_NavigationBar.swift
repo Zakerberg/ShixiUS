@@ -6,7 +6,14 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 没有你的陪伴，
+ 再美的诗和远方，
+ 都是流浪。
+ */
+
 import UIKit
+
 // =======================================================================================
 // MARK: - 1. 定义 SXAwakeProtocol 协议
 // =======================================================================================
@@ -227,9 +234,9 @@ extension UINavigationController: SXFatherAwakeProtocol {
         }
     }
     
-// ===================================================================================
-// MARK: swizzling pop
-// =======================================================================================
+    // ===================================================================================
+    // MARK: swizzling pop
+    // =======================================================================================
     struct popProperties {
         fileprivate static let popDuration = 0.13
         fileprivate static var displayCount = 0
@@ -240,9 +247,9 @@ extension UINavigationController: SXFatherAwakeProtocol {
         }
     }
     
-// =======================================================================================
-// swizzling system method: popToViewController
-// =======================================================================================
+    // =======================================================================================
+    // swizzling system method: popToViewController
+    // =======================================================================================
     
     @objc func sx_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBarUpdate(titleColor: viewController.navBarTitleColor)
@@ -261,9 +268,9 @@ extension UINavigationController: SXFatherAwakeProtocol {
         CATransaction.commit()
         return vcs
     }
-// =======================================================================================
-// swizzling system method: popToRootViewControllerAnimated
-// =======================================================================================
+    // =======================================================================================
+    // swizzling system method: popToRootViewControllerAnimated
+    // =======================================================================================
     
     @objc func sx_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
@@ -296,9 +303,9 @@ extension UINavigationController: SXFatherAwakeProtocol {
     }
     
     
-// =======================================================================================
-// MARK: swizzling push
-// =======================================================================================
+    // =======================================================================================
+    // MARK: swizzling push
+    // =======================================================================================
     struct pushProperties {
         fileprivate static let pushDuration = 0.13
         fileprivate static var displayCount = 0
@@ -836,10 +843,10 @@ extension UINavigationBar: SXAwakeProtocol {
             }
         }
     }
-
-// =======================================================================================
-// MARK: swizzling pop
-// =======================================================================================
+    
+    // =======================================================================================
+    // MARK: swizzling pop
+    // =======================================================================================
     
     @objc func sx_setTitleTextAttributes(_ newTitleTextAttributes:[String : Any]?) {
         guard var attributes = newTitleTextAttributes else {

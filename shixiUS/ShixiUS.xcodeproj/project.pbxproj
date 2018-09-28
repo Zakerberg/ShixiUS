@@ -61,6 +61,7 @@
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
 		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
 		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
+		32AC6B11215E28F2000355A4 /* SX_BaseAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AC6B10215E28F2000355A4 /* SX_BaseAlertController.swift */; };
 		32D0DFBF2147C1BD00A6549B /* SX_ProjectTripDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D0DFBE2147C1BD00A6549B /* SX_ProjectTripDateCell.swift */; };
 		32E49D1C21369DB0005633F2 /* SX_PayEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1B21369DB0005633F2 /* SX_PayEmploymentJobsController.swift */; };
 		32E49D1E21369DC1005633F2 /* SX_PayTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1D21369DC1005633F2 /* SX_PayTrainingProjectController.swift */; };
@@ -108,7 +109,6 @@
 		45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */; };
 		4561F03E20DA027800C64878 /* SX_HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561F03D20DA027800C64878 /* SX_HomeModel.swift */; };
 		458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */; };
-		458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458805212100751F006FCDC7 /* SX_BaseViewController.swift */; };
 		459B334A210965EA00B2EBB0 /* SX_MoreDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B3349210965EA00B2EBB0 /* SX_MoreDateController.swift */; };
 		45ACF3F32105AD0D001DAE5A /* SX_NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */; };
 		45B8E4E6212FE9D4002061D5 /* SX_PaymentRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8E4E5212FE9D4002061D5 /* SX_PaymentRecordController.swift */; };
@@ -211,6 +211,7 @@
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
 		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
 		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
+		32AC6B10215E28F2000355A4 /* SX_BaseAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseAlertController.swift; sourceTree = "<group>"; };
 		32D0DFBE2147C1BD00A6549B /* SX_ProjectTripDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectTripDateCell.swift; sourceTree = "<group>"; };
 		32E49D1B21369DB0005633F2 /* SX_PayEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayEmploymentJobsController.swift; sourceTree = "<group>"; };
 		32E49D1D21369DC1005633F2 /* SX_PayTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayTrainingProjectController.swift; sourceTree = "<group>"; };
@@ -264,7 +265,6 @@
 		45556B7220D8A52C0035FCA6 /* SX_MineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVC.swift; sourceTree = "<group>"; };
 		4561F03D20DA027800C64878 /* SX_HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HomeModel.swift; sourceTree = "<group>"; };
 		458130AC20FEE222003BB9E7 /* SX_ProjectDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectDetailController.swift; sourceTree = "<group>"; };
-		458805212100751F006FCDC7 /* SX_BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseViewController.swift; sourceTree = "<group>"; };
 		459B3349210965EA00B2EBB0 /* SX_MoreDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MoreDateController.swift; sourceTree = "<group>"; };
 		45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_NavigationBar.swift; sourceTree = "<group>"; };
 		45B8E4E5212FE9D4002061D5 /* SX_PaymentRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PaymentRecordController.swift; sourceTree = "<group>"; };
@@ -492,6 +492,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		32AC6B0F215E288C000355A4 /* SX_Base */ = {
+			isa = PBXGroup;
+			children = (
+				45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */,
+				4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */,
+				32AC6B10215E28F2000355A4 /* SX_BaseAlertController.swift */,
+			);
+			path = SX_Base;
+			sourceTree = "<group>";
+		};
 		32E49D1A21369D6C005633F2 /* SX_MyCollection */ = {
 			isa = PBXGroup;
 			children = (
@@ -714,13 +724,11 @@
 		45556B5B20D89D290035FCA6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				32AC6B0F215E288C000355A4 /* SX_Base */,
 				45FDD9A32126AEAD00E336F9 /* NetManager */,
 				45440EF820E0B98900058978 /* SX_CycleScrollerView */,
 				45556B5C20D89DAD0035FCA6 /* SX_TabBarController.swift */,
 				45556B5E20D89FE00035FCA6 /* SX_NavigationController.swift */,
-				458805212100751F006FCDC7 /* SX_BaseViewController.swift */,
-				45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */,
-				4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */,
 				45341D2F20F48C240099CDDD /* SX_LoadingView.swift */,
 				45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */,
 				459B3349210965EA00B2EBB0 /* SX_MoreDateController.swift */,
@@ -1244,7 +1252,6 @@
 				32621281214CE13E000C1A6C /* RMCalendarMonthHeaderView.m in Sources */,
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
 				323E99B7213D1635006038F5 /* SX_CollectionVocationalTrainingController.swift in Sources */,
-				458805222100751F006FCDC7 /* SX_BaseViewController.swift in Sources */,
 				45FDD9A52126AEC300E336F9 /* SX_NetManager.swift in Sources */,
 				322FC80A21464164005347E8 /* SX_HotJobDetailCell.swift in Sources */,
 				323E99C2213FA73E006038F5 /* SX_ApplyVocationListController.swift in Sources */,
@@ -1263,6 +1270,7 @@
 				4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */,
 				45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */,
 				458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */,
+				32AC6B11215E28F2000355A4 /* SX_BaseAlertController.swift in Sources */,
 				4527F902211D5D97000EAEB9 /* SX_HeadPortraitCell.swift in Sources */,
 				3262127D214CE13E000C1A6C /* RMCalendarLogic.m in Sources */,
 				324482DE214923F900037533 /* SX_PersonalHeadPortraitCell.swift in Sources */,
