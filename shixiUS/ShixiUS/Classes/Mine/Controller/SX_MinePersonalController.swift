@@ -59,7 +59,7 @@ extension SX_MinePersonalController {
     
     func fetchData() {
         let param = ["headpic" :"1",
-                     "username":self.Dic["1"],
+                     "username":self.Dic.value(forKey: "1"),
                      "country" :self.Dic.value(forKey: "3"),
                      "phone"   :self.Dic.value(forKey: "2"),
                      "email"   :self.Dic.value(forKey: "5"),
@@ -69,10 +69,6 @@ extension SX_MinePersonalController {
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{
                 let json = try JSON(data: result)
-                
-                
-                
-                
                 
                 
             }catch { }
@@ -116,7 +112,9 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             cell.tF?.placeholder  = self.contentArr[indexPath.row]
             
             cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
-                self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
+//                self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
+                self?.Dic.addEntries(from: [(cell.tF?.text ?? ""):"\(indexPath.row)"])
+                
             })
             
             return cell
