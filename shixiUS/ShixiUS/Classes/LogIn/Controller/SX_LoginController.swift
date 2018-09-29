@@ -211,8 +211,8 @@ extension SX_LoginController {
                             hud.isSquare = true
                             hud.label.text = "登陆成功"
                             hud.hide(animated: true, afterDelay: 1.0)
-                            USERDEFAULTS.set(json["token"].rawString(), forKey: "token")
-                            USERDEFAULTS.set(json["userId"].rawString(), forKey: "userId")
+                            USERDEFAULTS.set(json["data"]["token"].rawString(), forKey: "token")
+                            USERDEFAULTS.set(json["data"]["userId"].rawString(), forKey: "userId")
                             let statusStr = "1"
                             guard(self.closure != nil) else{
                                 return

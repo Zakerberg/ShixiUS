@@ -166,14 +166,16 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                     let cancelAction    = UIAlertAction(title: "取消", style: .cancel, handler: nil)
                     let okAction        = UIAlertAction(title: "离开", style: .default, handler: { (action) in
                         SXLog("退出登录!")
-                        SX_NetManager.requestData(type: .GET, URlString: SX_LogOut, finishCallBack: { (result) in
+                        let param = ["userId":USERDEFAULTS.value(forKey: "userId") as! String,
+                                     "token":USERDEFAULTS.value(forKey: "token") as! String]
+                        SX_NetManager.requestData(type: .POST, URlString: SX_LogOut, parameters: param, finishCallBack: { (result) in
                             do{
                                 let json = try JSON(data: result)
                                 if json["status"].int == 200 {
                                     let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
                                     hud.mode = .text
                                     hud.isSquare = true
-                                    hud.label.text = "退出成功"
+                                    hud.label.text = json["msg"].string
                                     hud.hide(animated: true, afterDelay: 1.0)
                                     self.statusStr = "0"
                                     USERDEFAULTS.set("", forKey: "token")
@@ -194,6 +196,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                             }catch { }
                         })
                     })
+                    
                     alertController.addAction(cancelAction)
                     alertController.addAction(okAction)
                     self.present(alertController, animated: true, completion: nil)
