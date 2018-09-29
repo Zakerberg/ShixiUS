@@ -79,4 +79,17 @@ let SX_VIPCenter_Add          = SHIXIUS + "/mycollection/add"
 // =======================================================================================
 /// 上传图片 (post)
 let SX_Mine_UploadImage       = SHIXIUS + "/common/uploadimage"
+/// 上传文件 (post)
+ let SX_Mine_UploadFile       = SHIXIUS + "/common/upload"
+/// 修改个人信息 (post)
+let SX_Mine_FixInfo           = SHIXIUS + "/member/info"
+
+
+
+
+
+
+
+
+
 

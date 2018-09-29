@@ -127,6 +127,9 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
                 FIX.layer.cornerRadius  = 10
                 FIX.rx.tap.subscribe(onNext: { (_) in
                     SXLog("修改密码 +++ + ")
+                    
+ 
+                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)

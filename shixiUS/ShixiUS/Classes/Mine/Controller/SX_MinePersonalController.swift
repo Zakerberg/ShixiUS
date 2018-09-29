@@ -14,6 +14,7 @@
  */
 
 import UIKit
+import SwiftyJSON
 
 class SX_MinePersonalController: UIViewController {
     
@@ -22,6 +23,7 @@ class SX_MinePersonalController: UIViewController {
     var getUrlDataArr: Array<Any>?
     var headPortrait: UIImage?
     var saveBtn: UIButton?
+    var Dic = NSMutableDictionary(capacity: 10)
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
@@ -36,7 +38,6 @@ class SX_MinePersonalController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,15 +54,29 @@ extension SX_MinePersonalController {
     func setUI() {
         title = "个人信息"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
-        let tap = UIGestureRecognizer(target: self, action: #selector(selfInfoTapClick))
-        // 默认 true
-        tap.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tap)
         self.view.addSubview(self.table)
     }
     
     func fetchData() {
+        let param = ["headpic" :"1",
+                     "username":self.Dic["1"],
+                     "country" :self.Dic.value(forKey: "3"),
+                     "phone"   :self.Dic.value(forKey: "2"),
+                     "email"   :self.Dic.value(forKey: "5"),
+                     "weixin"  :self.Dic.value(forKey: "4")]
         
+
+        SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
+            do{
+                let json = try JSON(data: result)
+                
+                
+                
+                
+                
+                
+            }catch { }
+        }
     }
 }
 
@@ -89,20 +104,23 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             
             cell.selectionStyle = .none
             cell.titleLabel?.text = self.titleArr[indexPath.row]
-            
             cell.addGestureRecognizer(singleTap)
             
             return cell
+        }else{
+            
+            let cell = SX_PersonalMessageCell(style: .default, reuseIdentifier: nil)
+            cell.selectionStyle = .none
+            
+            cell.titleLabel?.text = self.titleArr[indexPath.row]
+            cell.tF?.placeholder  = self.contentArr[indexPath.row]
+            
+            cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
+                self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
+            })
+            
+            return cell
         }
-        
-        let cell = SX_PersonalMessageCell(style: .default, reuseIdentifier: nil)
-        
-        cell.titleLabel?.text = self.titleArr[indexPath.row]
-        cell.tF?.placeholder  = self.contentArr[indexPath.row]
-        
-        cell.selectionStyle = .none
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -113,14 +131,15 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(45.FloatValue.IPAD_XValue)
         }).config({ (SAVE) in
-            SAVE.backgroundColor     = UIColor.SX_MainColor()
-            SAVE.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 20)
             SAVE.setTitle("保存", for: .normal)
+            SAVE.backgroundColor     = UIColor.colorWithHexString(hex: "666666", alpha: 1.0)
+            SAVE.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 20)
             SAVE.layer.masksToBounds = true
             SAVE.layer.cornerRadius  = 10
+            
             SAVE.rx.tap.subscribe(onNext: { (_) in
-                SXLog("保存个人信息 +++ + ")
-                /// 加提示 !
+                SXLog("保存个人信息")
+                self.fetchData()
                 
                 self.navigationController?.popViewController(animated: true)
             }, onError: { (error) in
@@ -134,35 +153,25 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 100.FloatValue.IPAD_XValue
     }
-}
-
-// =============================================================================================
-// MARK: - UITextFieldDelegate
-// =============================================================================================
-extension SX_MinePersonalController: UITextFieldDelegate {
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string == "\n" { // 按下return键
-            textField.resignFirstResponder()
-            self.table.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-            return true
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return CGFloat.leastNormalMagnitude
         }
-        return true
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return true
+        return 10.FloatValue.IPAD_XValue
     }
 }
 
 // =============================================================================================
-// MARK: - UIGestureRecognizerDelegate
+// MARK: - Other Method
 // =============================================================================================
-extension SX_MinePersonalController: UIGestureRecognizerDelegate {
-    
-    @objc func selfInfoTapClick() {
-        self.view.endEditing(true)
-        self.table.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+extension SX_MinePersonalController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.saveBtn?.resignFirstResponder()
     }
 }
 
@@ -171,21 +180,7 @@ extension SX_MinePersonalController: UIGestureRecognizerDelegate {
 // =============================================================================================
 extension SX_MinePersonalController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    
-    //    - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    //    //定义一个newPhoto，用来存放我们选择的图片。
-    //    UIImage *newPhoto = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-    //    _myHeadPortrait.image = newPhoto;
-    //    [self dismissViewControllerAnimated:YES completion:nil];
-    //    }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        
-        
-        
-        
-        
         
         
     }
