@@ -65,7 +65,6 @@ extension SX_MinePersonalController {
                      "email"   :self.Dic.value(forKey: "5"),
                      "weixin"  :self.Dic.value(forKey: "4")]
         
-
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{
                 let json = try JSON(data: result)
