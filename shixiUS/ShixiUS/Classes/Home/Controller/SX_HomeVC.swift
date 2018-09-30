@@ -15,8 +15,8 @@
  */
 
 import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
 import SwiftyJSON
 
 private let identifier:String = "hotJobsCell"
