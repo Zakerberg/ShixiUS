@@ -16,14 +16,8 @@ pod 'Moya'
 pod 'SwiftyJSON'
 pod 'Alamofire'
 pod 'Result'
-pod 'ObjectMapper' 
 pod 'Kingfisher'
-pod 'IQKeyboardManagerSwift'
-pod 'ESPullToRefresh'
-pod 'MJExtension'
 pod 'MBProgressHUD'
-pod 'YYModel'
-
   
   target 'ShixiUSTests' do
     inherit! :search_paths
