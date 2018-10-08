@@ -78,9 +78,9 @@ class SX_MyApplyController: UIViewController {
     }
 }
 
-// ===================================================================================================================
+// =============================================================
 // MARK: - Other Method
-// ===================================================================================================================
+// =============================================================
 extension SX_MyApplyController {
     
     func setUI() {
@@ -115,18 +115,18 @@ extension SX_MyApplyController {
     }
 }
 
-// =====================================================================================================================
+// =============================================================
 // MARK: - SXPageTitleViewDelegate
-// =====================================================================================================================
+// =============================================================
 extension SX_MyApplyController: SXPageTitleViewDelegate {
     func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
         self.pageContentView.setPageContentViewCurrentIndex(currentIndex: selectedIndex)
     }
 }
 
-// ======================================================================================================================
+// =============================================================
 // MARK: - SXPageContentViewDelegate
-// ======================================================================================================================
+// =============================================================
 extension SX_MyApplyController: SXPageContentViewDelegate {
     func pageContentViewScroll(progress: CGFloat, originalIndex: Int, targetIndex: Int) {
         self.pageTitleView.setPageTitleView(progress: progress, originalIndex: originalIndex, targetIndex: targetIndex)
