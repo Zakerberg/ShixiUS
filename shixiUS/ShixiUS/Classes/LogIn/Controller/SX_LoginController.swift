@@ -179,27 +179,11 @@ extension SX_LoginController {
             LOGIN.rx.tap.subscribe(onNext: { (_) in
                 SXLog("LOGIN")
                 /// 请求
-                let str = self.passWordTF?.text?.base64
-                let str1 = str?.replacingOccurrences(of: "\n", with: "")
-                let str2 = str1?.replacingOccurrences(of: "\t", with: "")
+                let str   = self.passWordTF?.text?.base64
+                let str1  = str?.replacingOccurrences(of: "\n", with: "")
+                let str2  = str1?.replacingOccurrences(of: "\t", with: "")
                 let param = ["name":self.userNameTF?.text,
                              "password":str2]
-                
-                if self.userNameTF?.text == "" {
-                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
-                    hud.mode       = .text
-                    hud.isSquare   = true
-                    hud.label.text = "请输入用户名"
-                    hud.hide(animated: true, afterDelay: 1.0)
-                    return
-                } else if self.passWordTF?.text == "" {
-                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
-                    hud.mode       = .text
-                    hud.isSquare   = true
-                    hud.label.text = "请输入密码"
-                    hud.hide(animated: true, afterDelay: 1.0)
-                    return
-                }
                 
                 SX_NetManager.requestData(type: .POST, URlString: SX_LogIn, parameters: param as? [String : String], finishCallBack: { (result) in
                     do{
@@ -214,8 +198,13 @@ extension SX_LoginController {
                             USERDEFAULTS.set(json["data"]["token"].rawString(), forKey: "token")
                             USERDEFAULTS.set(json["data"]["userId"].rawString(), forKey: "userId")
                             USERDEFAULTS.set("yes", forKey: "login")
+                            
+                            
                             let statusStr  = "1"
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINSUCCESS"), object: nil, userInfo: ["name":json["data"]["userName"].rawString()!])
+                            
                             guard(self.closure != nil) else{
+                                self.dismiss(animated: true, completion: nil)
                                 return
                             }
                             self.closure(json["data"]["userName"].rawString()!,statusStr)
@@ -226,6 +215,7 @@ extension SX_LoginController {
                             hud.isSquare   = true
                             hud.label.text = json["msg"].stringValue
                             hud.hide(animated: true, afterDelay: 1.0)
+                            self.dismiss(animated: true, completion: nil)
                         }
                     } catch{ }
                 })

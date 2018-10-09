@@ -47,6 +47,7 @@ class SX_MineVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginSuccessNoti), name: NSNotification.Name(rawValue: "LOGINSUCCESS"), object: nil)
         setUI()
     }
 }
@@ -84,8 +85,8 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let tap = UITapGestureRecognizer(target: self, action: #selector(changeIconImageView))
             let cell = SX_HeadPortraitCell(style: .default, reuseIdentifier: mineIconCellID)
-            cell.selectionStyle   = .none
-            cell.nameTitle?.isHidden = true
+            cell.selectionStyle         = .none
+            cell.nameTitle?.isHidden    = true
             cell.headPortraitImageView?.addGestureRecognizer(tap)
             self.headPortraitImageView  = cell.headPortraitImageView
             self.titleNameLabel = cell.nameTitle
@@ -98,9 +99,9 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                     self.statusStr = status
                     if self.statusStr == "1" { // 登陆
                         self.titleNameLabel?.isHidden = false
-                        self.logInBtn?.isHidden = true
-                        self.quitBtn?.isHidden  = false
-                        self.titleNameLabel?.text = name
+                        self.logInBtn?.isHidden       = true
+                        self.quitBtn?.isHidden        = false
+                        self.titleNameLabel?.text     = name
                     }
                 })
                 
@@ -172,9 +173,9 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                             do{
                                 let json = try JSON(data: result)
                                 if json["status"].int == 200 {
-                                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                    hud.mode = .text
-                                    hud.isSquare = true
+                                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                    hud.mode       = .text
+                                    hud.isSquare   = true
                                     hud.label.text = json["msg"].string
                                     hud.hide(animated: true, afterDelay: 1.0)
                                     self.statusStr = "0"
@@ -187,9 +188,9 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                                     
                                     self.table.reloadData()
                                 } else {
-                                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                    hud.mode = .text
-                                    hud.isSquare = true
+                                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                    hud.mode       = .text
+                                    hud.isSquare   = true
                                     hud.label.text = json["msg"].string
                                     hud.hide(animated: true, afterDelay: 1.0)
                                 }
@@ -252,7 +253,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 // =========================================================================================
-// MARK: - Noti
+// MARK: -
 // =========================================================================================
 extension SX_MineVC {
     
@@ -348,3 +349,14 @@ extension SX_MineVC {
         
     }
 }
+
+// =========================================================================================
+// MARK: - Noti
+// =========================================================================================
+extension SX_MineVC {
+    @objc func LoginSuccessNoti(user: Notification) {
+        self.titleNameLabel?.text = (user.userInfo?["name"] ?? "暂未设置") as? String
+    }
+}
+
+

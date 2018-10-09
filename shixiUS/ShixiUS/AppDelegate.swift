@@ -53,13 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 设置导航栏默认的背景颜色
         SX_NavigationBar.defaultNavBarBarTintColor = UIColor.SX_MainColor()
         // 设置导航栏所有按钮的默认颜色
-        SX_NavigationBar.defaultNavBarTintColor = .white
+        SX_NavigationBar.defaultNavBarTintColor    = .white
         // 设置导航栏标题默认颜色
-        SX_NavigationBar.defaultNavBarTitleColor = .white
+        SX_NavigationBar.defaultNavBarTitleColor   = .white
         // 统一设置状态栏样式
-        SX_NavigationBar.defaultStatusBarStyle = .default
+        SX_NavigationBar.defaultStatusBarStyle     = .default
         // 如果需要设置导航栏底部分割线隐藏，可以在这里统一设置
-        SX_NavigationBar.defaultShadowImageHidden = true
+        SX_NavigationBar.defaultShadowImageHidden  = true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

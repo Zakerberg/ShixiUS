@@ -90,7 +90,6 @@ extension SX_HotJobDetailController {
                     SX_NetManager.requestData(type: .GET, URlString: url, finishCallBack: { (result) in
                         do{
                             let json = try JSON(data: result)
-                            
                             if json["status"].int == 200 {
                                 if self.collectionBtn?.isSelected == true {
                                     SXLog("已收藏")
