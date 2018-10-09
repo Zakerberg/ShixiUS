@@ -60,7 +60,10 @@ class SX_MyApplyController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        super.viewWillAppear(animated)
+        
+        ///接收 登陆界面 back 的通知, 退回之前tabbbar
+        NotificationCenter.default.addObserver(self, selector: #selector(toPresentTabbar), name: NSNotification.Name(rawValue: "TOPRESENTTABBAR"), object: nil)
+    
     }
     
     override func viewDidLoad() {
@@ -130,5 +133,16 @@ extension SX_MyApplyController: SXPageTitleViewDelegate {
 extension SX_MyApplyController: SXPageContentViewDelegate {
     func pageContentViewScroll(progress: CGFloat, originalIndex: Int, targetIndex: Int) {
         self.pageTitleView.setPageTitleView(progress: progress, originalIndex: originalIndex, targetIndex: targetIndex)
+    }
+}
+
+// =============================================================
+// MARK: - Noti
+// =============================================================
+extension SX_MyApplyController {
+    @objc func toPresentTabbar(noti:Notification) {
+        SXLog("接收到通知")
+       let numiss = USERDEFAULTS.value(forKey: "tabBarSelectedIndex")
+        self.tabBarController?.selectedIndex = numiss as! Int
     }
 }

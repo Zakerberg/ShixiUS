@@ -77,8 +77,6 @@ extension SX_HotJobDetailController {
             COLLECTION.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
             COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
             COLLECTION.rx.tap.subscribe(onNext: { (_) in
-              
-                
                 // 判断登陆
                 if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
                     let vc = SX_LoginController()

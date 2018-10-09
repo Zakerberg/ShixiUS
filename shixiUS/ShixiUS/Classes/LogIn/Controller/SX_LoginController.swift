@@ -63,6 +63,8 @@ extension SX_LoginController {
             Back.setImage(UIImage.init(named: "Close"), for: .normal)
             Back.rx.tap.subscribe(onNext: { (_) in
                 SXLog("Back")
+                ///  点击 back 发送通知 退回到之前的 tabbbar
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "TOPRESENTTABBAR"), object: nil, userInfo: nil)
                 self.dismiss(animated: true, completion: {
                     SXLog("dissmiss")
                 })

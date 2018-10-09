@@ -18,6 +18,7 @@ import UIKit
 
 class SX_TabBarController: UITabBarController {
     
+    var temnum = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAllViewController()
@@ -28,7 +29,7 @@ class SX_TabBarController: UITabBarController {
 extension SX_TabBarController {
     
     // 添加所有控件
-    func setUpAllViewController() -> Void {
+    func setUpAllViewController() {
         setUpChildController(SX_HomeVC(), "首页","Home","Home_Selected")
         setUpChildController(SX_MyApplyController(), "我的申请",  "Application",  "Application_Selected")
         setUpChildController(SX_MineVC(), "我的",  "Mine",  "Mine_Selected")
@@ -46,5 +47,22 @@ extension SX_TabBarController {
         let nav = SX_NavigationController(rootViewController: controller)
         controller.title = title
         self.addChildViewController(nav)
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        let tabIndex = tabBar.items?.index(of: item) as! Int
+        if tabIndex != self.selectedIndex {
+            temnum = self.selectedIndex
+            USERDEFAULTS.set(temnum, forKey: "tabBarSelectedIndex")
+        }
+        
+        if tabIndex == 1 {
+            if String(describing: USERDEFAULTS.value(forKey: "login")!) == "yes" {
+            }else{
+                let vc  = SX_LoginController()
+                self.present(vc, animated: true, completion: {
+                })
+            }
+        }
     }
 }

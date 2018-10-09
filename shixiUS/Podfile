@@ -19,7 +19,7 @@ pod 'Result'
 pod 'Kingfisher'
 pod 'MBProgressHUD'
 pod 'ObjectMapper'
-  
+
   target 'ShixiUSTests' do
     inherit! :search_paths
     # Pods for testing
