@@ -199,10 +199,8 @@ extension SX_LoginController {
                             USERDEFAULTS.set(json["data"]["userId"].rawString(), forKey: "userId")
                             USERDEFAULTS.set("yes", forKey: "login")
                             
-                            
                             let statusStr  = "1"
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINSUCCESS"), object: nil, userInfo: ["name":json["data"]["userName"].rawString()!])
-                            
                             guard(self.closure != nil) else{
                                 self.dismiss(animated: true, completion: nil)
                                 return

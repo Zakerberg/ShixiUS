@@ -355,7 +355,10 @@ extension SX_MineVC {
 // =========================================================================================
 extension SX_MineVC {
     @objc func LoginSuccessNoti(user: Notification) {
-        self.titleNameLabel?.text = (user.userInfo?["name"] ?? "暂未设置") as? String
+        self.titleNameLabel?.isHidden = false
+        self.logInBtn?.isHidden       = true
+        self.quitBtn?.isHidden        = false
+        self.titleNameLabel?.text     = (user.userInfo?["name"] ?? "暂未设置") as? String
     }
 }
 

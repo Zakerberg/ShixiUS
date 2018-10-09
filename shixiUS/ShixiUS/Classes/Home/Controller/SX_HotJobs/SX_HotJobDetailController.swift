@@ -135,7 +135,7 @@ extension SX_HotJobDetailController {
                 SXLog("立即申请 +++ + ")
                 
                 /// 此处判断token
-                if String(describing: USERDEFAULTS.value(forKey: "token")!) == "" {
+                if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
                     self.present(SX_LoginController(), animated: true, completion: nil)
                 }else{
                     let vc   = SX_ApplyEmpListController()
