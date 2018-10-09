@@ -27,12 +27,12 @@ public protocol SXFatherAwakeProtocol: class {   // 1.1 定义 SXFatherAwakeProt
 class SX_NavigationBar {
     fileprivate struct AssociatedKeys {   // default is system attributes
         
-        static var defNavBarBarTintColor: UIColor = UIColor.white
-        static var defNavBarBackgroundImage: UIImage = UIImage()
-        static var defNavBarTintColor: UIColor = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1.0)
-        static var defNavBarTitleColor: UIColor = UIColor.black
+        static var defNavBarBarTintColor: UIColor      = UIColor.white
+        static var defNavBarBackgroundImage: UIImage   = UIImage()
+        static var defNavBarTintColor: UIColor         = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1.0)
+        static var defNavBarTitleColor: UIColor        = UIColor.black
         static var defStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
-        static var defShadowImageHidden: Bool = false
+        static var defShadowImageHidden: Bool          = false
     }
     
     class var defaultNavBarBarTintColor: UIColor {
@@ -116,23 +116,23 @@ class SX_NavigationBar {
     // Calculate the middle Color with translation percent
     class fileprivate func middleColor(fromColor: UIColor, toColor: UIColor, percent: CGFloat) -> UIColor {
         // get current color RGBA
-        var fromRed: CGFloat = 0
+        var fromRed: CGFloat   = 0
         var fromGreen: CGFloat = 0
-        var fromBlue: CGFloat = 0
+        var fromBlue: CGFloat  = 0
         var fromAlpha: CGFloat = 0
         fromColor.getRed(&fromRed, green: &fromGreen, blue: &fromBlue, alpha: &fromAlpha)
         
         // get to color RGBA
-        var toRed: CGFloat = 0
+        var toRed: CGFloat   = 0
         var toGreen: CGFloat = 0
-        var toBlue: CGFloat = 0
+        var toBlue: CGFloat  = 0
         var toAlpha: CGFloat = 0
         toColor.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha)
         
         // calculate middle color RGBA
-        let newRed = fromRed + (toRed - fromRed) * percent
+        let newRed   = fromRed + (toRed - fromRed) * percent
         let newGreen = fromGreen + (toGreen - fromGreen) * percent
-        let newBlue = fromBlue + (toBlue - fromBlue) * percent
+        let newBlue  = fromBlue + (toBlue - fromBlue) * percent
         let newAlpha = fromAlpha + (toAlpha - fromAlpha) * percent
         return UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: newAlpha)
     }
@@ -143,8 +143,6 @@ class SX_NavigationBar {
         return newAlpha
     }
 }
-
-
 
 // =======================================================================================
 // MARK: - UINavigationController
@@ -207,8 +205,8 @@ extension UINavigationController: SXFatherAwakeProtocol {
         
         // change navBar _UIBarBackground alpha
         let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? SX_NavigationBar.defaultBackgroundAlpha
-        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? SX_NavigationBar.defaultBackgroundAlpha
-        let newBarBackgroundAlpha = SX_NavigationBar.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: progress)
+        let toBarBackgroundAlpha   = toVC?.navBarBackgroundAlpha ?? SX_NavigationBar.defaultBackgroundAlpha
+        let newBarBackgroundAlpha  = SX_NavigationBar.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: progress)
         setNeedsNavigationBarUpdate(barBackgroundAlpha: newBarBackgroundAlpha)
     }
     
@@ -226,7 +224,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
             for selector in needSwizzleSelectorArr {
                 // _updateInteractiveTransition:  =>  sx_updateInteractiveTransition:
                 let str = ("sx_" + selector.description).replacingOccurrences(of: "__", with: "_")
-                if let originalMethod = class_getInstanceMethod(self, selector),
+                if let originalMethod  = class_getInstanceMethod(self, selector),
                     let swizzledMethod = class_getInstanceMethod(self, Selector(str)) {
                     method_exchangeImplementations(originalMethod, swizzledMethod)
                 }
@@ -242,7 +240,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
         fileprivate static var displayCount = 0
         fileprivate static var popProgress:CGFloat {
             let all:CGFloat = CGFloat(60.0 * popDuration)
-            let current = min(all, CGFloat(displayCount))
+            let current     = min(all, CGFloat(displayCount))
             return current / all
         }
     }
@@ -250,7 +248,6 @@ extension UINavigationController: SXFatherAwakeProtocol {
     // =======================================================================================
     // swizzling system method: popToViewController
     // =======================================================================================
-    
     @objc func sx_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBarUpdate(titleColor: viewController.navBarTitleColor)
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
@@ -296,12 +293,10 @@ extension UINavigationController: SXFatherAwakeProtocol {
         
         popProperties.displayCount += 1
         let popProgress = popProperties.popProgress
-        // print("第\(popProperties.displayCount)次pop的进度：\(popProgress)")
-        let fromVC = coordinator.viewController(forKey: .from)
-        let toVC = coordinator.viewController(forKey: .to)
+        let fromVC      = coordinator.viewController(forKey: .from)
+        let toVC        = coordinator.viewController(forKey: .to)
         updateNavigationBar(fromVC: fromVC, toVC: toVC, progress: popProgress)
     }
-    
     
     // =======================================================================================
     // MARK: swizzling push
@@ -311,7 +306,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
         fileprivate static var displayCount = 0
         fileprivate static var pushProgress:CGFloat {
             let all:CGFloat = CGFloat(60.0 * pushDuration)
-            let current = min(all, CGFloat(displayCount))
+            let current     = min(all, CGFloat(displayCount))
             return current / all
         }
     }
@@ -342,9 +337,8 @@ extension UINavigationController: SXFatherAwakeProtocol {
         
         pushProperties.displayCount += 1
         let pushProgress = pushProperties.pushProgress
-        // print("第\(pushProperties.displayCount)次push的进度：\(pushProgress)")
-        let fromVC = coordinator.viewController(forKey: .from)
-        let toVC = coordinator.viewController(forKey: .to)
+        let fromVC       = coordinator.viewController(forKey: .from)
+        let toVC         = coordinator.viewController(forKey: .to)
         updateNavigationBar(fromVC: fromVC, toVC: toVC, progress: pushProgress)
     }
 }
@@ -369,8 +363,8 @@ extension UINavigationController: UINavigationBarDelegate {
         }
         
         let itemCount = navigationBar.items?.count ?? 0
-        let n = viewControllers.count >= itemCount ? 2 : 1
-        let popToVC = viewControllers[viewControllers.count - n]
+        let n         = viewControllers.count >= itemCount ? 2 : 1
+        let popToVC   = viewControllers[viewControllers.count - n]
         
         popToViewController(popToVC, animated: true)
         return true
@@ -404,13 +398,13 @@ extension UINavigationController: UINavigationBarDelegate {
     // swizzling system method: _updateInteractiveTransition
     @objc func sx_updateInteractiveTransition(_ percentComplete: CGFloat) {
         guard let topViewController = topViewController,
-            let coordinator       = topViewController.transitionCoordinator else {
+            let coordinator         = topViewController.transitionCoordinator else {
                 sx_updateInteractiveTransition(percentComplete)
                 return
         }
         
         let fromVC = coordinator.viewController(forKey: .from)
-        let toVC = coordinator.viewController(forKey: .to)
+        let toVC   = coordinator.viewController(forKey: .to)
         updateNavigationBar(fromVC: fromVC, toVC: toVC, progress: percentComplete)
         
         sx_updateInteractiveTransition(percentComplete)
@@ -422,19 +416,19 @@ extension UINavigationController: UINavigationBarDelegate {
 //=============================================================================
 extension UIViewController: SXAwakeProtocol {
     fileprivate struct AssociatedKeys {
-        static var pushToCurrentVCFinished: Bool = false
-        static var pushToNextVCFinished:Bool = false
+        static var pushToCurrentVCFinished: Bool    = false
+        static var pushToNextVCFinished:Bool        = false
         
-        static var navBarBackgroundImage: UIImage = UIImage()
+        static var navBarBackgroundImage: UIImage   = UIImage()
         
-        static var navBarBarTintColor: UIColor = SX_NavigationBar.defaultNavBarBarTintColor
-        static var navBarBackgroundAlpha:CGFloat = 1.0
-        static var navBarTintColor: UIColor = SX_NavigationBar.defaultNavBarTintColor
-        static var navBarTitleColor: UIColor = SX_NavigationBar.defaultNavBarTitleColor
+        static var navBarBarTintColor: UIColor      = SX_NavigationBar.defaultNavBarBarTintColor
+        static var navBarBackgroundAlpha:CGFloat    = 1.0
+        static var navBarTintColor: UIColor         = SX_NavigationBar.defaultNavBarTintColor
+        static var navBarTitleColor: UIColor        = SX_NavigationBar.defaultNavBarTitleColor
         static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
-        static var navBarShadowImageHidden: Bool = false
+        static var navBarShadowImageHidden: Bool    = false
         
-        static var customNavBar: UINavigationBar = UINavigationBar()
+        static var customNavBar: UINavigationBar    = UINavigationBar()
     }
     
     // navigationBar barTintColor can not change by currentVC before fromVC push to currentVC finished
@@ -486,8 +480,7 @@ extension UIViewController: SXAwakeProtocol {
             
             if customNavBar.isKind(of: UINavigationBar.self) {
                 
-            }
-            else {
+            } else {
                 if canUpdateNavBarBarTintColorOrBackgroundAlpha == true {
                     navigationController?.setNeedsNavigationBarUpdate(barTintColor: newValue)
                 }
@@ -509,8 +502,7 @@ extension UIViewController: SXAwakeProtocol {
             if customNavBar.isKind(of: UINavigationBar.self) {
                 //                let navBar = customNavBar as! UINavigationBar
                 //                navBar.sx_setBackgroundAlpha(alpha: newValue)
-            }
-            else {
+            } else {
                 if canUpdateNavBarBarTintColorOrBackgroundAlpha == true {
                     navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: newValue)
                 }
@@ -542,9 +534,7 @@ extension UIViewController: SXAwakeProtocol {
             if customNavBar.isKind(of: UINavigationBar.self) {
                 //                let navBar = customNavBar as! UINavigationBar
                 //                navBar.tintColor = newValue
-            }
-            else
-            {
+            } else {
                 if pushToNextVCFinished == false {
                     navigationController?.setNeedsNavigationBarUpdate(tintColor: newValue)
                 }
@@ -566,9 +556,7 @@ extension UIViewController: SXAwakeProtocol {
             if customNavBar.isKind(of: UINavigationBar.self) {
                 //                let navBar = customNavBar as! UINavigationBar
                 //                navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:newValue]
-            }
-            else
-            {
+            } else {
                 if pushToNextVCFinished == false {
                     navigationController?.setNeedsNavigationBarUpdate(titleColor: newValue)
                 }
@@ -629,8 +617,8 @@ extension UIViewController: SXAwakeProtocol {
             
             for selector in needSwizzleSelectors
             {
-                let newSelectorStr = "sx_" + selector.description
-                if let originalMethod = class_getInstanceMethod(self, selector),
+                let newSelectorStr     = "sx_" + selector.description
+                if let originalMethod  = class_getInstanceMethod(self, selector),
                     let swizzledMethod = class_getInstanceMethod(self, Selector(newSelectorStr)) {
                     method_exchangeImplementations(originalMethod, swizzledMethod)
                 }
@@ -687,7 +675,6 @@ extension UIViewController: SXAwakeProtocol {
         }
     }
 }
-
 
 class NothingToSeeHere {
     static func harmlessFunction(){

@@ -40,8 +40,8 @@ extension SX_TabBarController {
         controller.tabBarItem.title = title
         // 修改TabBar标题位置
         controller.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -3)
-        controller.tabBarItem.image = UIImage(named: norImage)
-        controller.tabBarItem.selectedImage = UIImage(named: selectedImage)
+        controller.tabBarItem.image                   = UIImage(named: norImage)
+        controller.tabBarItem.selectedImage           = UIImage(named: selectedImage)
         // 设置 NavigationController
         let nav = SX_NavigationController(rootViewController: controller)
         controller.title = title

@@ -24,7 +24,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var tabBarVC: SX_TabBarController?
 
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -130,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
+
 
 
 
