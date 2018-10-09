@@ -110,10 +110,11 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             cell.titleLabel?.text = self.titleArr[indexPath.row]
             cell.tF?.placeholder  = self.contentArr[indexPath.row]
             
+            
+            
             cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
-//                self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
-                self?.Dic.addEntries(from: [(cell.tF?.text ?? ""):"\(indexPath.row)"])
-                
+                self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
+//                self?.Dic.addEntries(from: [(cell.tF?.text ?? ""):"\(indexPath.row)"])
             })
             
             return cell
@@ -178,7 +179,6 @@ extension SX_MinePersonalController {
 extension SX_MinePersonalController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
         
     }
 }

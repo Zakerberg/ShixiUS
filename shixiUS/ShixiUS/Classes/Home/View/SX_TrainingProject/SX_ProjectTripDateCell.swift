@@ -26,14 +26,13 @@ class SX_ProjectTripDateCell: UITableViewCell {
     var dateBtn: UIButton?
     /// 更多日期
     var moreDate: UIButton?
-    
     /// 06.12
     var date: UILabel?
     /// $5252
     var price: UILabel?
     
     /// 行程
-    var tripArr: [String]? {
+    var tripArr = [String]() {
         willSet{
             if tripArr == newValue {
                 return
@@ -45,20 +44,20 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 make.right.equalToSuperview().offset(-Margin)
                 make.height.equalTo(45.FloatValue.IPAD_XValue)
             }).config({ (TRIPS) in
-                TRIPS.contentSize                    = CGSize(width: (TRIPBTNWIDTH+20)*(self.tripArr?.count ?? 0), height: 0)
+                TRIPS.contentSize                    = CGSize(width: (TRIPBTNWIDTH+20)*(tripArr.count ?? 0), height: 0)
                 TRIPS.showsVerticalScrollIndicator   = false
                 TRIPS.showsHorizontalScrollIndicator = false
                 TRIPS.bounces                        = true
                 TRIPS.isUserInteractionEnabled       = true
             })
             
-            for index in 0..<(self.tripArr?.count ?? 0) {
+            for index in 0..<(tripArr.count) {
                 self.tripBtn = UIButton(type: .custom).addhere(toSuperView: self.tripScrollView!).layout(snapKitMaker: { (make) in
                     make.height.top.equalToSuperview()
                     make.left.equalToSuperview().offset(index*(TRIPBTNWIDTH+20))
                     make.width.equalTo(TRIPBTNWIDTH.FloatValue.IPAD_XValue)
                 }).config { (TRIPBTN) in
-                    TRIPBTN.setTitle(self.tripArr?[index], for: .normal)
+                    TRIPBTN.setTitle(tripArr[index], for: .normal)
                     TRIPBTN.setTitleColor(UIColor.white, for: .selected)
                     TRIPBTN.setTitleColor(UIColor.colorWithRGB(r: 51, g: 51, b: 51), for: .normal)
                     TRIPBTN.titleLabel?.font          = UIFont.boldSystemFont(ofSize: 15)
@@ -78,7 +77,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
     }
     
     /// 出发时间Arr
-    var dateArr: [String]? {
+    var dateArr = [String]() {
         willSet {
             if dateArr == newValue {
                 return
@@ -107,7 +106,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 DATES.bounces      = true
             }
             
-            for i in 0..<(self.dateArr?.count ?? 0) {
+            for i in 0..<(dateArr.count ) {
                 self.dateBtn = UIButton(type: .custom).addhere(toSuperView: self.dateScrollView!).layout(snapKitMaker: { (make) in
                     make.height.top.equalToSuperview()
                     make.left.equalToSuperview().offset(i*(DATEBTNWIDTH+8))
@@ -140,19 +139,19 @@ class SX_ProjectTripDateCell: UITableViewCell {
                         DATE.font = UIFont.systemFont(ofSize: 12)
                         DATE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                     }
-                    DATE.text = self.dateArr?[i]
+                    DATE.text = dateArr[i]
                 }
             }
         }
     }
     
-    var priceArr :[String]? {
+    var priceArr = [String]() {
         willSet {
             if priceArr == newValue {
                 return
             }
             priceArr = newValue
-            for index in 0..<(self.dateArr?.count ?? 0) {
+            for index in 0..<(dateArr.count) {
                 /// 加 价格
                 self.price = UILabel().addhere(toSuperView: self.dateScrollView!).layout(snapKitMaker: { (make) in
                     make.top.equalTo(self.date!.snp.bottom).offset(Margin)
@@ -167,7 +166,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
                         PRICE.font = UIFont.systemFont(ofSize: 12)
                         PRICE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                     }
-                    PRICE.text = self.tripArr?[index] ?? ""
+                    PRICE.text = tripArr[index] 
                 })
             }
         }
@@ -175,11 +174,11 @@ class SX_ProjectTripDateCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        // 更多日期Btn
         
-        if self.priceArr?.count ?? 0 <= 4 {
-            self.moreDate?.isHidden = true
-        }else{
+        // 更多日期Btn
+//        if priceArr.count <= 4 {
+//            self.moreDate?.isHidden = true
+//        }else{
             self.moreDate?.isHidden = false
             self.moreDate = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
                 make.height.equalTo(65.FloatValue.IPAD_XValue)
@@ -198,7 +197,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 MORE.imageEdgeInsets = UIEdgeInsetsMake(0, MORE.titleLabel!.bounds.size.width, 0, -MORE.titleLabel!.bounds.size.width)
             })
         }
-    }
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -222,7 +221,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
 extension SX_ProjectTripDateCell {
     @objc func tripBtnClick(btn: UIButton) {
         SXLog(btn.tag)
-        for index in 0...(self.tripArr?.count ?? 0) {
+        for index in 0...(tripArr.count) {
             let button = self.viewWithTag(5000+index) as? UIButton
             if button?.tag != btn.tag {
                 button?.setBackgroundImage(#imageLiteral(resourceName: "icon_projectDetail_Gray"), for: .normal)
@@ -237,7 +236,7 @@ extension SX_ProjectTripDateCell {
     /// 出发日期 Btn
     @objc func dateBtnClick(btn: UIButton) {
         SXLog(btn.tag)
-        for index in 0...(self.dateArr?.count ?? 0) {
+        for index in 0...(dateArr.count ?? 0) {
             let button = self.viewWithTag(3000+index) as? UIButton
             if button?.tag != btn.tag {
                 button?.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor

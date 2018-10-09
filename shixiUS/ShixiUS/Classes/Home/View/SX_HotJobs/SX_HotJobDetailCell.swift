@@ -29,7 +29,7 @@ class SX_HotJobDetailCell: UITableViewCell {
     /// 薪资
     var jobSalary      : UILabel?
     /// 职位介绍
-    var jobIntroduce   : UILabel?
+   // var jobIntroduce   : UILabel?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -196,24 +196,24 @@ extension SX_HotJobDetailCell {
         
 // -----------------------------------------------------------------------------
         
-        let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(industryImage.snp.bottom).offset(10.FloatValue.IPAD_XValue)
-            make.left.equalToSuperview().offset(Margin)
-            make.right.equalToSuperview().offset(-Margin)
-            make.height.equalTo(0.5)
-        }).config({ (LINE) in
-            LINE.backgroundColor = UIColor.SX_LineColor()
-        })
+//        let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.top.equalTo(industryImage.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+//            make.left.equalToSuperview().offset(Margin)
+//            make.right.equalToSuperview().offset(-Margin)
+//            make.height.equalTo(0.5)
+//        }).config({ (LINE) in
+//            LINE.backgroundColor = UIColor.SX_LineColor()
+//        })
         
         /// 职位介绍
-        self.jobIntroduce = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
-            make.left.right.equalTo(lineView)
-        }).config({ (INTRODUCE) in
-            INTRODUCE.sizeToFit()
-            INTRODUCE.font          = UIFont.systemFont(ofSize: 10)
-            INTRODUCE.textColor     = UIColor.colorWithRGB(r: 102, g: 153, b: 0)
-            INTRODUCE.numberOfLines = 0
-        })
+//        self.jobIntroduce = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+//            make.left.right.equalTo(lineView)
+//        }).config({ (INTRODUCE) in
+//            INTRODUCE.sizeToFit()
+//            INTRODUCE.font          = UIFont.systemFont(ofSize: 10)
+//            INTRODUCE.textColor     = UIColor.colorWithRGB(r: 102, g: 153, b: 0)
+//            INTRODUCE.numberOfLines = 0
+//        })
     }
 }

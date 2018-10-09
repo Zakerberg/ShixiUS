@@ -15,12 +15,10 @@
  eute amo
  tiamo
  爱している
- I LOVE YOU
  */
 
 import UIKit
 import CoreData
-import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

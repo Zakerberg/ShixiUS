@@ -15,6 +15,7 @@
 
 import UIKit
 import SwiftyJSON
+import MBProgressHUD
 
 let hotJobDetailCellID = "hotJobDetailCellID"
 let hotJobContentDetailCellID = "hotJobContentDetailCellID"
@@ -25,7 +26,7 @@ class SX_HotJobDetailController: UIViewController {
     
     var DATA = "1）传媒，广告，新闻，文学，艺术和电影等相关专业；\n 2）具有媒体音频视频策划剪辑制作经验，具有新闻传媒写作编辑和新媒体运营和市场拓展经验 ；\n 3）熟悉国内知名内容平台和音频视频平台，具有良好网感；\n 4）对新媒体行业有热情愿意学习并积极主动全心投入工作。"
     
-    var intrStr = "我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理"
+    // var intrStr = "我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理"
     
     var collectionBtn : UIButton?
     var applyBtn: UIButton?
@@ -75,15 +76,43 @@ extension SX_HotJobDetailController {
             COLLECTION.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             COLLECTION.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
             COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
-            
             COLLECTION.rx.tap.subscribe(onNext: { (_) in
-                if self.collectionBtn?.isSelected == true {
-                    SXLog("已收藏,点击取消收藏")
-                    self.collectionBtn?.isSelected = false
-                }else {
-                    SXLog("未收藏,点击收藏职位")
-                    self.collectionBtn?.isSelected = true
-                }
+                
+                /// token & userid 获取拼接
+                let url = SX_VIPCenter_Add + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userid=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" +  "&collection_type=job" + "&id=\(self.id!)"
+                
+                SX_NetManager.requestData(type: .GET, URlString: url, finishCallBack: { (result) in
+                    do{
+                        let json = try JSON(data: result)
+                        
+                        if json["status"].int == 200 {
+                            if self.collectionBtn?.isSelected == true {
+                                SXLog("已收藏")
+                                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                hud.mode = .text
+                                hud.isSquare = true
+                                hud.label.text = "已收藏"
+                                hud.hide(animated: true, afterDelay: 1.0)
+                                self.collectionBtn?.isSelected = false
+                            }else {
+                                SXLog("取消收藏")
+                                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                hud.mode = .text
+                                hud.isSquare = true
+                                hud.label.text = "取消收藏"
+                                hud.hide(animated: true, afterDelay: 1.0)
+                                self.collectionBtn?.isSelected = true
+                            }
+                        }else{ // 登录超时
+                            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                            hud.mode = .text
+                            hud.isSquare = true
+                            hud.label.text = json["msg"].string
+                            hud.hide(animated: true, afterDelay: 2.0)
+                            self.present(SX_LoginController(), animated: true, completion: nil)
+                        }
+                    } catch{ }
+                })
                 
             }, onError: { (error) in
                 SXLog(error)
@@ -99,14 +128,13 @@ extension SX_HotJobDetailController {
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
-             
-                if (USERDEFAULTS.value(forKey: "login") as! String) == "yes" {
-                    let vc = SX_ApplyEmpListController()
-                    self.navigationController?.pushViewController(vc, animated: true)
+                
+                /// 此处判断token
+                if String(describing: USERDEFAULTS.value(forKey: "token")!) == "" {
+                    self.present(SX_LoginController(), animated: true, completion: nil)
                 }else{
-                    self.logOut()
+                    self.navigationController?.pushViewController(SX_ApplyEmpListController(), animated: true)
                 }
-            
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -156,8 +184,8 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
             cell.jobPeopleCount?.text = (model.amount ?? "10(测试)") + "人"
             cell.jobFullTime?.text    = model.duration_name ?? "全职测试"
             cell.jobInterShip?.text   = model.nature_name ?? "实习测试"
-            cell.jobSalary?.text      = model.wages ?? "面"
-            cell.jobIntroduce?.text   =       self.intrStr
+            cell.jobSalary?.text      = model.wages ?? "面议"
+            //  cell.jobIntroduce?.text   = self.intrStr
             
             return cell
         }
@@ -188,7 +216,7 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return UILabel.SX_getSpaceLabelHeight(self.intrStr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 110.FloatValue.IPAD_XValue
+            return 110.FloatValue.IPAD_XValue
         } else if indexPath.section == 1 {
             return UILabel.SX_getSpaceLabelHeight(self.dataArr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
         }

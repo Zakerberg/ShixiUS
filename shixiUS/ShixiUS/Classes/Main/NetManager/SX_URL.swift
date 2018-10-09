@@ -67,7 +67,7 @@ let SX_JobIndex               = SHIXIUS + "/job/index"
 let SX_JobDetail              = SHIXIUS + "/job/view/id" //此处后面还要加培训id
 
 /// 海外就业报名页 (get)
-let SX_Oversea_Apply          = SHIXIUS + "/job/apply"
+let SX_Oversea_Apply          = SHIXIUS + "/job/apply" 
 
 /// 海外就业报名页 (post)
 let SX_Oversea_Apply_Confirm  = SHIXIUS + "/job/apply"
@@ -79,7 +79,7 @@ let SX_Oversea_Apply_Confirm  = SHIXIUS + "/job/apply"
 let SX_VIPCenter_MyCollection = SHIXIUS + "/mycollection/index"
 
 /// 添加我的收藏 (get)
-let SX_VIPCenter_Add          = SHIXIUS + "/mycollection/add"
+let SX_VIPCenter_Add          = SHIXIUS + "/mycollection/add?"
 
 // =======================================================================================
 // MARK: - 我的 ! ! !

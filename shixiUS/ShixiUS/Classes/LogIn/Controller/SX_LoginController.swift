@@ -131,10 +131,10 @@ extension SX_LoginController {
                 SXLog("开始编辑密码....")
                 
                 if ((self?.userNameTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.passWordTF?.text?.lengthOfBytes(using: .utf8)) != 0) {
-                    self?.logInBtn?.isEnabled = true
+                    self?.logInBtn?.isEnabled       = true
                     self?.logInBtn?.backgroundColor = UIColor.SX_MainColor()
                 }else{
-                    self?.logInBtn?.isEnabled = false
+                    self?.logInBtn?.isEnabled       = false
                     self?.logInBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
                 }
             })
@@ -169,7 +169,7 @@ extension SX_LoginController {
             make.top.equalTo(self.forgetBtn!.snp.bottom).offset(40.FloatValue.IPAD_XValue)
             make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (LOGIN) in
-            LOGIN.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
+            LOGIN.backgroundColor     = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
             LOGIN.setTitle("登录", for: .normal)
             LOGIN.setTitleColor(UIColor.white, for: .normal)
             LOGIN.layer.masksToBounds = true
@@ -186,16 +186,16 @@ extension SX_LoginController {
                              "password":str2]
                 
                 if self.userNameTF?.text == "" {
-                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                    hud.mode = .text
-                    hud.isSquare = true
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
                     hud.label.text = "请输入用户名"
                     hud.hide(animated: true, afterDelay: 1.0)
                     return
                 } else if self.passWordTF?.text == "" {
-                    let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                    hud.mode = .text
-                    hud.isSquare = true
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
                     hud.label.text = "请输入密码"
                     hud.hide(animated: true, afterDelay: 1.0)
                     return
@@ -206,9 +206,9 @@ extension SX_LoginController {
                         let json = try JSON(data: result)
                         if json["status"].int == 200 {
                             SXLog("登录成功! ----> \(json["msg"])")
-                            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                            hud.mode = .text
-                            hud.isSquare = true
+                            let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                            hud.mode       = .text
+                            hud.isSquare   = true
                             hud.label.text = "登陆成功"
                             hud.hide(animated: true, afterDelay: 1.0)
                             USERDEFAULTS.set(json["data"]["token"].rawString(), forKey: "token")
@@ -217,13 +217,12 @@ extension SX_LoginController {
                             guard(self.closure != nil) else{
                                 return
                             }
-                            
                             self.closure(json["data"]["userName"].rawString()!,statusStr)
                             self.dismiss(animated: true, completion: nil)
                         }else{
-                            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                            hud.mode = .text
-                            hud.isSquare = true
+                            let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                            hud.mode       = .text
+                            hud.isSquare   = true
                             hud.label.text = json["msg"].stringValue
                             hud.hide(animated: true, afterDelay: 1.0)
                         }
