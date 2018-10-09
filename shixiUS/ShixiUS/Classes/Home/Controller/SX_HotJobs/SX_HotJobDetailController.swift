@@ -88,17 +88,17 @@ extension SX_HotJobDetailController {
                         if json["status"].int == 200 {
                             if self.collectionBtn?.isSelected == true {
                                 SXLog("已收藏")
-                                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                hud.mode = .text
-                                hud.isSquare = true
+                                let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                hud.mode       = .text
+                                hud.isSquare   = true
                                 hud.label.text = "已收藏"
                                 hud.hide(animated: true, afterDelay: 1.0)
                                 self.collectionBtn?.isSelected = false
                             }else {
                                 SXLog("取消收藏")
-                                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                hud.mode = .text
-                                hud.isSquare = true
+                                let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                hud.mode       = .text
+                                hud.isSquare   = true
                                 hud.label.text = "取消收藏"
                                 hud.hide(animated: true, afterDelay: 1.0)
                                 self.collectionBtn?.isSelected = true
@@ -133,7 +133,9 @@ extension SX_HotJobDetailController {
                 if String(describing: USERDEFAULTS.value(forKey: "token")!) == "" {
                     self.present(SX_LoginController(), animated: true, completion: nil)
                 }else{
-                    self.navigationController?.pushViewController(SX_ApplyEmpListController(), animated: true)
+                    let vc   = SX_ApplyEmpListController()
+                    vc.jobid = self.id
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             }, onError: { (error) in
                 SXLog(error)
@@ -196,10 +198,10 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
         let model = detailModels[indexPath.row]
         
         if indexPath.section == 1 {
-            cell.titleLabel?.text = "工作职责"
+            cell.titleLabel?.text   = "工作职责"
             cell.contentLabel?.text = model.duty ?? self.dataArr
         }else if indexPath.section == 2{
-            cell.titleLabel?.text = "应聘要求"
+            cell.titleLabel?.text   = "应聘要求"
             cell.contentLabel?.text = model.requirement ?? self.DATA
         }
         
@@ -227,7 +229,3 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
         return 5.FloatValue.IPAD_XValue
     }
 }
-
-
-
-

@@ -17,7 +17,7 @@ import UIKit
 class SX_ApplySucceedController: UIViewController {
     
     /// 申请序号
-    var ApplyNum = UILabel()
+    var ApplyNum:String?
     var str = "实习网就业顾问 将在俩个工作日内联系您 (因为时差问题请谅解)"
     
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ extension SX_ApplySucceedController {
             make.height.equalTo(15)
             }.config { (NUMBER) in
                 NUMBER.sizeToFit()
-                NUMBER.text = "申请序号: " + self.ApplyNum.text!
+                NUMBER.text = "申请序号: " + self.ApplyNum!
                 NUMBER.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                 NUMBER.font = UIFont.systemFont(ofSize: 14)
         }
