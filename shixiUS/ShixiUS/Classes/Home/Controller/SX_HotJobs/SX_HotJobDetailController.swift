@@ -77,43 +77,49 @@ extension SX_HotJobDetailController {
             COLLECTION.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
             COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
             COLLECTION.rx.tap.subscribe(onNext: { (_) in
+              
                 
-                /// token & userid 获取拼接
-                let url = SX_VIPCenter_Add + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userid=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" +  "&collection_type=job" + "&id=\(self.id!)"
-                
-                SX_NetManager.requestData(type: .GET, URlString: url, finishCallBack: { (result) in
-                    do{
-                        let json = try JSON(data: result)
-                        
-                        if json["status"].int == 200 {
-                            if self.collectionBtn?.isSelected == true {
-                                SXLog("已收藏")
+                // 判断登陆
+                if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
+                    let vc = SX_LoginController()
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    /// token & userid 获取拼接
+                    let url = SX_VIPCenter_Add + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userid=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" +  "&collection_type=job" + "&id=\(self.id!)"
+                    
+                    SX_NetManager.requestData(type: .GET, URlString: url, finishCallBack: { (result) in
+                        do{
+                            let json = try JSON(data: result)
+                            
+                            if json["status"].int == 200 {
+                                if self.collectionBtn?.isSelected == true {
+                                    SXLog("已收藏")
+                                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                    hud.mode       = .text
+                                    hud.isSquare   = true
+                                    hud.label.text = "已收藏"
+                                    hud.hide(animated: true, afterDelay: 1.0)
+                                    self.collectionBtn?.isSelected = false
+                                }else {
+                                    SXLog("取消收藏")
+                                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                    hud.mode       = .text
+                                    hud.isSquare   = true
+                                    hud.label.text = "取消收藏"
+                                    hud.hide(animated: true, afterDelay: 1.0)
+                                    self.collectionBtn?.isSelected = true
+                                }
+                            }else{ // 登录超时
                                 let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
                                 hud.mode       = .text
                                 hud.isSquare   = true
-                                hud.label.text = "已收藏"
-                                hud.hide(animated: true, afterDelay: 1.0)
-                                self.collectionBtn?.isSelected = false
-                            }else {
-                                SXLog("取消收藏")
-                                let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                hud.mode       = .text
-                                hud.isSquare   = true
-                                hud.label.text = "取消收藏"
-                                hud.hide(animated: true, afterDelay: 1.0)
-                                self.collectionBtn?.isSelected = true
+                                hud.label.text = json["msg"].string
+                                hud.hide(animated: true, afterDelay: 2.0)
+                                self.present(SX_LoginController(), animated: true, completion: nil)
                             }
-                        }else{ // 登录超时
-                            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                            hud.mode = .text
-                            hud.isSquare = true
-                            hud.label.text = json["msg"].string
-                            hud.hide(animated: true, afterDelay: 2.0)
-                            self.present(SX_LoginController(), animated: true, completion: nil)
-                        }
-                    } catch{ }
-                })
-                
+                        } catch{ }
+                    })
+                }
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)

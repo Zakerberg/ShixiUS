@@ -213,7 +213,8 @@ extension SX_LoginController {
                             hud.hide(animated: true, afterDelay: 1.0)
                             USERDEFAULTS.set(json["data"]["token"].rawString(), forKey: "token")
                             USERDEFAULTS.set(json["data"]["userId"].rawString(), forKey: "userId")
-                            let statusStr = "1"
+                            USERDEFAULTS.set("yes", forKey: "login")
+                            let statusStr  = "1"
                             guard(self.closure != nil) else{
                                 return
                             }
@@ -250,7 +251,6 @@ extension SX_LoginController {
                 SXLog("注册 ++++ ")
                 let vc = SX_RegisterContrller()
                 self.present(vc, animated: true, completion: nil)
-                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)

@@ -180,7 +180,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                                     self.statusStr = "0"
                                     USERDEFAULTS.set("", forKey: "token")
                                     USERDEFAULTS.set("", forKey: "userId")
-                                    
+                                    USERDEFAULTS.set("no", forKey: "login")
                                     self.titleNameLabel?.isHidden = true
                                     self.logInBtn?.isHidden = false
                                     self.quitBtn?.isHidden  = true

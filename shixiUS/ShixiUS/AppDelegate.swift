@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = SX_TabBarController()
 //        }
         setNavBarAppearence()
+        USERDEFAULTS.set("no", forKey: "login")
         self.window?.makeKeyAndVisible()
         
         return true
