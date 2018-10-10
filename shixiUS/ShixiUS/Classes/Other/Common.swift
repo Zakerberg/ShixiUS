@@ -192,16 +192,6 @@
         result.deallocate(capacity: digestLen)
         return String(format: hash as String) as NSString
     }
-    
-    //    class func jsonStringToDictionary (jsonstr: NSString) -> NSDictionary {
-    //        do{
-    //            let json = try JSONSerialization.jsonObject(with: jsonstr.data(using: String.Encoding.utf8.rawValue)!, options: .allowFragments)
-    //            return json as! NSDictionary
-    //        }catch{ }
-    //
-    //        let str = NSDictionary()
-    //        return str
-    //    }
  }
  
  extension Int {
@@ -440,9 +430,6 @@
         let emailTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailTest.evaluate(with: self)
     }
-    
-    
-    
  }
  
  // ==============================================================================
