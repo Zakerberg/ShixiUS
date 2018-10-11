@@ -83,7 +83,7 @@ extension SX_HotJobDetailController {
                     self.present(vc, animated: true, completion: nil)
                 }else{
                     /// token & userid 获取拼接
-                    let url = SX_VIPCenter_Add + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userid=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" +  "&collection_type=job" + "&id=\(self.id!)"
+                    let url = SX_VIPCenter_Add + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" +  "&collection_type=job" + "&id=\(self.id!)"
                     
                     SX_NetManager.requestData(type: .GET, URlString: url, finishCallBack: { (result) in
                         do{

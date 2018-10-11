@@ -15,6 +15,8 @@
  */
 
 import UIKit
+import MBProgressHUD
+import SwiftyJSON
 
 let collectionEmpCellID = "collectionEmpCellID"
 
@@ -34,6 +36,7 @@ class SX_CollextionEmploymentJobsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,6 +52,31 @@ extension SX_CollextionEmploymentJobsController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
+    }
+    
+    func fetchData() {
+        let url = SX_VIPCenter_MyCollection + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&type=1"
+        
+        SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
+            do {
+                let json = try JSON(data: result)
+                if json["status"].int == 200 {
+                    SXLog("获取就业岗位申请成功!")
+                    
+                    
+                    
+
+                    
+                    
+                }else{
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
+                }
+            }catch { }
+        }
     }
 }
 
@@ -68,12 +96,12 @@ extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = SX_EmploymentJobsCell(style: .default, reuseIdentifier: collectionEmpCellID)
-        cell.backgroundColor           = UIColor.white
-        cell.selectionStyle            = .none
-        cell.employmentTitle?.text     = "美国金融实习岗位-信托和过桥基金业务"
-        cell.employmentDate?.text      = "2018.03.03"
-        cell.employmentAddress?.text   = "美国/纽约"
-        cell.employmentNature?.text    = "正式"
+        cell.backgroundColor             = UIColor.white
+        cell.selectionStyle              = .none
+        cell.employmentTitle?.text       = "美国金融实习岗位-信托和过桥基金业务"
+        cell.employmentDate?.text        = "2018.03.03"
+        cell.employmentAddress?.text     = "美国/纽约"
+        cell.employmentNature?.text      = "正式"
         
         cell.employmentDetail?.isHidden  = true
         cell.employmentPay?.isHidden     = true

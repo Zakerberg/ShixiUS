@@ -70,6 +70,9 @@ extension SX_MinePersonalController {
                 let json = try JSON(data: result)
                 
                 
+                
+                
+                
             }catch { }
         }
     }

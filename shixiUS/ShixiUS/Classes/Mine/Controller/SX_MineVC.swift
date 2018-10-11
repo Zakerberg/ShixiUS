@@ -25,8 +25,8 @@ let mineIconCellID = "mineIconCellID"
 
 class SX_MineVC: UIViewController {
     
-    var mineImageArr = [["te"], ["MyApply", "MyCollection"], ["PayRecord", "Personal"], ["FixPassword"]]
-    var mineTitleArr = [["st"], ["我的申请", "我的收藏"], ["付费记录", "个人信息"], ["修改密码"]]
+    var mineImageArr = [["te"], ["MyCollection","PayRecord"], ["Personal","FixPassword"]]
+    var mineTitleArr = [["st"], ["我的收藏","付费记录"], ["个人信息","修改密码"]]
     var quitBtn: UIButton?
     
     var titleNameLabel: UILabel?
@@ -70,13 +70,14 @@ extension SX_MineVC {
 extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return self.mineImageArr.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 || section == 3 {
             return 1
         }
+        
         return 2
     }
     
@@ -148,7 +149,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        if section == 3 {
+        if section == 2 {
             let view = UIView()
             
             self.quitBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
@@ -217,37 +218,33 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                self.hidesBottomBarWhenPushed = true
-                let vc = SX_MyApplyController()
-                self.navigationController?.pushViewController(vc, animated: true)
-                self.hidesBottomBarWhenPushed = false
-            }else {
                 SXLog("进入我的收藏Conroller")
                 self.hidesBottomBarWhenPushed = true
                 let vc = SX_MineMyCollectionController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 self.hidesBottomBarWhenPushed = false
-            }
-        } else if indexPath.section == 2 {
-            if indexPath.row == 0 {
+            }else {
                 SXLog("进入付款记录Conroller")
                 self.hidesBottomBarWhenPushed = true
                 let vc = SX_PaymentRecordController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 self.hidesBottomBarWhenPushed = false
-            }else {
+                
+            }
+        } else if indexPath.section == 2 {
+            if indexPath.row == 0 {
                 SXLog("进入个人信息Conroller")
                 self.hidesBottomBarWhenPushed = true
                 let vc = SX_MinePersonalController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 self.hidesBottomBarWhenPushed = false
+            }else {
+                SXLog("进入修改密码Conroller")
+                self.hidesBottomBarWhenPushed = true
+                let vc = SX_MineFixPasswordController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                self.hidesBottomBarWhenPushed = false
             }
-        } else {
-            SXLog("进入修改密码Conroller")
-            self.hidesBottomBarWhenPushed = true
-            let vc = SX_MineFixPasswordController()
-            self.navigationController?.pushViewController(vc, animated: true)
-            self.hidesBottomBarWhenPushed = false
         }
     }
 }
@@ -344,7 +341,7 @@ extension SX_MineVC {
             imageData = UIImageJPEGRepresentation(img, 1.0)!
         }
         
-        //        let iconStr = NSString(data: imageData, encoding: String.Encoding.utf8.rawValue)
+        //  let iconStr = NSString(data: imageData, encoding: String.Encoding.utf8.rawValue)
         let dic = ["image":imageData]
         
     }

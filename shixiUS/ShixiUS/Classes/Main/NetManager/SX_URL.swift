@@ -76,7 +76,7 @@ let SX_Oversea_Apply_Confirm  = SHIXIUS + "/job/apply"
 // MARK: - 会员中心 ! ! !
 // =======================================================================================
 /// 我的收藏 (get)
-let SX_VIPCenter_MyCollection = SHIXIUS + "/mycollection/index"
+let SX_VIPCenter_MyCollection = SHIXIUS + "/mycollection/index?"
 
 /// 添加我的收藏 (get)
 let SX_VIPCenter_Add          = SHIXIUS + "/mycollection/add?"

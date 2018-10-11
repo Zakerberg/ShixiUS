@@ -13,6 +13,7 @@
 
 import UIKit
 import SwiftyJSON
+import MBProgressHUD
 
 let employCellID = "employCellID"
 
@@ -57,17 +58,7 @@ extension SX_MineEmploymentJobsController {
     }
     
     func fetchData() {
-        
-//        if <#condition#> {
-//            <#code#>
-//        }
-        
-//        SX_NetManager.requestData(type: .GET, URlString: SX_VIPCenter_MyCollection) { (result) in
-//            do {
-//
-//            }catch { }
-//        }
-        
+
     }
 }
 
