@@ -22,7 +22,8 @@ let collectionEmpCellID = "collectionEmpCellID"
 
 class SX_CollextionEmploymentJobsController: UIViewController {
     
-    var dataArr = [Int](repeating: 0, count: 6)
+    var noDataView: SX_NoDataView?
+    var collectionJobArr  = [JobCollectionListModel]()
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
@@ -52,22 +53,28 @@ extension SX_CollextionEmploymentJobsController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
+        
+        self.noDataView = SX_NoDataView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-40.FloatValue-kNavH)).addhere(toSuperView: table)
+        self.noDataView?.isHidden = true
     }
     
     func fetchData() {
         let url = SX_VIPCenter_MyCollection + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&type=1"
-        
         SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
             do {
                 let json = try JSON(data: result)
                 if json["status"].int == 200 {
                     SXLog("获取就业岗位申请成功!")
-                    
-                    
-                    
-
-                    
-                    
+                    for item in json["data"]["lists"].array ?? [] {
+                        let collectionJobModel = JobCollectionListModel(jsonData: item)
+                        self.collectionJobArr.append(collectionJobModel)
+                    }
+                    self.table.reloadData()
+                    if json["data"]["list"].count == 0 {
+                        self.noDataView?.isHidden = false
+                    }else{
+                        self.noDataView?.isHidden = true
+                    }
                 }else{
                     let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
                     hud.mode       = .text
@@ -86,7 +93,7 @@ extension SX_CollextionEmploymentJobsController {
 extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataArr.count
+        return  self.collectionJobArr.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,10 +105,13 @@ extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableVie
         let cell = SX_EmploymentJobsCell(style: .default, reuseIdentifier: collectionEmpCellID)
         cell.backgroundColor             = UIColor.white
         cell.selectionStyle              = .none
-        cell.employmentTitle?.text       = "美国金融实习岗位-信托和过桥基金业务"
-        cell.employmentDate?.text        = "2018.03.03"
-        cell.employmentAddress?.text     = "美国/纽约"
-        cell.employmentNature?.text      = "正式"
+        
+        let model                        = collectionJobArr[indexPath.row]
+        cell.employmentTitle?.text       = model.title ?? "测试岗位信息"
+        
+        //cell.employmentDate?.text        =
+        cell.employmentAddress?.text     = model.address
+        cell.employmentNature?.text      = model.duration_name
         
         cell.employmentDetail?.isHidden  = true
         cell.employmentPay?.isHidden     = true

@@ -20,7 +20,7 @@ import UIKit
 import SwiftyJSON
 import MBProgressHUD
 
-let mineCellID = "mineCellID"
+let mineCellID     = "mineCellID"
 let mineIconCellID = "mineIconCellID"
 
 class SX_MineVC: UIViewController {
@@ -90,8 +90,8 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             cell.nameTitle?.isHidden    = true
             cell.headPortraitImageView?.addGestureRecognizer(tap)
             self.headPortraitImageView  = cell.headPortraitImageView
-            self.titleNameLabel = cell.nameTitle
-            self.logInBtn = cell.logInButton
+            self.titleNameLabel         = cell.nameTitle
+            self.logInBtn               = cell.logInButton
             
             self.logInBtn?.rx.tap.subscribe(onNext: { (_) in
                 let vc = SX_LoginController()
@@ -105,9 +105,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                         self.titleNameLabel?.text     = name
                     }
                 })
-                
                 self.present(vc, animated: true, completion: nil)
-                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -198,7 +196,6 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                             }catch { }
                         })
                     })
-                    
                     alertController.addAction(cancelAction)
                     alertController.addAction(okAction)
                     self.present(alertController, animated: true, completion: nil)
@@ -218,32 +215,51 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                SXLog("进入我的收藏Conroller")
-                self.hidesBottomBarWhenPushed = true
-                let vc = SX_MineMyCollectionController()
-                self.navigationController?.pushViewController(vc, animated: true)
-                self.hidesBottomBarWhenPushed = false
+                if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
+                    let vc = SX_LoginController()
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    SXLog("进入我的收藏Conroller")
+                    self.hidesBottomBarWhenPushed = true
+                    let vc = SX_MineMyCollectionController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.hidesBottomBarWhenPushed = false
+                }
             }else {
-                SXLog("进入付款记录Conroller")
-                self.hidesBottomBarWhenPushed = true
-                let vc = SX_PaymentRecordController()
-                self.navigationController?.pushViewController(vc, animated: true)
-                self.hidesBottomBarWhenPushed = false
-                
+                if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
+                    let vc = SX_LoginController()
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    SXLog("进入付款记录Conroller")
+                    self.hidesBottomBarWhenPushed = true
+                    let vc = SX_PaymentRecordController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.hidesBottomBarWhenPushed = false
+                }
             }
         } else if indexPath.section == 2 {
             if indexPath.row == 0 {
-                SXLog("进入个人信息Conroller")
-                self.hidesBottomBarWhenPushed = true
-                let vc = SX_MinePersonalController()
-                self.navigationController?.pushViewController(vc, animated: true)
-                self.hidesBottomBarWhenPushed = false
+                if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
+                    let vc = SX_LoginController()
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    SXLog("进入个人信息Conroller")
+                    self.hidesBottomBarWhenPushed = true
+                    let vc = SX_MinePersonalController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.hidesBottomBarWhenPushed = false
+                }
             }else {
-                SXLog("进入修改密码Conroller")
-                self.hidesBottomBarWhenPushed = true
-                let vc = SX_MineFixPasswordController()
-                self.navigationController?.pushViewController(vc, animated: true)
-                self.hidesBottomBarWhenPushed = false
+                if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
+                    let vc = SX_LoginController()
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    SXLog("进入修改密码Conroller")
+                    self.hidesBottomBarWhenPushed = true
+                    let vc = SX_MineFixPasswordController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.hidesBottomBarWhenPushed = false
+                }
             }
         }
     }
@@ -343,7 +359,6 @@ extension SX_MineVC {
         
         //  let iconStr = NSString(data: imageData, encoding: String.Encoding.utf8.rawValue)
         let dic = ["image":imageData]
-        
     }
 }
 

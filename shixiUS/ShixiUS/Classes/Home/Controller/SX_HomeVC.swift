@@ -1,35 +1,35 @@
  //
-//  SX_HomeVC.swift
-//  ShixiUS
-//
-//  Created by Michael 柏 on 6/19/18.
-//  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  首页
-
-/*
- 我想这世上,
- 许多事早已命中注定.
- 像江海不可平,
- 像走进你心里的路,
- 遥遥不可行.
- */
-
-import UIKit
-import RxCocoa
-import RxSwift
-import SwiftyJSON
-
-private let identifier:String = "hotJobsCell"
-private let shixiTrainingCellID = "shixiTrainingCellID"
-
-/// 实训项目视图
-struct InterShipPreview {
+ //  SX_HomeVC.swift
+ //  ShixiUS
+ //
+ //  Created by Michael 柏 on 6/19/18.
+ //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
+ //  首页
+ 
+ /*
+  我想这世上,
+  许多事早已命中注定.
+  像江海不可平,
+  像走进你心里的路,
+  遥遥不可行.
+  */
+ 
+ import UIKit
+ import RxCocoa
+ import RxSwift
+ import SwiftyJSON
+ 
+ private let identifier:String = "hotJobsCell"
+ private let shixiTrainingCellID = "shixiTrainingCellID"
+ 
+ /// 实训项目视图
+ struct InterShipPreview {
     var title:[String]
     var imgs:[String]
     var prices:[String]
-}
-
-class SX_HomeVC: UIViewController {
+ }
+ 
+ class SX_HomeVC: UIViewController {
     
     /// ad
     var adModel:SX_HomeADModel?
@@ -40,24 +40,21 @@ class SX_HomeVC: UIViewController {
     var adTypes  = [String]()
     /// ad
     
-    var homeModel: SX_HomeModel?
-    var trainingModel: SX_HomeTrainingModel?
-    var jobsModel: SX_HomeJobsModel?
-    var trainModel: SX_HomeTrainModel?
+    //    var homeModel: SX_HomeModel?
+    //    var trainingModel: SX_HomeTrainingModel?
+    //    var jobsModel: SX_HomeJobsModel?
+    //    var trainModel: SX_HomeTrainModel?
     
     /// jobs
     var jobsArr      = JSON()
-    
     /// training
     var trainingArr  = [SX_HomeTrainingModel]()
-    
     /// train
     var trainArr     = [SX_HomeTrainModel]()
-    
     var loadingView: SX_LoadingView?
     
     private lazy var homeButton: UIButton = {
-        let button = UIButton()
+        let button                        = UIButton()
         button.imageView?.frame           = CGRect(x: 20, y: 20, width: 55, height: 55)
         button.imageView?.center          = CGPoint(x: SCREEN_WIDTH/3, y: 40)
         button.titleLabel?.frame          = CGRect(x: 0, y: 50, width: button.frame.size.width, height: 50)
@@ -100,12 +97,12 @@ class SX_HomeVC: UIViewController {
         homeTableView.delegate = nil
         print("deinit-----")
     }
-}
-
-// ===========================================================================================
-// MARK: - setUI
-// ===========================================================================================
-extension SX_HomeVC {
+ }
+ 
+ // ===========================================================================================
+ // MARK: - setUI
+ // ===========================================================================================
+ extension SX_HomeVC {
     func setUI() {
         view.backgroundColor = UIColor.white
         
@@ -169,12 +166,12 @@ extension SX_HomeVC {
             } catch{ }
         })
     }
-}
-
-// ==================================================================================================
-// MARK: - Other Method
-// ===================================================================================================
-extension SX_HomeVC {
+ }
+ 
+ // ==================================================================================================
+ // MARK: - Other Method
+ // ===================================================================================================
+ extension SX_HomeVC {
     
     /// Alert
     func showMessage(_ text:String) {
@@ -220,12 +217,12 @@ extension SX_HomeVC {
     func hideLoadingView() {
         self.loadingView?.removeFromSuperview()
     }
-}
-
-// =====================================================================================================
-// MARK: - UIScrollerViewDelagate
-// =====================================================================================================
-extension SX_HomeVC {
+ }
+ 
+ // =====================================================================================================
+ // MARK: - UIScrollerViewDelagate
+ // =====================================================================================================
+ extension SX_HomeVC {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
@@ -252,12 +249,12 @@ extension SX_HomeVC {
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() ?? image
         return newImage
     }
-}
-
-// =======================================================================================
-// MARK: - UITableViewDelegate
-// =======================================================================================
-extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
+ }
+ 
+ // =======================================================================================
+ // MARK: - UITableViewDelegate
+ // =======================================================================================
+ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -292,28 +289,28 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 1 {
-            let cell = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
-            cell.selectionStyle = .none
+            let cell                = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
+            cell.selectionStyle     = .none
             
-            let model = jobsArr[indexPath.row]
+            let model               = jobsArr[indexPath.row]
             
-            cell.jobsLabel?.text = model["name"].string
+            cell.jobsLabel?.text    = model["name"].string
             cell.insduryLabel?.text = model["trade"].string
             cell.addressLabel?.text = model["address"].string
-            cell.eduLabel?.text = model["nature"].string
+            cell.eduLabel?.text     = model["nature"].string
             
             return cell
         }
         
         let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
-        shixiTrainingCell.selectionStyle = .none
+        shixiTrainingCell.selectionStyle       = .none
         if indexPath.section == 2 { // 2 培训认证
             shixiTrainingCell.titleLabel?.text = "培训认证"
-            shixiTrainingCell.trainModels = self.trainArr
+            shixiTrainingCell.trainModels      = self.trainArr
             
         }else{ /// 0 热门实训
             shixiTrainingCell.titleLabel?.text = "热门实训"
-            shixiTrainingCell.trainingModels = self.trainingArr
+            shixiTrainingCell.trainingModels   = self.trainingArr
         }
         
         shixiTrainingCell.delegate = self
@@ -431,12 +428,12 @@ extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
         vc.id  = model["id"].string
         self.navigationController?.pushViewController(vc, animated: true)
     }
-}
-
-// ================================================================================================
-// MARK: - SXCycleScrollerViewDelegate
-// ================================================================================================
-extension SX_HomeVC: SXCycleScrollerViewDelegate {
+ }
+ 
+ // ================================================================================================
+ // MARK: - SXCycleScrollerViewDelegate
+ // ================================================================================================
+ extension SX_HomeVC: SXCycleScrollerViewDelegate {
     
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
         
@@ -454,15 +451,15 @@ extension SX_HomeVC: SXCycleScrollerViewDelegate {
             SXLog("网页")
         }
     }
-}
-
-// ================================================================================================
-// MARK: - SX_TrainingCellDelegate
-// ================================================================================================
-extension SX_HomeVC: SX_TrainingCellDelegate {
+ }
+ 
+ // ================================================================================================
+ // MARK: - SX_TrainingCellDelegate
+ // ================================================================================================
+ extension SX_HomeVC: SX_TrainingCellDelegate {
     func clickCell(item: String) {
         let vc = SX_ProjectDetailController()
         vc.id = item
         self.navigationController?.pushViewController(vc, animated: true)
     }
-}
+ }

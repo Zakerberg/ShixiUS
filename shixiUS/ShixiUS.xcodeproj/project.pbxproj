@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F24381F419BB7C6CDD0046C /* Pods_ShixiUSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553BE065E47EC83B4E490D97 /* Pods_ShixiUSUITests.framework */; };
+		3207DCCA216F2160003828F8 /* SX_NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3207DCC9216F2160003828F8 /* SX_NoDataView.swift */; };
 		322FC80221461059005347E8 /* SX_MoreHotJobController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC80121461059005347E8 /* SX_MoreHotJobController.swift */; };
 		322FC804214613BA005347E8 /* SX_HotJobDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC803214613BA005347E8 /* SX_HotJobDetailController.swift */; };
 		322FC80A21464164005347E8 /* SX_HotJobDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC80921464164005347E8 /* SX_HotJobDetailCell.swift */; };
@@ -150,6 +151,7 @@
 		1190C349599AFF1C16E19BBE /* Pods-ShixiUS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShixiUS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShixiUS/Pods-ShixiUS.release.xcconfig"; sourceTree = "<group>"; };
 		1F4AED058C320E917EF0EB6C /* Pods_ShixiUSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		274957FB9689C296AF00F284 /* Pods_ShixiUS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShixiUS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3207DCC9216F2160003828F8 /* SX_NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_NoDataView.swift; sourceTree = "<group>"; };
 		322FC80121461059005347E8 /* SX_MoreHotJobController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MoreHotJobController.swift; sourceTree = "<group>"; };
 		322FC803214613BA005347E8 /* SX_HotJobDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobDetailController.swift; sourceTree = "<group>"; };
 		322FC80921464164005347E8 /* SX_HotJobDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_HotJobDetailCell.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */,
 				4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */,
 				32AC6B10215E28F2000355A4 /* SX_BaseAlertController.swift */,
+				3207DCC9216F2160003828F8 /* SX_NoDataView.swift */,
 			);
 			path = SX_Base;
 			sourceTree = "<group>";
@@ -1165,6 +1168,7 @@
 				45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */,
 				45454BE321198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift in Sources */,
 				32B41D7721609CE4000781A6 /* SX_Regex.swift in Sources */,
+				3207DCCA216F2160003828F8 /* SX_NoDataView.swift in Sources */,
 				45E57406212E9847007A4DCD /* SX_UnderlineBtn.swift in Sources */,
 				322FC80221461059005347E8 /* SX_MoreHotJobController.swift in Sources */,
 				45341D3020F48C240099CDDD /* SX_LoadingView.swift in Sources */,
