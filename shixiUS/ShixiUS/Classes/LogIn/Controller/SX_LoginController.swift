@@ -215,7 +215,6 @@ extension SX_LoginController {
                             hud.isSquare   = true
                             hud.label.text = json["msg"].stringValue
                             hud.hide(animated: true, afterDelay: 1.0)
-                            self.dismiss(animated: true, completion: nil)
                         }
                     } catch{ }
                 })

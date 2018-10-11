@@ -60,6 +60,7 @@ extension SX_CollextionEmploymentJobsController {
     
     func fetchData() {
         let url = SX_VIPCenter_MyCollection + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&type=1"
+        
         SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
             do {
                 let json = try JSON(data: result)
@@ -70,7 +71,7 @@ extension SX_CollextionEmploymentJobsController {
                         self.collectionJobArr.append(collectionJobModel)
                     }
                     self.table.reloadData()
-                    if json["data"]["list"].count == 0 {
+                    if json["data"]["lists"].count == 0 {
                         self.noDataView?.isHidden = false
                     }else{
                         self.noDataView?.isHidden = true
@@ -110,8 +111,8 @@ extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableVie
         cell.employmentTitle?.text       = model.title ?? "测试岗位信息"
         
         //cell.employmentDate?.text        =
-        cell.employmentAddress?.text     = model.address
-        cell.employmentNature?.text      = model.duration_name
+        cell.employmentAddress?.text     = model.address ?? "美国/纽约"
+        cell.employmentNature?.text      = model.duration_name ?? "全职(测试)"
         
         cell.employmentDetail?.isHidden  = true
         cell.employmentPay?.isHidden     = true
@@ -133,7 +134,6 @@ extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableVie
         }, onCompleted: nil, onDisposed: nil)
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

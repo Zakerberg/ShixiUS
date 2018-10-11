@@ -741,23 +741,3 @@ struct TrainingCollectionListModel {
         time            = jsonData["time"].string
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
