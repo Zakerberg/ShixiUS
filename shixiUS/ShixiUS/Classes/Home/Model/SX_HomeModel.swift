@@ -665,9 +665,11 @@ struct VIPCenterTrainModel {
     }
 }
 
-// =======================================================================================
-// MARK: -  我的界面 - 我的收藏
-// =======================================================================================
+// ===================================================================++++++++++++++++++++++++++++
+// MARK: -  我的界面
+// ===================================================================++++++++++++++++++++++++++++
+
+/// 我的收藏
 struct SX_MyCollectionJobModel {
     
     var lists: JobCollectionListModel
@@ -741,3 +743,21 @@ struct TrainingCollectionListModel {
         time            = jsonData["time"].string
     }
 }
+
+/// 付款记录
+struct SX_MyOrdelRecordModel {
+    
+    var productid:String?
+    var title:String?
+    var time:String?
+    var price:String?
+    
+    init(jsonData: JSON) {
+        productid      = jsonData["productid"].string
+        title          = jsonData["title"].string
+        time           = jsonData["time"].string
+        price          = jsonData["price"].string
+    }
+}
+
+/// 

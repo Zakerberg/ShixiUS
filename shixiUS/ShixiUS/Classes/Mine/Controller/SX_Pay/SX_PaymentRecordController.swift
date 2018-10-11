@@ -54,9 +54,9 @@ class SX_PaymentRecordController: UIViewController {
     }
 }
 
-// ======================================================================================================================
+// =====================================================================================
 // MARK: - Other Method 
-// ======================================================================================================================
+// =====================================================================================
 extension SX_PaymentRecordController {
     
     func setUI() {
@@ -95,18 +95,18 @@ extension SX_PaymentRecordController {
     }
 }
 
-// ======================================================================================================================
+// =====================================================================================
 // MARK: - SXPageTitleViewDelegate
-// ======================================================================================================================
+// =====================================================================================
 extension SX_PaymentRecordController: SXPageTitleViewDelegate {
     func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
         self.pageContentView.setPageContentViewCurrentIndex(currentIndex: selectedIndex)
     }
 }
 
-// ======================================================================================================================
+// =====================================================================================
 // MARK: - SXPageContentViewDelegate
-// ======================================================================================================================
+// =====================================================================================
 extension SX_PaymentRecordController : SXPageContentViewDelegate {
     func pageContentViewScroll(progress: CGFloat, originalIndex: Int, targetIndex: Int) {
         self.pageTitleView.setPageTitleView(progress: progress, originalIndex: originalIndex, targetIndex: targetIndex)
