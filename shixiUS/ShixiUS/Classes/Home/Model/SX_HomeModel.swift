@@ -258,7 +258,7 @@ struct TrainingDetailScheduleModel {
 // ==============================================================================================
 // MARK: - 实训报名页 /training/apply
 // ==============================================================================================
-struct SX_TrainingApplyModel {
+struct SX_TrainingSignUpModel {
     
     var uid:String?
     var training:String?
@@ -603,7 +603,7 @@ struct OverseaApplyCommit {
 }
 
 // ===================================================================++++++++++++++++++++++++++++
-// MARK: - 会员中心 ! ! !
+// MARK: - 我的申请 ! ! !
 // ===================================================================++++++++++++++++++++++++++++
 struct VIPCenterModel {
     
@@ -663,6 +663,55 @@ struct VIPCenterTrainModel {
         title           = jsonData["title"].string
         time            = jsonData["time"].string
     }
+}
+
+/// 我的申请 ---> (就业岗位)
+struct SX_JobApplyModel {
+    
+    var id:String?
+    var title:String?
+    var number:String?
+    var address:String?
+    var natureid:String?
+    var nature:String?
+    var time:String?
+    var status:String?
+    var statusCn:String?
+    var button:String?
+    
+    init(jsonData: JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        number          = jsonData["number"].string
+        address         = jsonData["address"].string
+        natureid        = jsonData["natureid"].string
+        nature          = jsonData["nature"].string
+        time            = jsonData["time"].string
+        status          = jsonData["status"].string
+        statusCn        = jsonData["statusCn"].sting
+        button          = jsonData["button"].string
+        
+        
+    }
+}
+
+/// 我的申请 ---> (实训项目)
+struct SX_TrainingApplyModel {
+    
+    
+    
+    
+    
+}
+
+/// 我的申请 ---> (培训认证)
+struct SX_TrainApplyModel {
+    
+    
+    
+    
+    
+    
 }
 
 // ===================================================================++++++++++++++++++++++++++++

@@ -25,7 +25,7 @@ class SX_MineVocationalTrainingController: UIViewController {
     var dataArr = [Int](repeating: 0, count: 4)
     
     lazy var table: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-80.FloatValue-kNavH)), style: .grouped)
         tableView.backgroundColor              = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate                     = self
@@ -46,9 +46,9 @@ class SX_MineVocationalTrainingController: UIViewController {
     }
 }
 
-// =======================================================================================================================
+// ============================================================================================
 // MARK: - Other Method
-// =======================================================================================================================
+// ============================================================================================
 extension SX_MineVocationalTrainingController {
     
     func setUI() {
@@ -61,9 +61,9 @@ extension SX_MineVocationalTrainingController {
     }
 }
 
-// =======================================================================================================================
+// ============================================================================================
 // MARK: - UITableViewDelegate
-// =======================================================================================================================
+// ============================================================================================
 extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -19,10 +19,11 @@ let employCellID = "employCellID"
 
 class SX_MineEmploymentJobsController: UIViewController {
     
-    var dataArr = [Int](repeating: 0, count: 6)
+    var noDataView: SX_NoDataView?
+    var jobApplyArr = [SX_MyOrdelRecordModel]()
     
     lazy var table: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-40.FloatValue-kNavH)), style: .grouped)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-80.FloatValue-kNavH)), style: .grouped)
         tableView.backgroundColor              = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate                     = self
@@ -59,6 +60,17 @@ extension SX_MineEmploymentJobsController {
     
     func fetchData() {
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
 
@@ -80,6 +92,11 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
         let cell = SX_EmploymentJobsCell(style: .default, reuseIdentifier: employCellID)
         cell.backgroundColor           = UIColor.white
         cell.selectionStyle            = .none
+        
+        
+        
+        
+        
         cell.employmentTitle?.text     = "美国金融实习岗位-信托和过桥基金业务"
         cell.employmentDate?.text      = "2018.03.03"
         cell.employmentAddress?.text   = "美国/纽约"

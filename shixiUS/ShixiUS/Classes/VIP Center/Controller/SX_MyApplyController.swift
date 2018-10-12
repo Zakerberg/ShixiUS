@@ -110,7 +110,6 @@ extension SX_MyApplyController {
                 self.addChildViewController(vc)
                 self.myChildViewControllers.add(vc)
                 self.vc.append(vc)
-                //self.vc = [vc]
             }
         }
         view.addSubview(pageTitleView)
