@@ -17,12 +17,14 @@
 
 import UIKit
 import SwiftyJSON
+import MBProgressHUD
 
 let vocationalCellID = "vocationalCellID"
 
 class SX_MineVocationalTrainingController: UIViewController {
     
-    
+    var noDataView: SX_NoDataView?
+    var trainApplyArr = [SX_TrainApplyModel]()
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-80.FloatValue-kNavH)), style: .grouped)
@@ -57,11 +59,32 @@ extension SX_MineVocationalTrainingController {
     }
     
     func fetchData() {
-     
+        let url = SX_MyApplyTrain + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
         
-        
-        
-        
+        SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
+            do {
+                let json = try JSON(data: result)
+                if json["status"].int == 200 {
+                    SXLog("成功!")
+                    for item in json["data"].array ?? [] {
+                        let trainApplyModel = SX_TrainApplyModel(jsonData: item)
+                        self.trainApplyArr.append(trainApplyModel)
+                    }
+                    self.table.reloadData()
+                    if json["data"].count == 0 {
+                        self.noDataView?.isHidden = false
+                    }else{
+                        self.noDataView?.isHidden = true
+                    }
+                }else{
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
+                }
+            }catch { }
+        }
     }
 }
 
@@ -71,7 +94,7 @@ extension SX_MineVocationalTrainingController {
 extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataArr.count
+        return self.trainApplyArr.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,21 +105,29 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
         
         let cell = SX_VocationalTrainingCell(style: .default, reuseIdentifier: vocationalCellID)
         cell.selectionStyle            = .none
-        cell.vocationalTitle?.text     = "算法工程师培训"
-        cell.vocationalPeriod?.text    = "第一期 | 2018-02-16"
-        cell.vocationalDate?.text      = "2018.03.03"
+        let model                      = trainApplyArr[indexPath.section]
+        cell.vocationalTitle?.text     = model.title ?? "算法工程师培训"
+        cell.vocationalPeriod?.text    = model.openclass ?? "第一期 | 2018-02-16"
+        cell.vocationalDate?.text      = model.time ?? "2018.03.03"
         
-        
-        switch indexPath.section {
-        case 0:
-            cell.vocationalCancel?.isHidden       = true
-            cell.vocationalPayAndRefund?.isHidden = true
+        switch model.status {
+        case "1"?:
+            cell.vocationalContact?.isHidden = true
+            cell.vocationalCancel?.isHidden  = true
             
-            cell.vocationalStyle?.text            = "申请成功"
-            cell.vocationalContact?.text          = "等待客服联系"
+            cell.vocationalPayAndRefund?.setTitle("去支付", for: .normal)
+            cell.vocationalPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.vocationalPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
+            cell.vocationalPayAndRefund?.backgroundColor  = UIColor.SX_MainColor()
+            cell.vocationalPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("去支付 ++++")
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
             
             break
-        case 1:
+            
+        default:
             cell.vocationalContact?.isHidden      = true
             cell.vocationalPayAndRefund?.isHidden = true
             
@@ -111,41 +142,6 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
-            
-            break
-        case 2:
-            cell.vocationalContact?.isHidden = true
-            cell.vocationalCancel?.isHidden  = true
-            
-            
-            cell.vocationalPayAndRefund?.setTitle("去支付", for: .normal)
-            cell.vocationalPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
-            cell.vocationalPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
-            cell.vocationalPayAndRefund?.backgroundColor  = UIColor.SX_MainColor()
-            cell.vocationalPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("去支付 ++++")
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-            
-            break
-        case 3:
-            cell.vocationalContact?.isHidden = true
-            cell.vocationalCancel?.isHidden  = true
-            
-            
-            cell.vocationalPayAndRefund?.setTitle("退款", for: .normal)
-            cell.vocationalPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
-            cell.vocationalPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
-            cell.vocationalPayAndRefund?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
-            cell.vocationalPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("退款 ++++")
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-            
-            break
-        default:
             break
         }
         

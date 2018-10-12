@@ -65,7 +65,7 @@ extension SX_MineTrainingProjectController {
     }
     
     func fetchData() {
-        let url = SX_MyApplyJob + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
+        let url = SX_MyApplyTraining + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
         
         SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
             do {
