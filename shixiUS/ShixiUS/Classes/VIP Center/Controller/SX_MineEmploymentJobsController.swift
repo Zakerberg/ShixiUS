@@ -34,6 +34,7 @@ class SX_MineEmploymentJobsController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchData()
     }
     
     override func viewDidLoad() {

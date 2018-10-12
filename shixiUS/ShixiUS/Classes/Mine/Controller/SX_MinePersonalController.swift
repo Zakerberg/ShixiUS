@@ -23,7 +23,7 @@ class SX_MinePersonalController: UIViewController {
     var getUrlDataArr: Array<Any>?
     var headPortrait: UIImage?
     var saveBtn: UIButton?
-    var Dic = NSMutableDictionary(capacity: 10)
+    var Dic = NSMutableDictionary()
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
@@ -68,8 +68,6 @@ extension SX_MinePersonalController {
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{
                 let json = try JSON(data: result)
-
-                
                 
                 
             }catch { }
@@ -113,7 +111,11 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             
             cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
                 self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
-//                self?.Dic.addEntries(from: [(cell.tF?.text ?? ""):"\(indexPath.row)"])
+                
+                if cell.tF?.text?.lengthOfBytes(using: .utf8) != 0 {
+                    self?.saveBtn?.isEnabled = true
+                    self?.saveBtn?.backgroundColor = UIColor.SX_MainColor()
+                }
             })
             return cell
         }
