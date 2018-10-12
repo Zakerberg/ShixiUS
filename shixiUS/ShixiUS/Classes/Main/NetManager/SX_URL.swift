@@ -106,7 +106,7 @@ let SX_ApplyTraininigDetail   = SHIXIUS + "/myapply/trainingdetail"
 let SX_ApplyTrainDetail       = SHIXIUS + "/myapply/traindetail"
 
 // 付款记录 (get)
-let SX_Mine_OrderRecord       = SHIXIUS + "/myorder/index"
+let SX_Mine_OrderRecord       = SHIXIUS + "/myorder/index?"
 
 // 取消申请 (get)
 let SX_ApplyCancel            = SHIXIUS + "/myapply/cancel"

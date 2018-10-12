@@ -45,7 +45,6 @@ class SX_PaymentRecordController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,13 +71,11 @@ extension SX_PaymentRecordController {
                     SXLog("获取命名空间失败!")
                     return
                 }
-                
                 let viewController: AnyClass? = NSClassFromString(spaceName + ".\(controllerClassNames[index])")
                 guard let typeClass = viewController as? UIViewController.Type else {
                     SXLog("viewController不能当做UIViewController!")
                     return
                 }
-                
                 let vc = typeClass.init()
                 self.addChildViewController(vc)
                 self.myChildViewControllers.add(vc)
@@ -88,10 +85,6 @@ extension SX_PaymentRecordController {
         }
         view.addSubview(pageTitleView)
         view.addSubview(pageContentView)
-    }
-    
-    func fetchData() {
-        
     }
 }
 
