@@ -106,12 +106,10 @@ extension SX_PayTrainingProjectController: UITableViewDelegate, UITableViewDataS
         let cell = SX_PaymentCell(style: .default, reuseIdentifier: paymentCellID)
         cell.selectionStyle  = .none
         
-        
-        
-        cell.payTitle?.text  = "美国金融实习岗位 - 信托和过桥基金业务"
-        cell.payDate?.text   = "2018.03.03"
-        cell.payMoney?.text  = "$600.00"
-        
+        let model            = jobOrderArr[indexPath.section]
+        cell.payTitle?.text  = model.title ?? "美国金融实习岗位 - 信托和过桥基金业务"
+        cell.payDate?.text   = model.time ?? "2018.03.03"
+        cell.payMoney?.text  = model.price ?? "$600.00"
         
         return cell
     }
