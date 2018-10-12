@@ -19,6 +19,7 @@ pod 'Result'
 pod 'Kingfisher'
 pod 'MBProgressHUD'
 pod 'ObjectMapper'
+pod 'IQKeyboardManagerSwift'
 
   target 'ShixiUSTests' do
     inherit! :search_paths

@@ -16,10 +16,16 @@
  */
 
 import UIKit
+import SwiftyJSON
+import MBProgressHUD
 
 class SX_MineFixPasswordController: UIViewController {
     
-    var fixBtn   : UIButton?
+    var fixBtn: UIButton?
+    var oldPassword: UITextField?
+    var newPassword: UITextField?
+    var newPasswordConfirm: UITextField?
+    
     lazy var fixTable: UITableView = {
         
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -31,11 +37,10 @@ class SX_MineFixPasswordController: UIViewController {
         
         return tableView
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,10 +58,6 @@ extension SX_MineFixPasswordController {
         title = "修改密码"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(self.fixTable)
-    }
-    
-    func fetchData() {
-        
     }
 }
 
@@ -80,26 +81,71 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.selectionStyle = .none
-        let TF = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
-            make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(45.FloatValue.IPAD_XValue)
-            }.config { (TF) in
-                TF.tintColor = UIColor.SX_MainColor()
-                TF.textAlignment = .left
-        }
         
         if indexPath.section == 0 {
-            cell.textLabel?.text    = "原密码"
-            TF.placeholder          = "输入旧密码"
+            cell.textLabel?.text = "原密码"
+            self.oldPassword     = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
+                make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
+                make.centerY.equalToSuperview()
+                make.height.equalTo(45.FloatValue.IPAD_XValue)
+                }.config { (TF) in
+                    TF.tintColor         = UIColor.SX_MainColor()
+                    TF.textAlignment     = .left
+                    TF.placeholder       = "输入旧密码"
+                    TF.isSecureTextEntry = true
+                    TF.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
+                        if ((self?.oldPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && self?.newPasswordConfirm?.text?.lengthOfBytes(using: .utf8) != 0) {
+                            self?.fixBtn?.isEnabled       = true
+                            self?.fixBtn?.backgroundColor = UIColor.SX_MainColor()
+                        }else{
+                            self?.fixBtn?.isEnabled       = false
+                            self?.fixBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
+                        }
+                    })
+            }
         } else if indexPath.section == 1 && indexPath.row == 0 {
             cell.textLabel?.text    = "新密码"
-            TF.placeholder          = "新密码"
+            self.newPassword = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
+                make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
+                make.centerY.equalToSuperview()
+                make.height.equalTo(45.FloatValue.IPAD_XValue)
+                }.config { (TF) in
+                    TF.tintColor         = UIColor.SX_MainColor()
+                    TF.textAlignment     = .left
+                    TF.placeholder       = "新密码"
+                    TF.isSecureTextEntry = true
+                    TF.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
+                        if ((self?.oldPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && self?.newPasswordConfirm?.text?.lengthOfBytes(using: .utf8) != 0) {
+                            self?.fixBtn?.isEnabled       = true
+                            self?.fixBtn?.backgroundColor = UIColor.SX_MainColor()
+                        }else{
+                            self?.fixBtn?.isEnabled       = false
+                            self?.fixBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
+                        }
+                    })
+            }
         }else{
-            cell.textLabel?.text    = "确认密码"
-            TF.placeholder          = "再次输入新密码"
+            cell.textLabel?.text         = "确认密码"
+            self.newPasswordConfirm      = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
+                make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
+                make.centerY.equalToSuperview()
+                make.height.equalTo(45.FloatValue.IPAD_XValue)
+                }.config { (TF) in
+                    TF.tintColor         = UIColor.SX_MainColor()
+                    TF.textAlignment     = .left
+                    TF.placeholder       = "再次输入新密码"
+                    TF.isSecureTextEntry = true
+                    TF.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
+                        if ((self?.oldPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && self?.newPasswordConfirm?.text?.lengthOfBytes(using: .utf8) != 0) {
+                            self?.fixBtn?.isEnabled       = true
+                            self?.fixBtn?.backgroundColor = UIColor.SX_MainColor()
+                        }else{
+                            self?.fixBtn?.isEnabled       = false
+                            self?.fixBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
+                        }
+                    })
+            }
         }
-        
         return cell
     }
     
@@ -108,28 +154,53 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
         if section == 0 {
             return UIView()
         } else {
-            
             let view = UIView()
-            
             self.fixBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
                 make.top.left.equalToSuperview().offset(Margin)
                 make.right.equalToSuperview().offset(-Margin)
                 make.height.equalTo(45.FloatValue.IPAD_XValue)
             }).config({ (FIX) in
-                FIX.backgroundColor     = UIColor.SX_MainColor()
+                FIX.backgroundColor     = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
                 FIX.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 20)
                 FIX.setTitle("修改", for: .normal)
                 FIX.layer.masksToBounds = true
                 FIX.layer.cornerRadius  = 10
+                FIX.isEnabled           = false
                 FIX.rx.tap.subscribe(onNext: { (_) in
-                    SXLog("修改密码 +++ + ")
                     
- 
-                    
+                    if self.newPassword?.text != self.newPasswordConfirm?.text {
+                        let hud         = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        hud.mode        = .text
+                        hud.isSquare    = true
+                        hud.label.text  = ""
+                        hud.hide(animated: true, afterDelay: 1.0)
+                    }else{
+                        let url = SX_VIPCenter_MyCollection + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
+                        
+                        SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
+                            do {
+                                let json = try JSON(data: result)
+                                if json["status"].int == 200 {
+                                    SXLog("修改成功!")
+                                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                    hud.mode       = .text
+                                    hud.isSquare   = true
+                                    hud.label.text = json["msg"].string
+                                    hud.hide(animated: true, afterDelay: 1.0)
+                                    self.navigationController?.popViewController(animated: true)
+                                }else{
+                                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                    hud.mode       = .text
+                                    hud.isSquare   = true
+                                    hud.label.text = json["msg"].string
+                                    hud.hide(animated: true, afterDelay: 1.0)
+                                }
+                            }catch { }
+                        }
+                    }
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
@@ -148,6 +219,11 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
         }
         return 100.FloatValue.IPAD_XValue
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0{
+            return CGFloat.leastNormalMagnitude
+        }
+        return Margin
+    }
 }
-
-

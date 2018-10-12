@@ -20,8 +20,9 @@ import UIKit
 import SwiftyJSON
 import MBProgressHUD
 
-let mineCellID     = "mineCellID"
-let mineIconCellID = "mineIconCellID"
+let mineCellID
+    = "mineCellID"
+let mineIconCellID   = "mineIconCellID"
 
 class SX_MineVC: UIViewController {
     
@@ -32,7 +33,7 @@ class SX_MineVC: UIViewController {
     var titleNameLabel: UILabel?
     var logInBtn: UIButton?
     var headPortraitImageView: UIImageView?
-    var statusStr = ""
+    var statusStr    = ""
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
