@@ -688,30 +688,59 @@ struct SX_JobApplyModel {
         nature          = jsonData["nature"].string
         time            = jsonData["time"].string
         status          = jsonData["status"].string
-        statusCn        = jsonData["statusCn"].sting
+        statusCn        = jsonData["statusCn"].string
         button          = jsonData["button"].string
-        
-        
     }
 }
 
 /// 我的申请 ---> (实训项目)
 struct SX_TrainingApplyModel {
     
+    var id:String?
+    var title:String?
+    var number:String?
+    var address:String?
+    var travel:String?
+    var time:String?
+    var status:String?
+    var statusCn:String?
+    var button:String?
     
-    
-    
-    
+    init(jsonData: JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        number          = jsonData["number"].string
+        address         = jsonData["address"].string
+        travel          = jsonData["travel"].string
+        time            = jsonData["time"].string
+        status          = jsonData["status"].string
+        statusCn        = jsonData["statusCn"].string
+        button          = jsonData["button"].string
+    }
 }
 
 /// 我的申请 ---> (培训认证)
 struct SX_TrainApplyModel {
     
+    var id:String?
+    var title:String?
+    var number:String?
+    var openclass:String?
+    var time:String?
+    var status:String?
+    var statusCn:String?
+    var button:String?
     
-    
-    
-    
-    
+    init(jsonData: JSON) {
+        id              = jsonData["id"].string
+        title           = jsonData["title"].string
+        number          = jsonData["number"].string
+        openclass       = jsonData["openclass"].string
+        time            = jsonData["time"].string
+        status          = jsonData["status"].string
+        statusCn        = jsonData["statusCn"].string
+        button          = jsonData["button"].string
+    }
 }
 
 // ===================================================================++++++++++++++++++++++++++++
@@ -808,5 +837,3 @@ struct SX_MyOrdelRecordModel {
         price          = jsonData["price"].string
     }
 }
-
-/// 

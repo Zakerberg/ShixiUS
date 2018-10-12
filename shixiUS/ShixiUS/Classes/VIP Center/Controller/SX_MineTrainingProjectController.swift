@@ -21,7 +21,7 @@ let TRAININGCELLID = "tainingCellID"
 
 class SX_MineTrainingProjectController: UIViewController {
     
-    var dataArr = [Int](repeating: 0, count: 4)
+    
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-80.FloatValue-kNavH)), style: .grouped)

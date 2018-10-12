@@ -20,7 +20,7 @@ let employCellID = "employCellID"
 class SX_MineEmploymentJobsController: UIViewController {
     
     var noDataView: SX_NoDataView?
-    var jobApplyArr = [SX_MyOrdelRecordModel]()
+    var jobApplyArr = [SX_JobApplyModel]()
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-80.FloatValue-kNavH)), style: .grouped)
@@ -56,21 +56,39 @@ extension SX_MineEmploymentJobsController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
+        
+        self.noDataView = SX_NoDataView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-40.FloatValue-kNavH)).addhere(toSuperView: table)
+        self.noDataView?.isHidden = true
     }
     
     func fetchData() {
-
         
+        let url = SX_MyApplyJob + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
+            do {
+                let json = try JSON(data: result)
+                if json["status"].int == 200 {
+                    SXLog("成功!")
+                    for item in json["data"].array ?? [] {
+                        let jobApplyModel = SX_JobApplyModel(jsonData: item)
+                        self.jobApplyArr.append(jobApplyModel)
+                    }
+                    self.table.reloadData()
+                    if json["data"].count == 0 {
+                        self.noDataView?.isHidden = false
+                    }else{
+                        self.noDataView?.isHidden = true
+                    }
+                }else{
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
+                }
+            }catch { }
+        }
     }
 }
 
@@ -80,7 +98,7 @@ extension SX_MineEmploymentJobsController {
 extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataArr.count
+        return self.jobApplyArr.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,40 +110,37 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
         let cell = SX_EmploymentJobsCell(style: .default, reuseIdentifier: employCellID)
         cell.backgroundColor           = UIColor.white
         cell.selectionStyle            = .none
+        let model                      = jobApplyArr[indexPath.section]
+        cell.employmentTitle?.text     = model.title ?? "美国金融实习岗位-信托和过桥基金业务"
+        cell.employmentDate?.text      = model.time ?? "2018.03.03"
+        cell.employmentAddress?.text   = model.address ?? "美国/纽约"
+        cell.employmentNature?.text    = model.nature ?? "正式"
         
-        
-        
-        
-        
-        cell.employmentTitle?.text     = "美国金融实习岗位-信托和过桥基金业务"
-        cell.employmentDate?.text      = "2018.03.03"
-        cell.employmentAddress?.text   = "美国/纽约"
-        cell.employmentNature?.text    = "正式"
-        
-        switch indexPath.section {
-        case 0: // 申请成功, 查看详情
+        switch model.status {
+        case "6"?: // 支付尾款
             cell.employmentPay?.isHidden     = true
             cell.employmentNotiBtn?.isHidden = true
+            cell.employmentPay?.isHidden     = true
             
-            cell.employmentStyle?.text = "申请成功"
+            cell.employmentStyle?.text       = model.statusCn
             
+            cell.employmentDetail?.setTitle(model.button, for: .normal)
             cell.employmentDetail?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
-            cell.employmentDetail?.titleLabel?.textAlignment = .center
-            cell.employmentDetail?.setTitle("查看详情", for: .normal)
-            cell.employmentDetail?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
-            
+            cell.employmentDetail?.setTitleColor(UIColor.white, for: .normal)
+            cell.employmentDetail?.backgroundColor   = UIColor.SX_MainColor()
             cell.employmentDetail?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("查看详情 ++++")
+            SXLog("支付尾款 ++++")
             }, onError: { (error) in
-                SXLog(error)
+            SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
             
             break
-        case 1: //支付定金, 取消申请
+
+        case "1"?: //支付定金, 取消申请
             cell.employmentDetail?.isHidden  = true
             cell.employmentDetail?.isHidden  = true
             
-            cell.employmentStyle?.text = "等待面试通知"
+            cell.employmentStyle?.text       = model.statusCn
             
             cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
@@ -143,7 +158,7 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             cell.employmentPay?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.employmentPay?.titleLabel?.textAlignment = .center
             cell.employmentPay?.backgroundColor = UIColor.SX_MainColor()
-            cell.employmentPay?.setTitle("支付定金", for: .normal)
+            cell.employmentPay?.setTitle(model.button, for: .normal)
             cell.employmentPay?.setTitleColor(UIColor.white, for: .normal)
             
             cell.employmentPay?.rx.tap.subscribe(onNext: { (_) in
@@ -153,60 +168,60 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             }, onCompleted: nil, onDisposed: nil)
             
             break
-        case 2: // 面试通知
-            cell.employmentDetail?.isHidden  = true
-            cell.employmentPay?.isHidden     = true
-            cell.employmentPay?.isHidden     = true
-            
-            
-            cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 14)
-            cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
-            cell.employmentNotiBtn?.setTitle("面试通知", for: .normal)
-            cell.employmentNotiBtn?.setlineColor(color: UIColor.colorWithHexString(hex: "72a21b", alpha: 1))
-            cell.employmentNotiBtn?.setTitleColor(UIColor.colorWithHexString(hex: "72a21b", alpha: 1), for: .normal)
-            
-            cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("面试通知 ++++")
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-            
-            break
-        case 3: // 等待面试反馈
-            cell.employmentDetail?.isHidden  = true
+//        case 2: // 面试通知
+//            cell.employmentDetail?.isHidden  = true
+//            cell.employmentPay?.isHidden     = true
+//            cell.employmentPay?.isHidden     = true
+//
+//
+//            cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 14)
+//            cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
+//            cell.employmentNotiBtn?.setTitle("面试通知", for: .normal)
+//            cell.employmentNotiBtn?.setlineColor(color: UIColor.colorWithHexString(hex: "72a21b", alpha: 1))
+//            cell.employmentNotiBtn?.setTitleColor(UIColor.colorWithHexString(hex: "72a21b", alpha: 1), for: .normal)
+//
+//            cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
+//                SXLog("面试通知 ++++")
+//            }, onError: { (error) in
+//                SXLog(error)
+//            }, onCompleted: nil, onDisposed: nil)
+//
+//            break
+//        case 3: // 等待面试反馈
+//            cell.employmentDetail?.isHidden  = true
+//            cell.employmentPay?.isHidden     = true
+//            cell.employmentNotiBtn?.isHidden = true
+//            cell.employmentPay?.isHidden     = true
+//
+//            cell.employmentStyle?.text = "等待面试通知"
+//
+//            break
+//        case 4: // 录用通知
+//            cell.employmentDetail?.isHidden  = true
+//            cell.employmentPay?.isHidden     = true
+//            cell.employmentPay?.isHidden     = true
+//
+//            cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 14)
+//            cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
+//            cell.employmentNotiBtn?.setTitle("录用通知", for: .normal)
+//            cell.employmentNotiBtn?.setlineColor(color: UIColor.SX_MainColor())
+//            cell.employmentNotiBtn?.setTitleColor(UIColor.SX_MainColor(), for: .normal)
+//
+//            cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
+//                SXLog("录用通知 ++++")
+//            }, onError: { (error) in
+//                SXLog(error)
+//            }, onCompleted: nil, onDisposed: nil)
+//
+//            break
+        case "4"?: // 退款
             cell.employmentPay?.isHidden     = true
             cell.employmentNotiBtn?.isHidden = true
             cell.employmentPay?.isHidden     = true
             
-            cell.employmentStyle?.text = "等待面试通知"
+            cell.employmentStyle?.text       = model.statusCn
             
-            break
-        case 4: // 录用通知
-            cell.employmentDetail?.isHidden  = true
-            cell.employmentPay?.isHidden     = true
-            cell.employmentPay?.isHidden     = true
-            
-            cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 14)
-            cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
-            cell.employmentNotiBtn?.setTitle("录用通知", for: .normal)
-            cell.employmentNotiBtn?.setlineColor(color: UIColor.SX_MainColor())
-            cell.employmentNotiBtn?.setTitleColor(UIColor.SX_MainColor(), for: .normal)
-            
-            cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("录用通知 ++++")
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-            
-            break
-        case 5: // 退款
-            cell.employmentPay?.isHidden     = true
-            cell.employmentNotiBtn?.isHidden = true
-            cell.employmentPay?.isHidden     = true
-            
-            cell.employmentStyle?.text = "应聘失败"
-            
-            cell.employmentDetail?.setTitle("退款", for: .normal)
+            cell.employmentDetail?.setTitle(model.button, for: .normal)
             cell.employmentDetail?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.employmentDetail?.setTitleColor(UIColor.white, for: .normal)
             cell.employmentDetail?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)

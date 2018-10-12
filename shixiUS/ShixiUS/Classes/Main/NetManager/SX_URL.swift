@@ -73,17 +73,36 @@ let SX_Oversea_Apply          = SHIXIUS + "/job/apply"
 let SX_Oversea_Apply_Confirm  = SHIXIUS + "/job/apply"
 
 // =======================================================================================
-// MARK: - 会员中心 ! ! !
+// MARK: - 我的申请 ! ! !
 // =======================================================================================
+/// 我的申请 ----> (就业岗位) (get)
+let SX_MyApplyJob             = SHIXIUS + "/myapply/job?"
+
+/// 我的申请 ----> (职业培训) (get)
+let SX_MyApplyTrain           = SHIXIUS + "/myapply/train?"
+
+/// 我的申请 ----> (职业培训) (get)
+let SX_MyApplyTraining        = SHIXIUS + "/myapply/training?"
+
+/// 申请详情(就业岗位) (get)
+let SX_ApplyJobDetail         = SHIXIUS + "/myapply/jobdetail"
+
+/// 申请详情(实训项目) (get)
+let SX_ApplyTraininigDetail   = SHIXIUS + "/myapply/trainingdetail"
+
+/// 申请详情(职业培训) (get)
+let SX_ApplyTrainDetail       = SHIXIUS + "/myapply/traindetail"
+
+// =======================================================================================
+// MARK: - 我的 ! ! !
+// =======================================================================================
+
 /// 我的收藏 (get)
 let SX_VIPCenter_MyCollection = SHIXIUS + "/mycollection/index?"
 
 /// 添加我的收藏 (get)
 let SX_VIPCenter_Add          = SHIXIUS + "/mycollection/add?"
 
-// =======================================================================================
-// MARK: - 我的 ! ! !
-// =======================================================================================
 /// 上传图片 (post)
 let SX_Mine_UploadImage       = SHIXIUS + "/common/uploadimage"
 
@@ -92,18 +111,6 @@ let SX_Mine_UploadFile        = SHIXIUS + "/common/upload"
 
 /// 修改个人信息 (post)
 let SX_Mine_FixInfo           = SHIXIUS + "/member/info"
-
-/// 我的申请(职业培训) (get)
-let SX_Mine_ApplyTrain        = SHIXIUS + "/myapply/train"
-
-// MARK: - 申请详情(就业岗位) (get)
-let SX_ApplyJobDetail         = SHIXIUS + "/myapply/jobdetail"
-
-// MARK: - 申请详情(实训项目) (get)
-let SX_ApplyTraininigDetail   = SHIXIUS + "/myapply/trainingdetail"
-
-// MARK: - 申请详情(职业培训) (get)
-let SX_ApplyTrainDetail       = SHIXIUS + "/myapply/traindetail"
 
 // 付款记录 (get)
 let SX_Mine_OrderRecord       = SHIXIUS + "/myorder/index?"
