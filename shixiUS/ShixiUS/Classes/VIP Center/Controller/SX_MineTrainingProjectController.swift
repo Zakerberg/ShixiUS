@@ -16,12 +16,14 @@
 
 import UIKit
 import SwiftyJSON
+import MBProgressHUD
 
 let TRAININGCELLID = "tainingCellID"
 
 class SX_MineTrainingProjectController: UIViewController {
     
-    
+    var noDataView: SX_NoDataView?
+    var trainingApplyArr = [SX_TrainingApplyModel]()
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-80.FloatValue-kNavH)), style: .grouped)
@@ -57,10 +59,38 @@ extension SX_MineTrainingProjectController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
+        
+        self.noDataView = SX_NoDataView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-40.FloatValue-kNavH)).addhere(toSuperView: table)
+        self.noDataView?.isHidden = true
     }
     
     func fetchData() {
+        let url = SX_MyApplyJob + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
         
+        SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
+            do {
+                let json = try JSON(data: result)
+                if json["status"].int == 200 {
+                    SXLog("成功!")
+                    for item in json["data"].array ?? [] {
+                        let trainingApplyModel = SX_TrainingApplyModel(jsonData: item)
+                        self.trainingApplyArr.append(trainingApplyModel)
+                    }
+                    self.table.reloadData()
+                    if json["data"].count == 0 {
+                        self.noDataView?.isHidden = false
+                    }else{
+                        self.noDataView?.isHidden = true
+                    }
+                }else{
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
+                }
+            }catch { }
+        }
     }
 }
 
@@ -70,7 +100,7 @@ extension SX_MineTrainingProjectController {
 extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataArr.count
+        return self.trainingApplyArr.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,43 +111,18 @@ extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewData
         
         let cell = SX_MyApplyTrainingProjectCell(style: .default, reuseIdentifier: TRAININGCELLID)
         cell.selectionStyle         = .none
-        cell.projectTitle?.text     = "华尔街投行实地项目"
-        cell.projectAddress?.text   = "Los Angles"
-        cell.projectDate?.text      = "2018.03.03"
-        cell.projectTime?.text      = "5Day"
+        let model                   = trainingApplyArr[indexPath.section]
+        cell.projectTitle?.text     = model.title ?? "华尔街投行实地项目"
+        cell.projectAddress?.text   = model.address ?? "Los Angles"
+        cell.projectDate?.text      = model.time ?? "2018.03.03"
+        //        cell.projectTime?.text      = "5Day"
         
-        switch indexPath.section {
-        case 0:
-            cell.projectCancel?.isHidden       = true
-            cell.projectPayAndRefund?.isHidden = true
-            
-            cell.projectStyle?.text            = "申请成功"
-            cell.projectContact?.text          = "等待客服联系"
-            
-            break
-        case 1:
-            cell.projectContact?.isHidden      = true
-            cell.projectPayAndRefund?.isHidden = true
-            
-            cell.projectCancel?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
-            cell.projectCancel?.titleLabel?.textAlignment = .center
-            cell.projectCancel?.setTitle("取消申请", for: .normal)
-            cell.projectCancel?.setlineColor(color: UIColor.colorWithHexString(hex: "666666", alpha: 1))
-            cell.projectCancel?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
-            
-            cell.projectCancel?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("取消申请 ++++")
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-            
-            break
-        case 2:
+        switch model.status {
+        case "1"?:
             cell.projectContact?.isHidden = true
             cell.projectCancel?.isHidden  = true
             
-            
-            cell.projectPayAndRefund?.setTitle("去支付", for: .normal)
+            cell.projectPayAndRefund?.setTitle(model.button, for: .normal)
             cell.projectPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
             cell.projectPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
             cell.projectPayAndRefund?.backgroundColor   = UIColor.SX_MainColor()
@@ -126,25 +131,27 @@ extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewData
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
-            
             break
-        case 3:
-            cell.projectContact?.isHidden = true
-            cell.projectCancel?.isHidden  = true
+        default:
             
+            cell.projectPayAndRefund?.isHidden            = true
+            cell.projectCancel?.titleLabel?.font          = UIFont.boldSystemFont(ofSize: 12)
+            cell.projectCancel?.titleLabel?.textAlignment = .center
+            cell.projectCancel?.setTitle(model.button, for: .normal)
+            cell.projectCancel?.setlineColor(color: UIColor.colorWithHexString(hex: "666666", alpha: 1))
+            cell.projectCancel?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
             
-            cell.projectPayAndRefund?.setTitle("退款", for: .normal)
-            cell.projectPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
-            cell.projectPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
-            cell.projectPayAndRefund?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
-            cell.projectPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("退款 ++++")
+            cell.projectCancel?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("取消申请 ++++")
+                
+                
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
             
-            break
-        default:
+            cell.projectStyle?.text            = model.statusCn
+            //cell.projectContact?.text          = "等待客服联系"
             break
         }
         
