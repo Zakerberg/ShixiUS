@@ -26,46 +26,45 @@ class SX_TrainingProjectController: UIViewController {
     var loadingView: SX_LoadingView?
     var collectionView: UICollectionView?
     
-    var compreArr = [String]()
+    var compreArr  = [String]()
+    var countryArr = [String]()
+    var trainArr   = [String]()
     
     var listsModels = [TrainingListModel]()
     
     // 综合排序View
-    lazy var comprehensiveView: UIView = {
-        let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
+    lazy var comprehensiveView: SX_BasePopSelectedView = {
+        let compreView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (compreView) in
             compreView.backgroundColor = UIColor.white
-            compreView.dataArr = ["综合排序","项目时间","价格降序","价格升序"]
             compreView.isHidden = true
-            compreView.backgroundColor = UIColor.red
         })
+        
         return compreView
     }()
     
     /// 实训类别View
-    private lazy var trainingView: UIView = {
-        let trainingView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (trainingView) in
+    lazy var trainingView: SX_BasePopSelectedView = {
+        let trainingView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (trainingView) in
             trainingView.backgroundColor = UIColor.white
+            trainingView.isHidden = true
         })
-        
-        trainingView.dataArr = ["测试类别1","测试类别2","测试类别3","测试类别4","测试类别5"]
-        trainingView.isHidden = true
         
         return trainingView
     }()
     
     /// 国家分类View
-    private lazy var countryView: UIView = {
-        let countryView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (countryView) in
+    lazy var countryView: SX_BasePopSelectedView = {
+        let countryView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (countryView) in
             countryView.backgroundColor = UIColor.white
+            countryView.isHidden = true
         })
-        countryView.dataArr = ["中国","美国","不限"]
-        countryView.isHidden = true
         
         return countryView
     }()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchData()
     }
     
     override func viewDidLoad() {
@@ -87,10 +86,10 @@ extension SX_TrainingProjectController {
     
     func setUI() {
         title = "实训项目"
-        view.backgroundColor = UIColor.white
-        self.trainingView.isHidden = true
+        view.backgroundColor            = UIColor.white
+        self.trainingView.isHidden      = true
         self.comprehensiveView.isHidden = true
-        self.countryView.isHidden = true
+        self.countryView.isHidden       = true
         setTopSelectedView()
         
         // 创建底部的黑色透明图, 先隐藏
@@ -111,10 +110,10 @@ extension SX_TrainingProjectController {
         let flowLayout = UICollectionViewFlowLayout()
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         self.collectionView?.backgroundColor = UIColor.white
-        self.collectionView?.delegate = self
+        self.collectionView?.delegate   = self
         self.collectionView?.dataSource = self
         self.collectionView?.showsHorizontalScrollIndicator = false
-        self.collectionView?.showsVerticalScrollIndicator = false
+        self.collectionView?.showsVerticalScrollIndicator   = false
         self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
         self.view.insertSubview(self.collectionView!, belowSubview: self.trainingView)
         self.collectionView?.snp.makeConstraints({ (make) in
@@ -128,8 +127,8 @@ extension SX_TrainingProjectController {
             topSelectedView.backgroundColor = UIColor.white
         })
         
-        let _ = UIView(frame: CGRect(x: 0, y: self.topSelectedView!.frame.origin.y + self.topSelectedView!.frame.size.height + 0.1 , width: SCREEN_WIDTH, height: 0.5)).addhere(toSuperView: self.view).config { (lineView) in
-            lineView.backgroundColor = UIColor.colorWithHexString(hex: "b2b2b2", alpha: 1)
+        let _ = UIView(frame: CGRect(x: 0, y: self.topSelectedView!.frame.origin.y + self.topSelectedView!.frame.size.height + 0.1 , width: SCREEN_WIDTH, height: 0.5)).addhere(toSuperView: self.view).config { (LINE) in
+            LINE.backgroundColor = UIColor.colorWithHexString(hex: "b2b2b2", alpha: 1)
         }
         
         var titleArr = ["综合排序","实训项目","国家"]
@@ -156,20 +155,20 @@ extension SX_TrainingProjectController {
             make.centerX.equalToSuperview().offset(-6)
             make.top.equalToSuperview().offset(15)
             make.size.equalTo(CGSize(width: 65, height: 14))
-            }.config { (label) in
-                label.text = title
-                label.font = UIFont.systemFont(ofSize: 14)
-                label.textColor = UIColor.black
-                label.textAlignment = .right
-                label.tag = tag + LabelTag
+            }.config { (LABEL) in
+                LABEL.text          = title
+                LABEL.font          = UIFont.systemFont(ofSize: 14)
+                LABEL.textColor     = UIColor.black
+                LABEL.textAlignment = .right
+                LABEL.tag           = tag + LabelTag
         }
         
         let _ = UIImageView(image: UIImage.init(named: "btn_down")).addhere(toSuperView: view).layout { (make) in
             make.left.equalTo(label.snp.right).offset(5)
             make.top.equalToSuperview().offset(19)
             make.size.equalTo(CGSize(width: 7, height: 4))
-            }.config { (imageV) in
-                imageV.tag = tag + ArrowTag
+            }.config { (IMAGEV) in
+                IMAGEV.tag = tag + ArrowTag
         }
         return view
     }
@@ -202,7 +201,7 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
         }
         
         cell.sourceName?.text = model.title ?? "测试项目"
-        cell.priceLabel?.text = ("￥" + model.price!) ?? "测试项目"
+        cell.priceLabel?.text = ("￥" + model.price!)
         
         return cell
     }
@@ -233,6 +232,27 @@ extension SX_TrainingProjectController {
                     let listModel = TrainingListModel(jsonData: item)
                     self.listsModels.append(listModel)
                 }
+                
+                for item in json["data"]["sort"].array ?? [] {
+                    self.compreArr.append(item["name"].string ?? "测试综合")
+                    self.comprehensiveView.dataArr = self.compreArr
+                }
+                
+                for item in json["data"]["type"].array ?? [] {
+                    self.trainArr.append(item["name"].string ?? "测试type")
+                    self.trainingView.dataArr = self.trainArr
+                }
+                
+                for item in json["data"]["country"].array ?? [] {
+                    self.countryArr.append(item["name"].string ?? "测试country")
+                    self.countryView.dataArr = self.countryArr
+                }
+                
+                self.comprehensiveView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.compreArr.count*50))
+                
+                self.trainingView.frame      = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.trainArr.count*50))
+                
+                self.countryView.frame       = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.countryArr.count*50))
                 
                 self.collectionView?.reloadData()
             } catch{ }

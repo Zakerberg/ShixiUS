@@ -18,7 +18,7 @@ private let cellID = "cellID"
 
 class SX_BasePopSelectedView: UIView {
     
-    var dataArr: [String]?
+    var dataArr = [String]()
     
     lazy var basePopSelectedTableView: UITableView = {
         let tableView = UITableView().addhere(toSuperView: self).layout(snapKitMaker: { (make) in
@@ -47,15 +47,16 @@ class SX_BasePopSelectedView: UIView {
 
 extension SX_BasePopSelectedView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataArr!.count
+        return self.dataArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
-        cell.textLabel?.text = self.dataArr?[indexPath.row]
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
+        cell.textLabel?.text      = self.dataArr[indexPath.row]
+        cell.textLabel?.font      = UIFont.systemFont(ofSize: 14)
         cell.textLabel?.textColor = UIColor.black
-        cell.accessoryType = .none
+        cell.accessoryType        = .none
+        cell.selectionStyle       = .none
         
         return cell
     }
@@ -63,7 +64,6 @@ extension SX_BasePopSelectedView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         SXLog("点击了basePopSelectedView 的\(indexPath.section)  ===== \(indexPath.row)")
-
         
     }
     
