@@ -60,10 +60,8 @@ class SX_MyApplyController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         ///接收 登陆界面 back 的通知, 退回之前tabbbar
         NotificationCenter.default.addObserver(self, selector: #selector(toPresentTabbar), name: NSNotification.Name(rawValue: "TOPRESENTTABBAR"), object: nil)
-    
     }
     
     override func viewDidLoad() {

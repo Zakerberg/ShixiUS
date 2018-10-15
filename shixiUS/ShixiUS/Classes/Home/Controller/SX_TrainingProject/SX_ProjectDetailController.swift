@@ -201,16 +201,13 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            
             let model = self.projectDetailArr[indexPath.section]
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle = .none
-            // MARK: - 接口 --------
-            
             titleCell.projectName!.text = model["title"].string ?? ""
             titleCell.projectCity!.text = model["outset_city"].string ?? ""
             titleCell.projectPrice!.text = "$" + "1500" + "起/人"
-            
+
             return titleCell
             
         } else if indexPath.section == 1 {
@@ -219,10 +216,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             cell.tripArr      = self.tripTitleArr
             cell.dateArr      = self.tripDateArr
             cell.priceArr     = self.tripPriceArr
-            
-            
-            
-            self.moreDateBtn = cell.moreDate
+
+            self.moreDateBtn  = cell.moreDate
             self.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("更多日期 ")
                 
@@ -261,7 +256,6 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         switch indexPath.section {
         case 0:
             return 110.FloatValue.IPAD_XValue
-            
         case 1:
             return 190.FloatValue.IPAD_XValue
         default:
@@ -274,7 +268,6 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         if  section == 2 {
             return 40.FloatValue.IPAD_XValue
         }
-        
         return 5.FloatValue.IPAD_XValue
     }
     
@@ -303,7 +296,6 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
 // ==========================================================================================================
 extension SX_ProjectDetailController: SXCycleScrollerViewDelegate {
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
-        
         
     }
     

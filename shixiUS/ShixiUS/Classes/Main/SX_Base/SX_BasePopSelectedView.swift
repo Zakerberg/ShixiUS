@@ -62,9 +62,9 @@ extension SX_BasePopSelectedView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        SXLog("点击了basePopSelectedView 的\(indexPath.section)  ===== \(indexPath.row)")
-        
+        SXLog("点击了basePopSelectedView 的 ---- \(indexPath.section) ------\(indexPath.row)")
+        // 发送 popSelected 通知
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA"), object: nil, userInfo: ["text":self.dataArr[indexPath.row]])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

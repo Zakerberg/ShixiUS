@@ -202,6 +202,7 @@ extension SX_LoginController {
                             USERDEFAULTS.set("yes", forKey: "login")
                             
                             let statusStr  = "1"
+                            /// 发送 登陆成功 通知
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINSUCCESS"), object: nil, userInfo: ["name":json["data"]["userName"].rawString()!])
                             guard(self.closure != nil) else{
                                 self.dismiss(animated: true, completion: nil)

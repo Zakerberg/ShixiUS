@@ -24,13 +24,20 @@ class SX_TrainingProjectController: UIViewController {
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
     var loadingView: SX_LoadingView?
+    
     var collectionView: UICollectionView?
     
-    var compreArr  = [String]()
-    var countryArr = [String]()
-    var trainArr   = [String]()
+    var compreArr    = [String]()
+    var countryArr   = [String]()
+    var trainArr     = [String]()
     
-    var listsModels = [TrainingListModel]()
+    var typeIdArr    = [String]() //中间
+    var countryIdArr = [String]()
+    var sortOrderArr = [String]()
+    
+    var listsModels  = [TrainingListModel]()
+    
+    var baseURL      = SHIXIUS + "/training/index"
     
     // 综合排序View
     lazy var comprehensiveView: SX_BasePopSelectedView = {
@@ -46,7 +53,7 @@ class SX_TrainingProjectController: UIViewController {
     lazy var trainingView: SX_BasePopSelectedView = {
         let trainingView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (trainingView) in
             trainingView.backgroundColor = UIColor.white
-            trainingView.isHidden = true
+            trainingView.isHidden        = true
         })
         
         return trainingView
@@ -56,7 +63,7 @@ class SX_TrainingProjectController: UIViewController {
     lazy var countryView: SX_BasePopSelectedView = {
         let countryView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (countryView) in
             countryView.backgroundColor = UIColor.white
-            countryView.isHidden = true
+            countryView.isHidden        = true
         })
         
         return countryView
@@ -64,7 +71,7 @@ class SX_TrainingProjectController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchData()
+        Noti()
     }
     
     override func viewDidLoad() {
@@ -117,7 +124,7 @@ extension SX_TrainingProjectController {
         self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
         self.view.insertSubview(self.collectionView!, belowSubview: self.trainingView)
         self.collectionView?.snp.makeConstraints({ (make) in
-            make.top.equalToSuperview().offset(kNavH+55)
+            make.top.equalToSuperview().offset(kNavH+30.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(Margin)
             make.right.equalToSuperview().offset(-Margin)
             make.bottom.equalToSuperview()
@@ -184,14 +191,12 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
         
         cell.layer.shadowColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 5
         cell.backgroundColor = UIColor.white
-        
         
         let model = listsModels[indexPath.item]
         if let url = URL(string: model.image ?? ""){
@@ -221,8 +226,7 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
 extension SX_TrainingProjectController {
     func fetchData()  {
         
-        SX_NetManager.requestData(type: .GET, URlString: SX_TrainingList, parameters: nil) { (result) in
-            
+        SX_NetManager.requestData(type: .GET, URlString: self.baseURL, parameters: nil) { (result) in
             do{
                 let json = try JSON(data: result)
                 /// 成功
@@ -232,26 +236,24 @@ extension SX_TrainingProjectController {
                     let listModel = TrainingListModel(jsonData: item)
                     self.listsModels.append(listModel)
                 }
-                
                 for item in json["data"]["sort"].array ?? [] {
                     self.compreArr.append(item["name"].string ?? "测试综合")
+                    self.sortOrderArr.append(item["order"].string ?? "desc")
                     self.comprehensiveView.dataArr = self.compreArr
                 }
-                
                 for item in json["data"]["type"].array ?? [] {
                     self.trainArr.append(item["name"].string ?? "测试type")
+                    self.typeIdArr.append(item["id"].string ?? "0")
                     self.trainingView.dataArr = self.trainArr
                 }
-                
                 for item in json["data"]["country"].array ?? [] {
                     self.countryArr.append(item["name"].string ?? "测试country")
+                    self.countryIdArr.append(item["id"].string ?? "1")
                     self.countryView.dataArr = self.countryArr
                 }
                 
                 self.comprehensiveView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.compreArr.count*50))
-                
                 self.trainingView.frame      = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.trainArr.count*50))
-                
                 self.countryView.frame       = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.countryArr.count*50))
                 
                 self.collectionView?.reloadData()
@@ -403,7 +405,6 @@ extension SX_TrainingProjectController {
     
     /// showLoadingView
     func showLoadingView() {
-        
         if (self.loadingView == nil) {
             self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
         }
@@ -427,5 +428,42 @@ extension SX_TrainingProjectController {
         hideViewWithAnimation(view: self.comprehensiveView)
         hideViewWithAnimation(view: self.trainingView)
         hideViewWithAnimation(view: self.countryView)
+    }
+}
+
+// ==============================================================================================
+// MARK: - Noti
+// ==============================================================================================
+extension SX_TrainingProjectController {
+    func Noti() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changeSelect), name: NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA"), object: nil)
+    }
+    
+    @objc func changeSelect(noti:Notification) {
+        SXLog("接收到popSelectedView点击的通知")
+        hideViewWithAnimation(view: self.comprehensiveView)
+        hideViewWithAnimation(view: self.trainingView)
+        hideViewWithAnimation(view: self.countryView)
+        
+        if self.comprehensiveView.isHidden == false {
+            SXLog(noti.userInfo?["text"])
+            self.listsModels.removeAll()
+            self.compreArr.removeAll()
+            // self.baseURL = SHIXIUS + "/training/index?" + ""
+
+            
+            
+            
+            
+        } else if self.trainingView.isHidden == false {
+            SXLog(noti.userInfo?["text"])
+            self.listsModels.removeAll()
+            self.trainArr.removeAll()
+            
+        } else if self.countryView.isHidden == false {
+            SXLog(noti.userInfo?["text"])
+            self.listsModels.removeAll()
+            self.countryArr.removeAll()
+        }
     }
 }
