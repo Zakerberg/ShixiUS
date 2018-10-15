@@ -451,7 +451,7 @@ extension SX_TrainingProjectController {
             self.compreArr.removeAll()
             // self.baseURL = SHIXIUS + "/training/index?" + ""
 
-            
+            // 点击indexPath.row 选择对应的 sort数组里面的id, sort, order传出去 
             
             
             
