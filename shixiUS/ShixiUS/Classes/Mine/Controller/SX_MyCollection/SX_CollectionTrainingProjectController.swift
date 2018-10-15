@@ -111,7 +111,7 @@ extension SX_CollectionTrainingProjectController: UITableViewDelegate, UITableVi
         let model                     = TrainArr[indexPath.section]
         cell.projectTitle?.text       = model.title ?? "华尔街投行实地(测试)项目"
         cell.projectAddress?.text     = model.outset_city ?? "Los Angles(测试)"
-        //        cell.projectDate?.text        = model.  "2018.03.03(测试)"
+        //cell.projectDate?.text        = model.  "2018.03.03(测试)"
         cell.projectTime?.text        = model.count ?? "5Day(测试)"
         
         cell.projectContact?.isHidden = true
