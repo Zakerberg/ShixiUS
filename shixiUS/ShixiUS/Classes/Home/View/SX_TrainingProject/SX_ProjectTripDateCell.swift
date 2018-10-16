@@ -107,7 +107,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
             for i in 0..<(dateArr.count ) {
                 self.dateBtn = UIButton(type: .custom).addhere(toSuperView: self.dateScrollView!).layout(snapKitMaker: { (make) in
                     make.height.top.equalToSuperview()
-                    make.left.equalToSuperview().offset(i*(DATEBTNWIDTH+8))
+                    make.left.equalToSuperview().offset(i*(DATEBTNWIDTH+10))
                     make.width.equalTo(DATEBTNWIDTH.FloatValue.IPAD_XValue)
                 }).config { (DATE) in
                     DATE.tag                       = i+3000
@@ -140,19 +140,14 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 self.price = UILabel().addhere(toSuperView: self.dateScrollView!).layout(snapKitMaker: { (make) in
                     make.width.equalToSuperview()
                     make.top.equalToSuperview().offset(Margin*3)
-                    make.left.equalToSuperview().offset(index*(DATEBTNWIDTH+8)+Int(Margin+8))
+                    make.left.equalToSuperview().offset(index*(DATEBTNWIDTH+10)+Int(Margin+8))
                     make.height.equalTo(13.FloatValue.IPAD_XValue)
                     
                 }).config({ (PRICE) in
                     PRICE.sizeToFit()
-                    if self.dateBtn?.isSelected == true  {
-                        PRICE.font      = UIFont.boldSystemFont(ofSize: 10)
-                        PRICE.textColor = UIColor.SX_MainColor()
-                    }else{
-                        PRICE.font      = UIFont.boldSystemFont(ofSize: 10)
-                        PRICE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-                    }
-                    PRICE.text          = priceArr[index]
+                    PRICE.font      = UIFont.boldSystemFont(ofSize: 10)
+                    PRICE.textColor = UIColor.red
+                    PRICE.text      = "¥" + priceArr[index]
                 })
             }
         }
@@ -222,7 +217,7 @@ extension SX_ProjectTripDateCell {
     /// 出发日期 Btn
     @objc func dateBtnClick(btn: UIButton) {
         SXLog(btn.tag)
-        for index in 0...(dateArr.count ?? 0) {
+        for index in 0...(dateArr.count) {
             let button = self.viewWithTag(3000+index) as? UIButton
             if button?.tag != btn.tag {
                 button?.layer.borderColor = UIColor.init(white: 0.6, alpha: 1).cgColor

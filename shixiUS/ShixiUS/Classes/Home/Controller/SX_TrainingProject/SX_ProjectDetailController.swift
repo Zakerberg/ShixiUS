@@ -202,7 +202,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             titleCell.projectName?.text  = model["data"]["title"].string ?? ""
             titleCell.projectCity?.text  = model["data"]["outset_city"].string ?? ""
             // titleCell.projectContent?.text = model["data"]["features"].string ?? ""
-            titleCell.projectPrice?.text = "$" + "1500" + "起/人"
+            titleCell.projectPrice?.text = "¥" + "1500" + "起/人"
             
             return titleCell
             

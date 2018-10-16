@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 7/12/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  培训认证
+//  培训认证列表 
 
 /*
  你习惯夜晚，我不再喜欢白天
@@ -30,15 +30,11 @@ class SX_CertificationController: UIViewController {
     
     var certicationModels = [TrainListModel]()
     
-    
-    // =================================================================================================================
-    //  MARK: - lazy
-    // =====================================================================================================================
     // 综合排序View
     lazy var comprehensiveView: UIView = {
         let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
             compreView.backgroundColor = UIColor.white
-            compreView.dataArr = ["综合排序","项目时间","价格降序","价格升序"]
+            compreView.dataArr  = ["综合排序","项目时间","价格降序","价格升序"]
             compreView.isHidden = true
             compreView.backgroundColor = UIColor.red
         })
@@ -51,7 +47,7 @@ class SX_CertificationController: UIViewController {
             ClassAttribute.backgroundColor = UIColor.white
         })
         
-        classAttribute.dataArr = ["测试类别1","测试类别2","测试类别3","测试类别4","测试类别5"]
+        classAttribute.dataArr  = ["测试类别1","测试类别2","测试类别3","测试类别4","测试类别5"]
         classAttribute.isHidden = true
         
         return classAttribute
@@ -62,7 +58,7 @@ class SX_CertificationController: UIViewController {
         let professionaltype = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (professionaltype) in
             professionaltype.backgroundColor = UIColor.white
         })
-        professionaltype.dataArr = ["测试类别6","测试类别7","测试类别8","测试类别9"]
+        professionaltype.dataArr  = ["测试类别6","测试类别7","测试类别8","测试类别9"]
         professionaltype.isHidden = true
         
         return professionaltype
@@ -80,23 +76,23 @@ class SX_CertificationController: UIViewController {
     }
 }
 
-// ================================================================================================================
+// ================================================================
 // MARK: - Other Method
-// ===================================================================================================================
+// ================================================================
 extension SX_CertificationController {
     
     func setUI() {
-        self.title = "培训认证"
-        self.view.backgroundColor = UIColor.white
-        self.ClassAttributeView.isHidden = true
-        self.comprehensiveView.isHidden = true
+        self.title                         = "培训认证"
+        self.view.backgroundColor          = UIColor.white
+        self.ClassAttributeView.isHidden   = true
+        self.comprehensiveView.isHidden    = true
         self.professionalTypeView.isHidden = true
         setTopSelectedView()
         
     }
     
     func setTopSelectedView() {
-        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout      = UICollectionViewFlowLayout()
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         self.collectionView?.backgroundColor = UIColor.white
         self.collectionView?.delegate = self
@@ -144,11 +140,11 @@ extension SX_CertificationController {
             make.top.equalToSuperview().offset(15)
             make.size.equalTo(CGSize(width: 65, height: 14))
             }.config { (label) in
-                label.text = title
-                label.font = UIFont.systemFont(ofSize: 14)
-                label.textColor = UIColor.black
+                label.text          = title
+                label.font          = UIFont.systemFont(ofSize: 14)
+                label.textColor     = UIColor.black
                 label.textAlignment = .right
-                label.tag = tag + LabelTag
+                label.tag           = tag + LabelTag
         }
         
         let _ = UIImageView(image: #imageLiteral(resourceName: "btn_down")).addhere(toSuperView: view).layout { (make) in
@@ -162,9 +158,9 @@ extension SX_CertificationController {
     }
 }
 
-// ==============================================================================================================
+// ======================================================================
 // MARK: - Other Method 2 响应
-// ==============================================================================================================
+// ======================================================================
 extension SX_CertificationController {
     
     func fetchData() {
@@ -174,12 +170,10 @@ extension SX_CertificationController {
                 let json = try JSON(data: result)
                 /// 成功
                 SXLog("成功! ")
-                
                 for item in json["data"]["lists"].array ?? [] {
                     let listModel = TrainListModel(jsonData: item)
                     self.certicationModels.append(listModel)
                 }
-                
                 self.collectionView?.reloadData()
             } catch{ }
         }
@@ -229,7 +223,6 @@ extension SX_CertificationController {
             UIView.animate(withDuration: 0.4, animations: {
                 /// 小三角的选中状态
                 for index in 0..<3 {
-                    
                     let allImg = self.topSelectedView?.viewWithTag(ArrowTag + index) as? UIImageView
                     allImg?.image = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(-Double.pi)*0)
@@ -249,11 +242,11 @@ extension SX_CertificationController {
         
         if view.isKind(of: type(of: self.comprehensiveView)) { //综合
             
-            self.ClassAttributeView.frame = CGRect(x: 0, y: -self.ClassAttributeView.bounds.size.height, width: SCREEN_WIDTH, height: self.ClassAttributeView.bounds.size.height)
+            self.ClassAttributeView.frame   = CGRect(x: 0, y: -self.ClassAttributeView.bounds.size.height, width: SCREEN_WIDTH, height: self.ClassAttributeView.bounds.size.height)
             self.professionalTypeView.frame = CGRect(x: 0, y: -self.professionalTypeView.bounds.size.height, width: SCREEN_WIDTH, height: self.professionalTypeView.bounds.size.height)
             
-            self.ClassAttributeView.isHidden = true
-            self.professionalTypeView.isHidden  = true
+            self.ClassAttributeView.isHidden   = true
+            self.professionalTypeView.isHidden = true
             
             let control1 = self.topSelectedView?.viewWithTag(1001) as? UIControl
             control1?.isSelected = false
@@ -262,11 +255,11 @@ extension SX_CertificationController {
             
         } else if (view.isKind(of: type(of: ClassAttributeView))) {  // 实训项目
             
-            self.comprehensiveView.frame = CGRect(x: 0, y: Int(-self.comprehensiveView.bounds.size.height), width: Int(SCREEN_WIDTH), height: Int(self.comprehensiveView.bounds.size.height))
+            self.comprehensiveView.frame    = CGRect(x: 0, y: Int(-self.comprehensiveView.bounds.size.height), width: Int(SCREEN_WIDTH), height: Int(self.comprehensiveView.bounds.size.height))
             self.professionalTypeView.frame = CGRect(x: 0, y: -self.professionalTypeView.bounds.size.height, width: SCREEN_WIDTH, height: self.professionalTypeView.bounds.size.height)
             
-            self.comprehensiveView.isHidden = true
-            self.professionalTypeView.isHidden       = true
+            self.comprehensiveView.isHidden    = true
+            self.professionalTypeView.isHidden = true
             
             let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
             control1?.isSelected = false
@@ -288,7 +281,7 @@ extension SX_CertificationController {
         }
         
         self.blackBgView?.isHidden = false
-        view.isHidden = false
+        view.isHidden              = false
         
         /// 改变传入的View frame
         UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseOut, animations: {
@@ -300,9 +293,9 @@ extension SX_CertificationController {
         /// 翻转箭头
         UIView.animate(withDuration: 0.1, animations: {
             let selectedImg = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
-            selectedImg.image = #imageLiteral(resourceName: "btn_odown")
+            selectedImg.image                = #imageLiteral(resourceName: "btn_odown")
             let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
-            selectedImg.transform = transform
+            selectedImg.transform            = transform
         }) { (finished) in
             SXLog(finished)
         }
@@ -343,9 +336,9 @@ extension SX_CertificationController {
     }
 }
 
-// ====================================================================================================================
+// ======================================================================
 // MARK: - UICollectionViewDelegate
-// ====================================================================================================================
+// ======================================================================
 extension SX_CertificationController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -353,25 +346,22 @@ extension SX_CertificationController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
         
-        cell.layer.shadowColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
+        cell.layer.shadowColor   = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
         cell.layer.masksToBounds = true
-        cell.layer.cornerRadius = 5
-        cell.backgroundColor = UIColor.white
+        cell.layer.cornerRadius  = 5
+        cell.backgroundColor     = UIColor.white
         
-        let model = certicationModels[indexPath.item]
-        
+        let model  = certicationModels[indexPath.item]
         if let url = URL(string: model.image ?? ""){
             cell.sourceImageView?.kf.setImage(with: url)
         }else{
             cell.sourceImageView?.image = #imageLiteral(resourceName: "icon_placeholdericon_Image")
         }
-        
-        cell.sourceName?.text = model.series_name ?? "测试项目"
+        cell.sourceName?.text       = model.series_name ?? "测试项目"
         cell.certificateLabel?.text = model.category_name ?? "测试分类"
-        cell.priceLabel?.text = ("￥" + model.price!)
+        cell.priceLabel?.text       = ("￥" + model.price!)
         
         return cell
     }
@@ -383,5 +373,4 @@ extension SX_CertificationController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
-    
 }

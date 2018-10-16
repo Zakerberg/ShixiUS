@@ -9,11 +9,10 @@
 import UIKit
 import SwiftyJSON
 
-private let ArrowTag = 3000
+private let ArrowTag   = 3000
 private let ControlTag = 1000
-private let LabelTag = 2000
-
-let hotJobCellID = "hotJobCellID"
+private let LabelTag   = 2000
+let hotJobCellID       = "hotJobCellID"
 
 class SX_MoreHotJobController: UIViewController {
     
@@ -24,7 +23,7 @@ class SX_MoreHotJobController: UIViewController {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 440)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
-        positionView.dataArr = ["不限","会计服务","航空","银行","电子商务","互联网","表演艺术","翻译和本地化","医疗","服装和时装","测试12"]
+        positionView.dataArr  = ["不限","会计服务","航空","银行","电子商务","互联网","表演艺术","翻译和本地化","医疗","服装和时装","测试12"]
         positionView.isHidden = true
         
         return positionView
@@ -35,7 +34,7 @@ class SX_MoreHotJobController: UIViewController {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
-        positionView.dataArr = ["中国","美国","不限"]
+        positionView.dataArr  = ["中国","美国","不限"]
         positionView.isHidden = true
         
         return positionView
@@ -48,7 +47,7 @@ class SX_MoreHotJobController: UIViewController {
             positionView.backgroundColor = UIColor.white
         })
         
-        positionView.dataArr = ["1","2","3"]
+        positionView.dataArr  = ["1","2","3"]
         positionView.isHidden = true
         
         return positionView
@@ -59,7 +58,7 @@ class SX_MoreHotJobController: UIViewController {
         let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
         })
-        positionView.dataArr = ["4","5","666"]
+        positionView.dataArr  = ["4","5","666"]
         positionView.isHidden = true
         
         return positionView
@@ -68,8 +67,8 @@ class SX_MoreHotJobController: UIViewController {
     private lazy var TableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: Int(kNavH), width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)-Int((kNavH+45))), style: .plain)
         tableView.backgroundColor = UIColor.white
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.delegate        = self
+        tableView.dataSource      = self
         
         return tableView
     }()
@@ -101,7 +100,7 @@ extension SX_MoreHotJobController {
     
     func setUI() {
         self.title = "热门岗位"
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor     = UIColor.white
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.positionView.isHidden    = true
@@ -157,7 +156,7 @@ extension SX_MoreHotJobController {
     /// 创建头部选择条件View
     func creatBtnView(_ title:String, frame: CGRect, tag:NSInteger) -> UIView {
         
-        let view = UIView(frame: frame)
+        let view             = UIView(frame: frame)
         view.backgroundColor = UIColor.groupTableViewBackground
         
         let label = UILabel().addhere(toSuperView: view).layout { (make) in
@@ -165,11 +164,11 @@ extension SX_MoreHotJobController {
             make.top.equalToSuperview().offset(15)
             make.size.equalTo(CGSize(width: 65, height: 14))
             }.config { (label) in
-                label.text = title
-                label.font = UIFont.systemFont(ofSize: 14)
-                label.textColor = UIColor.black
+                label.text          = title
+                label.font          = UIFont.systemFont(ofSize: 14)
+                label.textColor     = UIColor.black
                 label.textAlignment = .right
-                label.tag = tag + LabelTag
+                label.tag           = tag + LabelTag
         }
         
         let _ = UIImageView(image: #imageLiteral(resourceName: "btn_down")).addhere(toSuperView: view).layout { (make) in
@@ -199,7 +198,7 @@ extension SX_MoreHotJobController {
             hideViewWithAnimation(view: self.releaseDateView)
             
         }else if(control.isSelected == false) {
-            control.isSelected = true
+            control.isSelected      = true
             
             /// 创建弹窗 选择条件
             if(control.tag == 1000) {
@@ -235,7 +234,7 @@ extension SX_MoreHotJobController {
         self.blackBgView?.isHidden = true
         if view.isHidden == false {
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
-                view.frame = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
+                view.frame    = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
             }) {(finished) in
                 view.isHidden = true
             }
@@ -246,9 +245,9 @@ extension SX_MoreHotJobController {
                     let allImg = self.topSelectedView?.viewWithTag(ArrowTag + index) as? UIImageView
                     allImg?.image = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(-Double.pi)*0)
-                    allImg?.transform = transform
+                    allImg?.transform   = transform
                     
-                    let allLabel = self.topSelectedView?.viewWithTag(LabelTag + index) as? UILabel
+                    let allLabel        = self.topSelectedView?.viewWithTag(LabelTag + index) as? UILabel
                     allLabel?.textColor = UIColor.black
                 }
             }) { (finished) in
@@ -262,8 +261,8 @@ extension SX_MoreHotJobController {
         
         if view.isKind(of: type(of: self.positionView)) { //职位分类
             
-            self.workNatureView.frame = CGRect(x: 0, y: -self.workNatureView.bounds.size.height, width: SCREEN_WIDTH, height: self.workNatureView.bounds.size.height)
-            self.workTimeView.frame = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
+            self.workNatureView.frame  = CGRect(x: 0, y: -self.workNatureView.bounds.size.height, width: SCREEN_WIDTH, height: self.workNatureView.bounds.size.height)
+            self.workTimeView.frame    = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
             self.releaseDateView.frame = CGRect(x: 0, y: -self.releaseDateView.bounds.size.height, width: SCREEN_WIDTH, height: self.releaseDateView.bounds.size.height)
             
             self.workNatureView.isHidden  = true
@@ -279,8 +278,8 @@ extension SX_MoreHotJobController {
             
         } else if(view.isKind(of: type(of: workNatureView))) {  // 工作性质
             
-            self.positionView.frame = CGRect(x: 0, y: -self.positionView.bounds.size.height, width: SCREEN_WIDTH, height: self.positionView.bounds.size.height)
-            self.workTimeView.frame = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
+            self.positionView.frame    = CGRect(x: 0, y: -self.positionView.bounds.size.height, width: SCREEN_WIDTH, height: self.positionView.bounds.size.height)
+            self.workTimeView.frame    = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
             self.releaseDateView.frame = CGRect(x: 0, y: -self.releaseDateView.bounds.size.height, width: SCREEN_WIDTH, height: self.releaseDateView.bounds.size.height)
             
             self.positionView.isHidden    = true
@@ -296,8 +295,8 @@ extension SX_MoreHotJobController {
             
         } else if(view.isKind(of: type(of: self.workTimeView))) { // 工作时长
             
-            self.positionView.frame = CGRect(x: 0, y: -self.positionView.bounds.size.height, width: SCREEN_WIDTH, height: self.positionView.bounds.size.height)
-            self.workNatureView.frame = CGRect(x: 0, y: -self.workNatureView.bounds.size.height, width: SCREEN_WIDTH, height: self.workNatureView.bounds.size.height)
+            self.positionView.frame    = CGRect(x: 0, y: -self.positionView.bounds.size.height, width: SCREEN_WIDTH, height: self.positionView.bounds.size.height)
+            self.workNatureView.frame  = CGRect(x: 0, y: -self.workNatureView.bounds.size.height, width: SCREEN_WIDTH, height: self.workNatureView.bounds.size.height)
             self.releaseDateView.frame = CGRect(x: 0, y: -self.releaseDateView.bounds.size.height, width: SCREEN_WIDTH, height: self.releaseDateView.bounds.size.height)
             
             self.positionView.isHidden    = true
@@ -313,9 +312,9 @@ extension SX_MoreHotJobController {
             
         } else if(view.isKind(of: type(of: self.releaseDateView))) { // 发布日期
             
-            self.positionView.frame = CGRect(x: 0, y: -self.positionView.bounds.size.height, width: SCREEN_WIDTH, height: self.positionView.bounds.size.height)
+            self.positionView.frame   = CGRect(x: 0, y: -self.positionView.bounds.size.height, width: SCREEN_WIDTH, height: self.positionView.bounds.size.height)
             self.workNatureView.frame = CGRect(x: 0, y: -self.workNatureView.bounds.size.height, width: SCREEN_WIDTH, height: self.workNatureView.bounds.size.height)
-            self.workTimeView.frame = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
+            self.workTimeView.frame   = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
             
             self.positionView.isHidden   = true
             self.workNatureView.isHidden = true
@@ -340,8 +339,8 @@ extension SX_MoreHotJobController {
         
         /// 翻转箭头
         UIView.animate(withDuration: 0.1, animations: {
-            let selectedImg = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
-            selectedImg.image = #imageLiteral(resourceName: "btn_odown")
+            let selectedImg       = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
+            selectedImg.image     = #imageLiteral(resourceName: "btn_odown")
             let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
             selectedImg.transform = transform
         }) { (finished) in
@@ -352,18 +351,18 @@ extension SX_MoreHotJobController {
         for index in 0..<4 {
             if (index != (tag-ControlTag)) {
                 UIView.animate(withDuration: 0.1, animations: {
-                    let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
-                    allImg?.image = #imageLiteral(resourceName: "btn_down")
+                    let allImg        = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
+                    allImg?.image     = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
                     allImg?.transform = transform
                 }) { (finished) in
                     SXLog(finished)
-                    let allLabel = self.topSelectedView?.viewWithTag(index+LabelTag) as? UILabel
+                    let allLabel        = self.topSelectedView?.viewWithTag(index+LabelTag) as? UILabel
                     allLabel?.textColor = UIColor.black
                 }
             }
             
-            let selectedLabel = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
+            let selectedLabel        = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
             selectedLabel?.textColor = UIColor.SX_MainColor()
         }
     }
