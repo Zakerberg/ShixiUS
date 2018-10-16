@@ -17,11 +17,11 @@ enum ImgSource {
 // 图片类型
 enum ImgType:Int {
     case SERVER = 0     // default
-    case LOCAL = 1
+    case LOCAL  = 1
 }
 
 struct SXProxy {
-    var imgType:ImgType = .SERVER
+    var imgType:ImgType      = .SERVER
     var imgArray:[ImgSource] = [ImgSource]()
     
     // 下标法获取imgArray中对应索引的ImgSource eg: proxy[0] == imgArray[0]
@@ -68,10 +68,10 @@ protocol PageControlAlimentProtocol {
 extension PageControlAlimentProtocol where Self : UIView {   // TODO: 等待优化
     func relayoutPageControl(pageControl: SX_PageControl) {
         if pageControl.isHidden == false {
-            let pageH:CGFloat = 20 //pageControl.pageSize.height
-            let pageY = bounds.height - pageH
-            let pageW = pageControl.pageSize.width
-            var pageX:CGFloat = 0
+            let pageH:CGFloat   = 20 //pageControl.pageSize.height
+            let pageY           = bounds.height - pageH
+            let pageW           = pageControl.pageSize.width
+            var pageX:CGFloat   = 0
             
             switch self.pageControlAliment {
             case .CenterBottom:
@@ -86,7 +86,7 @@ extension PageControlAlimentProtocol where Self : UIView {   // TODO: 等待优�
     }
     func relayoutPageControl(pageControl: SX_PageControl, outerFrame:CGRect) {
         if pageControl.isHidden == false {
-            pageControl.frame = CGRect(x:outerFrame.origin.x, y:outerFrame.origin.y, width:pageControl.pageSize.width, height:pageControl.pageSize.height)
+            pageControl.frame   = CGRect(x:outerFrame.origin.x, y:outerFrame.origin.y, width:pageControl.pageSize.width, height:pageControl.pageSize.height)
         }
     }
 }
@@ -122,9 +122,9 @@ extension EndlessScrollProtocol where Self : UIView {
             return
         }
         
-        let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        let curItem = Int(collectionView.contentOffset.x / flowLayout.itemSize.width)
-        if curItem == itemsInSection - 1 {
+        let flowLayout   = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let curItem      = Int(collectionView.contentOffset.x / flowLayout.itemSize.width)
+        if curItem       == itemsInSection - 1 {
             let animated = (isEndlessScroll == true) ? false : true
             changeToFirstCycleCell(animated: animated, collectionView: collectionView)
         }else{

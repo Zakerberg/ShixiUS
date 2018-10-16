@@ -15,9 +15,9 @@
 import UIKit
 import SwiftyJSON
 
-private let ArrowTag = 3000
+private let ArrowTag   = 3000
 private let ControlTag = 1000
-private let LabelTag = 2000
+private let LabelTag   = 2000
 
 class SX_TrainingProjectController: UIViewController {
     
@@ -33,17 +33,26 @@ class SX_TrainingProjectController: UIViewController {
     
     var typeIdArr    = [String]() //中间
     var countryIdArr = [String]()
+    var sortSortArr  = [String]()
     var sortOrderArr = [String]()
+    
     
     var listsModels  = [TrainingListModel]()
     
-    var baseURL      = SHIXIUS + "/training/index"
+    /////用于Search搜索////
+    var typeStr: String      = "0"
+    var countryStr: String   = "1"
+    var sortStr: String      = "id"
+    var orderStr: String     = "0"
+    /////////////////////
+    
+    var baseURL = ""
     
     // 综合排序View
     lazy var comprehensiveView: SX_BasePopSelectedView = {
         let compreView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (compreView) in
-            compreView.backgroundColor = UIColor.white
-            compreView.isHidden = true
+            compreView.backgroundColor   = UIColor.white
+            compreView.isHidden          = true
         })
         
         return compreView
@@ -62,8 +71,8 @@ class SX_TrainingProjectController: UIViewController {
     /// 国家分类View
     lazy var countryView: SX_BasePopSelectedView = {
         let countryView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (countryView) in
-            countryView.backgroundColor = UIColor.white
-            countryView.isHidden        = true
+            countryView.backgroundColor  = UIColor.white
+            countryView.isHidden         = true
         })
         
         return countryView
@@ -102,12 +111,12 @@ extension SX_TrainingProjectController {
         // 创建底部的黑色透明图, 先隐藏
         self.blackBgView = UIView(frame: CGRect(x: 0, y: (self.topSelectedView?.frame.origin.y)! + (self.topSelectedView?.frame.size.height)!, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - kNavH - (self.topSelectedView?.frame.size.height)!))
         self.blackBgView?.backgroundColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-        self.blackBgView?.alpha = 0.3
+        self.blackBgView?.alpha    = 0.3
         self.view.insertSubview(self.blackBgView!, aboveSubview: self.collectionView!)
         self.blackBgView?.isHidden = true
         
         let tap = UIGestureRecognizer(target: self, action: #selector(TapClick))
-        tap.cancelsTouchesInView = false
+        tap.cancelsTouchesInView   = false
         self.blackBgView?.addGestureRecognizer(tap)
     }
     
@@ -226,11 +235,18 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
 extension SX_TrainingProjectController {
     func fetchData()  {
         
-        SX_NetManager.requestData(type: .GET, URlString: self.baseURL, parameters: nil) { (result) in
+        self.baseURL = SHIXIUS + "/training/index" + "?type=\(typeStr)" + "&country=\(countryStr)" + "&sort=\(sortStr)" + "&order=\(orderStr)"
+        
+        SX_NetManager.requestData(type: .GET, URlString: baseURL, parameters: nil) { (result) in
             do{
                 let json = try JSON(data: result)
                 /// 成功
                 SXLog("成功! ")
+                
+                self.typeStr    = json["data"]["search"]["type"].string ?? "0"
+                self.countryStr = json["data"]["search"]["country"].string ?? "1"
+                self.sortStr    = json["data"]["search"]["sort"].string ?? "id"
+                self.orderStr   = json["data"]["search"]["type"].string ?? "DESC"
                 
                 for item in json["data"]["lists"].array ?? [] {
                     let listModel = TrainingListModel(jsonData: item)
@@ -238,6 +254,7 @@ extension SX_TrainingProjectController {
                 }
                 for item in json["data"]["sort"].array ?? [] {
                     self.compreArr.append(item["name"].string ?? "测试综合")
+                    self.sortSortArr.append(item["sort"].string ?? "id")
                     self.sortOrderArr.append(item["order"].string ?? "desc")
                     self.comprehensiveView.dataArr = self.compreArr
                 }
@@ -251,7 +268,7 @@ extension SX_TrainingProjectController {
                     self.countryIdArr.append(item["id"].string ?? "1")
                     self.countryView.dataArr = self.countryArr
                 }
-                
+        
                 self.comprehensiveView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.compreArr.count*50))
                 self.trainingView.frame      = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.trainArr.count*50))
                 self.countryView.frame       = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.countryArr.count*50))
@@ -297,7 +314,7 @@ extension SX_TrainingProjectController {
         self.blackBgView?.isHidden = true
         if view.isHidden == false {
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
-                view.frame = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
+                view.frame    = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
             }) {(finished) in
                 view.isHidden = true
             }
@@ -305,7 +322,6 @@ extension SX_TrainingProjectController {
             UIView.animate(withDuration: 0.4, animations: {
                 /// 小三角的选中状态
                 for index in 0..<3 {
-                    
                     let allImg = self.topSelectedView?.viewWithTag(ArrowTag + index) as? UIImageView
                     allImg?.image = UIImage.init(named: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(-Double.pi)*0)
@@ -387,7 +403,7 @@ extension SX_TrainingProjectController {
         for index in 0..<3 {
             if (index != (tag-ControlTag)) {
                 UIView.animate(withDuration: 0.1, animations: {
-                    let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
+                    let allImg    = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
                     allImg?.image = UIImage.init(named: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
                     allImg?.transform = transform
@@ -432,7 +448,7 @@ extension SX_TrainingProjectController {
 }
 
 // ==============================================================================================
-// MARK: - Noti
+// MARK: - Noti处理
 // ==============================================================================================
 extension SX_TrainingProjectController {
     func Noti() {
@@ -446,24 +462,27 @@ extension SX_TrainingProjectController {
         hideViewWithAnimation(view: self.countryView)
         
         if self.comprehensiveView.isHidden == false {
-            SXLog(noti.userInfo?["text"])
+            SXLog(noti.userInfo?["index"])
             self.listsModels.removeAll()
             self.compreArr.removeAll()
-            // self.baseURL = SHIXIUS + "/training/index?" + ""
-
-            // 点击indexPath.row 选择对应的 sort数组里面的id, sort, order传出去 
             
+//WARNING: 点击indexPath.row 选择对应的 sort数组里面的 sort, order传出去, 然后fetchData
+            self.sortStr  = self.sortSortArr[noti.userInfo!["index"] as! Int]
+            self.orderStr = self.sortOrderArr[noti.userInfo!["index"] as! Int]
             
-            
+            fetchData()
         } else if self.trainingView.isHidden == false {
             SXLog(noti.userInfo?["text"])
             self.listsModels.removeAll()
             self.trainArr.removeAll()
-            
+            self.typeStr  = self.typeIdArr[noti.userInfo!["index"] as! Int]
+            fetchData()
         } else if self.countryView.isHidden == false {
             SXLog(noti.userInfo?["text"])
             self.listsModels.removeAll()
             self.countryArr.removeAll()
+            self.countryStr = self.countryIdArr[noti.userInfo!["index"] as! Int]
+            fetchData()
         }
     }
 }
