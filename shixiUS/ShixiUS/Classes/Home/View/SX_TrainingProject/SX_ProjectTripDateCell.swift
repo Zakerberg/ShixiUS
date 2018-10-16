@@ -26,8 +26,6 @@ class SX_ProjectTripDateCell: UITableViewCell {
     var dateBtn: UIButton?
     /// 更多日期
     var moreDate: UIButton?
-    /// 06.12
-    var date: UILabel?
     /// $5252
     var price: UILabel?
     
@@ -120,31 +118,13 @@ class SX_ProjectTripDateCell: UITableViewCell {
                     DATE.setTitleColor(UIColor.SX_MainColor(), for: .selected)
                     DATE.setTitleColor(UIColor.colorWithRGB(r: 51, g: 51, b: 51), for: .normal)
                     DATE.titleLabel?.font          = UIFont.boldSystemFont(ofSize: 10)
-                    DATE.titleLabel?.textAlignment = .center
-                    
+                    DATE.titleEdgeInsets           = UIEdgeInsetsMake(-20.FloatValue.IPAD_XValue, 0, 0, 0)
                     SXLog(DATE.tag)
                     if i == 0 {
                         DATE.isSelected = true
                     }
                     DATE.addTarget(self, action: #selector(dateBtnClick), for: .touchUpInside)
                 }
-                
-                /// 加日期
-//                self.date = UILabel().addhere(toSuperView: self.dateScrollView!).layout(snapKitMaker: { (make) in
-//                    make.top.equalToSuperview().offset(Margin)
-//                    make.left.equalToSuperview().offset(i*(DATEBTNWIDTH+5)+Int(Margin))
-//                    make.height.equalTo(13.FloatValue.IPAD_XValue)
-//                }).config { (DATE) in
-//                    DATE.sizeToFit()
-//                    if self.dateBtn?.isSelected == true {
-//                        DATE.font      = UIFont.boldSystemFont(ofSize: 10)
-//                        DATE.textColor = UIColor.SX_MainColor()
-//                    }else{
-//                        DATE.font      = UIFont.systemFont(ofSize: 12)
-//                        DATE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-//                    }
-//                    DATE.text = dateArr[i]
-//                }
             }
         }
     }
@@ -155,22 +135,24 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 return
             }
             priceArr = newValue
-            for index in 0..<(dateArr.count) {
+            for index in 0..<(dateArr.count )  {
                 /// 加 价格
                 self.price = UILabel().addhere(toSuperView: self.dateScrollView!).layout(snapKitMaker: { (make) in
-                    make.top.equalTo(self.date!.snp.bottom).offset(Margin)
-                    make.height.equalTo(self.date!)
-                    make.left.equalToSuperview().offset(index*(DATEBTNWIDTH+8)+Int(Margin))
+                    make.width.equalToSuperview()
+                    make.top.equalToSuperview().offset(Margin*3)
+                    make.left.equalToSuperview().offset(index*(DATEBTNWIDTH+8)+Int(Margin+8))
+                    make.height.equalTo(13.FloatValue.IPAD_XValue)
+                    
                 }).config({ (PRICE) in
                     PRICE.sizeToFit()
                     if self.dateBtn?.isSelected == true  {
-                        PRICE.font      = UIFont.boldSystemFont(ofSize: 12)
+                        PRICE.font      = UIFont.boldSystemFont(ofSize: 10)
                         PRICE.textColor = UIColor.SX_MainColor()
                     }else{
-                        PRICE.font      = UIFont.systemFont(ofSize: 12)
+                        PRICE.font      = UIFont.boldSystemFont(ofSize: 10)
                         PRICE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                     }
-                    PRICE.text          = tripArr[index] 
+                    PRICE.text          = priceArr[index]
                 })
             }
         }
