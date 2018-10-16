@@ -44,7 +44,6 @@ class SX_TrainingProjectController: UIViewController {
     var sortStr: String      = "id"
     var orderStr: String     = "0"
     /////////////////////
-    
     var baseURL = ""
     
     // 综合排序View
@@ -124,9 +123,9 @@ extension SX_TrainingProjectController {
         
         let flowLayout      = UICollectionViewFlowLayout()
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
-        self.collectionView?.backgroundColor = UIColor.white
-        self.collectionView?.delegate        = self
-        self.collectionView?.dataSource      = self
+        self.collectionView?.backgroundColor                = UIColor.white
+        self.collectionView?.delegate                       = self
+        self.collectionView?.dataSource                     = self
         self.collectionView?.showsHorizontalScrollIndicator = false
         self.collectionView?.showsVerticalScrollIndicator   = false
         self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
@@ -373,9 +372,9 @@ extension SX_TrainingProjectController {
             self.trainingView.isHidden       = true
             
             let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
-            control1?.isSelected = false
+            control1?.isSelected   = false
             let control2 = self.topSelectedView?.viewWithTag(1001) as? UIControl
-            control2?.isSelected = false
+            control2?.isSelected   = false
         }
         
         self.blackBgView?.isHidden = false

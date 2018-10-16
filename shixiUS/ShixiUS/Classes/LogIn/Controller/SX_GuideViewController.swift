@@ -22,20 +22,19 @@ class SX_GuideViewController: UIViewController {
     }
 }
 
-// =========================================================================================================================
+// =========================================================
 // MARK: - Other Method
-// =========================================================================================================================
+// =========================================================
 extension SX_GuideViewController {
     
     func setUI() {
         // gif和jpg类型的资源数组
         let imageGifArray = ["guideImage1.jpg","guideImage6.gif", "guideImage8.gif", "guideImage2.jpg","guideImage7.gif", "guideImage5.jpg"]
-        let guideView = SX_GuidePageView.init(images: imageGifArray, loginRegistCompletion: {
+        let guideView     = SX_GuidePageView.init(images: imageGifArray, loginRegistCompletion: {
             SXLog("登录/注册")
         }) {
             SXLog("开始使用App")
         }
-        
         self.view.addSubview(guideView)
     }
 }

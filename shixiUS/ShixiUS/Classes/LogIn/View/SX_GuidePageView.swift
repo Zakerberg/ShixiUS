@@ -33,9 +33,9 @@ public class SX_GuidePageView: UIView {
     
     /// 指示器
     public lazy var pageControl: SX_GuidePageControl = {
-        var pageControl = SX_GuidePageControl()
-        let size = CGSize(width: 15.0, height: 3.0)
-        let normalImage = creatImage(color: UIColor(white: 0.0, alpha: 0.1), size: size)
+        var pageControl   = SX_GuidePageControl()
+        let size          = CGSize(width: 15.0, height: 3.0)
+        let normalImage   = creatImage(color: UIColor(white: 0.0, alpha: 0.1), size: size)
         let selectedImage = creatImage(color: UIColor(red: 198.0/255.0, green: 165.0/255.0, blue: 111.0/255.0, alpha: 1.0), size: size)
         pageControl.setImage(normalImage, for: .normal)
         pageControl.setImage(selectedImage, for: .selected)
@@ -46,11 +46,11 @@ public class SX_GuidePageView: UIView {
     /// 跳过按钮
     public lazy var skipButton: UIButton = {
         let btn = UIButton.init(type: .custom)
-        btn.backgroundColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.4)
-        btn.layer.cornerRadius = 5.0
+        btn.backgroundColor     = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.4)
+        btn.layer.cornerRadius  = 5.0
         btn.layer.masksToBounds = true
         btn.setTitle("跳 过", for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        btn.titleLabel?.font    = UIFont.systemFont(ofSize: 12)
         btn.setTitleColor(UIColor.white, for: .normal)
         btn.titleLabel?.sizeToFit()
         btn.addTarget(self, action: #selector(skipBtnClicked), for: .touchUpInside)
@@ -63,7 +63,7 @@ public class SX_GuidePageView: UIView {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.setTitleColor(UIColor.white, for: .normal)
         btn.titleLabel?.sizeToFit()
-        btn.backgroundColor = UIColor.init(red: 177.0/255.0, green: 126.0/255.0, blue: 71.0/255.0, alpha: 1.0)
+        btn.backgroundColor  = UIColor.init(red: 177.0/255.0, green: 126.0/255.0, blue: 71.0/255.0, alpha: 1.0)
         btn.addTarget(self, action: #selector(loginBtnClicked), for: .touchUpInside)
         return btn
     }()
@@ -81,8 +81,8 @@ public class SX_GuidePageView: UIView {
     var startCompletion: (() -> ())?
     var loginCompletion: (() -> ())?
     let pageControlHeight: CGFloat = 40.0
-    let startHeigth: CGFloat = 30.0
-    let loginHeight: CGFloat = 40.0
+    let startHeigth: CGFloat       = 30.0
+    let loginHeight: CGFloat       = 40.0
     
     // MARK: - life cycle
     private override init(frame: CGRect) {
@@ -114,7 +114,7 @@ public class SX_GuidePageView: UIView {
         self.loginCompletion  = loginRegistCompletion
         
         setupSubviews(frame: frame)
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor  = UIColor.lightGray
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -124,11 +124,11 @@ public class SX_GuidePageView: UIView {
     // MARK: - setup
     private func setupSubviews(frame: CGRect) {
         let size = UIScreen.main.bounds.size
-        guideScrollView.frame = frame
+        guideScrollView.frame       = frame
         guideScrollView.contentSize = CGSize.init(width: frame.size.width * CGFloat(imageArray?.count ?? 0), height: frame.size.height)
         self.addSubview(guideScrollView)
         
-        skipButton.frame = CGRect.init(x: size.width - 70.0 , y: 40.0, width: 50.0, height: 24.0)
+        skipButton.frame    = CGRect.init(x: size.width - 70.0 , y: 40.0, width: 50.0, height: 24.0)
         skipButton.isHidden = isHiddenSkipBtn
         self.addSubview(skipButton)
         
@@ -157,9 +157,9 @@ public class SX_GuidePageView: UIView {
                 view.isUserInteractionEnabled = true
                 if !isHiddenStartBtn {
                     let y = size.height - pageControlHeight - startHeigth
-                    let width = size.width * 0.35
-                    startButton.frame = CGRect.init(x: (size.width - width) * 0.5, y: y, width: width, height: startHeigth)
-                    startButton.alpha = imageArray?.count == 1 ? 1.0 : 0.0
+                    let width          = size.width * 0.35
+                    startButton.frame  = CGRect.init(x: (size.width - width) * 0.5, y: y, width: width, height: startHeigth)
+                    startButton.alpha  = imageArray?.count == 1 ? 1.0 : 0.0
                     view.addSubview(startButton)
                     
                     let w = size.width * 0.6
@@ -174,7 +174,6 @@ public class SX_GuidePageView: UIView {
     
     // MARK: - actions
     private func removeGuideViewFromSupview() {
-        
         UIView.animate(withDuration: 1.0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.alpha = 0.0
         }) { (_) in
@@ -212,16 +211,15 @@ public class SX_GuidePageView: UIView {
     
     /**
      *   第三方库取图片资源
-     *
-     *   @Parameter name: 图片名
-     *   @Returns: 图片
-     *
+     *   Parameter name: 图片名
+     *   Returns: 图片
      */
     private func imageFromBundle(name: String) -> UIImage {
         let podBundle = Bundle(for: self.classForCoder)
         let bundleURL = podBundle.url(forResource: "GuideImage", withExtension: "bundle")
-        let bundle = Bundle(url: bundleURL!)
-        let image = UIImage(named: String(name), in: bundle, compatibleWith: nil)
+        let bundle    = Bundle(url: bundleURL!)
+        let image     = UIImage(named: String(name), in: bundle, compatibleWith: nil)
+        
         return image!
     }
     
@@ -238,14 +236,15 @@ public class SX_GuidePageView: UIView {
         let context = UIGraphicsGetCurrentContext()
         context!.setFillColor(color.cgColor)
         context!.fill(CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let image  = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
         return image!
     }
 }
-// =========================================================================================================================
+// =========================================================
 // MARK: - UIScrollViewDelegate
-// =========================================================================================================================
+// =========================================================
 extension SX_GuidePageView: UIScrollViewDelegate {
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page: Int = Int(scrollView.contentOffset.x / scrollView.bounds.size.width)
@@ -261,6 +260,3 @@ extension SX_GuidePageView: UIScrollViewDelegate {
         }
     }
 }
-
-
-

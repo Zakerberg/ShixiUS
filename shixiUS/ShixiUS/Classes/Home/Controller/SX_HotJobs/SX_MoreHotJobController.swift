@@ -6,6 +6,12 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  热门岗位的更多 && 海外就业
 
+/*
+ 风吹乱你的秀发
+ 刚刚好
+ 吹动了我的心
+ */
+
 import UIKit
 import SwiftyJSON
 
@@ -17,6 +23,14 @@ let hotJobCellID       = "hotJobCellID"
 class SX_MoreHotJobController: UIViewController {
     
     var jobListsMlodel = [JobListModel]()
+    
+    /////用于Search搜索////
+    var typeStr: String     = "0"
+    var natureStr: String   = "0"
+    var durationStr: String = "0"
+    var settrStr: String    = "0"
+    /////////////////////
+    var baseURL = ""
     
     /// 职位分类View
     private lazy var positionView: UIView = {
@@ -76,6 +90,11 @@ class SX_MoreHotJobController: UIViewController {
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Noti()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -99,9 +118,8 @@ class SX_MoreHotJobController: UIViewController {
 extension SX_MoreHotJobController {
     
     func setUI() {
-        self.title = "热门岗位"
+        title                         = "热门岗位"
         self.view.backgroundColor     = UIColor.white
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.positionView.isHidden    = true
         self.workTimeView.isHidden    = true
@@ -113,7 +131,10 @@ extension SX_MoreHotJobController {
     }
     
     func fetchData() {
-        SX_NetManager.requestData(type: .GET, URlString: SX_JobIndex, parameters: nil) { (result) in
+        
+        baseURL = SHIXIUS + "/job/index" 
+        
+        SX_NetManager.requestData(type: .GET, URlString: baseURL, parameters: nil) { (result) in
             
             do{
                 let json = try JSON(data: result)
@@ -146,9 +167,20 @@ extension SX_MoreHotJobController {
             self.topSelectedView?.addSubview(view)
             
             let control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-            control.addTarget(self, action: #selector(topSelectedBtnClick), for: .touchUpInside)
-            control.tag = index + ControlTag
             
+       //     control.addTarget(self, action: #selector(topSelectedBtnClick), for: .touchUpInside)
+            
+            
+            control.rx.controlEvent(.touchUpInside).subscribe(onNext: { (_) in
+
+                
+                
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+            
+
+            control.tag = index + ControlTag
             view.addSubview(control)
         }
     }
@@ -178,13 +210,14 @@ extension SX_MoreHotJobController {
             }.config { (imageV) in
                 imageV.tag = tag + ArrowTag
         }
+        
         return view
     }
 }
 
-// =================================================================================================================
+// =========================================================================================
 // MARK: - @objc
-// =================================================================================================================
+// =========================================================================================
 extension SX_MoreHotJobController {
     
     /// 调出PickerView
@@ -351,10 +384,10 @@ extension SX_MoreHotJobController {
         for index in 0..<4 {
             if (index != (tag-ControlTag)) {
                 UIView.animate(withDuration: 0.1, animations: {
-                    let allImg        = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
-                    allImg?.image     = #imageLiteral(resourceName: "btn_down")
+                    let allImg          = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
+                    allImg?.image       = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
-                    allImg?.transform = transform
+                    allImg?.transform   = transform
                 }) { (finished) in
                     SXLog(finished)
                     let allLabel        = self.topSelectedView?.viewWithTag(index+LabelTag) as? UILabel
@@ -362,15 +395,15 @@ extension SX_MoreHotJobController {
                 }
             }
             
-            let selectedLabel        = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
-            selectedLabel?.textColor = UIColor.SX_MainColor()
+            let selectedLabel           = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
+            selectedLabel?.textColor    = UIColor.SX_MainColor()
         }
     }
 }
 
-// =================================================================================================================
+// ===============================================================
 // MARK: - UITableViewDelegate
-// =================================================================================================================
+// ===============================================================
 extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.jobListsMlodel.count
@@ -403,3 +436,14 @@ extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+
+// ===============================================================
+// MARK: - Noti
+// ===============================================================
+extension SX_MoreHotJobController {
+    func Noti() {
+        
+    }
+}
+
+

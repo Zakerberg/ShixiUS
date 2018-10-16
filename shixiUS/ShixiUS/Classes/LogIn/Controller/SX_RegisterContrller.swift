@@ -6,6 +6,12 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  注册
 
+/*
+ 时光
+ 刚刚好
+ 等我来爱你
+ */
+
 import UIKit
 import SwiftyJSON
 import MBProgressHUD
