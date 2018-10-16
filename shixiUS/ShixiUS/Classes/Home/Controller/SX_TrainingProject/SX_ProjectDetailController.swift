@@ -17,7 +17,7 @@ import SwiftyJSON
 let projectDetailTitleCellID    = "projectDetailTitleCellID"
 let projectDetailDateTripCellID = "projectDetailDateTripCellID"
 
-let projectDetailCellID = "projectDetailCellID"
+let projectDetailCellID         = "projectDetailCellID"
 class SX_ProjectDetailController: UIViewController {
     
     var topArr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
@@ -29,28 +29,24 @@ class SX_ProjectDetailController: UIViewController {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
     var id:String?
-    var serverImgs = [String]()
+    var serverImgs       = [String]()
     var projectDetailArr = JSON()
     var moreDateBtn : UIButton?
     
     /// 行程标题
     var tripTitleArr = [String]()
     /// 日期
-    var tripDateArr =  [String]()
+    var tripDateArr  = [String]()
     /// 价格
     var tripPriceArr = [String]()
     
     lazy var pageTitleView: SX_PageTitleView = {
-        
         let config                = SX_PageTitleViewConfig()
         config.titleColor         = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         config.titleSelectedColor = UIColor.SX_MainColor()
-        
         let pageTitleView = SX_PageTitleView(frame: CGRect(x: 0, y: 200, width: SCREEN_WIDTH, height: 41), titles: self.topArr, config: config)
-        
         pageTitleView.config = config
         pageTitleView.titles = self.topArr
-        
         pageTitleView.pageTitleViewDelegate = self
         
         return pageTitleView
@@ -108,7 +104,6 @@ extension SX_ProjectDetailController {
         
         view.addSubview(tableView)
         tableView.addSubview(detailScrollerView)
-        //  tableView.addSubview(projectBgView)
         navBarBackgroundAlpha = 0
         
         self.collectionBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
@@ -146,12 +141,15 @@ extension SX_ProjectDetailController {
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
-                //                if SX_Utils.getSign_token() == "" {
-                //                    SXLog("前去登陆")
-                //                }else{
+                
+                
+                
+                
+                
+                
                 let vc =  SX_ApplyTrainListController()
                 self.navigationController?.pushViewController(vc, animated: true)
-                //                }
+                
                 
             }, onError: { (error) in
                 SXLog(error)
@@ -160,6 +158,7 @@ extension SX_ProjectDetailController {
     }
     
     func fetchData() {
+        
         SX_NetManager.requestData(type: .GET, URlString: (SX_TrainingDetail + self.id!), parameters:  nil, finishCallBack: { (result) in
             do{
                 /// SwiftyJSON 在这里 ! ! !
@@ -171,7 +170,6 @@ extension SX_ProjectDetailController {
                 for item in json["data"]["training"].array ?? [] {
                     self.tripTitleArr.append(item["title"].string ?? "")
                 }
-                
                 for item in json["data"]["details"].array ?? [] {
                     self.tripDateArr.append(item["date"].string ?? "")
                     self.tripPriceArr.append(item["price"].string ?? "")
@@ -201,23 +199,24 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let model = self.projectDetailArr[indexPath.section]
+            let model     = self.projectDetailArr[indexPath.section]
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
-            titleCell.selectionStyle = .none
-            titleCell.projectName!.text = model["title"].string ?? ""
-            titleCell.projectCity!.text = model["outset_city"].string ?? ""
-            titleCell.projectPrice!.text = "$" + "1500" + "起/人"
-
+            titleCell.selectionStyle     = .none
+            titleCell.projectName?.text  = model["data"]["title"].string ?? ""
+            titleCell.projectCity?.text  = model["data"]["outset_city"].string ?? ""
+            // titleCell.projectContent?.text = model["data"]["features"].string ?? ""
+            titleCell.projectPrice?.text = "$" + "1500" + "起/人"
+            
             return titleCell
             
-        } else if indexPath.section == 1 {
-            let cell = SX_ProjectTripDateCell(style: .default, reuseIdentifier: "111")
+        }else if indexPath.section == 1 {
+            let cell = SX_ProjectTripDateCell(style: .default, reuseIdentifier: "TRIPDATACELL")
             cell.selectionStyle = .none
-            cell.tripArr      = self.tripTitleArr
-            cell.dateArr      = self.tripDateArr
-            cell.priceArr     = self.tripPriceArr
-
-            self.moreDateBtn  = cell.moreDate
+            cell.tripArr        = self.tripTitleArr
+            cell.dateArr        = self.tripDateArr
+            //cell.priceArr       = self.tripPriceArr
+            
+            self.moreDateBtn    = cell.moreDate
             self.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("更多日期 ")
                 
@@ -235,18 +234,17 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         cell.selectionStyle = .none
         
         if indexPath.section == 2 {
-            cell.titleLabel?.text = "项目亮点"
+            cell.titleLabel?.text  = "项目亮点"
         }else if indexPath.section == 3 {
-            
-            cell.titleLabel?.text = "日程安排"
+            cell.titleLabel?.text  = "日程安排"
         }else if indexPath.section == 4 {
-            cell.titleLabel?.text = "费用说明"
+            cell.titleLabel?.text  = "费用说明"
         }else{
-            cell.titleLabel?.text = "预定须知"
+            cell.titleLabel?.text  = "预定须知"
         }
         
         cell.titleLabel?.textAlignment = .center
-        cell.contentLabel?.text = self.ProjectLightStr
+        cell.contentLabel?.text        = self.ProjectLightStr
         
         return cell
     }
@@ -356,12 +354,12 @@ extension SX_ProjectDetailController: SXPageTitleViewDelegate {
         SXLog(selectedIndex)
         if self.topArr.count > 0 {
             if selectedIndex == 0 {
-                //                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+                //  self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
             } else if selectedIndex == 1 {
                 self.tableView.scrollToRow(at: IndexPath(row: 0, section: 3), at: .top, animated: true)
             } else if selectedIndex == 2 {
                 self.tableView.scrollToRow(at: IndexPath(row: 0, section: 4), at: .top, animated: true)
-            }  else if selectedIndex == 3 {
+            } else if selectedIndex == 3 {
                 self.tableView.scrollToRow(at: IndexPath(row: 0, section: 5), at: .top, animated: true)
             }
         }

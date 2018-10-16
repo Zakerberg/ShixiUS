@@ -36,7 +36,6 @@ class SX_TrainingProjectController: UIViewController {
     var sortSortArr  = [String]()
     var sortOrderArr = [String]()
     
-    
     var listsModels  = [TrainingListModel]()
     
     /////用于Search搜索////
@@ -123,11 +122,11 @@ extension SX_TrainingProjectController {
     /// 顶部三个按钮 && CollectionView
     func setTopSelectedView() {
         
-        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout      = UICollectionViewFlowLayout()
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         self.collectionView?.backgroundColor = UIColor.white
-        self.collectionView?.delegate   = self
-        self.collectionView?.dataSource = self
+        self.collectionView?.delegate        = self
+        self.collectionView?.dataSource      = self
         self.collectionView?.showsHorizontalScrollIndicator = false
         self.collectionView?.showsVerticalScrollIndicator   = false
         self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
@@ -202,12 +201,12 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
         
-        cell.layer.shadowColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
+        cell.layer.shadowColor   = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
         cell.layer.masksToBounds = true
-        cell.layer.cornerRadius = 5
-        cell.backgroundColor = UIColor.white
+        cell.layer.cornerRadius  = 5
+        cell.backgroundColor     = UIColor.white
         
-        let model = listsModels[indexPath.item]
+        let model  = listsModels[indexPath.item]
         if let url = URL(string: model.image ?? ""){
             cell.sourceImageView?.kf.setImage(with: url)
         }else{
@@ -268,7 +267,7 @@ extension SX_TrainingProjectController {
                     self.countryIdArr.append(item["id"].string ?? "1")
                     self.countryView.dataArr = self.countryArr
                 }
-        
+                
                 self.comprehensiveView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.compreArr.count*50))
                 self.trainingView.frame      = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.trainArr.count*50))
                 self.countryView.frame       = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.countryArr.count*50))
@@ -465,11 +464,9 @@ extension SX_TrainingProjectController {
             SXLog(noti.userInfo?["index"])
             self.listsModels.removeAll()
             self.compreArr.removeAll()
-            
-//WARNING: 点击indexPath.row 选择对应的 sort数组里面的 sort, order传出去, 然后fetchData
+            //WARNING: 点击indexPath.row 选择对应的 sort数组里面的 sort, order传出去, 然后fetchData
             self.sortStr  = self.sortSortArr[noti.userInfo!["index"] as! Int]
             self.orderStr = self.sortOrderArr[noti.userInfo!["index"] as! Int]
-            
             fetchData()
         } else if self.trainingView.isHidden == false {
             SXLog(noti.userInfo?["text"])

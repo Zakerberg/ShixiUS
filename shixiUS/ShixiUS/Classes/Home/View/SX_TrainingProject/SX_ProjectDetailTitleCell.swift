@@ -16,10 +16,10 @@ import UIKit
 
 class SX_ProjectDetailTitleCell: UITableViewCell {
     
-    var projectName    : UILabel?
-//    var projectContent : UILabel?
-    var projectCity    : UILabel?
-    var projectPrice   : UILabel?
+    var projectName : UILabel?
+    var projectCity : UILabel?
+    //var projectContent: UILabel?
+    var projectPrice: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,38 +53,38 @@ extension SX_ProjectDetailTitleCell {
             make.top.equalToSuperview().offset(Margin)
             make.left.equalToSuperview().offset(Margin)
             make.height.equalTo(Margin+2)
-        }).config({ (projectName) in
-            projectName.sizeToFit()
-            projectName.font = UIFont.boldSystemFont(ofSize: 16)
-            projectName.textColor = UIColor.black
+        }).config({ (NAME) in
+            NAME.sizeToFit()
+            NAME.font      = UIFont.boldSystemFont(ofSize: 16)
+            NAME.textColor = UIColor.black
         })
         
 //        self.projectContent = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
 //            make.top.equalTo(self.projectName!.snp.bottom).offset(Margin)
 //            make.left.equalTo(self.projectName!)
-//            make.height.equalTo(Margin-1)
-//        }).config({ (projectContent) in
-//            projectContent.sizeToFit()
-//            projectContent.textColor = UIColor.gray
-//            projectContent.font = UIFont.systemFont(ofSize: 14)
+//            make.right.equalToSuperview().offset(-Margin)
+//        }).config({ (CONTENT) in
+//            CONTENT.numberOfLines = 0
+//            CONTENT.textColor     = UIColor.gray
+//            CONTENT.font          = UIFont.systemFont(ofSize: 14)
 //        })
         
         self.projectCity = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.projectName!.snp.bottom).offset(Margin)
             make.left.equalTo(self.projectName!)
-        }).config({ (projectCity) in
-            projectCity.sizeToFit()
-            projectCity.textColor = UIColor.gray
-            projectCity.font = UIFont.systemFont(ofSize: 13)
+        }).config({ (CITY) in
+            CITY.sizeToFit()
+            CITY.textColor = UIColor.gray
+            CITY.font      = UIFont.systemFont(ofSize: 13)
         })
         
         self.projectPrice = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.projectCity!.snp.bottom).offset(Margin)
             make.left.equalTo(self.projectName!)
-        }).config({ (projectPrice) in
-            projectPrice.sizeToFit()
-            projectPrice.font = UIFont.boldSystemFont(ofSize: 14)
-            projectPrice.textColor = UIColor.red
+        }).config({ (PRICE) in
+            PRICE.sizeToFit()
+            PRICE.font      = UIFont.boldSystemFont(ofSize: 14)
+            PRICE.textColor = UIColor.red
         })
     }
 }
