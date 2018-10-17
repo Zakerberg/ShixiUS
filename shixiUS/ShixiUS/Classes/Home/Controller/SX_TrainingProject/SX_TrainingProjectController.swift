@@ -27,16 +27,16 @@ class SX_TrainingProjectController: UIViewController {
     
     var collectionView: UICollectionView?
     
-    var compreArr    = [String]()
-    var countryArr   = [String]()
-    var trainArr     = [String]()
+    var compreNameArr  = [String]()
+    var countryNameArr = [String]()
+    var trainNameArr   = [String]()
     
-    var typeIdArr    = [String]() //中间
-    var countryIdArr = [String]()
-    var sortSortArr  = [String]()
-    var sortOrderArr = [String]()
+    var typeIdArr      = [String]() //中间
+    var countryIdArr   = [String]()
+    var sortSortArr    = [String]()
+    var sortOrderArr   = [String]()
     
-    var listsModels  = [TrainingListModel]()
+    var listsModels    = [TrainingListModel]()
     
     /////用于Search搜索////
     var typeStr: String      = "0"
@@ -134,8 +134,8 @@ extension SX_TrainingProjectController {
             make.bottom.equalToSuperview()
         })
         
-        self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: kNavH, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
-            topSelectedView.backgroundColor = UIColor.white
+        self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: kNavH, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (TOPSELECTEDVIEW) in
+            TOPSELECTEDVIEW.backgroundColor = UIColor.white
         })
         
         let _ = UIView(frame: CGRect(x: 0, y: self.topSelectedView!.frame.origin.y + self.topSelectedView!.frame.size.height + 0.1 , width: SCREEN_WIDTH, height: 0.5)).addhere(toSuperView: self.view).config { (LINE) in
@@ -230,7 +230,7 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
 extension SX_TrainingProjectController {
     func fetchData()  {
         
-        self.baseURL = SHIXIUS + "/training/index" + "?type=\(typeStr)" + "&country=\(countryStr)" + "&sort=\(sortStr)" + "&order=\(orderStr)"
+        baseURL = SHIXIUS + "/training/index" + "?type=\(typeStr)" + "&country=\(countryStr)" + "&sort=\(sortStr)" + "&order=\(orderStr)"
         
         SX_NetManager.requestData(type: .GET, URlString: baseURL, parameters: nil) { (result) in
             do{
@@ -248,25 +248,25 @@ extension SX_TrainingProjectController {
                     self.listsModels.append(listModel)
                 }
                 for item in json["data"]["sort"].array ?? [] {
-                    self.compreArr.append(item["name"].string ?? "测试综合")
+                    self.compreNameArr.append(item["name"].string ?? "测试综合")
                     self.sortSortArr.append(item["sort"].string ?? "id")
                     self.sortOrderArr.append(item["order"].string ?? "desc")
-                    self.comprehensiveView.dataArr = self.compreArr
+                    self.comprehensiveView.dataArr = self.compreNameArr
                 }
                 for item in json["data"]["type"].array ?? [] {
-                    self.trainArr.append(item["name"].string ?? "测试type")
+                    self.trainNameArr.append(item["name"].string ?? "测试type")
                     self.typeIdArr.append(item["id"].string ?? "0")
-                    self.trainingView.dataArr = self.trainArr
+                    self.trainingView.dataArr = self.trainNameArr
                 }
                 for item in json["data"]["country"].array ?? [] {
-                    self.countryArr.append(item["name"].string ?? "测试country")
+                    self.countryNameArr.append(item["name"].string ?? "测试country")
                     self.countryIdArr.append(item["id"].string ?? "1")
-                    self.countryView.dataArr = self.countryArr
+                    self.countryView.dataArr = self.countryNameArr
                 }
                 
-                self.comprehensiveView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.compreArr.count*50))
-                self.trainingView.frame      = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.trainArr.count*50))
-                self.countryView.frame       = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.countryArr.count*50))
+                self.comprehensiveView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.compreNameArr.count*50))
+                self.trainingView.frame      = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.trainNameArr.count*50))
+                self.countryView.frame       = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.countryNameArr.count*50))
                 
                 self.collectionView?.reloadData()
             } catch{ }
@@ -335,9 +335,8 @@ extension SX_TrainingProjectController {
     func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
         
         if view.isKind(of: type(of: self.comprehensiveView)) { //综合
-            
             self.trainingView.frame = CGRect(x: 0, y: -self.trainingView.bounds.size.height, width: SCREEN_WIDTH, height: self.trainingView.bounds.size.height)
-            self.countryView.frame = CGRect(x: 0, y: -self.countryView.bounds.size.height, width: SCREEN_WIDTH, height: self.countryView.bounds.size.height)
+            self.countryView.frame  = CGRect(x: 0, y: -self.countryView.bounds.size.height, width: SCREEN_WIDTH, height: self.countryView.bounds.size.height)
             
             self.trainingView.isHidden = true
             self.countryView.isHidden  = true
@@ -459,7 +458,7 @@ extension SX_TrainingProjectController {
         if self.comprehensiveView.isHidden == false {
             SXLog(noti.userInfo?["index"])
             self.listsModels.removeAll()
-            self.compreArr.removeAll()
+            self.compreNameArr.removeAll()
             //WARNING: 点击indexPath.row 选择对应的 sort数组里面的 sort, order传出去, 然后fetchData
             self.sortStr  = self.sortSortArr[noti.userInfo!["index"] as! Int]
             self.orderStr = self.sortOrderArr[noti.userInfo!["index"] as! Int]
@@ -467,13 +466,13 @@ extension SX_TrainingProjectController {
         } else if self.trainingView.isHidden == false {
             SXLog(noti.userInfo?["text"])
             self.listsModels.removeAll()
-            self.trainArr.removeAll()
+            self.trainNameArr.removeAll()
             self.typeStr  = self.typeIdArr[noti.userInfo!["index"] as! Int]
             fetchData()
         } else if self.countryView.isHidden == false {
             SXLog(noti.userInfo?["text"])
             self.listsModels.removeAll()
-            self.countryArr.removeAll()
+            self.countryNameArr.removeAll()
             self.countryStr = self.countryIdArr[noti.userInfo!["index"] as! Int]
             fetchData()
         }

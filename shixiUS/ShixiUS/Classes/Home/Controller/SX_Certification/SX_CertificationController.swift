@@ -32,29 +32,29 @@ class SX_CertificationController: UIViewController {
     
     // 综合排序View
     lazy var comprehensiveView: UIView = {
-        let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (compreView) in
-            compreView.backgroundColor = UIColor.white
-            compreView.dataArr  = ["综合排序","项目时间","价格降序","价格升序"]
-            compreView.isHidden = true
-            compreView.backgroundColor = UIColor.red
+        let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (COMPREVIEW) in
+            COMPREVIEW.backgroundColor = UIColor.white
+            COMPREVIEW.dataArr         = ["综合排序","项目时间","价格降序","价格升序"]
+            COMPREVIEW.isHidden        = true
+            COMPREVIEW.backgroundColor = UIColor.red
         })
         return compreView
     }()
     
     /// 课程属性View
-    private lazy var ClassAttributeView: UIView = {
-        let classAttribute = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (ClassAttribute) in
-            ClassAttribute.backgroundColor = UIColor.white
+     lazy var ClassAttributeView: UIView = {
+        let classAttribute = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (CLASS) in
+            CLASS.backgroundColor = UIColor.white
+            CLASS.dataArr  = ["测试类别1","测试类别2","测试类别3","测试类别4","测试类别5"]
+            CLASS.isHidden = true
         })
         
-        classAttribute.dataArr  = ["测试类别1","测试类别2","测试类别3","测试类别4","测试类别5"]
-        classAttribute.isHidden = true
         
         return classAttribute
     }()
     
     /// 专业类型View
-    private lazy var professionalTypeView: UIView = {
+     lazy var professionalTypeView: UIView = {
         let professionaltype = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (professionaltype) in
             professionaltype.backgroundColor = UIColor.white
         })
@@ -94,11 +94,11 @@ extension SX_CertificationController {
     func setTopSelectedView() {
         let flowLayout      = UICollectionViewFlowLayout()
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
-        self.collectionView?.backgroundColor = UIColor.white
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
+        self.collectionView?.backgroundColor                = UIColor.white
+        self.collectionView?.delegate                       = self
+        self.collectionView?.dataSource                     = self
         self.collectionView?.showsHorizontalScrollIndicator = false
-        self.collectionView?.showsVerticalScrollIndicator = false
+        self.collectionView?.showsVerticalScrollIndicator   = false
         self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
         self.view.insertSubview(self.collectionView!, belowSubview: self.ClassAttributeView)
         self.collectionView?.snp.makeConstraints({ (make) in
@@ -224,7 +224,7 @@ extension SX_CertificationController {
                 /// 小三角的选中状态
                 for index in 0..<3 {
                     let allImg = self.topSelectedView?.viewWithTag(ArrowTag + index) as? UIImageView
-                    allImg?.image = #imageLiteral(resourceName: "btn_down")
+                    allImg?.image     = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(-Double.pi)*0)
                     allImg?.transform = transform
                     
