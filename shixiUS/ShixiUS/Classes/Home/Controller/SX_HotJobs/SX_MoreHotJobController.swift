@@ -45,9 +45,8 @@ class SX_MoreHotJobController: UIViewController {
     
     /// 职位分类View
     lazy var positionView: SX_BasePopSelectedView = {
-        let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (POSITIONVIEW) in
+        let positionView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (POSITIONVIEW) in
             POSITIONVIEW.backgroundColor   = UIColor.white
-            POSITIONVIEW.dataArr           = ["不限","会计服务","航空","银行"]
             POSITIONVIEW.isHidden          = true
         })
         return positionView
@@ -55,9 +54,8 @@ class SX_MoreHotJobController: UIViewController {
     
     /// 工作性质View
     lazy var workNatureView: SX_BasePopSelectedView = {
-        let natureView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (WORKNATUREVIEW) in
+        let natureView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (WORKNATUREVIEW) in
             WORKNATUREVIEW.backgroundColor = UIColor.white
-            WORKNATUREVIEW.dataArr         = ["中国","美国","不限"]
             WORKNATUREVIEW.isHidden        = true
         })
         return natureView
@@ -65,9 +63,8 @@ class SX_MoreHotJobController: UIViewController {
     
     /// 工作时常View
     lazy var workTimeView: SX_BasePopSelectedView = {
-        let timeView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (WORKTIMEVIEW) in
+        let timeView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (WORKTIMEVIEW) in
             WORKTIMEVIEW.backgroundColor   = UIColor.white
-            WORKTIMEVIEW.dataArr           = ["1","2","3"]
             WORKTIMEVIEW.isHidden          = true
         })
         return timeView
@@ -75,9 +72,8 @@ class SX_MoreHotJobController: UIViewController {
     
     /// 发布日期View
     lazy var releaseDateView: SX_BasePopSelectedView = {
-        let releaseView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (RELEASEDATEView) in
+        let releaseView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (RELEASEDATEView) in
             RELEASEDATEView.backgroundColor = UIColor.white
-            RELEASEDATEView.dataArr         = ["4","5","666"]
             RELEASEDATEView.isHidden        = true
         })
         return releaseView
@@ -208,9 +204,9 @@ extension SX_MoreHotJobController {
                     self.jobListsMlodel.append(Model)
                 }
                 for item in json["data"]["type"].array ?? [] {
-                   self.typeIDArr.append(item["id"].string ?? "0")
-                   self.positionNameArr.append(item["name"].string ?? "测试name")
-                   self.positionView.dataArr = self.positionNameArr
+                    self.typeIDArr.append(item["id"].string ?? "0")
+                    self.positionNameArr.append(item["name"].string ?? "测试name")
+                    self.positionView.dataArr = self.positionNameArr
                 }
                 for item in json["data"]["nature"].array ?? [] {
                     self.natureIDArr.append(item["id"].string ?? "0")
@@ -227,7 +223,7 @@ extension SX_MoreHotJobController {
                     self.releaseNameArr.append(item["name"].string ?? "测试name")
                     self.releaseDateView.dataArr = self.releaseNameArr
                 }
-
+                
                 self.tableView!.reloadData()
             } catch{ }
         }
@@ -382,12 +378,12 @@ extension SX_MoreHotJobController {
         
         /// 翻转箭头
         UIView.animate(withDuration: 0.1, animations: {
-            let selectedImg                  = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
-            selectedImg.image                = #imageLiteral(resourceName: "btn_odown")
+            let selectedImg             = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
+            selectedImg.image           = #imageLiteral(resourceName: "btn_odown")
             let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
-            selectedImg.transform            = transform
-            let selectedLabel                = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
-            selectedLabel?.textColor         = UIColor.SX_MainColor()
+            selectedImg.transform       = transform
+            let selectedLabel           = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
+            selectedLabel?.textColor    = UIColor.SX_MainColor()
         }) { (finished) in
             SXLog(finished)
         }
@@ -457,13 +453,7 @@ extension SX_MoreHotJobController {
         
         
         
-        
-        
-        
-        
-        
-        
-        
+
         
     }
 }
