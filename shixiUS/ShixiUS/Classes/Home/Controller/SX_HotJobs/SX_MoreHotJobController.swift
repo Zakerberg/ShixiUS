@@ -22,7 +22,8 @@ let hotJobCellID       = "hotJobCellID"
 
 class SX_MoreHotJobController: UIViewController {
     
-    var jobListsMlodel = [JobListModel]()
+    var tableView: UITableView?
+    var jobListsMlodel      = [JobListModel]()
     
     /////用于Search搜索////
     var typeStr: String     = "0"
@@ -30,61 +31,46 @@ class SX_MoreHotJobController: UIViewController {
     var durationStr: String = "0"
     var settrStr: String    = "0"
     /////////////////////
-    var baseURL = ""
+    var baseURL             = ""
     
     /// 职位分类View
-    private lazy var positionView: UIView = {
-        let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 440)).addhere(toSuperView: self.view).config({ (positionView) in
-            positionView.backgroundColor = UIColor.white
+    lazy var positionView: UIView = {
+        let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 440)).addhere(toSuperView: self.view).config({ (POSITIONVIEW) in
+            POSITIONVIEW.backgroundColor = UIColor.white
+            POSITIONVIEW.dataArr         = ["不限","会计服务","航空","银行","电子商务","互联网","表演艺术","翻译和本地化","医疗","服装和时装","测试12"]
+            POSITIONVIEW.isHidden        = true
         })
-        positionView.dataArr  = ["不限","会计服务","航空","银行","电子商务","互联网","表演艺术","翻译和本地化","医疗","服装和时装","测试12"]
-        positionView.isHidden = true
-        
         return positionView
     }()
     
     /// 工作性质View
-    private lazy var workNatureView: UIView = {
-        let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
-            positionView.backgroundColor = UIColor.white
+    lazy var workNatureView: UIView = {
+        let workView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (WORKNATUREVIEW) in
+            WORKNATUREVIEW.backgroundColor = UIColor.white
+            WORKNATUREVIEW.dataArr         = ["中国","美国","不限"]
+            WORKNATUREVIEW.isHidden        = true
         })
-        positionView.dataArr  = ["中国","美国","不限"]
-        positionView.isHidden = true
-        
-        return positionView
+        return workView
     }()
     
     /// 工作时常View
-    private lazy var workTimeView: UIView = {
-        
-        let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
+    lazy var workTimeView: UIView = {
+        let workTimeView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
             positionView.backgroundColor = UIColor.white
+            positionView.isHidden        = true
+            positionView.dataArr         = ["1","2","3"]
         })
-        
-        positionView.dataArr  = ["1","2","3"]
-        positionView.isHidden = true
-        
-        return positionView
+        return workTimeView
     }()
     
     /// 发布日期View
-    private lazy var releaseDateView: UIView = {
-        let positionView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (positionView) in
-            positionView.backgroundColor = UIColor.white
+    lazy var releaseDateView: UIView = {
+        let releaseView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: -241, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (RELEASEDATEView) in
+            RELEASEDATEView.backgroundColor = UIColor.white
+            RELEASEDATEView.dataArr         = ["4","5","666"]
+            RELEASEDATEView.isHidden        = true
         })
-        positionView.dataArr  = ["4","5","666"]
-        positionView.isHidden = true
-        
-        return positionView
-    }()
-    
-    private lazy var TableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: Int(kNavH), width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)-Int((kNavH+45))), style: .plain)
-        tableView.backgroundColor = UIColor.white
-        tableView.delegate        = self
-        tableView.dataSource      = self
-        
-        return tableView
+        return releaseView
     }()
     
     var topSelectedView: SX_TopSelectedView?
@@ -94,7 +80,7 @@ class SX_MoreHotJobController: UIViewController {
         super.viewWillAppear(animated)
         Noti()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -107,7 +93,7 @@ class SX_MoreHotJobController: UIViewController {
     }
     
     deinit {
-        TableView.delegate = nil
+        tableView!.delegate = nil
         print("overseaTableView ---deinit")
     }
 }
@@ -119,39 +105,32 @@ extension SX_MoreHotJobController {
     
     func setUI() {
         title                         = "热门岗位"
-        self.view.backgroundColor     = UIColor.white
+        view.backgroundColor          = UIColor.white
         
         self.positionView.isHidden    = true
         self.workTimeView.isHidden    = true
         self.workNatureView.isHidden  = true
         self.releaseDateView.isHidden = true
-        
-        self.view.insertSubview(self.TableView, belowSubview: self.positionView)
         setTopSelectedView()
-    }
-    
-    func fetchData() {
-        
-        baseURL = SHIXIUS + "/job/index" 
-        
-        SX_NetManager.requestData(type: .GET, URlString: baseURL, parameters: nil) { (result) in
-            
-            do{
-                let json = try JSON(data: result)
-                /// 成功
-                SXLog("成功! ")
-                
-                for item in json["data"]["lists"].array ?? [] {
-                    let Model = JobListModel(jsonData: item)
-                    self.jobListsMlodel.append(Model)
-                }
-                self.TableView.reloadData()
-            } catch{ }
-        }
     }
     
     /// 顶部4个按钮
     func setTopSelectedView() {
+        
+        self.tableView = UITableView(frame: CGRect.zero, style: .plain)
+        self.tableView?.backgroundColor                = UIColor.white
+        self.tableView?.delegate                       = self
+        self.tableView?.dataSource                     = self
+        self.tableView?.showsVerticalScrollIndicator   = false
+        self.tableView?.showsHorizontalScrollIndicator = false
+        self.view.insertSubview(self.tableView!, belowSubview: self.workNatureView)
+        
+        self.tableView?.snp.makeConstraints({ (make) in
+            make.top.equalToSuperview().offset(kNavH+60.FloatValue.IPAD_XValue)
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+        })
+        
         self.topSelectedView = SX_TopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 44)).addhere(toSuperView: self.view).config({ (topSelectedView) in
             topSelectedView.backgroundColor = UIColor.white
         })
@@ -167,19 +146,7 @@ extension SX_MoreHotJobController {
             self.topSelectedView?.addSubview(view)
             
             let control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-            
-       //     control.addTarget(self, action: #selector(topSelectedBtnClick), for: .touchUpInside)
-            
-            
-            control.rx.controlEvent(.touchUpInside).subscribe(onNext: { (_) in
-
-                
-                
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-            
-
+            control.addTarget(self, action: #selector(topSelected), for: .touchUpInside)
             control.tag = index + ControlTag
             view.addSubview(control)
         }
@@ -210,8 +177,29 @@ extension SX_MoreHotJobController {
             }.config { (imageV) in
                 imageV.tag = tag + ArrowTag
         }
-        
         return view
+    }
+}
+
+// =========================================================================================
+// MARK: - fetchData
+// =========================================================================================
+extension SX_MoreHotJobController {
+    
+    func fetchData() {
+        baseURL = SHIXIUS + "/job/index"
+        SX_NetManager.requestData(type: .GET, URlString: baseURL, parameters: nil) { (result) in
+            do{
+                let json = try JSON(data: result)
+                /// 成功
+                SXLog("成功! ")
+                for item in json["data"]["lists"].array ?? [] {
+                    let Model = JobListModel(jsonData: item)
+                    self.jobListsMlodel.append(Model)
+                }
+                self.tableView!.reloadData()
+            } catch{ }
+        }
     }
 }
 
@@ -221,7 +209,9 @@ extension SX_MoreHotJobController {
 extension SX_MoreHotJobController {
     
     /// 调出PickerView
-    @objc func topSelectedBtnClick(control: UIControl) {
+    @objc func topSelected(control: UIControl) {
+        SXLog("222!")
+        
         if control.isSelected == true {
             control.isSelected = false
             /// 收起
@@ -263,7 +253,6 @@ extension SX_MoreHotJobController {
     
     /// hideView
     func hideViewWithAnimation(view: UIView) {
-        
         self.blackBgView?.isHidden = true
         if view.isHidden == false {
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
@@ -271,6 +260,7 @@ extension SX_MoreHotJobController {
             }) {(finished) in
                 view.isHidden = true
             }
+            
             UIView.animate(withDuration: 0.4, animations: {
                 /// 小三角的选中状态
                 for index in 0..<4 {
@@ -291,9 +281,7 @@ extension SX_MoreHotJobController {
     
     /// 展示隐藏动画
     func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
-        
         if view.isKind(of: type(of: self.positionView)) { //职位分类
-            
             self.workNatureView.frame  = CGRect(x: 0, y: -self.workNatureView.bounds.size.height, width: SCREEN_WIDTH, height: self.workNatureView.bounds.size.height)
             self.workTimeView.frame    = CGRect(x: 0, y: -self.workTimeView.bounds.size.height, width: SCREEN_WIDTH, height: self.workTimeView.bounds.size.height)
             self.releaseDateView.frame = CGRect(x: 0, y: -self.releaseDateView.bounds.size.height, width: SCREEN_WIDTH, height: self.releaseDateView.bounds.size.height)
@@ -430,6 +418,7 @@ extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SXLog("点击了海外就业的第\(indexPath.row)个")
+        
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

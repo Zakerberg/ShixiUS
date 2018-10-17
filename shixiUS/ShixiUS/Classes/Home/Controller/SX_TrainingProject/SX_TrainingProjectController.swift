@@ -131,7 +131,7 @@ extension SX_TrainingProjectController {
         self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
         self.view.insertSubview(self.collectionView!, belowSubview: self.trainingView)
         self.collectionView?.snp.makeConstraints({ (make) in
-            make.top.equalToSuperview().offset(kNavH+30.FloatValue.IPAD_XValue)
+            make.top.equalToSuperview().offset(kNavH+20.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(Margin)
             make.right.equalToSuperview().offset(-Margin)
             make.bottom.equalToSuperview()
