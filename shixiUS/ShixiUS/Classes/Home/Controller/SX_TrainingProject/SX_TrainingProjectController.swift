@@ -48,9 +48,9 @@ class SX_TrainingProjectController: UIViewController {
     
     // 综合排序View
     lazy var comprehensiveView: SX_BasePopSelectedView = {
-        let compreView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (compreView) in
-            compreView.backgroundColor   = UIColor.white
-            compreView.isHidden          = true
+        let compreView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (COMPREVIEW) in
+            COMPREVIEW.backgroundColor   = UIColor.white
+            COMPREVIEW.isHidden          = true
         })
         
         return compreView
@@ -58,9 +58,9 @@ class SX_TrainingProjectController: UIViewController {
     
     /// 实训类别View
     lazy var trainingView: SX_BasePopSelectedView = {
-        let trainingView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (trainingView) in
-            trainingView.backgroundColor = UIColor.white
-            trainingView.isHidden        = true
+        let trainingView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (TRAININGVIEW) in
+            TRAININGVIEW.backgroundColor = UIColor.white
+            TRAININGVIEW.isHidden        = true
         })
         
         return trainingView
@@ -68,9 +68,9 @@ class SX_TrainingProjectController: UIViewController {
     
     /// 国家分类View
     lazy var countryView: SX_BasePopSelectedView = {
-        let countryView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (countryView) in
-            countryView.backgroundColor  = UIColor.white
-            countryView.isHidden         = true
+        let countryView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (COUNTRYVIEW) in
+            COUNTRYVIEW.backgroundColor  = UIColor.white
+            COUNTRYVIEW.isHidden         = true
         })
         
         return countryView
@@ -101,9 +101,6 @@ extension SX_TrainingProjectController {
     func setUI() {
         title = "实训项目"
         view.backgroundColor            = UIColor.white
-        self.trainingView.isHidden      = true
-        self.comprehensiveView.isHidden = true
-        self.countryView.isHidden       = true
         setTopSelectedView()
         
         // 创建底部的黑色透明图, 先隐藏
@@ -177,7 +174,7 @@ extension SX_TrainingProjectController {
                 LABEL.tag           = tag + LabelTag
         }
         
-        let _ = UIImageView(image: UIImage.init(named: "btn_down")).addhere(toSuperView: view).layout { (make) in
+        let _ = UIImageView(image: #imageLiteral(resourceName: "btn_down")).addhere(toSuperView: view).layout { (make) in
             make.left.equalTo(label.snp.right).offset(5)
             make.top.equalToSuperview().offset(19)
             make.size.equalTo(CGSize(width: 7, height: 4))
@@ -321,7 +318,7 @@ extension SX_TrainingProjectController {
                 /// 小三角的选中状态
                 for index in 0..<3 {
                     let allImg = self.topSelectedView?.viewWithTag(ArrowTag + index) as? UIImageView
-                    allImg?.image = UIImage.init(named: "btn_down")
+                    allImg?.image = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(-Double.pi)*0)
                     allImg?.transform = transform
                     
@@ -390,7 +387,7 @@ extension SX_TrainingProjectController {
         /// 翻转箭头
         UIView.animate(withDuration: 0.1, animations: {
             let selectedImg = self.topSelectedView?.viewWithTag(tag-ControlTag+ArrowTag) as! UIImageView
-            selectedImg.image = UIImage.init(named: "btn_odown")
+            selectedImg.image = #imageLiteral(resourceName: "btn_odown")
             let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
             selectedImg.transform = transform
         }) { (finished) in
@@ -402,7 +399,7 @@ extension SX_TrainingProjectController {
             if (index != (tag-ControlTag)) {
                 UIView.animate(withDuration: 0.1, animations: {
                     let allImg    = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
-                    allImg?.image = UIImage.init(named: "btn_down")
+                    allImg?.image = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
                     allImg?.transform = transform
                 }) { (finished) in
