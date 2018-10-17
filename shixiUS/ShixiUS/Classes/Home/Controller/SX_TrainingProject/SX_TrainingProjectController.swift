@@ -308,7 +308,7 @@ extension SX_TrainingProjectController {
     func hideViewWithAnimation(view: UIView) {
         self.blackBgView?.isHidden = true
         if view.isHidden == false {
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
                 view.frame    = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
             }) {(finished) in
                 view.isHidden = true

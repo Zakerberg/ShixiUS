@@ -41,7 +41,7 @@ class SX_MoreHotJobController: UIViewController {
     var settrStr: String    = "0"
     /////////////////////
     var baseURL             = ""
-    var jobListsMlodel      = [JobListModel]()
+    var jobListsModel      = [JobListModel]()
     
     /// 职位分类View
     lazy var positionView: SX_BasePopSelectedView = {
@@ -201,7 +201,7 @@ extension SX_MoreHotJobController {
                 
                 for item in json["data"]["lists"].array ?? [] {
                     let Model = JobListModel(jsonData: item)
-                    self.jobListsMlodel.append(Model)
+                    self.jobListsModel.append(Model)
                 }
                 for item in json["data"]["type"].array ?? [] {
                     self.typeIDArr.append(item["id"].string ?? "0")
@@ -224,7 +224,13 @@ extension SX_MoreHotJobController {
                     self.releaseDateView.dataArr = self.releaseNameArr
                 }
                 
+                self.positionView.frame    = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.positionNameArr.count*50))
+                self.workNatureView.frame  = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.natureNameArr.count*50))
+                self.workTimeView.frame    = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.timeNameArr.count*50))
+                self.releaseDateView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.releaseNameArr.count*50))
+                
                 self.tableView!.reloadData()
+                
             } catch{ }
         }
     }
@@ -274,7 +280,7 @@ extension SX_MoreHotJobController {
     func hideViewWithAnimation(view: UIView) {
         //        self.blackBgView?.isHidden = true
         if view.isHidden == false {
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
                 view.frame    = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
             }) {(_) in
                 view.isHidden = true
@@ -413,14 +419,14 @@ extension SX_MoreHotJobController {
 // ===============================================================
 extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.jobListsMlodel.count
+        return self.jobListsModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = SX_OverseaCell(style: .default, reuseIdentifier: hotJobCellID)
         cell.selectionStyle = .none
-        let model = jobListsMlodel[indexPath.row]
+        let model = jobListsModel[indexPath.row]
         
         cell.jobName?.text  = model.title ?? "测试名字"
         cell.address?.text  = model.address ?? "测试地址"
@@ -450,11 +456,41 @@ extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
 // ===============================================================
 extension SX_MoreHotJobController {
     func Noti() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changeSelect), name: NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA"), object: nil)
+    }
+    
+    @objc func changeSelect(noti:Notification) {
+        SXLog("接收到通知!")
+        hideViewWithAnimation(view: self.positionView)
+        hideViewWithAnimation(view: self.workNatureView)
+        hideViewWithAnimation(view: self.workTimeView)
+        hideViewWithAnimation(view: self.releaseDateView)
         
-        
-        
-
-        
+        if self.positionView.isHidden == false {
+            SXLog(noti.userInfo!["index"])
+            self.jobListsModel.removeAll()
+            self.positionNameArr.removeAll()
+            self.typeStr = self.typeIDArr[noti.userInfo!["index"] as! Int]
+            fetchData()
+        }else if(self.workNatureView.isHidden == false) {
+            SXLog(noti.userInfo!["index"])
+            self.jobListsModel.removeAll()
+            self.natureNameArr.removeAll()
+            self.natureStr = self.natureIDArr[noti.userInfo!["index"] as! Int]
+            fetchData()
+        }else if(self.workTimeView.isHidden == false) {
+            SXLog(noti.userInfo?["index"])
+            self.jobListsModel.removeAll()
+            self.timeNameArr.removeAll()
+            self.durationStr = self.durationIDArr[noti.userInfo!["index"] as! Int]
+            fetchData()
+        }else if(self.releaseDateView.isHidden == false) {
+            SXLog(noti.userInfo?["index"])
+            self.jobListsModel.removeAll()
+            self.releaseNameArr.removeAll()
+            self.settrStr = self.settrIDArr[noti.userInfo!["index"] as! Int]
+            fetchData()
+        }
     }
 }
 
@@ -469,6 +505,3 @@ extension SX_MoreHotJobController {
         hideViewWithAnimation(view: self.releaseDateView)
     }
 }
-
-
-
