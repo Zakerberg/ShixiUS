@@ -265,9 +265,7 @@ extension SX_MoreHotJobController {
                 self.workNatureView.frame  = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.natureNameArr.count*50))
                 self.workTimeView.frame    = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.timeNameArr.count*50))
                 self.releaseDateView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.releaseNameArr.count*50))
-                
                 self.tableView!.reloadData()
-                
             } catch{ }
         }
     }
@@ -448,51 +446,57 @@ extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
 }
 
 // ===============================================================
-// MARK: - Noti
+// MARK: - RxSwift 通知处理
 // ===============================================================
 extension SX_MoreHotJobController {
     func Noti() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeSelect), name: NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA"), object: nil)
-        
-        
-        
-        
-        
-        
-    }
-    
-    @objc func changeSelect(noti:Notification) {
-        SXLog("接收到通知!")
-        hideViewWithAnimation(view: self.positionView)
-        hideViewWithAnimation(view: self.workNatureView)
-        hideViewWithAnimation(view: self.workTimeView)
-        hideViewWithAnimation(view: self.releaseDateView)
-        
-        if self.positionView.isHidden == false {
-            SXLog(noti.userInfo!["index"])
-            self.jobListsModel.removeAll()
-            self.positionNameArr.removeAll()
-            self.typeStr = self.typeIDArr[noti.userInfo!["index"] as! Int]
-            fetchData()
-        }else if(self.workNatureView.isHidden == false) {
-            SXLog(noti.userInfo!["index"])
-            self.jobListsModel.removeAll()
-            self.natureNameArr.removeAll()
-            self.natureStr = self.natureIDArr[noti.userInfo!["index"] as! Int]
-            fetchData()
-        }else if(self.workTimeView.isHidden == false) {
-            SXLog(noti.userInfo?["index"])
-            self.jobListsModel.removeAll()
-            self.timeNameArr.removeAll()
-            self.durationStr = self.durationIDArr[noti.userInfo!["index"] as! Int]
-            fetchData()
-        }else if(self.releaseDateView.isHidden == false) {
-            SXLog(noti.userInfo?["index"])
-            self.jobListsModel.removeAll()
-            self.releaseNameArr.removeAll()
-            self.settrStr = self.settrIDArr[noti.userInfo!["index"] as! Int]
-            fetchData()
-        }
+        NotificationCenter.default.rx.notification(NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA")).takeUntil(self.rx.deallocated).subscribe(onNext: { (noti) in
+            SXLog("接收到通知!")
+            self.hideViewWithAnimation(view: self.positionView)
+            self.hideViewWithAnimation(view: self.workNatureView)
+            self.hideViewWithAnimation(view: self.workTimeView)
+            self.hideViewWithAnimation(view: self.releaseDateView)
+            
+            if self.positionView.isHidden == false {
+                SXLog(noti.userInfo!["index"])
+                self.jobListsModel.removeAll()
+                self.positionNameArr.removeAll()
+                self.natureNameArr.removeAll()
+                self.releaseNameArr.removeAll()
+                self.timeNameArr.removeAll()
+                self.typeStr = self.typeIDArr[noti.userInfo!["index"] as! Int]
+                self.fetchData()
+            }else if(self.workNatureView.isHidden == false) {
+                SXLog(noti.userInfo!["index"])
+                self.jobListsModel.removeAll()
+                self.positionNameArr.removeAll()
+                self.natureNameArr.removeAll()
+                self.releaseNameArr.removeAll()
+                self.timeNameArr.removeAll()
+                self.natureStr = self.natureIDArr[noti.userInfo!["index"] as! Int]
+                self.fetchData()
+            }else if(self.workTimeView.isHidden == false) {
+                SXLog(noti.userInfo?["index"])
+                self.jobListsModel.removeAll()
+                self.positionNameArr.removeAll()
+                self.natureNameArr.removeAll()
+                self.releaseNameArr.removeAll()
+                self.timeNameArr.removeAll()
+                self.durationStr = self.durationIDArr[noti.userInfo!["index"] as! Int]
+                self.fetchData()
+            }else if(self.releaseDateView.isHidden == false) {
+                SXLog(noti.userInfo?["index"])
+                self.jobListsModel.removeAll()
+                self.positionNameArr.removeAll()
+                self.natureNameArr.removeAll()
+                self.releaseNameArr.removeAll()
+                self.timeNameArr.removeAll()
+                self.settrStr = self.settrIDArr[noti.userInfo!["index"] as! Int]
+                self.fetchData()
+            }
+        }, onError: { (error) in
+            SXLog(error)
+        }, onCompleted: nil, onDisposed: nil)
     }
 }
 

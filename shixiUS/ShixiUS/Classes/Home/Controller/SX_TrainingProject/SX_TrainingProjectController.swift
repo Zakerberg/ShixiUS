@@ -435,39 +435,45 @@ extension SX_TrainingProjectController {
 }
 
 // ==============================================================================================
-// MARK: - Noti处理
+// MARK: - RxSwift 通知处理
 // ==============================================================================================
 extension SX_TrainingProjectController {
     func Noti() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeSelect), name: NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA"), object: nil)
-    }
-    
-    @objc func changeSelect(noti:Notification) {
-        SXLog("接收到popSelectedView点击的通知")
-        hideViewWithAnimation(view: self.comprehensiveView)
-        hideViewWithAnimation(view: self.trainingView)
-        hideViewWithAnimation(view: self.countryView)
-        
-        if self.comprehensiveView.isHidden == false {
-            SXLog(noti.userInfo?["index"])
-            self.listsModels.removeAll()
-            self.compreNameArr.removeAll()
-            //WARNING: 点击indexPath.row 选择对应的 sort数组里面的 sort, order传出去, 然后fetchData
-            self.sortStr  = self.sortSortArr[noti.userInfo!["index"] as! Int]
-            self.orderStr = self.sortOrderArr[noti.userInfo!["index"] as! Int]
-            fetchData()
-        } else if self.trainingView.isHidden == false {
-            SXLog(noti.userInfo?["text"])
-            self.listsModels.removeAll()
-            self.trainNameArr.removeAll()
-            self.typeStr  = self.typeIdArr[noti.userInfo!["index"] as! Int]
-            fetchData()
-        } else if self.countryView.isHidden == false {
-            SXLog(noti.userInfo?["text"])
-            self.listsModels.removeAll()
-            self.countryNameArr.removeAll()
-            self.countryStr = self.countryIdArr[noti.userInfo!["index"] as! Int]
-            fetchData()
-        }
+        NotificationCenter.default.rx.notification(NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA")).takeUntil(self.rx.deallocated).subscribe(onNext: { (noti) in
+            SXLog("接收到popSelectedView点击的通知")
+            self.hideViewWithAnimation(view: self.comprehensiveView)
+            self.hideViewWithAnimation(view: self.trainingView)
+            self.hideViewWithAnimation(view: self.countryView)
+            
+            if self.comprehensiveView.isHidden == false {
+                SXLog(noti.userInfo?["index"])
+                self.listsModels.removeAll()
+                self.compreNameArr.removeAll()
+                self.trainNameArr.removeAll()
+                self.countryNameArr.removeAll()
+                //WARNING: 点击indexPath.row 选择对应的 sort数组里面的 sort, order传出去, 然后fetchData
+                self.sortStr  = self.sortSortArr[noti.userInfo!["index"] as! Int]
+                self.orderStr = self.sortOrderArr[noti.userInfo!["index"] as! Int]
+                self.fetchData()
+            } else if self.trainingView.isHidden == false {
+                SXLog(noti.userInfo?["text"])
+                self.listsModels.removeAll()
+                self.trainNameArr.removeAll()
+                self.compreNameArr.removeAll()
+                self.countryNameArr.removeAll()
+                self.typeStr  = self.typeIdArr[noti.userInfo!["index"] as! Int]
+                self.fetchData()
+            } else if self.countryView.isHidden == false {
+                SXLog(noti.userInfo?["text"])
+                self.listsModels.removeAll()
+                self.countryNameArr.removeAll()
+                self.compreNameArr.removeAll()
+                self.trainNameArr.removeAll()
+                self.countryStr = self.countryIdArr[noti.userInfo!["index"] as! Int]
+                self.fetchData()
+            }
+        }, onError: { (error) in
+            SXLog(error)
+        }, onCompleted: nil, onDisposed: nil)
     }
 }

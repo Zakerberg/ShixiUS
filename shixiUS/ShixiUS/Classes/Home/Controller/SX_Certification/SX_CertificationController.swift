@@ -41,7 +41,7 @@ class SX_CertificationController: UIViewController {
     var sortStr       = "id"
     var orderStr      = "DESC"
     /////////////////////
-    var certicationModels = [TrainListModel]()
+    var cerListsModels = [TrainListModel]()
     var baseURL       = ""
     
     // 综合排序View
@@ -216,7 +216,7 @@ extension SX_CertificationController {
                 
                 for item in json["data"]["lists"].array ?? [] {
                     let listModel = TrainListModel(jsonData: item)
-                    self.certicationModels.append(listModel)
+                    self.cerListsModels.append(listModel)
                 }
                 for item in json["data"]["sort"].array ?? [] {
                     self.compreNameArr.append(item["name"].string ?? "测试综合")
@@ -241,12 +241,12 @@ extension SX_CertificationController {
             } catch{ }
         }
     }
-
+    
     /// hideView
     func hideViewWithAnimation(view: UIView) {
         self.blackBgView?.isHidden = true
         if view.isHidden == false {
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseInOut, animations: {
                 view.frame = CGRect(x: 0, y: -view.bounds.size.width, width: SCREEN_WIDTH, height: view.bounds.size.height)
             }) {(finished) in
                 view.isHidden = true
@@ -370,7 +370,7 @@ extension SX_CertificationController {
 extension SX_CertificationController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.certicationModels.count
+        return self.cerListsModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -381,7 +381,7 @@ extension SX_CertificationController: UICollectionViewDelegate, UICollectionView
         cell.layer.cornerRadius  = 5
         cell.backgroundColor     = UIColor.white
         
-        let model  = certicationModels[indexPath.item]
+        let model  = cerListsModels[indexPath.item]
         if let url = URL(string: model.image ?? ""){
             cell.sourceImageView?.kf.setImage(with: url)
         }else{
@@ -404,17 +404,54 @@ extension SX_CertificationController: UICollectionViewDelegate, UICollectionView
 }
 
 // ======================================================================
-// MARK: - UICollectionViewDelegate
+// MARK: - RxSwift 通知处理
 // ======================================================================
 extension SX_CertificationController {
     func Noti() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeSelect), name: NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA"), object: nil)
-    }
-    
-    @objc func changeSelect(noti:Notification) {
-
-        
+        NotificationCenter.default.rx.notification(NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA")).takeUntil(self.rx.deallocated).subscribe(onNext: { (noti) in
+            self.hideViewWithAnimation(view: self.comprehensiveView)
+            self.hideViewWithAnimation(view: self.ClassAttributeView)
+            self.hideViewWithAnimation(view: self.professionalTypeView)
+            
+            if self.comprehensiveView.isHidden == false {
+                self.cerListsModels.removeAll()
+                self.compreNameArr.removeAll()
+                self.classNameArr.removeAll()
+                self.courseNameArr.removeAll()
+                self.sortStr  = self.sortSortArr[noti.userInfo!["index"] as! Int]
+                self.orderStr = self.sortOrderArr[noti.userInfo!["index"] as! Int]
+                
+                self.fetchData()
+            }else if self.ClassAttributeView.isHidden == false {
+                self.cerListsModels.removeAll()
+                self.compreNameArr.removeAll()
+                self.classNameArr.removeAll()
+                self.courseNameArr.removeAll()
+                self.courseStr = self.courseIDArr[noti.userInfo!["index"] as! Int]
+                
+                self.fetchData()
+            }else if self.professionalTypeView.isHidden == false {
+                self.cerListsModels.removeAll()
+                self.compreNameArr.removeAll()
+                self.classNameArr.removeAll()
+                self.courseNameArr.removeAll()
+                self.typeStr = self.typeIDArr[noti.userInfo!["index"] as! Int]
+                
+                self.fetchData()
+            }
+        }, onError: { (error) in
+            SXLog(error)
+        }, onCompleted: nil, onDisposed: nil)
     }
 }
 
-
+// ======================================================================
+// MARK: - Scroll
+// ======================================================================
+extension SX_CertificationController {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        hideViewWithAnimation(view: self.comprehensiveView)
+        hideViewWithAnimation(view: self.ClassAttributeView)
+        hideViewWithAnimation(view: self.professionalTypeView)
+    }
+}
