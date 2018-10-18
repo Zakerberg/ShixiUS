@@ -52,7 +52,6 @@ class SX_TrainingProjectController: UIViewController {
             COMPREVIEW.backgroundColor   = UIColor.white
             COMPREVIEW.isHidden          = true
         })
-        
         return compreView
     }()
     
@@ -62,7 +61,6 @@ class SX_TrainingProjectController: UIViewController {
             TRAININGVIEW.backgroundColor = UIColor.white
             TRAININGVIEW.isHidden        = true
         })
-        
         return trainingView
     }()
     
@@ -72,7 +70,6 @@ class SX_TrainingProjectController: UIViewController {
             COUNTRYVIEW.backgroundColor  = UIColor.white
             COUNTRYVIEW.isHidden         = true
         })
-        
         return countryView
     }()
     
@@ -230,7 +227,7 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
 extension SX_TrainingProjectController {
     func fetchData()  {
         
-        baseURL = SHIXIUS + "/training/index" + "?type=\(typeStr)" + "&country=\(countryStr)" + "&sort=\(sortStr)" + "&order=\(orderStr)"
+        baseURL = SHIXIUS + "/training/index?" + "type=\(typeStr)" + "&country=\(countryStr)" + "&sort=\(sortStr)" + "&order=\(orderStr)"
         
         SX_NetManager.requestData(type: .GET, URlString: baseURL, parameters: nil) { (result) in
             do{

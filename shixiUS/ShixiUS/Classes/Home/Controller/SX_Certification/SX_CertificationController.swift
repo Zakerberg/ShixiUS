@@ -15,11 +15,9 @@
 import UIKit
 import SwiftyJSON
 
-let cellID1 = "cellID"
-
-private let ArrowTag = 3000
+private let ArrowTag   = 3000
 private let ControlTag = 1000
-private let LabelTag = 2000
+private let LabelTag   = 2000
 
 class SX_CertificationController: UIViewController {
     
@@ -28,39 +26,47 @@ class SX_CertificationController: UIViewController {
     var loadingView: SX_LoadingView?
     var collectionView: UICollectionView?
     
+    var compreNameArr = [String]()
+    var sourceNameArr = [String]()
+    var classNameArr  = [String]()
+    
+    var typeIDArr     = [String]()
+    var courceIDArr   = [String]()
+    var sortIDArr     = [String]()
+    
+    /////用于Search搜索////
+    var typeStr       = "0"
+    var courseStr     = "0"
+    var sortStr       = "id"
+    var orderStr      = "DESC"
+    /////////////////////
     var certicationModels = [TrainListModel]()
+    var baseURL       = ""
     
     // 综合排序View
-    lazy var comprehensiveView: UIView = {
-        let compreView = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 160)).addhere(toSuperView: self.view).config({ (COMPREVIEW) in
+    lazy var comprehensiveView: SX_BasePopSelectedView = {
+        let compreView = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (COMPREVIEW) in
             COMPREVIEW.backgroundColor = UIColor.white
-            COMPREVIEW.dataArr         = ["综合排序","项目时间","价格降序","价格升序"]
             COMPREVIEW.isHidden        = true
-            COMPREVIEW.backgroundColor = UIColor.red
         })
         return compreView
     }()
     
     /// 课程属性View
-     lazy var ClassAttributeView: UIView = {
-        let classAttribute = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 200)).addhere(toSuperView: self.view).config({ (CLASS) in
+    lazy var ClassAttributeView: SX_BasePopSelectedView = {
+        let classAttribute = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (CLASS) in
             CLASS.backgroundColor = UIColor.white
-            CLASS.dataArr  = ["测试类别1","测试类别2","测试类别3","测试类别4","测试类别5"]
-            CLASS.isHidden = true
+            CLASS.isHidden        = true
         })
-        
-        
         return classAttribute
     }()
     
     /// 专业类型View
-     lazy var professionalTypeView: UIView = {
-        let professionaltype = SX_BasePopSelectedView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 120)).addhere(toSuperView: self.view).config({ (professionaltype) in
-            professionaltype.backgroundColor = UIColor.white
+    lazy var professionalTypeView: SX_BasePopSelectedView = {
+        let professionaltype = SX_BasePopSelectedView().addhere(toSuperView: self.view).config({ (PROFESSIONAL) in
+            PROFESSIONAL.backgroundColor = UIColor.white
+            PROFESSIONAL.isHidden        = true
         })
-        professionaltype.dataArr  = ["测试类别6","测试类别7","测试类别8","测试类别9"]
-        professionaltype.isHidden = true
-        
         return professionaltype
     }()
     
@@ -82,13 +88,12 @@ class SX_CertificationController: UIViewController {
 extension SX_CertificationController {
     
     func setUI() {
-        self.title                         = "培训认证"
-        self.view.backgroundColor          = UIColor.white
+        title                              = "培训认证"
+        view.backgroundColor               = UIColor.white
         self.ClassAttributeView.isHidden   = true
         self.comprehensiveView.isHidden    = true
         self.professionalTypeView.isHidden = true
         setTopSelectedView()
-        
     }
     
     func setTopSelectedView() {
@@ -162,18 +167,27 @@ extension SX_CertificationController {
 // MARK: - Other Method 2 响应
 // ======================================================================
 extension SX_CertificationController {
-    
     func fetchData() {
-        SX_NetManager.requestData(type: .GET, URlString: SX_TrainIndex, parameters: nil) { (result) in
-            
+        baseURL = SHIXIUS + "/train/index?" + "type=\(typeStr)" + "&course=\(courseStr)" + "&sort=\(sortStr)" + "&order=\(orderStr)"
+        SX_NetManager.requestData(type: .GET, URlString: baseURL, parameters: nil) { (result) in
             do{
                 let json = try JSON(data: result)
                 /// 成功
                 SXLog("成功! ")
+                self.typeStr   = json["data"]["search"]["type"].string ?? "0"
+                self.courseStr = json["data"]["search"]["course"].string ?? "0"
+                self.sortStr   = json["data"]["search"]["sort"].string ?? "id"
+                self.orderStr  = json["data"]["search"]["order"].string ?? "DESC"
+                
                 for item in json["data"]["lists"].array ?? [] {
                     let listModel = TrainListModel(jsonData: item)
                     self.certicationModels.append(listModel)
                 }
+
+                
+                
+                
+                
                 self.collectionView?.reloadData()
             } catch{ }
         }
@@ -224,11 +238,11 @@ extension SX_CertificationController {
                 /// 小三角的选中状态
                 for index in 0..<3 {
                     let allImg = self.topSelectedView?.viewWithTag(ArrowTag + index) as? UIImageView
-                    allImg?.image     = #imageLiteral(resourceName: "btn_down")
+                    allImg?.image       = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(-Double.pi)*0)
-                    allImg?.transform = transform
+                    allImg?.transform   = transform
                     
-                    let allLabel = self.topSelectedView?.viewWithTag(LabelTag + index) as? UILabel
+                    let allLabel        = self.topSelectedView?.viewWithTag(LabelTag + index) as? UILabel
                     allLabel?.textColor = UIColor.black
                 }
             }) { (finished) in
@@ -275,9 +289,9 @@ extension SX_CertificationController {
             self.ClassAttributeView.isHidden = true
             
             let control1 = self.topSelectedView?.viewWithTag(1000) as? UIControl
-            control1?.isSelected = false
+            control1?.isSelected   = false
             let control2 = self.topSelectedView?.viewWithTag(1001) as? UIControl
-            control2?.isSelected = false
+            control2?.isSelected   = false
         }
         
         self.blackBgView?.isHidden = false
@@ -296,26 +310,26 @@ extension SX_CertificationController {
             selectedImg.image                = #imageLiteral(resourceName: "btn_odown")
             let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
             selectedImg.transform            = transform
-        }) { (finished) in
-            SXLog(finished)
+        }) { (FINISHED) in
+            SXLog(FINISHED)
         }
         
         /// 恢复状态
         for index in 0..<3 {
             if (index != (tag-ControlTag)) {
                 UIView.animate(withDuration: 0.1, animations: {
-                    let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
-                    allImg?.image = #imageLiteral(resourceName: "btn_down")
+                    let allImg          = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
+                    allImg?.image       = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
-                    allImg?.transform = transform
+                    allImg?.transform   = transform
                 }) { (finished) in
                     SXLog(finished)
-                    let allLabel = self.topSelectedView?.viewWithTag(index+LabelTag) as? UILabel
+                    let allLabel        = self.topSelectedView?.viewWithTag(index+LabelTag) as? UILabel
                     allLabel?.textColor = UIColor.black
                 }
             }
             
-            let selectedLabel = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
+            let selectedLabel        = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
             selectedLabel?.textColor = UIColor.SX_MainColor()
         }
     }
@@ -331,8 +345,7 @@ extension SX_CertificationController {
     
     /// hideLoadingView
     func hideLoadingView() {
-        let delaySeconds = 0.5
-        
+        let delaySeconds = 0.5   
     }
 }
 

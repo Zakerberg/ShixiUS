@@ -192,7 +192,7 @@ extension SX_MoreHotJobController {
             do{
                 let json = try JSON(data: result)
                 /// 成功
-                SXLog("成功! ")
+                SXLog("成功!")
                 
                 self.typeStr     = json["data"]["search"]["type"].string ?? "0"
                 self.natureStr   = json["data"]["search"]["nature"].string ?? "0"
