@@ -146,9 +146,36 @@ extension SX_TrainingProjectController {
             self.topSelectedView?.addSubview(view)
             
             let control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-            control.addTarget(self, action: #selector(topSelectedBtnClick), for: .touchUpInside)
+            control.rx.controlEvent(.touchUpInside).subscribe(onNext: { (_) in
+                if control.isSelected == true {
+                    control.isSelected = false
+                    /// 收起
+                    self.hideViewWithAnimation(view: self.comprehensiveView)
+                    self.hideViewWithAnimation(view: self.trainingView)
+                    self.hideViewWithAnimation(view: self.countryView)
+                    
+                }else if(control.isSelected == false) {
+                    control.isSelected = true
+                    
+                    /// 创建弹窗 选择条件
+                    if(control.tag == 1000) {
+                        self.showViewWithAnimationAndTag(self.comprehensiveView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.trainingView)
+                        self.hideViewWithAnimation(view: self.countryView)
+                        
+                    } else if(control.tag == 1001) {
+                        self.showViewWithAnimationAndTag(self.trainingView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.comprehensiveView)
+                        self.hideViewWithAnimation(view: self.countryView)
+                        
+                    } else if(control.tag == 1002) {
+                        self.showViewWithAnimationAndTag(self.countryView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.comprehensiveView)
+                        self.hideViewWithAnimation(view: self.trainingView)
+                    }
+                }
+            }, onError: nil, onCompleted: nil, onDisposed: nil)
             control.tag = index + ControlTag
-            
             view.addSubview(control)
         }
     }
@@ -267,37 +294,6 @@ extension SX_TrainingProjectController {
                 
                 self.collectionView?.reloadData()
             } catch{ }
-        }
-    }
-    
-    /// 调出PickerView
-    @objc func topSelectedBtnClick(control: UIControl) {
-        if control.isSelected == true {
-            control.isSelected = false
-            /// 收起
-            hideViewWithAnimation(view: self.comprehensiveView)
-            hideViewWithAnimation(view: self.trainingView)
-            hideViewWithAnimation(view: self.countryView)
-            
-        }else if(control.isSelected == false) {
-            control.isSelected = true
-            
-            /// 创建弹窗 选择条件
-            if(control.tag == 1000) {
-                showViewWithAnimationAndTag(self.comprehensiveView, tag: control.tag)
-                hideViewWithAnimation(view: self.trainingView)
-                hideViewWithAnimation(view: self.countryView)
-                
-            } else if(control.tag == 1001) {
-                showViewWithAnimationAndTag(self.trainingView, tag: control.tag)
-                hideViewWithAnimation(view: self.comprehensiveView)
-                hideViewWithAnimation(view: self.countryView)
-                
-            } else if(control.tag == 1002) {
-                showViewWithAnimationAndTag(self.countryView, tag: control.tag)
-                hideViewWithAnimation(view: self.comprehensiveView)
-                hideViewWithAnimation(view: self.trainingView)
-            }
         }
     }
     

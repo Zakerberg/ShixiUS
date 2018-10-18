@@ -71,6 +71,11 @@ class SX_CertificationController: UIViewController {
         return professionaltype
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Noti()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -108,7 +113,7 @@ extension SX_CertificationController {
         self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
         self.view.insertSubview(self.collectionView!, belowSubview: self.ClassAttributeView)
         self.collectionView?.snp.makeConstraints({ (make) in
-            make.top.equalToSuperview().offset(kNavH+55)
+            make.top.equalToSuperview().offset(kNavH+20.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(Margin)
             make.right.equalToSuperview().offset(-Margin)
             make.bottom.equalToSuperview()
@@ -129,9 +134,38 @@ extension SX_CertificationController {
             self.topSelectedView?.addSubview(view)
             
             let control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-            control.addTarget(self, action: #selector(topSelectedBtnClick), for: .touchUpInside)
+            control.rx.controlEvent(.touchUpInside).subscribe(onNext: { (_) in
+                if control.isSelected == true {
+                    control.isSelected = false
+                    /// 收起
+                    self.hideViewWithAnimation(view: self.comprehensiveView)
+                    self.hideViewWithAnimation(view: self.ClassAttributeView)
+                    self.hideViewWithAnimation(view: self.professionalTypeView)
+                    
+                }else if(control.isSelected == false) {
+                    control.isSelected = true
+                    
+                    /// 创建弹窗 选择条件
+                    if(control.tag == 1000) {
+                        self.showViewWithAnimationAndTag(self.comprehensiveView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.ClassAttributeView)
+                        self.hideViewWithAnimation(view: self.professionalTypeView)
+                        
+                    } else if(control.tag == 1001) {
+                        self.showViewWithAnimationAndTag(self.ClassAttributeView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.comprehensiveView)
+                        self.hideViewWithAnimation(view: self.professionalTypeView)
+                        
+                    } else if(control.tag == 1002) {
+                        self.showViewWithAnimationAndTag(self.professionalTypeView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.comprehensiveView)
+                        self.hideViewWithAnimation(view: self.ClassAttributeView)
+                    }
+                }
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
             control.tag = index + ControlTag
-            
             view.addSubview(control)
         }
     }
@@ -207,38 +241,7 @@ extension SX_CertificationController {
             } catch{ }
         }
     }
-    
-    /// 调出PickerView
-    @objc func topSelectedBtnClick(control: UIControl) {
-        if control.isSelected == true {
-            control.isSelected = false
-            /// 收起
-            hideViewWithAnimation(view: self.comprehensiveView)
-            hideViewWithAnimation(view: self.ClassAttributeView)
-            hideViewWithAnimation(view: self.professionalTypeView)
-            
-        }else if(control.isSelected == false) {
-            control.isSelected = true
-            
-            /// 创建弹窗 选择条件
-            if(control.tag == 1000) {
-                showViewWithAnimationAndTag(self.comprehensiveView, tag: control.tag)
-                hideViewWithAnimation(view: self.ClassAttributeView)
-                hideViewWithAnimation(view: self.professionalTypeView)
-                
-            } else if(control.tag == 1001) {
-                showViewWithAnimationAndTag(self.ClassAttributeView, tag: control.tag)
-                hideViewWithAnimation(view: self.comprehensiveView)
-                hideViewWithAnimation(view: self.professionalTypeView)
-                
-            } else if(control.tag == 1002) {
-                showViewWithAnimationAndTag(self.professionalTypeView, tag: control.tag)
-                hideViewWithAnimation(view: self.comprehensiveView)
-                hideViewWithAnimation(view: self.ClassAttributeView)
-            }
-        }
-    }
-    
+
     /// hideView
     func hideViewWithAnimation(view: UIView) {
         self.blackBgView?.isHidden = true
@@ -399,3 +402,19 @@ extension SX_CertificationController: UICollectionViewDelegate, UICollectionView
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
 }
+
+// ======================================================================
+// MARK: - UICollectionViewDelegate
+// ======================================================================
+extension SX_CertificationController {
+    func Noti() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changeSelect), name: NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA"), object: nil)
+    }
+    
+    @objc func changeSelect(noti:Notification) {
+
+        
+    }
+}
+
+

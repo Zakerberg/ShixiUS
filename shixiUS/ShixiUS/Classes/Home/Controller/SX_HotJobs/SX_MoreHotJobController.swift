@@ -146,10 +146,47 @@ extension SX_MoreHotJobController {
             view.isUserInteractionEnabled = true
             self.topSelectedView?.addSubview(view)
             
-            let Control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-            Control.addTarget(self, action: #selector(topSelected), for: .touchUpInside)
-            Control.tag = index + ControlTag
-            view.addSubview(Control)
+            let control = UIControl(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+            control.rx.controlEvent(.touchUpInside).subscribe(onNext: { (_) in
+                if control.isSelected == true {
+                    control.isSelected = false
+                    /// 收起
+                    self.hideViewWithAnimation(view: self.positionView)
+                    self.hideViewWithAnimation(view: self.workNatureView)
+                    self.hideViewWithAnimation(view: self.workTimeView)
+                    self.hideViewWithAnimation(view: self.releaseDateView)
+                    
+                }else if(control.isSelected == false) {
+                    control.isSelected      = true
+                    /// 创建弹窗 选择条件
+                    if(control.tag == 1000) {
+                        self.showViewWithAnimationAndTag(self.positionView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.workNatureView)
+                        self.hideViewWithAnimation(view: self.workTimeView)
+                        self.hideViewWithAnimation(view: self.releaseDateView)
+                        
+                    } else if(control.tag == 1001) {
+                        self.showViewWithAnimationAndTag(self.workNatureView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.positionView)
+                        self.hideViewWithAnimation(view: self.workTimeView)
+                        self.hideViewWithAnimation(view: self.releaseDateView)
+                        
+                    } else if(control.tag == 1002) {
+                        self.showViewWithAnimationAndTag(self.workTimeView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.positionView)
+                        self.hideViewWithAnimation(view: self.workNatureView)
+                        self.hideViewWithAnimation(view: self.releaseDateView)
+                        
+                    } else if(control.tag == 1003) {
+                        self.showViewWithAnimationAndTag(self.releaseDateView, tag: control.tag)
+                        self.hideViewWithAnimation(view: self.positionView)
+                        self.hideViewWithAnimation(view: self.workNatureView)
+                        self.hideViewWithAnimation(view: self.workTimeView)
+                    }
+                }
+            }, onError: nil, onCompleted: nil, onDisposed: nil)
+            control.tag = index + ControlTag
+            view.addSubview(control)
         }
     }
     
@@ -232,47 +269,6 @@ extension SX_MoreHotJobController {
                 self.tableView!.reloadData()
                 
             } catch{ }
-        }
-    }
-    
-    /// 调出PickerView
-    @objc func topSelected(control: UIControl) {
-        if control.isSelected == true {
-            control.isSelected = false
-            /// 收起
-            hideViewWithAnimation(view: self.positionView)
-            hideViewWithAnimation(view: self.workNatureView)
-            hideViewWithAnimation(view: self.workTimeView)
-            hideViewWithAnimation(view: self.releaseDateView)
-            
-        }else if(control.isSelected == false) {
-            control.isSelected      = true
-            
-            /// 创建弹窗 选择条件
-            if(control.tag == 1000) {
-                showViewWithAnimationAndTag(self.positionView, tag: control.tag)
-                hideViewWithAnimation(view: self.workNatureView)
-                hideViewWithAnimation(view: self.workTimeView)
-                hideViewWithAnimation(view: self.releaseDateView)
-                
-            } else if(control.tag == 1001) {
-                showViewWithAnimationAndTag(self.workNatureView, tag: control.tag)
-                hideViewWithAnimation(view: self.positionView)
-                hideViewWithAnimation(view: self.workTimeView)
-                hideViewWithAnimation(view: self.releaseDateView)
-                
-            } else if(control.tag == 1002) {
-                showViewWithAnimationAndTag(self.workTimeView, tag: control.tag)
-                hideViewWithAnimation(view: self.positionView)
-                hideViewWithAnimation(view: self.workNatureView)
-                hideViewWithAnimation(view: self.releaseDateView)
-                
-            } else if(control.tag == 1003) {
-                showViewWithAnimationAndTag(self.releaseDateView, tag: control.tag)
-                hideViewWithAnimation(view: self.positionView)
-                hideViewWithAnimation(view: self.workNatureView)
-                hideViewWithAnimation(view: self.workTimeView)
-            }
         }
     }
     
@@ -457,6 +453,12 @@ extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
 extension SX_MoreHotJobController {
     func Noti() {
         NotificationCenter.default.addObserver(self, selector: #selector(changeSelect), name: NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA"), object: nil)
+        
+        
+        
+        
+        
+        
     }
     
     @objc func changeSelect(noti:Notification) {
