@@ -27,12 +27,13 @@ class SX_CertificationController: UIViewController {
     var collectionView: UICollectionView?
     
     var compreNameArr = [String]()
-    var sourceNameArr = [String]()
+    var courseNameArr = [String]()
     var classNameArr  = [String]()
     
     var typeIDArr     = [String]()
-    var courceIDArr   = [String]()
-    var sortIDArr     = [String]()
+    var courseIDArr   = [String]()
+    var sortSortArr   = [String]()
+    var sortOrderArr  = [String]()
     
     /////用于Search搜索////
     var typeStr       = "0"
@@ -183,11 +184,25 @@ extension SX_CertificationController {
                     let listModel = TrainListModel(jsonData: item)
                     self.certicationModels.append(listModel)
                 }
-
-                
-                
-                
-                
+                for item in json["data"]["sort"].array ?? [] {
+                    self.compreNameArr.append(item["name"].string ?? "测试综合")
+                    self.sortSortArr.append(item["sort"].string ?? "id")
+                    self.sortOrderArr.append(item["order"].string ?? "desc")
+                    self.comprehensiveView.dataArr = self.compreNameArr
+                }
+                for item in json["data"]["course"].array ?? [] {
+                    self.courseNameArr.append(item["name"].string ?? "测试课程属性")
+                    self.courseIDArr.append(item["id"].string ?? "0")
+                    self.ClassAttributeView.dataArr = self.courseNameArr
+                }
+                for item in json["data"]["type"].array ?? [] {
+                    self.classNameArr.append(item["name"].string ?? "测试专业类型")
+                    self.typeIDArr.append(item["id"].string ?? "0")
+                    self.professionalTypeView.dataArr = self.classNameArr
+                }
+                self.comprehensiveView.frame    = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.compreNameArr.count*50))
+                self.ClassAttributeView.frame   = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.courseNameArr.count*50))
+                self.professionalTypeView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.classNameArr.count*50))
                 self.collectionView?.reloadData()
             } catch{ }
         }
@@ -245,17 +260,15 @@ extension SX_CertificationController {
                     let allLabel        = self.topSelectedView?.viewWithTag(LabelTag + index) as? UILabel
                     allLabel?.textColor = UIColor.black
                 }
-            }) { (finished) in
-                SXLog(finished)
+            }) { (FINISHED) in
+                SXLog(FINISHED)
             }
         }
     }
     
     /// 展示隐藏动画
     func showViewWithAnimationAndTag(_ view: UIView, tag: NSInteger) {
-        
         if view.isKind(of: type(of: self.comprehensiveView)) { //综合
-            
             self.ClassAttributeView.frame   = CGRect(x: 0, y: -self.ClassAttributeView.bounds.size.height, width: SCREEN_WIDTH, height: self.ClassAttributeView.bounds.size.height)
             self.professionalTypeView.frame = CGRect(x: 0, y: -self.professionalTypeView.bounds.size.height, width: SCREEN_WIDTH, height: self.professionalTypeView.bounds.size.height)
             
@@ -281,7 +294,6 @@ extension SX_CertificationController {
             control2?.isSelected = false
             
         } else if (view.isKind(of: type(of: self.professionalTypeView))) { // 国家
-            
             self.comprehensiveView.frame  = CGRect(x: 0, y: -self.comprehensiveView.bounds.size.height, width: SCREEN_WIDTH, height: self.comprehensiveView.bounds.size.height)
             self.ClassAttributeView.frame = CGRect(x: 0, y: -self.ClassAttributeView.bounds.size.height, width: SCREEN_WIDTH, height: self.ClassAttributeView.bounds.size.height)
             
@@ -300,8 +312,8 @@ extension SX_CertificationController {
         /// 改变传入的View frame
         UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 5.0, options: .curveEaseOut, animations: {
             view.frame = CGRect(x: 0, y: self.topSelectedView!.bounds.origin.y + self.topSelectedView!.bounds.size.height + kNavH , width: SCREEN_WIDTH, height: view.bounds.size.height)
-        }) { (finished) in
-            SXLog(finished)
+        }) { (FINISHED) in
+            SXLog(FINISHED)
         }
         
         /// 翻转箭头
@@ -318,18 +330,18 @@ extension SX_CertificationController {
         for index in 0..<3 {
             if (index != (tag-ControlTag)) {
                 UIView.animate(withDuration: 0.1, animations: {
-                    let allImg          = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
-                    allImg?.image       = #imageLiteral(resourceName: "btn_down")
+                    let allImg = self.topSelectedView?.viewWithTag(index+ArrowTag) as? UIImageView
+                    allImg?.image = #imageLiteral(resourceName: "btn_down")
                     let transform: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)*0)
-                    allImg?.transform   = transform
-                }) { (finished) in
-                    SXLog(finished)
-                    let allLabel        = self.topSelectedView?.viewWithTag(index+LabelTag) as? UILabel
+                    allImg?.transform = transform
+                }) { (FINISHED) in
+                    SXLog(FINISHED)
+                    let allLabel = self.topSelectedView?.viewWithTag(index+LabelTag) as? UILabel
                     allLabel?.textColor = UIColor.black
                 }
             }
             
-            let selectedLabel        = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
+            let selectedLabel = self.topSelectedView?.viewWithTag(tag-ControlTag+LabelTag) as? UILabel
             selectedLabel?.textColor = UIColor.SX_MainColor()
         }
     }
