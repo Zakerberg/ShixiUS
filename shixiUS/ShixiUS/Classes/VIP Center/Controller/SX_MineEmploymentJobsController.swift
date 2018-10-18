@@ -34,13 +34,12 @@ class SX_MineEmploymentJobsController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchData()
+        Noti()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,33 +62,38 @@ extension SX_MineEmploymentJobsController {
     }
     
     func fetchData() {
-        
-        let url = SX_MyApplyJob + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
-        
-        SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
-            do {
-                let json = try JSON(data: result)
-                if json["status"].int == 200 {
-                    SXLog("成功!")
-                    for item in json["data"].array ?? [] {
-                        let jobApplyModel = SX_JobApplyModel(jsonData: item)
-                        self.jobApplyArr.append(jobApplyModel)
+       // if String(describing: USERDEFAULTS.value(forKey: "login")!) == "yes"{
+            let url = SX_MyApplyJob + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
+            
+            SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
+                do {
+                    let json = try JSON(data: result)
+                    if json["status"].int == 200 {
+                        SXLog("成功!")
+                        for item in json["data"].array ?? [] {
+                            let jobApplyModel = SX_JobApplyModel(jsonData: item)
+                            self.jobApplyArr.append(jobApplyModel)
+                        }
+                        self.table.reloadData()
+                        if json["data"].count == 0 {
+                            self.noDataView?.isHidden = false
+                        }else{
+                            self.noDataView?.isHidden = true
+                        }
+                    }else{
+                        let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        hud.mode       = .text
+                        hud.isSquare   = true
+                        hud.label.text = json["msg"].string
+                        hud.hide(animated: true, afterDelay: 1.0)
                     }
                     self.table.reloadData()
-                    if json["data"].count == 0 {
-                        self.noDataView?.isHidden = false
-                    }else{
-                        self.noDataView?.isHidden = true
-                    }
-                }else{
-                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
-                    hud.mode       = .text
-                    hud.isSquare   = true
-                    hud.label.text = json["msg"].string
-                    hud.hide(animated: true, afterDelay: 1.0)
-                }
-            }catch { }
-        }
+                }catch { }
+            }
+//        }else{
+//            let vc  = SX_LoginController()
+//            self.present(vc, animated: true, completion: nil)
+//        }
     }
 }
 
@@ -101,11 +105,9 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.jobApplyArr.count
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = SX_EmploymentJobsCell(style: .default, reuseIdentifier: employCellID)
@@ -148,7 +150,6 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
-            
             break
         case "4"?: // 退款
             cell.employmentPay?.isHidden     = true
@@ -172,7 +173,7 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             cell.employmentPay?.isHidden     = true
             cell.employmentNotiBtn?.isHidden = true
             cell.employmentPay?.isHidden     = true
-            
+
             cell.employmentStyle?.text       = model.statusCn
             
             cell.employmentDetail?.setTitle(model.button, for: .normal)
@@ -236,3 +237,15 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
     }
 }
 
+// ======================================================================
+// MARK: - RxSwift 通知处理
+// ======================================================================
+extension SX_MineEmploymentJobsController {
+    func Noti() {
+        NotificationCenter.default.rx.notification(NSNotification.Name(rawValue: "LOGINSUCCESS")).takeUntil(self.rx.deallocated).subscribe(onNext: { (noti) in
+            self.fetchData()
+        }, onError: { (error) in
+            SXLog(error)
+        }, onCompleted: nil, onDisposed: nil)
+    }
+}

@@ -144,8 +144,6 @@ extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewData
             cell.projectCancel?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("取消申请 ++++")
                 
-                
-                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)

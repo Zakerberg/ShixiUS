@@ -60,8 +60,7 @@ extension SX_TabBarController {
             if String(describing: USERDEFAULTS.value(forKey: "login")!) == "yes" {
             }else{
                 let vc  = SX_LoginController()
-                self.present(vc, animated: true, completion: {
-                })
+                self.present(vc, animated: true, completion: nil)
             }
         }
     }
