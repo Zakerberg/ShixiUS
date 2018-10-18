@@ -437,7 +437,10 @@ extension SX_MoreHotJobController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SXLog("点击了海外就业的第\(indexPath.row)个")
-        
+        let model = jobListsModel[indexPath.row]
+        let vc = SX_HotJobDetailController()
+        vc.id  = model.id ?? "23"
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
