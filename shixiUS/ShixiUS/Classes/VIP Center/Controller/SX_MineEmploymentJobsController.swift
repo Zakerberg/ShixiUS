@@ -54,7 +54,7 @@ class SX_MineEmploymentJobsController: UIViewController {
 extension SX_MineEmploymentJobsController {
     
     func setUI() {
-        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        self.view.backgroundColor = UIColor.SX_MainColor()
         self.view.addSubview(table)
 
         let tableViewWapper = SX_PullToBounceWrapper(scrollView: table)

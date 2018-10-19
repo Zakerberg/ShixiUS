@@ -23,6 +23,7 @@ class SX_TabBarController: UITabBarController {
         super.viewDidLoad()
         setUpAllViewController()
         self.tabBar.tintColor = UIColor.SX_MainColor()
+        self.tabBar.backgroundColor = UIColor.white
     }
 }
 
