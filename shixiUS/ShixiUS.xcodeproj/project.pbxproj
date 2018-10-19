@@ -53,6 +53,10 @@
 		32621281214CE13E000C1A6C /* RMCalendarMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126A214CE13E000C1A6C /* RMCalendarMonthHeaderView.m */; };
 		32621282214CE13E000C1A6C /* RMCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126B214CE13E000C1A6C /* RMCollectionCell.m */; };
 		32621283214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126C214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m */; };
+		32680E292179763900E86ACA /* SX_WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E282179763900E86ACA /* SX_WaveView.swift */; };
+		32680E2B2179764A00E86ACA /* SX_BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E2A2179764A00E86ACA /* SX_BallView.swift */; };
+		32680E2D2179766000E86ACA /* SX_BounceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E2C2179766000E86ACA /* SX_BounceView.swift */; };
+		32680E2F2179768800E86ACA /* SX_PullToBounceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E2E2179768800E86ACA /* SX_PullToBounceWrapper.swift */; };
 		32998873214FB28600DC9ED3 /* SX_ApplySucceedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */; };
 		3299887521509C9F00DC9ED3 /* SX_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3299887421509C9F00DC9ED3 /* SX_Utils.swift */; };
 		3299888521511BC700DC9ED3 /* CalendarTodaysDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3299888121511BC700DC9ED3 /* CalendarTodaysDate.png */; };
@@ -205,6 +209,10 @@
 		3262126C214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
 		3262126D214CE13E000C1A6C /* RMCalendarMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarMonthHeaderView.h; sourceTree = "<group>"; };
 		3262126E214CE13E000C1A6C /* RMCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCollectionCell.h; sourceTree = "<group>"; };
+		32680E282179763900E86ACA /* SX_WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_WaveView.swift; sourceTree = "<group>"; };
+		32680E2A2179764A00E86ACA /* SX_BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BallView.swift; sourceTree = "<group>"; };
+		32680E2C2179766000E86ACA /* SX_BounceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BounceView.swift; sourceTree = "<group>"; };
+		32680E2E2179768800E86ACA /* SX_PullToBounceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PullToBounceWrapper.swift; sourceTree = "<group>"; };
 		32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplySucceedController.swift; sourceTree = "<group>"; };
 		3299887421509C9F00DC9ED3 /* SX_Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_Utils.swift; sourceTree = "<group>"; };
 		3299888121511BC700DC9ED3 /* CalendarTodaysDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTodaysDate.png; sourceTree = "<group>"; };
@@ -496,6 +504,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		32680E27217975EB00E86ACA /* SX_PullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				32680E2E2179768800E86ACA /* SX_PullToBounceWrapper.swift */,
+				32680E282179763900E86ACA /* SX_WaveView.swift */,
+				32680E2A2179764A00E86ACA /* SX_BallView.swift */,
+				32680E2C2179766000E86ACA /* SX_BounceView.swift */,
+			);
+			path = SX_PullToRefresh;
+			sourceTree = "<group>";
+		};
 		32AC6B0F215E288C000355A4 /* SX_Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -695,6 +714,7 @@
 		45556B5820D89D290035FCA6 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				32680E27217975EB00E86ACA /* SX_PullToRefresh */,
 				32621249214CE12E000C1A6C /* SX_Calendar */,
 				324482E2214A348E00037533 /* SX_AlertView */,
 				3248484521411AA400B6049E /* SX_Picker */,
@@ -1180,9 +1200,11 @@
 				45E573C0212A7094007A4DCD /* SX_OrderPayInfoCell.swift in Sources */,
 				3248484921411F5800B6049E /* SX_AddressViewController.swift in Sources */,
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
+				32680E292179763900E86ACA /* SX_WaveView.swift in Sources */,
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
 				45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */,
 				45454BE321198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift in Sources */,
+				32680E2F2179768800E86ACA /* SX_PullToBounceWrapper.swift in Sources */,
 				32B41D7721609CE4000781A6 /* SX_Regex.swift in Sources */,
 				3207DCCA216F2160003828F8 /* SX_NoDataView.swift in Sources */,
 				45E57406212E9847007A4DCD /* SX_UnderlineBtn.swift in Sources */,
@@ -1191,6 +1213,7 @@
 				32621281214CE13E000C1A6C /* RMCalendarMonthHeaderView.m in Sources */,
 				45556B6120D8A0370035FCA6 /* Defines.swift in Sources */,
 				323E99B7213D1635006038F5 /* SX_CollectionVocationalTrainingController.swift in Sources */,
+				32680E2B2179764A00E86ACA /* SX_BallView.swift in Sources */,
 				45FDD9A52126AEC300E336F9 /* SX_NetManager.swift in Sources */,
 				322FC80A21464164005347E8 /* SX_HotJobDetailCell.swift in Sources */,
 				323E99C2213FA73E006038F5 /* SX_ApplyVocationListController.swift in Sources */,
@@ -1223,6 +1246,7 @@
 				32484853214129AD00B6049E /* SX_AddressPickerView.swift in Sources */,
 				32621282214CE13E000C1A6C /* RMCollectionCell.m in Sources */,
 				45440F0020E0C4E700058978 /* SX_CycleCell.swift in Sources */,
+				32680E2D2179766000E86ACA /* SX_BounceView.swift in Sources */,
 				4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */,
 				4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */,
 				4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */,
