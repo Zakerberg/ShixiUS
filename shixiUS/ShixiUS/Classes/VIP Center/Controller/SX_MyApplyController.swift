@@ -86,7 +86,7 @@ extension SX_MyApplyController {
     
     func setUI() {
         title = "我的申请"
-        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        self.view.backgroundColor = UIColor.white
             // 就业岗位, 培训项目, 职业认证
             let controllerClassNames = ["SX_MineEmploymentJobsController", "SX_MineTrainingProjectController", "SX_MineVocationalTrainingController"]
             

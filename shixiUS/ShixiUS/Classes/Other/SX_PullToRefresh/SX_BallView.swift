@@ -52,7 +52,9 @@ class SX_BallView: UIView {
 }
 
 
-
+// ==============================================================================
+// MARK: - SX_CircleLayer
+// ==============================================================================
 class SX_CircleLayer :CAShapeLayer, CAAnimationDelegate {
     
     let moveUpDist: CGFloat!
@@ -131,7 +133,9 @@ class SX_CircleLayer :CAShapeLayer, CAAnimationDelegate {
     }
 }
 
-
+// ==============================================================================
+// MARK: - SX_SpinerLayer
+// ==============================================================================
 class SX_SpinerLayer :CAShapeLayer, CAAnimationDelegate {
     
     init(superLayerFrame:CGRect, ballSize:CGFloat, color:UIColor = UIColor.white) {

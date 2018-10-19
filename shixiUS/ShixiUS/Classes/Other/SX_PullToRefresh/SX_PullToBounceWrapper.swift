@@ -37,12 +37,12 @@ open class SX_PullToBounceWrapper: UIView {
     public init(
         scrollView: UIScrollView,
         bounceDuration: CFTimeInterval = 0.8,
-        ballSize:CGFloat = 36,
+        ballSize:CGFloat               = 36,
         ballMoveTimingFunc:CAMediaTimingFunction = CAMediaTimingFunction(controlPoints:0.49,0.13,0.29,1.61),
-        moveUpDuration:CFTimeInterval = 0.25,
-        pullDistance: CGFloat = 96,
-        bendDistance: CGFloat = 40,
-        didPullToRefresh: (()->())? = nil
+        moveUpDuration:CFTimeInterval  = 0.25,
+        pullDistance: CGFloat          = 96,
+        bendDistance: CGFloat          = 40,
+        didPullToRefresh: (()->())?    = nil
         )
     {
         if scrollView.frame == CGRect.zero {

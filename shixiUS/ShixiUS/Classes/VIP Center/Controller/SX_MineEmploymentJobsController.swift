@@ -56,6 +56,17 @@ extension SX_MineEmploymentJobsController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
+
+        let tableViewWapper = SX_PullToBounceWrapper(scrollView: table)
+        self.view.addSubview(tableViewWapper)
+
+        tableViewWapper.didPullToRefresh = {
+            _ = Timer.schedule(delay: 2, handler: { (timer) in
+                self.jobApplyArr.removeAll()
+                self.fetchData()
+                tableViewWapper.stopLoadingAnimation()
+            })
+        }
         
         self.noDataView = SX_NoDataView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-40.FloatValue-kNavH)).addhere(toSuperView: table)
         self.noDataView?.isHidden = true

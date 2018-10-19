@@ -28,8 +28,8 @@ class SX_LoginController: UIViewController {
     var forgetBtn      : UIButton?
     var registerBtn    : UIButton?
     
-    typealias SuccessClosure = (String, String) ->()
-    var closure: SuccessClosure!
+//    typealias SuccessClosure = (String, String) ->()
+//    var closure: SuccessClosure!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,11 +204,11 @@ extension SX_LoginController {
                             let statusStr  = "1"
                             /// 发送 登陆成功 通知
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINSUCCESS"), object: nil, userInfo: ["name":json["data"]["userName"].rawString()!])
-                            guard(self.closure != nil) else{
-                                self.dismiss(animated: true, completion: nil)
-                                return
-                            }
-                            self.closure(json["data"]["userName"].rawString()!,statusStr)
+//                            guard(self.closure != nil) else{
+//                                self.dismiss(animated: true, completion: nil)
+//                                return
+//                            }
+//                            self.closure(json["data"]["userName"].rawString()!,statusStr)
                             self.dismiss(animated: true, completion: nil)
                         }else{
                             let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -258,9 +258,9 @@ extension SX_LoginController {
         self.backBtn?.resignFirstResponder()
     }
     
-    func callBack(closure :@escaping SuccessClosure) {
-        self.closure = closure
-    }
+//    func callBack(closure :@escaping SuccessClosure) {
+//        self.closure = closure
+//    }
 }
 
 class SX_TextField: UITextField {

@@ -57,6 +57,7 @@
 		32680E2B2179764A00E86ACA /* SX_BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E2A2179764A00E86ACA /* SX_BallView.swift */; };
 		32680E2D2179766000E86ACA /* SX_BounceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E2C2179766000E86ACA /* SX_BounceView.swift */; };
 		32680E2F2179768800E86ACA /* SX_PullToBounceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E2E2179768800E86ACA /* SX_PullToBounceWrapper.swift */; };
+		32680E312179BEB700E86ACA /* SX_CertificationDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E302179BEB700E86ACA /* SX_CertificationDetailController.swift */; };
 		32998873214FB28600DC9ED3 /* SX_ApplySucceedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */; };
 		3299887521509C9F00DC9ED3 /* SX_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3299887421509C9F00DC9ED3 /* SX_Utils.swift */; };
 		3299888521511BC700DC9ED3 /* CalendarTodaysDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3299888121511BC700DC9ED3 /* CalendarTodaysDate.png */; };
@@ -213,6 +214,7 @@
 		32680E2A2179764A00E86ACA /* SX_BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BallView.swift; sourceTree = "<group>"; };
 		32680E2C2179766000E86ACA /* SX_BounceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BounceView.swift; sourceTree = "<group>"; };
 		32680E2E2179768800E86ACA /* SX_PullToBounceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PullToBounceWrapper.swift; sourceTree = "<group>"; };
+		32680E302179BEB700E86ACA /* SX_CertificationDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CertificationDetailController.swift; sourceTree = "<group>"; };
 		32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplySucceedController.swift; sourceTree = "<group>"; };
 		3299887421509C9F00DC9ED3 /* SX_Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_Utils.swift; sourceTree = "<group>"; };
 		3299888121511BC700DC9ED3 /* CalendarTodaysDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTodaysDate.png; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				4505982120F6F11C00504B6E /* SX_CertificationController.swift */,
+				32680E302179BEB700E86ACA /* SX_CertificationDetailController.swift */,
 			);
 			path = SX_Certification;
 			sourceTree = "<group>";
@@ -1202,6 +1205,7 @@
 				45341D2E20F44E7F0099CDDD /* SX_TopSelectedView.swift in Sources */,
 				32680E292179763900E86ACA /* SX_WaveView.swift in Sources */,
 				45D3520F20D8B3F600D7300A /* Common.swift in Sources */,
+				32680E312179BEB700E86ACA /* SX_CertificationDetailController.swift in Sources */,
 				45454BE521198A95002B9EBC /* SX_EmploymentJobsCell.swift in Sources */,
 				45454BE321198A2E002B9EBC /* SX_MyApplyTrainingProjectCell.swift in Sources */,
 				32680E2F2179768800E86ACA /* SX_PullToBounceWrapper.swift in Sources */,
