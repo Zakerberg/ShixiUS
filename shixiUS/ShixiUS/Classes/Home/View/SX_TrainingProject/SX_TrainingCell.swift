@@ -43,7 +43,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configCell()
         
-        self.collectionView?.delegate = self
+        self.collectionView?.delegate   = self
         self.collectionView?.dataSource = self
         self.collectionView?.register(SX_TrainingCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellID)
     }
@@ -123,7 +123,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         SXLog("点击了CollectionView的\(indexPath.section)---\(indexPath.row)")
-
+        
         self.delegate?.clickCell(item: self.id ?? "0")
     }
     

@@ -53,6 +53,7 @@
     var trainArr     = [SX_HomeTrainModel]()
     var loadingView: SX_LoadingView?
     
+    var cerStr = ""
     private lazy var homeButton: UIButton = {
         let button                        = UIButton()
         button.imageView?.frame           = CGRect(x: 20, y: 20, width: 55, height: 55)
@@ -304,11 +305,14 @@
         
         let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
         shixiTrainingCell.selectionStyle       = .none
+        
         if indexPath.section == 2 { // 2 培训认证
+            self.cerStr = "1"
             shixiTrainingCell.titleLabel?.text = "培训认证"
             shixiTrainingCell.trainModels      = self.trainArr
             
         }else{ /// 0 热门实训
+            self.cerStr = ""
             shixiTrainingCell.titleLabel?.text = "热门实训"
             shixiTrainingCell.trainingModels   = self.trainingArr
         }
@@ -437,6 +441,7 @@
     
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
         
+        
     }
     
     func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
@@ -457,8 +462,14 @@
  // ================================================================================================
  extension SX_HomeVC: SX_TrainingCellDelegate {
     func clickCell(item: String) {
-        let vc = SX_ProjectDetailController()
-        vc.id = item
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        if self.cerStr == "1" {
+            let vc = SX_CertificationDetailController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            let vc = SX_ProjectDetailController()
+            vc.id = item
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
  }

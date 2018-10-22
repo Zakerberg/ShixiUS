@@ -12,9 +12,8 @@ class SX_CertificationDetailController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+        setUI()
+        fetchData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,7 +23,20 @@ class SX_CertificationDetailController: UIViewController {
 }
 
 // ==============================================================================
-// MARK: -
+// MARK: - Other Method
+// ==============================================================================
+extension SX_CertificationDetailController {
+    func setUI() {
+        
+    }
+    
+    func fetchData() {
+        
+    }
+}
+
+// ==============================================================================
+// MARK: - 
 // ==============================================================================
 extension SX_CertificationDetailController {
     
@@ -35,7 +47,6 @@ extension SX_CertificationDetailController {
 
 
 
-
 // ==============================================================================
 // MARK: -
 // ==============================================================================
@@ -46,28 +57,10 @@ extension SX_CertificationDetailController {
     
 }
 
-
-
 // ==============================================================================
 // MARK: -
 // ==============================================================================
 extension SX_CertificationDetailController {
-    
-    
-    
-    
-}
-
-
-
-
-// ==============================================================================
-// MARK: -
-// ==============================================================================
-extension SX_CertificationDetailController {
-    
-    
-    
     
 }
 

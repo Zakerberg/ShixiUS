@@ -73,6 +73,7 @@ extension SX_MineEmploymentJobsController {
     }
     
     func fetchData() {
+        
        // if String(describing: USERDEFAULTS.value(forKey: "login")!) == "yes"{
             let url = SX_MyApplyJob + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
             

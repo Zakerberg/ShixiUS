@@ -59,8 +59,8 @@ class SX_ProjectDetailController: UIViewController {
     lazy var tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-50.FloatValue.IPAD_XValue), style: .grouped)
         table.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
-        table.delegate = self
-        table.dataSource = self
+        table.delegate     = self
+        table.dataSource   = self
         table.showsVerticalScrollIndicator = false
         
         return table
