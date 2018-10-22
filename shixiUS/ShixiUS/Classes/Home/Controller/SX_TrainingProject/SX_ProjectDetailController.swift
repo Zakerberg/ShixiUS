@@ -24,8 +24,6 @@ class SX_ProjectDetailController: UIViewController {
     
     ///////////////////////////////////////////////////////////////////////////////////////////////
     var ProjectLightStr = "Overriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keyword"
-    //    var dateTArr     = ["06.12", "06.14", "08.19", "09.16"]
-    //    var priceTArr    = ["¥5818", "¥5555", "¥1234", "¥7892"]
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
     var id:String?
@@ -137,7 +135,7 @@ extension SX_ProjectDetailController {
             make.height.width.equalTo(self.collectionBtn!)
         }).config({ (APPLY) in
             APPLY.backgroundColor     = UIColor.SX_MainColor()
-            APPLY.titleLabel?.font    = UIFont.systemFont(ofSize: 15)
+            APPLY.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 15)
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
@@ -146,8 +144,7 @@ extension SX_ProjectDetailController {
                 
                 let vc =  SX_ApplyTrainListController()
                 self.navigationController?.pushViewController(vc, animated: true)
-                
-                
+
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
