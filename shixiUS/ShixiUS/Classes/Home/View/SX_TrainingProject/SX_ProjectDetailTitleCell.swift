@@ -60,7 +60,7 @@ extension SX_ProjectDetailTitleCell {
         })
         
         self.projectContent = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.projectName!.snp.bottom).offset(Margin)
+            make.top.equalTo(self.projectName!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(self.projectName!)
             make.right.equalToSuperview().offset(-Margin)
         }).config({ (CONTENT) in
@@ -70,16 +70,16 @@ extension SX_ProjectDetailTitleCell {
         })
         
         self.projectCity = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.projectContent!.snp.bottom).offset(Margin)
+            make.top.equalTo(self.projectContent!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(self.projectName!)
         }).config({ (CITY) in
             CITY.sizeToFit()
-            CITY.textColor = UIColor.gray
-            CITY.font      = UIFont.systemFont(ofSize: 13)
+            CITY.textColor  = UIColor.gray
+            CITY.font       = UIFont.systemFont(ofSize: 13)
         })
         
-        self.projectPrice = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.projectCity!.snp.bottom).offset(Margin)
+        self.projectPrice   = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(self.projectCity!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(self.projectName!)
         }).config({ (PRICE) in
             PRICE.sizeToFit()

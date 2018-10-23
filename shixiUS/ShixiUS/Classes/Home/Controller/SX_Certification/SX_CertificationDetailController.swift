@@ -237,7 +237,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         
         switch indexPath.section {
         case 0:
-            return 110.FloatValue.IPAD_XValue
+            return 120.FloatValue.IPAD_XValue
         case 1:
             return 190.FloatValue.IPAD_XValue
         default:
@@ -283,6 +283,7 @@ extension SX_CertificationDetailController: SXCycleScrollerViewDelegate {
     
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
         
+        
     }
 }
 
@@ -291,6 +292,7 @@ extension SX_CertificationDetailController: SXCycleScrollerViewDelegate {
 // ==============================================================================
 extension SX_CertificationDetailController: SXPageTitleViewDelegate {
     func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
+        
         
     }
 }
