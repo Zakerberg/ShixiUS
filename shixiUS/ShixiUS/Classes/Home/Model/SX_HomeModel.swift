@@ -413,19 +413,92 @@ struct TrainSortModel {
 // ==============================================================================================
 struct SX_TrainDetailModel {
     
+    var id:String?
+    var title:String?
+    var image:String?
+    var address:String?
+    var target:String?
+    var audience:String?
+    var content:String?
+    var describe:String?
+    var series: TrainDetailSeriesModel
+    var courseprice: TrainDetailCoursepriceModel
+    var curriculum: TrainDetailCurriculumModel
+    var teacher: TrainDetailTeacherModel
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        title          = jsonData["title"].string
+        image          = jsonData["image"].string
+        address        = jsonData["address"].string
+        target         = jsonData["target"].string
+        audience       = jsonData["audience"].string
+        content        = jsonData["content"].string
+        describe       = jsonData["describe"].string
+        series         = TrainDetailSeriesModel(jsonData: jsonData["series"])
+        courseprice    = TrainDetailCoursepriceModel(jsonData: jsonData["courseprice"])
+        curriculum     = TrainDetailCurriculumModel(jsonData: jsonData["curriculum"])
+        teacher        = TrainDetailTeacherModel(jsonData: jsonData["teacher"])
+    }
 }
 
+struct TrainDetailSeriesModel {
+    
+    var id: String?
+    var name:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        name           = jsonData["name"].string
+    }
+}
+
+struct TrainDetailCoursepriceModel {
+    
+    var id: String?
+    var date:String?
+    var price:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        date           = jsonData["date"].string
+        price          = jsonData["price"].string
+    }
+}
+
+struct TrainDetailCurriculumModel {
+    
+    var id: String?
+    var title:String?
+    var content:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        title          = jsonData["title"].string
+        content        = jsonData["content"].string
+    }
+}
+
+struct TrainDetailTeacherModel {
+    
+    var id:String?
+    var image:String?
+    var name:String?
+    var title:String?
+    var school:String?
+    var company:String?
+    var describe:String?
+    
+    init(jsonData: JSON) {
+        id             = jsonData["id"].string
+        image          = jsonData["image"].string
+        name           = jsonData["name"].string
+        title          = jsonData["title"].string
+        school         = jsonData["school"].string
+        company        = jsonData["company"].string
+        describe       = jsonData["describe"].string
+    }
+}
 
 // ==============================================================================================
 // MARK: - 职位列表页 /job/index
@@ -434,11 +507,11 @@ struct SX_TrainDetailModel {
 struct SX_JobModel {
     
     var search: JobSearchModel
-    var lists:JobListModel
-    var type:JobTypeModel
-    var nature:JobNatureModel
-    var duration:JobDurationModel
-    var setter:JobSetterModel
+    var lists: JobListModel
+    var type: JobTypeModel
+    var nature: JobNatureModel
+    var duration: JobDurationModel
+    var setter: JobSetterModel
     
     init(jsonData: JSON) {
         search         = JobSearchModel(jsonData: jsonData["search"])
@@ -485,6 +558,7 @@ struct JobListModel {
 }
 
 struct JobTypeModel {
+    
     var id: String?
     var name:String?
     

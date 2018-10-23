@@ -49,7 +49,7 @@ let SX_Home                   = SHIXIUS + "/index/index"
 let SX_TrainingList           = SHIXIUS + "/training/index"
 
 /// 实训详情页 (get)
-let SX_TrainingDetail         = SHIXIUS + "/training/view/id/" //此处后面还要加培训id
+let SX_TrainingDetail         = SHIXIUS + "/training/view/id/" //此处后面还要加实训id
 
 /// 实训报名页 (get)
 let SX_TrainingApply          = SHIXIUS + "/training/apply"
@@ -60,11 +60,14 @@ let SX_TrainingApplyConfirm   = SHIXIUS + "/training/apply"
 /// 培训列表页 
 let SX_TrainIndex             = SHIXIUS + "/train/index"
 
+/// 培训详情页
+let SX_TrainDetail            = SHIXIUS + "/train/view/id/" //此处后面还要加培训id
+
 /// 职位列表页 (get)
 let SX_JobIndex               = SHIXIUS + "/job/index"
 
 /// 职位详情界面 (get)
-let SX_JobDetail              = SHIXIUS + "/job/view/id" //此处后面还要加培训id
+let SX_JobDetail              = SHIXIUS + "/job/view/id" //此处后面还要加职位id
 
 /// 海外就业报名页 (get)
 let SX_Oversea_Apply          = SHIXIUS + "/job/apply" 

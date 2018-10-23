@@ -52,8 +52,13 @@ class SX_CertificationDetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
         fetchData()
+        setUI()
+    }
+
+    deinit {
+        tableView.delegate = nil
+        print("培训详情VC deinit")
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,13 +128,25 @@ extension SX_CertificationDetailController {
     }
     
     func fetchData() {
-        
-        
+
+        SX_NetManager.requestData(type: .GET, URlString: (SX_TrainDetail + self.id!), parameters:  nil, finishCallBack: { (result) in
+            do{
+
+                 let json = try JSON(data: result)
+            
+                
+                
+
+                self.detailScrollerView.reloadData()
+                self.tableView.reloadData()
+
+            } catch{ }
+        })
     }
 }
 
 // ==============================================================================
-// MARK: - 
+// MARK: -  UITableViewDelegate
 // ==============================================================================
 extension SX_CertificationDetailController: UITableViewDelegate, UITableViewDataSource {
     
@@ -147,9 +164,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle     = .none
             
-            
             titleCell.projectPrice?.text = "¥" + "1500" + "起/人"
-            
             return titleCell
             
         }else if indexPath.section == 1 {

@@ -14,5 +14,6 @@
 //#import <CommonCrypto/CommonCrypto.h>
 #import <CommonCrypto/CommonDigest.h>
 #import "RMCalendarController.h"
+#import "NSDictionary+SXArray.h"
 
 #endif /* SX_NetWork_Header_h */
