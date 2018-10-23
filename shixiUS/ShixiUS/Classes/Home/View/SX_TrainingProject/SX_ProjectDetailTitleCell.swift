@@ -18,7 +18,7 @@ class SX_ProjectDetailTitleCell: UITableViewCell {
     
     var projectName : UILabel?
     var projectCity : UILabel?
-    //var projectContent: UILabel?
+    var projectContent: UILabel?
     var projectPrice: UILabel?
     
     override func awakeFromNib() {
@@ -42,9 +42,9 @@ class SX_ProjectDetailTitleCell: UITableViewCell {
     }
 }
 
-// ============================================================================================
+// ===============================================================================
 // MARK: - configCell()
-// ============================================================================================
+// ===============================================================================
 extension SX_ProjectDetailTitleCell {
     
     func configCell() {
@@ -59,18 +59,18 @@ extension SX_ProjectDetailTitleCell {
             NAME.textColor = UIColor.black
         })
         
-//        self.projectContent = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//            make.top.equalTo(self.projectName!.snp.bottom).offset(Margin)
-//            make.left.equalTo(self.projectName!)
-//            make.right.equalToSuperview().offset(-Margin)
-//        }).config({ (CONTENT) in
-//            CONTENT.numberOfLines = 0
-//            CONTENT.textColor     = UIColor.gray
-//            CONTENT.font          = UIFont.systemFont(ofSize: 14)
-//        })
+        self.projectContent = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(self.projectName!.snp.bottom).offset(Margin)
+            make.left.equalTo(self.projectName!)
+            make.right.equalToSuperview().offset(-Margin)
+        }).config({ (CONTENT) in
+            CONTENT.numberOfLines = 0
+            CONTENT.textColor     = UIColor.gray
+            CONTENT.font          = UIFont.systemFont(ofSize: 14)
+        })
         
         self.projectCity = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.projectName!.snp.bottom).offset(Margin)
+            make.top.equalTo(self.projectContent!.snp.bottom).offset(Margin)
             make.left.equalTo(self.projectName!)
         }).config({ (CITY) in
             CITY.sizeToFit()

@@ -132,9 +132,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-// =============================================================================================
+// ===============================================================================
 // MARK: - UICollectionViewDelegateFlowLayout
-// =============================================================================================
+// ===============================================================================
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
     }
@@ -143,9 +143,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
     
-// =============================================================================================
+// ===============================================================================
 // MARK: - configCell
-// =============================================================================================
+// ===============================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -184,9 +184,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     }
 }
 
-// =============================================================================================
+// ===============================================================================
 // MARK: - 1.查找所在的ViewController
-// =============================================================================================
+// ===============================================================================
 extension SX_TrainingCell {
     
     /*

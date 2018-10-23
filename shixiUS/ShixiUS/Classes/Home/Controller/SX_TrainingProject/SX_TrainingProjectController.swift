@@ -90,9 +90,9 @@ class SX_TrainingProjectController: UIViewController {
     }
 }
 
-// =======================================================================================
+// ===============================================================================
 // MARK: - Other Method
-// =======================================================================================
+// ===============================================================================
 extension SX_TrainingProjectController {
     
     func setUI() {
@@ -209,9 +209,9 @@ extension SX_TrainingProjectController {
     }
 }
 
-// =================================================================================
+// ===============================================================================
 // MARK: - UICollectionViewDelegateFlowLayout
-// =================================================================================
+// ===============================================================================
 extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -248,9 +248,9 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
     }
 }
 
-// ==============================================================================================
+// ===============================================================================
 // MARK: - Other Method 2 响应
-// ==============================================================================================
+// ===============================================================================
 extension SX_TrainingProjectController {
     func fetchData()  {
         
@@ -434,9 +434,9 @@ extension SX_TrainingProjectController {
     }
 }
 
-// ==============================================================================================
+// ===============================================================================
 // MARK: - RxSwift 通知处理
-// ==============================================================================================
+// ===============================================================================
 extension SX_TrainingProjectController {
     func Noti() {
         NotificationCenter.default.rx.notification(NSNotification.Name(rawValue: "CHANGEPOPSELECTDATA")).takeUntil(self.rx.deallocated).subscribe(onNext: { (noti) in

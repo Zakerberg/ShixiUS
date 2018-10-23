@@ -197,7 +197,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
 }
 
 // ===============================================================================
-// MARK: -
+// MARK: - objc
 // ===============================================================================
 extension SX_ProjectTripDateCell {
     @objc func tripBtnClick(btn: UIButton) {

@@ -90,9 +90,9 @@ class SX_ProjectDetailController: UIViewController {
     }
 }
 
-// ========================================================================================================
+// ===============================================================================
 // MARK: - Other Method
-// ========================================================================================================
+// ===============================================================================
 extension SX_ProjectDetailController {
     
     func setUI() {
@@ -139,12 +139,12 @@ extension SX_ProjectDetailController {
             APPLY.setTitle("立即申请", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
-
+                
                 ///加判断
                 
                 let vc =  SX_ApplyTrainListController()
                 self.navigationController?.pushViewController(vc, animated: true)
-
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -177,9 +177,9 @@ extension SX_ProjectDetailController {
     }
 }
 
-// =======================================================================================================
+// ===============================================================================
 // MARK: - UITableViewDelegate
-// =======================================================================================================
+// ===============================================================================
 extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 6
@@ -195,7 +195,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle     = .none
             titleCell.projectName?.text  = model["data"]["title"].string ?? ""
-            titleCell.projectCity?.text  = model["data"]["outset_city"].string ?? ""
+            titleCell.projectCity?.text  = "出发城市: " + (model["data"]["outset_city"].string ?? "北京(测试)")
             // titleCell.projectContent?.text = model["data"]["features"].string ?? ""
             titleCell.projectPrice?.text = "¥" + "1500" + "起/人"
             
@@ -281,9 +281,9 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
-// ===========================================================================================================
+// ===============================================================================
 // MARK: - SXCycleScrollerViewDelegate
-// ==========================================================================================================
+// ===============================================================================
 extension SX_ProjectDetailController: SXCycleScrollerViewDelegate {
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
         
@@ -294,9 +294,9 @@ extension SX_ProjectDetailController: SXCycleScrollerViewDelegate {
     }
 }
 
-// ==========================================================================================================
+// ===============================================================================
 // MARK: - UIScrollViewDelegate
-// ===========================================================================================================
+// ===============================================================================
 extension SX_ProjectDetailController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -337,9 +337,9 @@ extension SX_ProjectDetailController: UIScrollViewDelegate {
     }
 }
 
-// =========================================================================================================
+// ===============================================================================
 // MARK: -  SXPageTitleViewDelegate
-// =========================================================================================================
+// ===============================================================================
 extension SX_ProjectDetailController: SXPageTitleViewDelegate {
     
     func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {

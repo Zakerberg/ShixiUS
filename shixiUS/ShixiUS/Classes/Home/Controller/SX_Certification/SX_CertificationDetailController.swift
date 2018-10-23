@@ -15,6 +15,17 @@ class SX_CertificationDetailController: UIViewController {
     var id: String?
     var moreDateBtn: UIButton?
     var serverImgs = [String]()
+    var certificationDetailArr = JSON()
+    
+    /// 课程标题
+    var classTitleArr  = [String]()
+    /// 课程日期
+    var classDateArr   = [String]()
+    /// 课程价格
+    var classPriceArr  = [String]()
+    
+    /// teacher 列表
+    var teacherListArr = [TrainDetailTeacherModel]()
     
     lazy var pageTitleView: SX_PageTitleView = {
         let config                = SX_PageTitleViewConfig()
@@ -55,7 +66,7 @@ class SX_CertificationDetailController: UIViewController {
         fetchData()
         setUI()
     }
-
+    
     deinit {
         tableView.delegate = nil
         print("培训详情VC deinit")
@@ -128,18 +139,32 @@ extension SX_CertificationDetailController {
     }
     
     func fetchData() {
-
+        
         SX_NetManager.requestData(type: .GET, URlString: (SX_TrainDetail + self.id!), parameters:  nil, finishCallBack: { (result) in
             do{
-
-                 let json = try JSON(data: result)
-            
                 
+                let json = try JSON(data: result)
+                self.certificationDetailArr = JSON(arrayLiteral: json.dictionary ?? [:])
+                self.serverImgs.append(json["data"]["image"].string!)
+                self.detailScrollerView.serverImgArray = self.serverImgs
                 
+                for item in json["data"]["series"].array ?? [] {
+                    self.classTitleArr.append(item["name"].string ?? "")
+                }
+                
+                for item in json["data"]["courseprice"].array ?? [] {
+                    self.classDateArr.append(item["date"].string ?? "")
+                    self.classPriceArr.append(item["price"].string ?? "")
+                }
+                
+                for item in json["data"]["teacher"].array ?? [] {
+                
+                    
+                }
 
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
-
+                
             } catch{ }
         })
     }
@@ -162,9 +187,15 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         if indexPath.section == 0 {
             
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
-            titleCell.selectionStyle     = .none
+            titleCell.selectionStyle = .none
+            let model = self.certificationDetailArr[indexPath.section]
             
-            titleCell.projectPrice?.text = "¥" + "1500" + "起/人"
+            titleCell.projectName?.text    = model["data"]["title"].string ?? ""
+            titleCell.projectContent?.text = model["data"]["teacher_name"].string ?? ""
+            titleCell.projectCity?.text    = "授课地点: " + (model["data"]["address"].string ?? "")
+            
+            titleCell.projectPrice?.text   = "¥" + ("1500") + "起/人"
+            
             return titleCell
             
         }else if indexPath.section == 1 {
@@ -197,7 +228,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         }
         
         cell.titleLabel?.textAlignment = .center
-//        cell.contentLabel?.text        = self.ProjectLightStr
+        // cell.contentLabel?.text        = self.ProjectLightStr
         
         return cell
     }
@@ -213,7 +244,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             return 100.FloatValue.IPAD_XValue
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if  section == 2 {
