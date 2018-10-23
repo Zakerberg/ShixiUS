@@ -32,7 +32,7 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
 }
 
 // ===============================================================================
-// MARK: - Other Method
+// MARK: - ConfigCell
 // ===============================================================================
 extension SX_TrainingCollectionViewCell {
     func configCell() {
