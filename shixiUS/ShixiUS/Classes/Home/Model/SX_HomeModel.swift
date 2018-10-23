@@ -416,6 +416,14 @@ struct SX_TrainDetailModel {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 
