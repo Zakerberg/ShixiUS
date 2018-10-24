@@ -258,7 +258,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         if  section == 2 {
             return 40.FloatValue.IPAD_XValue
         }
-        return 5.FloatValue.IPAD_XValue
+        return CGFloat.leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

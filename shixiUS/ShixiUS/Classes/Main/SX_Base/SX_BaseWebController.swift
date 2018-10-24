@@ -48,6 +48,8 @@ extension SX_BaseWebController {
     
     func loadWebView() {
         
+        
+        
     }
     
     func setLeftBack() {
@@ -60,7 +62,7 @@ extension SX_BaseWebController {
          btn.imageEdgeInsets = UIEdgeInsetsMake(0, -28, 0, 0);
          UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
          self.navigationItem.leftBarButtonItem = backItem;
-         self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+         self.navigantionController.interactivePopGestureRecognizer.delegate = (id)self;
          */
     }
 }

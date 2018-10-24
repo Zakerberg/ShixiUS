@@ -128,7 +128,6 @@ extension SX_CertificationDetailController {
                 SXLog("立即申请 +++ + ")
                 
                 ///加判断
-                
                 let vc =  SX_ApplyTrainListController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 
@@ -151,20 +150,13 @@ extension SX_CertificationDetailController {
                 for item in json["data"]["series"].array ?? [] {
                     self.classTitleArr.append(item["name"].string ?? "")
                 }
-                
                 for item in json["data"]["courseprice"].array ?? [] {
                     self.classDateArr.append(item["date"].string ?? "")
                     self.classPriceArr.append(item["price"].string ?? "")
                 }
                 
-                for item in json["data"]["teacher"].array ?? [] {
-                
-                    
-                }
-
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
-                
             } catch{ }
         })
     }
@@ -201,6 +193,9 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         }else if indexPath.section == 1 {
             let cell = SX_ProjectTripDateCell(style: .default, reuseIdentifier: "TRIPDATACELL")
             cell.selectionStyle = .none
+            cell.tripArr        = self.classTitleArr
+            cell.dateArr        = self.classDateArr
+            cell.priceArr       = self.classPriceArr
             
             self.moreDateBtn    = cell.moreDate
             self.moreDateBtn?.rx.tap.subscribe(onNext: { (_) in
@@ -250,7 +245,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         if  section == 2 {
             return 40.FloatValue.IPAD_XValue
         }
-        return 5.FloatValue.IPAD_XValue
+        return CGFloat.leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
