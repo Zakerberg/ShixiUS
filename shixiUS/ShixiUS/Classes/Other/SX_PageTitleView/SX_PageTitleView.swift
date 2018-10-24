@@ -40,11 +40,11 @@ class SX_PageTitleView: UIView {
     }()
     
     //底部分隔线
-    private lazy var line: UIView = {
-        let lineV = UIView(frame: CGRect(x: 0, y: self.height-1, width: self.width, height: 1))
-        lineV.backgroundColor = UIColor.colorWithRGB(r: 244, g: 244, b: 244)
-        return lineV
-    }()
+    //    private lazy var line: UIView = {
+    //        let lineV = UIView(frame: CGRect(x: 0, y: self.height-1, width: self.width, height: 1))
+    //        lineV.backgroundColor = UIColor.colorWithRGB(r: 244, g: 244, b: 244)
+    //        return lineV
+    //    }()
     
     //指示器
     private lazy var indicatorView: UIView = {
@@ -103,9 +103,9 @@ class SX_PageTitleView: UIView {
     }
 }
 
-// ===================================================================================================================
+// ==============================================================
 // MARK: - Private func
-// ===================================================================================================================
+// ==============================================================
 extension SX_PageTitleView {
     
     private func setupUI() {
@@ -116,7 +116,7 @@ extension SX_PageTitleView {
         self.addSubview(scrollView)
         if let showBottomSeparator = self.config?.showBottomSeparator {
             if showBottomSeparator {
-                self.addSubview(line)
+                // self.addSubview(line)
             }
         }
         scrollView.insertSubview(indicatorView, at: 0)
@@ -222,9 +222,9 @@ extension SX_PageTitleView {
     }
 }
 
-// ===================================================================================================================
+// ==============================================================
 // MARK: - @objc
-// ===================================================================================================================
+// ==============================================================
 extension SX_PageTitleView {
     
     @objc func btnDidClick(sender:UIButton) {
@@ -248,9 +248,9 @@ extension SX_PageTitleView {
     }
 }
 
-// ===================================================================================================================
+// ==============================================================
 // MARK: - 给外界提供的方法
-// ===================================================================================================================
+// ==============================================================
 extension SX_PageTitleView {
     
     func setPageTitleView(progress: CGFloat, originalIndex: Int, targetIndex: Int) {

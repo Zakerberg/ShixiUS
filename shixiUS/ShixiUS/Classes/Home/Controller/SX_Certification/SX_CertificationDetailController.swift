@@ -24,6 +24,13 @@ class SX_CertificationDetailController: UIViewController {
     /// 课程价格
     var classPriceArr  = [String]()
     
+    /// 课程目标
+    var target: UILabel?
+    /// 主要受众
+    var audience: UILabel?
+    /// 主要内容
+    var content: UILabel?
+    
     /// teacher 列表
     var teacherListArr = [TrainDetailTeacherModel]()
     
@@ -142,9 +149,10 @@ extension SX_CertificationDetailController {
         SX_NetManager.requestData(type: .GET, URlString: (SX_TrainDetail + self.id!), parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
-                self.certificationDetailArr = JSON(arrayLiteral: json.dictionary ?? [:])
+                
                 self.serverImgs.append(json["data"]["image"].string!)
                 self.detailScrollerView.serverImgArray = self.serverImgs
+                self.certificationDetailArr = JSON(arrayLiteral: json.dictionary ?? [:])
                 
                 for item in json["data"]["series"].array ?? [] {
                     self.classTitleArr.append(item["name"].string ?? "")
@@ -208,21 +216,68 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             }, onCompleted: nil, onDisposed: nil).dispose()
             
             return cell
+        }else if indexPath.section == 2 {
+        
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            
+            let model = certificationDetailArr[indexPath.row]
+            
+            let title = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
+                make.centerX.equalToSuperview()
+                make.width.equalToSuperview()
+            }).config({ (TITLE) in
+                TITLE.textAlignment = .center
+                TITLE.text          = "课程参数"
+                TITLE.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                TITLE.font          = UIFont.boldSystemFont(ofSize: 15)
+            })
+
+            self.target = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.equalTo(title.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (TARGET) in
+                TARGET.numberOfLines = 0
+                TARGET.text          = "课程目标: " + (model["target"].string ?? "")
+                TARGET.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
+                TARGET.font          = UIFont.systemFont(ofSize: 15)
+            })
+   
+            self.audience = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+            
+            }).config({ (AUDIENCE) in
+                
+            })
+            
+            self.content = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+            
+            }).config({ (CONTENT) in
+                
+            })
+            
+ 
+            return cell
         }
         
         let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
         cell.selectionStyle = .none
         
         if indexPath.section == 2 {
-            cell.titleLabel?.text  = "课程介绍"
-        }else if indexPath.section == 3 {
-            cell.titleLabel?.text  = "课程大纲"
+            cell.titleLabel?.text   = "课程介绍"
+            cell.contentLabel?.text = ""
+            
+        }else if indexPath.section  == 3 {
+            cell.titleLabel?.text   = "课程大纲"
+            cell.contentLabel?.text = ""
+            
         }else{
-            cell.titleLabel?.text  = "名师介绍"
+            cell.titleLabel?.text   = "名师介绍"
+            cell.contentLabel?.text = ""
         }
         
         cell.titleLabel?.textAlignment = .center
-        // cell.contentLabel?.text        = self.ProjectLightStr
+        
         
         return cell
     }

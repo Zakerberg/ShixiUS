@@ -51,7 +51,7 @@ class SX_ProjectTripDateCell: UITableViewCell {
             
             for index in 0..<(tripArr.count) {
                 /// 计算文字大小
-                if tripArr[index].lengthOfBytes(using: String.Encoding.utf8) > 17 {
+                if tripArr[index].lengthOfBytes(using: String.Encoding.utf8) > 15 {
                     self.TRIPBTNWIDTH = Int(tripArr[index].SX_widthWithString(font: UIFont.boldSystemFont(ofSize: 15), size: CGSize(width: 0, height: 0)))
                 }
                 
