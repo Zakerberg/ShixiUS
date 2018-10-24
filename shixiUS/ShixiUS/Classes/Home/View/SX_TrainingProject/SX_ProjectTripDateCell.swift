@@ -49,6 +49,18 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 TRIPS.isUserInteractionEnabled       = true
             })
             
+            /*
+             /// 计算文字大小
+             let length = tripArr[index].SX_widthWithString(font: UIFont.boldSystemFont(ofSize: 15), size: CGSize(width: 0, height: 0))
+             
+             self.tripBtn = UIButton(type: .custom).addhere(toSuperView: self.tripScrollView!).layout(snapKitMaker: { (make) in
+             make.height.top.equalToSuperview()
+             if tripArr[index].lengthOfBytes(using: String.Encoding.utf8) > 7 {
+             make.left.equalToSuperview().offset(index*Int((length+20)))
+             make.width.equalTo(length+Margin)
+             */
+            
+            
             for index in 0..<(tripArr.count) {
                 self.tripBtn = UIButton(type: .custom).addhere(toSuperView: self.tripScrollView!).layout(snapKitMaker: { (make) in
                     make.height.top.equalToSuperview()

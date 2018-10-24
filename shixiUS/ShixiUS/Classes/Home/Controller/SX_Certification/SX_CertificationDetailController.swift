@@ -141,7 +141,6 @@ extension SX_CertificationDetailController {
         
         SX_NetManager.requestData(type: .GET, URlString: (SX_TrainDetail + self.id!), parameters:  nil, finishCallBack: { (result) in
             do{
-                
                 let json = try JSON(data: result)
                 self.certificationDetailArr = JSON(arrayLiteral: json.dictionary ?? [:])
                 self.serverImgs.append(json["data"]["image"].string!)
