@@ -16,7 +16,7 @@ import UIKit
 
 class SX_ProjectTripDateCell: UITableViewCell {
     
-    let TRIPBTNWIDTH = 100
+    var TRIPBTNWIDTH = 100
     let DATEBTNWIDTH = 65
     
     var tripScrollView: UIScrollView?
@@ -42,26 +42,19 @@ class SX_ProjectTripDateCell: UITableViewCell {
                 make.right.equalToSuperview().offset(-Margin)
                 make.height.equalTo(45.FloatValue.IPAD_XValue)
             }).config({ (TRIPS) in
-                TRIPS.contentSize                    = CGSize(width: (TRIPBTNWIDTH+20)*(tripArr.count ?? 0), height: 0)
+                TRIPS.contentSize                    = CGSize(width: (TRIPBTNWIDTH+20)*(tripArr.count), height: 0)
                 TRIPS.showsVerticalScrollIndicator   = false
                 TRIPS.showsHorizontalScrollIndicator = false
                 TRIPS.bounces                        = true
                 TRIPS.isUserInteractionEnabled       = true
             })
             
-            /*
-             /// 计算文字大小
-             let length = tripArr[index].SX_widthWithString(font: UIFont.boldSystemFont(ofSize: 15), size: CGSize(width: 0, height: 0))
-             
-             self.tripBtn = UIButton(type: .custom).addhere(toSuperView: self.tripScrollView!).layout(snapKitMaker: { (make) in
-             make.height.top.equalToSuperview()
-             if tripArr[index].lengthOfBytes(using: String.Encoding.utf8) > 7 {
-             make.left.equalToSuperview().offset(index*Int((length+20)))
-             make.width.equalTo(length+Margin)
-             */
-            
-            
             for index in 0..<(tripArr.count) {
+                /// 计算文字大小
+                if tripArr[index].lengthOfBytes(using: String.Encoding.utf8) > 17 {
+                    self.TRIPBTNWIDTH = Int(tripArr[index].SX_widthWithString(font: UIFont.boldSystemFont(ofSize: 15), size: CGSize(width: 0, height: 0)))
+                }
+                
                 self.tripBtn = UIButton(type: .custom).addhere(toSuperView: self.tripScrollView!).layout(snapKitMaker: { (make) in
                     make.height.top.equalToSuperview()
                     make.left.equalToSuperview().offset(index*(TRIPBTNWIDTH+20))
