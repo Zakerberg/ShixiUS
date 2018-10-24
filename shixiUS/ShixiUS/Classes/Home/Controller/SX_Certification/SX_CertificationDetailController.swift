@@ -187,7 +187,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle = .none
-            let model = self.certificationDetailArr[indexPath.section]
+            let model = self.certificationDetailArr[indexPath.row]
             
             titleCell.projectName?.text    = model["data"]["title"].string ?? ""
             titleCell.projectContent?.text = "主讲老师: " + (model["data"]["teacher_name"].string ?? "")
@@ -220,7 +220,10 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             
-            let model = certificationDetailArr[indexPath.row]
+            let model = self.certificationDetailArr[indexPath.row]
+            
+//            titleCell.projectName?.text    = model["data"]["title"].string ?? ""
+//            titleCell.projectContent?.text = "主讲老师: " + (model["data"]["teacher_name"].string ?? "")
             
             let title = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
@@ -239,7 +242,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
                 make.right.equalToSuperview().offset(-Margin)
             }).config({ (TARGET) in
                 TARGET.numberOfLines = 0
-                TARGET.text          = "课程目标: " + (model["target"].string ?? "")
+                TARGET.text          = "课程目标: " + (model["data"]["target"].string ?? "")
                 TARGET.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
                 TARGET.font          = UIFont.systemFont(ofSize: 15)
             })
@@ -290,7 +293,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         case 1:
             return 190.FloatValue.IPAD_XValue
         default:
-            return 100.FloatValue.IPAD_XValue
+            return UILabel.SX_getSpaceLabelHeight((self.target?.text as NSString?)!, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60
         }
     }
     
