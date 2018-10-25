@@ -327,32 +327,27 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             return cell
         } else if indexPath.section == 4 {
             let cell = UITableViewCell(style: .default, reuseIdentifier: "curriculumCellID")
+            cell.selectionStyle = .none
+            
+            let circleImage = UIImageView(image: #imageLiteral(resourceName: "icon_CertificationDetail_circle")).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.left.equalToSuperview().offset(20.FloatValue.IPAD_XValue)
+                make.width.height.equalTo(20.FloatValue.IPAD_XValue)
+            }).config({ (CIRCLE) in
+                
+            })
             
             
             
             
+            let titleImageV = UIImageView(image: #imageLiteral(resourceName: "icon_CertificationDetail_ClassTitle")).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.centerY.equalTo(circleImage)
+                make.left.equalTo(circleImage.snp.right).offset(8.FloatValue.IPAD_XValue)
+                make.height.equalTo(circleImage)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (TITLEV) in
+                
+            })
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            //            let circleImageV = UIImageView(image: #imageLiteral(resourceName: "icon_CertificationDetail_circle")).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
-            //
-            //            }).config({ (CIRCLE) in
-            //
-            //            })
-            //
-            //            let titleImageV = UIImageView(image: #imageLiteral(resourceName: "icon_CertificationDetail_ClassTitle")).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
-            //
-            //            }).config({ (TITLEV) in
-            //
-            //            })
-            //
             //            let classTitle = UILabel().addhere(toSuperView: titleImageV).layout(snapKitMaker: { (make) in
             //
             //            }).config({ (CLASSTITLE) in
@@ -410,10 +405,8 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        if  section == 2 {
+        if  section == 2  || section == 4 {
             return 40.FloatValue.IPAD_XValue
-        } else if section == 4 {
-            return 60.FloatValue.IPAD_XValue
         }
         return CGFloat.leastNormalMagnitude
     }
