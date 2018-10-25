@@ -52,8 +52,9 @@ extension SX_HotJobContentDetailCell {
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(17)
         }).config({ (TITLE) in
-            TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-            TITLE.font = UIFont.boldSystemFont(ofSize: 16)
+            TITLE.textAlignment = .center
+            TITLE.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+            TITLE.font          = UIFont.boldSystemFont(ofSize: 16)
             TITLE.sizeToFit()
         })
         

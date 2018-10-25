@@ -58,9 +58,10 @@ class SX_CertificationDetailController: SX_BaseController {
     /// 主 TbaleView
     lazy var tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-50.FloatValue.IPAD_XValue), style: .grouped)
-        table.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
-        table.delegate     = self
-        table.dataSource   = self 
+        table.contentInset   = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
+        table.delegate       = self
+        table.dataSource     = self
+        table.separatorStyle = .none
         table.showsVerticalScrollIndicator = false
         
         return table
@@ -189,12 +190,12 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let model = self.certificationDetailArr[indexPath.row]
         if indexPath.section == 0 {
             
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle = .none
-            let model = self.certificationDetailArr[indexPath.row]
+            
             
             titleCell.projectName?.text    = model["data"]["title"].string ?? ""
             titleCell.projectContent?.text = "主讲老师: " + (model["data"]["teacher_name"].string ?? "")
@@ -227,10 +228,6 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             
             let cell = UITableViewCell(style: .default, reuseIdentifier: "parameterCellID")
             cell.selectionStyle = .none
-            
-            let model = self.certificationDetailArr[indexPath.row]
-            
-            //  titleCell.projectContent?.text = "主讲老师: " + (model["data"]["teacher_name"].string ?? "")
             
             let title = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
@@ -308,21 +305,66 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             })
             
             return cell
+        } else if indexPath.section == 3 {
+            let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
+            cell.selectionStyle = .none
+            
+            cell.titleLabel?.text   = "课程介绍"
+            cell.contentLabel?.text = model["data"]["describe"].string ?? ""
+            
+            return cell
+        } else if indexPath.section == 4 {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "curriculumCellID")
+            
+            let titleLabel = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.left.top.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+                make.height.equalTo(17)
+            }).config({ (TITLE) in
+                TITLE.sizeToFit()
+                TITLE.text          = "课程大纲"
+                TITLE.textAlignment = .center
+                TITLE.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                TITLE.font          = UIFont.boldSystemFont(ofSize: 16)
+            })
+            
+            _ = UIView().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.equalTo(titleLabel.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.height.equalTo(0.5)
+                make.left.equalToSuperview().offset(15)
+                make.right.equalToSuperview().offset(-15)
+            }).config({ (LINE) in
+                LINE.backgroundColor = UIColor.SX_LineColor()
+            })
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            return cell
         }
+        
+        
         
         let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
         cell.selectionStyle = .none
         
-        if indexPath.section == 3 {
-            cell.titleLabel?.text   = "课程介绍"
-            cell.contentLabel?.text = ""
-        }else if indexPath.section  == 4 {
-            cell.titleLabel?.text   = "课程大纲"
-            cell.contentLabel?.text = ""
-        }else{
-            cell.titleLabel?.text   = "名师介绍"
-            cell.contentLabel?.text = ""
-        }
+        cell.titleLabel?.text   = "名师介绍"
+        cell.contentLabel?.text = ""
+        
         
         cell.titleLabel?.textAlignment = .center
         
@@ -339,7 +381,8 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             return 190.FloatValue.IPAD_XValue
         case 2: // 课程参数
             return UILabel.SX_getSpaceLabelHeight((model["data"]["target"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + UILabel.SX_getSpaceLabelHeight((model["data"]["audience"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + UILabel.SX_getSpaceLabelHeight((model["data"]["content"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 80.FloatValue.IPAD_XValue
-            
+        case 3:
+            return UILabel.SX_getSpaceLabelHeight((model["data"]["describe"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 40.FloatValue.IPAD_XValue
         default:
             return 200.FloatValue.IPAD_XValue
         }
@@ -387,7 +430,6 @@ extension SX_CertificationDetailController: SXCycleScrollerViewDelegate {
     
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
         
-        
     }
 }
 
@@ -396,7 +438,6 @@ extension SX_CertificationDetailController: SXCycleScrollerViewDelegate {
 // ==============================================================================
 extension SX_CertificationDetailController: SXPageTitleViewDelegate {
     func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
-        
         
     }
 }

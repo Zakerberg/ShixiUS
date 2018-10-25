@@ -40,11 +40,11 @@ class SX_PageTitleView: UIView {
     }()
     
     //底部分隔线
-    //    private lazy var line: UIView = {
-    //        let lineV = UIView(frame: CGRect(x: 0, y: self.height-1, width: self.width, height: 1))
-    //        lineV.backgroundColor = UIColor.colorWithRGB(r: 244, g: 244, b: 244)
-    //        return lineV
-    //    }()
+    private lazy var line: UIView = {
+        let lineV = UIView(frame: CGRect(x: 0, y: self.height-1, width: self.width, height: 1))
+        lineV.backgroundColor = UIColor.colorWithRGB(r: 244, g: 244, b: 244)
+        return lineV
+    }()
     
     //指示器
     private lazy var indicatorView: UIView = {
@@ -107,25 +107,21 @@ class SX_PageTitleView: UIView {
 // MARK: - Private func
 // ==============================================================
 extension SX_PageTitleView {
-    
     private func setupUI() {
-        
         //处理偏移量
         let tempView = UIView(frame: CGRect.zero)
         self.addSubview(tempView)
         self.addSubview(scrollView)
         if let showBottomSeparator = self.config?.showBottomSeparator {
             if showBottomSeparator {
-                // self.addSubview(line)
+                self.addSubview(line)
             }
         }
         scrollView.insertSubview(indicatorView, at: 0)
-        
         setupButtons()
     }
     
     private func setupButtons() {
-        
         var totalTextWidth: CGFloat = 0
         
         for title in self.titles {
@@ -168,9 +164,7 @@ extension SX_PageTitleView {
             }
             
             scrollView.contentSize = CGSize(width: self.bounds.width + totalExtraWidth, height: 0)
-            
         }else {
-            
             var btnX: CGFloat = 0
             let btnY: CGFloat = 0
             let btnH: CGFloat = self.bounds.height
@@ -226,11 +220,8 @@ extension SX_PageTitleView {
 // MARK: - @objc
 // ==============================================================
 extension SX_PageTitleView {
-    
     @objc func btnDidClick(sender:UIButton) {
-        
         self.changeSelectedButton(button: sender)
-        
         scrollCenter(selectedBtn: sender)
         
         if self.allBtnWidth > self.width || totalExtraWidth > 0 {
@@ -243,7 +234,6 @@ extension SX_PageTitleView {
         }
         
         pageTitleViewDelegate?.selectedIndexInPageTitleView(pageTitleView: self, selectedIndex: sender.tag)
-        
         self.signBtnIndex = sender.tag
     }
 }
@@ -252,7 +242,6 @@ extension SX_PageTitleView {
 // MARK: - 给外界提供的方法
 // ==============================================================
 extension SX_PageTitleView {
-    
     func setPageTitleView(progress: CGFloat, originalIndex: Int, targetIndex: Int) {
         let originalBtn: UIButton = self.btnArr[originalIndex]
         let targetBtn: UIButton = self.btnArr[targetIndex]
@@ -299,7 +288,7 @@ extension SX_PageTitleView {
             let moveTotalX: CGFloat = targetBtn.x - originalBtn.x
             let moveX: CGFloat = moveTotalX * progress
             self.indicatorView.center.x = originalBtn.centerX + moveX
-        } else {
+        }else{
             self.indicatorView.width = tempIndicatorWidth
         }
     }
@@ -322,8 +311,7 @@ extension SX_PageTitleView {
             distance = progress * totalDistance - totalOffsetX
             self.indicatorView.x = originalBtn.x + offsetX
             self.indicatorView.width = originalBtn.width + distance
-            
-        } else {
+        }else{
             offsetX = totalOffsetX * progress + 0.5 * (self.config?.spacingBetweenButtons)!
             distance = progress * (totalDistance - totalOffsetX) - (self.config?.spacingBetweenButtons)!
             self.indicatorView.x = originalBtn.x + offsetX;
@@ -331,5 +319,3 @@ extension SX_PageTitleView {
         }
     }
 }
-
-
