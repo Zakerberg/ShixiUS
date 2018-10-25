@@ -171,7 +171,6 @@ extension SX_ProjectDetailController {
                 
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
-                
             } catch{ }
         })
     }
