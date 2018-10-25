@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 我爱你 ，
+ 其余两行，
+ 都是多余
+ */
+
 import UIKit
 
 class SX_WaveView: UIView, UIGestureRecognizerDelegate, CAAnimationDelegate {

@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  培训认证详情
 
+/*
+ 思念所达之地
+ 目光所及之处
+ 都是你
+ */
+
 import UIKit
 import SwiftyJSON
 

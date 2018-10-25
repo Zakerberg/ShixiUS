@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 中间那一行，
+ 
+ 留给我们的未来。
+ */
+
 import UIKit
 
 private var timeFunc : CAMediaTimingFunction!
