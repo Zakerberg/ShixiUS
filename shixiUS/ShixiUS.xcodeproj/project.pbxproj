@@ -75,7 +75,6 @@
 		32E49D1E21369DC1005633F2 /* SX_PayTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1D21369DC1005633F2 /* SX_PayTrainingProjectController.swift */; };
 		32E49D2021369DDC005633F2 /* SX_PayVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1F21369DDC005633F2 /* SX_PayVocationalTrainingController.swift */; };
 		32E49D2221378FAD005633F2 /* SX_PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D2121378FAD005633F2 /* SX_PaymentCell.swift */; };
-		32F0C28D217EF9A50053DE84 /* NSDictionary+SXArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F0C28C217EF9A50053DE84 /* NSDictionary+SXArray.m */; };
 		32F0C290217F0FD40053DE84 /* SX_TrainDetailTeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F0C28F217F0FD40053DE84 /* SX_TrainDetailTeacherCell.swift */; };
 		4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982120F6F11C00504B6E /* SX_CertificationController.swift */; };
 		4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */; };
@@ -235,8 +234,6 @@
 		32E49D1D21369DC1005633F2 /* SX_PayTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayTrainingProjectController.swift; sourceTree = "<group>"; };
 		32E49D1F21369DDC005633F2 /* SX_PayVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayVocationalTrainingController.swift; sourceTree = "<group>"; };
 		32E49D2121378FAD005633F2 /* SX_PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PaymentCell.swift; sourceTree = "<group>"; };
-		32F0C28B217EF9A50053DE84 /* NSDictionary+SXArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SXArray.h"; sourceTree = "<group>"; };
-		32F0C28C217EF9A50053DE84 /* NSDictionary+SXArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SXArray.m"; sourceTree = "<group>"; };
 		32F0C28F217F0FD40053DE84 /* SX_TrainDetailTeacherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainDetailTeacherCell.swift; sourceTree = "<group>"; };
 		4505982120F6F11C00504B6E /* SX_CertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CertificationController.swift; sourceTree = "<group>"; };
 		4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BasePopSelectedView.swift; sourceTree = "<group>"; };
@@ -743,8 +740,6 @@
 				45E57405212E9847007A4DCD /* SX_UnderlineBtn.swift */,
 				3299887421509C9F00DC9ED3 /* SX_Utils.swift */,
 				32B41D7621609CE4000781A6 /* SX_Regex.swift */,
-				32F0C28B217EF9A50053DE84 /* NSDictionary+SXArray.h */,
-				32F0C28C217EF9A50053DE84 /* NSDictionary+SXArray.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1207,7 +1202,6 @@
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
 				45B8E4E6212FE9D4002061D5 /* SX_PaymentRecordController.swift in Sources */,
-				32F0C28D217EF9A50053DE84 /* NSDictionary+SXArray.m in Sources */,
 				3262127E214CE13E000C1A6C /* RMCalendarController.m in Sources */,
 				32E49D1C21369DB0005633F2 /* SX_PayEmploymentJobsController.swift in Sources */,
 				4527F91121226B29000EAEB9 /* SX_ApplyProgressDetailController.swift in Sources */,
