@@ -455,7 +455,6 @@
  // ===============================================================================
  extension SX_HomeVC: SX_TrainingCellDelegate {
     func clickCell(item: String) {
-        
         if self.cerStr == "1" { /// 培训认证
             let vc = SX_CertificationDetailController()
             vc.id  = item
