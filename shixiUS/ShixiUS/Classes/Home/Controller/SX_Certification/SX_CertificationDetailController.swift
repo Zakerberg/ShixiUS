@@ -217,13 +217,13 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             
             return cell
         }else if indexPath.section == 2 {
-        
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            cell.selectionStyle = .none
             
             let model = self.certificationDetailArr[indexPath.row]
             
-//            titleCell.projectName?.text    = model["data"]["title"].string ?? ""
-//            titleCell.projectContent?.text = "主讲老师: " + (model["data"]["teacher_name"].string ?? "")
+            //            titleCell.projectContent?.text = "主讲老师: " + (model["data"]["teacher_name"].string ?? "")
             
             let title = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
@@ -235,7 +235,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
                 TITLE.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                 TITLE.font          = UIFont.boldSystemFont(ofSize: 15)
             })
-
+            
             self.target = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.top.equalTo(title.snp.bottom).offset(10.FloatValue.IPAD_XValue)
                 make.left.equalToSuperview().offset(Margin)
@@ -246,20 +246,20 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
                 TARGET.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
                 TARGET.font          = UIFont.systemFont(ofSize: 15)
             })
-   
-            self.audience = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
             
-            }).config({ (AUDIENCE) in
-                
-            })
+            //            self.audience = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+            //
+            //            }).config({ (AUDIENCE) in
+            //
+            //            })
+            //
+            //            self.content = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+            //
+            //            }).config({ (CONTENT) in
+            //
+            //            })
             
-            self.content = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
             
-            }).config({ (CONTENT) in
-                
-            })
-            
- 
             return cell
         }
         
@@ -286,6 +286,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = self.certificationDetailArr[indexPath.row]
         
         switch indexPath.section {
         case 0:
@@ -293,8 +294,12 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         case 1:
             return 190.FloatValue.IPAD_XValue
         default:
-            return UILabel.SX_getSpaceLabelHeight((self.target?.text as NSString?)!, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60
+            return UILabel.SX_getSpaceLabelHeight((model["data"]["target"].string ?? "") as! NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
         }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 500.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
