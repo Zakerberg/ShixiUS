@@ -126,6 +126,7 @@
                         self.adImages.append(subJSON["image"].string ?? "")
                         self.adTitles.append(subJSON["title"].string ?? "")
                         self.adTypes.append(subJSON["type"].string ?? "")
+                        self.adURLs.append(subJSON["url"].string ?? "")
                     }
                     self.cycleScrollerView.serverImgArray = self.adImages
                     self.cycleScrollerView.descTextArray = self.adTitles
@@ -438,6 +439,9 @@
     }
     
     func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
+        
+        SXLog(index)
+        
         if self.adTypes[index] == "training" {
             SXLog("跳转实训详情")
         } else if self.adTypes[index] == "train" {
@@ -445,7 +449,11 @@
         }else if self.adTypes[index] == "jobs" {
             SXLog("跳转职位详情")
         }else if self.adTypes[index] == "link" {
-            SXLog("网页")
+            let vc    = SX_BaseWebController()
+            vc.webURL = self.adURLs[index] as NSString
+            self.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            self.hidesBottomBarWhenPushed = false
         }
     }
  }
