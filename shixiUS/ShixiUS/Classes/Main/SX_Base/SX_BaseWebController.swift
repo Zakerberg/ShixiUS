@@ -53,7 +53,7 @@ extension SX_BaseWebController {
     }
     
     func setLeftBack() {
-       
+        
         /*
          UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
          btn.frame = CGRectMake(0, 0, 44, 44);
@@ -82,19 +82,14 @@ extension SX_BaseWebController: WKNavigationDelegate {
     
     ///失败或者加载完成添加hud的隐藏 开始展示就隐藏hud
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        /*
-         double delaySeconds = 0.5;
-         __weak BaseViewController *weakSelf = self;
-         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delaySeconds * NSEC_PER_SEC));
-         dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-         [weakSelf.loadingView hideLoadingView];
-         weakSelf.loadingView = nil;
-         });
-         NSLog(@"%s",__FUNCTION__);
-         */
+        let delaySeconds = UInt64(0.5)
+        let popTime = NSEC_PER_SEC*delaySeconds
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.init(uptimeNanoseconds: popTime), execute: {
+            self.loadingView?.hideLoadingView()
+            self.loadingView = nil
+        })
     }
 }
-
 
 // ======================================================================
 // MARK: - UIWebViewDelegate

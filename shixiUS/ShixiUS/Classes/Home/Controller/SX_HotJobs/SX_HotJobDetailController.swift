@@ -20,13 +20,11 @@ import MBProgressHUD
 let hotJobDetailCellID = "hotJobDetailCellID"
 let hotJobContentDetailCellID = "hotJobContentDetailCellID"
 
-class SX_HotJobDetailController: UIViewController {
+class SX_HotJobDetailController: SX_BaseController {
     
     var dataArr = "1. 加入酷炫拽的华尔街金融和媒体圈子，可认识美国行业专家和华尔街金融人士，打造在美国的资源人脉\n 2. 可获得美国公司跨境新媒体工作经验和推荐信，并优先获得长期职位和推荐职位 \n 3. 获得海外精英教育和海外投资专业知识，接受相关专业知识培训； \n 4. 获得新媒体创业和创富机会。公司实现课程专题创业项目制，每个员工包括实习生可以自己提议选题和推荐主讲人，经公司专题组同意后和主讲人合作开始制作音频课程然后销售。项目负责人以及团队可获得课程销售的10%作为项目提成，实现新媒体创业并创富."
     
     var DATA = "1）传媒，广告，新闻，文学，艺术和电影等相关专业；\n 2）具有媒体音频视频策划剪辑制作经验，具有新闻传媒写作编辑和新媒体运营和市场拓展经验 ；\n 3）熟悉国内知名内容平台和音频视频平台，具有良好网感；\n 4）对新媒体行业有热情愿意学习并积极主动全心投入工作。"
-    
-    // var intrStr = "我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理我们的一个客户企业正在招募专业的应届实习生, 作为他们的信托业务助理"
     
     var collectionBtn : UIButton?
     var applyBtn: UIButton?
@@ -48,6 +46,7 @@ class SX_HotJobDetailController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,9 +55,9 @@ class SX_HotJobDetailController: UIViewController {
     }
 }
 
-// =================================================================================================================
+// ==========================================================
 // MARK: - Other Method
-// =================================================================================================================
+// ==========================================================
 extension SX_HotJobDetailController {
     func setUI() {
         title = "热门岗位"
@@ -155,15 +154,16 @@ extension SX_HotJobDetailController {
                 let model = SX_JobDetailModel(jsonData: json)
                 self.detailModels.append(model)
                 
+                self.hideLoadingView()
                 self.table.reloadData()
             } catch{ }
         })
     }
 }
 
-// =================================================================================================================
+// ==========================================================
 // MARK: -  UITableViewDelegate
-// =================================================================================================================
+// ==========================================================
 extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

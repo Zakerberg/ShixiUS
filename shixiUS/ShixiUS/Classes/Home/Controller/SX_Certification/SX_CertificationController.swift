@@ -348,20 +348,6 @@ extension SX_CertificationController {
             selectedLabel?.textColor = UIColor.SX_MainColor()
         }
     }
-    
-    /// showLoadingView
-    func showLoadingView() {
-        
-        if (self.loadingView == nil) {
-            self.loadingView = SX_LoadingView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
-        }
-        self.view.addSubview(self.loadingView!)
-    }
-    
-    /// hideLoadingView
-    func hideLoadingView() {
-        let delaySeconds = 0.5   
-    }
 }
 
 // ======================================================================

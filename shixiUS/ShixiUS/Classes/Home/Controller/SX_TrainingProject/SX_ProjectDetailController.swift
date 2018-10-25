@@ -18,7 +18,7 @@ let projectDetailTitleCellID    = "projectDetailTitleCellID"
 let projectDetailDateTripCellID = "projectDetailDateTripCellID"
 
 let projectDetailCellID         = "projectDetailCellID"
-class SX_ProjectDetailController: UIViewController {
+class SX_ProjectDetailController: SX_BaseController {
     
     var topArr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
     
@@ -77,6 +77,7 @@ class SX_ProjectDetailController: UIViewController {
         super.viewDidLoad()
         fetchData()
         setUI()
+        showLoadingView()
     }
     
     deinit {
@@ -168,7 +169,7 @@ extension SX_ProjectDetailController {
                     self.tripDateArr.append(item["date"].string ?? "")
                     self.tripPriceArr.append(item["price"].string ?? "")
                 }
-                
+                self.hideLoadingView()
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
             } catch{ }

@@ -40,11 +40,6 @@
     var adTypes  = [String]()
     /// ad
     
-    //    var homeModel: SX_HomeModel?
-    //    var trainingModel: SX_HomeTrainingModel?
-    //    var jobsModel: SX_HomeJobsModel?
-    //    var trainModel: SX_HomeTrainModel?
-    
     /// jobs
     var jobsArr      = JSON()
     /// training
@@ -173,7 +168,6 @@
  // MARK: - Other Method
  // ===============================================================================
  extension SX_HomeVC {
-    
     /// Alert
     func showMessage(_ text:String) {
         let alertController = UIAlertController(title: text, message: nil, preferredStyle: .alert)
@@ -440,7 +434,6 @@
  extension SX_HomeVC: SXCycleScrollerViewDelegate {
     
     func cycleScrollerDidScroll(to index: Int, cycleScrollerView: SX_CycleScrollerView) {
-        
         
     }
     
