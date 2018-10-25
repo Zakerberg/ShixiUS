@@ -44,7 +44,6 @@ class SX_BasePopSelectedView: UIView {
 // ==============================================================
 // MARK: - UITableViewDelegate
 // ==============================================================
-
 extension SX_BasePopSelectedView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataArr.count

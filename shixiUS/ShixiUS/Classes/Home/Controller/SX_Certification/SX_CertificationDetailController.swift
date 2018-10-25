@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class SX_CertificationDetailController: UIViewController {
+class SX_CertificationDetailController: SX_BaseController {
     var topArr = ["课程介绍", "课程大纲", "名师介绍"]
     
     var id: String?
@@ -72,6 +72,7 @@ class SX_CertificationDetailController: UIViewController {
         super.viewDidLoad()
         fetchData()
         setUI()
+        showLoadingView()
     }
     
     deinit {
@@ -161,7 +162,7 @@ extension SX_CertificationDetailController {
                     self.classDateArr.append(item["date"].string ?? "")
                     self.classPriceArr.append(item["price"].string ?? "")
                 }
-                
+                self.hideLoadingView()
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
             } catch{ }
@@ -218,22 +219,33 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             return cell
         }else if indexPath.section == 2 {
             
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "parameterCellID")
             cell.selectionStyle = .none
             
             let model = self.certificationDetailArr[indexPath.row]
             
-            //            titleCell.projectContent?.text = "主讲老师: " + (model["data"]["teacher_name"].string ?? "")
+            //  titleCell.projectContent?.text = "主讲老师: " + (model["data"]["teacher_name"].string ?? "")
             
             let title = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.top.equalToSuperview().offset(10.FloatValue.IPAD_XValue)
                 make.centerX.equalToSuperview()
                 make.width.equalToSuperview()
             }).config({ (TITLE) in
-                TITLE.textAlignment = .center
-                TITLE.text          = "课程参数"
-                TITLE.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-                TITLE.font          = UIFont.boldSystemFont(ofSize: 15)
+                TITLE.textAlignment    = .center
+                TITLE.text             = "课程参数"
+                TITLE.textColor        = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                TITLE.font             = UIFont.boldSystemFont(ofSize: 15)
+            })
+            
+            let _ = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.equalTo(title.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+                make.height.equalTo(15)
+            }).config({ (TARL) in
+                TARL.text              = "课程目标: "
+                TARL.textColor         = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                TARL.font              = UIFont.boldSystemFont(ofSize: 14)
             })
             
             self.target = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
@@ -241,24 +253,53 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
                 make.left.equalToSuperview().offset(Margin)
                 make.right.equalToSuperview().offset(-Margin)
             }).config({ (TARGET) in
-                TARGET.numberOfLines = 0
-                TARGET.text          = "课程目标: " + (model["data"]["target"].string ?? "")
-                TARGET.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
-                TARGET.font          = UIFont.systemFont(ofSize: 15)
+                TARGET.numberOfLines   = 0
+                TARGET.text            = "                  " + (model["data"]["target"].string ?? "")
+                TARGET.textColor       = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
+                TARGET.font            = UIFont.systemFont(ofSize: 15)
             })
             
-            //            self.audience = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
-            //
-            //            }).config({ (AUDIENCE) in
-            //
-            //            })
-            //
-            //            self.content = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
-            //
-            //            }).config({ (CONTENT) in
-            //
-            //            })
+            let audL = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.equalTo(self.target!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (AUDL) in
+                AUDL.text              = "主要受众: "
+                AUDL.textColor         = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                AUDL.font              = UIFont.boldSystemFont(ofSize: 14)
+            })
             
+            self.audience = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.equalTo(self.target!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (AUDIENCE) in
+                AUDIENCE.numberOfLines = 0
+                AUDIENCE.text          = "                  " + (model["data"]["audience"].string ?? "")
+                AUDIENCE.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
+                AUDIENCE.font          = UIFont.systemFont(ofSize: 15)
+            })
+            
+            let _ = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.equalTo(audL.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (AUDIENCE) in
+                AUDIENCE.text          = "主要内容: "
+                AUDIENCE.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                AUDIENCE.font          = UIFont.boldSystemFont(ofSize: 15)
+            })
+            
+            self.content = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.equalTo(audL.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (CONTENT) in
+                CONTENT.numberOfLines = 0
+                CONTENT.text          = "                  " + (model["data"]["content"].string ?? "")
+                CONTENT.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
+                CONTENT.font          = UIFont.systemFont(ofSize: 15)
+            })
             
             return cell
         }
@@ -266,21 +307,18 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
         cell.selectionStyle = .none
         
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             cell.titleLabel?.text   = "课程介绍"
             cell.contentLabel?.text = ""
-            
-        }else if indexPath.section  == 3 {
+        }else if indexPath.section  == 4 {
             cell.titleLabel?.text   = "课程大纲"
             cell.contentLabel?.text = ""
-            
         }else{
             cell.titleLabel?.text   = "名师介绍"
             cell.contentLabel?.text = ""
         }
         
         cell.titleLabel?.textAlignment = .center
-        
         
         return cell
     }
@@ -289,12 +327,15 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         let model = self.certificationDetailArr[indexPath.row]
         
         switch indexPath.section {
-        case 0:
+        case 0: // 第四期专家中医
             return 120.FloatValue.IPAD_XValue
-        case 1:
+        case 1: // 传承弟子
             return 190.FloatValue.IPAD_XValue
+        case 2: // 课程参数
+            return UILabel.SX_getSpaceLabelHeight((model["data"]["target"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + UILabel.SX_getSpaceLabelHeight((model["data"]["audience"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + UILabel.SX_getSpaceLabelHeight((model["data"]["content"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 80.FloatValue.IPAD_XValue
+            
         default:
-            return UILabel.SX_getSpaceLabelHeight((model["data"]["target"].string ?? "") as! NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
+            return 200.FloatValue.IPAD_XValue
         }
     }
     
