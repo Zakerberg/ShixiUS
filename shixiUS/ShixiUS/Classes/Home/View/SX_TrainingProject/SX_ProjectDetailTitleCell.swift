@@ -65,7 +65,7 @@ extension SX_ProjectDetailTitleCell {
             make.right.equalToSuperview().offset(-Margin)
         }).config({ (CONTENT) in
             CONTENT.numberOfLines = 0
-            CONTENT.textColor     = UIColor.gray
+            CONTENT.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
             CONTENT.font          = UIFont.systemFont(ofSize: 14)
         })
         

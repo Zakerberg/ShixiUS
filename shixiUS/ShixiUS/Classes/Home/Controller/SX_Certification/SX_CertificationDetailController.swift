@@ -178,6 +178,10 @@ extension SX_CertificationDetailController {
                     let curriculumModel = TrainDetailCurriculumModel(jsonData: item)
                     self.curriculumListArr.append(curriculumModel)
                 }
+                for item in json["data"]["teacher"].array ?? [] {
+                    let teacherModel = TrainDetailTeacherModel(jsonData: item)
+                    self.teacherListArr.append(teacherModel)
+                }
                 
                 self.hideLoadingView()
                 self.detailScrollerView.reloadData()
@@ -193,7 +197,7 @@ extension SX_CertificationDetailController {
 extension SX_CertificationDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 6
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -206,9 +210,9 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = self.certificationDetailArr[indexPath.row]
+        
         if indexPath.section == 0 {
-            
+            let model = self.certificationDetailArr[indexPath.row]
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle = .none
             
@@ -221,6 +225,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             return titleCell
             
         }else if indexPath.section == 1 {
+            let model = self.certificationDetailArr[indexPath.row]
             let cell = SX_ProjectTripDateCell(style: .default, reuseIdentifier: "TRIPDATACELL")
             cell.selectionStyle = .none
             cell.tripArr        = self.classTitleArr
@@ -240,7 +245,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             
             return cell
         }else if indexPath.section == 2 {
-            
+            let model = self.certificationDetailArr[indexPath.row]
             let cell = UITableViewCell(style: .default, reuseIdentifier: "parameterCellID")
             cell.selectionStyle = .none
             
@@ -321,6 +326,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             
             return cell
         } else if indexPath.section == 3 {
+            let model = self.certificationDetailArr[indexPath.row]
             let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
             cell.selectionStyle = .none
             
@@ -329,7 +335,8 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             
             return cell
         } else if indexPath.section == 4 {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "curriculumCellID")
+            let cell  = UITableViewCell(style: .default, reuseIdentifier: "curriculumCellID")
+            let model = self.curriculumListArr[indexPath.row]
             cell.selectionStyle = .none
             self.sectionTitle?.text = "课程大纲"
             let circleImage = UIImageView(image: #imageLiteral(resourceName: "icon_CertificationDetail_circle")).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
@@ -354,45 +361,41 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
                 make.height.equalTo(14)
             }).config({ (CLASSTITLE) in
                 CLASSTITLE.sizeToFit()
-                CLASSTITLE.text          = model["data"]["curriculum"][0]["title"].string ?? ""
+                CLASSTITLE.text          = model.title ?? ""
                 CLASSTITLE.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
                 CLASSTITLE.font          = UIFont.systemFont(ofSize: 13)
             })
             
-            let classContent = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+            _ = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.top.equalTo(titleImageV.snp.bottom).offset(Margin)
                 make.left.equalTo(classTitle)
                 make.right.equalTo(titleImageV)
             }).config({ (CLASSCONTENT) in
                 CLASSCONTENT.sizeToFit()
                 CLASSCONTENT.numberOfLines = 0
-                CLASSCONTENT.text          = model["data"]["curriculum"][0]["content"].string ?? ""
+                CLASSCONTENT.text          = model.content ?? ""
                 CLASSCONTENT.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
                 CLASSCONTENT.font          = UIFont.systemFont(ofSize: 15)
             })
             
             return cell
+        } else if indexPath.section == 5 {
+            let cell  = SX_TrainDetailTeacherCell(style: .default, reuseIdentifier: "teachercellID")
+            cell.selectionStyle     = .none
+            self.sectionTitle?.text = "名师介绍"
+            let model = self.teacherListArr[indexPath.row]
+            
+            
+            
+            
+            cell.name?.text     = model.name ?? "张亮(测试)"
+            cell.info?.text     = (model.school! + ",") + (model.title! + ",") + (model.company!)
+            cell.describe?.text = model.describe ?? "张亮简介(测试)"
+            
+            return cell
         }
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "teachercellID")
-        self.sectionTitle?.text = "名师介绍"
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "111")
         
         return cell
     }
@@ -454,8 +457,8 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             _ = UIView().addhere(toSuperView: view).layout(snapKitMaker: { (make) in
                 make.top.equalTo(self.sectionTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
                 make.height.equalTo(0.5)
-                make.left.equalToSuperview().offset(15)
-                make.right.equalToSuperview().offset(-15)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
             }).config({ (LINE) in
                 LINE.backgroundColor = UIColor.SX_LineColor()
             })
