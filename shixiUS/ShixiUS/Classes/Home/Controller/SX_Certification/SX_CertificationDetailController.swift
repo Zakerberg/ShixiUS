@@ -361,9 +361,9 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
                 make.height.equalTo(14)
             }).config({ (CLASSTITLE) in
                 CLASSTITLE.sizeToFit()
-                CLASSTITLE.text          = model.title ?? ""
-                CLASSTITLE.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
-                CLASSTITLE.font          = UIFont.systemFont(ofSize: 13)
+                CLASSTITLE.text            = model.title ?? ""
+                CLASSTITLE.textColor       = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
+                CLASSTITLE.font            = UIFont.systemFont(ofSize: 13)
             })
             
             _ = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
@@ -383,14 +383,15 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             let cell  = SX_TrainDetailTeacherCell(style: .default, reuseIdentifier: "teachercellID")
             cell.selectionStyle     = .none
             self.sectionTitle?.text = "名师介绍"
-            let model = self.teacherListArr[indexPath.row]
-            
-            
-            
-            
-            cell.name?.text     = model.name ?? "张亮(测试)"
-            cell.info?.text     = (model.school! + ",") + (model.title! + ",") + (model.company!)
-            cell.describe?.text = model.describe ?? "张亮简介(测试)"
+            let model               = self.teacherListArr[indexPath.row]
+            if let url = URL(string: model.image ?? "") {
+                cell.icon?.kf.setImage(with: url)
+            }else {
+                cell.icon?.image = #imageLiteral(resourceName: "icon_placeholdericon_Image")
+            }
+            cell.name?.text         = model.name ?? "张亮(测试)"
+            cell.info?.text         = (model.school! + ",") + (model.title! + ",") + (model.company!)
+            cell.describe?.text     = model.describe ?? "张亮简介(测试)"
             
             return cell
         }
