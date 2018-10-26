@@ -76,7 +76,13 @@ extension SX_TrainDetailTeacherCell {
             make.height.equalTo(13.FloatValue.IPAD_XValue)
         }).config({ (INFO) in
             NAME.sizeToFit()
-            NAME.text  = "天津大学,硕士,注册会计师"
+            NA\\\\]\\
+            
+            
+            
+            
+            
+            ME.text  = "天津大学,硕士,注册会计师"
             NAME.textColor     = UIColor.colorWithRGB(r: 102, g:102 , b: 102)
             NAME.textAlignment = .left
         })
