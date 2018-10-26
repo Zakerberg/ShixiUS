@@ -19,7 +19,8 @@ class SX_TrainDetailTeacherCell: UITableViewCell {
     var icon:UIImageView?
     var name:UILabel?
     /// 天津大学, 硕士, 注册会计师
-    var edu:UILabel?
+    var info:UILabel?
+    
     var describe:UILabel?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -50,27 +51,42 @@ extension SX_TrainDetailTeacherCell {
     func ConfigCell() {
         
         self.icon = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.left.top.equalToSuperview().offset(Margin)
+            make.height.width.equalTo(35.FloatValue.IPAD_XValue)
         }).config({ (ICON) in
-            
+            ICON.layer.masksToBounds = true
+            ICON.image = #imageLiteral(resourceName: "icon")
+            ICON.layer.cornerRadius  = 17
         })
         
         self.name = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.top.equalTo(self.icon!.snp.top).offset(Margin)
+            make.left.equalTo(self.icon!.snp.right).offset(10.FloatValue.IPAD_XValue)
+            make.height.equalTo(Margin)
         }).config({ (NAME) in
-            
+            NAME.sizeToFit()
+            NAME.text  = "张亮!!!"
+            NAME.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+            NAME.textAlignment = .left
         })
         
-        self.edu = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (EDU) in
-            
+        self.info = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(self.name!.snp.bottom).offset(5.FloatValue.IPAD_XValue)
+            make.left.equalTo(self.name!)
+            make.height.equalTo(13.FloatValue.IPAD_XValue)
+        }).config({ (INFO) in
+            NAME.sizeToFit()
+            NAME.text  = "天津大学,硕士,注册会计师"
+            NAME.textColor     = UIColor.colorWithRGB(r: 102, g:102 , b: 102)
+            NAME.textAlignment = .left
         })
         
         let line = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+            make.top.equalTo(self.icon!.snp.bottom).offset(5.FloatValue.IPAD_XValue)
+            make.width.equalToSuperview()
+            make.height.equalTo(0.5)
         }).config({ (LINE) in
-            
+            LINE.back
         })
         
         self.describe = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in

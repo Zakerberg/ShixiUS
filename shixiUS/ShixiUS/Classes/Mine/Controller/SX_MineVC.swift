@@ -100,16 +100,20 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             
             self.logInBtn?.rx.tap.subscribe(onNext: { (_) in
                 let vc = SX_LoginController()
-                // 闭包回掉在这里!
-                //                vc.callBack(closure: { (name, status) in
-                //                    self.statusStr = status
-                //                    if self.statusStr == "1" { // 登陆
-                //                        self.titleNameLabel?.isHidden = false
-                //                        self.logInBtn?.isHidden       = true
-                //                        self.quitBtn?.isHidden        = false
-                //                        self.titleNameLabel?.text     = name
-                //                    }
-                //                })
+               
+                /*
+                 // 闭包回掉在这里!
+                 vc.callBack(closure: { (name, status) in
+                 self.statusStr = status
+                 if self.statusStr == "1" { // 登陆
+                 self.titleNameLabel?.isHidden = false
+                 self.logInBtn?.isHidden       = true
+                 self.quitBtn?.isHidden        = false
+                 self.titleNameLabel?.text     = name
+                 }
+                 })
+                 */
+                
                 self.present(vc, animated: true, completion: nil)
             }, onError: { (error) in
                 SXLog(error)

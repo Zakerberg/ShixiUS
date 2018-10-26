@@ -193,12 +193,14 @@ extension SX_CertificationDetailController {
 extension SX_CertificationDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6 + self.teacherListArr.count
+        return 7
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 4 {
             return self.curriculumListArr.count
+        }else if section == 5 {
+            return self.teacherListArr.count
         }else{
             return 1
         }
@@ -371,25 +373,28 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             
             return cell
         }
+        
         let cell = UITableViewCell(style: .default, reuseIdentifier: "teachercellID")
-        
-        
         self.sectionTitle?.text = "名师介绍"
         
-        cell.textLabel?.text = "11111"
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         return cell
-        
-        //        let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
-        //                cell.selectionStyle = .none
-        //
-        //                cell.titleLabel?.text   = "名师介绍"
-        //                cell.contentLabel?.text = ""
-        //
-        //                cell.titleLabel?.textAlignment = .center
-        //
-        //                return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
