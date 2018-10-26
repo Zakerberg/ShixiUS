@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 2018/9/3.
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  所有的分段选择 Menu (我的申请, 我的收藏...)
+
 
 /*
  我爱你

@@ -21,6 +21,11 @@ class SX_BaseWebController: UIViewController {
     var webURL: NSString?
     var loadingView:SX_LoadingView?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.hidesBottomBarWhenPushed = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setWebView()
@@ -48,8 +53,8 @@ extension SX_BaseWebController {
     
     func loadWebView() {
         
-        
-        
+        let request = NSURLRequest(url: NSURL(string: self.webURL as! String) as! URL, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0.5)
+        self.webView?.load(request as URLRequest)
     }
     
     func setLeftBack() {

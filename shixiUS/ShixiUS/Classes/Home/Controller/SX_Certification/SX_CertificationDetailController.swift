@@ -22,6 +22,7 @@ class SX_CertificationDetailController: SX_BaseController {
     var id: String?
     var moreDateBtn: UIButton?
     var serverImgs = [String]()
+    var sectionTitle: UILabel?
     var certificationDetailArr = JSON()
     
     /// 课程标题
@@ -328,7 +329,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         } else if indexPath.section == 4 {
             let cell = UITableViewCell(style: .default, reuseIdentifier: "curriculumCellID")
             cell.selectionStyle = .none
-            
+            self.sectionTitle?.text = "课程大纲"
             let circleImage = UIImageView(image: #imageLiteral(resourceName: "icon_CertificationDetail_circle")).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.top.left.equalToSuperview().offset(20.FloatValue.IPAD_XValue)
                 make.width.height.equalTo(20.FloatValue.IPAD_XValue)
@@ -336,50 +337,59 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
                 
             })
             
-            
-            
-            
             let titleImageV = UIImageView(image: #imageLiteral(resourceName: "icon_CertificationDetail_ClassTitle")).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.centerY.equalTo(circleImage)
                 make.left.equalTo(circleImage.snp.right).offset(8.FloatValue.IPAD_XValue)
-                make.height.equalTo(circleImage)
                 make.right.equalToSuperview().offset(-Margin)
+                make.height.equalTo(25.FloatValue.IPAD_XValue)
             }).config({ (TITLEV) in
                 
             })
             
-            //            let classTitle = UILabel().addhere(toSuperView: titleImageV).layout(snapKitMaker: { (make) in
-            //
-            //            }).config({ (CLASSTITLE) in
-            //
-            //            })
-            //
-            //            let classContent = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
-            //
-            //            }).config({ (CLASSCONTENT) in
-            //
-            //            })
+            let classTitle = UILabel().addhere(toSuperView: titleImageV).layout(snapKitMaker: { (make) in
+                make.centerY.equalToSuperview()
+                make.left.equalToSuperview().offset(Margin)
+                make.height.equalTo(14)
+            }).config({ (CLASSTITLE) in
+                CLASSTITLE.sizeToFit()
+                CLASSTITLE.text          = model["data"]["curriculum"][0]["title"].string ?? ""
+                CLASSTITLE.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
+                CLASSTITLE.font          = UIFont.systemFont(ofSize: 13)
+            })
             
-            
-            
-            
-            
-            
+            let classContent = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.top.equalTo(titleImageV.snp.bottom).offset(Margin)
+                make.left.equalTo(classTitle)
+                make.right.equalTo(titleImageV)
+            }).config({ (CLASSCONTENT) in
+                CLASSCONTENT.sizeToFit()
+                CLASSCONTENT.numberOfLines = 0
+                CLASSCONTENT.text          = model["data"]["curriculum"][0]["content"].string ?? ""
+                CLASSCONTENT.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
+                CLASSCONTENT.font          = UIFont.systemFont(ofSize: 15)
+            })
             
             return cell
         }
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "teachercellID")
         
         
-        let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
-        cell.selectionStyle = .none
+        self.sectionTitle?.text = "名师介绍"
         
-        cell.titleLabel?.text   = "名师介绍"
-        cell.contentLabel?.text = ""
+        cell.textLabel?.text = "11111"
         
-        
-        cell.titleLabel?.textAlignment = .center
         
         return cell
+        
+        //        let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
+        //                cell.selectionStyle = .none
+        //
+        //                cell.titleLabel?.text   = "名师介绍"
+        //                cell.contentLabel?.text = ""
+        //
+        //                cell.titleLabel?.textAlignment = .center
+        //
+        //                return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -405,7 +415,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        if  section == 2  || section == 4 {
+        if  section == 2  || section == 4 || section == 5 {
             return 40.FloatValue.IPAD_XValue
         }
         return CGFloat.leastNormalMagnitude
@@ -422,23 +432,22 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             tableView.tableHeaderView?.addSubview(view)
             
             return view
-        } else if section == 4 {
+        } else if section == 4 || section == 5 {
             let view = UIView()
             view.backgroundColor = UIColor.white
-            let titleLabel = UILabel().addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+            self.sectionTitle = UILabel().addhere(toSuperView: view).layout(snapKitMaker: { (make) in
                 make.left.top.equalToSuperview().offset(Margin)
                 make.right.equalToSuperview().offset(-Margin)
                 make.height.equalTo(17)
             }).config({ (TITLE) in
                 TITLE.sizeToFit()
-                TITLE.text          = "课程大纲"
                 TITLE.textAlignment = .center
                 TITLE.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                 TITLE.font          = UIFont.boldSystemFont(ofSize: 16)
             })
             
             _ = UIView().addhere(toSuperView: view).layout(snapKitMaker: { (make) in
-                make.top.equalTo(titleLabel.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.top.equalTo(self.sectionTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
                 make.height.equalTo(0.5)
                 make.left.equalToSuperview().offset(15)
                 make.right.equalToSuperview().offset(-15)
@@ -447,6 +456,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             })
             return view
         }
+        
         return UIView()
     }
     
