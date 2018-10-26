@@ -59,9 +59,9 @@ class SX_PageContentView: UIView {
     }
 }
 
-// ===================================================================================================================
+// ========================================================================
 // MARK: - Other Method
-// ===================================================================================================================
+// ========================================================================
 extension SX_PageContentView {
     
     //给外界用以获取PageTitleView选中按钮的下标
@@ -89,9 +89,9 @@ extension SX_PageContentView {
     }
 }
 
-// ===================================================================================================================
+// ========================================================================
 // MARK: - UIScrollViewDelegate
-// ===================================================================================================================
+// ========================================================================
 extension SX_PageContentView: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -136,7 +136,6 @@ extension SX_PageContentView: UIScrollViewDelegate {
                 progress = 1
                 targetIndex = originalIndex
             }
-            
         } else { // 右滑
             progress = 1 - (currentOffsetX / scrollViewW - floor(currentOffsetX / scrollViewW))
             targetIndex = Int(currentOffsetX / scrollViewW)

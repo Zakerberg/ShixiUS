@@ -19,11 +19,11 @@ private let ArrowTag   = 3000
 private let ControlTag = 1000
 private let LabelTag   = 2000
 
-class SX_TrainingProjectController: UIViewController {
+class SX_TrainingProjectController: SX_BaseController {
     
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
-    var loadingView: SX_LoadingView?
+//    var loadingView: SX_LoadingView?
     
     var collectionView: UICollectionView?
     
@@ -82,6 +82,7 @@ class SX_TrainingProjectController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -292,6 +293,7 @@ extension SX_TrainingProjectController {
                 self.trainingView.frame      = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.trainNameArr.count*50))
                 self.countryView.frame       = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.countryNameArr.count*50))
                 
+                self.hideLoadingView()
                 self.collectionView?.reloadData()
             } catch{ }
         }

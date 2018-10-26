@@ -305,25 +305,31 @@
             self.cerStr = "1"
             shixiTrainingCell.titleLabel?.text = "培训认证"
             shixiTrainingCell.trainModels      = self.trainArr
+            shixiTrainingCell.moreButton?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("热门实训更多")
+                let vc = SX_CertificationController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+            
+            
             
         }else{ /// 0 热门实训
             self.cerStr = ""
             shixiTrainingCell.titleLabel?.text = "热门实训"
             shixiTrainingCell.trainingModels   = self.trainingArr
+            shixiTrainingCell.moreButton?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("热门实训更多")
+                let vc = SX_TrainingProjectController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
         }
         
         shixiTrainingCell.delegate = self
         shixiTrainingCell.collectionView?.reloadData()
-        
-        shixiTrainingCell.moreButton?.rx.tap.subscribe(onNext: { (_) in
-            SXLog("首页热门实训更多按钮")
-            
-            let vc = SX_TrainingProjectController()
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        }, onError: { (error) in
-            SXLog(error)
-        }, onCompleted: nil, onDisposed: nil)
         
         return shixiTrainingCell
     }
@@ -408,7 +414,7 @@
                     MORE.titleEdgeInsets = UIEdgeInsetsMake(0, -MORE.imageView!.bounds.size.width, 0, MORE.imageView!.bounds.size.width)
                     MORE.imageEdgeInsets = UIEdgeInsetsMake(0, MORE.titleLabel!.bounds.size.width, 0, -MORE.titleLabel!.bounds.size.width)
                     MORE.rx.tap.subscribe(onNext: { (_) in
-                        SXLog("进入更多界面")
+                        SXLog("热门岗位更多")
                         let vc = SX_MoreHotJobController()
                         self.navigationController?.pushViewController(vc, animated: true)
                     }, onError: { (error) in

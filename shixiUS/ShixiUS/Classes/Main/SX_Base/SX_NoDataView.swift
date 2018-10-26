@@ -6,6 +6,14 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //
 
+/*
+ 笑那浮华落尽
+ 月色如洗
+ 笑那悄然而逝 飞花万盏
+ 谁是那轻轻颤动的百合
+ 在你的清辉下亘古不变
+ */
+
 import UIKit
 
 class SX_NoDataView: UIView {

@@ -493,6 +493,7 @@ extension SX_CertificationDetailController: SXCycleScrollerViewDelegate {
 extension SX_CertificationDetailController: SXPageTitleViewDelegate {
     func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
         
+        
     }
 }
 

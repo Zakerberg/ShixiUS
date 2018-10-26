@@ -56,9 +56,9 @@ class SX_MineMyCollectionController: UIViewController {
     }
 }
 
-// ====================================================================================================
+// ========================================================================
 // MARK: - Other Method
-// ====================================================================================================
+// ========================================================================
 extension SX_MineMyCollectionController {
     
     func setUI() {
@@ -93,18 +93,18 @@ extension SX_MineMyCollectionController {
     }
 }
 
-// ====================================================================================================
+// ========================================================================
 // MARK: - SXPageTitleViewDelegate
-// ====================================================================================================
+// ========================================================================
 extension SX_MineMyCollectionController: SXPageTitleViewDelegate {
     func selectedIndexInPageTitleView(pageTitleView: SX_PageTitleView, selectedIndex: Int) {
         self.pageContentView.setPageContentViewCurrentIndex(currentIndex: selectedIndex)
     }
 }
 
-// ====================================================================================================
+// ========================================================================
 // MARK: - SXPageContentViewDelegate
-// ====================================================================================================
+// ========================================================================
 extension SX_MineMyCollectionController: SXPageContentViewDelegate {
     func pageContentViewScroll(progress: CGFloat, originalIndex: Int, targetIndex: Int) {
         self.pageTitleView.setPageTitleView(progress: progress, originalIndex: originalIndex, targetIndex: targetIndex)

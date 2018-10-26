@@ -333,13 +333,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		322FC80521461AF4005347E8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		322FC80621461AF4005347E8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,20 +382,6 @@
 				323E99B0213CCE44006038F5 /* SX_PageContentView.swift */,
 			);
 			path = SX_PageTitleView;
-			sourceTree = "<group>";
-		};
-		323E99B8213D2F40006038F5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		324482E2214A348E00037533 /* SX_AlertView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SX_AlertView;
 			sourceTree = "<group>";
 		};
 		3248484521411AA400B6049E /* SX_Picker */ = {
@@ -569,7 +548,6 @@
 				323E99BF213FA721006038F5 /* SX_ApplyTrainListController.swift */,
 				323E99C1213FA73D006038F5 /* SX_ApplyVocationListController.swift */,
 				4527F91021226B29000EAEB9 /* SX_ApplyProgressDetailController.swift */,
-				322FC80521461AF4005347E8 /* Model */,
 			);
 			path = SX_MyApply;
 			sourceTree = "<group>";
@@ -732,7 +710,6 @@
 			children = (
 				32680E27217975EB00E86ACA /* SX_PullToRefresh */,
 				32621249214CE12E000C1A6C /* SX_Calendar */,
-				324482E2214A348E00037533 /* SX_AlertView */,
 				3248484521411AA400B6049E /* SX_Picker */,
 				323E99AB213CCDBC006038F5 /* SX_PageTitleView */,
 				45556B6020D8A0370035FCA6 /* Defines.swift */,
@@ -756,7 +733,6 @@
 		45556B5A20D89D290035FCA6 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				323E99B8213D2F40006038F5 /* Model */,
 				45454BCE211834A2002B9EBC /* Controller */,
 				45556B7120D8A51A0035FCA6 /* View */,
 			);

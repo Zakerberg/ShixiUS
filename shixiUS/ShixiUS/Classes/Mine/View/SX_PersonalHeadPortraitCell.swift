@@ -6,6 +6,12 @@
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  个人信息里面头像Cell
 
+/*
+ 即使时过迁境
+ 即使沧海桑田
+ 你依然是我致命的弱点
+ */
+
 import UIKit
 
 class SX_PersonalHeadPortraitCell: UITableViewCell {

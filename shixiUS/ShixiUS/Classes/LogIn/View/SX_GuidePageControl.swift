@@ -309,7 +309,6 @@ open class SX_GuidePageControl: UIPageControl {
     }
 }
 
-
 extension UIControlState: Hashable {
     public var hashValue: Int {
         return Int((6777*self.rawValue+3777)%UInt(UInt16.max))

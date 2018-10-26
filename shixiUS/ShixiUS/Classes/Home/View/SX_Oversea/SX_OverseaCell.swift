@@ -6,6 +6,12 @@
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  海外就业Cell
 
+/*
+岁月荏苒
+青灯孤影月为伴
+弱水三千不敌昔日你巧笑嫣然
+ */
+
 import UIKit
 
 class SX_OverseaCell: UITableViewCell {

@@ -19,11 +19,11 @@ private let ArrowTag   = 3000
 private let ControlTag = 1000
 private let LabelTag   = 2000
 
-class SX_CertificationController: UIViewController {
+class SX_CertificationController: SX_BaseController {
     
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
-    var loadingView: SX_LoadingView?
+//    var loadingView: SX_LoadingView?
     var collectionView: UICollectionView?
     
     var compreNameArr = [String]()
@@ -80,6 +80,7 @@ class SX_CertificationController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -237,6 +238,7 @@ extension SX_CertificationController {
                 self.comprehensiveView.frame    = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.compreNameArr.count*50))
                 self.ClassAttributeView.frame   = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.courseNameArr.count*50))
                 self.professionalTypeView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.classNameArr.count*50))
+                self.hideLoadingView()
                 self.collectionView?.reloadData()
             } catch{ }
         }

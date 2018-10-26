@@ -48,9 +48,9 @@ class SX_ApplyDetailController: UIViewController {
     }
 }
 
-// ===================================================================================================================
+// ========================================================================
 // MARK: - Other Method
-// ===================================================================================================================
+// ========================================================================
 extension SX_ApplyDetailController {
     
     func setUI() {
@@ -64,9 +64,9 @@ extension SX_ApplyDetailController {
     }
 }
 
-// ===============================================================================================================
+// ========================================================================
 // MARK: - UITableViewDelegate
-// ===============================================================================================================
+// ========================================================================
 extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -92,7 +92,6 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
             cell.progressStatus?.text      = "等待客服联系这是测试的数据为了显示换行,确实要换行啊,还要多少字?换行了吧!"
             cell.progressTime?.text        = "2018-07-10 20:55:00"
             cell.progressRejected?.text    = "退款申请被驳回,有问题联系客服" // 1
-            
             
             return cell
             

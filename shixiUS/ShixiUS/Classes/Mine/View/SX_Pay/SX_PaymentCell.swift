@@ -52,7 +52,9 @@ class SX_PaymentCell: UITableViewCell {
         // Configure the view for the selected state
     }
 }
-
+// ========================================================================
+// MARK: - ConfigCell
+// ========================================================================
 extension SX_PaymentCell {
     
     func ConfigCell() {

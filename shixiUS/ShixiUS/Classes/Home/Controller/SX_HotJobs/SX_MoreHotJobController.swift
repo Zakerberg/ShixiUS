@@ -15,12 +15,12 @@
 import UIKit
 import SwiftyJSON
 
-private let ArrowTag   = 3000
-private let ControlTag = 1000
-private let LabelTag   = 2000
-let hotJobCellID       = "hotJobCellID"
+private let ArrowTag        = 3000
+private let ControlTag      = 1000
+private let LabelTag        = 2000
+let hotJobCellID            = "hotJobCellID"
 
-class SX_MoreHotJobController: UIViewController {
+class SX_MoreHotJobController: SX_BaseController {
     
     var tableView: UITableView?
     
@@ -41,7 +41,7 @@ class SX_MoreHotJobController: UIViewController {
     var settrStr: String    = "0"
     /////////////////////
     var baseURL             = ""
-    var jobListsModel      = [JobListModel]()
+    var jobListsModel       = [JobListModel]()
     
     /// 职位分类View
     lazy var positionView: SX_BasePopSelectedView = {
@@ -91,6 +91,7 @@ class SX_MoreHotJobController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,9 +105,9 @@ class SX_MoreHotJobController: UIViewController {
     }
 }
 
-// =================================================================================================================
+// ========================================================================
 // MARK: - Other Method
-// =================================================================================================================
+// ========================================================================
 extension SX_MoreHotJobController {
     
     func setUI() {
@@ -218,9 +219,9 @@ extension SX_MoreHotJobController {
     }
 }
 
-// =========================================================================================
+// ========================================================================
 // MARK: - Other Method 2
-// =========================================================================================
+// ========================================================================
 extension SX_MoreHotJobController {
     func fetchData() {
         baseURL = SHIXIUS + "/job/index?" + "type=\(typeStr)" + "&nature=\(natureStr)" + "&duration=\(durationStr)" + "&settr=\(settrStr)"
@@ -265,6 +266,7 @@ extension SX_MoreHotJobController {
                 self.workNatureView.frame  = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.natureNameArr.count*50))
                 self.workTimeView.frame    = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.timeNameArr.count*50))
                 self.releaseDateView.frame = CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: (self.releaseNameArr.count*50))
+                self.hideLoadingView()
                 self.tableView!.reloadData()
             } catch{ }
         }
