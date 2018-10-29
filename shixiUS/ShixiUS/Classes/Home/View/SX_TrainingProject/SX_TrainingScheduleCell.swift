@@ -12,7 +12,7 @@
  你已征服了我
  可还不属于我
  叫我如何不去猜测你在想什么
- 张信哲
+ 张信哲 -- 太想爱你 
  */
 import UIKit
 
@@ -65,10 +65,12 @@ extension SX_TrainingScheduleCell {
             DIALOG.image = #imageLiteral(resourceName: "icon_trainingDetail_Dialog")
         })
         
-        self.day = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
+        self.day = UILabel().addhere(toSuperView: dialogIV).layout(snapKitMaker: { (make) in
+            make.center.equalToSuperview()
+            make
         }).config({ (DAY) in
-            
+            DAY.text = "第一天"
+            DAY.textColor = UIColor.white
         })
         
         self.title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
