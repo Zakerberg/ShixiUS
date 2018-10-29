@@ -19,19 +19,15 @@ let projectDetailTitleCellID    = "projectDetailTitleCellID"
 let projectDetailDateTripCellID = "projectDetailDateTripCellID"
 
 let projectDetailCellID         = "projectDetailCellID"
+
 class SX_ProjectDetailController: SX_BaseController {
     
     var topArr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
-    
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    var ProjectLightStr = "Overriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keywordOverriding declaration requires an 'override' keyword"
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    
     var id:String?
-    
     var serverImgs       = [String]()
     var projectDetailArr = JSON()
     var moreDateBtn: UIButton?
+    var sectionTitle: UILabel?
     
     /// 行程标题
     var tripTitleArr = [String]()
@@ -170,7 +166,12 @@ extension SX_ProjectDetailController {
                 }else{
                     let vc =  SX_ApplyTrainListController()
                     
-
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     
@@ -225,14 +226,13 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let model     = self.projectDetailArr[indexPath.section]
         if indexPath.section == 0 {
-            let model     = self.projectDetailArr[indexPath.section]
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle     = .none
             titleCell.projectName?.text  = model["data"]["title"].string ?? ""
             titleCell.projectCity?.text  = "出发城市: " + (model["data"]["outset_city"].string ?? "北京(测试)")
-            // titleCell.projectContent?.text = model["data"]["features"].string ?? ""
-            titleCell.projectPrice?.text = "¥" + "1500" + "起/人"
+            titleCell.projectPrice?.text = "¥" + "100" + "起/人"
             
             return titleCell
             
@@ -255,39 +255,64 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             }, onCompleted: nil, onDisposed: nil).dispose()
             
             return cell
+            
+        } else if indexPath.section == 2 {
+            let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
+            cell.selectionStyle            = .none
+            cell.titleLabel?.text          = "项目亮点"
+            cell.titleLabel?.textAlignment = .center
+            
+            cell.contentLabel?.text        = model["data"]["features"].string ?? "1112243343256(测试项目亮点数据)"
+            
+            return cell
+        } else if indexPath.section == 3 { // 日程安排
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "cellsection3")
+            cell.selectionStyle  = .none
+            cell.textLabel?.text = "3333333^^^^^^^^"
+            
+            return cell
+        } else if indexPath.section == 4 || indexPath.section == 5 {
+            let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
+            cell.selectionStyle = .none
+            cell.titleLabel?.textAlignment = .center
+            
+            if indexPath.section == 4 {
+                cell.titleLabel?.text  = "费用说明"
+                cell.contentLabel?.text = model["data"]["expense"].string ?? "3233333332332323(测试费用说明数据)"
+            }else {
+                cell.titleLabel?.text  = "预定须知"
+                cell.contentLabel?.text = model["data"]["destine"].string ?? "098634566787096789889(测试预定须知数据)"
+            }
+            return cell
         }
-        
-        let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
-        cell.selectionStyle = .none
-        
-        if indexPath.section == 2 {
-            cell.titleLabel?.text  = "项目亮点"
-        }else if indexPath.section == 3 {
-            cell.titleLabel?.text  = "日程安排"
-        }else if indexPath.section == 4 {
-            cell.titleLabel?.text  = "费用说明"
-        }else{
-            cell.titleLabel?.text  = "预定须知"
-        }
-        
-        cell.titleLabel?.textAlignment = .center
-        cell.contentLabel?.text        = self.ProjectLightStr
-        
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        let model     = self.projectDetailArr[indexPath.section]
         switch indexPath.section {
         case 0:
             return 110.FloatValue.IPAD_XValue
         case 1:
             return 190.FloatValue.IPAD_XValue
+        case 2:
+            return UILabel.SX_getSpaceLabelHeight((model["data"]["features"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
+        case 3:
+            return UILabel.SX_getSpaceLabelHeight((model["data"]["features"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
+        case 4:
+            return UILabel.SX_getSpaceLabelHeight((model["data"]["expense"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
+        case 5:
+            return UILabel.SX_getSpaceLabelHeight((model["data"]["destine"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
         default:
-            return UILabel.SX_getSpaceLabelHeight(self.ProjectLightStr as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60
+            return 200.FloatValue.IPAD_XValue
         }
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200.FloatValue.IPAD_XValue
+    }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if  section == 2 {
@@ -305,7 +330,29 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         if section == 2 {
             let view = self.pageTitleView
             tableView.tableHeaderView?.addSubview(view)
+            return view
+        }else if section == 3 {
+            let view = UIView()
+            view.backgroundColor = UIColor.white
+            self.sectionTitle = UILabel().addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+                make.left.top.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+                make.height.equalTo(17)
+            }).config({ (TITLE) in
+                TITLE.sizeToFit()
+                TITLE.textAlignment = .center
+                TITLE.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                TITLE.font          = UIFont.boldSystemFont(ofSize: 16)
+            })
             
+            _ = UIView().addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+                make.top.equalTo(self.sectionTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.height.equalTo(0.5)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (LINE) in
+                LINE.backgroundColor = UIColor.SX_LineColor()
+            })
             return view
         }
         return UIView()

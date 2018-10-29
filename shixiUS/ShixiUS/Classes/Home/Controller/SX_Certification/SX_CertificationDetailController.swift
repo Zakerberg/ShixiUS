@@ -442,8 +442,12 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             return 190.FloatValue.IPAD_XValue
         case 2: // 课程参数
             return UILabel.SX_getSpaceLabelHeight((model["data"]["target"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + UILabel.SX_getSpaceLabelHeight((model["data"]["audience"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + UILabel.SX_getSpaceLabelHeight((model["data"]["content"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 80.FloatValue.IPAD_XValue
-        case 3:
+        case 3: // 课程介绍
             return UILabel.SX_getSpaceLabelHeight((model["data"]["describe"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 40.FloatValue.IPAD_XValue
+        case 4: // 课程大纲
+            return 200.FloatValue.IPAD_XValue
+        case 5: // 名师介绍
+            return 200.FloatValue.IPAD_XValue
         default:
             return 200.FloatValue.IPAD_XValue
         }

@@ -71,6 +71,7 @@
 		32AC6B11215E28F2000355A4 /* SX_BaseAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AC6B10215E28F2000355A4 /* SX_BaseAlertController.swift */; };
 		32B41D7721609CE4000781A6 /* SX_Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B41D7621609CE4000781A6 /* SX_Regex.swift */; };
 		32D0DFBF2147C1BD00A6549B /* SX_ProjectTripDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D0DFBE2147C1BD00A6549B /* SX_ProjectTripDateCell.swift */; };
+		32D51BD02186EAEF00B9ED51 /* SX_TrainingScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D51BCF2186EAEF00B9ED51 /* SX_TrainingScheduleCell.swift */; };
 		32E49D1C21369DB0005633F2 /* SX_PayEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1B21369DB0005633F2 /* SX_PayEmploymentJobsController.swift */; };
 		32E49D1E21369DC1005633F2 /* SX_PayTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1D21369DC1005633F2 /* SX_PayTrainingProjectController.swift */; };
 		32E49D2021369DDC005633F2 /* SX_PayVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1F21369DDC005633F2 /* SX_PayVocationalTrainingController.swift */; };
@@ -230,6 +231,7 @@
 		32AC6B10215E28F2000355A4 /* SX_BaseAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseAlertController.swift; sourceTree = "<group>"; };
 		32B41D7621609CE4000781A6 /* SX_Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_Regex.swift; sourceTree = "<group>"; };
 		32D0DFBE2147C1BD00A6549B /* SX_ProjectTripDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectTripDateCell.swift; sourceTree = "<group>"; };
+		32D51BCF2186EAEF00B9ED51 /* SX_TrainingScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainingScheduleCell.swift; sourceTree = "<group>"; };
 		32E49D1B21369DB0005633F2 /* SX_PayEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayEmploymentJobsController.swift; sourceTree = "<group>"; };
 		32E49D1D21369DC1005633F2 /* SX_PayTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayTrainingProjectController.swift; sourceTree = "<group>"; };
 		32E49D1F21369DDC005633F2 /* SX_PayVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayVocationalTrainingController.swift; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 				453C5B50210B03C4009F9CB9 /* SX_ProjectDetailTitleCell.swift */,
 				32D0DFBE2147C1BD00A6549B /* SX_ProjectTripDateCell.swift */,
 				4505982720FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift */,
+				32D51BCF2186EAEF00B9ED51 /* SX_TrainingScheduleCell.swift */,
 			);
 			path = SX_TrainingProject;
 			sourceTree = "<group>";
@@ -1242,6 +1245,7 @@
 				32621282214CE13E000C1A6C /* RMCollectionCell.m in Sources */,
 				45440F0020E0C4E700058978 /* SX_CycleCell.swift in Sources */,
 				32680E2D2179766000E86ACA /* SX_BounceView.swift in Sources */,
+				32D51BD02186EAEF00B9ED51 /* SX_TrainingScheduleCell.swift in Sources */,
 				4527F900211D2645000EAEB9 /* SX_ProgressDetailCell.swift in Sources */,
 				4505982820FD88AF00504B6E /* SX_TrainingCollectionViewCell.swift in Sources */,
 				4527F873211A8970000EAEB9 /* SX_ApplyDetailController.swift in Sources */,
