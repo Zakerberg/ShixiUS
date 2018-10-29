@@ -87,30 +87,30 @@ extension SX_MyApplyController {
     func setUI() {
         title = "我的申请"
         self.view.backgroundColor = UIColor.white
-            // 就业岗位, 培训项目, 职业认证
-            let controllerClassNames = ["SX_MineEmploymentJobsController", "SX_MineTrainingProjectController", "SX_MineVocationalTrainingController"]
-            
-            for index in 0..<self.dataArr.count {
-                if controllerClassNames.count > index {
-                    guard let spaceName = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {
-                        SXLog("获取命名空间失败!")
-                        return
-                    }
-                    
-                    let viewController: AnyClass? = NSClassFromString(spaceName + ".\(controllerClassNames[index])")
-                    guard let typeClass = viewController as? UIViewController.Type else {
-                        SXLog("viewController不能当做UIViewController!")
-                        return
-                    }
-                    
-                    let vc = typeClass.init()
-                    self.addChildViewController(vc)
-                    self.myChildViewControllers.add(vc)
-                    self.vc.append(vc)
+        // 就业岗位, 培训项目, 职业认证
+        let controllerClassNames = ["SX_MineEmploymentJobsController", "SX_MineTrainingProjectController", "SX_MineVocationalTrainingController"]
+        
+        for index in 0..<self.dataArr.count {
+            if controllerClassNames.count > index {
+                guard let spaceName = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {
+                    SXLog("获取命名空间失败!")
+                    return
                 }
+                
+                let viewController: AnyClass? = NSClassFromString(spaceName + ".\(controllerClassNames[index])")
+                guard let typeClass = viewController as? UIViewController.Type else {
+                    SXLog("viewController不能当做UIViewController!")
+                    return
+                }
+                
+                let vc = typeClass.init()
+                self.addChildViewController(vc)
+                self.myChildViewControllers.add(vc)
+                self.vc.append(vc)
             }
-            view.addSubview(pageTitleView)
-            view.addSubview(pageContentView)
+        }
+        view.addSubview(pageTitleView)
+        view.addSubview(pageContentView)
     }
 }
 
@@ -138,7 +138,7 @@ extension SX_MyApplyController: SXPageContentViewDelegate {
 extension SX_MyApplyController {
     @objc func toPresentTabbar(noti:Notification) {
         SXLog("接收到通知")
-       let numiss = USERDEFAULTS.value(forKey: "tabBarSelectedIndex")
+        let numiss = USERDEFAULTS.value(forKey: "tabBarSelectedIndex")
         self.tabBarController?.selectedIndex = numiss as! Int
     }
 }
