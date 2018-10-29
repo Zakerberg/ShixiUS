@@ -131,7 +131,7 @@ extension SX_HotJobDetailController {
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
                 
-                /// 此处判断token
+                /// 此处判断token 登录判断
                 if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
                     self.present(SX_LoginController(), animated: true, completion: nil)
                 }else{

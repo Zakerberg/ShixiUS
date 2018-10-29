@@ -124,14 +124,28 @@ extension SX_CertificationDetailController {
             COLLECTION.setTitleColor(UIColor.SX_MainColor(), for: .selected)
             
             COLLECTION.rx.tap.subscribe(onNext: { (_) in
-                if self.collectionBtn?.isSelected == true {
-                    SXLog("已收藏,点击取消收藏")
-                    self.collectionBtn?.isSelected = false
-                }else {
-                    SXLog("未收藏,点击收藏职位")
-                    self.collectionBtn?.isSelected = true
+                if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
+                    let vc = SX_LoginController()
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    if self.collectionBtn?.isSelected == true {
+                        SXLog("已收藏,点击取消收藏")
+                        let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        hud.mode       = .text
+                        hud.isSquare   = true
+                        hud.label.text = "已取消收藏"
+                        hud.hide(animated: true, afterDelay: 1.0)
+                        self.collectionBtn?.isSelected = false
+                    }else {
+                        SXLog("未收藏,点击收藏职位")
+                        let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        hud.mode       = .text
+                        hud.isSquare   = true
+                        hud.label.text = "已收藏"
+                        hud.hide(animated: true, afterDelay: 1.0)
+                        self.collectionBtn?.isSelected = true
+                    }
                 }
-                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -146,11 +160,16 @@ extension SX_CertificationDetailController {
             APPLY.setTitle("申请报名", for: .normal)
             APPLY.rx.tap.subscribe(onNext: { (_) in
                 SXLog("立即申请 +++ + ")
-                
-                ///加判断
-                let vc =  SX_ApplyTrainListController()
-                self.navigationController?.pushViewController(vc, animated: true)
-                
+                if String(describing: USERDEFAULTS.value(forKey: "login")!) == "no" {
+                    let vc = SX_LoginController()
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    let vc =  SX_ApplyTrainListController()
+                    
+                    
+                    
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)

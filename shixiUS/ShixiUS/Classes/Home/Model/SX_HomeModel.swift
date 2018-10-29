@@ -202,13 +202,23 @@ struct SX_TrainingDetailModel {
     var training: TrainingDetailTrainingModel
     var details: TrainingDetailDetailsModel
     var schedule:TrainingDetailScheduleModel
-    var collection:Int?
+    var collection:String?
     var collection_type:String?
     
     init(jsonData: JSON) {
-        training       = TrainingDetailTrainingModel(jsonData: jsonData["training"])
-        details        = TrainingDetailDetailsModel(jsonData: ["details"])
-        schedule       = TrainingDetailScheduleModel(jsonData: ["schedule"])
+        
+        id              = jsonData["id"].string
+        image           = jsonData["image"].string
+        title           = jsonData["title"].string
+        outset_city     = jsonData["outset_city"].string
+        features        = jsonData["features"].string
+        expense         = jsonData["expense"].string
+        destine         = jsonData["destine"].string
+        training        = TrainingDetailTrainingModel(jsonData: jsonData["training"])
+        details         = TrainingDetailDetailsModel(jsonData: ["details"])
+        schedule        = TrainingDetailScheduleModel(jsonData: ["schedule"])
+        collection      = jsonData["collection"].string
+        collection_type = jsonData["collection_type"].string
     }
 }
 
@@ -238,7 +248,7 @@ struct TrainingDetailDetailsModel {
 
 struct TrainingDetailScheduleModel {
     
-    var sort:Int?
+    var sort:String?
     var title:String?
     var location:String?
     var repast:String?
@@ -246,7 +256,7 @@ struct TrainingDetailScheduleModel {
     var content:String?
     
     init(jsonData: JSON) {
-        sort           = jsonData["sort"].int
+        sort           = jsonData["sort"].string
         title          = jsonData["title"].string
         location       = jsonData["location"].string
         repast         = jsonData["repast"].string
