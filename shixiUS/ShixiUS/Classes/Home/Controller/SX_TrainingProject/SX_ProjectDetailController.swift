@@ -40,13 +40,18 @@ class SX_ProjectDetailController: SX_BaseController {
     /// 价格
     var tripPriceArr = [String]()
     
+    /// 日程安排
+    var schedule     = [TrainingDetailScheduleModel]()
+    /// 是否收藏
+    var collection: String?
+    
     lazy var pageTitleView: SX_PageTitleView = {
         let config                = SX_PageTitleViewConfig()
         config.titleColor         = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         config.titleSelectedColor = UIColor.SX_MainColor()
         let pageTitleView = SX_PageTitleView(frame: CGRect(x: 0, y: 200, width: SCREEN_WIDTH, height: 41), titles: self.topArr, config: config)
-        pageTitleView.config = config
-        pageTitleView.titles = self.topArr
+        pageTitleView.config      = config
+        pageTitleView.titles      = self.topArr
         pageTitleView.pageTitleViewDelegate = self
         
         return pageTitleView
@@ -164,6 +169,11 @@ extension SX_ProjectDetailController {
                     self.present(vc, animated: true, completion: nil)
                 }else{
                     let vc =  SX_ApplyTrainListController()
+                    
+
+                    
+                    
+                    
                     
                     
                     
