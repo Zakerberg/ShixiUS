@@ -19,7 +19,7 @@ import UIKit
 class SX_TrainingScheduleCell: UITableViewCell {
 
     var title: UILabel?
-    var location: UILabel?
+    var day: UILabel?
     var content: UILabel?
     
     override func awakeFromNib() {
@@ -49,11 +49,40 @@ class SX_TrainingScheduleCell: UITableViewCell {
 extension SX_TrainingScheduleCell {
     func ConfigCell() {
  
+        let cicleIV = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.left.top.equalToSuperview().offset(Margin)
+            make.width.height.equalTo(10.FloatValue.IPAD_XValue)
+        }).config({ (CICLE) in
+            CICLE.image = #imageLiteral(resourceName: "icon_trainingDetail_Cicle")
+        })
         
+        let dialogIV = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.left.equalTo(cicleIV.snp.right).offset(5.FloatValue.IPAD_XValue)
+            make.centerY.equalTo(cicleIV)
+            make.width.equalTo(60.FloatValue.IPAD_XValue)
+            make.height.equalTo(30.FloatValue.IPAD_XValue)
+        }).config({ (DIALOG) in
+            DIALOG.image = #imageLiteral(resourceName: "icon_trainingDetail_Dialog")
+        })
         
+        self.day = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (DAY) in
+            
+        })
         
-        
-        
+        self.title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.centerY.equalTo(dialogIV)
+            make.left.equalTo(dialogIV.snp.right).offset(Margin)
+        }).config({ (TITLE) in
+            
+        })
+
+        self.content = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            
+        }).config({ (TITLE) in
+            
+        })
     }
 }
 

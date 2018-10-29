@@ -23,7 +23,6 @@ class SX_CertificationController: SX_BaseController {
     
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
-//    var loadingView: SX_LoadingView?
     var collectionView: UICollectionView?
     
     var compreNameArr = [String]()
@@ -41,6 +40,7 @@ class SX_CertificationController: SX_BaseController {
     var sortStr       = "id"
     var orderStr      = "DESC"
     /////////////////////
+    
     var cerListsModels = [TrainListModel]()
     var baseURL       = ""
     
@@ -124,7 +124,7 @@ extension SX_CertificationController {
             topSelectedView.backgroundColor = UIColor.white
         })
         
-        let _ = UIView(frame: CGRect(x: 0, y: self.topSelectedView!.frame.origin.y + self.topSelectedView!.frame.size.height + 0.1 , width: SCREEN_WIDTH, height: 0.5)).addhere(toSuperView: self.view).config { (lineView) in
+        _ = UIView(frame: CGRect(x: 0, y: self.topSelectedView!.frame.origin.y + self.topSelectedView!.frame.size.height + 0.1 , width: SCREEN_WIDTH, height: 0.5)).addhere(toSuperView: self.view).config { (lineView) in
             lineView.backgroundColor = UIColor.colorWithHexString(hex: "b2b2b2", alpha: 1)
         }
         

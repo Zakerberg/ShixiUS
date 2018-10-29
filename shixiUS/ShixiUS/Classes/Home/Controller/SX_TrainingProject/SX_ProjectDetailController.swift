@@ -168,15 +168,7 @@ extension SX_ProjectDetailController {
                     
                     
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+
                     
                     
                     

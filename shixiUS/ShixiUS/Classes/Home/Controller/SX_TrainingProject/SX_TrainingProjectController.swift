@@ -23,8 +23,6 @@ class SX_TrainingProjectController: SX_BaseController {
     
     var topSelectedView: SX_TopSelectedView?
     var blackBgView: UIView? // 黑色背景弹窗
-//    var loadingView: SX_LoadingView?
-    
     var collectionView: UICollectionView?
     
     var compreNameArr  = [String]()
