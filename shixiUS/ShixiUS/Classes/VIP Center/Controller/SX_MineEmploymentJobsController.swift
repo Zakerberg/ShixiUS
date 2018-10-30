@@ -212,10 +212,10 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             cell.employmentNotiBtn?.setTitleColor(UIColor.colorWithHexString(hex: "72a21b", alpha: 1), for: .normal)
             
             cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
-                let vc = SX_ApplyDetailController()
-                
-    
-                self.navigationController?.pushViewController(vc, animated: true)
+//                let vc = SX_ApplyDetailController()
+//
+//
+//                self.navigationController?.pushViewController(vc, animated: true)
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -246,8 +246,8 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SXLog("进入就业岗位的申请详情")
-        let vc = SX_ApplyDetailController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = SX_ApplyDetailController()
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

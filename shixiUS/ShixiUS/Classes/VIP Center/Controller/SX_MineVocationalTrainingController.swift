@@ -170,8 +170,8 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SXLog("进入职业培训的申请详情")
-        let vc = SX_ApplyDetailController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = SX_ApplyDetailController()
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

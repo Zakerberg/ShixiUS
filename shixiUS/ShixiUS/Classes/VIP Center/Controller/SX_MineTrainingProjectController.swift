@@ -178,7 +178,7 @@ extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SXLog("进入实训项目的申请详情")
-        let vc = SX_ApplyDetailController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = SX_ApplyDetailController()
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

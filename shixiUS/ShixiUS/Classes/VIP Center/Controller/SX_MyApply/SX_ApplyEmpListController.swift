@@ -23,6 +23,8 @@ class SX_ApplyEmpListController: UIViewController {
     var weChatTF: UITextField?
     var jobid:String?
     
+    
+    
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor              = UIColor.SX_BackGroundColor()
@@ -210,7 +212,6 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
         })
-        
         return view
     }
     

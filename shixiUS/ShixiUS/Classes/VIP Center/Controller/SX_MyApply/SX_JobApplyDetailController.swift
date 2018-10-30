@@ -1,10 +1,10 @@
 //
-//  SX_ApplyDetailController.swift
+//  SX_JobApplyDetailController.swift
 //  ShixiUS
 //
 //  Created by Michael 柏 on 8/8/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  申请详情界面
+//  就业岗位申请详情界面
 
 /*
  听过最撩人的一句话:
@@ -22,11 +22,14 @@ import MBProgressHUD
 let applyDetailCellID = "applyDetailCellID"
 let detailCellID      = "detailCellID"
 
-class SX_ApplyDetailController: UIViewController {
+class SX_JobApplyDetailController: SX_BaseController {
     
-    var detailPriceLabel : UILabel?  // 价格
-    var payBtn           : UIButton? // 支付服务预定金
-    var cancelBtn        : UIButton? // 取消订单
+    var detailPriceLabel: UILabel?  // 价格
+    var payBtn: UIButton? // 支付服务预定金
+    var cancelBtn: UIButton? // 取消订单
+    var number: String?
+    
+    var jobAppDetailModelArr = [SX_ApplyJobDetail]()
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -53,7 +56,7 @@ class SX_ApplyDetailController: UIViewController {
 // ========================================================================
 // MARK: - Other Method
 // ========================================================================
-extension SX_ApplyDetailController {
+extension SX_JobApplyDetailController {
     
     func setUI() {
         title = "申请详情"
@@ -63,19 +66,25 @@ extension SX_ApplyDetailController {
     
     func fetchData() {
         
-        
-        
-        
-        
-        
-        
+        SX_NetManager.requestData(type: .GET, URlString: (SX_ApplyJobDetail + self.number!), parameters:  nil, finishCallBack: { (result) in
+            do{
+                let json = try JSON(data: result)
+                
+                
+                
+                
+                
+                
+                
+            } catch{ }
+        })
     }
 }
 
 // ========================================================================
 // MARK: - UITableViewDelegate
 // ========================================================================
-extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
+extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -136,6 +145,7 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
                 cell.textLabel?.textColor              = UIColor.colorWithHexString(hex: "333333", alpha: 1)
                 
                 break
+                
             case 1:
                 cell.textLabel?.text                   = "服务费用总额"
                 cell.textLabel?.font                   = UIFont.systemFont(ofSize: 14)
@@ -264,4 +274,5 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
         }
     }
 }
+
 
