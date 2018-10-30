@@ -289,12 +289,7 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                 /// 申请成功 ! 获取订单号
                 
                 
-                
-                
-                
-                
-                
-                
+
                 
                 
             }, onError: { (error) in

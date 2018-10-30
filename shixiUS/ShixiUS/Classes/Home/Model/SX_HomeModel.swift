@@ -835,6 +835,52 @@ struct SX_TrainApplyModel {
     }
 }
 
+/// 申请详情 ---> (就业岗位)
+struct SX_JobApplyDetailModel {
+    var id: String?
+    var steps:String?
+    var stepsCn:String?
+    var status:String?
+    var title:String?
+    var trade:String?
+    var address:String?
+    var nature:String?
+    var serviceMoney:String?
+    var deposit:String?
+    var addtime:String?
+    var orderid:String?
+    
+    init(jsonData:JSON) {
+        id              = jsonData["id"].string
+        steps           = jsonData["steps"].string
+        stepsCn         = jsonData["stepsCn"].string
+        status          = jsonData["status"].string
+        title           = jsonData["title"].string
+        trade           = jsonData["trade"].string
+        address         = jsonData["address"].string
+        nature          = jsonData["nature"].string
+        serviceMoney    = jsonData["serviceMoney"].string
+        deposit         = jsonData["deposit"].string
+        addtime         = jsonData["addtime"].string
+        orderid         = jsonData["orderid"].string
+    }
+}
+
+/// 申请详情 ---> (实训项目)
+struct SX_TrainingApplyDetailModel {
+    
+    var id:String?
+    
+    
+    
+}
+
+/// 申请详情 ---> (职业培训)
+struct SX_TrainApplyDetailModel {
+    
+    
+}
+
 // ===================================================================++++++++++++++++++++++++++++
 // MARK: -  我的界面
 // ===================================================================++++++++++++++++++++++++++++

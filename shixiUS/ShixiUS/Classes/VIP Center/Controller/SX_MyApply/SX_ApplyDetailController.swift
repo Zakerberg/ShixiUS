@@ -16,6 +16,8 @@
  */
 
 import UIKit
+import SwiftyJSON
+import MBProgressHUD
 
 let applyDetailCellID = "applyDetailCellID"
 let detailCellID      = "detailCellID"
@@ -60,6 +62,12 @@ extension SX_ApplyDetailController {
     }
     
     func fetchData() {
+        
+        
+        
+        
+        
+        
         
     }
 }
@@ -241,11 +249,11 @@ extension SX_ApplyDetailController: UITableViewDelegate,UITableViewDataSource {
         if section == 2 {
             return 120.FloatValue.IPAD_XValue
         }
-        return 10.FloatValue.IPAD_XValue
+        return 5.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.FloatValue.IPAD_XValue
+        return 5.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -152,7 +152,11 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             cell.employmentPay?.setTitleColor(UIColor.white, for: .normal)
             
             cell.employmentPay?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("支付定金 ++++")
+                let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                hud.mode       = .text
+                hud.isSquare   = true
+                hud.label.text = "请去网页操作"
+                hud.hide(animated: true, afterDelay: 1.0)
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -169,7 +173,8 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             cell.employmentDetail?.setTitleColor(UIColor.white, for: .normal)
             cell.employmentDetail?.backgroundColor   = UIColor.colorWithHexString(hex: "72a21b", alpha: 1)
             cell.employmentDetail?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("退款 ++++")
+
+            
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -207,7 +212,10 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             cell.employmentNotiBtn?.setTitleColor(UIColor.colorWithHexString(hex: "72a21b", alpha: 1), for: .normal)
             
             cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("面试通知 ++++")
+                let vc = SX_ApplyDetailController()
+                
+    
+                self.navigationController?.pushViewController(vc, animated: true)
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
