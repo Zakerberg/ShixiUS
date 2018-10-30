@@ -9,22 +9,68 @@
 import UIKit
 
 class SX_TrainingApplyDetailController: SX_BaseController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUI()
+        fetchData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 }
 
+// ===============================================================================
+// MARK: - Other Method
+// ===============================================================================
+extension SX_TrainingApplyDetailController{
+    func setUI() {
+        
+    }
+    
+    func fetchData() {
+        
+    }
+}
 
+// ===============================================================================
+// MARK: -
+// ===============================================================================
 extension SX_TrainingApplyDetailController{
     
     
 }
 
+// ===============================================================================
+// MARK: -
+// ===============================================================================
+extension SX_TrainingApplyDetailController{
+    
+    
+}
 
+// ===============================================================================
+// MARK: -
+// ===============================================================================
+extension SX_TrainingApplyDetailController{
+    
+    
+}
+
+// ===============================================================================
+// MARK: -
+// ===============================================================================
+extension SX_TrainingApplyDetailController{
+    
+    
+}
+
+// ===============================================================================
+// MARK: -
+// ===============================================================================
+extension SX_TrainingApplyDetailController{
+    
+    
+}

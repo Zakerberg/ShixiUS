@@ -29,7 +29,7 @@ class SX_JobApplyDetailController: SX_BaseController {
     var cancelBtn: UIButton? // 取消订单
     var number: String?
     
-    var jobAppDetailModelArr = [SX_ApplyJobDetail]()
+    var jobAppDetailModelArr = [SX_JobApplyDetailModel]()
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -70,12 +70,7 @@ extension SX_JobApplyDetailController {
             do{
                 let json = try JSON(data: result)
                 
-                
-                
-                
-                
-                
-                
+
             } catch{ }
         })
     }
@@ -274,5 +269,4 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
         }
     }
 }
-
 
