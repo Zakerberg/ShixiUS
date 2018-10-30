@@ -17,7 +17,7 @@
 import UIKit
 
 class SX_TrainingScheduleCell: UITableViewCell {
-
+    
     var title: UILabel?
     var day: UILabel?
     var content: UILabel?
@@ -26,7 +26,7 @@ class SX_TrainingScheduleCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         ConfigCell()
@@ -38,7 +38,7 @@ class SX_TrainingScheduleCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 }
@@ -48,7 +48,7 @@ class SX_TrainingScheduleCell: UITableViewCell {
 // ===============================================================================
 extension SX_TrainingScheduleCell {
     func ConfigCell() {
- 
+        
         let cicleIV = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.left.top.equalToSuperview().offset(Margin)
             make.width.height.equalTo(10.FloatValue.IPAD_XValue)
@@ -60,30 +60,39 @@ extension SX_TrainingScheduleCell {
             make.left.equalTo(cicleIV.snp.right).offset(5.FloatValue.IPAD_XValue)
             make.centerY.equalTo(cicleIV)
             make.width.equalTo(60.FloatValue.IPAD_XValue)
-            make.height.equalTo(30.FloatValue.IPAD_XValue)
+            make.height.equalTo(20.FloatValue.IPAD_XValue)
         }).config({ (DIALOG) in
             DIALOG.image = #imageLiteral(resourceName: "icon_trainingDetail_Dialog")
         })
         
         self.day = UILabel().addhere(toSuperView: dialogIV).layout(snapKitMaker: { (make) in
-            make.center.equalToSuperview()
-            make
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(12.FloatValue.IPAD_XValue)
+            make.right.equalToSuperview()
         }).config({ (DAY) in
-            DAY.text = "第一天"
+            DAY.sizeToFit()
+            DAY.font      = UIFont.boldSystemFont(ofSize: Margin)
             DAY.textColor = UIColor.white
         })
         
         self.title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.centerY.equalTo(dialogIV)
-            make.left.equalTo(dialogIV.snp.right).offset(Margin)
+            make.left.equalTo(dialogIV.snp.right).offset(8.FloatValue.IPAD_XValue)
+            make.height.equalTo(self.day!)
         }).config({ (TITLE) in
-            
+            TITLE.sizeToFit()
+            TITLE.font      = UIFont.boldSystemFont(ofSize: Margin)
+            TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
         })
-
+        
         self.content = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            
-        }).config({ (TITLE) in
-            
+            make.top.equalTo(dialogIV.snp.bottom).offset(Margin)
+            make.left.equalTo(dialogIV)
+            make.right.equalToSuperview().offset(-20.FloatValue.IPAD_XValue)
+        }).config({ (CONTENT) in
+            CONTENT.numberOfLines = 0
+            CONTENT.font          = UIFont.systemFont(ofSize: 14)
+            CONTENT.textColor     = UIColor.colorWithRGB(r: 102, g: 102, b: 102)
         })
     }
 }

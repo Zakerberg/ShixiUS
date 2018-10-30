@@ -71,9 +71,9 @@ extension SX_HotJobContentDetailCell {
             make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.right.equalTo(lineView)
         }).config({ (CONTENT) in
-            CONTENT.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-            CONTENT.font = UIFont.systemFont(ofSize: 13)
             CONTENT.numberOfLines = 0
+            CONTENT.font          = UIFont.systemFont(ofSize: 13)
+            CONTENT.textColor     = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         })
     }
 }

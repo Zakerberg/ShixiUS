@@ -27,7 +27,6 @@ class SX_ProjectDetailController: SX_BaseController {
     var serverImgs       = [String]()
     var projectDetailArr = JSON()
     var moreDateBtn: UIButton?
-    var sectionTitle: UILabel?
     
     /// 行程标题
     var tripTitleArr = [String]()
@@ -37,7 +36,10 @@ class SX_ProjectDetailController: SX_BaseController {
     var tripPriceArr = [String]()
     
     /// 日程安排
-    var schedule     = [TrainingDetailScheduleModel]()
+    var scheduleModelArr = [TrainingDetailScheduleModel]()
+    /// 日程安排内容
+    var schduleContent   = [String]()
+    
     /// 是否收藏
     var collection: String?
     
@@ -167,11 +169,6 @@ extension SX_ProjectDetailController {
                     let vc =  SX_ApplyTrainListController()
                     
                     
-                    
-
-                    
-                    
-                    
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }, onError: { (error) in
@@ -197,6 +194,11 @@ extension SX_ProjectDetailController {
                     self.tripDateArr.append(item["date"].string ?? "")
                     self.tripPriceArr.append(item["price"].string ?? "")
                 }
+                for item in json["data"]["schedule"].array ?? [] {
+                    let scheduleModel = TrainingDetailScheduleModel(jsonData: item)
+                    self.scheduleModelArr.append(scheduleModel)
+                    self.schduleContent.append(item["content"].string ?? "")
+                }
                 self.hideLoadingView()
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
@@ -214,11 +216,14 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 3 {
+            return self.scheduleModelArr.count
+        }
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let model     = self.projectDetailArr[indexPath.section]
+        let model = self.projectDetailArr[indexPath.section]
         if indexPath.section == 0 {
             let titleCell = SX_ProjectDetailTitleCell(style: .default, reuseIdentifier: projectDetailTitleCellID)
             titleCell.selectionStyle     = .none
@@ -227,7 +232,6 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             titleCell.projectPrice?.text = "¥" + "100" + "起/人"
             
             return titleCell
-            
         }else if indexPath.section == 1 {
             let cell = SX_ProjectTripDateCell(style: .default, reuseIdentifier: "TRIPDATACELL")
             cell.selectionStyle = .none
@@ -258,11 +262,16 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             
             return cell
         } else if indexPath.section == 3 { // 日程安排
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "cellsection3")
-            cell.selectionStyle  = .none
-            cell.textLabel?.text = "3333333^^^^^^^^"
+            let scheduleModel       = scheduleModelArr[indexPath.row]
+            let cell = SX_TrainingScheduleCell(style: .default, reuseIdentifier: "schduleCellID")
+            cell.selectionStyle     = .none
+            
+            cell.day?.text          = "第" + (scheduleModel.sort ?? "") + "天"
+            cell.title?.text        = scheduleModel.title ?? "联合国(测试)"
+            cell.content?.text      = scheduleModel.content ?? "联合国玩耍(测试)"
             
             return cell
+            
         } else if indexPath.section == 4 || indexPath.section == 5 {
             let cell = SX_HotJobContentDetailCell(style: .default, reuseIdentifier: projectDetailCellID)
             cell.selectionStyle = .none
@@ -282,7 +291,8 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let model     = self.projectDetailArr[indexPath.section]
+        let model = self.projectDetailArr[indexPath.section]
+        
         switch indexPath.section {
         case 0:
             return 110.FloatValue.IPAD_XValue
@@ -291,7 +301,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         case 2:
             return UILabel.SX_getSpaceLabelHeight((model["data"]["features"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
         case 3:
-            return UILabel.SX_getSpaceLabelHeight((model["data"]["features"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
+            return UILabel.SX_getSpaceLabelHeight((self.schduleContent[indexPath.row] as NSString), font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
         case 4:
             return UILabel.SX_getSpaceLabelHeight((model["data"]["expense"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
         case 5:
@@ -304,10 +314,10 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200.FloatValue.IPAD_XValue
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        if  section == 2 {
+        if  section == 2 || section == 3 {
             return 40.FloatValue.IPAD_XValue
         }
         return CGFloat.leastNormalMagnitude
@@ -326,19 +336,20 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
         }else if section == 3 {
             let view = UIView()
             view.backgroundColor = UIColor.white
-            self.sectionTitle = UILabel().addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+            let sectionTitle = UILabel().addhere(toSuperView: view).layout(snapKitMaker: { (make) in
                 make.left.top.equalToSuperview().offset(Margin)
                 make.right.equalToSuperview().offset(-Margin)
                 make.height.equalTo(17)
             }).config({ (TITLE) in
                 TITLE.sizeToFit()
+                TITLE.text          = "日程安排"
                 TITLE.textAlignment = .center
                 TITLE.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
                 TITLE.font          = UIFont.boldSystemFont(ofSize: 16)
             })
             
             _ = UIView().addhere(toSuperView: view).layout(snapKitMaker: { (make) in
-                make.top.equalTo(self.sectionTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.top.equalTo(sectionTitle.snp.bottom).offset(10.FloatValue.IPAD_XValue)
                 make.height.equalTo(0.5)
                 make.left.equalToSuperview().offset(Margin)
                 make.right.equalToSuperview().offset(-Margin)

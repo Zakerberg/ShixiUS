@@ -56,10 +56,10 @@ extension SX_MineEmploymentJobsController {
     func setUI() {
         self.view.backgroundColor = UIColor.SX_MainColor()
         self.view.addSubview(table)
-
+        
         let tableViewWapper = SX_PullToBounceWrapper(scrollView: table)
         self.view.addSubview(tableViewWapper)
-
+        
         tableViewWapper.didPullToRefresh = {
             _ = Timer.schedule(delay: 2, handler: { (timer) in
                 self.jobApplyArr.removeAll()
@@ -73,39 +73,33 @@ extension SX_MineEmploymentJobsController {
     }
     
     func fetchData() {
+        let url = SX_MyApplyJob + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
         
-       // if String(describing: USERDEFAULTS.value(forKey: "login")!) == "yes"{
-            let url = SX_MyApplyJob + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
-            
-            SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
-                do {
-                    let json = try JSON(data: result)
-                    if json["status"].int == 200 {
-                        SXLog("成功!")
-                        for item in json["data"].array ?? [] {
-                            let jobApplyModel = SX_JobApplyModel(jsonData: item)
-                            self.jobApplyArr.append(jobApplyModel)
-                        }
-                        self.table.reloadData()
-                        if json["data"].count == 0 {
-                            self.noDataView?.isHidden = false
-                        }else{
-                            self.noDataView?.isHidden = true
-                        }
-                    }else{
-                        let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
-                        hud.mode       = .text
-                        hud.isSquare   = true
-                        hud.label.text = json["msg"].string
-                        hud.hide(animated: true, afterDelay: 1.0)
+        SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
+            do {
+                let json = try JSON(data: result)
+                if json["status"].int == 200 {
+                    SXLog("成功!")
+                    for item in json["data"].array ?? [] {
+                        let jobApplyModel = SX_JobApplyModel(jsonData: item)
+                        self.jobApplyArr.append(jobApplyModel)
                     }
                     self.table.reloadData()
-                }catch { }
-            }
-//        }else{
-//            let vc  = SX_LoginController()
-//            self.present(vc, animated: true, completion: nil)
-//        }
+                    if json["data"].count == 0 {
+                        self.noDataView?.isHidden = false
+                    }else{
+                        self.noDataView?.isHidden = true
+                    }
+                }else{
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
+                }
+                self.table.reloadData()
+            }catch { }
+        }
     }
 }
 
@@ -185,7 +179,7 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             cell.employmentPay?.isHidden     = true
             cell.employmentNotiBtn?.isHidden = true
             cell.employmentPay?.isHidden     = true
-
+            
             cell.employmentStyle?.text       = model.statusCn
             
             cell.employmentDetail?.setTitle(model.button, for: .normal)
