@@ -188,7 +188,6 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                     STATUSBTN.setTitleColor(UIColor.white, for: .normal)
                     STATUSBTN.isHidden              = true
                 })
-                
                 self.detailPriceLabel?.text         = "未支付"
                 self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
                 self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "333333", alpha: 1)
@@ -198,11 +197,9 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 cell.textLabel?.text                = "应付定金"
                 cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
                 cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-                
                 self.detailPriceLabel?.text         = "¥100.00"
                 self.detailPriceLabel?.font         = UIFont.boldSystemFont(ofSize: 18)
                 self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
-                
                 break
             default:
                 break
