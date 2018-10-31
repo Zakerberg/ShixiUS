@@ -28,6 +28,7 @@ class SX_JobApplyDetailController: SX_BaseController {
     var payBtn: UIButton? // 支付服务预定金
     var cancelBtn: UIButton? // 取消订单
     var number: String?
+    var statusBtn: UIButton? // 状态(申请退款Btn)
     
     var jobApplyDetail = JSON()
     var applyStatus:String?
@@ -84,11 +85,13 @@ extension SX_JobApplyDetailController {
 extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if self.applyStatus == "0" {
+            return 2
+        }
         return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if section == 2 {
             return 5
         }
@@ -127,7 +130,8 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             cell.employmentNature?.text             = model["nature"].string ?? "正式(测试)"
             
             return cell
-        } else {
+        }else{
+            
             let cell = UITableViewCell(style: .subtitle, reuseIdentifier: detailCellID)
             cell.backgroundColor  = UIColor.white
             cell.selectionStyle   = .none
@@ -153,7 +157,7 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
                 cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
                 
-                self.detailPriceLabel?.text         = "$500.00"
+                self.detailPriceLabel?.text         = "¥500.00"
                 self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
                 self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "333333", alpha: 1)
                 
@@ -163,7 +167,7 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
                 cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
                 
-                self.detailPriceLabel?.text         = "$100.00"
+                self.detailPriceLabel?.text         = "¥100.00"
                 self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
                 self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "333333", alpha: 1)
                 
@@ -172,6 +176,12 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 cell.textLabel?.text                = "状态"
                 cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
                 cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                
+                self.statusBtn = UIButton(type: .custom).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                    
+                }).config({ (STATUSBTN) in
+                    
+                })
                 
                 self.detailPriceLabel?.text         = "未支付"
                 self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
@@ -183,9 +193,9 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
                 cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
                 
-                self.detailPriceLabel?.text         = "$100.00"
+                self.detailPriceLabel?.text         = "¥100.00"
                 self.detailPriceLabel?.font         = UIFont.boldSystemFont(ofSize: 18)
-                self.detailPriceLabel?.textColor     = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
+                self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
                 
                 break
             default:
