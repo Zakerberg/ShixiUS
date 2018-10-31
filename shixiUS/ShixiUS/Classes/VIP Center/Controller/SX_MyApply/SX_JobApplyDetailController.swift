@@ -178,9 +178,15 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
                 
                 self.statusBtn = UIButton(type: .custom).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
-                    
+                    make.centerY.equalToSuperview()
+                    make.height.equalTo(30.FloatValue.IPAD_XValue)
+                    make.right.equalToSuperview().offset(-Margin)
                 }).config({ (STATUSBTN) in
-                    
+                    STATUSBTN.backgroundColor       = UIColor.SX_MainColor()
+                    STATUSBTN.titleLabel?.font      = UIFont.boldSystemFont(ofSize: 12)
+                    STATUSBTN.setTitle((model["steps"].string ?? ""), for: .normal)
+                    STATUSBTN.setTitleColor(UIColor.white, for: .normal)
+                    STATUSBTN.isHidden              = true
                 })
                 
                 self.detailPriceLabel?.text         = "未支付"
