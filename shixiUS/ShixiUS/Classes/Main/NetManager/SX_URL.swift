@@ -88,7 +88,7 @@ let SX_MyApplyTrain           = SHIXIUS + "/myapply/train?"
 let SX_MyApplyTraining        = SHIXIUS + "/myapply/training?"
 
 /// 申请详情(就业岗位) (get)
-let SX_ApplyJobDetail         = SHIXIUS + "/myapply/jobdetail"
+let SX_ApplyJobDetail         = SHIXIUS + "/myapply/jobdetail?"
 
 /// 申请详情(实训项目) (get)
 let SX_ApplyTraininigDetail   = SHIXIUS + "/myapply/trainingdetail"

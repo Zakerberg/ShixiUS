@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 8/8/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  就业岗位申请详情界面
+//  申请详情 --> (就业岗位)
 
 /*
  听过最撩人的一句话:
@@ -66,10 +66,13 @@ extension SX_JobApplyDetailController {
     
     func fetchData() {
         
-        SX_NetManager.requestData(type: .GET, URlString: (SX_ApplyJobDetail + self.number!), parameters:  nil, finishCallBack: { (result) in
+        let url = SX_ApplyJobDetail + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number!)"
+        
+        SX_NetManager.requestData(type: .GET, URlString: url, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
                 
+
 
             } catch{ }
         })

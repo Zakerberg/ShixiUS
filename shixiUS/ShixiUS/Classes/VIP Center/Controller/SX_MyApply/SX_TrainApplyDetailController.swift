@@ -2,9 +2,13 @@
 //  SX_TrainApplyDetailController.swift
 //  ShixiUS
 //
-//  Created by heather on 2018/10/30.
+//  Created by Michael 柏 on 2018/10/30.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  
+//  申请详情 --> (培训认证)
+
+/*
+ 
+ */
 
 import UIKit
 

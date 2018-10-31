@@ -32,6 +32,7 @@ class SX_MineVocationalTrainingController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate                     = self
         tableView.dataSource                   = self
+        tableView.separatorStyle               = .none
         
         return tableView
     }()
@@ -161,7 +162,7 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.FloatValue.IPAD_XValue
+        return CGFloat.leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -169,9 +170,13 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        SXLog("进入职业培训的申请详情")
-//        let vc = SX_ApplyDetailController()
-//        self.navigationController?.pushViewController(vc, animated: true)
+        SXLog("进入就业岗位的申请详情")
+//        let model = jobApplyArr[indexPath.section]
+        self.hidesBottomBarWhenPushed = true
+        let vc    = SX_TrainApplyDetailController()
+//        vc.number = model.id
+        self.navigationController?.pushViewController(vc, animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
 }
 
