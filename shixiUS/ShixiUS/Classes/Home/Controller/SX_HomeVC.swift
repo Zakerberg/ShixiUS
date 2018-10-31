@@ -379,7 +379,6 @@
                             self.navigationController?.pushViewController(vc, animated: true)
                             self.hidesBottomBarWhenPushed = false
                         }
-                        
                     }, onError: { (error) in
                         SXLog(error)
                     }, onCompleted: nil, onDisposed: nil)

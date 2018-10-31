@@ -249,7 +249,7 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
         let model = jobApplyArr[indexPath.section]
         self.hidesBottomBarWhenPushed = true
         let vc    = SX_JobApplyDetailController()
-        vc.number = model.id
+        vc.number = model.number
         self.navigationController?.pushViewController(vc, animated: true)
         self.hidesBottomBarWhenPushed = false
     }

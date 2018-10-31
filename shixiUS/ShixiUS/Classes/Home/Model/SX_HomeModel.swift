@@ -849,7 +849,7 @@ struct SX_JobApplyDetailModel {
     var deposit:String?
     var addtime:String?
     var orderid:String?
-    
+
     init(jsonData:JSON) {
         id              = jsonData["id"].string
         steps           = jsonData["steps"].string
@@ -867,19 +867,19 @@ struct SX_JobApplyDetailModel {
 }
 
 /// 申请详情 ---> (实训项目)
-struct SX_TrainingApplyDetailModel {
-    
-    var id:String?
-    
-    
-    
-}
+//struct SX_TrainingApplyDetailModel {
+//
+//    var id:String?
+//
+//
+//
+//}
 
 /// 申请详情 ---> (职业培训)
-struct SX_TrainApplyDetailModel {
-    
-    
-}
+//struct SX_TrainApplyDetailModel {
+//
+//
+//}
 
 // ===================================================================++++++++++++++++++++++++++++
 // MARK: -  我的界面

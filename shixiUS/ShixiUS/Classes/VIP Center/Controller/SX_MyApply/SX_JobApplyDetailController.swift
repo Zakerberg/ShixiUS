@@ -29,8 +29,9 @@ class SX_JobApplyDetailController: SX_BaseController {
     var cancelBtn: UIButton? // 取消订单
     var number: String?
     
-    var jobAppDetailModelArr = [SX_JobApplyDetailModel]()
-    
+    var jobApplyDetail = JSON()
+    var applyStatus:String?
+
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor = UIColor.SX_BackGroundColor()
@@ -43,8 +44,8 @@ class SX_JobApplyDetailController: SX_BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
         fetchData()
+        setUI()
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,16 +66,14 @@ extension SX_JobApplyDetailController {
     }
     
     func fetchData() {
-        
         let url = SX_ApplyJobDetail + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number!)"
-        
         SX_NetManager.requestData(type: .GET, URlString: url, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
-                
-
-
+                self.jobApplyDetail = JSON(arrayLiteral: json["data"].dictionary ?? [:])
+                self.applyStatus    = json["data"]["status"].string ?? ""
             } catch{ }
+            self.table.reloadData()
         })
     }
 }
@@ -99,13 +98,14 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = SX_ApplyProgressCell(style: .default, reuseIdentifier: nil)
+            let model = self.jobApplyDetail[indexPath.section]
+            let cell  = SX_ApplyProgressCell(style: .default, reuseIdentifier: nil)
             cell.accessoryType             = .disclosureIndicator
             cell.selectionStyle            = .none
             cell.progressNormalBgView?.isHidden = false
             cell.progressBgView?.isHidden  = true  // 1
-            cell.progressStatus?.text      = "等待客服联系这是测试的数据为了显示换行,确实要换行啊,还要多少字?换行了吧!"
-            cell.progressTime?.text        = "2018-07-10 20:55:00"
+            cell.progressStep?.text        = model["steps"].string ?? "测试进度标题"
+            cell.progressStatus?.text      = model["stepsCn"].string ?? "测试申请进度测试"
             cell.progressRejected?.text    = "退款申请被驳回,有问题联系客服" // 1
             
             return cell
@@ -195,7 +195,6 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
         
         if section == 2 {
             let view = UIView()
-            
             self.payBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
                 make.top.equalToSuperview().offset(Margin)
                 make.left.equalToSuperview().offset(Margin)
@@ -231,7 +230,6 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
             })
-            
             return view
         }
         return UIView()
@@ -242,14 +240,20 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+        let model = self.jobApplyDetail[indexPath.section]
         if indexPath.section == 0 {
-            
-            return UILabel.SX_getSpaceLabelHeight("等待客服联系这是测试的数据为了显示换行,确实要换行啊,还要多少字?换行了吧!", font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 80
+            return UILabel.SX_getSpaceLabelHeight((model["stepsCn"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
         } else if indexPath.section == 1{
             return 80.FloatValue.IPAD_XValue
         }
         
+        return 45.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 300.FloatValue.IPAD_XValue
+        }
         return 45.FloatValue.IPAD_XValue
     }
     
@@ -261,7 +265,7 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5.FloatValue.IPAD_XValue
+        return CGFloat.leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
