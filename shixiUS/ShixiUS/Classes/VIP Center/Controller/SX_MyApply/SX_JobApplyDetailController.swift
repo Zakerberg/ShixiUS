@@ -31,7 +31,7 @@ class SX_JobApplyDetailController: SX_BaseController {
     
     var jobApplyDetail = JSON()
     var applyStatus:String?
-
+    
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor = UIColor.SX_BackGroundColor()
@@ -96,37 +96,41 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let model = self.jobApplyDetail[indexPath.row]
         if indexPath.section == 0 {
-            let model = self.jobApplyDetail[indexPath.section]
             let cell  = SX_ApplyProgressCell(style: .default, reuseIdentifier: nil)
-            cell.accessoryType             = .disclosureIndicator
-            cell.selectionStyle            = .none
-            cell.progressNormalBgView?.isHidden = false
-            cell.progressBgView?.isHidden  = true  // 1
-            cell.progressStep?.text        = model["steps"].string ?? "测试进度标题"
-            cell.progressStatus?.text      = model["stepsCn"].string ?? "测试申请进度测试"
-            cell.progressRejected?.text    = "退款申请被驳回,有问题联系客服" // 1
+            cell.selectionStyle                     = .none
             
+            if self.applyStatus == "7" { // 订单已经取消
+                cell.progressNormalBgView?.isHidden = true
+                cell.progressBgView?.isHidden       = false
+                cell.progressBtn?.isHidden          = true
+                cell.progressRejected?.text         = model["steps"].string ?? "测试订单取消"
+            }else {
+                cell.accessoryType                  = .disclosureIndicator
+                cell.progressNormalBgView?.isHidden = false
+                cell.progressBgView?.isHidden       = true
+                cell.progressStep?.text             = model["steps"].string ?? "测试进度标题"
+                cell.progressStatus?.text           = model["stepsCn"].string ?? "测试申请进度测试"
+            }
             return cell
-            
         } else if indexPath.section == 1 {
             
             let cell = SX_EmploymentJobsCell(style: .default, reuseIdentifier: applyDetailCellID)
-            cell.backgroundColor           = UIColor.white
-            cell.selectionStyle            = .none
-            cell.lineView?.isHidden        = true
+            cell.backgroundColor                    = UIColor.white
+            cell.selectionStyle                     = .none
+            cell.lineView?.isHidden                 = true
             
-            cell.employmentTitle?.text     = "美国金融实习岗位-信托和过桥基金业务"
-            cell.employmentDate?.text      = "2018.03.03"
-            cell.employmentAddress?.text   = "美国/纽约"
-            cell.employmentNature?.text    = "正式"
+            cell.employmentTitle?.text              = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
+            cell.employmentDate?.text               = model["addtime"].string ?? "2018.03.03(测试)"
+            cell.employmentAddress?.text            = model["address"].string ?? "美国/纽约(测试)"
+            cell.employmentNature?.text             = model["nature"].string ?? "正式(测试)"
             
             return cell
         } else {
-            
             let cell = UITableViewCell(style: .subtitle, reuseIdentifier: detailCellID)
-            cell.backgroundColor = UIColor.white
+            cell.backgroundColor  = UIColor.white
+            cell.selectionStyle   = .none
             
             self.detailPriceLabel = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.centerY.equalToSuperview()
@@ -138,50 +142,50 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             
             switch indexPath.row {
             case 0:
-                cell.textLabel?.text                   = "美国金融实习岗位"
-                cell.textLabel?.font                   = UIFont.systemFont(ofSize: 16)
-                cell.textLabel?.textColor              = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+                cell.textLabel?.text                = "美国金融实习岗位"
+                cell.textLabel?.font                = UIFont.systemFont(ofSize: 16)
+                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
                 
                 break
                 
             case 1:
-                cell.textLabel?.text                   = "服务费用总额"
-                cell.textLabel?.font                   = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor              = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                cell.textLabel?.text                = "服务费用总额"
+                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
+                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
                 
-                self.detailPriceLabel?.text            = "$500.00"
-                self.detailPriceLabel?.font            = UIFont.systemFont(ofSize: 14)
-                self.detailPriceLabel?.textColor       = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+                self.detailPriceLabel?.text         = "$500.00"
+                self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
+                self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "333333", alpha: 1)
                 
                 break
             case 2:
-                cell.textLabel?.text                   = "预定金"
-                cell.textLabel?.font                   = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor              = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                cell.textLabel?.text                = "预定金"
+                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
+                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
                 
-                self.detailPriceLabel?.text            = "$100.00"
-                self.detailPriceLabel?.font            = UIFont.systemFont(ofSize: 14)
-                self.detailPriceLabel?.textColor       = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+                self.detailPriceLabel?.text         = "$100.00"
+                self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
+                self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "333333", alpha: 1)
                 
                 break
             case 3:
-                cell.textLabel?.text                   = "状态"
-                cell.textLabel?.font                   = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor              = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                cell.textLabel?.text                = "状态"
+                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
+                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
                 
-                self.detailPriceLabel?.text            = "未支付"
-                self.detailPriceLabel?.font            = UIFont.systemFont(ofSize: 14)
-                self.detailPriceLabel?.textColor       = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+                self.detailPriceLabel?.text         = "未支付"
+                self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
+                self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "333333", alpha: 1)
                 
                 break
             case 4:
-                cell.textLabel?.text                   = "应付定金"
-                cell.textLabel?.font                   = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor              = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+                cell.textLabel?.text                = "应付定金"
+                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
+                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
                 
-                self.detailPriceLabel?.text            = "$100.00"
-                self.detailPriceLabel?.font            = UIFont.boldSystemFont(ofSize: 18)
-                self.detailPriceLabel?.textColor       = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
+                self.detailPriceLabel?.text         = "$100.00"
+                self.detailPriceLabel?.font         = UIFont.boldSystemFont(ofSize: 18)
+                self.detailPriceLabel?.textColor     = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
                 
                 break
             default:
@@ -242,11 +246,14 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let model = self.jobApplyDetail[indexPath.section]
         if indexPath.section == 0 {
-            return UILabel.SX_getSpaceLabelHeight((model["stepsCn"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
+            if self.applyStatus == "7" { // 订单已经取消
+                return 100.FloatValue.IPAD_XValue
+            }else{
+                return UILabel.SX_getSpaceLabelHeight((model["stepsCn"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
+            }
         } else if indexPath.section == 1{
-            return 80.FloatValue.IPAD_XValue
+            return 70.FloatValue.IPAD_XValue
         }
-        
         return 45.FloatValue.IPAD_XValue
     }
     

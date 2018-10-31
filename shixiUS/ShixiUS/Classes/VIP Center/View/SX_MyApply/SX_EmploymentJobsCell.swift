@@ -112,7 +112,7 @@ extension SX_EmploymentJobsCell {
             DATE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
-        self.lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.employmentAddress!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(addressImage)
             make.right.equalTo(self.employmentDate!)
@@ -121,7 +121,7 @@ extension SX_EmploymentJobsCell {
             LINE.backgroundColor = UIColor.SX_LineColor()
         })
         
-// -------------------------------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------
         
         self.employmentStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(lineView!.snp.bottom).offset(Margin)
@@ -148,7 +148,7 @@ extension SX_EmploymentJobsCell {
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)
         }).config({ (NOTIBTN) in
-
+            
         })
         
         self.employmentPay = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -157,7 +157,7 @@ extension SX_EmploymentJobsCell {
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)
         }).config({ (PAY) in
-
+            
         })
     }
 }

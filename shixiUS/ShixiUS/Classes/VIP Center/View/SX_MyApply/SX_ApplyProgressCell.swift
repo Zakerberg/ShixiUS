@@ -121,11 +121,11 @@ extension SX_ApplyProgressCell {
         /// 驳回!
         self.progressRejected = UILabel().addhere(toSuperView: self.progressBgView!).layout(snapKitMaker: { (make) in
             make.center.equalToSuperview()
-            make.height.equalTo(17)
+            make.height.equalTo(20)
         }).config({ (REJECTED) in
             REJECTED.sizeToFit()
             REJECTED.textColor = UIColor.red
-            REJECTED.font      = UIFont.boldSystemFont(ofSize: 16)
+            REJECTED.font      = UIFont.boldSystemFont(ofSize: 18)
         })
     }
 }
