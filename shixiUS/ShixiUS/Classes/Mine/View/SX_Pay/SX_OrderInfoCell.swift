@@ -101,7 +101,7 @@ extension SX_OrderInfoCell {
             ORDERDATE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
     
-// ----------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------
         
         let line1 = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.orderStatus!.snp.bottom).offset(12)

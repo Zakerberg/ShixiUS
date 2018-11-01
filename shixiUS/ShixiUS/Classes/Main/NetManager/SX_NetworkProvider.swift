@@ -95,7 +95,6 @@ public class SX_NetworkProvider {
         }
     }
     
-    
     /// 设置一个公共请求超时时间
     private func requestTimeoutClosure<T:TargetType>(target:T) -> MoyaProvider<T>.RequestClosure{
         let requestTimeoutClosure = { (endpoint:Endpoint, done: @escaping MoyaProvider<T>.RequestResultClosure) in

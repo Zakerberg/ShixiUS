@@ -56,9 +56,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         super.setSelected(selected, animated: animated)
     }
     
-// ===============================================================================
-// MARK: - UICollectionViewDelegate
-// ===============================================================================
+    // ===============================================================================
+    // MARK: - UICollectionViewDelegate
+    // ===============================================================================
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.trainModels?.count ?? self.trainingModels?.count ?? 2
     }
@@ -89,9 +89,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         }else if indexPath.section == 0 && indexPath.row == 3 {
             index = 3
         }
-    
+        
         if let trainModels = trainModels, trainModels.count >= 4 {
-          
+            
             let model = trainModels[index]
             cell.certificateLabel?.text = model.category
             if let url = URL(string: model.image ?? ""){
@@ -106,7 +106,7 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
         if let trainingModels = trainingModels, trainingModels.count >= 4 {
             let model = trainingModels[index]
-
+            
             if let url = URL(string: model.image ?? ""){
                 cell.sourceImageView?.kf.setImage(with: url)
             }else{
@@ -131,9 +131,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         
     }
     
-// ===============================================================================
-// MARK: - UICollectionViewDelegateFlowLayout
-// ===============================================================================
+    // ===============================================================================
+    // MARK: - UICollectionViewDelegateFlowLayout
+    // ===============================================================================
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
     }
@@ -142,9 +142,9 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
     
-// ===============================================================================
-// MARK: - configCell
-// ===============================================================================
+    // ===============================================================================
+    // MARK: - configCell
+    // ===============================================================================
     func configCell()  {
         
         self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
