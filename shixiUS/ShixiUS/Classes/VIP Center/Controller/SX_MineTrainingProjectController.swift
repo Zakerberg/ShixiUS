@@ -52,9 +52,9 @@ class SX_MineTrainingProjectController: UIViewController {
     }
 }
 
-// ============================================================================================
+// ==============================================================================
 // MARK: - Other Method
-// ============================================================================================
+// ==============================================================================
 extension SX_MineTrainingProjectController {
     
     func setUI() {
@@ -95,9 +95,9 @@ extension SX_MineTrainingProjectController {
     }
 }
 
-// ============================================================================================
+// ==============================================================================
 // MARK: - UITableViewDelegate
-// ============================================================================================
+// ==============================================================================
 extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -180,10 +180,10 @@ extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SXLog("进入实训项目的申请详情")
         
-//        let model = jobApplyArr[indexPath.section]
+        //        let model = jobApplyArr[indexPath.section]
         self.hidesBottomBarWhenPushed = true
         let vc    = SX_TrainingApplyDetailController()
-//        vc.number = model.id
+        //        vc.number = model.id
         self.navigationController?.pushViewController(vc, animated: true)
         self.hidesBottomBarWhenPushed = false
     }

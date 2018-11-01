@@ -46,9 +46,9 @@ class SX_MinePersonalController: UIViewController {
     }
 }
 
-// =============================================================================================
+// ==============================================================================
 // MARK: - Other method
-// ============================================================================================
+// ==============================================================================
 extension SX_MinePersonalController {
     
     func setUI() {
@@ -75,9 +75,9 @@ extension SX_MinePersonalController {
     }
 }
 
-// =============================================================================================
+// ==============================================================================
 // MARK: - UITableViewDelegate
-// =============================================================================================
+// ==============================================================================
 extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -164,27 +164,27 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-// =============================================================================================
+// ==============================================================================
 // MARK: - Other Method
-// =============================================================================================
+// ==============================================================================
 extension SX_MinePersonalController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.saveBtn?.resignFirstResponder()
     }
 }
 
-// =============================================================================================
+// ==============================================================================
 // MARK: - UINavigationControllerDelegate
-// =============================================================================================
+// ==============================================================================
 extension SX_MinePersonalController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
     }
 }
 
-// =============================================================================================
+// ==============================================================================
 // MARK: - UIActionSheetDelegate
-// =============================================================================================
+// ==============================================================================
 extension SX_MinePersonalController: UIAlertViewDelegate {
     
     @objc func alterHeadPortrait() {

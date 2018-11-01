@@ -118,7 +118,6 @@ extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableVie
         cell.employmentPay?.isHidden     = true
         cell.employmentPay?.isHidden     = true
         
-        
         cell.employmentNotiBtn?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 14)
         cell.employmentNotiBtn?.titleLabel?.textAlignment = .center
         cell.employmentNotiBtn?.setTitle("立即申请", for: .normal)

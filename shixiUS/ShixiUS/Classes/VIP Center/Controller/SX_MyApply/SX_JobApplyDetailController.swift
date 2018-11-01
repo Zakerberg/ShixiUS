@@ -294,4 +294,3 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
         }
     }
 }
-
