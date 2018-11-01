@@ -1,17 +1,18 @@
 //
-//  SX_ApplyMessageCell.swift
+//  SX_ApplyDetailMessageCell.swift
 //  ShixiUS
 //
-//  Created by Michael 柏 on 2018/9/7.
-//  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  申请表里面的其他填写的信息
+//  Created by Michael 柏 on 2018/11/1.
+//  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
+//  
 
 import UIKit
 
-class SX_ApplyMessageCell: UITableViewCell {
+class SX_ApplyDetailMessageCell: UITableViewCell {
     
     var title: UILabel?
-    var TF: UITextField?
+    var depositBtn: UIButton?
+    var price: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +38,7 @@ class SX_ApplyMessageCell: UITableViewCell {
 // ========================================================================
 // MARK: - ConfigCell
 // ========================================================================
-extension SX_ApplyMessageCell {
+extension SX_ApplyDetailMessageCell {
     
     func ConfigCell() {
         self.title = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
@@ -47,16 +48,21 @@ extension SX_ApplyMessageCell {
         }).config({ (TITLE) in
             TITLE.sizeToFit()
             TITLE.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-            TITLE.font = UIFont.systemFont(ofSize: 14)
+            TITLE.font      = UIFont.systemFont(ofSize: 14)
         })
-
-        self.TF = UITextField().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.centerY.top.equalTo(self.title!)
-            make.left.equalTo(self.title!.snp.right).offset(Margin)
-        }).config({ (TF) in
-           TF.sizeToFit()
-            
+        
+        self.depositBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.height.centerY.equalTo(self.title!)
+            make.right.equalToSuperview().offset(-Margin)
+        }).config({ (DEPOSIT) in
+            DEPOSIT.sizeToFit()
+        })
+        
+        self.price = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.height.centerY.equalTo(self.title!)
+            make.right.equalToSuperview().offset(-Margin)
+        }).config({ (PRICE) in
+            PRICE.sizeToFit()
         })
     }
 }
-

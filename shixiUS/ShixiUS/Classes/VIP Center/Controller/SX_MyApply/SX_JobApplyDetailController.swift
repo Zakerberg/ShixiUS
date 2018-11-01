@@ -74,7 +74,6 @@ extension SX_JobApplyDetailController {
                 let json = try JSON(data: result)
                 self.jobApplyDetail = JSON(arrayLiteral: json["data"].dictionary ?? [:])
                 self.applyStatus    = json["data"]["status"].string ?? ""
-                
             } catch{ }
             
             self.table.reloadData()
@@ -132,6 +131,9 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             cell.backgroundColor                    = UIColor.white
             cell.selectionStyle                     = .none
             cell.lineView?.isHidden                 = true
+            cell.employmentDetail?.isHidden         = true
+            cell.employmentNotiBtn?.isHidden        = true
+            cell.employmentPay?.isHidden            = true
             
             cell.employmentTitle?.text              = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
             cell.employmentDate?.text               = model["addtime"].string ?? "2018.03.03(测试)"
@@ -140,19 +142,10 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             
             return cell
         }else if indexPath.section == 2 {
-            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: detailCellID)
+            
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             cell.backgroundColor  = UIColor.white
             cell.selectionStyle   = .none
-           
-            if indexPath.row == 0{
-                cell.textLabel?.text  = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
-                cell.textLabel?.font                = UIFont.systemFont(ofSize: 16)
-                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-            }else{
-                cell.textLabel?.text = self.sectionArr[indexPath.row]
-                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
-            }
             
             _ = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.centerY.equalToSuperview()
@@ -162,24 +155,19 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 PRICE.sizeToFit()
                 PRICE.font      = UIFont.systemFont(ofSize: 14)
                 PRICE.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-                switch indexPath.row {
-                case 1:
-                    PRICE.text = "¥" + (model["serviceMoney"].string ?? "11.11(测试)")
-                    break
-                case 2:
-                    PRICE.text = "¥" + (model["deposit"].string ?? "11.11(测试)")
-                    break
-                case 3:
-                    PRICE.text = (model["steps"].string ?? "测试状态")
-                    break
-                case 4:
-                    PRICE.text = "¥" + (model["deposit"].string ?? "11.11(测试)")
-                    break
-                default:
-                    break
-                }
             })
-            return cell
+
+            if indexPath.row == 0{
+                cell.textLabel?.text = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
+                cell.textLabel?.font                = UIFont.systemFont(ofSize: 16)
+                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+                return cell
+            }else{
+                cell.textLabel?.text = self.sectionArr[indexPath.row]
+                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
+                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                return  cell
+            }
         }
         return UITableViewCell()
     }
@@ -205,10 +193,6 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 }
                 PAY.rx.tap.subscribe(onNext: { (_) in
                     SXLog("支付服务预定金 +++ + ")
-                    
-                    
-                    
-                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
