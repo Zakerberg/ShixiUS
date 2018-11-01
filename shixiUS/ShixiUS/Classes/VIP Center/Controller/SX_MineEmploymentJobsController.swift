@@ -17,7 +17,7 @@ import MBProgressHUD
 
 let employCellID = "employCellID"
 
-class SX_MineEmploymentJobsController: UIViewController {
+class SX_MineEmploymentJobsController: SX_BaseController {
     
     var noDataView: SX_NoDataView?
     var jobApplyArr = [SX_JobApplyModel]()

@@ -24,7 +24,6 @@ let detailCellID      = "detailCellID"
 
 class SX_JobApplyDetailController: SX_BaseController {
     
-    var detailPriceLabel: UILabel?  // 价格
     var payBtn: UIButton? // 支付服务预定金
     var cancelBtn: UIButton? // 取消订单
     var number: String?
@@ -32,6 +31,7 @@ class SX_JobApplyDetailController: SX_BaseController {
     
     var jobApplyDetail = JSON()
     var applyStatus:String?
+    var sectionArr = ["", "服务费用总额", "预定金", "状态", "应付定金"]
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -47,6 +47,7 @@ class SX_JobApplyDetailController: SX_BaseController {
         super.viewDidLoad()
         fetchData()
         setUI()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,8 +74,11 @@ extension SX_JobApplyDetailController {
                 let json = try JSON(data: result)
                 self.jobApplyDetail = JSON(arrayLiteral: json["data"].dictionary ?? [:])
                 self.applyStatus    = json["data"]["status"].string ?? ""
+                
             } catch{ }
+            
             self.table.reloadData()
+            self.hideLoadingView()
         })
     }
 }
@@ -93,13 +97,18 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 2 {
-            return 5
+            if self.applyStatus == "7" {
+                return 4
+            }else{
+                return 5
+            }
         }
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = self.jobApplyDetail[indexPath.row]
+        
         if indexPath.section == 0 {
             let cell  = SX_ApplyProgressCell(style: .default, reuseIdentifier: nil)
             cell.selectionStyle                     = .none
@@ -130,82 +139,49 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             cell.employmentNature?.text             = model["nature"].string ?? "正式(测试)"
             
             return cell
-        }else{
-            
+        }else if indexPath.section == 2 {
             let cell = UITableViewCell(style: .subtitle, reuseIdentifier: detailCellID)
             cell.backgroundColor  = UIColor.white
             cell.selectionStyle   = .none
+           
+            if indexPath.row == 0{
+                cell.textLabel?.text  = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
+                cell.textLabel?.font                = UIFont.systemFont(ofSize: 16)
+                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            }else{
+                cell.textLabel?.text = self.sectionArr[indexPath.row]
+                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
+                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            }
             
-            self.detailPriceLabel = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+            _ = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
                 make.centerY.equalToSuperview()
                 make.height.equalTo(20.FloatValue.IPAD_XValue)
                 make.right.equalToSuperview().offset(-Margin)
             }).config({ (PRICE) in
                 PRICE.sizeToFit()
+                PRICE.font      = UIFont.systemFont(ofSize: 14)
+                PRICE.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+                switch indexPath.row {
+                case 1:
+                    PRICE.text = "¥" + (model["serviceMoney"].string ?? "11.11(测试)")
+                    break
+                case 2:
+                    PRICE.text = "¥" + (model["deposit"].string ?? "11.11(测试)")
+                    break
+                case 3:
+                    PRICE.text = (model["steps"].string ?? "测试状态")
+                    break
+                case 4:
+                    PRICE.text = "¥" + (model["deposit"].string ?? "11.11(测试)")
+                    break
+                default:
+                    break
+                }
             })
-            
-            switch indexPath.row {
-            case 0:
-                cell.textLabel?.text                = "美国金融实习岗位"
-                cell.textLabel?.font                = UIFont.systemFont(ofSize: 16)
-                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-                
-                break
-                
-            case 1:
-                cell.textLabel?.text                = "服务费用总额"
-                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
-                
-                self.detailPriceLabel?.text         = "¥500.00"
-                self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
-                self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-                
-                break
-            case 2:
-                cell.textLabel?.text                = "预定金"
-                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
-                
-                self.detailPriceLabel?.text         = "¥100.00"
-                self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
-                self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-                
-                break
-            case 3:
-                cell.textLabel?.text                = "状态"
-                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
-                
-                self.statusBtn = UIButton(type: .custom).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
-                    make.centerY.equalToSuperview()
-                    make.height.equalTo(30.FloatValue.IPAD_XValue)
-                    make.right.equalToSuperview().offset(-Margin)
-                }).config({ (STATUSBTN) in
-                    STATUSBTN.backgroundColor       = UIColor.SX_MainColor()
-                    STATUSBTN.titleLabel?.font      = UIFont.boldSystemFont(ofSize: 12)
-                    STATUSBTN.setTitle((model["steps"].string ?? ""), for: .normal)
-                    STATUSBTN.setTitleColor(UIColor.white, for: .normal)
-                    STATUSBTN.isHidden              = true
-                })
-                self.detailPriceLabel?.text         = "未支付"
-                self.detailPriceLabel?.font         = UIFont.systemFont(ofSize: 14)
-                self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-                
-                break
-            case 4:
-                cell.textLabel?.text                = "应付定金"
-                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-                self.detailPriceLabel?.text         = "¥100.00"
-                self.detailPriceLabel?.font         = UIFont.boldSystemFont(ofSize: 18)
-                self.detailPriceLabel?.textColor    = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
-                break
-            default:
-                break
-            }
             return cell
         }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -224,8 +200,15 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 PAY.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
                 PAY.setTitle("支付服务预定金", for: .normal)
                 PAY.setTitleColor(UIColor.white, for: .normal)
+                if self.applyStatus == "7" {
+                    PAY.isHidden    = true
+                }
                 PAY.rx.tap.subscribe(onNext: { (_) in
                     SXLog("支付服务预定金 +++ + ")
+                    
+                    
+                    
+                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
@@ -241,8 +224,13 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 CANCEL.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
                 CANCEL.setTitle("取消订单", for: .normal)
                 CANCEL.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+                if self.applyStatus == "7" {
+                    CANCEL.isHidden    = true
+                }
                 CANCEL.rx.tap.subscribe(onNext: { (_) in
                     SXLog("取消订单 +++ + ")
+                    
+                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
@@ -262,7 +250,7 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             if self.applyStatus == "7" { // 订单已经取消
                 return 100.FloatValue.IPAD_XValue
             }else{
-                return UILabel.SX_getSpaceLabelHeight((model["stepsCn"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 60.FloatValue.IPAD_XValue
+                return UILabel.SX_getSpaceLabelHeight((model["stepsCn"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 80.FloatValue.IPAD_XValue
             }
         } else if indexPath.section == 1{
             return 70.FloatValue.IPAD_XValue
@@ -279,7 +267,11 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 2 {
-            return 120.FloatValue.IPAD_XValue
+            if self.applyStatus == "7" {
+                return 5.FloatValue.IPAD_XValue
+            }else{
+                return 120.FloatValue.IPAD_XValue
+            }
         }
         return 5.FloatValue.IPAD_XValue
     }

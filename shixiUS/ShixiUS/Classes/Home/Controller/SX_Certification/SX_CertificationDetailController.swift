@@ -169,17 +169,6 @@ extension SX_CertificationDetailController {
                     
                     
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }, onError: { (error) in
