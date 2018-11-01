@@ -37,15 +37,19 @@ class SX_JobApplyDetailController: SX_BaseController {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
-        tableView.delegate   = self
-        tableView.dataSource = self
+        tableView.delegate        = self
+        tableView.dataSource      = self
         
         return tableView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
         setUI()
         showLoadingView()
     }
@@ -95,21 +99,22 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 2 {
+        if section == 0 || section == 1 {
+            return 1
+        }else{
             if self.applyStatus == "7" {
                 return 4
             }else{
                 return 5
             }
         }
-        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = self.jobApplyDetail[indexPath.row]
         
         if indexPath.section == 0 {
-            let cell  = SX_ApplyProgressCell(style: .default, reuseIdentifier: nil)
+            let cell  = SX_ApplyProgressCell(style: .default, reuseIdentifier: "ApplyProgressCellID")
             cell.selectionStyle                     = .none
             
             if self.applyStatus == "7" { // 订单已经取消
@@ -141,35 +146,52 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             cell.employmentNature?.text             = model["nature"].string ?? "正式(测试)"
             
             return cell
-        }else if indexPath.section == 2 {
-            
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            cell.backgroundColor  = UIColor.white
-            cell.selectionStyle   = .none
-            
-            _ = UILabel().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
-                make.centerY.equalToSuperview()
-                make.height.equalTo(20.FloatValue.IPAD_XValue)
-                make.right.equalToSuperview().offset(-Margin)
-            }).config({ (PRICE) in
-                PRICE.sizeToFit()
-                PRICE.font      = UIFont.systemFont(ofSize: 14)
-                PRICE.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-            })
-
-            if indexPath.row == 0{
-                cell.textLabel?.text = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
-                cell.textLabel?.font                = UIFont.systemFont(ofSize: 16)
-                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-                return cell
-            }else{
-                cell.textLabel?.text = self.sectionArr[indexPath.row]
-                cell.textLabel?.font                = UIFont.systemFont(ofSize: 14)
-                cell.textLabel?.textColor           = UIColor.colorWithHexString(hex: "999999", alpha: 1)
-                return  cell
-            }
         }
-        return UITableViewCell()
+        
+        
+        let cell = SX_ApplyDetailMessageCell(style: .default, reuseIdentifier: "ApplyDetailMessageCellID")
+        let messModel = self.jobApplyDetail[0]
+        cell.backgroundColor  = UIColor.white
+        cell.selectionStyle   = .none
+        
+        switch indexPath.row {
+        case 1:
+            cell.title?.text      = self.sectionArr[indexPath.row]
+            cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
+            cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            cell.price?.text      =  "¥" + (messModel["serviceMoney"].string ?? "11.11(测试服务费)")
+            break
+        case 2:
+            cell.title?.text      = self.sectionArr[indexPath.row]
+            cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
+            cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            cell.price?.text      = "¥" + (messModel["deposit"].string ?? "11.11(测试)")
+            break
+        case 3:
+            cell.title?.text      = self.sectionArr[indexPath.row]
+            cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
+            cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            if self.applyStatus   == "7" {
+                cell.price?.textColor = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
+            }
+            cell.price?.text      = messModel["steps"].string ?? "测试订单取消"
+            break
+        case 4:
+            cell.title?.text      = self.sectionArr[indexPath.row]
+            cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
+            cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            
+            cell.price?.font      = UIFont.boldSystemFont(ofSize: 18)
+            cell.price?.textColor = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
+            cell.price?.text      = "¥" + (messModel["deposit"].string ?? "11.11(测试)")
+            break
+        default: // 0
+            cell.title?.text      = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
+            cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
+            cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            break
+        }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

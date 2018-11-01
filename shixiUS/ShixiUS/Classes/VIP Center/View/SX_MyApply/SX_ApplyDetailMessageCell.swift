@@ -4,14 +4,14 @@
 //
 //  Created by Michael 柏 on 2018/11/1.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  
+//
 
 import UIKit
 
 class SX_ApplyDetailMessageCell: UITableViewCell {
     
     var title: UILabel?
-    var depositBtn: UIButton?
+//    var depositBtn: UIButton?
     var price: UILabel?
     
     override func awakeFromNib() {
@@ -51,15 +51,16 @@ extension SX_ApplyDetailMessageCell {
             TITLE.font      = UIFont.systemFont(ofSize: 14)
         })
         
-        self.depositBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.height.centerY.equalTo(self.title!)
-            make.right.equalToSuperview().offset(-Margin)
-        }).config({ (DEPOSIT) in
-            DEPOSIT.sizeToFit()
-        })
+//        self.depositBtn = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+//            make.height.centerY.equalTo(self.title!)
+//            make.right.equalToSuperview().offset(-Margin)
+//        }).config({ (DEPOSIT) in
+//            DEPOSIT.sizeToFit()
+//        })
         
         self.price = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.height.centerY.equalTo(self.title!)
+            make.centerY.equalTo(self.title!)
+            make.height.equalTo(20.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
         }).config({ (PRICE) in
             PRICE.sizeToFit()
