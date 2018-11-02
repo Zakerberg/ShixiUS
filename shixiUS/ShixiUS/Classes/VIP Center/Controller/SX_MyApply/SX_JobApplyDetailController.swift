@@ -148,7 +148,6 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             return cell
         }
         
-        
         let cell = SX_ApplyDetailMessageCell(style: .default, reuseIdentifier: "ApplyDetailMessageCellID")
         let messModel = self.jobApplyDetail[0]
         cell.backgroundColor  = UIColor.white
@@ -157,20 +156,20 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
         switch indexPath.row {
         case 1:
             cell.title?.text      = self.sectionArr[indexPath.row]
-            cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
-            cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            cell.title?.font      = UIFont.systemFont(ofSize: 14)
+            cell.title?.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             cell.price?.text      =  "¥" + (messModel["serviceMoney"].string ?? "11.11(测试服务费)")
             break
         case 2:
             cell.title?.text      = self.sectionArr[indexPath.row]
-            cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
-            cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            cell.title?.font      = UIFont.systemFont(ofSize: 14)
+            cell.title?.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             cell.price?.text      = "¥" + (messModel["deposit"].string ?? "11.11(测试)")
             break
         case 3:
             cell.title?.text      = self.sectionArr[indexPath.row]
-            cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
-            cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            cell.title?.font      = UIFont.systemFont(ofSize: 14)
+            cell.title?.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             if self.applyStatus   == "7" {
                 cell.price?.textColor = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
             }
@@ -180,7 +179,6 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             cell.title?.text      = self.sectionArr[indexPath.row]
             cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
             cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-            
             cell.price?.font      = UIFont.boldSystemFont(ofSize: 18)
             cell.price?.textColor = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
             cell.price?.text      = "¥" + (messModel["deposit"].string ?? "11.11(测试)")
