@@ -20,7 +20,6 @@ class SX_TrainingApplyDetailController: SX_BaseController {
     
     var number: String?
     
-    
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor = UIColor.SX_BackGroundColor()

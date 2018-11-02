@@ -77,10 +77,6 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
 
         
         
-        
-        
-        
-        
         return cell
     }
     
