@@ -66,7 +66,7 @@ class SX_JobApplyDetailController: SX_BaseController {
 extension SX_JobApplyDetailController {
     
     func setUI() {
-        title = "申请详情"
+        title = "就业申请详情"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
     }
@@ -150,8 +150,8 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
         
         let cell = SX_ApplyDetailMessageCell(style: .default, reuseIdentifier: "ApplyDetailMessageCellID")
         let messModel = self.jobApplyDetail[0]
-        cell.backgroundColor  = UIColor.white
-        cell.selectionStyle   = .none
+        cell.backgroundColor      = UIColor.white
+        cell.selectionStyle       = .none
         
         switch indexPath.row {
         case 1:
@@ -179,6 +179,7 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             cell.title?.text      = self.sectionArr[indexPath.row]
             cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
             cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            
             cell.price?.font      = UIFont.boldSystemFont(ofSize: 18)
             cell.price?.textColor = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
             cell.price?.text      = "¥" + (messModel["deposit"].string ?? "11.11(测试)")
@@ -208,9 +209,10 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 PAY.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
                 PAY.setTitle("支付服务预定金", for: .normal)
                 PAY.setTitleColor(UIColor.white, for: .normal)
-                if self.applyStatus == "7" {
-                    PAY.isHidden    = true
+                if self.applyStatus == "2" || self.applyStatus == "3" || self.applyStatus == "4" || self.applyStatus == "5" || self.applyStatus == "6" || self.applyStatus == "7" { //对应图34578
+                    PAY.isHidden = true
                 }
+
                 PAY.rx.tap.subscribe(onNext: { (_) in
                     SXLog("支付服务预定金 +++ + ")
                 }, onError: { (error) in
@@ -228,8 +230,10 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 CANCEL.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
                 CANCEL.setTitle("取消订单", for: .normal)
                 CANCEL.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
-                if self.applyStatus == "7" {
-                    CANCEL.isHidden    = true
+                if self.applyStatus == "1" {
+                    CANCEL.isHidden = false
+                }else{
+                    CANCEL.isHidden = true // 对应图1345678
                 }
                 CANCEL.rx.tap.subscribe(onNext: { (_) in
                     SXLog("取消订单 +++ + ")

@@ -49,8 +49,7 @@ class SX_MineVC: UIViewController {
         super.viewWillAppear(animated)
         Noti()
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -298,7 +297,6 @@ extension SX_MineVC: UIImagePickerControllerDelegate, UINavigationControllerDele
         let compressImg = imageWithImageSimple(img as! UIImage, newSize:CGSize(width: 60, height: 60))
         //   transportImgToServer(img: compressImg)
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
