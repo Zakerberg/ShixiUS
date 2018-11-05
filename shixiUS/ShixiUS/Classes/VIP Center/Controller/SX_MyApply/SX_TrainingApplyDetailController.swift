@@ -171,10 +171,10 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
                 make.centerY.equalToSuperview()
                 make.right.equalToSuperview().offset(-Margin)
                 make.height.equalTo(25.FloatValue.IPAD_XValue)
+                make.width.equalTo(60.FloatValue.IPAD_XValue)
             }).config({ (REFUND) in
-                REFUND.sizeToFit()
                 REFUND.setTitle("申请退款(测试)", for: .normal)
-                REFUND.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+                REFUND.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 REFUND.setTitleColor(UIColor.white, for: .normal)
                 REFUND.backgroundColor = UIColor.SX_MainColor()
                 REFUND.rx.tap.subscribe(onNext: { (_) in
