@@ -65,7 +65,6 @@ extension SX_TrainingApplyDetailController{
     }
     
     func fetchData() {
-        
         let url = SX_ApplyTraininigDetail + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number!)"
         SX_NetManager.requestData(type: .GET, URlString: url, parameters:  nil, finishCallBack: { (result) in
             do{
@@ -97,7 +96,6 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
         if indexPath.section == 0 {
             let cell = SX_ApplyProgressCell(style: .default, reuseIdentifier: "applyProgressCellID")
             cell.selectionStyle = .none
-            
             if self.applyStatus == "7" { // 订单已经取消
                 cell.progressNormalBgView?.isHidden = true
                 cell.progressBgView?.isHidden       = false
@@ -127,10 +125,14 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
         }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: "trainApplyDetailCellID")
+     
+        
+        
+        
+        
         
         return cell
     }
-    
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
@@ -138,7 +140,6 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
         }
         return 45.FloatValue.IPAD_XValue
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
@@ -175,12 +176,4 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-}
-
-// ===============================================================================
-// MARK: -
-// ===============================================================================
-extension SX_TrainingApplyDetailController {
-    
-    
 }
