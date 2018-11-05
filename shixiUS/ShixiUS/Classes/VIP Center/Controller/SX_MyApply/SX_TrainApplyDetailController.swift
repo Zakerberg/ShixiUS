@@ -9,7 +9,7 @@
 /*
  我们工作时间做的事,决定我们拥有什么
  我们工作闲暇做的事,决定我们成为哪种人
-            乔治 伊士曼
+ 乔治 伊士曼
  */
 
 import UIKit
@@ -21,7 +21,7 @@ class SX_TrainApplyDetailController: SX_BaseController {
     var number:String?
     var applyStatus:String?
     var trainApplyDetail = JSON()
-
+    
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor = UIColor.SX_BackGroundColor()
@@ -61,8 +61,13 @@ extension SX_TrainApplyDetailController {
     }
     
     func fetchData() {
-        let url = SX_ApplyTraininigDetail + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number!)"
+        let url = ""
         
+        /*
+         状态字段status
+         0:申请成功;1:就业顾问联系;2:支付成功;3:申请退款;4:审核通过
+         5:审核驳回;6:退款完成;7:取消申请
+         */
         SX_NetManager.requestData(type: .GET, URlString: url, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json              = try JSON(data: result)

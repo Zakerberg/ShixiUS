@@ -182,7 +182,7 @@ extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewData
         let model = trainingApplyArr[indexPath.section]
         self.hidesBottomBarWhenPushed = true
         let vc    = SX_TrainingApplyDetailController()
-        vc.number = model.id
+        vc.number = model.number
         self.navigationController?.pushViewController(vc, animated: true)
         self.hidesBottomBarWhenPushed = false
     }

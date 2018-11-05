@@ -73,6 +73,11 @@ extension SX_JobApplyDetailController {
     
     func fetchData() {
         let url = SX_ApplyJobDetail + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number!)"
+        /*
+         状态字段status
+         0:申请成功;1:就业顾问联系;2:应聘成功;3:申请退款;4:审核通过;
+         5:审核驳回;6:退款完成;7:取消申请
+         */
         SX_NetManager.requestData(type: .GET, URlString: url, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
@@ -112,7 +117,6 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = self.jobApplyDetail[indexPath.row]
-        
         if indexPath.section == 0 {
             let cell  = SX_ApplyProgressCell(style: .default, reuseIdentifier: "ApplyProgressCellID")
             cell.selectionStyle                     = .none
@@ -212,7 +216,7 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 if self.applyStatus == "2" || self.applyStatus == "3" || self.applyStatus == "4" || self.applyStatus == "5" || self.applyStatus == "6" || self.applyStatus == "7" { //对应图34578
                     PAY.isHidden = true
                 }
-
+                
                 PAY.rx.tap.subscribe(onNext: { (_) in
                     SXLog("支付服务预定金 +++ + ")
                 }, onError: { (error) in
