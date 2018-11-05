@@ -32,7 +32,7 @@ class SX_MineVC: UIViewController {
     var titleNameLabel: UILabel?
     var logInBtn: UIButton?
     var headPortraitImageView: UIImageView?
-    //    var statusStr = ""
+    var statusStr = ""
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -49,7 +49,7 @@ class SX_MineVC: UIViewController {
         super.viewWillAppear(animated)
         Noti()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -99,20 +99,16 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             
             self.logInBtn?.rx.tap.subscribe(onNext: { (_) in
                 let vc = SX_LoginController()
-               
-                /*
-                 // 闭包回掉在这里!
-                 vc.callBack(closure: { (name, status) in
-                 self.statusStr = status
-                 if self.statusStr == "1" { // 登陆
-                 self.titleNameLabel?.isHidden = false
-                 self.logInBtn?.isHidden       = true
-                 self.quitBtn?.isHidden        = false
-                 self.titleNameLabel?.text     = name
-                 }
-                 })
-                 */
-                
+                // 闭包回掉在这里!
+                vc.callBack(closure: { (name, status) in
+                    self.statusStr = status
+                    if self.statusStr == "1" { // 登陆
+                        self.titleNameLabel?.isHidden = false
+                        self.logInBtn?.isHidden       = true
+                        self.quitBtn?.isHidden        = false
+                        self.titleNameLabel?.text     = name
+                    }
+                })
                 self.present(vc, animated: true, completion: nil)
             }, onError: { (error) in
                 SXLog(error)
@@ -391,5 +387,3 @@ extension SX_MineVC {
         self.present(alertController, animated: true, completion: nil)
     }
 }
-
-

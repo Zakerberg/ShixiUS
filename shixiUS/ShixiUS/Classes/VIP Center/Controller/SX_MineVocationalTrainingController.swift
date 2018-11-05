@@ -171,10 +171,10 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SXLog("进入就业岗位的申请详情")
-//        let model = jobApplyArr[indexPath.section]
+        let model = trainApplyArr[indexPath.section]
         self.hidesBottomBarWhenPushed = true
         let vc    = SX_TrainApplyDetailController()
-//        vc.number = model.id
+        vc.number = model.id
         self.navigationController?.pushViewController(vc, animated: true)
         self.hidesBottomBarWhenPushed = false
     }

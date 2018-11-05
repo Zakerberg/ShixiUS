@@ -16,19 +16,18 @@ import UIKit
 
 class SX_MyApplyTrainingProjectCell: UITableViewCell {
     
-    var projectTitle        : UILabel?
-    var projectAddress      : UILabel?
-    var projectTime         : UILabel?
-    var projectDate         : UILabel?
-    var projectStyle        : UILabel?
-    
+    var projectTitle: UILabel?
+    var projectAddress: UILabel?
+    var projectTime: UILabel?
+    var projectDate: UILabel?
+    var projectStyle: UILabel?
+    var lineView: UIView?
     /// 等待客服联系
-    var projectContact      : UILabel?
-    
+    var projectContact: UILabel?
     /// 取消申请
-    var projectCancel       : SX_UnderlineBtn?
+    var projectCancel: SX_UnderlineBtn?
     /// 支付 && 退款
-    var projectPayAndRefund : UIButton?
+    var projectPayAndRefund: UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -108,7 +107,7 @@ extension SX_MyApplyTrainingProjectCell {
             DATE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
 
-        let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.projectAddress!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(addressImage)
             make.right.equalTo(self.projectDate!)
@@ -117,10 +116,9 @@ extension SX_MyApplyTrainingProjectCell {
             LINE.backgroundColor = UIColor.SX_LineColor()
         })
         
-// ---------------------------------------------------------------------------------------------------------------------------
-        
+// -------------------------------------------------------------------
         self.projectStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(Margin)
+            make.top.equalTo(self.lineView!.snp.bottom).offset(Margin)
             make.left.equalTo(self.projectTitle!)
             make.height.equalTo(13)
         }).config({ (STYLE) in
@@ -130,7 +128,7 @@ extension SX_MyApplyTrainingProjectCell {
         })
 
         self.projectContact = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.top.equalTo(self.lineView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(13)
         }).config({ (CONTACT) in
@@ -140,7 +138,7 @@ extension SX_MyApplyTrainingProjectCell {
         })
 
         self.projectCancel = SX_UnderlineBtn(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.top.equalTo(self.lineView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)
@@ -149,7 +147,7 @@ extension SX_MyApplyTrainingProjectCell {
         })
 
         self.projectPayAndRefund = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.top.equalTo(self.lineView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)
