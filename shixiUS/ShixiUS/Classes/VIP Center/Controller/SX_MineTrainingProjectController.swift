@@ -116,7 +116,7 @@ extension SX_MineTrainingProjectController: UITableViewDelegate, UITableViewData
         cell.projectTitle?.text     = model.title ?? "华尔街投行实地项目"
         cell.projectAddress?.text   = model.address ?? "Los Angles"
         cell.projectDate?.text      = model.time ?? "2018.03.03"
-        //        cell.projectTime?.text      = "5Day"
+        cell.projectTime?.text      = model.travel ?? "5Day"
         
         switch model.status {
         case "1"?:
