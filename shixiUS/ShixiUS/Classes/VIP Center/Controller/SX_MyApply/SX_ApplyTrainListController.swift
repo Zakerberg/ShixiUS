@@ -199,7 +199,6 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
             cell.selectionStyle            = .none
             
             switch indexPath.row {
-                
             case 1:
                 cell.title?.text           = "姓名"
                 cell.TF?.placeholder       = "输入您的姓名"
@@ -288,9 +287,7 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                 
                 /// 申请成功 ! 获取订单号
                 
-                
 
-                
                 
             }, onError: { (error) in
                 SXLog(error)
