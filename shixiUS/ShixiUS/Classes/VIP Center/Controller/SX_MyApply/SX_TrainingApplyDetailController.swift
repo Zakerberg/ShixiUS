@@ -128,7 +128,7 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
         }else if indexPath.section == 1 {
             let cell = SX_MyApplyTrainingProjectCell(style: .default, reuseIdentifier: "applytrainingprohectCellID")
             cell.selectionStyle                     = .none
-
+            
             cell.lineView?.isHidden                 = true
             cell.projectStyle?.isHidden             = true
             cell.projectPayAndRefund?.isHidden      = true
@@ -217,6 +217,25 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        if section == 2 {
+            let view = UIView()
+            
+            
+            
+            
+            
+            
+            return view
+        }
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

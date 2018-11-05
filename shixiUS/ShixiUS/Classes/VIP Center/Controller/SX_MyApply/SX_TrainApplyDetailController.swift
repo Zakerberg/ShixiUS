@@ -61,8 +61,7 @@ extension SX_TrainApplyDetailController {
     }
     
     func fetchData() {
-        let url = ""
-        
+        let url = SX_ApplyTrainDetail + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number!)"
         /*
          状态字段status
          0:申请成功;1:就业顾问联系;2:支付成功;3:申请退款;4:审核通过
