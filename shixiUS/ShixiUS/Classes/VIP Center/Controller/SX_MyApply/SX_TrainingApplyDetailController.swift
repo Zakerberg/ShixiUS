@@ -228,11 +228,63 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
         if section == 2 {
             let view = UIView()
             
+            self.payBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+                make.top.equalToSuperview().offset(Margin)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+                make.height.equalTo(50.FloatValue.IPAD_XValue)
+            }).config({ (PAY) in
+                PAY.backgroundColor     = UIColor.SX_MainColor()
+                PAY.layer.masksToBounds = true
+                PAY.layer.cornerRadius  = 5
+                PAY.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
+                PAY.setTitle("去支付", for: .normal)
+                PAY.setTitleColor(UIColor.white, for: .normal)
+                if self.applyStatus == "1" { //对应图2
+                    PAY.isHidden = false
+                }else{
+                    PAY.isHidden = true
+                }
+                
+                PAY.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("去支付 +++ + ")
+                    
+                    
+                    
+                    
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
             
-            
-            
-            
-            
+            self.cancelBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+                make.top.equalTo(self.payBtn!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.height.left.right.equalTo(self.payBtn!)
+            }).config({ (CANCEL) in
+                CANCEL.backgroundColor     = UIColor.colorWithHexString(hex: "cccccc", alpha: 1)
+                CANCEL.layer.masksToBounds = true
+                CANCEL.layer.cornerRadius  = 5
+                CANCEL.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
+                CANCEL.setTitle("取消订单", for: .normal)
+                CANCEL.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+                if self.applyStatus == "1" {
+                    CANCEL.isHidden = false //对应图2
+                }else{
+                    CANCEL.isHidden = true
+                }
+                CANCEL.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("取消订单 +++ + ")
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
             return view
         }
         return UIView()

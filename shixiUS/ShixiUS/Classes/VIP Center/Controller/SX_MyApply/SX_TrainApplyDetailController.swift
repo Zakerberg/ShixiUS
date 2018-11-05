@@ -125,6 +125,8 @@ extension SX_TrainApplyDetailController: UITableViewDelegate, UITableViewDataSou
         }
         
         let cell = UITableViewCell(style: .default, reuseIdentifier: "trainApplyDetailCellID")
+
+        
         
         
         
@@ -177,13 +179,3 @@ extension SX_TrainApplyDetailController: UITableViewDelegate, UITableViewDataSou
         }
     }
 }
-
-// ===============================================================================
-// MARK: -
-// ===============================================================================
-extension SX_TrainApplyDetailController {
-    
-}
-
-
-
