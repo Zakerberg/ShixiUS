@@ -22,7 +22,7 @@ class SX_TrainingApplyDetailController: SX_BaseController {
     var applyStatus:String?
     var payBtn: UIButton? // 去支付
     var cancelBtn: UIButton? // 取消订单
-    var statusBtn: UIButton? // 状态(申请退款)
+    var refundBtn: UIButton? // 申请退款(取消退款)
     
     var trainingApplyDetail = JSON()
     
@@ -98,7 +98,7 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
         if section == 0 || section == 1 {
             return 1
         }else{
-            if self.applyStatus == "7" {
+            if self.applyStatus == "4" || self.applyStatus == "5" || self.applyStatus == "6" || self.applyStatus == "7" {
                 return 3
             }else{
                 return 4
@@ -111,6 +111,7 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
         if indexPath.section == 0 {
             let cell = SX_ApplyProgressCell(style: .default, reuseIdentifier: "applyProgressCellID")
             cell.selectionStyle = .none
+            
             if self.applyStatus == "7" { // 订单已经取消
                 cell.progressNormalBgView?.isHidden = true
                 cell.progressBgView?.isHidden       = false
@@ -143,41 +144,66 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
         }
         
         let cell = SX_ApplyDetailMessageCell(style: .default, reuseIdentifier: "ApplyDetailMessageCellID")
-        cell.backgroundColor      = UIColor.white
-        cell.selectionStyle       = .none
-        let messModel             = self.trainingApplyDetail[0]
+        cell.backgroundColor          = UIColor.white
+        cell.selectionStyle           = .none
+        let messModel                 = self.trainingApplyDetail[0]
         switch indexPath.row {
         case 1:
-            cell.title?.text      = "总金额"
-            cell.title?.font      = UIFont.systemFont(ofSize: 14)
-            cell.title?.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            cell.title?.text          = "总金额"
+            cell.title?.font          = UIFont.systemFont(ofSize: 14)
+            cell.title?.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             
-            cell.price?.text      = "¥" + (messModel["price"].string ?? "11.11(测试服务费)")
-            cell.price?.font      = UIFont.systemFont(ofSize: 14)
-            cell.price?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+            cell.price?.text          = "¥" + (messModel["price"].string ?? "11.11(测试服务费)")
+            cell.price?.font          = UIFont.systemFont(ofSize: 14)
+            cell.price?.textColor     = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             break
         case 2:
-            cell.title?.text      = "状态"
-            cell.title?.font      = UIFont.systemFont(ofSize: 14)
-            cell.title?.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            cell.title?.text          = "状态"
+            cell.title?.font          = UIFont.systemFont(ofSize: 14)
+            cell.title?.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
             
-            cell.price?.text      = messModel["statusCn"].string ?? "未支付(测试)"
-            cell.price?.font      = UIFont.systemFont(ofSize: 14)
-            cell.price?.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+            cell.price?.text          = messModel["statusCn"].string ?? "未支付(测试)"
+            cell.price?.font          = UIFont.systemFont(ofSize: 14)
+            cell.price?.textColor     = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             break
         case 3:
-            cell.title?.text      = "应付金额"
-            cell.title?.font      = UIFont.systemFont(ofSize: 14)
-            cell.title?.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            self.refundBtn = UIButton(type: .custom).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.centerY.equalToSuperview()
+                make.right.equalToSuperview().offset(-Margin)
+                make.height.equalTo(25.FloatValue.IPAD_XValue)
+            }).config({ (REFUND) in
+                REFUND.sizeToFit()
+                REFUND.setTitle("申请退款(测试)", for: .normal)
+                REFUND.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+                REFUND.setTitleColor(UIColor.white, for: .normal)
+                REFUND.backgroundColor = UIColor.SX_MainColor()
+                REFUND.rx.tap.subscribe(onNext: { (_) in
+                    
+                    SXLog("点击申请退款!")
+                    
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
             
-            cell.price?.text      = "¥" + (messModel["price"].string ?? "11.11(测试服务费)")
-            cell.price?.font      = UIFont.boldSystemFont(ofSize: 16)
-            cell.price?.textColor = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
+            if self.applyStatus == "2" || self.applyStatus == "3" {
+                cell.title?.text      = "操作"
+                cell.title?.font      = UIFont.boldSystemFont(ofSize: 14)
+                cell.title?.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+            }else{
+                cell.title?.text      = "应付金额"
+                cell.title?.font      = UIFont.systemFont(ofSize: 14)
+                cell.title?.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            }
+            cell.price?.text          = "¥" + (messModel["price"].string ?? "11.11(测试服务费)")
+            cell.price?.font          = UIFont.boldSystemFont(ofSize: 16)
+            cell.price?.textColor     = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
+            
             break
         default: // 0
-            cell.title?.text      = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
-            cell.title?.font      = UIFont.boldSystemFont(ofSize: 16)
-            cell.title?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            cell.title?.text          = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
+            cell.title?.font          = UIFont.boldSystemFont(ofSize: 16)
+            cell.title?.textColor     = UIColor.colorWithHexString(hex: "333333", alpha: 1)
             break
         }
         return cell
@@ -248,8 +274,6 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
                 
                 PAY.rx.tap.subscribe(onNext: { (_) in
                     SXLog("去支付 +++ + ")
-                    
-                    
                     
                     
                 }, onError: { (error) in
