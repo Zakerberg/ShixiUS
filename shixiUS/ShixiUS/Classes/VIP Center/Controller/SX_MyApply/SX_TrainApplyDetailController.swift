@@ -20,6 +20,9 @@ class SX_TrainApplyDetailController: SX_BaseController {
     
     var number:String?
     var applyStatus:String?
+    var refundBtn:UIButton?
+    var payBtn: UIButton? // 去支付
+    var cancelBtn: UIButton? // 取消订单
     var trainApplyDetail = JSON()
     
     lazy var table: UITableView = {
@@ -55,7 +58,7 @@ class SX_TrainApplyDetailController: SX_BaseController {
 extension SX_TrainApplyDetailController {
     
     func setUI() {
-        title = "职业培训申请详情"
+        title = "申请详情"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
     }
@@ -84,15 +87,26 @@ extension SX_TrainApplyDetailController {
 // ===============================================================================
 extension SX_TrainApplyDetailController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
+        if self.applyStatus == "0" {
+            return 2
+        }
         return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 || section == 1 {
+            return 1
+        }else{
+            if self.applyStatus == "4" || self.applyStatus == "5" || self.applyStatus == "6" || self.applyStatus == "7" {
+                return 3
+            }else{
+                return 4
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let model = self.trainApplyDetail[indexPath.row]
         if indexPath.section == 0 {
             let cell = SX_ApplyProgressCell(style: .default, reuseIdentifier: "applyProgressCellID")
             cell.selectionStyle = .none
@@ -100,38 +114,103 @@ extension SX_TrainApplyDetailController: UITableViewDelegate, UITableViewDataSou
                 cell.progressNormalBgView?.isHidden = true
                 cell.progressBgView?.isHidden       = false
                 cell.progressBtn?.isHidden          = true
-                cell.progressRejected?.text         =  "测试订单取消" //model["steps"].string ??
+                cell.progressRejected?.text         = model["steps"].string ?? "测试订单取消"
             }else {
                 cell.accessoryType                  = .disclosureIndicator
                 cell.progressNormalBgView?.isHidden = false
                 cell.progressBgView?.isHidden       = true
-                cell.progressStep?.text             =  "测试进度标题" //model["steps"].string ??
-                cell.progressStatus?.text           =  "测试申请进度测试"//model["stepsCn"].string ??
+                cell.progressStep?.text             = model["steps"].string ?? "测试进度标题"
+                cell.progressStatus?.text           = model["stepsCn"].string ?? "测试申请进度测试"
             }
             
             return cell
         }else if indexPath.section == 1 {
-            let cell = SX_MyApplyTrainingProjectCell(style: .default, reuseIdentifier: "applytrainingprohectCellID")
+            let cell = SX_VocationalTrainingCell(style: .default, reuseIdentifier: "applytrainingprohectCellID")
             cell.selectionStyle                     = .none
-            cell.projectTitle?.text                 = "1111"
-            cell.projectTime?.text                  = "2018.10.10"
-            cell.projectDate?.text                  = "5天"
-            
             cell.lineView?.isHidden                 = true
-            cell.projectStyle?.isHidden             = true
-            cell.projectPayAndRefund?.isHidden      = true
+            cell.vocationalContact?.isHidden        = true
+            cell.vocationalPayAndRefund?.isHidden   = true
+            cell.vocationalCancel?.isHidden         = true
             
+            cell.vocationalTitle?.text              = model["title"].string ?? "课程培训标题(测试)"
+            cell.vocationalPeriod?.text             = model["openclass"].string ?? "2018-09-14开课(测试)"
+            cell.vocationalDate?.text               = model["addtime"].string ?? "2018.08.16(测试)"
             return cell
         }
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "trainApplyDetailCellID")
-
         
-        
-        
-        
-        
-        
+        let cell = SX_ApplyDetailMessageCell(style: .default, reuseIdentifier: "ApplyDetailMessageCellID")
+        cell.backgroundColor          = UIColor.white
+        cell.selectionStyle           = .none
+        let messModel                 = self.trainApplyDetail[0]
+        switch indexPath.row {
+        case 1:
+            cell.title?.text          = "总金额"
+            cell.title?.font          = UIFont.systemFont(ofSize: 14)
+            cell.title?.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            
+            cell.price?.text          = "¥" + (messModel["price"].string ?? "11.11(测试服务费)")
+            cell.price?.font          = UIFont.systemFont(ofSize: 14)
+            cell.price?.textColor     = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+            break
+        case 2:
+            cell.title?.text          = "状态"
+            cell.title?.font          = UIFont.systemFont(ofSize: 14)
+            cell.title?.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            
+            cell.price?.text          = messModel["statusCn"].string ?? "未支付(测试)"
+            cell.price?.font          = UIFont.systemFont(ofSize: 14)
+            cell.price?.textColor     = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+            break
+        case 3:
+            self.refundBtn = UIButton(type: .custom).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.centerY.equalToSuperview()
+                make.right.equalToSuperview().offset(-Margin)
+                make.height.equalTo(25.FloatValue.IPAD_XValue)
+                make.width.equalTo(60.FloatValue.IPAD_XValue)
+            }).config({ (REFUND) in
+                REFUND.setTitle((messModel["buttonCn"].string ?? ""), for: .normal)
+                REFUND.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+                REFUND.setTitleColor(UIColor.white, for: .normal)
+                REFUND.backgroundColor = UIColor.SX_MainColor()
+                if self.applyStatus == "2" || self.applyStatus == "3" {
+                    REFUND.isHidden = false
+                    
+                }else{
+                    REFUND.isHidden = true
+                }
+                
+                REFUND.rx.tap.subscribe(onNext: { (_) in
+                    
+                    SXLog("点击申请退款!")
+                    
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
+            
+            if self.applyStatus == "2" || self.applyStatus == "3" { // 对应图3,4
+                cell.title?.text      = "操作"
+                cell.title?.font      = UIFont.boldSystemFont(ofSize: 14)
+                cell.title?.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                cell.price?.isHidden  = true
+            }else{
+                cell.title?.text      = "应付金额"
+                cell.title?.font      = UIFont.systemFont(ofSize: 14)
+                cell.title?.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                
+                cell.price?.text      = "¥" + (messModel["price"].string ?? "11.11(测试服务费)")
+                cell.price?.font      = UIFont.boldSystemFont(ofSize: 16)
+                cell.price?.textColor = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
+            }
+            
+            break
+        default: // 0
+            cell.title?.text          = model["title"].string ?? "美国金融实习岗位-信托和过桥基金业务(测试)"
+            cell.title?.font          = UIFont.boldSystemFont(ofSize: 16)
+            cell.title?.textColor     = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+            break
+        }
         
         return cell
     }
@@ -169,6 +248,67 @@ extension SX_TrainApplyDetailController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        if section == 2 {
+            let view = UIView()
+            
+            self.payBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+                make.top.equalToSuperview().offset(Margin)
+                make.left.equalToSuperview().offset(Margin)
+                make.right.equalToSuperview().offset(-Margin)
+                make.height.equalTo(50.FloatValue.IPAD_XValue)
+            }).config({ (PAY) in
+                PAY.backgroundColor     = UIColor.SX_MainColor()
+                PAY.layer.masksToBounds = true
+                PAY.layer.cornerRadius  = 5
+                PAY.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
+                PAY.setTitle("去支付", for: .normal)
+                PAY.setTitleColor(UIColor.white, for: .normal)
+                if self.applyStatus == "1" { //对应图2
+                    PAY.isHidden = false
+                }else{
+                    PAY.isHidden = true
+                }
+                
+                PAY.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("去支付 +++ + ")
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
+            
+            self.cancelBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
+                make.top.equalTo(self.payBtn!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+                make.height.left.right.equalTo(self.payBtn!)
+            }).config({ (CANCEL) in
+                CANCEL.backgroundColor     = UIColor.colorWithHexString(hex: "cccccc", alpha: 1)
+                CANCEL.layer.masksToBounds = true
+                CANCEL.layer.cornerRadius  = 5
+                CANCEL.titleLabel?.font    = UIFont.boldSystemFont(ofSize: 18)
+                CANCEL.setTitle("取消订单", for: .normal)
+                CANCEL.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
+                if self.applyStatus == "1" {
+                    CANCEL.isHidden = false //对应图2
+                }else{
+                    CANCEL.isHidden = true
+                }
+                CANCEL.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("取消订单 +++ + ")
+                    
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
+            return view
+        }
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

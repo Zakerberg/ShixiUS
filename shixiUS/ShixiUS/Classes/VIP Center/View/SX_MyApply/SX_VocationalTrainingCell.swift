@@ -19,19 +19,17 @@ import UIKit
 
 class SX_VocationalTrainingCell: UITableViewCell {
     
-    var vocationalTitle        : UILabel?
-    
+    var vocationalTitle: UILabel?
     /// 第一期 + 后面的时间
-    var vocationalPeriod       : UILabel?
-    var vocationalDate         : UILabel?
-    
+    var vocationalPeriod: UILabel?
+    var vocationalDate: UILabel?
     /// 申请成功
-    var vocationalStyle        : UILabel?
+    var vocationalStyle: UILabel?
     /// 等待客服联系
-    var vocationalContact      : UILabel?
-    var vocationalCancel       : SX_UnderlineBtn?
-    var vocationalPayAndRefund : UIButton?
-    
+    var lineView: UIView?
+    var vocationalContact: UILabel?
+    var vocationalCancel: SX_UnderlineBtn?
+    var vocationalPayAndRefund: UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -96,7 +94,7 @@ extension SX_VocationalTrainingCell {
             DATE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
-        let lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+        self.lineView = UIView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.vocationalPeriod!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.left.equalTo(periodImage)
             make.right.equalTo(self.vocationalDate!)
@@ -105,30 +103,29 @@ extension SX_VocationalTrainingCell {
             LINE.backgroundColor = UIColor.SX_LineColor()
         })
         
-//--------------------------------------------------------------------------------------------------------------------------
-        
+        //-----------------------------------------------------------------------------
         self.vocationalStyle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(Margin)
+            make.top.equalTo(self.lineView!.snp.bottom).offset(Margin)
             make.left.equalTo(self.vocationalTitle!)
             make.height.equalTo(13)
         }).config({ (STYLE) in
             STYLE.sizeToFit()
-            STYLE.font = UIFont.systemFont(ofSize: 12)
+            STYLE.font = UIFont.systemFont(ofSize: 14)
             STYLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
         self.vocationalContact = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.top.equalTo(self.lineView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(13)
         }).config({ (CONTACT) in
             CONTACT.sizeToFit()
-            CONTACT.font = UIFont.systemFont(ofSize: 12)
+            CONTACT.font = UIFont.systemFont(ofSize: 14)
             CONTACT.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
         })
         
         self.vocationalPayAndRefund = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.top.equalTo(self.lineView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)
@@ -137,7 +134,7 @@ extension SX_VocationalTrainingCell {
         })
         
         self.vocationalCancel = SX_UnderlineBtn(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(lineView.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.top.equalTo(self.lineView!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)

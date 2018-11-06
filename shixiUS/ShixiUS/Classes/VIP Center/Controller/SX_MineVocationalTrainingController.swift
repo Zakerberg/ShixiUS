@@ -117,7 +117,7 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
             cell.vocationalCancel?.isHidden  = true
             
             cell.vocationalPayAndRefund?.setTitle("去支付", for: .normal)
-            cell.vocationalPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.vocationalPayAndRefund?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 14)
             cell.vocationalPayAndRefund?.setTitleColor(UIColor.white, for: .normal)
             cell.vocationalPayAndRefund?.backgroundColor  = UIColor.SX_MainColor()
             cell.vocationalPayAndRefund?.rx.tap.subscribe(onNext: { (_) in
@@ -132,7 +132,7 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
             cell.vocationalContact?.isHidden      = true
             cell.vocationalPayAndRefund?.isHidden = true
             
-            cell.vocationalCancel?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 12)
+            cell.vocationalCancel?.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 14)
             cell.vocationalCancel?.titleLabel?.textAlignment = .center
             cell.vocationalCancel?.setTitle("取消申请", for: .normal)
             cell.vocationalCancel?.setlineColor(color: UIColor.colorWithHexString(hex: "666666", alpha: 1))

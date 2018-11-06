@@ -173,10 +173,17 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
                 make.height.equalTo(25.FloatValue.IPAD_XValue)
                 make.width.equalTo(60.FloatValue.IPAD_XValue)
             }).config({ (REFUND) in
-                REFUND.setTitle("申请退款(测试)", for: .normal)
+                REFUND.setTitle((messModel["buttonCn"].string ?? ""), for: .normal)
                 REFUND.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 REFUND.setTitleColor(UIColor.white, for: .normal)
                 REFUND.backgroundColor = UIColor.SX_MainColor()
+                if self.applyStatus == "2" || self.applyStatus == "3" {
+                    REFUND.isHidden = false
+                    
+                }else{
+                    REFUND.isHidden = true
+                }
+                
                 REFUND.rx.tap.subscribe(onNext: { (_) in
                     
                     SXLog("点击申请退款!")
@@ -186,18 +193,22 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
                 }, onCompleted: nil, onDisposed: nil)
             })
             
-            if self.applyStatus == "2" || self.applyStatus == "3" {
+            if self.applyStatus == "2" || self.applyStatus == "3" { // 对应图3,4
                 cell.title?.text      = "操作"
                 cell.title?.font      = UIFont.boldSystemFont(ofSize: 14)
                 cell.title?.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                
+                cell.price?.isHidden  = true
+                
             }else{
                 cell.title?.text      = "应付金额"
                 cell.title?.font      = UIFont.systemFont(ofSize: 14)
                 cell.title?.textColor = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                
+                cell.price?.text      = "¥" + (messModel["price"].string ?? "11.11(测试服务费)")
+                cell.price?.font      = UIFont.boldSystemFont(ofSize: 16)
+                cell.price?.textColor = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
             }
-            cell.price?.text          = "¥" + (messModel["price"].string ?? "11.11(测试服务费)")
-            cell.price?.font          = UIFont.boldSystemFont(ofSize: 16)
-            cell.price?.textColor     = UIColor.colorWithHexString(hex: "fc1614", alpha: 1)
             
             break
         default: // 0
@@ -274,8 +285,6 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
                 
                 PAY.rx.tap.subscribe(onNext: { (_) in
                     SXLog("去支付 +++ + ")
-                    
-                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
@@ -298,12 +307,6 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
                 }
                 CANCEL.rx.tap.subscribe(onNext: { (_) in
                     SXLog("取消订单 +++ + ")
-                    
-                    
-                    
-                    
-                    
-                    
                     
                 }, onError: { (error) in
                     SXLog(error)
