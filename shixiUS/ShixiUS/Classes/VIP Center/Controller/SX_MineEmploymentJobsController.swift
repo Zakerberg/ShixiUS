@@ -73,6 +73,7 @@ extension SX_MineEmploymentJobsController {
     }
     
     func fetchData() {
+        
         let url = SX_MyApplyJob + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
         
         SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
