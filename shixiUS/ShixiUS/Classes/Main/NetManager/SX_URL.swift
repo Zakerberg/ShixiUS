@@ -96,6 +96,9 @@ let SX_ApplyTraininigDetail   = SHIXIUS + "/myapply/trainingdetail?"
 /// 申请详情(职业培训) (get)
 let SX_ApplyTrainDetail       = SHIXIUS + "/myapply/traindetail?"
 
+/// 取消申请
+let SX_ApplyCancel            = SHIXIUS + "/myapply/cancel"
+
 // =======================================================================================
 // MARK: - 我的 ! ! !
 // =======================================================================================
@@ -118,13 +121,8 @@ let SX_Mine_FixInfo           = SHIXIUS + "/member/info"
 // 付款记录 (get)
 let SX_Mine_OrderRecord       = SHIXIUS + "/myorder/index?"
 
-// 取消申请 (get)
-let SX_ApplyCancel            = SHIXIUS + "/myapply/cancel"
-
 // 申请退款 (get)
 let SX_ApplyRefund            = SHIXIUS + "/myapply/refundmoney"
 
 // 取消退款 (get)
 let SX_ApplyRefundCancel      = SHIXIUS + "/myapply/cancelrefund"
-
-

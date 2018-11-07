@@ -139,7 +139,20 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
             cell.vocationalCancel?.setTitleColor(UIColor.colorWithHexString(hex: "666666", alpha: 1), for: .normal)
             
             cell.vocationalCancel?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("取消申请 ++++")
+                SXLog("职业培训取消申请 ++++")
+                
+                SX_NetManager.requestData(type: .GET, URlString: SX_ApplyCancel) { (result) in
+                    do {
+                        let json = try JSON(data: result)
+                        if json["status"].int == 200 {
+                            SXLog("取消申请成功!")
+                            
+                            
+                        }else{
+                            
+                        }
+                    }catch { }
+                }
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
