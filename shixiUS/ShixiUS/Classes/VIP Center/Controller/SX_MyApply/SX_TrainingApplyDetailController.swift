@@ -305,6 +305,7 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
                 }else{
                     CANCEL.isHidden = true
                 }
+                
                 CANCEL.rx.tap.subscribe(onNext: { (_) in
                     SXLog("取消订单 +++ + ")
                     

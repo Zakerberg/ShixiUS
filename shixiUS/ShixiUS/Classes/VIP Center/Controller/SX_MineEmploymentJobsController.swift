@@ -85,6 +85,7 @@ extension SX_MineEmploymentJobsController {
                         let jobApplyModel = SX_JobApplyModel(jsonData: item)
                         self.jobApplyArr.append(jobApplyModel)
                     }
+                    
                     self.table.reloadData()
                     if json["data"].count == 0 {
                         self.noDataView?.isHidden = false
@@ -141,6 +142,11 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             
             cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("取消申请 ++++")
+                
+                
+                
+                
+                
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -214,7 +220,6 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             
             cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
                 //                let vc = SX_ApplyDetailController()
-                //
                 //                self.navigationController?.pushViewController(vc, animated: true)
             }, onError: { (error) in
                 SXLog(error)
