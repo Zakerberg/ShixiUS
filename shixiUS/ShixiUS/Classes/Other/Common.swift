@@ -20,6 +20,8 @@
  import UIKit
  import SnapKit
  
+ var maxTextNumberDegault = 15
+ 
  // ==============================================================================
  // MARK: - UIColor
  // ==============================================================================
@@ -526,42 +528,42 @@
  // ==============================================================================
  extension UITextField {
     
-    func setTextField(_ font: CGFloat, color: UIColor, aligment: NSTextAlignment, title: String, placeHolder: String) {
-        let rightImageBtn = UIButton()
-        self.isSecureTextEntry = true
-        rightImageBtn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
-        rightImageBtn.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
-        rightImageBtn.centerY = self.centerY
-        self.rightView = rightImageBtn
-        self.rightViewMode = .always
-        rightImageBtn.addTarget(self, action: #selector(btnClick), for: .touchUpInside)
-        
-        self.font = UIFont.systemFont(ofSize: font)
-        self.textColor = color
-        self.textAlignment = aligment
-        self.borderStyle = .none
-        self.text = title
-        self.placeholder = placeHolder
-    }
-    
-    @objc func btnClick(btn: UIButton) {
-        //监听右边按钮的点击,切换密码输入明暗文状态
-        let text  = self.text
-        self.text = ""
-        self.text = text
-        self.resignFirstResponder()
-        btn.isSelected  = !btn.isSelected
-        if !btn.isSelected {
-            self.font = UIFont.systemFont(ofSize: 16)
-            btn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
-            self.isSecureTextEntry = true
-        }else{
-            self.font = UIFont.systemFont(ofSize: 16)
-            btn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_yincang"), for: .selected)
-            self.isSecureTextEntry = false
-        }
-        self.becomeFirstResponder()
-    }
+    //    func setTextField(_ font: CGFloat, color: UIColor, aligment: NSTextAlignment, title: String, placeHolder: String) {
+    //        let rightImageBtn = UIButton()
+    //        self.isSecureTextEntry = true
+    //        rightImageBtn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
+    //        rightImageBtn.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+    //        rightImageBtn.centerY = self.centerY
+    //        self.rightView = rightImageBtn
+    //        self.rightViewMode = .always
+    //        rightImageBtn.addTarget(self, action: #selector(btnClick), for: .touchUpInside)
+    //
+    //        self.font = UIFont.systemFont(ofSize: font)
+    //        self.textColor = color
+    //        self.textAlignment = aligment
+    //        self.borderStyle = .none
+    //        self.text = title
+    //        self.placeholder = placeHolder
+    //    }
+    //
+    //    @objc func btnClick(btn: UIButton) {
+    //        //监听右边按钮的点击,切换密码输入明暗文状态
+    //        let text  = self.text
+    //        self.text = ""
+    //        self.text = text
+    //        self.resignFirstResponder()
+    //        btn.isSelected  = !btn.isSelected
+    //        if !btn.isSelected {
+    //            self.font = UIFont.systemFont(ofSize: 16)
+    //            btn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
+    //            self.isSecureTextEntry = true
+    //        }else{
+    //            self.font = UIFont.systemFont(ofSize: 16)
+    //            btn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_yincang"), for: .selected)
+    //            self.isSecureTextEntry = false
+    //        }
+    //        self.becomeFirstResponder()
+    //    }
  }
  
  // ==============================================================================
@@ -689,11 +691,61 @@
  }
  
  // ==============================================================================
- // MARK: - UIViewController
+ // MARK: - UITextField
  // ==============================================================================
- extension UIViewController {
-
- 
- 
+ extension UITextField {
+    // 使用runtime给textField添加最大的输入属性, 默任15
+    var maxTextNumber: Int {
+        set {
+            objc_setAssociatedObject(self, &maxTextNumberDegault, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+        
+        get {
+            if let rs = objc_getAssociatedObject(self, &maxTextNumberDegault) as? Int {
+                return rs
+            }
+            return 15
+        }
+    }
+    
+    // 添加判断数量的方法
+    func addChangeTextTarget() {
+        self.addTarget(self, action:#selector(changeText), for:.editingChanged)
+    }
+    @objc func changeText() {
+        // 判断是不是拼音状态,拼音不截取文本
+        if let positionRange = self.markedTextRange {
+            guard self.position(from: positionRange.start, offset: 0) != nil else {
+                checkTextFieldText()
+                return
+            }
+        }else{
+            checkTextFieldText()
+        }
+    }
+    
+    func checkTextFieldText() {
+        guard (self.text?.length)! <= maxTextNumber else {
+            self.text = (self.text?.stringCut(end: maxTextNumber))!
+            return
+        }
+    }
  }
  
+ extension String {
+    
+    var length: Int {
+        /// 更改成其他的影响还有emoji协议的签名
+        return self.utf16.count
+    }
+    
+    /// 截取第一个到任意位置
+    /// end: 结束的位置
+    /// Returns: 截取后的字符串
+    func stringCut(end: Int) -> String {
+        if !(end <= count) { return self }
+        let sInde = index(startIndex, offsetBy: end)
+        return String(self[..<sInde])
+    }
+ }
+
