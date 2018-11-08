@@ -1,5 +1,20 @@
 PODS:
   - Alamofire (4.7.2)
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
   - Bugly (2.5.0)
   - IQKeyboardManagerSwift (6.1.1)
   - Kingfisher (4.8.0)
@@ -21,6 +36,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - BlocksKit
   - Bugly
   - IQKeyboardManagerSwift
   - Kingfisher
@@ -37,6 +53,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - BlocksKit
     - Bugly
     - IQKeyboardManagerSwift
     - Kingfisher
@@ -52,6 +69,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
@@ -65,6 +83,6 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 53bad9dc939c601fd5b74828a53743d01ee312ce
+PODFILE CHECKSUM: 48ccc41b967d969822a73724a91be9b1ef267540
 
 COCOAPODS: 1.5.3
