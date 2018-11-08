@@ -263,13 +263,110 @@ extension SX_LoginController {
     }
 }
 
+// =========================================================================================
+// MARK: - class: SX_TextField
+// =========================================================================================
 class SX_TextField: UITextField {
     
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 0)
+    private let bottomLine: CALayer = {
+        let line              = CALayer()
+        line.backgroundColor  = UIColor.SX_MainColor().cgColor
+        line.isHidden         = true
+        
+        return line
+    }()
+    
+    public let label: UILabel = {
+        let label             = UILabel()
+        label.font            = UIFont.systemFont(ofSize: 18)
+        label.textColor       = UIColor.colorWithRGBA(R: 51, G: 51, B: 51, A: 0.4)
+        label.textAlignment   = .left
+        label.frame           = CGRect(x: 0, y: 0, width: 100, height: 100)
+        
+        return label
+    }()
+    
+    /***
+     ///init: 方法
+     
+     /// parameters:
+     /// - frame: frame
+     /// - isSecure: 是否密码格式
+     ***/
+    init(frame: CGRect, isSecure: Bool) {
+        super.init(frame: frame)
+        self.isSecureTextEntry = isSecure
+        drawMyView()
+        /// 添加数字判断
+        addChangeTextTarget()
     }
     
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 0)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func drawMyView() {
+        self.addSubview(label)
+        self.layer.addSublayer(bottomLine)
+        if self.isSecureTextEntry {
+            let passwordSwitch   = SX_PasswordSwitch(frame: CGRect(x: 0, y: 0, width: 21, height: 12.5))
+            passwordSwitch.addTarget(self, action: #selector(passwordSwitchHidden(sender:)), for: .touchUpInside)
+            self.rightView       = passwordSwitch
+            self.rightViewMode   = .always
+        }
+    }
+    
+    @objc func passwordSwitchHidden(sender: SX_PasswordSwitch) {
+        self.isSecureTextEntry   = !self.isSecureTextEntry
+        sender.isSelected        = !sender.isSelected
+    }
+    
+    /// 将palceHoler上移的方法, 点击空的textField时候调用
+    public func changLabel() {
+        UIView.animate(withDuration: 0.4) {
+            self.label.frame     = CGRect(x: 0, y: -20, width: 100, height: 20)
+            self.label.font      = UIFont.systemFont(ofSize: 10)
+            self.label.textColor = UIColor.SX_MainColor()
+        }
+    }
+    
+    public func changeLineHidden() {
+        self.bottomLine.isHidden  = !self.bottomLine.isHidden
+    }
+    
+    /// 将palceHoler下移的方法, 当文字清空的时候调用
+    public func disChangeLabel() {
+        UIView.animate(withDuration: 0.4) {
+            self.label.frame     = CGRect(x: 0, y: 0, width: 100, height: self.frame.size.height)
+            self.label.font      = UIFont.systemFont(ofSize: 18)
+            self.label.textColor = UIColor.colorWithRGBA(R: 51, G: 51, B: 51, A: 0.4)
+        }
+    }
+    
+    /// 重写方法调整 rightView.frame来实现密码状态下的眼睛按钮与非密码状态下的清空按钮对其
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rect       = super.rightViewRect(forBounds: bounds)
+        rect.origin.x -= 4
+        return rect
+    }
+}
+
+// =========================================================================================
+// MARK: - class: SX_PasswordSwitch
+// =========================================================================================
+class SX_PasswordSwitch: UIButton {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        config()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func config() {
+        self.setImage(#imageLiteral(resourceName: "icon_Login_password"), for: .normal)
+        self.setImage(#imageLiteral(resourceName: "icon_Login_password_Selected"), for: .selected)
     }
 }

@@ -37,14 +37,17 @@
         self.init(red: gray/255.0 ,green: gray/255.0 ,blue: gray/255.0 ,alpha:1.0)
     }
     
+    class func colorWithRGBA(R:CGFloat, G:CGFloat, B:CGFloat, A:CGFloat) -> UIColor {
+        return UIColor(red: R/255, green: g/255, blue: B/255, alpha: A)
+    }
+    
     /// 随机色
     class func randomColor() -> UIColor {
         return UIColor(r: CGFloat(arc4random_uniform(256)), g: CGFloat(arc4random_uniform(256)), b: CGFloat(arc4random_uniform(256)))
     }
     
     /// 主题颜色
-    class func SX_MainColor() -> UIColor
-    {
+    class func SX_MainColor() -> UIColor {
         return colorWithHexString(hex: "ff7900", alpha: 1.0)
     }
     
