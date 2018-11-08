@@ -38,7 +38,7 @@
     }
     
     class func colorWithRGBA(R:CGFloat, G:CGFloat, B:CGFloat, A:CGFloat) -> UIColor {
-        return UIColor(red: R/255, green: g/255, blue: B/255, alpha: A)
+        return UIColor(red: R/255, green: G/255, blue: B/255, alpha: A)
     }
     
     /// 随机色

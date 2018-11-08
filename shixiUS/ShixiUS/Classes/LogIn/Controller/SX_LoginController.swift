@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 8/6/18.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  登录
+//
 
 /*
  愿你所有的温柔
@@ -81,7 +81,7 @@ extension SX_LoginController {
             }.config { (LOGO) in
         }
         
-        self.userNameTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+        self.userNameTF = SX_TextField(frame: CGRect.zero, isSecure: false).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(logoView.snp.bottom).offset(50.FloatValue.IPAD_XValue)
             make.left.equalToSuperview().offset(Margin*2.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-Margin*2.FloatValue.IPAD_XValue)
@@ -113,7 +113,7 @@ extension SX_LoginController {
             })
         })
         
-        self.passWordTF = SX_TextField().addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
+        self.passWordTF = SX_TextField(frame: CGRect.zero, isSecure: true).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalTo(self.userNameTF!.snp.bottom).offset(Margin)
             make.height.left.width.equalTo(self.userNameTF!)
         }).config({ (PASSWORD) in
