@@ -20,7 +20,7 @@ import MBProgressHUD
 
 let TRAININGCELLID = "tainingCellID"
 
-class SX_MineTrainingProjectController: UIViewController {
+class SX_MineTrainingProjectController: SX_BaseController {
     
     var noDataView: SX_NoDataView?
     var trainingApplyArr = [SX_TrainingApplyModel]()
@@ -44,6 +44,7 @@ class SX_MineTrainingProjectController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -90,6 +91,8 @@ extension SX_MineTrainingProjectController {
                     hud.label.text = json["msg"].string
                     hud.hide(animated: true, afterDelay: 1.0)
                 }
+                self.table.reloadData()
+                self.hideLoadingView()
             }catch { }
         }
     }

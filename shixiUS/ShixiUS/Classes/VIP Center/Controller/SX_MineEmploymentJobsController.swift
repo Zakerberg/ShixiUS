@@ -40,6 +40,7 @@ class SX_MineEmploymentJobsController: SX_BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,6 +101,7 @@ extension SX_MineEmploymentJobsController {
                     hud.hide(animated: true, afterDelay: 1.0)
                 }
                 self.table.reloadData()
+                self.hideLoadingView()
             }catch { }
         }
     }
@@ -142,10 +144,6 @@ extension SX_MineEmploymentJobsController: UITableViewDelegate, UITableViewDataS
             
             cell.employmentNotiBtn?.rx.tap.subscribe(onNext: { (_) in
                 SXLog("取消申请 ++++")
-                
-                
-                
-                
                 
             }, onError: { (error) in
                 SXLog(error)

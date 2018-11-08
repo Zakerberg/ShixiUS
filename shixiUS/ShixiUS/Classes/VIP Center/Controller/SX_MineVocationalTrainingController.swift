@@ -21,7 +21,7 @@ import MBProgressHUD
 
 let vocationalCellID = "vocationalCellID"
 
-class SX_MineVocationalTrainingController: UIViewController {
+class SX_MineVocationalTrainingController: SX_BaseController {
     
     var noDataView: SX_NoDataView?
     var trainApplyArr = [SX_TrainApplyModel]()
@@ -41,6 +41,7 @@ class SX_MineVocationalTrainingController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,6 +85,8 @@ extension SX_MineVocationalTrainingController {
                     hud.label.text = json["msg"].string
                     hud.hide(animated: true, afterDelay: 1.0)
                 }
+                self.table.reloadData()
+                self.hideLoadingView()
             }catch { }
         }
     }
