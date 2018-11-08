@@ -95,6 +95,8 @@ extension SX_LoginController {
             NUM.layer.cornerRadius       = 10
             NUM.placeholder              = "请输入用户名"
             NUM.textAlignment            = .left
+            NUM.clearButtonMode          = .always
+            
             NUM.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
                 SXLog("开始编辑账号....")
                 if ((self?.userNameTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.passWordTF?.text?.lengthOfBytes(using: .utf8)) != 0) {
@@ -128,7 +130,6 @@ extension SX_LoginController {
             PASSWORD.enablesReturnKeyAutomatically = true
             PASSWORD.clearButtonMode               = .whileEditing
             PASSWORD.isSecureTextEntry             = true
-            
             PASSWORD.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
                 SXLog("开始编辑密码....")
                 
@@ -268,24 +269,6 @@ extension SX_LoginController {
 // =========================================================================================
 class SX_TextField: UITextField {
     
-    private let bottomLine: CALayer = {
-        let line              = CALayer()
-        line.backgroundColor  = UIColor.SX_MainColor().cgColor
-        line.isHidden         = true
-        
-        return line
-    }()
-    
-    public let label: UILabel = {
-        let label             = UILabel()
-        label.font            = UIFont.systemFont(ofSize: 18)
-        label.textColor       = UIColor.colorWithRGBA(R: 51, G: 51, B: 51, A: 0.4)
-        label.textAlignment   = .left
-        label.frame           = CGRect(x: 0, y: 0, width: 100, height: 100)
-        
-        return label
-    }()
-    
     /***
      ///init: 方法
      
@@ -306,8 +289,6 @@ class SX_TextField: UITextField {
     }
     
     private func drawMyView() {
-        self.addSubview(label)
-        self.layer.addSublayer(bottomLine)
         if self.isSecureTextEntry {
             let passwordSwitch   = SX_PasswordSwitch(frame: CGRect(x: 0, y: 0, width: 21, height: 12.5))
             passwordSwitch.addTarget(self, action: #selector(passwordSwitchHidden(sender:)), for: .touchUpInside)
@@ -321,33 +302,19 @@ class SX_TextField: UITextField {
         sender.isSelected        = !sender.isSelected
     }
     
-    /// 将palceHoler上移的方法, 点击空的textField时候调用
-    public func changLabel() {
-        UIView.animate(withDuration: 0.4) {
-            self.label.frame     = CGRect(x: 0, y: -20, width: 100, height: 20)
-            self.label.font      = UIFont.systemFont(ofSize: 10)
-            self.label.textColor = UIColor.SX_MainColor()
-        }
-    }
-    
-    public func changeLineHidden() {
-        self.bottomLine.isHidden  = !self.bottomLine.isHidden
-    }
-    
-    /// 将palceHoler下移的方法, 当文字清空的时候调用
-    public func disChangeLabel() {
-        UIView.animate(withDuration: 0.4) {
-            self.label.frame     = CGRect(x: 0, y: 0, width: 100, height: self.frame.size.height)
-            self.label.font      = UIFont.systemFont(ofSize: 18)
-            self.label.textColor = UIColor.colorWithRGBA(R: 51, G: 51, B: 51, A: 0.4)
-        }
-    }
-    
     /// 重写方法调整 rightView.frame来实现密码状态下的眼睛按钮与非密码状态下的清空按钮对其
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
         var rect       = super.rightViewRect(forBounds: bounds)
         rect.origin.x -= 4
         return rect
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: 10, dy: 0)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: 10, dy: 0)
     }
 }
 
