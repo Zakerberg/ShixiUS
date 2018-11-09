@@ -242,6 +242,9 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
                 CANCEL.rx.tap.subscribe(onNext: { (_) in
                     SXLog("取消订单 +++ + ")
                     
+
+                    
+                    
                     
                     
                     

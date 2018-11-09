@@ -149,8 +149,7 @@ extension SX_MineVocationalTrainingController: UITableViewDelegate, UITableViewD
                         let json = try JSON(data: result)
                         if json["status"].int == 200 {
                             SXLog("取消申请成功!")
-                            
-                            
+                         
                         }else{
                             
                         }
