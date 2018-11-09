@@ -164,17 +164,9 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                 QUIT.setTitle("退出登录", for: .normal)
                 QUIT.isHidden          = true
                 QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
-                
-                QUIT.rx.tap.subscribe(onNext: { (_) in
-                    
-                    
-                    
-                }, onError: { (error) in
-                    SXLog(error)
-                }, onCompleted: nil, onDisposed: nil)
+                QUIT.addTarget(self, action: #selector(BntnClick), for: .touchUpInside)
             })
             
-            self.quitBtn?.addTarget(self, action: #selector(BntnClick), for: .touchUpInside)
             return view
         }
         return UIView()
@@ -348,42 +340,25 @@ extension SX_MineVC {
         }, onCompleted: nil, onDisposed: nil)
     }
     
+    
+    
+    
+    
+    
+    
     @objc func BntnClick () {
-        let alertController = SX_BaseAlertController(title: "提示", message: "您确定退出吗?", preferredStyle: .alert)
-        let cancelAction    = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        let okAction        = UIAlertAction(title: "离开", style: .default, handler: { (action) in
-            SXLog("退出登录!")
-            let param = ["userId":USERDEFAULTS.value(forKey: "userId") as! String,
-                         "token":USERDEFAULTS.value(forKey: "token") as! String]
-            SX_NetManager.requestData(type: .POST, URlString: SX_LogOut, parameters: param, finishCallBack: { (result) in
-                do{
-                    let json = try JSON(data: result)
-                    if json["status"].int == 200 {
-                        let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
-                        hud.mode       = .text
-                        hud.isSquare   = true
-                        hud.label.text = json["msg"].string
-                        hud.hide(animated: true, afterDelay: 1.0)
-                        USERDEFAULTS.set("", forKey: "token")
-                        USERDEFAULTS.set("", forKey: "userId")
-                        USERDEFAULTS.set("no", forKey: "login")
-                        self.titleNameLabel?.isHidden = true
-                        self.logInBtn?.isHidden = false
-                        self.quitBtn?.isHidden  = true
-                        
-                        self.table.reloadData()
-                    } else {
-                        let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
-                        hud.mode       = .text
-                        hud.isSquare   = true
-                        hud.label.text = json["msg"].string
-                        hud.hide(animated: true, afterDelay: 1.0)
-                    }
-                }catch { }
-            })
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
+
 }

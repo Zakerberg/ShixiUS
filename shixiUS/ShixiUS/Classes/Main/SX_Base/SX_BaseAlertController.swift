@@ -24,41 +24,70 @@
 
 import UIKit
 
-class SX_BaseAlertController: UIAlertController {
+enum AlertBtnClickIndex {
+    case cancle
+    case sure
+}
+
+class SX_BaseAlertController: UIView {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configAlert()
+    typealias SureClosure = ((NSInteger) ->())
+    var closure: SureClosure!
+    var contentView:UIView?
+    var title:UILabel?
+    var message:UILabel?
+    var surebtn:UIButton?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        config()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func show() {
+        
     }
 }
 
-//=============================================================================
-// MARK: - configAlert
-//=============================================================================
+//===================================================
+// MARK: -
+//===================================================
 extension SX_BaseAlertController {
-    func configAlert() {
-        /// 标题字体的样式(红色, 放大)
-        let titleFont = UIFont.systemFont(ofSize: 20)
-        let titleAttribute = NSMutableAttributedString.init(string: self.title!)
-        titleAttribute.addAttributes([(kCTFontAttributeName as NSAttributedStringKey):titleFont,
-                                      kCTForegroundColorAttributeName as NSAttributedStringKey:UIColor.red],
-                                     range:NSMakeRange(0, (self.title?.characters.count)!))
+    
+    func config() {
         
-        self.setValue(titleAttribute, forKey: "attributedTitle")
+        self.frame = UIScreen.main.bounds
+        self.backgroundColor = UIColor(white: 0.5, alpha: 0.85)
+        UIView.animate(withDuration: 0.5) {
+            self.alpha = 1
+        }
         
-        /// 消息内容样式
-        let messageFontDescriptor = UIFontDescriptor(fontAttributes: [
-            UIFontDescriptor.AttributeName.family: "Arial",
-            UIFontDescriptor.AttributeName.name: "Arial-ItalicMT"])
+        self.contentView = UIView().addhere(toSuperView: self).layout(snapKitMaker: { (make) in
+            make.center.equalToSuperview()
+            make.height.equalTo(150.FloatValue.IPAD_XValue)
+            make.left.equalToSuperview().offset(40)
+            make.right.equalToSuperview().offset(-40.FloatValue.IPAD_XValue)
+        }).config({ (CONTENTVIEW) in
+            CONTENTVIEW.backgroundColor    = UIColor.white
+            CONTENTVIEW.layer.cornerRadius = 6
+        })
         
-        let messageFont = UIFont(descriptor: messageFontDescriptor, size: 13.0)
-        let messaeAttribute = NSMutableAttributedString(string: self.message!)
-        messaeAttribute.addAttributes([(kCTFontAttributeName as NSAttributedStringKey):messageFont, kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range :NSMakeRange(0, (self.message?.characters.count)!))
-        self.setValue(messaeAttribute, forKey: "attributedMessage")
+        self.title = UILabel().addhere(toSuperView: self.contentView!).layout(snapKitMaker: { (make) in
+            make.top.equalToSuperview().offset(Margin)
+            
+        }).config({ (TITLE) in
+            
+        })
+        
+        self.message = UILabel().addhere(toSuperView: self.contentView!).layout(snapKitMaker: { (make) in
+            
+        }).config({ (TITLE) in
+            
+        })
+
+        
     }
 }
