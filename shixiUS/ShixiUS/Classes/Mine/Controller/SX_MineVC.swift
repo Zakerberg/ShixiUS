@@ -53,55 +53,16 @@ class SX_MineVC: UIViewController {
             QUIT.backgroundColor   = UIColor.white
             QUIT.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 18)
             QUIT.setTitle("退出登录", for: .normal)
+            QUIT.isHidden          = true
             QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
             QUIT.rx.tap.subscribe(onNext: { (_) in
                 SXLog("退出登录")
-                /*
-                 //修改title字体及颜色
-                 NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:@"标题"];
-                 [titleStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, titleStr.length)];
-                 [titleStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(0, titleStr.length)];
-                 [alertController setValue:titleStr forKey:@"attributedTitle"];
-                 
-                 // 修改message字体及颜色
-                 NSMutableAttributedString *messageStr = [[NSMutableAttributedString alloc] initWithString:@"此处展示提示消息"];
-                 [messageStr addAttribute:NSForegroundColorAttributeName value:[UIColor purpleColor] range:NSMakeRange(0, messageStr.length)];
-                 [messageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(0, messageStr.length)];
-                 [alertController setValue:messageStr forKey:@"attributedMessage"];
-                 
-                 // 添加UIAlertAction
-                 UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                 NSLog(@"确认");
-                 }];
-                 // KVC修改字体颜色
-                 [sureAction setValue:[UIColor blueColor] forKey:@"_titleTextColor"];
-                 [alertController addAction:sureAction];
-                 
-                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                 NSLog(@"取消");
-                 }];
-                 [cancelAction setValue:[UIColor blackColor] forKey:@"_titleTextColor"];
-                 [alertController addAction:cancelAction];
-                 
-                 UIAlertAction *testActionOne = [UIAlertAction actionWithTitle:@"测试1" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                 NSLog(@"测试1");
-                 }];
-                 [testActionOne setValue:[UIColor greenColor] forKey:@"_titleTextColor"];
-                 [alertController addAction:testActionOne];
-                 
-                 UIAlertAction *testActionTwo = [UIAlertAction actionWithTitle:@"测试2" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                 NSLog(@"测试2");
-                 }];
-                 [testActionTwo setValue:[UIColor greenColor] forKey:@"_titleTextColor"];
-                 [alertController addAction:testActionTwo];
-                 */
 
                 let alertController = UIAlertController(title: "确定退出登录?", message: "", preferredStyle: .alert)
                 var cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
                     
                 })
                 //[cancelAction setValue:[UIColor blackColor] forKey:@"_titleTextColor"]
-                
                 var sureAction  = UIAlertAction(title: "确定", style: .default, handler: { (action) in
 
                 })
@@ -385,17 +346,10 @@ extension SX_MineVC {
             self.titleNameLabel?.isHidden = false
             self.logInBtn?.isHidden       = true
             self.titleNameLabel?.text     = (noti.userInfo?["name"] ?? "暂未设置") as? String
+            self.quitBtn.isHidden         = false
         }, onError: { (error) in
             SXLog(error)
         }, onCompleted: nil, onDisposed: nil)
     }
 }
 
-// =========================================================================================
-// MARK: - UIAlertViewDelegate
-// =========================================================================================
-extension SX_MineVC:UIAlertViewDelegate {
-    
-    
-    
-}
