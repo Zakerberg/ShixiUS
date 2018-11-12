@@ -27,7 +27,6 @@ class SX_MineVC: UIViewController {
     
     var mineImageArr = [["te"], ["MyCollection","PayRecord"], ["Personal","FixPassword"]]
     var mineTitleArr = [["st"], ["我的收藏","付费记录"], ["个人信息","修改密码"]]
-    var quitBtn: UIButton?
     
     var titleNameLabel: UILabel?
     var logInBtn: UIButton?
@@ -43,6 +42,34 @@ class SX_MineVC: UIViewController {
         tableView.dataSource                   = self
         
         return tableView
+    }()
+    
+    lazy var quitBtn: UIButton = {
+        let button = UIButton(type: .custom).addhere(toSuperView: table).layout(snapKitMaker: { (make) in
+            make.top.equalToSuperview().offset(385.FloatValue.IPAD_XValue)
+            make.width.equalToSuperview()
+            make.height.equalTo(45.FloatValue.IPAD_XValue)
+        }).config({ (QUIT) in
+            QUIT.backgroundColor   = UIColor.white
+            QUIT.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 18)
+            QUIT.setTitle("退出登录", for: .normal)
+            QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
+            QUIT.rx.tap.subscribe(onNext: { (_) in
+                SXLog("退出登录")
+                let alert = SX_BaseAlertController(title: "退出登录", message: "", messageColor: UIColor.colorWithRGB(r: 51, g: 51, b: 51))
+                alert.addButton(.Other, title: "取消") { (item) in
+                    alert.dismiss()
+                }
+                alert.addButton(.Other, title: "确定") { (item) in
+                    SXLog("确定退出")
+                }
+                alert.show()
+                
+            }, onError: { (error) in
+                
+            }, onCompleted: nil, onDisposed: nil)
+        })
+        return button
     }()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +91,7 @@ extension SX_MineVC {
     func setUI() {
         title = "我的"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        table.addSubview(quitBtn)
         self.view.addSubview(table)
     }
 }
@@ -105,7 +133,6 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                     if self.statusStr == "1" { // 登陆
                         self.titleNameLabel?.isHidden = false
                         self.logInBtn?.isHidden       = true
-                        self.quitBtn?.isHidden        = false
                         self.titleNameLabel?.text     = name
                     }
                 })
@@ -134,14 +161,13 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.FloatValue.IPAD_XValue
+        if section == 0 {
+            return CGFloat.leastNormalMagnitude
+        }
+        return 5.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        
-        if section == 3 {
-            return 45.FloatValue.IPAD_XValue
-        }
         return 10.FloatValue.IPAD_XValue
     }
     
@@ -150,25 +176,6 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        if section == 2 {
-            let view = UIView()
-            
-            self.quitBtn = UIButton(type: .custom).addhere(toSuperView: view).layout(snapKitMaker: { (make) in
-                make.top.equalToSuperview().offset(Margin)
-                make.width.equalTo(SCREEN_WIDTH)
-                make.height.equalTo(60.FloatValue.IPAD_XValue)
-            }).config({ (QUIT) in
-                QUIT.backgroundColor   = UIColor.white
-                QUIT.titleLabel?.font  = UIFont.boldSystemFont(ofSize: 18)
-                QUIT.setTitle("退出登录", for: .normal)
-                QUIT.isHidden          = true
-                QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
-                QUIT.addTarget(self, action: #selector(BntnClick), for: .touchUpInside)
-            })
-            
-            return view
-        }
         return UIView()
     }
     
@@ -333,32 +340,9 @@ extension SX_MineVC {
         NotificationCenter.default.rx.notification(NSNotification.Name(rawValue: "LOGINSUCCESS")).takeUntil(self.rx.deallocated).subscribe(onNext: { (noti) in
             self.titleNameLabel?.isHidden = false
             self.logInBtn?.isHidden       = true
-            self.quitBtn?.isHidden        = false
             self.titleNameLabel?.text     = (noti.userInfo?["name"] ?? "暂未设置") as? String
         }, onError: { (error) in
             SXLog(error)
         }, onCompleted: nil, onDisposed: nil)
     }
-    
-    
-    
-    
-    
-    
-    
-    @objc func BntnClick () {
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-
 }

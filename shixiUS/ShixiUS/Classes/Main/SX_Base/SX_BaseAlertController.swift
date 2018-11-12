@@ -24,14 +24,14 @@
 
 import UIKit
 
-let AlertWidth: CGFloat   = 270
-let AlertHeight:CGFloat   = 130
+let AlertWidth: CGFloat   = 330.FloatValue.IPAD_XValue
+let AlertHeight:CGFloat   = 130.FloatValue.IPAD_XValue
 
 let AlertPadding: CGFloat = 10
 let MenuHeight: CGFloat   = 44
 
 enum ButtonType {
-    case button_OK, button_Cancel, button_Other
+    case OK, Cancel, Other
 }
 
 class SX_AlertDialogItem: NSObject {
@@ -72,15 +72,15 @@ class SX_BaseAlertController: UIView {
         // 计算frame
         var SCREENWIDTH  = UIScreen.main.bounds.size.width
         var SCREENHEIGHT = UIScreen.main.bounds.size.height
-        // On iOS7, screen width and height doesn't automatically follow orientation
-        if floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1 {
-            let interfaceOrientation = UIApplication.shared.statusBarOrientation
-            if UIInterfaceOrientationIsLandscape(interfaceOrientation) {
+        
+//        if floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1 {
+//            let interfaceOrientation = UIApplication.shared.statusBarOrientation
+//            if UIInterfaceOrientationIsLandscape(interfaceOrientation) {
                 let tmp      = SCREENWIDTH
                 SCREENWIDTH  = SCREENHEIGHT
                 SCREENHEIGHT = tmp
-            }
-        }
+//            }
+//        }
         let rect     = CGRect(x: 0, y: 0, width: SCREENWIDTH, height: SCREENHEIGHT)
         
         self.init(frame: rect)
@@ -93,10 +93,10 @@ class SX_BaseAlertController: UIView {
     }
     
     func buildViews(_ color:UIColor?) {
-        self.coverView                   = UIView(frame: self.topView().bounds)
-        self.coverView?.backgroundColor  = UIColor.black
-        self.coverView?.alpha            = 0
-        self.coverView?.autoresizingMask = UIViewAutoresizing.flexibleHeight
+        self.coverView                      = UIView(frame: self.topView().bounds)
+        self.coverView?.backgroundColor     = UIColor.black
+        self.coverView?.alpha               = 0
+        self.coverView?.autoresizingMask    = UIViewAutoresizing.flexibleHeight
         self.topView().addSubview(self.coverView!)
         
         self.alertView = UIView(frame: CGRect(x: 0, y: 0, width: AlertWidth, height: AlertHeight))
@@ -108,59 +108,66 @@ class SX_BaseAlertController: UIView {
         self.addSubview(self.alertView!)
         
         // 设置title
-        let labelHeigh = self.heighOfRow(self.title! as NSString, font: 17, width: AlertWidth - 2 * AlertPadding)
-        self.labelTitle = UILabel(frame: CGRect(x: AlertPadding, y: AlertPadding, width: AlertWidth - 2 * AlertPadding, height: labelHeigh))
-        self.labelTitle?.font          = UIFont.boldSystemFont(ofSize: 17)
-        self.labelTitle?.textColor     = UIColor.black
-        self.labelTitle?.textAlignment = NSTextAlignment.center
-        self.labelTitle?.numberOfLines = 0
-        self.labelTitle?.text          = self.title
-        self.labelTitle?.lineBreakMode = NSLineBreakMode.byCharWrapping
-        self.alertView?.addSubview(self.labelTitle!)
+//        let labelHeigh = self.heighOfRow(self.title! as NSString, font: 17, width: AlertWidth - 2 * AlertPadding)
+//        self.labelTitle = UILabel(frame: CGRect(x: AlertPadding, y: AlertPadding, width: AlertWidth - 2 * AlertPadding, height: labelHeigh))
+        
+        self.labelTitle = UILabel().addhere(toSuperView: self.alertView!).layout(snapKitMaker: { (make) in
+            make.top.equalToSuperview().offset(Margin)
+            make.width.equalToSuperview()
+            make.height.equalTo(25.FloatValue.IPAD_XValue)
+        }).config({ (LABELTITLE) in
+            LABELTITLE.font          = UIFont.boldSystemFont(ofSize: 17)
+            LABELTITLE.textColor     = UIColor.black
+            LABELTITLE.textAlignment = NSTextAlignment.center
+            LABELTITLE.text          = self.title
+        })
+        
+//        self.labelTitle?.font          = UIFont.boldSystemFont(ofSize: 17)
+//        self.labelTitle?.textColor     = UIColor.black
+//        self.labelTitle?.textAlignment = NSTextAlignment.center
+//        self.labelTitle?.numberOfLines = 0
+//        self.labelTitle?.text          = self.title
+//        self.labelTitle?.lineBreakMode = NSLineBreakMode.byCharWrapping
+//        self.alertView?.addSubview(self.labelTitle!)
         
         // 设置message
-        let messageHeigh  = self.heighOfRow(self.message! as NSString, font: 14, width: AlertWidth - 2 * AlertPadding)
-        self.labelmessage = UILabel(frame: CGRect(x: AlertPadding, y: self.labelTitle!.frame.origin.y + self.labelTitle!.frame.size.height, width: AlertWidth - 2 * AlertPadding, height: messageHeigh + 2 * AlertPadding))
-        self.labelmessage?.font = UIFont.systemFont(ofSize: 14)
-        
-        let mesColor:UIColor             = color ?? UIColor.black
-        self.labelmessage?.textColor     = mesColor
-        self.labelmessage?.textAlignment = NSTextAlignment.center
-        self.labelmessage?.text          = self.message
-        self.labelmessage?.numberOfLines = 0
-        self.labelmessage?.lineBreakMode = NSLineBreakMode.byCharWrapping
-        self.alertView?.addSubview(self.labelmessage!)
-        
-        self.contentScrollView = UIScrollView(frame: CGRect.zero)
-        self.alertView?.addSubview(self.contentScrollView!)
-        
-        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.addObserver(self, selector: #selector(SX_BaseAlertController.deviceOrientationDidChange(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-    }
-    
-    // dealloc
-    deinit {
-        UIDevice.current.endGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+//        let messageHeigh  = self.heighOfRow(self.message! as NSString, font: 14, width: AlertWidth - 2 * AlertPadding)
+//        self.labelmessage = UILabel(frame: CGRect(x: AlertPadding, y: self.labelTitle!.frame.origin.y + self.labelTitle!.frame.size.height, width: AlertWidth - 2 * AlertPadding, height: messageHeigh + 2 * AlertPadding))
+//        self.labelmessage?.font = UIFont.systemFont(ofSize: 14)
+//
+//        let mesColor:UIColor             = color ?? UIColor.black
+//        self.labelmessage?.textColor     = mesColor
+//        self.labelmessage?.textAlignment = NSTextAlignment.center
+//        self.labelmessage?.text          = self.message
+//        self.labelmessage?.numberOfLines = 0
+//        self.labelmessage?.lineBreakMode = NSLineBreakMode.byCharWrapping
+//        self.alertView?.addSubview(self.labelmessage!)
+//
+//        self.contentScrollView = UIScrollView(frame: CGRect.zero)
+//        self.alertView?.addSubview(self.contentScrollView!)
+//
+//        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+//        NotificationCenter.default.addObserver(self, selector: #selector(SX_BaseAlertController.deviceOrientationDidChange(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+
     }
     
     // override func
-    override func layoutSubviews() {
-        self.buttonScrollView?.frame  = CGRect(x: 0, y: self.alertView!.frame.size.height-MenuHeight,width: self.alertView!.frame.size.width, height: MenuHeight);
-        self.contentScrollView?.frame = CGRect(x: 0, y: self.labelTitle!.frame.origin.y + self.labelTitle!.frame.size.height, width: self.alertView!.frame.size.width, height: self.alertView!.frame.size.height - MenuHeight);
-        self.contentView?.frame       = CGRect(x: 0,y: 0,width: self.contentView!.frame.size.width, height: self.contentView!.frame.size.height);
-        if self.contentView != nil {
-            self.contentScrollView?.contentSize = self.contentView!.frame.size;
-        }
-    }
+//    override func layoutSubviews() {
+//        self.buttonScrollView?.frame  = CGRect(x: 0, y: self.alertView!.frame.size.height-MenuHeight,width: self.alertView!.frame.size.width, height: MenuHeight);
+//        self.contentScrollView?.frame = CGRect(x: 0, y: self.labelTitle!.frame.origin.y + self.labelTitle!.frame.size.height, width: self.alertView!.frame.size.width, height: self.alertView!.frame.size.height - MenuHeight);
+//        self.contentView?.frame       = CGRect(x: 0,y: 0,width: self.contentView!.frame.size.width, height: self.contentView!.frame.size.height);
+//        if self.contentView != nil {
+//            self.contentScrollView?.contentSize = self.contentView!.frame.size;
+//        }
+//    }
     
-    override func willMove(toSuperview newSuperview: UIView?) {
-        self.addButtonItem()
-        if self.contentView != nil {
-            self.contentScrollView?.addSubview(self.contentView!)
-        }
-        self.reLayout()
-    }
+//    override func willMove(toSuperview newSuperview: UIView?) {
+//        self.addButtonItem()
+//        if self.contentView != nil {
+//            self.contentScrollView?.addSubview(self.contentView!)
+//        }
+//        self.reLayout()
+//    }
     
     // show and dismiss
     func topView() -> UIView {
@@ -175,7 +182,7 @@ class SX_BaseAlertController: UIView {
         item.action = {(ite:SX_AlertDialogItem)->Void in
             print("no action")
         }
-        item.type = ButtonType.button_OK
+        item.type = ButtonType.OK
         self.items?.add(item)
         return (self.items?.index(of: title))!
     }
@@ -205,10 +212,10 @@ class SX_BaseAlertController: UIView {
         }
         
         self.items?.enumerateObjects({ (item, idx, stop) in
-            let button = UIButton(type: UIButtonType.system)
+            let button   = UIButton(type: UIButtonType.system)
             button.frame = CGRect(x: CGFloat(idx) * width, y: 1, width: width, height: MenuHeight)
             button.backgroundColor     = UIColor.white
-            button.layer.shadowColor   = UIColor.gray.cgColor
+            button.layer.shadowColor   = UIColor.colorWithHexString(hex: "333333", alpha: 0.1).cgColor
             button.layer.shadowRadius  = 0.5
             button.layer.shadowOpacity = 1
             button.layer.shadowOffset  = CGSize.zero
@@ -217,8 +224,7 @@ class SX_BaseAlertController: UIView {
             
             let ite = item as! SX_AlertDialogItem
             
-            button.setTitle(ite.title, for: UIControlState())
-            button.setTitle(ite.title, for: UIControlState.selected)
+            button.setTitle(ite.title, for: .selected)
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: (button.titleLabel?.font.pointSize)!)
             
             button.addTarget(self, action: #selector(SX_BaseAlertController.buttonTouched(_:)), for: UIControlEvents.touchUpInside)
@@ -227,33 +233,32 @@ class SX_BaseAlertController: UIView {
             // 按钮边框
             if idx != (self.items?.count)! - 1 {
                 let seprateLineVer = UIView(frame: CGRect(x: width - 1, y: 0, width: 2, height: MenuHeight))
-                seprateLineVer.backgroundColor = UIColor.lightGray
+                seprateLineVer.backgroundColor = UIColor.colorWithHexString(hex: "333333", alpha: 0.1)
                 button.addSubview(seprateLineVer)
             }
             
             let seprateLineHor = UIView(frame: CGRect(x: 0, y: 0, width: self.buttonScrollView!.frame.size.width, height: 1))
-            seprateLineHor.backgroundColor = UIColor.lightGray
+            seprateLineHor.backgroundColor = UIColor.colorWithHexString(hex: "333333", alpha: 0.1)
             self.buttonScrollView?.addSubview(seprateLineHor)
         })
         self.alertView?.addSubview(self.buttonScrollView!)
     }
     
-    func reLayout() {
-        var plus:CGFloat
-        if self.contentView != nil {
-            plus = (self.contentView!.frame.size.height) - ((self.alertView?.frame.size.height)! - MenuHeight)
-        }
-        else {
-            plus = (self.labelmessage?.frame.origin.y)! + (self.labelmessage?.frame.size.height)! - ((self.alertView?.frame.size.height)! - MenuHeight)
-        }
-        plus = max(0, plus)
-        let height = min(self.screenBounds().size.height - MenuHeight, (self.alertView?.frame.size.height)! + plus)
-        
-        self.alertView?.frame  = CGRect(x: self.alertView!.frame.origin.x, y: self.alertView!.frame.origin.y, width: AlertWidth, height: height)
-        self.alertView?.center = self.center
-        self.setNeedsDisplay()
-        self.setNeedsLayout()
-    }
+//    func reLayout() {
+//        var plus:CGFloat
+//        if self.contentView != nil {
+//            plus = (self.contentView!.frame.size.height) - ((self.alertView?.frame.size.height)! - MenuHeight)
+//        }else {
+//            plus = (self.labelmessage?.frame.origin.y)! + (self.labelmessage?.frame.size.height)! - ((self.alertView?.frame.size.height)! - MenuHeight)
+//        }
+//        plus = max(0, plus)
+//        let height = min(self.screenBounds().size.height - MenuHeight, (self.alertView?.frame.size.height)! + plus)
+//
+//        self.alertView?.frame  = CGRect(x: self.alertView!.frame.origin.x, y: self.alertView!.frame.origin.y, width: AlertWidth, height: height)
+//        self.alertView?.center = self.center
+//        self.setNeedsDisplay()
+//        self.setNeedsLayout()
+//    }
 }
 
 //=======================================================================================
@@ -299,12 +304,13 @@ extension SX_BaseAlertController {
         self.dismiss()
     }
     
-    // handle device orientation changes
     @objc func deviceOrientationDidChange(_ notification:Notification) {
         self.frame = self.screenBounds()
         UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
-            self.reLayout()
+//            self.reLayout()
         }) { (finished) -> Void in
+         
+            
             
         }
     }
