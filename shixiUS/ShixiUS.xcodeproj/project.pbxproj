@@ -69,7 +69,6 @@
 		329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */; };
 		329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */; };
 		329FDF732136326900D939F9 /* SX_MineVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */; };
-		32AC6B11215E28F2000355A4 /* SX_BaseAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AC6B10215E28F2000355A4 /* SX_BaseAlertController.swift */; };
 		32B41D7721609CE4000781A6 /* SX_Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B41D7621609CE4000781A6 /* SX_Regex.swift */; };
 		32D0DFBF2147C1BD00A6549B /* SX_ProjectTripDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D0DFBE2147C1BD00A6549B /* SX_ProjectTripDateCell.swift */; };
 		32D43BB321884D59002CFCFC /* SX_JobApplyDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D43BB221884D59002CFCFC /* SX_JobApplyDetailController.swift */; };
@@ -232,7 +231,6 @@
 		329FDF6E2136318300D939F9 /* SX_MineEmploymentJobsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineEmploymentJobsController.swift; sourceTree = "<group>"; };
 		329FDF702136320C00D939F9 /* SX_MineTrainingProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineTrainingProjectController.swift; sourceTree = "<group>"; };
 		329FDF722136326900D939F9 /* SX_MineVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_MineVocationalTrainingController.swift; sourceTree = "<group>"; };
-		32AC6B10215E28F2000355A4 /* SX_BaseAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseAlertController.swift; sourceTree = "<group>"; };
 		32B41D7621609CE4000781A6 /* SX_Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_Regex.swift; sourceTree = "<group>"; };
 		32D0DFBE2147C1BD00A6549B /* SX_ProjectTripDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ProjectTripDateCell.swift; sourceTree = "<group>"; };
 		32D43BB221884D59002CFCFC /* SX_JobApplyDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_JobApplyDetailController.swift; sourceTree = "<group>"; };
@@ -513,7 +511,6 @@
 			children = (
 				45CF169120EF3F4400188F42 /* SX_BaseWebController.swift */,
 				4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */,
-				32AC6B10215E28F2000355A4 /* SX_BaseAlertController.swift */,
 				3207DCC9216F2160003828F8 /* SX_NoDataView.swift */,
 				3274F3AC2181972F0010BE91 /* SX_BaseController.swift */,
 			);
@@ -1245,7 +1242,6 @@
 				4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */,
 				45556B7320D8A52C0035FCA6 /* SX_MineVC.swift in Sources */,
 				458130AD20FEE222003BB9E7 /* SX_ProjectDetailController.swift in Sources */,
-				32AC6B11215E28F2000355A4 /* SX_BaseAlertController.swift in Sources */,
 				4527F902211D5D97000EAEB9 /* SX_HeadPortraitCell.swift in Sources */,
 				3262127D214CE13E000C1A6C /* RMCalendarLogic.m in Sources */,
 				324482DE214923F900037533 /* SX_PersonalHeadPortraitCell.swift in Sources */,
