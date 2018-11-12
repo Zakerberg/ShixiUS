@@ -126,3 +126,12 @@ let SX_Mine_FixInfo           = SHIXIUS + "/member/info"
 
 // 付款记录 (get)
 let SX_Mine_OrderRecord       = SHIXIUS + "/myorder/index?"
+
+// 修改密码
+let SX_Mine_FixPassword       = SHIXIUS + "/member/uppassword?"
+
+//
+
+
+
+
