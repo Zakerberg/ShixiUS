@@ -77,7 +77,7 @@ extension SX_BaseAlertController {
         
         self.title = UILabel().addhere(toSuperView: self.contentView!).layout(snapKitMaker: { (make) in
             make.top.equalToSuperview().offset(Margin)
-            
+            make
         }).config({ (TITLE) in
             
         })
@@ -88,6 +88,5 @@ extension SX_BaseAlertController {
             
         })
 
-        
     }
 }
