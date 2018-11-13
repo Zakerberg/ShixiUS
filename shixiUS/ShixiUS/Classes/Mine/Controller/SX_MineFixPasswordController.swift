@@ -22,11 +22,11 @@ import MBProgressHUD
 class SX_MineFixPasswordController: UIViewController {
     
     var fixBtn: UIButton?
-    var oldPassword: UITextField?
+    var password: UITextField?
     var newPassword: UITextField?
-    var newPasswordConfirm: UITextField?
+    var repeatPassword: UITextField?
     
-    lazy var fixTable: UITableView = {
+    lazy var table: UITableView = {
         
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
         tableView.backgroundColor  = UIColor.SX_BackGroundColor()
@@ -57,7 +57,7 @@ extension SX_MineFixPasswordController {
     func setUI() {
         title = "修改密码"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
-        self.view.addSubview(self.fixTable)
+        self.view.addSubview(self.table)
     }
 }
 
@@ -84,7 +84,7 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
         
         if indexPath.section == 0 {
             cell.textLabel?.text = "原密码"
-            self.oldPassword     = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
+            self.password = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
                 make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
                 make.centerY.equalToSuperview()
                 make.height.equalTo(45.FloatValue.IPAD_XValue)
@@ -94,7 +94,7 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
                     TF.placeholder       = "输入旧密码"
                     TF.isSecureTextEntry = true
                     TF.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
-                        if ((self?.oldPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && self?.newPasswordConfirm?.text?.lengthOfBytes(using: .utf8) != 0) {
+                        if ((self?.password?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && self?.repeatPassword?.text?.lengthOfBytes(using: .utf8) != 0) {
                             self?.fixBtn?.isEnabled       = true
                             self?.fixBtn?.backgroundColor = UIColor.SX_MainColor()
                         }else{
@@ -115,7 +115,7 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
                     TF.placeholder       = "新密码"
                     TF.isSecureTextEntry = true
                     TF.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
-                        if ((self?.oldPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && self?.newPasswordConfirm?.text?.lengthOfBytes(using: .utf8) != 0) {
+                        if ((self?.password?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && self?.repeatPassword?.text?.lengthOfBytes(using: .utf8) != 0) {
                             self?.fixBtn?.isEnabled       = true
                             self?.fixBtn?.backgroundColor = UIColor.SX_MainColor()
                         }else{
@@ -126,7 +126,7 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
             }
         }else{
             cell.textLabel?.text         = "确认密码"
-            self.newPasswordConfirm      = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
+            self.repeatPassword      = UITextField().addhere(toSuperView: cell.contentView).layout { (make) in
                 make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
                 make.centerY.equalToSuperview()
                 make.height.equalTo(45.FloatValue.IPAD_XValue)
@@ -136,7 +136,7 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
                     TF.placeholder       = "再次输入新密码"
                     TF.isSecureTextEntry = true
                     TF.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
-                        if ((self?.oldPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && self?.newPasswordConfirm?.text?.lengthOfBytes(using: .utf8) != 0) {
+                        if ((self?.password?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 && self?.repeatPassword?.text?.lengthOfBytes(using: .utf8) != 0) {
                             self?.fixBtn?.isEnabled       = true
                             self?.fixBtn?.backgroundColor = UIColor.SX_MainColor()
                         }else{
@@ -171,31 +171,48 @@ extension SX_MineFixPasswordController: UITableViewDelegate, UITableViewDataSour
                 FIX.isEnabled           = false
                 FIX.rx.tap.subscribe(onNext: { (_) in
                     
-                    if self.newPassword?.text != self.newPasswordConfirm?.text {
+                    if self.newPassword?.text != self.repeatPassword?.text {
                         let hud         = MBProgressHUD.showAdded(to: self.view, animated: true)
                         hud.mode        = .text
                         hud.isSquare    = true
-                        hud.label.text  = ""
+                        hud.label.text  = "两次输入的密码不一致"
                         hud.hide(animated: true, afterDelay: 1.0)
                     }else{
-                        let url = SX_VIPCenter_MyCollection + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
                         
-                        SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
-                            do {
+                        let passwordStr = self.password?.text?.base64
+                        let str1 = passwordStr?.replacingOccurrences(of: "\n", with: "")
+                        let str2 = str1?.replacingOccurrences(of: "\t", with: "")
+                        
+                        let newPasswordStr = self.newPassword?.text?.base64
+                        let str3 = newPasswordStr?.replacingOccurrences(of: "\n", with: "")
+                        let str4 = str3?.replacingOccurrences(of: "\t", with: "")
+                        
+                        let repeatPasswordStr = self.repeatPassword?.text?.base64
+                        let str5 = repeatPasswordStr?.replacingOccurrences(of: "\n", with: "")
+                        let str6 = str5?.replacingOccurrences(of: "\t", with: "")
+                        
+                        let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
+                                     "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!),
+                                     "password":str2,
+                                     "newpassword":str4,
+                                     "repeatpassword":str6
+                            ] as! [String : String]
+                        
+                        SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixPassword, parameters: param) { (result) in
+                            do{
                                 let json = try JSON(data: result)
-                                if json["status"].int == 200 {
-                                    SXLog("修改成功!")
+                                if json["status"] == 200 {
                                     let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
                                     hud.mode       = .text
                                     hud.isSquare   = true
-                                    hud.label.text = json["msg"].string
+                                    hud.label.text = json["msg"].stringValue
                                     hud.hide(animated: true, afterDelay: 1.0)
                                     self.navigationController?.popViewController(animated: true)
                                 }else{
                                     let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
                                     hud.mode       = .text
                                     hud.isSquare   = true
-                                    hud.label.text = json["msg"].string
+                                    hud.label.text = json["msg"].stringValue
                                     hud.hide(animated: true, afterDelay: 1.0)
                                 }
                             }catch { }

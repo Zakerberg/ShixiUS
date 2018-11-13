@@ -128,7 +128,7 @@ let SX_Mine_FixInfo           = SHIXIUS + "/member/info"
 let SX_Mine_OrderRecord       = SHIXIUS + "/myorder/index?"
 
 // 修改密码
-let SX_Mine_FixPassword       = SHIXIUS + "/member/uppassword?"
+let SX_Mine_FixPassword       = SHIXIUS + "/member/uppassword"
 
 //
 

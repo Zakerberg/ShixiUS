@@ -248,7 +248,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
     // =======================================================================================
     // swizzling system method: popToViewController
     // =======================================================================================
-    @objc func sx_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
+    @objc func SX_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBarUpdate(titleColor: viewController.navBarTitleColor)
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
         // UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响
@@ -261,7 +261,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
         }
         CATransaction.setAnimationDuration(popProperties.popDuration)
         CATransaction.begin()
-        let vcs = sx_popToViewController(viewController, animated: animated)
+        let vcs = SX_popToViewController(viewController, animated: animated)
         CATransaction.commit()
         return vcs
     }
@@ -269,7 +269,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
     // swizzling system method: popToRootViewControllerAnimated
     // =======================================================================================
     
-    @objc func sx_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
+    @objc func SX_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
         displayLink?.add(to: RunLoop.main, forMode: .commonModes)
         CATransaction.setCompletionBlock {
@@ -279,7 +279,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
         }
         CATransaction.setAnimationDuration(popProperties.popDuration)
         CATransaction.begin()
-        let vcs = sx_popToRootViewControllerAnimated(animated)
+        let vcs = SX_popToRootViewControllerAnimated(animated)
         CATransaction.commit()
         return vcs;
     }
@@ -312,7 +312,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
     }
     
     // swizzling system method: pushViewController
-    @objc func sx_pushViewController(_ viewController: UIViewController, animated: Bool) {
+    @objc func SX_pushViewController(_ viewController: UIViewController, animated: Bool) {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(pushNeedDisplay))
         displayLink?.add(to: RunLoop.main, forMode: .commonModes)
         CATransaction.setCompletionBlock {
@@ -324,7 +324,7 @@ extension UINavigationController: SXFatherAwakeProtocol {
         
         CATransaction.setAnimationDuration(pushProperties.pushDuration)
         CATransaction.begin()
-        sx_pushViewController(viewController, animated: animated)
+        SX_pushViewController(viewController, animated: animated)
         CATransaction.commit()
     }
     
