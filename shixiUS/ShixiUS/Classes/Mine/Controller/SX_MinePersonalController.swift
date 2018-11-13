@@ -9,7 +9,7 @@
 /*
  想打张白条给你
  上面就写着:
- 我欠你一声温柔半世呵护
+ 我欠你一声温柔 半世呵护
  分期一万年
  */
 
@@ -27,10 +27,10 @@ class SX_MinePersonalController: UIViewController {
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
-        tableView.backgroundColor = UIColor.SX_BackGroundColor()
+        tableView.backgroundColor              = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
-        tableView.delegate   = self
-        tableView.dataSource = self
+        tableView.delegate                     = self
+        tableView.dataSource                   = self
         
         return tableView
     }()
@@ -65,9 +65,17 @@ extension SX_MinePersonalController {
                      "email"   :self.Dic.value(forKey: "5"),
                      "weixin"  :self.Dic.value(forKey: "4")]
         
+        
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{
                 let json = try JSON(data: result)
+                
+                
+                
+                
+                
+  
+                
                 
                 
             }catch { }
@@ -85,7 +93,6 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         if indexPath.row == 0 {
             return 100.FloatValue.IPAD_XValue
         }
@@ -97,14 +104,14 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             let singleTap = UIGestureRecognizer(target: self, action: #selector(alterHeadPortrait))
             let cell = SX_PersonalHeadPortraitCell(style: .default, reuseIdentifier: nil)
             
-            cell.selectionStyle = .none
+            cell.selectionStyle   = .none
             cell.titleLabel?.text = self.titleArr[indexPath.row]
             cell.addGestureRecognizer(singleTap)
             
             return cell
         }else{
             let cell = SX_PersonalMessageCell(style: .default, reuseIdentifier: nil)
-            cell.selectionStyle = .none
+            cell.selectionStyle   = .none
             
             cell.titleLabel?.text = self.titleArr[indexPath.row]
             cell.tF?.placeholder  = self.contentArr[indexPath.row]
@@ -113,7 +120,7 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
                 self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
                 
                 if cell.tF?.text?.lengthOfBytes(using: .utf8) != 0 {
-                    self?.saveBtn?.isEnabled = true
+                    self?.saveBtn?.isEnabled       = true
                     self?.saveBtn?.backgroundColor = UIColor.SX_MainColor()
                 }
             })
