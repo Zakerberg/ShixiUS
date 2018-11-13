@@ -114,17 +114,25 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
         }else{
             let cell = SX_PersonalMessageCell(style: .default, reuseIdentifier: nil)
             cell.selectionStyle   = .none
+            if indexPath.row      == 2 {
+                cell.tF?.keyboardType = .numberPad
+            }
             
             cell.titleLabel?.text = self.titleArr[indexPath.row]
             cell.tF?.placeholder  = self.contentArr[indexPath.row]
             
-            cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
+    cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
                 self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
                 
-                if cell.tF?.text?.lengthOfBytes(using: .utf8) != 0 {
+        //      if cell.tF?.text?.lengthOfBytes(using: .utf8) != 0 { }
+        
                     self?.saveBtn?.isEnabled       = true
                     self?.saveBtn?.backgroundColor = UIColor.SX_MainColor()
-                }
+        
+//        if ((self?.password?.text?.lengthOfBytes(using: .utf8)) != 0 || (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 || self?.repeatPassword?.text?.lengthOfBytes(using: .utf8) != 0) {
+
+//        }
+        
             })
             return cell
         }
