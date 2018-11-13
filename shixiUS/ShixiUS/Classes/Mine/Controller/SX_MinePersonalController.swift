@@ -15,6 +15,7 @@
 
 import UIKit
 import SwiftyJSON
+import IQKeyboardManagerSwift
 
 class SX_MinePersonalController: UIViewController {
     
@@ -35,8 +36,15 @@ class SX_MinePersonalController: UIViewController {
         return tableView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name:NSNotification.Name.UIKeyboardWillShow , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHidden), name:NSNotification.Name.UIKeyboardWillHide , object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        IQKeyboardManager.shared.enable = false
         setUI()
     }
     
@@ -53,6 +61,7 @@ extension SX_MinePersonalController {
     
     func setUI() {
         title = "个人信息"
+        
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(self.table)
     }
@@ -65,16 +74,9 @@ extension SX_MinePersonalController {
                      "email"   :self.Dic.value(forKey: "5"),
                      "weixin"  :self.Dic.value(forKey: "4")]
         
-        
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{
                 let json = try JSON(data: result)
-                
-                
-                
-                
-                
-  
                 
                 
                 
@@ -223,3 +225,20 @@ extension SX_MinePersonalController: UIAlertViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 }
+
+// ==============================================================================
+// MARK: - KeyBoard Noti
+// ==============================================================================
+extension SX_MinePersonalController {
+    @objc func keyBoardWillShow(noti: Notification) {
+        self.table.frame = CGRect(x: 0, y: -100, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+    }
+    @objc func keyBoardWillHidden() {
+        self.table.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+    }
+}
+
+
+
+
+
