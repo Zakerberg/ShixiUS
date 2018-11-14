@@ -66,9 +66,6 @@ extension SX_ApplyProgressDetailController {
         
         
         
-        
-        
-        
     }
 }
 
