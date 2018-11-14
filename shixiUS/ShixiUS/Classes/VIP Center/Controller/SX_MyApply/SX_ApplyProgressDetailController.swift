@@ -17,7 +17,9 @@ import UIKit
 
 let progressDetailCellID = "progressDetailCellID"
 
-class SX_ApplyProgressDetailController: UIViewController {
+class SX_ApplyProgressDetailController: SX_BaseController {
+    
+    var dataArr = ["q", "q", "q"]
     
     lazy var progressTab: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
@@ -29,10 +31,16 @@ class SX_ApplyProgressDetailController: UIViewController {
         return tableView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+     super.viewWillAppear(animated)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,6 +65,10 @@ extension SX_ApplyProgressDetailController {
         
         
         
+        
+        
+        
+        
     }
 }
 
@@ -66,15 +78,12 @@ extension SX_ApplyProgressDetailController {
 extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return self.dataArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SX_ProgressDetailCell(style: .default, reuseIdentifier: progressDetailCellID)
         cell.selectionStyle = .none
-        
-        
-
         
         return cell
     }

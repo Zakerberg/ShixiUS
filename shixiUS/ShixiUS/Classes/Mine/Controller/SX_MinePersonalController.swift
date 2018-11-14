@@ -67,12 +67,16 @@ extension SX_MinePersonalController {
     }
     
     func fetchData() {
-        let param = ["headpic" :"1",
-                     "username":self.Dic.value(forKey: "1"),
-                     "country" :self.Dic.value(forKey: "3"),
-                     "phone"   :self.Dic.value(forKey: "2"),
-                     "email"   :self.Dic.value(forKey: "5"),
-                     "weixin"  :self.Dic.value(forKey: "4")]
+        let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
+                     "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!),
+                     "headpic" :"1",
+                     "username":self.Dic.value(forKey: "1") ?? "",
+                     "country" :self.Dic.value(forKey: "3") ?? "",
+                     "phone"   :self.Dic.value(forKey: "2") ?? "",
+                     "email"   :self.Dic.value(forKey: "5") ?? "",
+                     "weixin"  :self.Dic.value(forKey: "4") ?? ""]
+        
+        
         
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{
@@ -124,19 +128,13 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             
             cell.titleLabel?.text = self.titleArr[indexPath.row]
             cell.tF?.placeholder  = self.contentArr[indexPath.row]
-            
-    cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
+
+            cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
                 self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
-                
-        //      if cell.tF?.text?.lengthOfBytes(using: .utf8) != 0 { }
-        
+                if cell.tF?.text?.lengthOfBytes(using: .utf8) != 0 {
                     self?.saveBtn?.isEnabled       = true
                     self?.saveBtn?.backgroundColor = UIColor.SX_MainColor()
-        
-//        if ((self?.password?.text?.lengthOfBytes(using: .utf8)) != 0 || (self?.newPassword?.text?.lengthOfBytes(using: .utf8)) != 0 || self?.repeatPassword?.text?.lengthOfBytes(using: .utf8) != 0) {
-
-//        }
-        
+                }
             })
             return cell
         }
@@ -249,8 +247,3 @@ extension SX_MinePersonalController {
         self.table.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
     }
 }
-
-
-
-
-
