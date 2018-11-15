@@ -61,7 +61,6 @@
 		32680E2F2179768800E86ACA /* SX_PullToBounceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E2E2179768800E86ACA /* SX_PullToBounceWrapper.swift */; };
 		32680E312179BEB700E86ACA /* SX_CertificationDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E302179BEB700E86ACA /* SX_CertificationDetailController.swift */; };
 		3274F3AD2181972F0010BE91 /* SX_BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3274F3AC2181972F0010BE91 /* SX_BaseController.swift */; };
-		32947039219D6C8F00DBBDE3 /* SX_TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32947038219D6C8F00DBBDE3 /* SX_TabBarButton.swift */; };
 		32998873214FB28600DC9ED3 /* SX_ApplySucceedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */; };
 		3299887521509C9F00DC9ED3 /* SX_Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3299887421509C9F00DC9ED3 /* SX_Utils.swift */; };
 		3299888521511BC700DC9ED3 /* CalendarTodaysDate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3299888121511BC700DC9ED3 /* CalendarTodaysDate.png */; };
@@ -225,7 +224,6 @@
 		32680E2E2179768800E86ACA /* SX_PullToBounceWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PullToBounceWrapper.swift; sourceTree = "<group>"; };
 		32680E302179BEB700E86ACA /* SX_CertificationDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CertificationDetailController.swift; sourceTree = "<group>"; };
 		3274F3AC2181972F0010BE91 /* SX_BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BaseController.swift; sourceTree = "<group>"; };
-		32947038219D6C8F00DBBDE3 /* SX_TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TabBarButton.swift; sourceTree = "<group>"; };
 		32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_ApplySucceedController.swift; sourceTree = "<group>"; };
 		3299887421509C9F00DC9ED3 /* SX_Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_Utils.swift; sourceTree = "<group>"; };
 		3299888121511BC700DC9ED3 /* CalendarTodaysDate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTodaysDate.png; sourceTree = "<group>"; };
@@ -765,7 +763,6 @@
 				45ACF3F22105AD0D001DAE5A /* SX_NavigationBar.swift */,
 				459B3349210965EA00B2EBB0 /* SX_MoreDateController.swift */,
 				32998872214FB28600DC9ED3 /* SX_ApplySucceedController.swift */,
-				32947038219D6C8F00DBBDE3 /* SX_TabBarButton.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1194,7 +1191,6 @@
 				45454BE1211989EC002B9EBC /* SX_VocationalTrainingCell.swift in Sources */,
 				323E99BE213FA6E6006038F5 /* SX_ApplyEmpListController.swift in Sources */,
 				45BEF63F20DA4F8500B71FAC /* SX_TrainingCell.swift in Sources */,
-				32947039219D6C8F00DBBDE3 /* SX_TabBarButton.swift in Sources */,
 				45EBB89B20D8DB2100863544 /* SX_GuideViewController.swift in Sources */,
 				45B8E4E6212FE9D4002061D5 /* SX_PaymentRecordController.swift in Sources */,
 				3262127E214CE13E000C1A6C /* RMCalendarController.m in Sources */,
