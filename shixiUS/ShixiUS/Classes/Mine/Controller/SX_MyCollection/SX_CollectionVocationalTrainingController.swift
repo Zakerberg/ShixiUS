@@ -62,7 +62,7 @@ extension SX_CollectionVocationalTrainingController {
     
     func fetchData() {
         
-        let url = SX_VIPCenter_MyCollection + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&type=2"
+        let url = SX_VIPCenter_MyCollection + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&type=3"
         
         SX_NetManager.requestData(type: .GET, URlString: url) { (result) in
             do {
@@ -147,10 +147,17 @@ extension SX_CollectionVocationalTrainingController:UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.FloatValue.IPAD_XValue
+        return CGFloat.leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10.FloatValue.IPAD_XValue
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = TrainingArr[indexPath.row]
+        let vc    = SX_CertificationDetailController()
+        vc.id     = model.id
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

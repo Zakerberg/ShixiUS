@@ -146,11 +146,19 @@ extension SX_CollectionTrainingProjectController: UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.FloatValue.IPAD_XValue
+        return CGFloat.leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10.FloatValue.IPAD_XValue
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = TrainArr[indexPath.row]
+        let vc   = SX_ProjectDetailController()
+        vc.id   = model.id
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

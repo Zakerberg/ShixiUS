@@ -1,4 +1,3 @@
-
 #import "RMCalendarController.h"
 #import "RMCalendarCollectionViewLayout.h"
 #import "RMCollectionCell.h"
@@ -11,7 +10,7 @@
 
 @implementation RMCalendarController
 static NSString *MonthHeader = @"MonthHeaderView";
-static NSString *DayCell = @"DayCell";
+static NSString *DayCell     = @"DayCell";
 
 /**
  *  初始化模型数组对象
@@ -105,8 +104,7 @@ static NSString *DayCell = @"DayCell";
  *  @param arr  模型数组
  *  @return 数组
  */
-- (NSMutableArray *)getMonthArrayOfDays:(int)days showType:(CalendarShowType)type isEnable:(BOOL)isEnable modelArr:(NSArray *)arr
-{
+- (NSMutableArray *)getMonthArrayOfDays:(int)days showType:(CalendarShowType)type isEnable:(BOOL)isEnable modelArr:(NSArray *)arr{
     NSDate *date = [NSDate date];
     
     NSDate *selectdate  = [NSDate date];
@@ -115,7 +113,6 @@ static NSString *DayCell = @"DayCell";
 }
 
 #pragma mark - CollectionView 数据源
-
 // 返回组数
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.calendarMonth.count;
@@ -127,7 +124,6 @@ static NSString *DayCell = @"DayCell";
 }
 
 #pragma mark - CollectionView 代理
-
 - (UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     RMCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DayCell forIndexPath:indexPath];
     NSArray *months = [self.calendarMonth objectAtIndex:indexPath.section];
@@ -136,22 +132,17 @@ static NSString *DayCell = @"DayCell";
     return cell;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     UICollectionReusableView *reusableview = nil;
-    
     if (kind == UICollectionElementKindSectionHeader){
-        
         NSMutableArray *month_Array = [self.calendarMonth objectAtIndex:indexPath.section];
         RMCalendarModel *model = [month_Array objectAtIndex:15];
-        
         RMCalendarMonthHeaderView *monthHeader = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:MonthHeader forIndexPath:indexPath];
         monthHeader.masterLabel.text = [NSString stringWithFormat:@"%lu年 %lu月",(unsigned long)model.year,(unsigned long)model.month];//@"日期";
         monthHeader.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8f];
         reusableview = monthHeader;
     }
     return reusableview;
-    
 }
 
 - (void)collectionView:(nonnull UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {

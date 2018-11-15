@@ -66,6 +66,7 @@ extension SX_CollextionEmploymentJobsController {
                 let json = try JSON(data: result)
                 if json["status"].int == 200 {
                     SXLog("获取就业岗位申请成功!")
+                    
                     for item in json["data"]["lists"].array ?? [] {
                         let collectionJobModel = JobCollectionListModel(jsonData: item)
                         self.collectionJobArr.append(collectionJobModel)
@@ -148,7 +149,7 @@ extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10.FloatValue.IPAD_XValue
+        return CGFloat.leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -157,6 +158,9 @@ extension SX_CollextionEmploymentJobsController: UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        let model = collectionJobArr[indexPath.row]
+        let vc   = SX_HotJobDetailController()
+        vc.id   = model.id
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
