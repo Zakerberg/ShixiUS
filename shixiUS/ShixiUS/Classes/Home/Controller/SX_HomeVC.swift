@@ -50,11 +50,11 @@
     
     var cerStr = ""
     private lazy var homeButton: UIButton = {
-        let button                        = UIButton()
-        button.imageView?.frame           = CGRect(x: 20, y: 20, width: 55, height: 55)
-        button.imageView?.center          = CGPoint(x: SCREEN_WIDTH/3, y: 40)
-        button.titleLabel?.frame          = CGRect(x: 0, y: 50, width: button.frame.size.width, height: 50)
-        button.titleLabel?.textAlignment  = .center
+        let button                              = UIButton()
+        button.imageView?.frame                 = CGRect(x: 20, y: 20, width: 55, height: 55)
+        button.imageView?.center                = CGPoint(x: SCREEN_WIDTH/3, y: 40)
+        button.titleLabel?.frame                = CGRect(x: 0, y: 50, width: button.frame.size.width, height: 50)
+        button.titleLabel?.textAlignment        = .center
         
         return button
     }()
@@ -263,12 +263,16 @@
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 100
+            return 100.FloatValue.IPAD_XValue
             
         }else if section == 1{
-            return 42
+            return 42.FloatValue.IPAD_XValue
         }
-        return 0
+        return CGFloat.leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 5.FloatValue.IPAD_XValue
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
