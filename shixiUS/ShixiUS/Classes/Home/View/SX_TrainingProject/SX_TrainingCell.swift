@@ -26,13 +26,11 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     var titleLabel: UILabel?
     var moreButton: UIButton?
     var collectionView: UICollectionView?
-    
     var trainModels: [SX_HomeTrainModel]?
     var trainingModels:[SX_HomeTrainingModel]?
     
     // delegate
     var delegate: SX_TrainingCellDelegate?
-    
     var id:String?
     
     override func awakeFromNib() {
@@ -55,10 +53,68 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+}
+
+// ===============================================================================
+// MARK: - configCell
+// ===============================================================================
+extension SX_TrainingCell {
+    func configCell()  {
+        self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.left.lessThanOrEqualTo(Margin)
+            make.height.lessThanOrEqualTo(Margin)
+        }).config({ (TITLE) in
+            TITLE.sizeToFit()
+            TITLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
+            TITLE.font = UIFont.systemFont(ofSize: 15)
+        })
+        
+        self.moreButton = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalToSuperview().offset(Margin)
+            make.right.equalToSuperview().offset(-Margin)
+            make.height.equalTo(Margin)
+        }).config({ (moreButton) in
+            moreButton.setImage(UIImage.init(named: "more"), for: .normal)
+            moreButton.setTitle("更多 ", for: .normal)
+            moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
+            moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
+            moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
+        })
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
+            //            make.left.equalTo(self.titleLabel!)
+            //            make.bottom.equalToSuperview().offset(-21)
+            //            make.right.equalToSuperview().offset(-Margin)
+            make.left.right.bottom.equalToSuperview()
+        }).config({ (collectionView) in
+            collectionView.isScrollEnabled              = false
+            collectionView.showsVerticalScrollIndicator = false
+            collectionView.backgroundColor              = UIColor.SX_BackGroundColor()
+        })
+    }
+}
+
+// ===============================================================================
+// MARK: - UICollectionViewDelegateFlowLayout
+// ===============================================================================
+extension SX_TrainingCell {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 170.FloatValue.IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
+    }
     
-    // ===============================================================================
-    // MARK: - UICollectionViewDelegate
-    // ===============================================================================
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: Margin, left: 10, bottom: Margin, right: 10)
+    }
+}
+
+
+// ===============================================================================
+// MARK: - UICollectionViewDelegate
+// ===============================================================================
+extension SX_TrainingCell {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.trainModels?.count ?? self.trainingModels?.count ?? 2
     }
@@ -73,10 +129,10 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellID, for: indexPath) as! SX_TrainingCollectionViewCell
         
-        cell.layer.shadowColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
+        cell.layer.shadowColor   = UIColor.colorWithHexString(hex: "cccccc", alpha: 0.3).cgColor
         cell.layer.masksToBounds = true
-        cell.layer.cornerRadius = 5
-        cell.backgroundColor = UIColor.white
+        cell.layer.cornerRadius  = 5
+        cell.backgroundColor     = UIColor.white
         
         var index = 0;
         
@@ -116,70 +172,16 @@ class SX_TrainingCell: UITableViewCell, UICollectionViewDelegate,UICollectionVie
             cell.sourceName?.text = model.title
             cell.priceLabel?.text = ("￥" + model.price!)
         }
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         SXLog("点击了CollectionView的\(indexPath.section)---\(indexPath.row)")
-        
         self.delegate?.clickCell(item: self.id ?? "0")
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        
-    }
-    
-    // ===============================================================================
-    // MARK: - UICollectionViewDelegateFlowLayout
-    // ===============================================================================
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: CGFloat(165).IPAD_XValue, height: 165.FloatValue.IPAD_XValue)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
-    }
-    
-    // ===============================================================================
-    // MARK: - configCell
-    // ===============================================================================
-    func configCell()  {
-        
-        self.titleLabel = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.left.lessThanOrEqualTo(Margin)
-            make.height.lessThanOrEqualTo(Margin)
-        }).config({ (TITLE) in
-            TITLE.sizeToFit()
-            TITLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
-            TITLE.font = UIFont.systemFont(ofSize: 15)
-        })
-        
-        self.moreButton = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(Margin)
-            make.right.equalToSuperview().offset(-Margin)
-            make.height.equalTo(Margin)
-        }).config({ (moreButton) in
-            moreButton.setImage(UIImage.init(named: "more"), for: .normal)
-            moreButton.setTitle("更多 ", for: .normal)
-            moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-            moreButton.setTitleColor(UIColor.colorWithHexString(hex: "999999", alpha: 1), for: .normal)
-            moreButton.titleEdgeInsets = UIEdgeInsetsMake(0, -moreButton.imageView!.bounds.size.width, 0, moreButton.imageView!.bounds.size.width)
-            moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, moreButton.titleLabel!.bounds.size.width, 0, -moreButton.titleLabel!.bounds.size.width)
-        })
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalTo(self.titleLabel!.snp.bottom).offset(10)
-            make.left.equalTo(self.titleLabel!)
-            make.bottom.equalToSuperview().offset(-21)
-            make.right.equalToSuperview().offset(-Margin)
-        }).config({ (collectionView) in
-            collectionView.isScrollEnabled = false
-            collectionView.showsVerticalScrollIndicator = false
-            collectionView.backgroundColor = UIColor.SX_BackGroundColor()
-        })
     }
 }
 

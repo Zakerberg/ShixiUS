@@ -36,7 +36,6 @@ class SX_TrainingCollectionViewCell: UICollectionViewCell {
 // ===============================================================================
 extension SX_TrainingCollectionViewCell {
     func configCell() {
-        
         self.sourceImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
           make.top.left.right.equalToSuperview()
           make.height.equalTo(95)

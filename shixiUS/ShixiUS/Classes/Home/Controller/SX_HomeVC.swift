@@ -77,7 +77,7 @@
         let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: self.adImages, descs: self.adTitles)
         cycleView.descLabelFont  = UIFont.boldSystemFont(ofSize: 16)
         
-        cycleView.delegate = self
+        cycleView.delegate       = self
         return cycleView
     }()
     
@@ -100,14 +100,14 @@
  // ===============================================================================
  extension SX_HomeVC {
     func setUI() {
-        view.backgroundColor = UIColor.white
+        view.backgroundColor  = UIColor.white
         
         // 设置导航栏颜色
-        navBarBarTintColor = UIColor.SX_MainColor()
+        navBarBarTintColor    = UIColor.SX_MainColor()
         // 设置初始导航栏透明度
         navBarBackgroundAlpha = 0
         // 设置导航栏按钮和标题颜色
-        navBarTintColor = .white
+        navBarTintColor       = .white
         
         view.addSubview(homeTableView)
         homeTableView.addSubview(self.cycleScrollerView)
