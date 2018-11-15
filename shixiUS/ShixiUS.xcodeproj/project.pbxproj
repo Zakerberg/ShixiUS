@@ -54,6 +54,7 @@
 		32621281214CE13E000C1A6C /* RMCalendarMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126A214CE13E000C1A6C /* RMCalendarMonthHeaderView.m */; };
 		32621282214CE13E000C1A6C /* RMCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126B214CE13E000C1A6C /* RMCollectionCell.m */; };
 		32621283214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262126C214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m */; };
+		32624FB5219D3ED60037D244 /* SX_FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32624FB4219D3ED60037D244 /* SX_FileViewController.swift */; };
 		32680E292179763900E86ACA /* SX_WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E282179763900E86ACA /* SX_WaveView.swift */; };
 		32680E2B2179764A00E86ACA /* SX_BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E2A2179764A00E86ACA /* SX_BallView.swift */; };
 		32680E2D2179766000E86ACA /* SX_BounceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32680E2C2179766000E86ACA /* SX_BounceView.swift */; };
@@ -216,6 +217,7 @@
 		3262126C214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
 		3262126D214CE13E000C1A6C /* RMCalendarMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCalendarMonthHeaderView.h; sourceTree = "<group>"; };
 		3262126E214CE13E000C1A6C /* RMCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMCollectionCell.h; sourceTree = "<group>"; };
+		32624FB4219D3ED60037D244 /* SX_FileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_FileViewController.swift; sourceTree = "<group>"; };
 		32680E282179763900E86ACA /* SX_WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_WaveView.swift; sourceTree = "<group>"; };
 		32680E2A2179764A00E86ACA /* SX_BallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BallView.swift; sourceTree = "<group>"; };
 		32680E2C2179766000E86ACA /* SX_BounceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BounceView.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 				4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */,
 				3207DCC9216F2160003828F8 /* SX_NoDataView.swift */,
 				3274F3AC2181972F0010BE91 /* SX_BaseController.swift */,
+				32624FB4219D3ED60037D244 /* SX_FileViewController.swift */,
 			);
 			path = SX_Base;
 			sourceTree = "<group>";
@@ -1222,6 +1225,7 @@
 				323E99B7213D1635006038F5 /* SX_CollectionVocationalTrainingController.swift in Sources */,
 				32680E2B2179764A00E86ACA /* SX_BallView.swift in Sources */,
 				32468B28218AE759005CAAF7 /* SX_ApplyDetailMessageCell.swift in Sources */,
+				32624FB5219D3ED60037D244 /* SX_FileViewController.swift in Sources */,
 				45FDD9A52126AEC300E336F9 /* SX_NetManager.swift in Sources */,
 				322FC80A21464164005347E8 /* SX_HotJobDetailCell.swift in Sources */,
 				323E99C2213FA73E006038F5 /* SX_ApplyVocationListController.swift in Sources */,

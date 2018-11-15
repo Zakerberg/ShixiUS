@@ -1,11 +1,3 @@
-//
-//  RMCalendarLogic.m
-//  RMCalendar
-//
-//  Created by 迟浩东 on 15/7/15.
-//  Copyright © 2015年 迟浩东(http://www.ruanman.net). All rights reserved.
-//
-
 #import "RMCalendarLogic.h"
 #import "NSDate+RMCalendarLogic.h"
 #import "TicketModel.h"

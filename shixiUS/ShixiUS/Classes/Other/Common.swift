@@ -438,138 +438,6 @@
  }
  
  // ==============================================================================
- // MARK: - NSDate Extension CalendarLogic
- // ==============================================================================
- extension NSDate {
-    
-    /// 计算这个月有多少天
-    //    func numberOfDaysInCurrentMonth() -> Int {
-    // 频繁调用 NSCalendar.current 可能有性能问题
-    //        return NSCalendar.current.range(of: Calendar.Component.day, in: Calendar.Component.month, for: self as Date)
-    //    }
-    
-    //    func numberOfWeeksInCurrentMonth() -> NSInteger {
-    //
-    //    }
-    
-    //    func weeklyOrdinality() -> NSInteger {
-    //
-    //    }
-    //
-    //    func firstDayOfCurrentMonth() -> NSDate {
-    //
-    //    }
-    //
-    //    func lastDayOfCurrentMonth() -> NSDate {
-    //
-    //    }
-    //
-    //    func dayInThePreviousMonth() -> NSDate {
-    //
-    //    }
-    //
-    //    func dayInFollowingMonth() -> NSDate {
-    //
-    //    }
-    //
-    //    /// 获取当前日期之前后的几个月
-    //    func dayInTheFollowingMonth(month: Int) -> NSDate {
-    //
-    //    }
-    //
-    //    /// 获取当前日期之前后的几天
-    //    func dayInTheFollowingDay(day: Int) -> NSDate {
-    //
-    //
-    //    }
-    //
-    //    func YMDComponents() {
-    //
-    //    }
-    //
-    //    /// NSString 转 NSDate
-    //    func dateFormString(dateString: NSString) -> NSDate {
-    //
-    //    }
-    //
-    //    /// NSDate 转 NSString
-    //    func stringFormDate(date: NSDate) -> NSString {
-    //
-    //    }
-    //
-    //    class func getDayNumbertoDay(_ today: NSDate, beforeDay: NSDate) -> Int {
-    //
-    //    }
-    //
-    //    func getweekInValueWithDate() -> Int {
-    //
-    //    }
-    //
-    //    /// 判断日期是今天,明天,后天,周几
-    //    func compareIfTodayWithDate() -> NSString {
-    //
-    //    }
-    //
-    //    /// 通过数字返回星期几
-    //    class func getWeekStringFormInteger(week:Int) -> NSString {
-    //
-    //    }
- }
- 
- extension UIViewController {
-    
-    func logOut() {
-        let loginVC = SX_LoginController()
-        let mainVc  = UINavigationController(rootViewController: loginVC)
-        mainVc.modalTransitionStyle = .partialCurl
-        self.present(mainVc, animated: true, completion: nil)
-    }
- }
- 
- // ==============================================================================
- // MARK: - UITextField
- // ==============================================================================
- extension UITextField {
-    
-    //    func setTextField(_ font: CGFloat, color: UIColor, aligment: NSTextAlignment, title: String, placeHolder: String) {
-    //        let rightImageBtn = UIButton()
-    //        self.isSecureTextEntry = true
-    //        rightImageBtn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
-    //        rightImageBtn.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
-    //        rightImageBtn.centerY = self.centerY
-    //        self.rightView = rightImageBtn
-    //        self.rightViewMode = .always
-    //        rightImageBtn.addTarget(self, action: #selector(btnClick), for: .touchUpInside)
-    //
-    //        self.font = UIFont.systemFont(ofSize: font)
-    //        self.textColor = color
-    //        self.textAlignment = aligment
-    //        self.borderStyle = .none
-    //        self.text = title
-    //        self.placeholder = placeHolder
-    //    }
-    //
-    //    @objc func btnClick(btn: UIButton) {
-    //        //监听右边按钮的点击,切换密码输入明暗文状态
-    //        let text  = self.text
-    //        self.text = ""
-    //        self.text = text
-    //        self.resignFirstResponder()
-    //        btn.isSelected  = !btn.isSelected
-    //        if !btn.isSelected {
-    //            self.font = UIFont.systemFont(ofSize: 16)
-    //            btn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_zhankai"), for: .normal)
-    //            self.isSecureTextEntry = true
-    //        }else{
-    //            self.font = UIFont.systemFont(ofSize: 16)
-    //            btn.setBackgroundImage(#imageLiteral(resourceName: "zhuce_btn_yincang"), for: .selected)
-    //            self.isSecureTextEntry = false
-    //        }
-    //        self.becomeFirstResponder()
-    //    }
- }
- 
- // ==============================================================================
  // MARK: - CGRect
  // ==============================================================================
  extension CGRect {
@@ -751,4 +619,118 @@
         return String(self[..<sInde])
     }
  }
-
+ 
+ // ================================================  |  ===============================================
+ // ================================================  |  ===============================================
+ // ================================================  | ================================================
+ // ================================================  以  ==============================================
+ // ================================================  下  ==============================================
+ // ================================================  是 ===============================================
+ // ================================================  日  ==============================================
+ // ================================================  历  ==============================================
+ // ================================================  部  ==============================================
+ // ================================================  分  ==============================================
+ // ================================================  |  ===============================================
+ // ================================================  |  ===============================================
+ // ================================================  |  ===============================================
+ 
+ // ==============================================================================
+ // MARK: - NSDate Extension
+ // ==============================================================================
+ extension NSDate {
+    
+    /// 计算这个月有多少天
+    func numberOfDaysInCurrentMonth() -> Int {
+        // 频繁调用 NSCalendar.current 可能有性能问题
+        return ((NSCalendar.current.range(of: .day, in: .month, for: self as Date))?.count)!
+    }
+    
+    /// 获取这个月有多少周
+    func numberOfWeeksInCurrentMonth() -> NSInteger {
+        let weekDay:NSInteger = self.firstDayOfCurrentMonth().weeklyOrdinality()
+        var days:NSInteger    = self.numberOfDaysInCurrentMonth()
+        
+        var weeks = 0
+        if weekDay > 1 {
+            weeks += 1
+            days -= (7 - weekDay + 1)
+        }
+        weeks += days/7
+        weeks += (days%7 > 0) ? 1 : 0
+        
+        return weeks
+    }
+    
+    /*计算这个月最开始的一天*/
+    func firstDayOfCurrentMonth() -> NSDate {
+        let startDate = NSDate()
+       // let Ok: Bool  = NSCalendar.current.startOfDay(for: startDate)
+        
+        return startDate
+    }
+    
+    /*计算这个月的第一天是礼拜几*/
+    func weeklyOrdinality() -> NSInteger {
+        return NSCalendar.current.ordinality(of: .day, in: .weekday, for: self as Date)!
+    }
+    
+    //
+    //    func lastDayOfCurrentMonth() -> NSDate {
+    //
+    //    }
+    //
+    //    func dayInThePreviousMonth() -> NSDate {
+    //
+    //    }
+    //
+    //    func dayInFollowingMonth() -> NSDate {
+    //
+    //    }
+    //
+    //    /// 获取当前日期之前后的几个月
+    //    func dayInTheFollowingMonth(month: Int) -> NSDate {
+    //
+    //    }
+    //
+    //    /// 获取当前日期之前后的几天
+    //    func dayInTheFollowingDay(day: Int) -> NSDate {
+    //
+    //
+    //    }
+    //
+    //    func YMDComponents() {
+    //
+    //    }
+    //
+    //    /// NSString 转 NSDate
+    //    func dateFormString(dateString: NSString) -> NSDate {
+    //
+    //    }
+    //
+    //    /// NSDate 转 NSString
+    //    func stringFormDate(date: NSDate) -> NSString {
+    //
+    //    }
+    //
+    //    class func getDayNumbertoDay(_ today: NSDate, beforeDay: NSDate) -> Int {
+    //
+    //    }
+    //
+    //    func getweekInValueWithDate() -> Int {
+    //
+    //    }
+    //
+    //    /// 判断日期是今天,明天,后天,周几
+    //    func compareIfTodayWithDate() -> NSString {
+    //
+    //    }
+    //
+    //    /// 通过数字返回星期几
+    //    class func getWeekStringFormInteger(week:Int) -> NSString {
+    //
+    //    }
+ }
+ 
+ 
+ 
+ 

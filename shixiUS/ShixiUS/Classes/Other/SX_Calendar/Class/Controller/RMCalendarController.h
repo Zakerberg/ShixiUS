@@ -1,11 +1,3 @@
-//
-//  RMCalendarController.h
-//  RMCalendar
-//
-//  Created by 迟浩东 on 15/7/15.
-//  Copyright © 2015年 迟浩东 All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import "RMCalendarLogic.h"
 /**

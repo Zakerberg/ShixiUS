@@ -132,4 +132,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    /// open URL
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        let alertController = UIAlertController(title: "将此文件作为简历上传到实习网?", message: "", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
+         
+        })
+        
+        let sureAction  = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+            SXLog("这里的! ! ! ! ! ---> url=\(url)")
+        
+            
+            
+            
+        })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(sureAction)
+        
+        self.window!.rootViewController?.present(alertController, animated: true, completion: {
+        })
+        
+        return true
+    }
 }

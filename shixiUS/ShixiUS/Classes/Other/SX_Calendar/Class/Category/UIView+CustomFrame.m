@@ -1,11 +1,3 @@
-//
-//  UIView+CustomFrame.m
-//  RMCalendar
-//
-//  Created by 迟浩东 on 15/4/30.
-//  Copyright (c) 2015年 CHD. All rights reserved.
-//
-
 #import "UIView+CustomFrame.h"
 
 @implementation UIView (CustomFrame)
