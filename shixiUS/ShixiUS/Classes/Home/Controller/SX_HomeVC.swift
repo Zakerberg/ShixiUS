@@ -426,6 +426,16 @@
         }
         return UIView()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if indexPath.section == 1 {
+        let model = jobsArr[indexPath.row]
+        let vc = SX_HotJobDetailController()
+        vc.id  = model["id"].string
+        self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
  }
  
  // ===============================================================================
