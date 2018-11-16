@@ -21,6 +21,7 @@
  
  private let identifier:String = "hotJobsCell"
  private let shixiTrainingCellID = "shixiTrainingCellID"
+ private let certificationCellID = "certificationCellID"
  
  /// 实训项目视图
  struct InterShipPreview {
@@ -288,38 +289,9 @@
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 1 {
-            let cell                = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
-            cell.selectionStyle     = .none
-            
-            let model               = jobsArr[indexPath.row]
-            
-            cell.jobsLabel?.text    = model["name"].string
-            cell.insduryLabel?.text = model["trade"].string
-            cell.addressLabel?.text = model["address"].string
-            cell.eduLabel?.text     = model["nature"].string
-            
-            return cell
-        }
-        
-        let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
-        shixiTrainingCell.selectionStyle       = .none
-        
-        if indexPath.section == 2 { // 2 培训认证
-            self.cerStr = "1"
-            shixiTrainingCell.titleLabel?.text = "培训认证"
-            shixiTrainingCell.trainModels      = self.trainArr
-            shixiTrainingCell.moreButton?.rx.tap.subscribe(onNext: { (_) in
-                SXLog("热门实训更多")
-                let vc = SX_CertificationController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }, onError: { (error) in
-                SXLog(error)
-            }, onCompleted: nil, onDisposed: nil)
-            
-            
-            
-        }else{ /// 0 热门实训
+        if indexPath.section == 0 {
+            let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
+            shixiTrainingCell.selectionStyle   = .none
             self.cerStr = ""
             shixiTrainingCell.titleLabel?.text = "热门实训"
             shixiTrainingCell.trainingModels   = self.trainingArr
@@ -330,12 +302,40 @@
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
+            shixiTrainingCell.delegate = self
+            shixiTrainingCell.collectionView?.reloadData()
+            
+            return shixiTrainingCell
+        } else if indexPath.section == 1 {
+            let cell                = SX_HotJobsCell(style: .default, reuseIdentifier: identifier)
+            cell.selectionStyle     = .none
+            let model               = jobsArr[indexPath.row]
+            cell.jobsLabel?.text    = model["name"].string
+            cell.insduryLabel?.text = model["trade"].string
+            cell.addressLabel?.text = model["address"].string
+            cell.eduLabel?.text     = model["nature"].string
+            
+            return cell
+        }else {
+            let shixiTrainCell = SX_TrainingCell(style: .default, reuseIdentifier: certificationCellID)
+            shixiTrainCell.selectionStyle   = .none
+            
+            self.cerStr = "1"
+            shixiTrainCell.titleLabel?.text = "培训认证"
+            shixiTrainCell.trainModels      = self.trainArr
+            shixiTrainCell.moreButton?.rx.tap.subscribe(onNext: { (_) in
+                SXLog("培训认证更多")
+                let vc = SX_CertificationController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }, onError: { (error) in
+                SXLog(error)
+            }, onCompleted: nil, onDisposed: nil)
+            
+            shixiTrainCell.delegate = self
+            shixiTrainCell.collectionView?.reloadData()
+            
+            return shixiTrainCell
         }
-        
-        shixiTrainingCell.delegate = self
-        shixiTrainingCell.collectionView?.reloadData()
-        
-        return shixiTrainingCell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -388,10 +388,8 @@
                     }, onCompleted: nil, onDisposed: nil)
                 })
             }
-            
             return headerView1
         }else if section == 1 {
-            
             let hotJobHeaderView = UIView()
             hotJobHeaderView.backgroundColor = UIColor.white
             
@@ -405,7 +403,7 @@
                     HOTTITLE.textColor = UIColor.colorWithHexString(hex: "666666", alpha: 1)
             }
             
-            let _ = UIButton().addhere(toSuperView: hotJobHeaderView).layout { (make) in
+            _ = UIButton().addhere(toSuperView: hotJobHeaderView).layout { (make) in
                 make.top.equalTo(hotTitle.snp.top)
                 make.height.centerY.equalTo(hotTitle)
                 make.right.equalToSuperview().offset(-Margin)
@@ -427,14 +425,6 @@
             return hotJobHeaderView
         }
         return UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        let model = jobsArr[indexPath.row]
-        let vc = SX_HotJobDetailController()
-        vc.id  = model["id"].string
-        self.navigationController?.pushViewController(vc, animated: true)
     }
  }
  

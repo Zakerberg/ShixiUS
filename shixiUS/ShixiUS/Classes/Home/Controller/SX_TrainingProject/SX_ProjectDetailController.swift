@@ -43,11 +43,13 @@ class SX_ProjectDetailController: SX_BaseController {
     /// 是否收藏
     var collection: String?
     
+    var priceStr: String?
+    
     lazy var pageTitleView: SX_PageTitleView = {
         let config                = SX_PageTitleViewConfig()
         config.titleColor         = UIColor.colorWithHexString(hex: "333333", alpha: 1)
         config.titleSelectedColor = UIColor.SX_MainColor()
-        let pageTitleView = SX_PageTitleView(frame: CGRect(x: 0, y: 200, width: SCREEN_WIDTH, height: 41), titles: self.topArr, config: config)
+        let pageTitleView         = SX_PageTitleView(frame: CGRect(x: 0, y: 200, width: SCREEN_WIDTH, height: 41), titles: self.topArr, config: config)
         pageTitleView.config      = config
         pageTitleView.titles      = self.topArr
         pageTitleView.pageTitleViewDelegate = self
@@ -55,16 +57,16 @@ class SX_ProjectDetailController: SX_BaseController {
         return pageTitleView
     }()
     
-    var collectionBtn : UIButton?
+    var collectionBtn: UIButton?
     var applyBtn: UIButton?
     
     /// 主 TbaleView
     lazy var tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-50.FloatValue.IPAD_XValue), style: .grouped)
-        table.contentInset   = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
-        table.delegate       = self
-        table.dataSource     = self
-        table.separatorStyle = .none
+        table.contentInset                 = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavH), 0, 0, 0);
+        table.delegate                     = self
+        table.dataSource                   = self
+        table.separatorStyle               = .none
         table.showsVerticalScrollIndicator = false
         
         return table
@@ -247,7 +249,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             titleCell.selectionStyle     = .none
             titleCell.projectName?.text  = model["data"]["title"].string ?? ""
             titleCell.projectCity?.text  = "出发城市: " + (model["data"]["outset_city"].string ?? "北京(测试)")
-            titleCell.projectPrice?.text = "¥" + "100" + "起/人"
+            titleCell.projectPrice?.text = "¥" + (model["details"][indexPath.section]["price"].string ?? "1") + "起/人"
             
             return titleCell
         }else if indexPath.section == 1 {

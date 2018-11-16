@@ -2,7 +2,7 @@
 //  SX_CertificationDetailController.swift
 //  ShixiUS
 //
-//  Created by heather on 2018/10/19.
+//  Created by Michael 柏 on 2018/10/19.
 //  Copyright © 2018 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  培训认证详情
 
@@ -165,10 +165,6 @@ extension SX_CertificationDetailController {
                     self.present(vc, animated: true, completion: nil)
                 }else{
                     let vc =  SX_ApplyTrainListController()
-                    
-                    
-                    
-                    
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }, onError: { (error) in
@@ -496,6 +492,12 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
+    
+    
+    
+    
+    
+    
 }
 
 // ==============================================================================

@@ -2,7 +2,7 @@
 //  SX_ProjectTripDateCell.swift
 //  ShixiUS
 //
-//  Created by heather on 2018/9/11.
+//  Created by Michael 柏 on 2018/9/11.
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
 //  项目详情的 行程出发时间cell
 

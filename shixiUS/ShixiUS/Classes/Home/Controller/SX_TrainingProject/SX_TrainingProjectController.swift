@@ -96,18 +96,18 @@ extension SX_TrainingProjectController {
     
     func setUI() {
         title = "实训项目"
-        view.backgroundColor            = UIColor.white
+        view.backgroundColor  = UIColor.white
         setTopSelectedView()
         
         // 创建底部的黑色透明图, 先隐藏
         self.blackBgView = UIView(frame: CGRect(x: 0, y: (self.topSelectedView?.frame.origin.y)! + (self.topSelectedView?.frame.size.height)!, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - kNavH - (self.topSelectedView?.frame.size.height)!))
         self.blackBgView?.backgroundColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
-        self.blackBgView?.alpha    = 0.3
+        self.blackBgView?.alpha           = 0.3
         self.view.insertSubview(self.blackBgView!, aboveSubview: self.collectionView!)
-        self.blackBgView?.isHidden = true
+        self.blackBgView?.isHidden        = true
         
         let tap = UIGestureRecognizer(target: self, action: #selector(TapClick))
-        tap.cancelsTouchesInView   = false
+        tap.cancelsTouchesInView          = false
         self.blackBgView?.addGestureRecognizer(tap)
     }
     
@@ -244,6 +244,15 @@ extension SX_TrainingProjectController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        SXLog(" +++++++++++++++++++++++++++\(indexPath.row)")
+        let model = self.listsModels[indexPath.row]
+        let vc    = SX_ProjectDetailController()
+        vc.id     = model.id
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

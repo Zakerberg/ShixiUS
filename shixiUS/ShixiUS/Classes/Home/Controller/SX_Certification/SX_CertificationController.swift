@@ -389,6 +389,15 @@ extension SX_CertificationController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: Margin, right: 0)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        SXLog(" +++++++++++++++++++++++++++\(indexPath.row)")
+        let model = self.cerListsModels[indexPath.row]
+        let vc    = SX_CertificationDetailController()
+        vc.id     = model.id
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // ======================================================================
