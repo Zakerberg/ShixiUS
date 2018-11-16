@@ -448,9 +448,7 @@
     }
     
     func cycleScrollViewDidSelect(at index: Int, cycleScrollView: SX_CycleScrollerView) {
-        
         SXLog(index)
-        
         if self.adTypes[index] == "training" {
             SXLog("跳转实训详情")
         } else if self.adTypes[index] == "train" {
