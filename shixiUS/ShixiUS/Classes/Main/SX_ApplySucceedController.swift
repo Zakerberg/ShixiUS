@@ -44,7 +44,6 @@ extension SX_ApplySucceedController {
             make.top.equalToSuperview().offset(Margin+kNavH)
             make.width.height.equalTo(45.FloatValue.IPAD_XValue)
             }.config { (SUCCEED) in
-                
         }
         
         let succeedL = UILabel().addhere(toSuperView: self.view).layout { (make) in
@@ -53,9 +52,9 @@ extension SX_ApplySucceedController {
             make.height.equalTo(16.FloatValue.IPAD_XValue)
             }.config { (SUCCEEDL) in
                 SUCCEEDL.sizeToFit()
-                SUCCEEDL.text = "恭喜您,职位申请成功!"
+                SUCCEEDL.text      = "恭喜您,职位申请成功!"
                 SUCCEEDL.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-                SUCCEEDL.font = UIFont.boldSystemFont(ofSize: 15)
+                SUCCEEDL.font      = UIFont.boldSystemFont(ofSize: 15)
         }
         
         let applyNum = UILabel().addhere(toSuperView: self.view).layout { (make) in
@@ -64,9 +63,9 @@ extension SX_ApplySucceedController {
             make.height.equalTo(15)
             }.config { (NUMBER) in
                 NUMBER.sizeToFit()
-                NUMBER.text = "申请序号: " + self.ApplyNum!
+                NUMBER.text      = "申请序号: " + self.ApplyNum!
                 NUMBER.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-                NUMBER.font = UIFont.systemFont(ofSize: 14)
+                NUMBER.font      = UIFont.systemFont(ofSize: 14)
         }
 
         let contentL = UILabel().addhere(toSuperView: self.view).layout { (make) in
@@ -74,10 +73,10 @@ extension SX_ApplySucceedController {
             make.left.equalTo(applyNum)
 //            make.height.equalTo(UILabel.SX_getSpaceLabelHeight(self.str as NSString, font: UIFont.systemFont(ofSize: 12), width: SCREEN_WIDTH-20, space: 0, zpace: 0))
             }.config { (CONTENT) in
-                CONTENT.text = self.str
+                CONTENT.text          = self.str
                 CONTENT.numberOfLines = 0
-                CONTENT.textColor = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
-                CONTENT.font = UIFont.systemFont(ofSize: 14)
+                CONTENT.textColor     = UIColor.colorWithRGB(r: 51, g: 51, b: 51)
+                CONTENT.font          = UIFont.systemFont(ofSize: 14)
         }
 
         _ = UIButton(type: .custom).addhere(toSuperView: self.view).layout { (make) in
@@ -92,9 +91,7 @@ extension SX_ApplySucceedController {
                 CONFIRM.layer.masksToBounds = true
                 CONFIRM.layer.cornerRadius  = 10
                 CONFIRM.rx.tap.subscribe(onNext: { (_) in
-
                     self.navigationController?.popViewController(animated: true)
-                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
