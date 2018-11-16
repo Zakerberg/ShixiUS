@@ -34,7 +34,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     var localImgArray :[String]? {
         didSet {
             if let local = localImgArray {
-                proxy = SXProxy(type: .LOCAL, array: local)
+                proxy    = SXProxy(type: .LOCAL, array: local)
                 reloadData()
             }
         }
@@ -43,7 +43,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     var serverImgArray:[String]? {
         didSet {
             if let server = serverImgArray {
-                proxy = SXProxy(type: .SERVER, array: server)
+                proxy     = SXProxy(type: .SERVER, array: server)
                 reloadData()
             }
         }
@@ -63,7 +63,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     /// 主要功能需求相关
     override var frame: CGRect {
         didSet {
-            flowLayout?.itemSize = frame.size
+            flowLayout?.itemSize  = frame.size
             collectionView?.frame = bounds
         }
     }
@@ -116,9 +116,9 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
         }
     }
     
-    // ==================================================================================================================
+    // ========================================================================
     // MARK: 对外提供的方法
-    // ==================================================================================================================
+    // ========================================================================
     func reloadData() {
         timer?.invalidate()
         timer = nil
@@ -151,15 +151,18 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     fileprivate var imgsCount:Int {
         return (isEndlessScroll == true) ? (itemsInSection / endlessScrollTimes) : itemsInSection
     }
+    
     var itemsInSection:Int {
         guard let imgs = proxy?.imgArray else {
             return 0
         }
         return (isEndlessScroll == true) ? (imgs.count * endlessScrollTimes) : imgs.count
     }
+    
     fileprivate var firstItem:Int {
         return (isEndlessScroll == true) ? (itemsInSection / 2) : 0
     }
+    
     fileprivate var canChangeCycleCell:Bool {
         guard itemsInSection  != 0 ,
             let _ = collectionView,
@@ -168,11 +171,13 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
         }
         return true
     }
+    
     fileprivate var indexOnPageControl:Int {
         var curIndex = Int((collectionView!.contentOffset.x + flowLayout!.itemSize.width * 0.5) / flowLayout!.itemSize.width)
         curIndex = max(0, curIndex)
         return curIndex % imgsCount
     }
+    
     fileprivate var proxy:SXProxy!
     fileprivate var flowLayout:UICollectionViewFlowLayout?
     fileprivate var collectionView:UICollectionView?
@@ -185,9 +190,6 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     // ========================================================================
     // MARK: 构造方法
     // ========================================================================
-    
-    /// 构造方法
-    ///
     /// - Parameters:
     ///   - frame: frame
     ///   - type:  ImagesType                         default:Server
@@ -197,21 +199,21 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     init(frame: CGRect, type:ImgType = .SERVER, imgs:[String]? = nil, descs:[String]? = nil, defaultDotImage:UIImage? = nil, currentDotImage:UIImage? = nil, placeholderImage:UIImage? = nil) {
         super.init(frame: frame)
         setupCollectionView()
-        defaultPageDotImage = defaultDotImage
-        currentPageDotImage = currentDotImage
+        defaultPageDotImage   = defaultDotImage
+        currentPageDotImage   = currentDotImage
         self.placeholderImage = placeholderImage
-        imgsType = type
+        imgsType    = type
         if imgsType == .SERVER {
             if let server = imgs {
                 proxy = SXProxy(type: .SERVER, array: server)
             }
         }else{
             if let local = imgs {
-                proxy = SXProxy(type: .LOCAL, array: local)
+                proxy    = SXProxy(type: .LOCAL, array: local)
             }
         }
         
-        if let descTexts = descs {
+        if let descTexts  = descs {
             descTextArray = descTexts
         }
         reloadData()
@@ -263,7 +265,7 @@ class SX_CycleScrollerView: UIView, PageControlAlimentProtocol, EndlessScrollPro
     }
 }
 
-//====================================================================================================//
+//=========================================================================
 // MARK-: - 定时器、自动滚动、scrollView代理方法
 // ========================================================================
 extension SX_CycleScrollerView {
@@ -313,17 +315,17 @@ extension SX_CycleScrollerView {
 
 // ========================================================================
 // MARK: - pageControl页面
-//====================================================================================================//
+// ========================================================================
 extension SX_CycleScrollerView {
     fileprivate func setupPageControl() {
         pageControl?.removeFromSuperview()
         if showPageControl == true {
             pageControl = SX_PageControl(frame: CGRect.zero, currentImage: currentPageDotImage, defaultImage: defaultPageDotImage)
-            pageControl?.numberOfPages = imgsCount
-            pageControl?.hidesForSinglePage = true
+            pageControl?.numberOfPages                 = imgsCount
+            pageControl?.hidesForSinglePage            = true
             pageControl?.currentPageIndicatorTintColor = self.currentDotColor
-            pageControl?.pageIndicatorTintColor = self.otherDotColor
-            pageControl?.isUserInteractionEnabled = false
+            pageControl?.pageIndicatorTintColor        = self.otherDotColor
+            pageControl?.isUserInteractionEnabled      = false
             pageControl?.pointSpace = pageControlPointSpace
             
             if let _ = outerPageControlFrame {
@@ -335,24 +337,24 @@ extension SX_CycleScrollerView {
     }
 }
 
-//====================================================================================================//
+// ========================================================================
 // MARK: - SXCycleCell 相关
 // ========================================================================
 extension SX_CycleScrollerView: UICollectionViewDelegate,UICollectionViewDataSource {
     fileprivate func setupCollectionView() {
-        flowLayout = UICollectionViewFlowLayout()
-        flowLayout?.itemSize = frame.size
+        flowLayout                     = UICollectionViewFlowLayout()
+        flowLayout?.itemSize           = frame.size
         flowLayout?.minimumLineSpacing = 0
-        flowLayout?.scrollDirection = .horizontal
+        flowLayout?.scrollDirection    = .horizontal
         
         collectionView = UICollectionView(frame: bounds, collectionViewLayout: flowLayout!)
         collectionView?.register(SX_CycleCell.self, forCellWithReuseIdentifier: CellID)
-        collectionView?.isPagingEnabled = true
-        collectionView?.bounces = false
-        collectionView?.showsVerticalScrollIndicator = false
+        collectionView?.isPagingEnabled                = true
+        collectionView?.bounces                        = false
+        collectionView?.showsVerticalScrollIndicator   = false
         collectionView?.showsHorizontalScrollIndicator = false
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
+        collectionView?.delegate                       = self
+        collectionView?.dataSource                     = self
         addSubview(collectionView!)
     }
     
@@ -364,22 +366,21 @@ extension SX_CycleScrollerView: UICollectionViewDelegate,UICollectionViewDataSou
         let curIndex = indexPath.item % imgsCount
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! SX_CycleCell
         cell.placeholderImage = placeholderImage
-        cell.imgSource = proxy[curIndex]
-        cell.descText = descTextArray?[curIndex]
+        cell.imgSource        = proxy[curIndex]
+        cell.descText         = descTextArray?[curIndex]
         
         if let _ = descTextArray {
-            cell.imageContentModel = (imageContentModel == nil) ? cell.imageContentModel : imageContentModel!
-            cell.descLabelFont = (descLabelFont == nil) ? cell.descLabelFont : descLabelFont!
-            cell.descLabelTextColor = (descLabelTextColor == nil) ? cell.descLabelTextColor : descLabelTextColor!
-            cell.descLabelHeight = (descLabelHeight == nil) ? cell.descLabelHeight : descLabelHeight!
-            cell.descLabelTextAlignment = (descLabelTextAlignment == nil) ? cell.descLabelTextAlignment : descLabelTextAlignment!
+            cell.imageContentModel         = (imageContentModel == nil) ? cell.imageContentModel : imageContentModel!
+            cell.descLabelFont             = (descLabelFont == nil) ? cell.descLabelFont : descLabelFont!
+            cell.descLabelTextColor        = (descLabelTextColor == nil) ? cell.descLabelTextColor : descLabelTextColor!
+            cell.descLabelHeight           = (descLabelHeight == nil) ? cell.descLabelHeight : descLabelHeight!
+            cell.descLabelTextAlignment    = (descLabelTextAlignment == nil) ? cell.descLabelTextAlignment : descLabelTextAlignment!
             cell.bottomViewBackgroundColor = (bottomViewBackgroundColor == nil) ? cell.bottomViewBackgroundColor : bottomViewBackgroundColor!
         }
         return cell
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         delegate?.cycleScrollViewDidSelect(at: indexOnPageControl, cycleScrollView: self)
     }
 }

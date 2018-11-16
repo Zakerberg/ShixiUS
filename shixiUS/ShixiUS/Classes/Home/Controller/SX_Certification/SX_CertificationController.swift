@@ -375,9 +375,9 @@ extension SX_CertificationController: UICollectionViewDelegate, UICollectionView
         }else{
             cell.sourceImageView?.image = #imageLiteral(resourceName: "icon_placeholdericon_Image")
         }
-        cell.sourceName?.text       = model.series_name ?? "测试项目"
-        cell.certificateLabel?.text = model.category_name ?? "测试分类"
-        cell.priceLabel?.text       = ("￥" + model.price!)
+        cell.sourceName?.text           = model.series_name ?? "测试项目"
+        cell.certificateLabel?.text     = model.category_name ?? "测试分类"
+        cell.priceLabel?.text           = ("￥" + model.price!)
         
         return cell
     }

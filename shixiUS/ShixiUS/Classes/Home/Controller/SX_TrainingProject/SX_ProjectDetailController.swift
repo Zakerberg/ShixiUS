@@ -24,7 +24,7 @@ class SX_ProjectDetailController: SX_BaseController {
     
     var topArr = ["项目亮点", "日程安排", "费用说明", "预定须知"]
     var id:String?
-    var serverImgs       = [String]()
+    var serverImgs   = [String]()
     var projectDetailArr = JSON()
     var moreDateBtn: UIButton?
     
@@ -77,7 +77,6 @@ class SX_ProjectDetailController: SX_BaseController {
         let frame = CGRect(x: 0, y: -IMAGE_HEIGHT, width: SCREEN_WIDTH, height: IMAGE_HEIGHT)
         let cycleView = SX_CycleScrollerView(frame: frame, type: .SERVER, imgs: self.serverImgs, descs: nil)
         cycleView.delegate = self
-        
         return cycleView
     }()
     
@@ -106,12 +105,10 @@ extension SX_ProjectDetailController {
     
     func setUI() {
         view.backgroundColor = UIColor.white
-        //self.setRightItem("share") 
-        self.setLeftItem("leftBack")
-        
         view.addSubview(tableView)
         tableView.addSubview(detailScrollerView)
         navBarBackgroundAlpha = 0
+        self.navigationItem.leftItemsSupplementBackButton = true
         
         self.collectionBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.left.bottom.equalToSuperview()
