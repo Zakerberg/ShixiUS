@@ -44,8 +44,8 @@ class SX_HotJobDetailController: SX_BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
         fetchData()
+        setUI()
         showLoadingView()
     }
     
@@ -146,6 +146,7 @@ extension SX_HotJobDetailController {
     }
     
     func fetchData() {
+        
         SX_NetManager.requestData(type: .GET, URlString: (SX_JobDetail + self.id!), parameters:  nil, finishCallBack: { (result) in
             do{
                 /// SwiftyJSON 在这里 ! ! !
@@ -154,6 +155,7 @@ extension SX_HotJobDetailController {
                 let model = SX_JobDetailModel(jsonData: json)
                 self.detailModels.append(model)
                 
+                self.id = json["data"]["id"].string ?? "250"
                 self.hideLoadingView()
                 self.table.reloadData()
             } catch{ }
@@ -190,7 +192,6 @@ extension SX_HotJobDetailController: UITableViewDelegate, UITableViewDataSource 
             cell.jobFullTime?.text    = model.duration_name ?? "全职测试"
             cell.jobInterShip?.text   = model.nature_name ?? "实习测试"
             cell.jobSalary?.text      = model.wages ?? "面议"
-            //  cell.jobIntroduce?.text   = self.intrStr
             
             return cell
         }

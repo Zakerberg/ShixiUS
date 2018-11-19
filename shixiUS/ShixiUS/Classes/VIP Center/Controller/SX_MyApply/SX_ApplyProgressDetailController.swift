@@ -14,14 +14,16 @@
  */
 
 import UIKit
+import SwiftyJSON
 
 let progressDetailCellID = "progressDetailCellID"
 
 class SX_ApplyProgressDetailController: SX_BaseController {
     
-    var dataArr = ["q", "q", "q"]
+    var progressArr = [String]()
+    var typeStr: String?
     
-    lazy var progressTab: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
         tableView.backgroundColor              = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
@@ -32,7 +34,7 @@ class SX_ApplyProgressDetailController: SX_BaseController {
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-     super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         
     }
     
@@ -57,15 +59,23 @@ extension SX_ApplyProgressDetailController {
     func setUI() {
         title = "进度详情"
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
-        self.view.addSubview(progressTab)
+        self.view.addSubview(tableView)
     }
     
     func fetchData() {
-       
         
+        let url = SX_Apply_TrainingProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
         
-        
-        
+        SX_NetManager.requestData(type: .GET, URlString: url, parameters:  nil, finishCallBack: { (result) in
+            do{
+                let json              = try JSON(data: result)
+                
+                
+                
+            } catch{ }
+            self.tableView.reloadData()
+            self.hideLoadingView()
+        })
     }
 }
 
@@ -75,7 +85,7 @@ extension SX_ApplyProgressDetailController {
 extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataArr.count
+        return self.progressArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

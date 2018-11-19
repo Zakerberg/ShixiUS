@@ -67,7 +67,7 @@ let SX_TrainDetail            = SHIXIUS + "/train/view/id/" //此处后面还要
 let SX_JobIndex               = SHIXIUS + "/job/index"
 
 /// 职位详情界面 (get)
-let SX_JobDetail              = SHIXIUS + "/job/view/id" //此处后面还要加职位id
+let SX_JobDetail              = SHIXIUS + "/job/view/id/" //此处后面还要加职位id
 
 /// 海外就业报名页 (get)
 let SX_Oversea_Apply          = SHIXIUS + "/job/apply" 
@@ -105,6 +105,15 @@ let SX_ApplyRefund            = SHIXIUS + "/myapply/refundmoney?"
 // 取消退款 (get)
 let SX_ApplyRefundCancel      = SHIXIUS + "/myapply/cancelrefund"
 
+/// 实训 申请进度 详情
+let SX_Apply_TrainingProgress = SHIXIUS + "/myapply/trainingprogress?"
+
+/// 培训 申请进度 详情
+let SX_Apply_TrainProgress    = SHIXIUS + "/myapply/trainprogress?"
+
+/// 就业岗位 申请进度 详情
+let SX_Apply_JobProgress      = SHIXIUS + "/myapply/jobprogress?"
+
 // =======================================================================================
 // MARK: - 我的 ! ! !
 // =======================================================================================
@@ -129,9 +138,4 @@ let SX_Mine_OrderRecord       = SHIXIUS + "/myorder/index?"
 
 // 修改密码
 let SX_Mine_FixPassword       = SHIXIUS + "/member/uppassword"
-
-//
-
-
-
 

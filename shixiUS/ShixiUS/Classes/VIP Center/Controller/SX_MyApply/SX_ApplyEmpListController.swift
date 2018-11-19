@@ -98,12 +98,13 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
                 make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
                 make.centerY.equalToSuperview()
                 make.height.equalTo(45.FloatValue.IPAD_XValue)
+                make.right.equalToSuperview().offset(-Margin)
             }).config({ (NUM) in
                 NUM.tintColor     = UIColor.SX_MainColor()
                 NUM.textAlignment = .left
                 NUM.placeholder   = "请输入手机号"
                 NUM.keyboardType  = .numberPad
-                
+                NUM.maxTextNumber = 11
                 NUM.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
                     SXLog("开始编辑手机号....")
                     
@@ -124,6 +125,7 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
                 make.left.equalToSuperview().offset(100.FloatValue.IPAD_XValue)
                 make.centerY.equalToSuperview()
                 make.height.equalTo(45.FloatValue.IPAD_XValue)
+                make.right.equalToSuperview().offset(-Margin)
             }).config({ (WECHAT) in
                 WECHAT.tintColor     = UIColor.SX_MainColor()
                 WECHAT.textAlignment = .left
@@ -175,12 +177,13 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
                 let regex    = try! SX_Regex(pattern)
                 if regex.matches(self.numTF!.text!) {
                     SXLog("正确, 申请")
+                    
                     let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
-                                 "userid":String(describing: USERDEFAULTS.value(forKey: "userId")!),
-                                 "jobid":self.jobid!,
+                                 "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!),
+                                 "job":self.jobid!,
                                  "telephone":self.numTF!.text!,
-                                 "wechat":self.weChatTF!.text
-                        ] as! [String : String]
+                                 "wechat":self.weChatTF!.text!
+                        ] as [String : String]
                     
                     SX_NetManager.requestData(type: .POST, URlString: SX_Oversea_Apply_Confirm, parameters: param, finishCallBack: { (result) in
                         do{
