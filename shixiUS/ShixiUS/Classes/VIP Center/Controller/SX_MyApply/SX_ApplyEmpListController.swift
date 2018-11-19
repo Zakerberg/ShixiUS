@@ -23,7 +23,9 @@ class SX_ApplyEmpListController: UIViewController {
     var weChatTF: UITextField?
     var jobid:String?
     
-    
+//    var resumeController: UIDocumentBrowserViewController?
+    var resumeBtn: UIButton?
+    var letterBtn: UIButton? //求职信
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .grouped)
@@ -74,7 +76,7 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -130,7 +132,6 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
                 WECHAT.tintColor     = UIColor.SX_MainColor()
                 WECHAT.textAlignment = .left
                 WECHAT.placeholder   = "请输入微信号"
-                
                 WECHAT.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
                     SXLog("开始编辑微信....")
                     
@@ -143,8 +144,66 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
                     }
                 })
             })
+            
+        }else if indexPath.row == 3 {
+            
+            cell.textLabel?.text = "上传简历:"
+            self.resumeBtn = UIButton(type: .custom).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.left.equalToSuperview().offset(115.FloatValue.IPAD_XValue)
+                make.centerY.equalToSuperview()
+                make.height.equalTo(30.FloatValue.IPAD_XValue)
+                make.width.equalTo(150.FloatValue.IPAD_XValue)
+            }).config({ (RESUME) in
+                RESUME.setTitle("点击选取", for: .normal)
+                RESUME.titleLabel?.textAlignment = .center
+                RESUME.backgroundColor           = UIColor.SX_MainColor()
+                RESUME.titleLabel?.font          = UIFont.boldSystemFont(ofSize: 15)
+                RESUME.layer.masksToBounds       = true
+                RESUME.layer.cornerRadius        = 10
+                
+                RESUME.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("点击选取简历")
+                    
+//                    let vc = UIDocumentBrowserViewController(forOpeningFilesWithContentTypes: ["public.content","public.text","public.source-code","public.image","public.audiovisual-content","com.adobe.pdf","com.apple.keynote.key","com.microsoft.word.doc","com.microsoft.excel.xls","com.microsoft.powerpoint.ppt"])
+//                    vc.modalPresentationStyle = .fullScreen
+//                    vc.delegate               = self
+
+                    let vc = UIDocumentPickerViewController(documentTypes: ["public.content","public.text","public.source-code","public.image","public.audiovisual-content","com.adobe.pdf","com.apple.keynote.key","com.microsoft.word.doc","com.microsoft.excel.xls","com.microsoft.powerpoint.ppt"], in: UIDocumentPickerMode.open)
+                    vc.delegate = self
+                    vc.modalPresentationStyle = .fullScreen
+
+
+
+
+                    self.present(vc, animated: true, completion: {
+                        SXLog("选取文件1")
+                    })
+                }, onError: { (error) in
+                    SXLog(error)
+                }, onCompleted: nil, onDisposed: nil)
+            })
+        }else if indexPath.row == 4 {
+            
+            cell.textLabel?.text = "上传求职信:"
+            self.letterBtn = UIButton(type: .custom).addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.left.equalToSuperview().offset(115.FloatValue.IPAD_XValue)
+                make.centerY.equalToSuperview()
+                make.height.equalTo(30.FloatValue.IPAD_XValue)
+                make.width.equalTo(150.FloatValue.IPAD_XValue)
+            }).config({ (LETTER) in
+                LETTER.setTitle("点击选取", for: .normal)
+                LETTER.titleLabel?.textAlignment = .center
+                LETTER.backgroundColor           = UIColor.SX_MainColor()
+                LETTER.titleLabel?.font          = UIFont.boldSystemFont(ofSize: 15)
+                LETTER.layer.masksToBounds       = true
+                LETTER.layer.cornerRadius        = 10
+                LETTER.rx.tap.subscribe(onNext: { (_) in
+                    SXLog("点击选取求职信")
+                }, onError: { (error) in
+                    
+                }, onCompleted: nil, onDisposed: nil)
+            })
         }
-        
         return cell
     }
     
@@ -230,3 +289,43 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
         return UIView()
     }
 }
+
+// ========================================================================
+// MARK: - UIDocumentBrowserViewControllerDelegate
+// ========================================================================
+extension SX_ApplyEmpListController: UIDocumentBrowserViewControllerDelegate {
+    
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
+        SXLog(documentURLs)
+        
+    }
+    
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, didImportDocumentAt sourceURL: URL, toDestinationURL destinationURL: URL) {
+        
+    }
+        
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL, error: Error?) {
+        
+    }
+    
+//    func documentBrowser(_ controller: UIDocumentBrowserViewController, applicationActivitiesForDocumentURLs documentURLs: [URL]) -> [UIActivity] {
+//
+//    }
+    
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, willPresent activityViewController: UIActivityViewController) {
+        
+    }
+}
+
+
+// ========================================================================
+// MARK: - UIDocumentBrowserViewControllerDelegate
+// ========================================================================
+extension SX_ApplyEmpListController: UIDocumentPickerDelegate {
+    
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentURLs documentURLs: [URL]) {
+        SXLog(documentURLs)
+        
+    }
+}
+
