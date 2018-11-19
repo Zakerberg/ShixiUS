@@ -20,7 +20,7 @@ import SwiftyJSON
 
 let collectionEmpCellID = "collectionEmpCellID"
 
-class SX_CollextionEmploymentJobsController: UIViewController {
+class SX_CollextionEmploymentJobsController: SX_BaseController {
     
     var noDataView: SX_NoDataView?
     var collectionJobArr  = [JobCollectionListModel]()
@@ -38,6 +38,7 @@ class SX_CollextionEmploymentJobsController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,6 +85,7 @@ extension SX_CollextionEmploymentJobsController {
                     hud.label.text = json["msg"].string
                     hud.hide(animated: true, afterDelay: 1.0)
                 }
+                self.hideLoadingView()
             }catch { }
         }
     }

@@ -22,7 +22,7 @@ import SwiftyJSON
 
 let collectionVocationCellID = "collectionVocationCellID"
 
-class SX_CollectionVocationalTrainingController: UIViewController {
+class SX_CollectionVocationalTrainingController: SX_BaseController {
     
     var noDataView: SX_NoDataView?
     var TrainingArr  = [TrainingCollectionListModel]()
@@ -40,6 +40,7 @@ class SX_CollectionVocationalTrainingController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,6 +87,7 @@ extension SX_CollectionVocationalTrainingController {
                     hud.label.text = json["msg"].string
                     hud.hide(animated: true, afterDelay: 1.0)
                 }
+                self.hideLoadingView()
             }catch { }
         }
     }

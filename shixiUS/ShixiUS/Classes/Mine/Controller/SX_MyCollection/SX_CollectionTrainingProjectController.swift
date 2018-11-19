@@ -21,7 +21,7 @@ import SwiftyJSON
 
 let collectionTrainingCellID = "collectionTrainingCellID"
 
-class SX_CollectionTrainingProjectController: UIViewController {
+class SX_CollectionTrainingProjectController: SX_BaseController {
     
     var noDataView: SX_NoDataView?
     var TrainArr  = [TrainCollectionListModel]()
@@ -39,6 +39,7 @@ class SX_CollectionTrainingProjectController: UIViewController {
         super.viewDidLoad()
         setUI()
         fetchData()
+        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,6 +86,7 @@ extension SX_CollectionTrainingProjectController {
                     hud.label.text = json["msg"].string
                     hud.hide(animated: true, afterDelay: 1.0)
                 }
+                self.hideLoadingView()
             }catch { }
         }
     }
