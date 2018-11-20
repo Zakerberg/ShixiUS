@@ -70,8 +70,6 @@ extension SX_ApplyProgressDetailController {
             do{
                 let json              = try JSON(data: result)
                 
-                
-                
             } catch{ }
             self.tableView.reloadData()
             self.hideLoadingView()
@@ -92,6 +90,13 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
         let cell = SX_ProgressDetailCell(style: .default, reuseIdentifier: progressDetailCellID)
         cell.selectionStyle = .none
         
+        
+        
+        
+        
+        
+        
+        
         return cell
     }
     
@@ -105,5 +110,12 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        
     }
 }

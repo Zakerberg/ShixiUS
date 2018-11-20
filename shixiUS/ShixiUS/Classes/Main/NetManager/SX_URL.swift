@@ -106,13 +106,13 @@ let SX_ApplyRefund            = SHIXIUS + "/myapply/refundmoney?"
 let SX_ApplyRefundCancel      = SHIXIUS + "/myapply/cancelrefund"
 
 /// 实训 申请进度 详情
-let SX_Apply_TrainingProgress = SHIXIUS + "/myapply/trainingprogress?"
+let SX_Apply_TrainingProgress = SHIXIUS + "/myapply/trainingprocess?"
 
 /// 培训 申请进度 详情
-let SX_Apply_TrainProgress    = SHIXIUS + "/myapply/trainprogress?"
+let SX_Apply_TrainProgress    = SHIXIUS + "/myapply/trainprocess?"
 
 /// 就业岗位 申请进度 详情
-let SX_Apply_JobProgress      = SHIXIUS + "/myapply/jobprogress?"
+let SX_Apply_JobProgress      = SHIXIUS + "/myapply/jobprocess?"
 
 // =======================================================================================
 // MARK: - 我的 ! ! !

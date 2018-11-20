@@ -23,7 +23,7 @@ class SX_ApplyEmpListController: UIViewController {
     var weChatTF: UITextField?
     var jobid:String?
     
-//    var resumeController: UIDocumentBrowserViewController?
+    //    var resumeController: UIDocumentBrowserViewController?
     var resumeBtn: UIButton?
     var letterBtn: UIButton? //求职信
     
@@ -163,21 +163,17 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
                 
                 RESUME.rx.tap.subscribe(onNext: { (_) in
                     SXLog("点击选取简历")
-                    
-//                    let vc = UIDocumentBrowserViewController(forOpeningFilesWithContentTypes: ["public.content","public.text","public.source-code","public.image","public.audiovisual-content","com.adobe.pdf","com.apple.keynote.key","com.microsoft.word.doc","com.microsoft.excel.xls","com.microsoft.powerpoint.ppt"])
-//                    vc.modalPresentationStyle = .fullScreen
-//                    vc.delegate               = self
-
                     let vc = UIDocumentPickerViewController(documentTypes: ["public.content","public.text","public.source-code","public.image","public.audiovisual-content","com.adobe.pdf","com.apple.keynote.key","com.microsoft.word.doc","com.microsoft.excel.xls","com.microsoft.powerpoint.ppt"], in: UIDocumentPickerMode.open)
                     vc.delegate = self
                     vc.modalPresentationStyle = .fullScreen
-
-
-
-
+                    
                     self.present(vc, animated: true, completion: {
+                        
                         SXLog("选取文件1")
+                        RESUME.setTitle("已经选取简历文件\(vc.allowsMultipleSelection)", for: .normal)
+                        
                     })
+                    
                 }, onError: { (error) in
                     SXLog(error)
                 }, onCompleted: nil, onDisposed: nil)
@@ -291,40 +287,61 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
 }
 
 // ========================================================================
-// MARK: - UIDocumentBrowserViewControllerDelegate
-// ========================================================================
-extension SX_ApplyEmpListController: UIDocumentBrowserViewControllerDelegate {
-    
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
-        SXLog(documentURLs)
-        
-    }
-    
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, didImportDocumentAt sourceURL: URL, toDestinationURL destinationURL: URL) {
-        
-    }
-        
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL, error: Error?) {
-        
-    }
-    
-//    func documentBrowser(_ controller: UIDocumentBrowserViewController, applicationActivitiesForDocumentURLs documentURLs: [URL]) -> [UIActivity] {
-//
-//    }
-    
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, willPresent activityViewController: UIActivityViewController) {
-        
-    }
-}
-
-
-// ========================================================================
-// MARK: - UIDocumentBrowserViewControllerDelegate
+// MARK: - UIDocumentPickerDelegate
 // ========================================================================
 extension SX_ApplyEmpListController: UIDocumentPickerDelegate {
     
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentURLs documentURLs: [URL]) {
-        SXLog(documentURLs)
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         
     }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        SXLog(urls)
+        
+        let fileUrAuthoized: Bool = (urls.first?.startAccessingSecurityScopedResource())!
+        if fileUrAuthoized {
+            // 通过文件协调工具来得到新的文件地址, 以此得到文件的保护功能
+            let fileCoordinator = NSFileCoordinator()
+            fileCoordinator.coordinate(readingItemAt: urls.first!, options: [], error: nil) { (newURL) in
+                let fileName = newURL.lastPathComponent
+                let error:NSError? = nil
+                do{
+                    let fileData = try NSData(contentsOf: newURL, options: NSData.ReadingOptions.mappedIfSafe)
+                    if (error != nil) {
+                        // 读取出错
+                        SXLog("读取出错")
+                    }else{
+                        // 上传
+                        SXLog("上传")
+//                        let str = try String(contentsOf: urls[0])
+                        SX_NetManager.requestData(type: .POST, URlString: SX_Mine_UploadFile, parameters: ["file":"/private/var/mobile/Library/Mobile%20Documents/com~apple~CloudDocs/%E5%AE%9E%E8%AE%ADAPP1.0%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3.doc"
+                            ], finishCallBack: { (result) in
+                                SXLog("这里打印 --------> \(result)")
+                                
+                        })
+                        
+                    }
+                    self.dismiss(animated: true, completion: nil)
+                }catch { }
+                urls.first?.stopAccessingSecurityScopedResource()
+            }
+        }else{
+            // 授权失败
+            SXLog("授权失败")
+        }
+    }
 }
+
+
+// ========================================================================
+// MARK: -
+// ========================================================================
+extension SX_ApplyEmpListController {
+    
+    
+    
+    
+    
+}
+
+
