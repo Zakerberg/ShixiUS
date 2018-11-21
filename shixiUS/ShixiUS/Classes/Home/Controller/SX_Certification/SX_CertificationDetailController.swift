@@ -174,15 +174,12 @@ extension SX_CertificationDetailController {
     }
     
     func fetchData() {
-        
         SX_NetManager.requestData(type: .GET, URlString: (SX_TrainDetail + self.id!), parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
-                
                 self.serverImgs.append(json["data"]["image"].string!)
                 self.detailScrollerView.serverImgArray = self.serverImgs
                 self.certificationDetailArr = JSON(arrayLiteral: json.dictionary ?? [:])
-                
                 for item in json["data"]["series"].array ?? [] {
                     self.classTitleArr.append(item["name"].string ?? "")
                 }
@@ -198,7 +195,6 @@ extension SX_CertificationDetailController {
                     let teacherModel = TrainDetailTeacherModel(jsonData: item)
                     self.teacherListArr.append(teacherModel)
                 }
-                
                 self.hideLoadingView()
                 self.detailScrollerView.reloadData()
                 self.tableView.reloadData()
