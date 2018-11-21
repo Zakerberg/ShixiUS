@@ -430,10 +430,10 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
         case 3: // 课程介绍
             return UILabel.SX_getSpaceLabelHeight((model["data"]["describe"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 40.FloatValue.IPAD_XValue
         case 4: // 课程大纲
-            return 200.FloatValue.IPAD_XValue
+            return UILabel.SX_getSpaceLabelHeight((model["data"]["curriculum"]["content"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 140.FloatValue.IPAD_XValue
         case 5: // 名师介绍
-            return 200.FloatValue.IPAD_XValue
-        default:
+            return UILabel.SX_getSpaceLabelHeight((model["data"]["teacher"]["describe"].string ?? "") as NSString, font: UIFont.systemFont(ofSize: 15), width: SCREEN_WIDTH-20, space: 0, zpace: 0) + 140.FloatValue.IPAD_XValue
+        default: //
             return 200.FloatValue.IPAD_XValue
         }
     }
@@ -492,12 +492,6 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    
-    
-    
-    
-    
-    
 }
 
 // ==============================================================================

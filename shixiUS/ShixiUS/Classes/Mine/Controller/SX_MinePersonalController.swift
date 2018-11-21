@@ -16,6 +16,7 @@
 import UIKit
 import SwiftyJSON
 import IQKeyboardManagerSwift
+import MBProgressHUD
 
 class SX_MinePersonalController: UIViewController {
     
@@ -75,13 +76,24 @@ extension SX_MinePersonalController {
                      "phone"   :self.Dic.value(forKey: "2") ?? "",
                      "email"   :self.Dic.value(forKey: "5") ?? "",
                      "weixin"  :self.Dic.value(forKey: "4") ?? ""]
+        
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{
                 let json = try JSON(data: result)
-                
-                
-                
-                
+                if json["status"] == "200"{
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
+                    self.navigationController?.popViewController(animated: true)
+                }else{
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
+                }
             }catch { }
         }
     }
