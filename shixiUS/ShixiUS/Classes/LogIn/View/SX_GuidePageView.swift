@@ -43,7 +43,6 @@ public class SX_GuidePageView: UIView {
         return pageControl
     }()
     
-    /// 跳过按钮
     public lazy var skipButton: UIButton = {
         let btn = UIButton.init(type: .custom)
         btn.backgroundColor     = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.4)
@@ -56,7 +55,7 @@ public class SX_GuidePageView: UIView {
         btn.addTarget(self, action: #selector(skipBtnClicked), for: .touchUpInside)
         return btn
     }()
-    /// 登录注册按钮
+    
     public lazy var logtinButton: UIButton = {
         let btn = UIButton.init(type: .custom)
         btn.setTitle("注册/登录", for: .normal)
@@ -144,7 +143,7 @@ public class SX_GuidePageView: UIView {
             let data: Data? = try? Data.init(contentsOf: URL.init(fileURLWithPath: filePath), options: Data.ReadingOptions.uncached)
             var view: UIView
             let type = SX_GifImageOperation.checkDataType(data: data)
-            if type == DataType.gif {   // gif
+            if type  == DataType.gif {   // gif
                 view = SX_GifImageOperation.init(frame: imageFrame, gifData: data!)
             } else {                    // 其它图片
                 // Warning: 假如说图片是放在Assets中的，使用Bundle的方式加载不到，需要使用init(named:)方法加载。
@@ -152,6 +151,7 @@ public class SX_GuidePageView: UIView {
                 view.contentMode = .scaleAspectFill
                 (view as! UIImageView).image = (data != nil ? UIImage.init(data: data!) : UIImage.init(named: name))
             }
+            
             // 添加“立即体验”按钮和登录/注册按钮
             if imageArray?.last == name {
                 view.isUserInteractionEnabled = true

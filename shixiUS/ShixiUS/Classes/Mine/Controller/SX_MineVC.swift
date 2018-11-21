@@ -57,15 +57,20 @@ class SX_MineVC: UIViewController {
             QUIT.setTitleColor(UIColor.SX_MainColor(), for: .normal)
             QUIT.rx.tap.subscribe(onNext: { (_) in
                 SXLog("退出登录")
-
                 let alertController = UIAlertController(title: "确定退出登录?", message: "", preferredStyle: .alert)
+                
                 var cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
-                    
+                    USERDEFAULTS.set("", forKey: "token")
+                    USERDEFAULTS.set("", forKey: "userId")
+                    USERDEFAULTS.set("no", forKey: "login")
                 })
+                
                 //[cancelAction setValue:[UIColor blackColor] forKey:@"_titleTextColor"]
                 var sureAction  = UIAlertAction(title: "确定", style: .default, handler: { (action) in
-
+                    
+                    QUIT.isHidden   = true
                 })
+                
                 alertController.addAction(cancelAction)
                 alertController.addAction(sureAction)
                 self.present(alertController, animated: true, completion: nil)

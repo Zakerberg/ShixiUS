@@ -37,7 +37,7 @@
     var adImages = [String]()
     var adURLs   = [String]()
     var adTitles = [String]()
-    var adIDs    = [Int]()
+    var adIDs    = [String]()
     var adTypes  = [String]()
     /// ad
     
@@ -128,6 +128,7 @@
                         self.adTitles.append(subJSON["title"].string ?? "")
                         self.adTypes.append(subJSON["type"].string ?? "")
                         self.adURLs.append(subJSON["url"].string ?? "")
+                        self.adIDs.append(subJSON["id"].string ?? "")
                     }
                     self.cycleScrollerView.serverImgArray = self.adImages
                     self.cycleScrollerView.descTextArray = self.adTitles
@@ -430,10 +431,10 @@
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if indexPath.section == 1 {
-        let model = jobsArr[indexPath.row]
-        let vc = SX_HotJobDetailController()
-        vc.id  = model["id"].string
-        self.navigationController?.pushViewController(vc, animated: true)
+            let model = jobsArr[indexPath.row]
+            let vc = SX_HotJobDetailController()
+            vc.id  = model["id"].string
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
  }
@@ -451,10 +452,25 @@
         SXLog(index)
         if self.adTypes[index] == "training" {
             SXLog("跳转实训详情")
+            let vc = SX_ProjectDetailController()
+            vc.id  = self.adIDs[index] as String
+            self.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            self.hidesBottomBarWhenPushed = false
         } else if self.adTypes[index] == "train" {
             SXLog("跳转培训详情")
-        }else if self.adTypes[index] == "jobs" {
+            let vc = SX_CertificationDetailController()
+            vc.id  = self.adIDs[index] as String
+            self.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            self.hidesBottomBarWhenPushed = false
+        }else if self.adTypes[index] == "job" {
             SXLog("跳转职位详情")
+            let vc = SX_HotJobDetailController()
+            vc.id  = self.adIDs[index] as String
+            self.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            self.hidesBottomBarWhenPushed = false
         }else if self.adTypes[index] == "link" {
             let vc    = SX_BaseWebController()
             vc.webURL = self.adURLs[index] as NSString

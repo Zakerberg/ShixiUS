@@ -52,8 +52,7 @@ extension SX_BaseWebController {
     }
     
     func loadWebView() {
-        
-        let request = NSURLRequest(url: NSURL(string: self.webURL as! String) as! URL, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0.5)
+        let request = NSURLRequest(url: NSURL(string: self.webURL! as String)! as URL, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 0.5)
         self.webView?.load(request as URLRequest)
     }
     

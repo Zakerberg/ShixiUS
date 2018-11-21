@@ -20,13 +20,13 @@ import MBProgressHUD
 
 class SX_LoginController: UIViewController {
     
-    var userNameTF     : SX_TextField?
-    var backBtn        : UIButton?
-    var passWordTF     : SX_TextField?
+    var userNameTF: SX_TextField?
+    var backBtn: UIButton?
+    var passWordTF: SX_TextField?
     
-    var logInBtn       : UIButton?
-    var forgetBtn      : UIButton?
-    var registerBtn    : UIButton?
+    var logInBtn: UIButton?
+    var forgetBtn: UIButton?
+    var registerBtn: UIButton?
     
     typealias SuccessClosure = (String, String) ->()
     var closure: SuccessClosure!
