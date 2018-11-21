@@ -75,15 +75,9 @@ extension SX_MinePersonalController {
                      "phone"   :self.Dic.value(forKey: "2") ?? "",
                      "email"   :self.Dic.value(forKey: "5") ?? "",
                      "weixin"  :self.Dic.value(forKey: "4") ?? ""]
-        
-        
-        
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{
                 let json = try JSON(data: result)
-                
-                
-                
                 
                 
                 
@@ -128,8 +122,7 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             
             cell.titleLabel?.text = self.titleArr[indexPath.row]
             cell.tF?.placeholder  = self.contentArr[indexPath.row]
-
-            cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
+           cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
                 self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
                 if cell.tF?.text?.lengthOfBytes(using: .utf8) != 0 {
                     self?.saveBtn?.isEnabled       = true
@@ -157,7 +150,6 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             SAVE.rx.tap.subscribe(onNext: { (_) in
                 SXLog("保存个人信息")
                 self.fetchData()
-                
                 self.navigationController?.popViewController(animated: true)
             }, onError: { (error) in
                 SXLog(error)

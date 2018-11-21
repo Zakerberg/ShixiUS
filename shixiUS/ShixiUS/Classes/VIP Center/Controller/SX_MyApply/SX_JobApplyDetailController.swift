@@ -22,7 +22,7 @@ import MBProgressHUD
 let applyDetailCellID = "applyDetailCellID"
 let detailCellID      = "detailCellID"
 
-class SX_JobApplyDetailController: SX_BaseController {
+class SX_JobApplyDetailController: UIViewController {
     
     var payBtn: UIButton? // 支付服务预定金
     var cancelBtn: UIButton? // 取消订单
@@ -51,7 +51,6 @@ class SX_JobApplyDetailController: SX_BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        showLoadingView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,7 +85,6 @@ extension SX_JobApplyDetailController {
             } catch{ }
             
             self.table.reloadData()
-            self.hideLoadingView()
         })
     }
 }

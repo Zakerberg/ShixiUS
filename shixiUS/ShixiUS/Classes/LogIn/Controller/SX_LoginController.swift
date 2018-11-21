@@ -31,6 +31,12 @@ class SX_LoginController: UIViewController {
     typealias SuccessClosure = (String, String) ->()
     var closure: SuccessClosure!
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name:NSNotification.Name.UIKeyboardWillShow , object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHidden), name:NSNotification.Name.UIKeyboardWillHide , object: nil)
+//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -43,6 +49,8 @@ class SX_LoginController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "LOGINSUCCEED"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
 }
 
@@ -52,9 +60,7 @@ class SX_LoginController: UIViewController {
 extension SX_LoginController {
     
     func setUI() {
-        
         self.view.backgroundColor = UIColor.white
-        
         self.backBtn = UIButton(type: .custom).addhere(toSuperView: self.view).layout(snapKitMaker: { (make) in
             make.top.equalToSuperview().offset(50.FloatValue.IPAD_XValue)
             make.right.equalToSuperview().offset(-30.FloatValue.IPAD_XValue)
@@ -257,6 +263,9 @@ extension SX_LoginController {
         self.passWordTF?.resignFirstResponder()
         self.userNameTF?.resignFirstResponder()
         self.backBtn?.resignFirstResponder()
+        self.registerBtn?.resignFirstResponder()
+        self.logInBtn?.resignFirstResponder()
+        self.forgetBtn?.resignFirstResponder()
     }
     
     func callBack(closure :@escaping SuccessClosure) {
@@ -337,3 +346,17 @@ class SX_PasswordSwitch: UIButton {
         self.setImage(#imageLiteral(resourceName: "icon_Login_password_Selected"), for: .selected)
     }
 }
+
+// ==============================================================================
+// MARK: - KeyBoard Noti
+// ==============================================================================
+extension SX_LoginController {
+//    @objc func keyBoardWillShow(noti: Notification) {
+//        view.frame = CGRect(x: 0, y: -200, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+//    }
+//
+//    @objc func keyBoardWillHidden() {
+//        view.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+//    }
+}
+
