@@ -139,3 +139,5 @@ let SX_Mine_OrderRecord       = SHIXIUS + "/myorder/index?"
 // 修改密码
 let SX_Mine_FixPassword       = SHIXIUS + "/member/uppassword"
 
+// 获取个人信息 (post)
+let SX_Mine_GetInfo           = SHIXIUS + "/member/getinfo"

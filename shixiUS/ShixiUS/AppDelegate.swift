@@ -143,6 +143,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let sureAction  = UIAlertAction(title: "确定", style: .default, handler: { (action) in
             SXLog("这里的! ! ! ! ! ---> url=\(url)")
+            
+            
+            
+            
+            
+            
 
         })
         

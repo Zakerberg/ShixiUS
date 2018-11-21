@@ -620,6 +620,34 @@
     }
  }
  
+ // ==============================================================================
+ // MARK: - Optional Extension
+ // ==============================================================================
+ extension Optional {
+    /// 可选值为空的时候返回 true
+    var isNone: Bool {
+        switch self {
+        case .none:
+            return true
+        case .some:
+            return false
+        }
+    }
+    
+    /// 可选值非空返回 true
+    var isSome: Bool {
+        return !isNone
+    }
+    
+    /****
+     before:
+     guard leftBtn != nil else { fatalError("Missing Interface Builder Connections") }
+     
+     now:
+     guard leftBtn.isSome else { fatalError("Missing Interface Builder Connections") }
+     */
+ }
+ 
  // ================================================  |  ===============================================
  // ================================================  |  ===============================================
  // ================================================  | ================================================

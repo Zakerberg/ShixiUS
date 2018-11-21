@@ -47,6 +47,7 @@ class SX_MinePersonalController: UIViewController {
         super.viewDidLoad()
         IQKeyboardManager.shared.enable = false
         setUI()
+        fetchInfoData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,7 +63,6 @@ extension SX_MinePersonalController {
     
     func setUI() {
         title = "个人信息"
-        
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(self.table)
     }
@@ -95,6 +95,29 @@ extension SX_MinePersonalController {
                     hud.hide(animated: true, afterDelay: 1.0)
                 }
             }catch { }
+        }
+    }
+    
+    func fetchInfoData() {
+        let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
+                     "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!)]
+        SX_NetManager.requestData(type: .POST, URlString: SX_Mine_GetInfo, parameters: param) { (result) in
+            do{
+                let json = try JSON(data: result)
+                if json["status"].string == "200" {
+                    self.Dic.setValue(json["data"]["username"].string, forKey: "1")
+                    self.Dic.setValue(json["data"]["country"], forKey: "2")
+                    self.Dic.setValue(json["data"]["phone"].string, forKey: "3")
+                    self.Dic.setValue(json["data"]["email"], forKey: "4")
+                    self.Dic.setValue(json["data"]["wechat"], forKey: "5")
+                }else{
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
+                }
+            }catch{ }
         }
     }
 }
@@ -134,8 +157,9 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             
             cell.titleLabel?.text = self.titleArr[indexPath.row]
             cell.tF?.placeholder  = self.contentArr[indexPath.row]
-           cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
+            cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
                 self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
+                
                 if cell.tF?.text?.lengthOfBytes(using: .utf8) != 0 {
                     self?.saveBtn?.isEnabled       = true
                     self?.saveBtn?.backgroundColor = UIColor.SX_MainColor()

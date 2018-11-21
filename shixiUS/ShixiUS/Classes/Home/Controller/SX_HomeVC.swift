@@ -253,7 +253,6 @@
  // MARK: - UITableViewDelegate
  // ===============================================================================
  extension SX_HomeVC : UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 1 {
@@ -289,7 +288,6 @@
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.section == 0 {
             let shixiTrainingCell = SX_TrainingCell(style: .default, reuseIdentifier: shixiTrainingCellID)
             shixiTrainingCell.selectionStyle   = .none

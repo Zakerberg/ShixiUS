@@ -33,11 +33,6 @@ class SX_ApplyProgressDetailController: SX_BaseController {
         return tableView
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -63,12 +58,16 @@ extension SX_ApplyProgressDetailController {
     }
     
     func fetchData() {
-        
         let url = SX_Apply_TrainingProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
-        
         SX_NetManager.requestData(type: .GET, URlString: url, parameters:  nil, finishCallBack: { (result) in
             do{
-                let json              = try JSON(data: result)
+                let json = try JSON(data: result)
+                
+                
+                
+                
+                
+                
                 
             } catch{ }
             self.tableView.reloadData()
@@ -89,14 +88,17 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SX_ProgressDetailCell(style: .default, reuseIdentifier: progressDetailCellID)
         cell.selectionStyle = .none
-        
-        
-        
-        
-        
-        
-        
-        
+
+ 
+
+
+
+
+
+
+
+
+
         return cell
     }
     

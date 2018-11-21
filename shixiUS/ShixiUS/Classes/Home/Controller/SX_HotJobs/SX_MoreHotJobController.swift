@@ -128,7 +128,7 @@ extension SX_MoreHotJobController {
         self.view.insertSubview(self.tableView!, belowSubview: self.workNatureView)
         
         self.tableView?.snp.makeConstraints({ (make) in
-            make.top.equalToSuperview().offset(kNavH)
+            make.top.equalToSuperview().offset(kNavH+60.FloatValue.IPAD_XValue)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
         })
