@@ -19,7 +19,6 @@ import UIKit
 @IBDesignable
 open class SX_GuidePageControl: UIPageControl {
     
-    /// The number of page indicators of the page control. Default is 0.
     @IBInspectable
      open override var numberOfPages: Int {
         didSet {
@@ -27,7 +26,6 @@ open class SX_GuidePageControl: UIPageControl {
         }
     }
     
-    /// The current page, highlighted by the page control. Default is 0.
     @IBInspectable
      open override var currentPage: Int {
         didSet {
@@ -35,7 +33,6 @@ open class SX_GuidePageControl: UIPageControl {
         }
     }
     
-    /// The spacing to use of page indicators in the page control.
     @IBInspectable
     open var itemSpacing: CGFloat = 6 {
         didSet {
@@ -43,7 +40,6 @@ open class SX_GuidePageControl: UIPageControl {
         }
     }
     
-    /// The spacing to use between page indicators in the page control.
     @IBInspectable
     open var interitemSpacing: CGFloat = 6 {
         didSet {
@@ -51,34 +47,30 @@ open class SX_GuidePageControl: UIPageControl {
         }
     }
     
-    /// The distance that the page indicators is inset from the enclosing page control.
-    /// @IBInspectable 不支持 UIEdgeInsets 类型
     open var contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0) {
         didSet {
             self.setNeedsLayout()
         }
     }
     
-    /// The horizontal alignment of content within the control’s bounds. Default is center.
     open override var contentHorizontalAlignment: UIControlContentHorizontalAlignment {
         didSet {
             self.setNeedsLayout()
         }
     }
-    
-    
-    internal var strokeColors: [UIControlState: UIColor] = [:]
-    internal var fillColors: [UIControlState: UIColor] = [:]
-    internal var paths: [UIControlState: UIBezierPath] = [:]
-    internal var images: [UIControlState: UIImage] = [:]
-    internal var alphas: [UIControlState: CGFloat] = [:]
+
+    internal var strokeColors: [UIControlState: UIColor]         = [:]
+    internal var fillColors: [UIControlState: UIColor]           = [:]
+    internal var paths: [UIControlState: UIBezierPath]           = [:]
+    internal var images: [UIControlState: UIImage]               = [:]
+    internal var alphas: [UIControlState: CGFloat]               = [:]
     internal var transforms: [UIControlState: CGAffineTransform] = [:]
     
     fileprivate weak var contentView: UIView!
     
     fileprivate var needsUpdateIndicators = false
     fileprivate var needsCreateIndicators = false
-    fileprivate var indicatorLayers = [CAShapeLayer]()
+    fileprivate var indicatorLayers       = [CAShapeLayer]()
     
     fileprivate var runLoopObserver: CFRunLoopObserver?
     fileprivate var runLoopCallback: CFRunLoopObserverCallBack = {
@@ -108,11 +100,11 @@ open class SX_GuidePageControl: UIPageControl {
     open override func layoutSubviews() {
         super.layoutSubviews()
         self.contentView.frame = {
-            let x = self.contentInsets.left
-            let y = self.contentInsets.top
-            let width = self.frame.width - self.contentInsets.left - self.contentInsets.right
+            let x      = self.contentInsets.left
+            let y      = self.contentInsets.top
+            let width  = self.frame.width - self.contentInsets.left - self.contentInsets.right
             let height = self.frame.height - self.contentInsets.top - self.contentInsets.bottom
-            let frame = CGRect(x: x, y: y, width: width, height: height)
+            let frame  = CGRect(x: x, y: y, width: width, height: height)
             return frame
         }()
     }
@@ -120,8 +112,8 @@ open class SX_GuidePageControl: UIPageControl {
     open override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
         
-        let diameter = self.itemSpacing
-        let spacing = self.interitemSpacing
+        let diameter   = self.itemSpacing
+        let spacing    = self.interitemSpacing
         var x: CGFloat = {
             switch self.contentHorizontalAlignment {
             case .left:
@@ -141,20 +133,15 @@ open class SX_GuidePageControl: UIPageControl {
         }()
         for (index, value) in self.indicatorLayers.enumerated() {
             let state: UIControlState = (index == self.currentPage) ? .selected : .normal
-            let image = self.images[state]
-            let size = image?.size ?? CGSize(width: diameter, height: diameter)
-            let origin = CGPoint(x: x - (size.width-diameter)*0.5, y: self.contentView.bounds.midY-size.height*0.5)
+            let image   = self.images[state]
+            let size    = image?.size ?? CGSize(width: diameter, height: diameter)
+            let origin  = CGPoint(x: x - (size.width-diameter)*0.5, y: self.contentView.bounds.midY-size.height*0.5)
             value.frame = CGRect(origin: origin, size: size)
             x += (spacing + diameter)
         }
         
     }
     
-    /// Sets the stroke color for page indicators to use for the specified state. (selected/normal).
-    ///
-    /// - Parameters:
-    ///   - strokeColor: The stroke color to use for the specified state.
-    ///   - state: The state that uses the specified stroke color.
     @objc(setStrokeColor:forState:)
     open func setStrokeColor(_ strokeColor: UIColor?, for state: UIControlState) {
         guard self.strokeColors[state] != strokeColor else {
@@ -164,11 +151,6 @@ open class SX_GuidePageControl: UIPageControl {
         self.setNeedsUpdateIndicators()
     }
     
-    /// Sets the fill color for page indicators to use for the specified state. (selected/normal).
-    ///
-    /// - Parameters:
-    ///   - fillColor: The fill color to use for the specified state.
-    ///   - state: The state that uses the specified fill color.
     @objc(setFillColor:forState:)
     open func setFillColor(_ fillColor: UIColor?, for state: UIControlState) {
         guard self.fillColors[state] != fillColor else {
@@ -178,11 +160,6 @@ open class SX_GuidePageControl: UIPageControl {
         self.setNeedsUpdateIndicators()
     }
     
-    /// Sets the image for page indicators to use for the specified state. (selected/normal).
-    ///
-    /// - Parameters:
-    ///   - image: The image to use for the specified state.
-    ///   - state: The state that uses the specified image.
     @objc(setImage:forState:)
     open func setImage(_ image: UIImage?, for state: UIControlState) {
         guard self.images[state] != image else {
@@ -194,11 +171,6 @@ open class SX_GuidePageControl: UIPageControl {
     
     @objc(setAlpha:forState:)
     
-    /// Sets the alpha value for page indicators to use for the specified state. (selected/normal).
-    ///
-    /// - Parameters:
-    ///   - alpha: The alpha value to use for the specified state.
-    ///   - state: The state that uses the specified alpha.
     open func setAlpha(_ alpha: CGFloat, for state: UIControlState) {
         guard self.alphas[state] != alpha else {
             return
@@ -207,11 +179,6 @@ open class SX_GuidePageControl: UIPageControl {
         self.setNeedsUpdateIndicators()
     }
     
-    /// Sets the path for page indicators to use for the specified state. (selected/normal).
-    ///
-    /// - Parameters:
-    ///   - path: The path to use for the specified state.
-    ///   - state: The state that uses the specified path.
     @objc(setPath:forState:)
     open func setPath(_ path: UIBezierPath?, for state: UIControlState) {
         guard self.paths[state] != path else {
@@ -222,16 +189,13 @@ open class SX_GuidePageControl: UIPageControl {
     }
     
     // MARK: - Private functions
-
     fileprivate func commonInit() {
         
-        // Content View
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor.clear
         self.addSubview(view)
         self.contentView = view
         
-        // RunLoop
         let runLoop = CFRunLoopGetCurrent()
         let activities: CFRunLoopActivity = [.entry, .afterWaiting]
         var context = CFRunLoopObserverContext(version: 0, info: Unmanaged.passUnretained(self).toOpaque(), retain: nil, release: nil, copyDescription: nil)

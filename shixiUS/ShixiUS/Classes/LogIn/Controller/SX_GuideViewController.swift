@@ -15,7 +15,6 @@
 import UIKit
 
 class SX_GuideViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -26,7 +25,6 @@ class SX_GuideViewController: UIViewController {
 // MARK: - Other Method
 // =========================================================
 extension SX_GuideViewController {
-    
     func setUI() {
         // gif和jpg类型的资源数组
         let imageGifArray = ["guideImage1.jpg","guideImage6.gif", "guideImage8.gif", "guideImage2.jpg","guideImage7.gif", "guideImage5.jpg"]

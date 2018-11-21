@@ -19,15 +19,15 @@ import UIKit
 public class SX_GuidePageView: UIView {
     
     private var imageArray: Array<String>?
-    private var isHiddenSkipBtn: Bool = false           // 是否隐藏跳过按钮(true 隐藏; false 不隐藏)，default: false
+    private var isHiddenSkipBtn: Bool  = false           // 是否隐藏跳过按钮(true 隐藏; false 不隐藏)，default: false
     private var isHiddenStartBtn: Bool = false          // 是否隐藏立即体验按钮(true 隐藏; false 不隐藏)，default: false
     private lazy var guideScrollView: UIScrollView = {
         let view = UIScrollView.init()
         view.backgroundColor = UIColor.lightGray
-        view.bounces = false
+        view.bounces         = false
         view.isPagingEnabled = true
         view.showsHorizontalScrollIndicator = false
-        view.delegate = self
+        view.delegate        = self
         return view
     }()
     
