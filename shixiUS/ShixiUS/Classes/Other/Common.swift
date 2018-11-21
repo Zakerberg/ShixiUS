@@ -621,7 +621,7 @@
  }
  
  // ==============================================================================
- // MARK: - Optional Extension
+ // MARK: - Optional Extension - Emptiness(判空)
  // ==============================================================================
  extension Optional {
     /// 可选值为空的时候返回 true
@@ -633,7 +633,6 @@
             return false
         }
     }
-    
     /// 可选值非空返回 true
     var isSome: Bool {
         return !isNone
@@ -647,6 +646,79 @@
      guard leftBtn.isSome else { fatalError("Missing Interface Builder Connections") }
      */
  }
+ 
+ // ==============================================================================
+ // MARK: - Optional Extension - Or (或)
+ // ==============================================================================
+ extension Optional {
+    /// 返回可选值或者默认值
+    ///  - 参数: 如果可选值为空, 将会默认值
+    func or(_ default: Wrapped) ->Wrapped {
+        return self ?? `default`
+    }
+  
+    /// 返回可选值 或 `else` 表达式返回的值
+    /// eg: optional.or(else: print("Arr"))
+    func or(else: @autoclosure() -> Wrapped) -> Wrapped {
+        return self ?? `else`()
+    }
+    
+    /// 返回可选值 或 `else` 闭包返回的值
+    /// eg: optional.or(else: {
+    ///  ... do a lot of stuff
+    ///   })
+    func or(else: () -> Wrapped) -> Wrapped {
+        return self ?? `else`()
+    }
+    
+    /// 当可选值不为空时候. 返回可选值
+    /// 为空, 抛出异常
+    func or(throw exception: Error) throws -> Wrapped {
+        guard let unwrapped = self else { return exception as! Wrapped }
+        return unwrapped
+    }
+}
+ 
+ extension Optional where Wrapped == Error {
+    /// 当可选值不为空时, 执行`else`
+    func or(_ else: (Error) -> Void) {
+        guard let error = self else { return }
+        `else`(error)
+    }
+ }
+ 
+ // ==============================================================================
+ // MARK: - Optional Extension - Map (变换)
+ // ==============================================================================
+ extension Optional {
+    
+    
+ }
+ 
+ // ==============================================================================
+ // MARK: - Optional Extension - Combining Optionals (组合可选值)
+ // ==============================================================================
+ extension Optional {
+    
+    
+ }
+ 
+ // ==============================================================================
+ // MARK: - Optional Extension - On
+ // ==============================================================================
+ extension Optional {
+    
+    
+ }
+ 
+ // ==============================================================================
+ // MARK: - Optional Extension - Various
+ // ==============================================================================
+ extension Optional {
+    
+    
+ }
+ 
  
  // ================================================  |  ===============================================
  // ================================================  |  ===============================================
