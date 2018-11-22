@@ -102,6 +102,7 @@ extension SX_LoginController {
             NUM.placeholder              = "请输入用户名"
             NUM.textAlignment            = .left
             NUM.clearButtonMode          = .always
+            NUM.keyboardType             = .namePhonePad
             
             NUM.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
                 SXLog("开始编辑账号....")
@@ -210,9 +211,10 @@ extension SX_LoginController {
                             
                             let statusStr  = "1"
                             /// 发送 登陆成功 通知
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINSUCCESS"), object: nil, userInfo: ["name":json["data"]["userName"].rawString()!])
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINSUCCESS"), object: nil, userInfo: nil)
                             guard(self.closure != nil) else{
                                 self.dismiss(animated: true, completion: nil)
+                                
                                 return
                             }
                             self.closure(json["data"]["userName"].rawString()!,statusStr)

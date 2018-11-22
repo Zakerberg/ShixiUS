@@ -141,3 +141,6 @@ let SX_Mine_FixPassword       = SHIXIUS + "/member/uppassword"
 
 // 获取个人信息 (post)
 let SX_Mine_GetInfo           = SHIXIUS + "/member/getinfo"
+
+// 退出登录(post)
+let SX_Mine_SignOut           = SHIXIUS + "/signup/signout"

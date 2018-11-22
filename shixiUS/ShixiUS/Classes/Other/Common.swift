@@ -20,7 +20,7 @@
  import UIKit
  import SnapKit
  
- var maxTextNumberDegault = 15
+ var maxTextNumberDegault = 30
  
  // ==============================================================================
  // MARK: - UIColor
@@ -575,7 +575,7 @@
             if let rs = objc_getAssociatedObject(self, &maxTextNumberDegault) as? Int {
                 return rs
             }
-            return 15
+            return 30
         }
     }
     

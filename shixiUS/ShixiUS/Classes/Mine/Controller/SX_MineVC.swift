@@ -60,15 +60,37 @@ class SX_MineVC: UIViewController {
                 let alertController = UIAlertController(title: "确定退出登录?", message: "", preferredStyle: .alert)
                 
                 var cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: { (_) in
-                    USERDEFAULTS.set("", forKey: "token")
-                    USERDEFAULTS.set("", forKey: "userId")
-                    USERDEFAULTS.set("no", forKey: "login")
+                    
                 })
                 
                 //[cancelAction setValue:[UIColor blackColor] forKey:@"_titleTextColor"]
                 var sureAction  = UIAlertAction(title: "确定", style: .default, handler: { (action) in
-                    
-                    QUIT.isHidden   = true
+                    let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
+                                 "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!)]
+                    SX_NetManager.requestData(type: .POST, URlString: SX_Mine_SignOut, parameters: param) { (result) in
+                        do{
+                            let json = try JSON(data: result)
+                            if json["status"].int == 200 {
+                                QUIT.isHidden                 = true
+                                self.titleNameLabel?.isHidden = true
+                                self.logInBtn?.isHidden       = false
+                                USERDEFAULTS.set("", forKey: "token")
+                                USERDEFAULTS.set("", forKey: "userId")
+                                USERDEFAULTS.set("no", forKey: "login")
+                                let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                hud.mode       = .text
+                                hud.isSquare   = true
+                                hud.label.text = json["msg"].string
+                                hud.hide(animated: true, afterDelay: 1.0)
+                            }else{
+                                let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                hud.mode       = .text
+                                hud.isSquare   = true
+                                hud.label.text = json["msg"].string
+                                hud.hide(animated: true, afterDelay: 1.0)
+                            }
+                        }catch { }
+                    }
                 })
                 
                 alertController.addAction(cancelAction)
@@ -103,6 +125,35 @@ extension SX_MineVC {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         table.addSubview(quitBtn)
         self.view.addSubview(table)
+    }
+    
+    func fetchData() {
+        let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
+                     "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!)]
+        SX_NetManager.requestData(type: .POST, URlString: SX_Mine_GetInfo, parameters: param) { (result) in
+            do{
+                let json = try JSON(data: result)
+                if json["status"].int == 200 {
+                self.titleNameLabel?.text = json["data"]["username"].string ?? "实习网(测试)"
+                    if let url = URL(string: json["data"]["head_pic"].string ?? ""){
+                        self.headPortraitImageView?.kf.setImage(with: url)
+                    }else{
+                        self.headPortraitImageView?.image = UIImage(named: "icon")
+                    }
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = "登录成功"
+                    hud.hide(animated: true, afterDelay: 1.0)
+                }else {
+                    let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    hud.mode       = .text
+                    hud.isSquare   = true
+                    hud.label.text = json["msg"].string
+                    hud.hide(animated: true, afterDelay: 1.0)
+                }
+            }catch { }
+        }
     }
 }
 
@@ -143,7 +194,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                     if self.statusStr == "1" { // 登陆
                         self.titleNameLabel?.isHidden = false
                         self.logInBtn?.isHidden       = true
-                        self.titleNameLabel?.text     = name
+//                        self.titleNameLabel?.text     = name
                     }
                 })
                 self.present(vc, animated: true, completion: nil)
@@ -350,8 +401,9 @@ extension SX_MineVC {
         NotificationCenter.default.rx.notification(NSNotification.Name(rawValue: "LOGINSUCCESS")).takeUntil(self.rx.deallocated).subscribe(onNext: { (noti) in
             self.titleNameLabel?.isHidden = false
             self.logInBtn?.isHidden       = true
-            self.titleNameLabel?.text     = (noti.userInfo?["name"] ?? "暂未设置") as? String
+            // self.titleNameLabel?.text     = (noti.userInfo?["name"] ?? "暂未设置") as? String
             self.quitBtn.isHidden         = false
+            self.fetchData()
         }, onError: { (error) in
             SXLog(error)
         }, onCompleted: nil, onDisposed: nil)
