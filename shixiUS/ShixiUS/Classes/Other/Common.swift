@@ -212,8 +212,8 @@
  //打印信息
  func SXLog<T>(_ message : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
     #if DEBUG
-        let fileName = (file as NSString).lastPathComponent
-        print("\n>>> \(Date())  \(fileName) (line: \(lineNum)): \(message)\n")
+    let fileName = (file as NSString).lastPathComponent
+    print("\n>>> \(Date())  \(fileName) (line: \(lineNum)): \(message)\n")
     #endif
  }
  
@@ -656,7 +656,7 @@
     func or(_ default: Wrapped) ->Wrapped {
         return self ?? `default`
     }
-  
+    
     /// 返回可选值 或 `else` 表达式返回的值
     /// eg: optional.or(else: print("Arr"))
     func or(else: @autoclosure() -> Wrapped) -> Wrapped {
@@ -677,7 +677,35 @@
         guard let unwrapped = self else { return exception as! Wrapped }
         return unwrapped
     }
-}
+    
+    
+    /*************** before
+     func buildCar() throws -> Car {
+     let tires = try machine1.createTires()
+     let windows = try machine2.createWindows()
+     guard let motor = externalMachine.deliverMotor() else {
+     throw MachineError.motor
+     }
+     let trunk = try machine3.createTrunk()
+     if let car = manufacturer.buildCar(tires, windows,  motor, trunk) {
+     return car
+     } else {
+     throw MachineError.manufacturer
+     }
+     }
+     ****************/
+    
+    /*************** now
+     func build_car() throws -> Car {
+     let tires = try machine1.createTires()
+     let windows = try machine2.createWindows()
+     let motor = try externalMachine.deliverMotor().or(throw: MachineError.motor)
+     let trunk = try machine3.createTrunk()
+     return try manufacturer.buildCar(tires, windows,  motor, trunk).or(throw: MachineError.manufacturer)
+     }
+     ****************/
+    
+ }
  
  extension Optional where Wrapped == Error {
     /// 当可选值不为空时, 执行`else`
@@ -685,6 +713,32 @@
         guard let error = self else { return }
         `else`(error)
     }
+ }
+ 
+ // ==============================================================================
+ // MARK: - Optional Extension Handling Errors(错误处理)
+ // ==============================================================================
+ extension Optional {
+    func should(_ do: () throws -> Void) -> Error? {
+        do {
+            try `do`()
+            return nil
+        } catch let error {
+            return error
+        }
+    }
+    
+    /****************** before
+     do {
+     try throwingFunction()
+     } catch let error {
+     print(error)
+     }
+     ********************/
+    
+    /************ now
+     should { try throwingFunction() }.or(print($0))
+     ************/
  }
  
  // ==============================================================================
@@ -764,7 +818,7 @@
     /*计算这个月最开始的一天*/
     func firstDayOfCurrentMonth() -> NSDate {
         let startDate = NSDate()
-       // let Ok: Bool  = NSCalendar.current.startOfDay(for: startDate)
+        // let Ok: Bool  = NSCalendar.current.startOfDay(for: startDate)
         
         return startDate
     }
