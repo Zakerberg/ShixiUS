@@ -231,8 +231,7 @@ extension SX_CertificationDetailController: UITableViewDelegate, UITableViewData
             titleCell.projectName?.text    = model["data"]["title"].string ?? ""
             titleCell.projectContent?.text = "主讲老师: " + (model["data"]["teacher_name"].string ?? "")
             titleCell.projectCity?.text    = "授课地点: " + (model["data"]["address"].string ?? "")
-            
-            titleCell.projectPrice?.text   = "¥" + ("1500") + "起/人"
+            titleCell.projectPrice?.text   =  "¥" + (model["details"][indexPath.section]["price"].string ?? "1") + "起/人"
             
             return titleCell
             

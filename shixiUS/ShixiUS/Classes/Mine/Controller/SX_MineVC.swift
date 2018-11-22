@@ -134,7 +134,7 @@ extension SX_MineVC {
             do{
                 let json = try JSON(data: result)
                 if json["status"].int == 200 {
-                self.titleNameLabel?.text = json["data"]["username"].string ?? "实习网(测试)"
+                    self.titleNameLabel?.text = json["data"]["username"].string ?? "实习网(测试)"
                     if let url = URL(string: json["data"]["head_pic"].string ?? ""){
                         self.headPortraitImageView?.kf.setImage(with: url)
                     }else{
@@ -194,7 +194,6 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
                     if self.statusStr == "1" { // 登陆
                         self.titleNameLabel?.isHidden = false
                         self.logInBtn?.isHidden       = true
-//                        self.titleNameLabel?.text     = name
                     }
                 })
                 self.present(vc, animated: true, completion: nil)
