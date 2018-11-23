@@ -315,6 +315,7 @@ extension SX_TrainApplyDetailController: UITableViewDelegate, UITableViewDataSou
         if indexPath.section == 0 {
             SXLog("进入申请进度详情界面")
             let vc = SX_ApplyProgressDetailController()
+            vc.typeStr = "train"
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

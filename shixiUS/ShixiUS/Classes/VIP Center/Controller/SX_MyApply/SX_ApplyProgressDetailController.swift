@@ -20,8 +20,10 @@ let progressDetailCellID = "progressDetailCellID"
 
 class SX_ApplyProgressDetailController: SX_BaseController {
     
-    var progressArr = [String]()
+    var progressArr = [SX_ApplyProgressDetailModel]()
     var typeStr: String?
+    var url: String?
+    var number: String?
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
@@ -58,17 +60,22 @@ extension SX_ApplyProgressDetailController {
     }
     
     func fetchData() {
-        let url = SX_Apply_TrainingProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))"
-        SX_NetManager.requestData(type: .GET, URlString: url, parameters:  nil, finishCallBack: { (result) in
+        
+        if  self.typeStr == "training" {
+            self.url = SX_Apply_TrainingProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number ?? "")"
+        }else if self.typeStr == "job" {
+            self.url = SX_Apply_TrainProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number ?? "")"
+        }else {
+            self.url = SX_Apply_JobProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number ?? "")"
+        }
+        
+        SX_NetManager.requestData(type: .GET, URlString: self.url!, parameters:  nil, finishCallBack: { (result) in
             do{
                 let json = try JSON(data: result)
-                
-                
-                
-                
-                
-                
-                
+                for item in json["data"].array ?? [] {
+                    let progressModel = SX_ApplyProgressDetailModel(jsonData: item)
+                    self.progressArr.append(progressModel)
+                }
             } catch{ }
             self.tableView.reloadData()
             self.hideLoadingView()
@@ -88,16 +95,15 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SX_ProgressDetailCell(style: .default, reuseIdentifier: progressDetailCellID)
         cell.selectionStyle = .none
-
- 
-
-
-
-
-
-
-
-
+        let model = self.progressArr[indexPath.section]
+        if indexPath.section == 0 {
+            cell.progressPoint?.image = UIImage(named: "icon")
+        } else {
+            cell.progressPoint?.image = UIImage(named: "icon1")
+        }
+        
+        cell.steps?.text   = model.steps ?? "实习网测试Steps"
+        cell.stepsCn?.text = model.stepsCn ?? "实习网测试StepsCn"
 
         return cell
     }

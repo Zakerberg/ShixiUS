@@ -322,6 +322,7 @@ extension SX_TrainingApplyDetailController: UITableViewDelegate, UITableViewData
         if indexPath.section == 0 {
             SXLog("进入申请进度详情界面")
             let vc = SX_ApplyProgressDetailController()
+            vc.typeStr = "training"
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

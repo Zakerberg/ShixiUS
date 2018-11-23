@@ -107,9 +107,6 @@ extension SX_MinePersonalController {
     func fetchInfoData() {
         let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
                      "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!)]
-        
-        
-        
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_GetInfo, parameters: param) { (result) in
             do{
                 let json = try JSON(data: result)

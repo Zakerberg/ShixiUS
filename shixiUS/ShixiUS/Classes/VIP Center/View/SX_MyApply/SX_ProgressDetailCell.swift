@@ -17,16 +17,9 @@ import UIKit
 
 class SX_ProgressDetailCell: UITableViewCell {
     
-//    var progressTitle   : UILabel?
-//    var progressDes     : UILabel? // 详情
-//    var progressPoint   : UIImageView?
-
-    
-    var leftRoundImageView: UIImageView?
-    var leftLineView: UIView?
-    var progressTitle: UILabel?
-    var contentLabel: UILabel?
-    var bottomLine: UIView?
+    var progressPoint: UIImageView?
+    var steps: UILabel?
+    var stepsCn: UILabel?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,8 +28,8 @@ class SX_ProgressDetailCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-     //   ConfigCell()
-        configCell1()
+        //   ConfigCell()
+        ConfigCell()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,53 +48,32 @@ class SX_ProgressDetailCell: UITableViewCell {
 // ========================================================================
 extension SX_ProgressDetailCell{
     
-//    func ConfigCell() {
-//
-//        self.progressPoint = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//            make.left.top.equalToSuperview().offset(Margin)
-//
-//        }).config({ (POINT) in
-//            POINT.sizeToFit()
-//        })
-//
-//        self.progressTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//            make.centerY.equalTo(self.progressPoint!)
-//            make.left.equalTo(self.progressPoint!.snp.right).offset(Margin)
-//            make.height.equalTo(15.FloatValue.IPAD_XValue)
-//        }).config({ (TITLE) in
-//            TITLE.sizeToFit()
-//            TITLE.font = UIFont.boldSystemFont(ofSize: 14)
-//        })
-//
-//        self.progressDes = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-//            make.top.equalTo(self.progressTitle!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
-//            make.left.equalTo(self.progressTitle!)
-//            make.right.equalToSuperview().offset(-Margin)
-//        }).config({ (DES) in
-//            DES.sizeToFit()
-//            DES.numberOfLines = 0
-//            DES.lineBreakMode = .byWordWrapping
-//            DES.font = UIFont.systemFont(ofSize: 14)
-//        })
-//    }
-}
-
-
-// ========================================================================
-// MARK: -
-// ========================================================================
-extension SX_ProgressDetailCell {
-    
-    func configCell1() {
-
+    func ConfigCell() {
+        self.progressPoint = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.left.top.equalToSuperview().offset(Margin)
+            make.width.height.equalTo(Margin)
+        }).config({ (POINT) in
+            POINT.sizeToFit()
+        })
         
+        self.steps = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.centerY.equalTo(self.progressPoint!)
+            make.left.equalTo(self.progressPoint!.snp.right).offset(Margin)
+            make.height.equalTo(15.FloatValue.IPAD_XValue)
+        }).config({ (STEPS) in
+            STEPS.sizeToFit()
+            STEPS.font = UIFont.boldSystemFont(ofSize: 15)
+        })
         
-        
-        
+        self.stepsCn = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
+            make.top.equalTo(self.steps!.snp.bottom).offset(10.FloatValue.IPAD_XValue)
+            make.left.equalTo(self.steps!)
+            make.right.equalToSuperview().offset(-Margin)
+        }).config({ (STEPSCN) in
+            STEPSCN.sizeToFit()
+            STEPSCN.numberOfLines = 0
+            STEPSCN.lineBreakMode = .byWordWrapping
+            STEPSCN.font = UIFont.systemFont(ofSize: 14)
+        })
     }
 }
-
-
-
-
-

@@ -142,8 +142,8 @@ extension SX_MyApplyTrainingProjectCell {
             make.right.equalToSuperview().offset(-Margin)
             make.height.equalTo(25.FloatValue.IPAD_XValue)
             make.width.equalTo(80.FloatValue.IPAD_XValue)
-        }).config({ (Cancel) in
-
+        }).config({ (Cancel) in 
+            
         })
 
         self.projectPayAndRefund = UIButton(type: .custom).addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
