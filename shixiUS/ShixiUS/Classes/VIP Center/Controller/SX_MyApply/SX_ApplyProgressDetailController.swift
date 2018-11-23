@@ -24,6 +24,7 @@ class SX_ApplyProgressDetailController: SX_BaseController {
     var typeStr: String?
     var url: String?
     var number: String?
+    var stepsCnArr = [String]()
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
@@ -75,6 +76,7 @@ extension SX_ApplyProgressDetailController {
                 for item in json["data"].array ?? [] {
                     let progressModel = SX_ApplyProgressDetailModel(jsonData: item)
                     self.progressArr.append(progressModel)
+                    self.stepsCnArr.append(item["stepsCn"].string ?? "")
                 }
             } catch{ }
             self.tableView.reloadData()
