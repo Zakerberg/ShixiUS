@@ -21,11 +21,16 @@ import MBProgressHUD
 class SX_MinePersonalController: UIViewController {
     
     var titleArr   = ["头像", "用户名", "手机号", "国家/地区", "微信", "邮箱"]
-    var contentArr = ["", "请输入姓名", "请输入手机号", "请选择国家和地区", "请输入微信", "请输入邮箱"]
+    // var contentArr = ["", , ]
     var getUrlDataArr: Array<Any>?
-    var headPortrait: UIImage?
+    
+    var iconImageView: UIImageView?
+    var nameTF: UITextField?
+    var phoneTF: UITextField?
+    var countryTF: UITextField?
+    var mailTF: UITextField?
+    var weChatTF: UITextField?
     var saveBtn: UIButton?
-    var Dic = NSMutableDictionary()
     
     lazy var table: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
@@ -70,12 +75,13 @@ extension SX_MinePersonalController {
     func fetchData() {
         let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
                      "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!),
-                     "headpic" :"1",
-                     "username":self.Dic.value(forKey: "1") ?? "",
-                     "country" :self.Dic.value(forKey: "3") ?? "",
-                     "phone"   :self.Dic.value(forKey: "2") ?? "",
-                     "email"   :self.Dic.value(forKey: "5") ?? "",
-                     "weixin"  :self.Dic.value(forKey: "4") ?? ""]
+                     "headpic":"1",
+                     "username":self.nameTF!.text ?? "",
+                     "country":self.countryTF!.text ?? "",
+                     "phone":self.phoneTF!.text ?? "",
+                     "email":self.mailTF!.text ?? "" ,
+                     "weixin":self.weChatTF!.text ?? ""]
+        
         
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{
@@ -101,15 +107,23 @@ extension SX_MinePersonalController {
     func fetchInfoData() {
         let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
                      "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!)]
+        
+        
+        
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_GetInfo, parameters: param) { (result) in
             do{
                 let json = try JSON(data: result)
                 if json["status"].string == "200" {
-                    self.Dic.setValue(json["data"]["username"].string, forKey: "1")
-                    self.Dic.setValue(json["data"]["country"], forKey: "2")
-                    self.Dic.setValue(json["data"]["phone"].string, forKey: "3")
-                    self.Dic.setValue(json["data"]["email"], forKey: "4")
-                    self.Dic.setValue(json["data"]["wechat"], forKey: "5")
+                    if let url = URL(string: json["data"]["head_pic"].string ?? ""){
+                        self.iconImageView?.kf.setImage(with: url)
+                    }else{
+                        self.iconImageView?.image = UIImage(named: "icon")
+                    }
+                    self.nameTF?.text    = json["data"]["username"].string ?? "用户名(测试)"
+                    self.phoneTF?.text   = json["data"]["phone"].string ?? "手机号(测试)"
+                    self.countryTF?.text = json["data"]["country"].string ?? "国家(测试)"
+                    self.mailTF?.text    = json["data"]["email"].string ?? "邮箱(测试)"
+                    self.weChatTF?.text  = json["data"]["wechat"].string ?? "微信(测试)"
                 }else{
                     let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
                     hud.mode       = .text
@@ -139,34 +153,108 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let singleTap = UIGestureRecognizer(target: self, action: #selector(alterHeadPortrait))
-            let cell = SX_PersonalHeadPortraitCell(style: .default, reuseIdentifier: nil)
-            
-            cell.selectionStyle   = .none
-            cell.titleLabel?.text = self.titleArr[indexPath.row]
-            cell.addGestureRecognizer(singleTap)
-            
-            return cell
-        }else{
-            let cell = SX_PersonalMessageCell(style: .default, reuseIdentifier: nil)
-            cell.selectionStyle   = .none
-            if indexPath.row      == 2 {
-                cell.tF?.keyboardType = .numberPad
-            }
-            
-            cell.titleLabel?.text = self.titleArr[indexPath.row]
-            cell.tF?.placeholder  = self.contentArr[indexPath.row]
-            cell.tF?.rx.controlEvent([.editingDidEnd,.editingChanged,.editingDidEnd]).asObservable().subscribe({ [weak self] (_) in
-                self?.Dic.setValue((cell.tF?.text ?? "") , forKey: "\(indexPath.row)")
-                
-                if cell.tF?.text?.lengthOfBytes(using: .utf8) != 0 {
-                    self?.saveBtn?.isEnabled       = true
-                    self?.saveBtn?.backgroundColor = UIColor.SX_MainColor()
-                }
+        
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.textLabel?.text      = self.titleArr[indexPath.row]
+        cell.textLabel?.textColor = UIColor.colorWithHexString(hex: "333333", alpha: 1)
+        cell.textLabel?.font      = UIFont.systemFont(ofSize: 16)
+        cell.selectionStyle       = .none
+        
+        switch indexPath.row {
+        case 0:
+            self.iconImageView = UIImageView().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.centerY.equalToSuperview()
+                make.right.equalToSuperview().offset(-30.FloatValue.IPAD_XValue)
+                make.width.height.equalTo(60.FloatValue.IPAD_XValue)
+            }).config({ (ICON) in
+                ICON.layer.masksToBounds      = true
+                ICON.layer.cornerRadius       = 30
             })
+            
             return cell
+            break
+        case 1:
+            self.nameTF = UITextField().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.centerY.equalToSuperview()
+                make.height.equalTo(20.FloatValue.IPAD_XValue)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (NAME) in
+                NAME.keyboardType  = .namePhonePad
+                NAME.placeholder   = "请输入姓名"
+                NAME.textAlignment = .right
+                NAME.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                NAME.font          = UIFont.systemFont(ofSize: 16)
+            })
+            
+            return cell
+            break
+        case 2:
+            
+            self.phoneTF = UITextField().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.centerY.equalToSuperview()
+                make.height.equalTo(20.FloatValue.IPAD_XValue)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (PHONE) in
+                PHONE.keyboardType  = .numberPad
+                PHONE.placeholder   = "请输入手机号"
+                PHONE.textAlignment = .right
+                PHONE.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                PHONE.font          = UIFont.systemFont(ofSize: 16)
+                PHONE.delegate      = self
+            })
+            
+            return cell
+            break
+        case 3:
+            self.countryTF = UITextField().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.centerY.equalToSuperview()
+                make.height.equalTo(20.FloatValue.IPAD_XValue)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (COUNTRY) in
+                COUNTRY.keyboardType  = .namePhonePad
+                COUNTRY.placeholder   = "请选择国家和地区"
+                COUNTRY.textAlignment = .right
+                COUNTRY.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                COUNTRY.font          = UIFont.systemFont(ofSize: 16)
+                
+            })
+            
+            return cell
+            break
+        case 4:
+            self.weChatTF = UITextField().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.centerY.equalToSuperview()
+                make.height.equalTo(20.FloatValue.IPAD_XValue)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (WECHAT) in
+                WECHAT.keyboardType  = .namePhonePad
+                WECHAT.placeholder   = "请输入微信"
+                WECHAT.textAlignment = .right
+                WECHAT.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                WECHAT.font          = UIFont.systemFont(ofSize: 16)
+            })
+            
+            return cell
+            break
+        case 5:
+            self.mailTF = UITextField().addhere(toSuperView: cell.contentView).layout(snapKitMaker: { (make) in
+                make.centerY.equalToSuperview()
+                make.height.equalTo(20.FloatValue.IPAD_XValue)
+                make.right.equalToSuperview().offset(-Margin)
+            }).config({ (MAIL) in
+                MAIL.keyboardType  = .namePhonePad
+                MAIL.placeholder   = "请输入邮箱"
+                MAIL.textAlignment = .right
+                MAIL.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+                MAIL.font          = UIFont.systemFont(ofSize: 16)
+            })
+            
+            return cell
+            break
+        default :
+            break
         }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -185,8 +273,7 @@ extension SX_MinePersonalController: UITableViewDelegate, UITableViewDataSource 
             
             SAVE.rx.tap.subscribe(onNext: { (_) in
                 SXLog("保存个人信息")
-                self.fetchData()
-                self.navigationController?.popViewController(animated: true)
+                 self.fetchData()
             }, onError: { (error) in
                 SXLog(error)
             }, onCompleted: nil, onDisposed: nil)
@@ -275,3 +362,30 @@ extension SX_MinePersonalController {
         self.table.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
     }
 }
+
+// ==============================================================================
+// MARK: - UITextFieldDelegate
+// ==============================================================================
+extension SX_MinePersonalController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if  (range.length + range.location > textField.text!.length) {
+            return false
+        }
+        
+        let newLength = textField.text!.length + string.length - range.length
+        if newLength <= 11 {
+            return true
+        }else{
+            let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.mode       = .text
+            hud.isSquare   = true
+            hud.label.text = "手机号不能超过11位哦"
+            hud.hide(animated: true, afterDelay: 1.0)
+        }
+        return false
+    }
+}
+
+

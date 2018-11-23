@@ -697,14 +697,13 @@
     
     /*************** now
      func build_car() throws -> Car {
-     let tires = try machine1.createTires()
+     let tires   = try machine1.createTires()
      let windows = try machine2.createWindows()
-     let motor = try externalMachine.deliverMotor().or(throw: MachineError.motor)
-     let trunk = try machine3.createTrunk()
+     let motor   = try externalMachine.deliverMotor().or(throw: MachineError.motor)
+     let trunk   = try machine3.createTrunk()
      return try manufacturer.buildCar(tires, windows,  motor, trunk).or(throw: MachineError.manufacturer)
      }
      ****************/
-    
  }
  
  extension Optional where Wrapped == Error {
