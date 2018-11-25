@@ -77,6 +77,13 @@ class SX_MineVC: UIViewController {
                                 USERDEFAULTS.set("", forKey: "token")
                                 USERDEFAULTS.set("", forKey: "userId")
                                 USERDEFAULTS.set("no", forKey: "login")
+                             
+                                
+                                /*
+                                 
+                                 userdefaults.removeObjectForKey:
+                                 
+                                 */
                                 let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
                                 hud.mode       = .text
                                 hud.isSquare   = true

@@ -110,8 +110,12 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 300.FloatValue.IPAD_XValue
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UILabel.SX_getSpaceLabelHeight("self.progressDesArr[indexPath.row] as NSString", font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 50.FloatValue.IPAD_XValue
+        return 200.FloatValue.IPAD_XValue
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -124,8 +128,8 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        
-        
+    
+    
+    
     }
 }
