@@ -77,13 +77,12 @@ class SX_MineVC: UIViewController {
                                 USERDEFAULTS.set("", forKey: "token")
                                 USERDEFAULTS.set("", forKey: "userId")
                                 USERDEFAULTS.set("no", forKey: "login")
-                             
+
                                 
                                 /*
-                                 
                                  userdefaults.removeObjectForKey:
-                                 
                                  */
+                                
                                 let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
                                 hud.mode       = .text
                                 hud.isSquare   = true
@@ -141,12 +140,14 @@ extension SX_MineVC {
             do{
                 let json = try JSON(data: result)
                 if json["status"].int == 200 {
+                    
                     self.titleNameLabel?.text = json["data"]["username"].string ?? "实习网(测试)"
                     if let url = URL(string: json["data"]["head_pic"].string ?? ""){
                         self.headPortraitImageView?.kf.setImage(with: url)
                     }else{
                         self.headPortraitImageView?.image = UIImage(named: "icon")
                     }
+                    
                     let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
                     hud.mode       = .text
                     hud.isSquare   = true
