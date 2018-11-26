@@ -79,7 +79,7 @@ public class SX_GuidePageView: UIView {
         
         self.skipButton = UIButton(type: .custom).addhere(toSuperView: self).layout(snapKitMaker: { (make) in
             make.top.equalToSuperview().offset(40.FloatValue.IPAD_XValue)
-            make.right.equalToSuperview().offset(Margin)
+            make.right.equalToSuperview().offset(-Margin)
             make.width.equalTo(50.FloatValue.IPAD_XValue)
             make.height.equalTo(24.FloatValue.IPAD_XValue)
         }).config({ (SKIP) in
@@ -89,7 +89,7 @@ public class SX_GuidePageView: UIView {
             SKIP.setTitle("跳 过", for: .normal)
             SKIP.titleLabel?.font    = UIFont.systemFont(ofSize: 12)
             SKIP.setTitleColor(UIColor.white, for: .normal)
-            SKIP.titleLabel?.sizeToFit()
+            SKIP.sizeToFit()
             SKIP.addTarget(self, action: #selector(skipBtnClicked), for: .touchUpInside)
             SKIP.isHidden = isHiddenSkipBtn
         })

@@ -30,16 +30,10 @@ extension SX_GuideViewController {
         let imageGifArray = ["引导页1", "引导页2", "引导页3"]
         let guideView     = SX_GuidePageView.init(images: imageGifArray, loginRegistCompletion: {
             SXLog("登录/注册")
-            
-            
-            
-            
-            
-            
+
+
         }) {
             SXLog("开始使用App")
-            
-            
             
             
         }
