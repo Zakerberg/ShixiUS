@@ -23,25 +23,9 @@ let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 let SCREEN_WIDTH  = UIScreen.main.bounds.size.width
 let USERDEFAULTS  = UserDefaults.standard
 
-let iphoneX       = (SCREEN_WIDTH == 375 && SCREEN_HEIGHT == 812 ?  true : false)
+let iphoneX       = UIApplication.shared.statusBarFrame.size.height > 20 ? true : false
 let kNavH         = (SCREEN_HEIGHT == 812 ? 88 : 64).FloatValue
 let kTabBarHeight = (iphoneX ? 83.FloatValue : 49.FloatValue)
-
-//struct ScreenInfo {
-//
-//    static let Frame  = UIScreen.main.bounds
-//    static let Height = Frame.height
-//    static let Width  = Frame.width
-//    static let navigationHeight:CGFloat = navBarHeight()
-//
-//    static func isIphoneX() -> Bool {
-//        return Frame.equalTo(CGRect(x: 0, y: 0, width: 375, height: 812))
-//    }
-//
-//    static private func navBarHeight() -> CGFloat {
-//        return isIphoneX() ? 88 : 64
-//    }
-//}
 
 // 间距
 let Margin:CGFloat = 15
