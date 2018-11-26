@@ -33,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.white
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-//        IQKeyboardManager.shared.enableAutoToolbar = false
 //        if !UserDefaults.standard.bool(forKey: "firstLaunch") {
 //            UserDefaults.standard.bool(forKey: "firstLaunch")
 //            SXLog("首次启动")

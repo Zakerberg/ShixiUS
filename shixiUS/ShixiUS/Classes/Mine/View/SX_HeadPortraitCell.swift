@@ -63,8 +63,8 @@ extension SX_HeadPortraitCell {
             make.height.equalTo(Margin)
         }).config({ (LOGIN) in
             LOGIN.setTitle("登录/注册  ", for: .normal)
-//            logIn.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-            LOGIN.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            LOGIN.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            LOGIN.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
             LOGIN.setTitleColor(UIColor.colorWithHexString(hex: "2d2d2d", alpha: 1), for: .normal)
             LOGIN.titleEdgeInsets  = UIEdgeInsetsMake(0, -LOGIN.imageView!.bounds.size.width, 0, LOGIN.imageView!.bounds.size.width)
             LOGIN.imageEdgeInsets  = UIEdgeInsetsMake(0, LOGIN.titleLabel!.bounds.size.width, 0, -LOGIN.titleLabel!.bounds.size.width)
