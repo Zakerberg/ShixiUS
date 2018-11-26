@@ -116,9 +116,13 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
         let model = self.progressArr[indexPath.row]
         
         return UILabel.SX_getSpaceLabelHeight((model.stepsCn as! NSString), font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 40.FloatValue.IPAD_XValue
-        
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 100.FloatValue.IPAD_XValue
+    }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }

@@ -50,7 +50,7 @@ extension SX_ProgressDetailCell{
     
     func ConfigCell() {
         self.progressPoint = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.top.equalToSuperview().offset(Margin)
+            make.top.left.equalToSuperview().offset(Margin)
             make.width.height.equalTo(Margin)
         }).config({ (POINT) in
             POINT.sizeToFit()
