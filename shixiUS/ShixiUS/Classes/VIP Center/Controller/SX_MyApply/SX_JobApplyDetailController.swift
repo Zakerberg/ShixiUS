@@ -295,6 +295,7 @@ extension SX_JobApplyDetailController: UITableViewDelegate,UITableViewDataSource
             SXLog("进入申请进度详情界面")
             let vc = SX_ApplyProgressDetailController()
             vc.typeStr = "job"
+            vc.number  = self.number
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

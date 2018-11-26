@@ -316,6 +316,7 @@ extension SX_TrainApplyDetailController: UITableViewDelegate, UITableViewDataSou
             SXLog("进入申请进度详情界面")
             let vc = SX_ApplyProgressDetailController()
             vc.typeStr = "train"
+            vc.number  = self.number
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

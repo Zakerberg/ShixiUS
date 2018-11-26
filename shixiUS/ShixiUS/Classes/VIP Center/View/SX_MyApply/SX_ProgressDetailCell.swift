@@ -50,7 +50,7 @@ extension SX_ProgressDetailCell{
     
     func ConfigCell() {
         self.progressPoint = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
-            make.left.top.equalToSuperview().offset(Margin)
+            make.top.equalToSuperview().offset(Margin)
             make.width.height.equalTo(Margin)
         }).config({ (POINT) in
             POINT.sizeToFit()
@@ -73,7 +73,16 @@ extension SX_ProgressDetailCell{
             STEPSCN.sizeToFit()
             STEPSCN.numberOfLines = 0
             STEPSCN.lineBreakMode = .byWordWrapping
-            STEPSCN.font = UIFont.systemFont(ofSize: 14)
+            STEPSCN.textColor     = UIColor.colorWithHexString(hex: "999999", alpha: 1)
+            STEPSCN.font          = UIFont.systemFont(ofSize: 14)
         })
+        
+         _ = UIView().addhere(toSuperView: self.contentView).layout { (make) in
+            make.top.equalTo(self.stepsCn!.snp.bottom).offset(Margin)
+            make.left.right.equalTo(self.stepsCn!)
+            make.height.equalTo(0.5)
+            }.config { (LINE) in
+                LINE.backgroundColor = UIColor.colorWithHexString(hex: "f0f0f0", alpha: 1)
+        }
     }
 }

@@ -21,17 +21,18 @@ let progressDetailCellID = "progressDetailCellID"
 class SX_ApplyProgressDetailController: SX_BaseController {
     
     var progressArr = [SX_ApplyProgressDetailModel]()
-    var typeStr: String?
+    var typeStr = ""
     var url: String?
     var number: String?
     var stepsCnArr = [String]()
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT)), style: .plain)
-        tableView.backgroundColor              = UIColor.SX_BackGroundColor()
+        tableView.backgroundColor              = UIColor.white
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate                     = self
         tableView.dataSource                   = self
+        tableView.separatorStyle               = .none
         
         return tableView
     }()
@@ -56,7 +57,7 @@ extension SX_ApplyProgressDetailController {
     
     func setUI() {
         title = "进度详情"
-        self.view.backgroundColor = UIColor.SX_BackGroundColor()
+        self.view.backgroundColor = UIColor.white
         self.view.addSubview(tableView)
     }
     
@@ -64,10 +65,11 @@ extension SX_ApplyProgressDetailController {
         
         if  self.typeStr == "training" {
             self.url = SX_Apply_TrainingProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number ?? "")"
+            
         }else if self.typeStr == "job" {
-            self.url = SX_Apply_TrainProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number ?? "")"
-        }else {
             self.url = SX_Apply_JobProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number ?? "")"
+        }else {
+            self.url = SX_Apply_TrainProgress + "token=\(String(describing: USERDEFAULTS.value(forKey: "token")!))" + "&userId=\(String(describing: USERDEFAULTS.value(forKey: "userId")!))" + "&number=\(self.number ?? "")"
         }
         
         SX_NetManager.requestData(type: .GET, URlString: self.url!, parameters:  nil, finishCallBack: { (result) in
@@ -97,11 +99,11 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SX_ProgressDetailCell(style: .default, reuseIdentifier: progressDetailCellID)
         cell.selectionStyle = .none
-        let model = self.progressArr[indexPath.section]
-        if indexPath.section == 0 {
-            cell.progressPoint?.image = UIImage(named: "icon")
+        let model = self.progressArr[indexPath.row]
+        if indexPath.row == 0 {
+            cell.progressPoint?.image = UIImage(named: "progress")
         } else {
-            cell.progressPoint?.image = UIImage(named: "icon1")
+            cell.progressPoint?.image = UIImage(named: "progress1")
         }
         
         cell.steps?.text   = model.steps ?? "实习网测试Steps"
@@ -109,13 +111,12 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
 
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300.FloatValue.IPAD_XValue
-    }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200.FloatValue.IPAD_XValue
+        let model = self.progressArr[indexPath.row]
+        
+        return UILabel.SX_getSpaceLabelHeight((model.stepsCn as! NSString), font: UIFont.systemFont(ofSize: 14), width: 200, space: 0, zpace: 0) + 40.FloatValue.IPAD_XValue
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -126,10 +127,16 @@ extension SX_ApplyProgressDetailController: UITableViewDelegate, UITableViewData
         return 0
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    
-    
     
     }
 }
