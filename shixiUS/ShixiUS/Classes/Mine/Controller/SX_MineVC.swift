@@ -30,7 +30,7 @@ class SX_MineVC: UIViewController {
     
     var titleNameLabel: UILabel?
     var logInBtn: UIButton?
-    var headPortraitImageView: UIImageView?
+    var headImageView: UIImageView?
     var statusStr = ""
     
     lazy var table: UITableView = {
@@ -74,15 +74,10 @@ class SX_MineVC: UIViewController {
                                 QUIT.isHidden                 = true
                                 self.titleNameLabel?.isHidden = true
                                 self.logInBtn?.isHidden       = false
+                                self.headImageView?.image     = UIImage(named: "icon_head")
                                 USERDEFAULTS.set("", forKey: "token")
                                 USERDEFAULTS.set("", forKey: "userId")
                                 USERDEFAULTS.set("no", forKey: "login")
-
-                                
-                                /*
-                                 userdefaults.removeObjectForKey:
-                                 */
-                                
                                 let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
                                 hud.mode       = .text
                                 hud.isSquare   = true
@@ -143,9 +138,9 @@ extension SX_MineVC {
                     
                     self.titleNameLabel?.text = json["data"]["username"].string ?? "实习网(测试)"
                     if let url = URL(string: json["data"]["head_pic"].string ?? ""){
-                        self.headPortraitImageView?.kf.setImage(with: url)
+                        self.headImageView?.kf.setImage(with: url)
                     }else{
-                        self.headPortraitImageView?.image = UIImage(named: "icon")
+                        self.headImageView?.image = UIImage(named: "icon")
                     }
                     
                     let hud        = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -190,7 +185,7 @@ extension SX_MineVC: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle         = .none
             cell.nameTitle?.isHidden    = true
             cell.headPortraitImageView?.addGestureRecognizer(tap)
-            self.headPortraitImageView  = cell.headPortraitImageView
+            self.headImageView  = cell.headPortraitImageView
             self.titleNameLabel         = cell.nameTitle
             self.logInBtn               = cell.logInButton
             
@@ -356,7 +351,7 @@ extension SX_MineVC: UIImagePickerControllerDelegate, UINavigationControllerDele
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let img = (info as NSDictionary).object(forKey: UIImagePickerControllerEditedImage)
-        self.headPortraitImageView?.image = img as? UIImage
+        self.headImageView?.image = img as? UIImage
         let compressImg = imageWithImageSimple(img as! UIImage, newSize:CGSize(width: 60, height: 60))
         //   transportImgToServer(img: compressImg)
         self.dismiss(animated: true, completion: nil)

@@ -50,34 +50,34 @@ extension SX_HeadPortraitCell {
         self.headPortraitImageView = UIImageView().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.top.left.equalToSuperview().offset(Margin)
             make.height.width.equalTo(60.FloatValue.IPAD_XValue)
-        }).config({ (headPortrait) in
-            headPortrait.layer.masksToBounds = true
-            headPortrait.layer.cornerRadius  = 30
-            headPortrait.image = #imageLiteral(resourceName: "icon")
-            headPortrait.isUserInteractionEnabled = true
+        }).config({ (HEAD) in
+            HEAD.layer.masksToBounds      = true
+            HEAD.layer.cornerRadius       = 30.FloatValue.IPAD_XValue
+            HEAD.isUserInteractionEnabled = true
+            HEAD.image                    = UIImage(named: "icon_head")
         })
         
         self.logInButton = UIButton().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.left.equalTo(self.headPortraitImageView!.snp.right).offset(10.FloatValue.IPAD_XValue)
             make.centerY.equalTo(self.headPortraitImageView!)
             make.height.equalTo(Margin)
-        }).config({ (logIn) in
-            logIn.setTitle("登录/注册  ", for: .normal)
-            logIn.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-            logIn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            logIn.setTitleColor(UIColor.colorWithHexString(hex: "2d2d2d", alpha: 1), for: .normal)
-            logIn.titleEdgeInsets = UIEdgeInsetsMake(0, -logIn.imageView!.bounds.size.width, 0, logIn.imageView!.bounds.size.width)
-            logIn.imageEdgeInsets = UIEdgeInsetsMake(0, logIn.titleLabel!.bounds.size.width, 0, -logIn.titleLabel!.bounds.size.width)
+        }).config({ (LOGIN) in
+            LOGIN.setTitle("登录/注册  ", for: .normal)
+//            logIn.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            LOGIN.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            LOGIN.setTitleColor(UIColor.colorWithHexString(hex: "2d2d2d", alpha: 1), for: .normal)
+            LOGIN.titleEdgeInsets  = UIEdgeInsetsMake(0, -LOGIN.imageView!.bounds.size.width, 0, LOGIN.imageView!.bounds.size.width)
+            LOGIN.imageEdgeInsets  = UIEdgeInsetsMake(0, LOGIN.titleLabel!.bounds.size.width, 0, -LOGIN.titleLabel!.bounds.size.width)
         })
         
         self.nameTitle = UILabel().addhere(toSuperView: self.contentView).layout(snapKitMaker: { (make) in
             make.left.equalTo(self.headPortraitImageView!.snp.right).offset(10.FloatValue.IPAD_XValue)
             make.centerY.equalTo(self.headPortraitImageView!)
             make.height.equalTo(Margin)
-        }).config({ (Name) in
-            Name.sizeToFit()
-            Name.font = UIFont.systemFont(ofSize: 15)
-            Name.textColor = UIColor.colorWithHexString(hex: "2d2d2d", alpha: 1)
+        }).config({ (NAME) in
+            NAME.sizeToFit()
+            NAME.font = UIFont.systemFont(ofSize: 15)
+            NAME.textColor = UIColor.colorWithHexString(hex: "2d2d2d", alpha: 1)
 //            Name.text = "LLY19920924"
         })
     }
