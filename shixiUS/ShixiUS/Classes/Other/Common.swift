@@ -758,6 +758,17 @@
  // ==============================================================================
  extension Optional {
     
+    /// 当可选值不为空时,解包并返回参数. `optional`
+    func and<B>(_ optional: B?) -> B? {
+        guard self != nil else { return nil }
+        return optional
+    }
+    
+    /// 解包可选值,当可选值不为空时, 执行`then` 闭包,并返回执行结果
+    
+    
+    
+    
     
  }
  

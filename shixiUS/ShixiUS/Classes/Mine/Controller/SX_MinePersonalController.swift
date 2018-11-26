@@ -75,13 +75,12 @@ extension SX_MinePersonalController {
     func fetchData() {
         let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
                      "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!),
-                     "headpic":"1",
+                     "headpic":"",
                      "username":self.nameTF!.text ?? "",
                      "country":self.countryTF!.text ?? "",
                      "phone":self.phoneTF!.text ?? "",
                      "email":self.mailTF!.text ?? "" ,
                      "weixin":self.weChatTF!.text ?? ""]
-        
         
         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_FixInfo, parameters: param as? [String : String]) { (result) in
             do{

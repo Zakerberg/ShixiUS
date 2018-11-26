@@ -27,12 +27,21 @@ class SX_GuideViewController: UIViewController {
 extension SX_GuideViewController {
     func setUI() {
         // gif和jpg类型的资源数组
-        let imageGifArray = ["guideImage1.jpg","guideImage6.gif", "guideImage8.gif", "guideImage2.jpg","guideImage7.gif", "guideImage5.jpg"]
+        let imageGifArray = ["引导页1", "引导页2", "引导页3"]
         let guideView     = SX_GuidePageView.init(images: imageGifArray, loginRegistCompletion: {
             SXLog("登录/注册")
             
+            
+            
+            
+            
+            
         }) {
             SXLog("开始使用App")
+            
+            
+            
+            
         }
         self.view.addSubview(guideView)
     }
