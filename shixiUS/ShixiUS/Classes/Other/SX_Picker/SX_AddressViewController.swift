@@ -25,7 +25,7 @@ class SX_AddressViewController: UIViewController {
         }
         /// 成功选择后将数据回调,并推出视图
         view.backLocationString = { (address,province,city,area) in
-            if self.backLocationStringController != nil{
+            if self.backLocationStringController.isSome {
                 self.backLocationStringController!(address,province,city,area)
                 self.onClickCancel()
             }

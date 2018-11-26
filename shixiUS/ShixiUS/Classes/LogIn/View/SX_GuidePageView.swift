@@ -135,7 +135,7 @@ public class SX_GuidePageView: UIView {
         pageControl.numberOfPages = imageArray?.count ?? 0
         self.addSubview(pageControl)
         
-        guard imageArray != nil, imageArray?.count ?? 0 > 0 else { return }
+        guard imageArray.isSome, imageArray?.count ?? 0 > 0 else { return }
         for index in 0..<(imageArray?.count ?? 1) {
             let name        = imageArray![index]
             let imageFrame  = CGRect.init(x: size.width * CGFloat(index), y: 0.0, width: size.width, height: size.height)
@@ -149,7 +149,7 @@ public class SX_GuidePageView: UIView {
                 // Warning: 假如说图片是放在Assets中的，使用Bundle的方式加载不到，需要使用init(named:)方法加载。
                 view = UIImageView.init(frame: imageFrame)
                 view.contentMode = .scaleAspectFill
-                (view as! UIImageView).image = (data != nil ? UIImage.init(data: data!) : UIImage.init(named: name))
+                (view as! UIImageView).image = (data.isSome ? UIImage.init(data: data!) : UIImage.init(named: name))
             }
             
             // 添加“立即体验”按钮和登录/注册按钮
@@ -183,7 +183,7 @@ public class SX_GuidePageView: UIView {
     
     /// 点击“跳过”按钮事件，立即退出引导页
     @objc private func skipBtnClicked() {
-        if self.startCompletion != nil {
+        if self.startCompletion.isSome {
             self.startCompletion!()
         }
         self.removeGuideViewFromSupview()
@@ -191,7 +191,7 @@ public class SX_GuidePageView: UIView {
     
     /// 点击“立即体验”按钮事件，退出引导页
     @objc private func startBtnClicked() {
-        if self.startCompletion != nil {
+        if self.startCompletion.isSome {
             self.startCompletion!()
         }
         self.removeGuideViewFromSupview()
@@ -199,7 +199,7 @@ public class SX_GuidePageView: UIView {
     
     /// 点击登录注册按钮
     @objc private func loginBtnClicked() {
-        if self.loginCompletion != nil {
+        if self.loginCompletion.isSome {
             self.loginCompletion!()
         }
         DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 1.5) {

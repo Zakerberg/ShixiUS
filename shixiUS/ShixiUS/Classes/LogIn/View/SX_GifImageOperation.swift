@@ -101,7 +101,7 @@ public class SX_GifImageOperation: UIView {
      *
      */
     public class func checkDataType(data: Data?) -> DataType {
-        guard data != nil else {
+        guard data.isSome else {
             return .defaultType
         }
         let c = data![0]

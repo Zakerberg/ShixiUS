@@ -212,7 +212,7 @@ extension SX_LoginController {
                             let statusStr  = "1"
                             /// 发送 登陆成功 通知
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINSUCCESS"), object: nil, userInfo: nil)
-                            guard(self.closure != nil) else{
+                            guard(self.closure.isSome) else{
                                 self.dismiss(animated: true, completion: nil)
                                 
                                 return

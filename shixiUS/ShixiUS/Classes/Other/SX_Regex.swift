@@ -144,7 +144,7 @@ extension SX_Regex {
         //初始化
         internal init(result: NSTextCheckingResult, in string: String) {
             precondition(
-                result.regularExpression != nil,
+                result.regularExpression.isSome,
                 "NSTextCheckingResult必需使用正则表达式"
             )
             
