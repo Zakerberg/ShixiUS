@@ -764,11 +764,94 @@
         return optional
     }
     
+    /**
+     依赖(Dependencies)
+     若一个可选值的解包作为另一可选值解包的前提, and<B>(_ optional) 就显得非常实用:
+     
+     bedore:
+     let user != nil, let account = userAccount()...
+     
+     now:
+     if let account = user.and(userAccount())...
+     */
+    
     /// 解包可选值,当可选值不为空时, 执行`then` 闭包,并返回执行结果
+    func and<T>(then: (Wrapped) throws -> T?) rethrows -> T? {
+     guard let unwrapped = self else { return nil }
+        return try then(unwrapped)
+    }
     
+    /*
+     链式调用（Chaining）
+     and<T>(then:) 是另一个非常有用的函数, 它将多个可选项链接起来，以便将可选项 A 的解包值当做可选项 B 的输入。我们从一个简单的例子开始：
+     
+     protocol UserDatabase {
+     func current() -> User?
+     func spouse(of user: User) -> User?
+     func father(of user: User) -> User?
+     func childrenCount(of user: User) -> Int
+     }
+     
+     let database: UserDatabase = ...
+     
+     // 思考如下关系该如何表达：
+     // Man -> Spouse -> Father -> Father -> Spouse -> children
+     
+     // 使用前
+     let childrenCount: Int
+     if let user = database.current(),
+     let father1 = database.father(user),
+     let father2 = database.father(father1),
+     let spouse = database.spouse(father2),
+     let children = database.childrenCount(father2) {
+     childrenCount = children
+     } else {
+     childrenCount = 0
+     }
+     
+     // 使用后
+     let children = database.current().and(then: { database.spouse($0) })
+     .and(then: { database.father($0) })
+     .and(then: { database.spouse($0) })
+     .and(then: { database.childrenCount($0) })
+     .or(0)
+     */
     
+    /// 将当前可选值与其他可选值组合在一起
+    /// 当且仅当两个可选值都不为空时组合成功, 否则返回空
+    func zip2<A>(with other: Optional<A>) -> (Wrapped, A)? {
+        guard let first = self, let second = other else { return nil }
+        return (first, second)
+    }
     
+    /// 将当前可选值与其他可选值组合在一起
+    /// 当且仅当三个可选值都不为空时组合成功, 否则返回空
+    func zip3<A, B>(with other: Optional<A>, another: Optional<B>) -> (Wrapped, A, B)? {
+        guard let first = self,
+        let second      = other,
+        let third       = another else { return nil }
+        return (first, second, third)
+    }
     
+    /*
+     / 正常示例
+     func buildProduct() -> Product? {
+     if let var1 = machine1.makeSomething(),
+     let var2 = machine2.makeAnotherThing(),
+     let var3 = machine3.createThing() {
+     return finalMachine.produce(var1, var2, var3)
+     } else {
+     return nil
+     }
+    }
+     
+     // 使用扩展
+     func buildProduct() -> Product? {
+     return machine1.makeSomething()
+     .zip3(machine2.makeAnotherThing(), machine3.createThing())
+     .map { finalMachine.produce($0.1, $0.2, $0.3) }
+     }
+     */
     
  }
  
@@ -777,7 +860,23 @@
  // ==============================================================================
  extension Optional {
     
+    /// 当可选值不为空时, 执行`some`
+    func on(some: () throws -> Void) rethrows {
+        if self != nil { try some() }
+    }
     
+    /// 当可选值不为空时, 执行`none`
+    func on(none: () throws -> Void) rethrows {
+        if self != nil { try none() }
+    }
+    
+    /*
+     /// 如果用户不存在将登出
+     self.user.on(none: { AppCoordinator.shared.logout() })
+     
+     /// 当用户不为空时，连接网络
+     self.user.on(some: { AppCoordinator.shared.unlock() })
+     */
  }
  
  // ==============================================================================
@@ -785,26 +884,22 @@
  // ==============================================================================
  extension Optional {
     
+  /// 可选值不为空且可选值满足`predicate` 条件才返回, 否则返回`nil`
+    func filter(_ predicate: (Wrapped) -> Bool) -> Wrapped? {
+        guard let  unwrapped = self,
+        predicate(unwrapped) else { return nil }
+        return self
+    }
     
+    /// 可选值不为空时返回, 否则crash
+    func expect(_ message: String) -> Wrapped {
+        guard let value = self else { return fatalError(message) as! Wrapped }
+        return value
+    }
  }
  
- 
- // ================================================  |  ===============================================
- // ================================================  |  ===============================================
- // ================================================  | ================================================
- // ================================================  以  ==============================================
- // ================================================  下  ==============================================
- // ================================================  是 ===============================================
- // ================================================  日  ==============================================
- // ================================================  历  ==============================================
- // ================================================  部  ==============================================
- // ================================================  分  ==============================================
- // ================================================  |  ===============================================
- // ================================================  |  ===============================================
- // ================================================  |  ===============================================
- 
  // ==============================================================================
- // MARK: - NSDate Extension
+ // MARK: - NSDate Extension (日历)
  // ==============================================================================
  extension NSDate {
     
@@ -843,15 +938,21 @@
         return NSCalendar.current.ordinality(of: .day, in: .weekday, for: self as Date)!
     }
     
-    //
-    //    func lastDayOfCurrentMonth() -> NSDate {
-    //
-    //    }
-    //
-    //    func dayInThePreviousMonth() -> NSDate {
-    //
-    //    }
-    //
+    ///
+//    func lastDayOfCurrentMonth() -> NSDate {
+    
+//        let calendarComponents = ((Calendar.Component.day) || (Calendar.Component.year
+//            ) || (Calendar.Component.month))
+//        let dateComponents = NSCalendar.current.component(calendarComponents, from: self)
+//        dateComponents.day = self.numberOfDaysInCurrentMonth()
+//        return NSCalendar.current.date(from: dateComponents)
+//    }
+    
+//    func dayInThePreviousMonth() -> NSDate {
+ 
+    
+//    }
+    
     //    func dayInFollowingMonth() -> NSDate {
     //
     //    }
