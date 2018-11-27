@@ -33,7 +33,7 @@ class SX_HotJobDetailController: SX_BaseController {
     var detailModels = [SX_JobDetailModel]()
     
     lazy var table: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-50.FloatValue.IPAD_XValue)), style: .grouped)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: Int(SCREEN_WIDTH), height: Int(SCREEN_HEIGHT-kTabBarHeight)), style: .grouped)
         tableView.backgroundColor              = UIColor.SX_BackGroundColor()
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate                     = self
