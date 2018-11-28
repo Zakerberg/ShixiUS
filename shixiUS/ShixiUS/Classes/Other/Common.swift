@@ -949,10 +949,6 @@
 //    }
     
 //    func dayInThePreviousMonth() -> NSDate {
- 
-    
-    
-    
     
 //    }
     

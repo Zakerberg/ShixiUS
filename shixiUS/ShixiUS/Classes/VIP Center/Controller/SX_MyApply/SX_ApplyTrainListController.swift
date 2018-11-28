@@ -14,6 +14,8 @@
 
 
 import UIKit
+import SwiftyJSON
+import MBProgressHUD
 
 let applyListIdentifier = "applyListIdentifier"
 let applyAddressCellID  = "applyAddressCellID"
@@ -23,8 +25,19 @@ class SX_ApplyTrainListController: UIViewController {
     var dataArr = [Int](repeating: 0, count: 16)
     var confirmBtn: UIButton?
     
+    var name: UITextField?
+    var IDCard: UITextField?
+    var education: UITextField?
+    var school: UITextField?
+    var company: UITextField?
+    var telephone: UITextField?
+    var wechat: UITextField?
+    var country: UITextField?
+    var email: UITextField?
+    
     var visaStr: String?
     var gradStr: String?
+    var number:String? /// 订单号
     
     /// 是否有签证Arr
     var VisaArr :Array = { () -> [[String : String]] in
@@ -80,6 +93,32 @@ extension SX_ApplyTrainListController {
     
     func fetchData() {
         
+        let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
+                     "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!),
+                     "training":"",
+                     "details":"",
+                     "telephone":self.telephone?.text ?? "",
+                     "email":self.email?.text ?? "",
+                     "wechat":self.wechat?.text ?? "",
+                     "fullname":"",
+                     "graduation":self.education?.text ?? "",
+                     "school":self.school?.text ?? "",
+                     "discipline":"",
+                     "grade":"",
+                     "us_visa":"",
+                     "country":self.country?.text ?? "",
+                     "address":"",
+                     "promoter":""]
+        
+        SX_NetManager.requestData(type: .POST, URlString: SX_TrainingApply, parameters: param) { (result) in
+        do {
+            let json = try JSON(data: result)
+            if json["status"].int == 200 {
+                SXLog("申请成功")
+                self.number = json["data"]["number"].string
+            }
+            }catch { }
+        }
     }
 }
 
@@ -286,7 +325,7 @@ extension SX_ApplyTrainListController: UITableViewDelegate, UITableViewDataSourc
                 
                 /// 申请成功 ! 获取订单号
                 
-
+                
                 
                 
                 

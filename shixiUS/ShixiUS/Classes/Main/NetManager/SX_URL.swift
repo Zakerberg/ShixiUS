@@ -51,17 +51,17 @@ let SX_TrainingList           = SHIXIUS + "/training/index"
 /// 实训详情页 (get)
 let SX_TrainingDetail         = SHIXIUS + "/training/view/id/" //此处后面还要加实训id
 
-/// 实训报名页 (get)
+/// 实训报名页
 let SX_TrainingApply          = SHIXIUS + "/training/apply"
-
-/// 实训报名(确定) (post)
-let SX_TrainingApplyConfirm   = SHIXIUS + "/training/apply"
 
 /// 培训列表页 
 let SX_TrainIndex             = SHIXIUS + "/train/index"
 
 /// 培训详情页
 let SX_TrainDetail            = SHIXIUS + "/train/view/id/" //此处后面还要加培训id
+
+/// 培训报名提交
+let SX_TrainApply             = SHIXIUS + "/train/apply"
 
 /// 职位列表页 (get)
 let SX_JobIndex               = SHIXIUS + "/job/index"
@@ -70,10 +70,7 @@ let SX_JobIndex               = SHIXIUS + "/job/index"
 let SX_JobDetail              = SHIXIUS + "/job/view/id/" //此处后面还要加职位id
 
 /// 海外就业报名页 (get)
-let SX_Oversea_Apply          = SHIXIUS + "/job/apply" 
-
-/// 海外就业报名页 (post)
-let SX_Oversea_Apply_Confirm  = SHIXIUS + "/job/apply"
+let SX_JobApply               = SHIXIUS + "/job/apply"
 
 // =======================================================================================
 // MARK: - 我的申请 ! ! !

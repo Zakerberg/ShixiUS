@@ -240,7 +240,7 @@ extension SX_ApplyEmpListController: UITableViewDelegate, UITableViewDataSource 
                                  "wechat":self.weChatTF!.text!
                         ] as [String : String]
                     
-                    SX_NetManager.requestData(type: .POST, URlString: SX_Oversea_Apply_Confirm, parameters: param, finishCallBack: { (result) in
+                    SX_NetManager.requestData(type: .POST, URlString: SX_JobApply, parameters: param, finishCallBack: { (result) in
                         do{
                             let json = try JSON(data: result)
                             if json["status"].int == 200 {
@@ -317,9 +317,7 @@ extension SX_ApplyEmpListController: UIDocumentPickerDelegate {
                         SX_NetManager.requestData(type: .POST, URlString: SX_Mine_UploadFile, parameters: ["file":"/private/var/mobile/Library/Mobile%20Documents/com~apple~CloudDocs/%E5%AE%9E%E8%AE%ADAPP1.0%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3.doc"
                             ], finishCallBack: { (result) in
                                 SXLog("这里打印 --------> \(result)")
-                                
                         })
-                        
                     }
                     self.dismiss(animated: true, completion: nil)
                 }catch { }

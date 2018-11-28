@@ -13,12 +13,15 @@
  */
 
 import UIKit
+import SwiftyJSON
+import MBProgressHUD
 
 class SX_ApplyVocationListController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 10)
     var confirmBtn: UIButton?
     
+    var number: String? /// 订单号
     var sexStr: String?
     /// 性别Arr
     var sexArr :Array = { () -> [[String : String]] in
@@ -59,6 +62,34 @@ extension SX_ApplyVocationListController {
         self.view.backgroundColor = UIColor.SX_BackGroundColor()
         self.view.addSubview(table)
     }
+    
+    func fetchData() {
+        
+        let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
+                     "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!),
+                     "train":"",
+                     "courseprice":"",
+                     "name":"",
+                     "sex":"",
+                     "certificates":"",
+                     "education":"",
+                     "school":"",
+                     "company":"",
+                     "telephone":"",
+                     "wecaht":"",
+                     "email":""]
+        
+        SX_NetManager.requestData(type: .POST, URlString: SX_TrainApply, parameters: param) { (result) in
+            do {
+                let json = try JSON(data: result)
+                if json["status"].int == 200 {
+                    SXLog("申请成功")
+                    self.number = json["data"]["number"].string
+                }
+            }catch { }
+        }
+    }
+    
 }
 
 // ========================================================================
