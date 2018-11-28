@@ -26,14 +26,16 @@ class SX_ApplyTrainListController: UIViewController {
     var confirmBtn: UIButton?
     
     var name: UITextField?
-    var IDCard: UITextField?
-    var education: UITextField?
-    var school: UITextField?
-    var company: UITextField?
-    var telephone: UITextField?
-    var wechat: UITextField?
     var country: UITextField?
+    var telephone: UITextField?
     var email: UITextField?
+    var wechat: UITextField?
+    var age:UITextField?
+    var school: UITextField?
+    var professional:UITextField? // 专业
+    var grade:UITextField? // 年级
+    var address:UITextField?
+    var promoter:UITextField?
     
     var visaStr: String?
     var gradStr: String?
@@ -101,14 +103,14 @@ extension SX_ApplyTrainListController {
                      "email":self.email?.text ?? "",
                      "wechat":self.wechat?.text ?? "",
                      "fullname":"",
-                     "graduation":self.education?.text ?? "",
+                     "graduation":"",
                      "school":self.school?.text ?? "",
                      "discipline":"",
                      "grade":"",
                      "us_visa":"",
                      "country":self.country?.text ?? "",
-                     "address":"",
-                     "promoter":""]
+                     "address":self.address?.text ?? "",
+                     "promoter":self.promoter?.text ?? ""]
         
         SX_NetManager.requestData(type: .POST, URlString: SX_TrainingApply, parameters: param) { (result) in
         do {

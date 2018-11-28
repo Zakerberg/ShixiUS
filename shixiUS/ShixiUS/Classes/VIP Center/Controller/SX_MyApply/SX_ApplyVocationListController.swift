@@ -4,7 +4,7 @@
 //
 //  Created by Michael 柏 on 2018/9/5.
 //  Copyright © 2018年 Shixi (Beijing)  Tchnology  Limited. All rights reserved.
-//  职位培训的申请表
+//  培训的申请表
 
 /*
  我把曾经写过的诗撕碎
@@ -20,6 +20,16 @@ class SX_ApplyVocationListController: UIViewController {
     
     var dataArr = [Int](repeating: 0, count: 10)
     var confirmBtn: UIButton?
+    
+    var name: UITextField?
+    var IDCard: UITextField?
+    var education: UITextField?
+    var school: UITextField?
+    var company: UITextField?
+    var telephone: UITextField?
+    var wechat: UITextField?
+    var country: UITextField?
+    var email: UITextField?
     
     var number: String? /// 订单号
     var sexStr: String?
@@ -73,11 +83,11 @@ extension SX_ApplyVocationListController {
                      "sex":"",
                      "certificates":"",
                      "education":"",
-                     "school":"",
-                     "company":"",
-                     "telephone":"",
-                     "wecaht":"",
-                     "email":""]
+                     "school":self.school?.text ?? "",
+                     "company":self.company?.text ?? "",
+                     "telephone":self.telephone?.text ?? "",
+                     "wecaht":self.wechat?.text ?? "",
+                     "email":self.email?.text ?? ""]
         
         SX_NetManager.requestData(type: .POST, URlString: SX_TrainApply, parameters: param) { (result) in
             do {
