@@ -95,6 +95,7 @@ extension SX_ApplyVocationListController {
                 if json["status"].int == 200 {
                     SXLog("申请成功")
                     self.number = json["data"]["number"].string
+                
                 }
             }catch { }
         }

@@ -95,22 +95,22 @@ extension SX_ApplyTrainListController {
     
     func fetchData() {
         
-        let param = ["token":String(describing: USERDEFAULTS.value(forKey: "token")!),
-                     "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!),
-                     "training":"",
-                     "details":"",
-                     "telephone":self.telephone?.text ?? "",
-                     "email":self.email?.text ?? "",
-                     "wechat":self.wechat?.text ?? "",
-                     "fullname":"",
-                     "graduation":"",
-                     "school":self.school?.text ?? "",
-                     "discipline":"",
-                     "grade":"",
-                     "us_visa":"",
-                     "country":self.country?.text ?? "",
-                     "address":self.address?.text ?? "",
-                     "promoter":self.promoter?.text ?? ""]
+        let param = [ "token":String(describing: USERDEFAULTS.value(forKey: "token")!),
+                      "userId":String(describing: USERDEFAULTS.value(forKey: "userId")!),
+                      "training":"1",
+                      "details":"1",
+                      "telephone":self.telephone?.text ?? "",
+                      "email":self.email?.text ?? "",
+                      "wechat":self.wechat?.text ?? "",
+                      "fullname":"1",
+                      "graduation":"1",
+                      "school":self.school?.text ?? "",
+                      "discipline":"1",
+                      "grade":"1",
+                      "us_visa":"1",
+                      "country":self.country?.text ?? "",
+                      "address":self.address?.text ?? "",
+                      "promoter":self.promoter?.text ?? "" ]
         
         SX_NetManager.requestData(type: .POST, URlString: SX_TrainingApply, parameters: param) { (result) in
         do {
