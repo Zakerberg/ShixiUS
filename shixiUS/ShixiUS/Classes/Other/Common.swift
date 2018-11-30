@@ -777,7 +777,7 @@
     
     /// 解包可选值,当可选值不为空时, 执行`then` 闭包,并返回执行结果
     func and<T>(then: (Wrapped) throws -> T?) rethrows -> T? {
-     guard let unwrapped = self else { return nil }
+        guard let unwrapped = self else { return nil }
         return try then(unwrapped)
     }
     
@@ -828,8 +828,8 @@
     /// 当且仅当三个可选值都不为空时组合成功, 否则返回空
     func zip3<A, B>(with other: Optional<A>, another: Optional<B>) -> (Wrapped, A, B)? {
         guard let first = self,
-        let second      = other,
-        let third       = another else { return nil }
+            let second      = other,
+            let third       = another else { return nil }
         return (first, second, third)
     }
     
@@ -843,7 +843,7 @@
      } else {
      return nil
      }
-    }
+     }
      
      // 使用扩展
      func buildProduct() -> Product? {
@@ -884,10 +884,10 @@
  // ==============================================================================
  extension Optional {
     
-  /// 可选值不为空且可选值满足`predicate` 条件才返回, 否则返回`nil`
+    /// 可选值不为空且可选值满足`predicate` 条件才返回, 否则返回`nil`
     func filter(_ predicate: (Wrapped) -> Bool) -> Wrapped? {
         guard let  unwrapped = self,
-        predicate(unwrapped) else { return nil }
+            predicate(unwrapped) else { return nil }
         return self
     }
     
@@ -903,54 +903,54 @@
  // ==============================================================================
  extension NSDate {
     
-    /// 计算这个月有多少天
-    func numberOfDaysInCurrentMonth() -> Int {
-        // 频繁调用 NSCalendar.current 可能有性能问题
-        return ((NSCalendar.current.range(of: .day, in: .month, for: self as Date))?.count)!
-    }
-    
-    /// 获取这个月有多少周
-    func numberOfWeeksInCurrentMonth() -> NSInteger {
-        let weekDay:NSInteger = self.firstDayOfCurrentMonth().weeklyOrdinality()
-        var days:NSInteger    = self.numberOfDaysInCurrentMonth()
-        
-        var weeks = 0
-        if weekDay > 1 {
-            weeks += 1
-            days -= (7 - weekDay + 1)
-        }
-        weeks += days/7
-        weeks += (days%7 > 0) ? 1 : 0
-        
-        return weeks
-    }
-    
-    /*计算这个月最开始的一天*/
-    func firstDayOfCurrentMonth() -> NSDate {
-        let startDate = NSDate()
-        // let Ok: Bool  = NSCalendar.current.startOfDay(for: startDate)
-        
-        return startDate
-    }
-    
-    /*计算这个月的第一天是礼拜几*/
-    func weeklyOrdinality() -> NSInteger {
-        return NSCalendar.current.ordinality(of: .day, in: .weekday, for: self as Date)!
-    }
+    //    /// 计算这个月有多少天
+    //    func numberOfDaysInCurrentMonth() -> Int {
+    //        // 频繁调用 NSCalendar.current 可能有性能问题
+    //        return ((NSCalendar.current.range(of: .day, in: .month, for: self as Date))?.count)!
+    //    }
+    //
+    //    /// 获取这个月有多少周
+    //    func numberOfWeeksInCurrentMonth() -> NSInteger {
+    //        let weekDay:NSInteger = self.firstDayOfCurrentMonth().weeklyOrdinality()
+    //        var days:NSInteger    = self.numberOfDaysInCurrentMonth()
+    //
+    //        var weeks = 0
+    //        if weekDay > 1 {
+    //            weeks += 1
+    //            days -= (7 - weekDay + 1)
+    //        }
+    //        weeks += days/7
+    //        weeks += (days%7 > 0) ? 1 : 0
+    //
+    //        return weeks
+    //    }
+    //
+    //    /*计算这个月最开始的一天*/
+    //    func firstDayOfCurrentMonth() -> NSDate {
+    //        let startDate = NSDate()
+    //        // let Ok: Bool  = NSCalendar.current.startOfDay(for: startDate)
+    //
+    //        return startDate
+    //    }
+    //
+    //    /*计算这个月的第一天是礼拜几*/
+    //    func weeklyOrdinality() -> NSInteger {
+    //        return NSCalendar.current.ordinality(of: .day, in: .weekday, for: self as Date)!
+    //    }
     
     ///
-//    func lastDayOfCurrentMonth() -> NSDate {
+    //    func lastDayOfCurrentMonth() -> NSDate {
     
-//        let calendarComponents = ((Calendar.Component.day) || (Calendar.Component.year
-//            ) || (Calendar.Component.month))
-//        let dateComponents = NSCalendar.current.component(calendarComponents, from: self)
-//        dateComponents.day = self.numberOfDaysInCurrentMonth()
-//        return NSCalendar.current.date(from: dateComponents)
-//    }
+    //        let calendarComponents = ((Calendar.Component.day) || (Calendar.Component.year
+    //            ) || (Calendar.Component.month))
+    //        let dateComponents = NSCalendar.current.component(calendarComponents, from: self)
+    //        dateComponents.day = self.numberOfDaysInCurrentMonth()
+    //        return NSCalendar.current.date(from: dateComponents)
+    //    }
     
-//    func dayInThePreviousMonth() -> NSDate {
+    //    func dayInThePreviousMonth() -> NSDate {
     
-//    }
+    //    }
     
     //    func dayInFollowingMonth() -> NSDate {
     //
@@ -1000,6 +1000,40 @@
     //    }
  }
  
+ 
+ // ===============================================================================================
+ // MARK: - UIView iOS12.1 tabBar偏移 (由于Swift没有+load方法,所以手动触发, 先放在ApplicationDelegate里面)
+ // ===============================================================================================
+ extension UIView {
+    /// Swift4 不支持dispatch_once, 静态变量默认用dispatch_once初始化, 可以替代dispatch_once的实现
+    private static let swizzlingTabBarButtonFrame: Void = {
+        guard #available(iOS 12.1, *) else { return }
+        guard let cls = NSClassFromString("UITabBarButton") else { return }
+        let originalSelector     = #selector(setter: UIView.frame)
+        let swizzledSelector     = #selector(UIView.sx_setFrame)
+        guard let orihinalMehtod = class_getInstanceMethod(cls, originalSelector) else { return }
+        guard let swizzledMethod = class_getInstanceMethod(cls, swizzledSelector) else { return }
+        let isSuccess            = class_addMethod(cls, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
+        if (isSuccess) {
+            class_replaceMethod(cls, swizzledSelector, method_getImplementation(orihinalMehtod), method_getTypeEncoding(orihinalMehtod))
+        } else {
+            method_exchangeImplementations(orihinalMehtod, swizzledMethod)
+        }
+    }()
+    
+    @objc func sx_setFrame(frame: CGRect) {
+        var newFrame: CGRect = frame
+        if !self.frame.isEmpty {
+            guard !newFrame.isEmpty else{ return }
+            newFrame.size.height = newFrame.size.height > 48.0 ? newFrame.size.height : 48.0
+        }
+        self.sx_setFrame(frame: newFrame)
+    }
+    
+    open class func swizzledTabBarButtonFrame() {
+        UIView.swizzlingTabBarButtonFrame
+    }
+ }
  
  
  

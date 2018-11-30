@@ -44,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setNavBarAppearence()
         USERDEFAULTS.set("no", forKey: "login")
         self.window?.makeKeyAndVisible()
+        /// 处理iOS 12.1 tabBar图标错位
+        UIView.swizzledTabBarButtonFrame()
         
         return true
     }

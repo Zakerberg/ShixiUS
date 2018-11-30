@@ -151,12 +151,12 @@
             do{
                 let json = try JSON(data: result)
                 self.jobsArr = JSON(arrayLiteral: json["data"]["jobs"].array ?? [])[0]
-
+                
                 for item in json["data"]["training"].array ?? [] {
                     let trainingModel = SX_HomeTrainingModel(jsonData: item)
                     self.trainingArr.append(trainingModel)
                 }
-
+                
                 for item in json["data"]["train"].array ?? [] {
                     let trainModel = SX_HomeTrainModel(jsonData: item)
                     self.trainArr.append(trainModel)
