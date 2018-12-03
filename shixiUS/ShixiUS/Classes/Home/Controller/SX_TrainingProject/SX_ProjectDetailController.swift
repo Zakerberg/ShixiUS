@@ -246,7 +246,7 @@ extension SX_ProjectDetailController: UITableViewDelegate, UITableViewDataSource
             titleCell.selectionStyle     = .none
             titleCell.projectName?.text  = model["data"]["title"].string ?? ""
             titleCell.projectCity?.text  = "出发城市: " + (model["data"]["outset_city"].string ?? "北京(测试)")
-            titleCell.projectPrice?.text = "¥" + (model["details"][indexPath.section]["price"].string ?? "1") + "起/人"
+            titleCell.projectPrice?.text = "¥" + (model["details"][indexPath.section]["price"].string ?? "10") + "起/人"
             
             return titleCell
         }else if indexPath.section == 1 {
