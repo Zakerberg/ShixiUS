@@ -118,10 +118,10 @@ extension SX_RegisterContrller {
             PASSWORD.rx.controlEvent(.editingChanged).asObservable().subscribe({ [weak self] (_) in
                 SXLog("开始编辑密码....")
                 if ((self?.userNameTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.passWordTF?.text?.lengthOfBytes(using: .utf8)) != 0 && (self?.email?.text?.lengthOfBytes(using: .utf8)) != 0) {
-                    self?.regBtn?.isEnabled = true
+                    self?.regBtn?.isEnabled       = true
                     self?.regBtn?.backgroundColor = UIColor.SX_MainColor()
                 }else{
-                    self?.regBtn?.isEnabled = false
+                    self?.regBtn?.isEnabled       = false
                     self?.regBtn?.backgroundColor = UIColor.colorWithHexString(hex: "cccccc", alpha: 1.0)
                 }
             })
