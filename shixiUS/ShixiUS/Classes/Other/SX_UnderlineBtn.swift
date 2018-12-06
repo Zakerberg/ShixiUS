@@ -34,9 +34,9 @@ class SX_UnderlineBtn: UIButton {
     }
     
     override func draw(_ rect: CGRect) {
-        let textRect = self.titleLabel?.frame
+        let textRect   = self.titleLabel?.frame
         let contextRef = UIGraphicsGetCurrentContext()
-        let descender = self.titleLabel?.font.descender
+        let descender  = self.titleLabel?.font.descender
         
         if self.lineColor!.isKind(of: UIColor.self) {
             contextRef?.setStrokeColor(lineColor!.cgColor)
@@ -44,7 +44,6 @@ class SX_UnderlineBtn: UIButton {
         
         contextRef?.move(to: CGPoint(x: textRect!.origin.x, y: textRect!.origin.y + textRect!.size.height + descender!+1))
         contextRef?.addLine(to: CGPoint(x: textRect!.origin.x + textRect!.size.width, y: textRect!.origin.y + textRect!.size.height + descender!+1))
-        
         contextRef?.closePath()
         contextRef?.drawPath(using: .stroke)
     }

@@ -94,16 +94,16 @@ open class SX_PullToBounceWrapper: UIView {
             if y < pullDist {
                 bounceView.frame.y = y
                 bounceView.wave(0)
-                scrollView?.alpha = (pullDist - y)/pullDist
+                scrollView?.alpha  = (pullDist - y)/pullDist
             }
             else if y < stopPos {
                 bounceView.wave(y - pullDist)
-                scrollView?.alpha = 0
+                scrollView?.alpha  = 0
             }
             else if y > stopPos {
                 scrollView?.isScrollEnabled = false
                 scrollView?.setContentOffset(CGPoint(x: scrollView!.contentOffset.x, y: -stopPos), animated: false)
-                bounceView.frame.y = pullDist
+                bounceView.frame.y          = pullDist
                 bounceView.wave(stopPos - pullDist)
                 bounceView.didRelease(stopPos - pullDist)
                 self.didPullToRefresh?()

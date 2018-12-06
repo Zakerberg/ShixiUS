@@ -57,7 +57,6 @@ class SX_BallView: UIView {
     }
 }
 
-
 // ==============================================================================
 // MARK: - SX_CircleLayer
 // ==============================================================================
@@ -68,9 +67,9 @@ class SX_CircleLayer :CAShapeLayer, CAAnimationDelegate {
     var didEndAnimation: (()->())?
     
     init(size:CGFloat, moveUpDist:CGFloat , superViewFrame:CGRect, color:UIColor = UIColor.white) {
-        self.moveUpDist = moveUpDist
-        let selfFrame   = CGRect(x: 0, y: 0, width: superViewFrame.size.width, height: superViewFrame.size.height)
-        self.spiner     = SX_SpinerLayer(superLayerFrame: selfFrame, ballSize: size, color: color)
+        self.moveUpDist     = moveUpDist
+        let selfFrame       = CGRect(x: 0, y: 0, width: superViewFrame.size.width, height: superViewFrame.size.height)
+        self.spiner         = SX_SpinerLayer(superLayerFrame: selfFrame, ballSize: size, color: color)
         super.init()
         
         self.addSublayer(spiner)
@@ -82,10 +81,10 @@ class SX_CircleLayer :CAShapeLayer, CAAnimationDelegate {
         let endAngle = Double.pi * (Double.pi / 2)
         let clockwise: Bool = true
         self.path = UIBezierPath(arcCenter: center, radius: radius, startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle), clockwise: clockwise).cgPath
-        self.fillColor   = color.withAlphaComponent(1).cgColor
-        self.strokeColor = self.fillColor
-        self.lineWidth   = 0
-        self.strokeEnd   = 1
+        self.fillColor      = color.withAlphaComponent(1).cgColor
+        self.strokeColor    = self.fillColor
+        self.lineWidth      = 0
+        self.strokeEnd      = 1
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,31 +105,24 @@ class SX_CircleLayer :CAShapeLayer, CAAnimationDelegate {
     
     func moveUp(_ distance: CGFloat) {
         let move = CABasicAnimation(keyPath: "position")
-        
-        move.fromValue = NSValue(cgPoint: position)
-        move.toValue   = NSValue(cgPoint: CGPoint(x: position.x, y: position.y - distance))
-        
-        move.duration  = upDuration
-        move.timingFunction = timeFunc
-        
-        move.fillMode  = kCAFillModeForwards
+        move.fromValue             = NSValue(cgPoint: position)
+        move.toValue               = NSValue(cgPoint: CGPoint(x: position.x, y: position.y - distance))
+        move.duration              = upDuration
+        move.timingFunction        = timeFunc
+        move.fillMode              = kCAFillModeForwards
         move.isRemovedOnCompletion = false
         self.add(move, forKey: move.keyPath)
     }
     
-    
     func moveDown(_ distance: CGFloat) {
-        let move = CABasicAnimation(keyPath: "position")
-        
-        move.fromValue = NSValue(cgPoint: CGPoint(x: position.x, y: position.y - distance))
-        move.toValue   = NSValue(cgPoint: position)
-        
-        move.duration  = upDuration
-        move.timingFunction = timeFunc
-        
-        move.fillMode  = kCAFillModeForwards
+        let move                   = CABasicAnimation(keyPath: "position")
+        move.fromValue             = NSValue(cgPoint: CGPoint(x: position.x, y: position.y - distance))
+        move.toValue               = NSValue(cgPoint: position)
+        move.duration              = upDuration
+        move.timingFunction        = timeFunc
+        move.fillMode              = kCAFillModeForwards
         move.isRemovedOnCompletion = false
-        move.delegate  = self
+        move.delegate              = self
         self.add(move, forKey: move.keyPath)
     }
     
@@ -147,23 +139,21 @@ class SX_SpinerLayer :CAShapeLayer, CAAnimationDelegate {
     init(superLayerFrame:CGRect, ballSize:CGFloat, color:UIColor = UIColor.white) {
         super.init()
         
-        let radius:CGFloat = (ballSize / 2) * 1.2//1.45
-        self.frame = CGRect(x: 0, y: 0, width: superLayerFrame.height, height: superLayerFrame.height)
-        let center = CGPoint(x: superLayerFrame.size.width / 2, y: superLayerFrame.origin.y + superLayerFrame.size.height/2)
-        let startAngle = 0 - Double.pi / 2
-        let endAngle   = (Double.pi * 2 - (Double.pi / 2)) + Double.pi / 8
+        let radius:CGFloat  = (ballSize / 2) * 1.2//1.45
+        self.frame          = CGRect(x: 0, y: 0, width: superLayerFrame.height, height: superLayerFrame.height)
+        let center          = CGPoint(x: superLayerFrame.size.width / 2, y: superLayerFrame.origin.y + superLayerFrame.size.height/2)
+        let startAngle      = 0 - Double.pi / 2
+        let endAngle        = (Double.pi * 2 - (Double.pi / 2)) + Double.pi / 8
         let clockwise: Bool = true
         self.path = UIBezierPath(arcCenter: center, radius: radius, startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle), clockwise: clockwise).cgPath
         
-        self.fillColor   = nil
-        self.strokeColor = color.withAlphaComponent(1).cgColor
-        self.lineWidth   = 2
-        self.lineCap     = kCALineCapRound
-        
-        self.strokeStart = 0
-        self.strokeEnd   = 0
-        self.isHidden    = true
-        
+        self.fillColor      = nil
+        self.strokeColor    = color.withAlphaComponent(1).cgColor
+        self.lineWidth      = 2
+        self.lineCap        = kCALineCapRound
+        self.strokeStart    = 0
+        self.strokeEnd      = 0
+        self.isHidden       = true
     }
     
     required init?(coder aDecoder: NSCoder) {

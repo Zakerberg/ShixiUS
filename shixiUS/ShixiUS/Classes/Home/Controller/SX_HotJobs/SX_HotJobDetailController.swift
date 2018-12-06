@@ -17,7 +17,7 @@ import UIKit
 import SwiftyJSON
 import MBProgressHUD
 
-let hotJobDetailCellID = "hotJobDetailCellID"
+let hotJobDetailCellID        = "hotJobDetailCellID"
 let hotJobContentDetailCellID = "hotJobContentDetailCellID"
 
 class SX_HotJobDetailController: SX_BaseController {
