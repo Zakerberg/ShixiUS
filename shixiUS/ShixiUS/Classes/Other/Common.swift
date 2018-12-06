@@ -903,50 +903,54 @@
  // ==============================================================================
  extension NSDate {
     
-    //    /// 计算这个月有多少天
-    //    func numberOfDaysInCurrentMonth() -> Int {
-    //        // 频繁调用 NSCalendar.current 可能有性能问题
-    //        return ((NSCalendar.current.range(of: .day, in: .month, for: self as Date))?.count)!
-    //    }
-    //
-    //    /// 获取这个月有多少周
-    //    func numberOfWeeksInCurrentMonth() -> NSInteger {
-    //        let weekDay:NSInteger = self.firstDayOfCurrentMonth().weeklyOrdinality()
-    //        var days:NSInteger    = self.numberOfDaysInCurrentMonth()
-    //
-    //        var weeks = 0
-    //        if weekDay > 1 {
-    //            weeks += 1
-    //            days -= (7 - weekDay + 1)
-    //        }
-    //        weeks += days/7
-    //        weeks += (days%7 > 0) ? 1 : 0
-    //
-    //        return weeks
-    //    }
-    //
-    //    /*计算这个月最开始的一天*/
-    //    func firstDayOfCurrentMonth() -> NSDate {
-    //        let startDate = NSDate()
-    //        // let Ok: Bool  = NSCalendar.current.startOfDay(for: startDate)
-    //
-    //        return startDate
-    //    }
-    //
-    //    /*计算这个月的第一天是礼拜几*/
-    //    func weeklyOrdinality() -> NSInteger {
-    //        return NSCalendar.current.ordinality(of: .day, in: .weekday, for: self as Date)!
-    //    }
+        /// 计算这个月有多少天
+        func numberOfDaysInCurrentMonth() -> Int {
+            // 频繁调用 NSCalendar.current 可能有性能问题
+            return ((NSCalendar.current.range(of: .day, in: .month, for: self as Date))?.count)!
+        }
     
-    ///
-    //    func lastDayOfCurrentMonth() -> NSDate {
+        /// 获取这个月有多少周
+        func numberOfWeeksInCurrentMonth() -> NSInteger {
+            let weekDay:NSInteger = self.firstDayOfCurrentMonth().weeklyOrdinality()
+            var days:NSInteger    = self.numberOfDaysInCurrentMonth()
     
-    //        let calendarComponents = ((Calendar.Component.day) || (Calendar.Component.year
-    //            ) || (Calendar.Component.month))
-    //        let dateComponents = NSCalendar.current.component(calendarComponents, from: self)
-    //        dateComponents.day = self.numberOfDaysInCurrentMonth()
-    //        return NSCalendar.current.date(from: dateComponents)
-    //    }
+            var weeks = 0
+            if weekDay > 1 {
+                weeks += 1
+                days -= (7 - weekDay + 1)
+            }
+            weeks += days/7
+            weeks += (days%7 > 0) ? 1 : 0
+    
+            return weeks
+        }
+    
+        /*计算这个月最开始的一天*/
+        func firstDayOfCurrentMonth() -> NSDate {
+            let startDate = NSDate()
+            // let Ok: Bool  = NSCalendar.current.startOfDay(for: startDate)
+    
+            return startDate
+        }
+    
+        /*计算这个月的第一天是礼拜几*/
+        func weeklyOrdinality() -> NSInteger {
+            return NSCalendar.current.ordinality(of: .day, in: .weekday, for: self as Date)!
+        }
+    
+    
+        func lastDayOfCurrentMonth() -> NSDate {
+    
+//            let calendarComponents = (Calendar.Component.day) | (Calendar.Component.year
+//                ) | (Calendar.Component.month)
+//            let dateComponents = NSCalendar.current.component(calendarComponents, from: self)
+//            dateComponents.day = self.numberOfDaysInCurrentMonth()
+//            return NSCalendar.current.date(from: dateComponents)
+            
+            let calendarUnit: NSCalendar.Unit = NSCalendar.Unit(rawValue: NSCalendar.Unit.year.rawValue | NSCalendar.Unit.month.rawValue | NSCalendar.Unit.day.rawValue)
+            
+            
+        }
     
     //    func dayInThePreviousMonth() -> NSDate {
     
