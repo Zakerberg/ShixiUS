@@ -938,72 +938,76 @@
             return NSCalendar.current.ordinality(of: .day, in: .weekday, for: self as Date)!
         }
     
-    
         func lastDayOfCurrentMonth() -> NSDate {
-    
-//            let calendarComponents = (Calendar.Component.day) | (Calendar.Component.year
-//                ) | (Calendar.Component.month)
-//            let dateComponents = NSCalendar.current.component(calendarComponents, from: self)
-//            dateComponents.day = self.numberOfDaysInCurrentMonth()
-//            return NSCalendar.current.date(from: dateComponents)
-            
-            let calendarUnit: NSCalendar.Unit = NSCalendar.Unit(rawValue: NSCalendar.Unit.year.rawValue | NSCalendar.Unit.month.rawValue | NSCalendar.Unit.day.rawValue)
-            
-            
+//            let calendarUnit   = NSCalendar.Unit(rawValue: NSCalendar.Unit.year.rawValue | NSCalendar.Unit.month.rawValue | NSCalendar.Unit.day.rawValue)
+            let dateComponents: NSDateComponents = NSCalendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day], from: self as Date) as NSDateComponents
+            dateComponents.day = self.numberOfDaysInCurrentMonth()
+            return NSCalendar.current.date(from: dateComponents as DateComponents) as! NSDate
+        }
+
+    /// 上个月
+        func dayInThePreviousMonth() -> NSDate {
+            let dateComponents: NSDateComponents = NSDateComponents()
+            dateComponents.month = -1
+            return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
+        }
+
+    /// 下个月
+        func dayInFollowingMonth() -> NSDate {
+            let dateComponents: NSDateComponents = NSDateComponents()
+            dateComponents.month = 1
+            return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
         }
     
-    //    func dayInThePreviousMonth() -> NSDate {
+        /// 获取当前日期之前后的几个月
+        func dayInTheFollowingMonth(month: Int) -> NSDate {
+            let dateComponents: NSDateComponents = NSDateComponents()
+            dateComponents.month                 = month
+            return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
+        }
     
-    //    }
+        /// 获取当前日期之前后的几天
+        func dayInTheFollowingDay(day: Int) -> NSDate {
+           let dateComponents  = NSDateComponents()
+            dateComponents.day = day
+            return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
+        }
     
-    //    func dayInFollowingMonth() -> NSDate {
-    //
-    //    }
-    //
-    //    /// 获取当前日期之前后的几个月
-    //    func dayInTheFollowingMonth(month: Int) -> NSDate {
-    //
-    //    }
-    //
-    //    /// 获取当前日期之前后的几天
-    //    func dayInTheFollowingDay(day: Int) -> NSDate {
-    //
-    //
-    //    }
-    //
-    //    func YMDComponents() {
-    //
-    //    }
-    //
-    //    /// NSString 转 NSDate
-    //    func dateFormString(dateString: NSString) -> NSDate {
-    //
-    //    }
-    //
-    //    /// NSDate 转 NSString
-    //    func stringFormDate(date: NSDate) -> NSString {
-    //
-    //    }
-    //
-    //    class func getDayNumbertoDay(_ today: NSDate, beforeDay: NSDate) -> Int {
-    //
-    //    }
-    //
-    //    func getweekInValueWithDate() -> Int {
-    //
-    //    }
-    //
-    //    /// 判断日期是今天,明天,后天,周几
-    //    func compareIfTodayWithDate() -> NSString {
-    //
-    //    }
-    //
-    //    /// 通过数字返回星期几
-    //    class func getWeekStringFormInteger(week:Int) -> NSString {
-    //
-    //    }
+        func YMDComponents() -> NSDateComponents {
+            return NSCalendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekday], from: self as Date) as NSDateComponents
+        }
+    
+        /// NSString 转 NSDate
+//        func dateFormString(dateString: NSString) -> NSDate {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.date(from: "yyyy-MM-dd")
+//
+////            let destDate =
+//        }
+//
+//        /// NSDate 转 NSString
+//        func stringFormDate(date: NSDate) -> NSString {
+//
+//        }
+//
+//        class func getDayNumbertoDay(_ today: NSDate, beforeDay: NSDate) -> Int {
+//
+//        }
+//
+//        func getweekInValueWithDate() -> Int {
+//
+//        }
+//
+//        /// 判断日期是今天,明天,后天,周几
+//        func compareIfTodayWithDate() -> NSString {
+//
+//        }
+//
+//        /// 通过数字返回星期几
+//        class func getWeekStringFormInteger(week:Int) -> NSString {
+//
+//        }
  }
- 
  
  // ===============================================================================================
  // MARK: - UIView iOS12.1 tabBar偏移 (由于Swift没有+load方法,所以手动触发, 先放在ApplicationDelegate里面)
