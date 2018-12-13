@@ -22,6 +22,10 @@
  
  var maxTextNumberDegault = 30
  
+ typealias WebImageProgressBlock  = (_ percent: Float) -> Void
+ typealias WebImageCompletedBlock = (_ image: UIImage?, _ error: Error?) -> Void
+ typealias WebImageCancelBlock    = () -> Void
+ 
  // ==============================================================================
  // MARK: - UIColor
  // ==============================================================================
@@ -99,11 +103,10 @@
     class func colorWithRGB(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
         return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1)
     }
-    
  }
  
  // ==============================================================================
- // MARK: - UIImage Extension
+ // MARK: - UIImage 纯色图片 压缩图片 模糊处理
  // ==============================================================================
  extension UIImage {
     
@@ -112,7 +115,7 @@
     
     /// 根据颜色生成一张纯色图片
     class func imageWithColor(color : UIColor ,size : CGSize) -> UIImage{
-        let rect = CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: size)
+        let rect    = CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: size)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
         context!.setFillColor(color.cgColor)
@@ -143,6 +146,27 @@
         let newImage = UIImage(cgImage: imageRef!)
         return newImage
     }
+ }
+ 
+ // ==============================================================================
+ // MARK: - UIImageView Extension WebCache
+ // ==============================================================================
+ extension UIImageView {
+    static var operationKey = "operationKey"
+    var operation: WebCombineOperation? {
+        get{
+            return objc_getAssociatedObject(self, &UIImage.operationKey) as? WebCombineOperation
+        }
+        
+            
+        
+    
+    }
+    
+    
+    
+    
+    
  }
  
  // ==============================================================================
