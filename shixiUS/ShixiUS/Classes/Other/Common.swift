@@ -157,16 +157,7 @@
         get{
             return objc_getAssociatedObject(self, &UIImage.operationKey) as? WebCombineOperation
         }
-        
-            
-        
-    
     }
-    
-    
-    
-    
-    
  }
  
  // ==============================================================================
