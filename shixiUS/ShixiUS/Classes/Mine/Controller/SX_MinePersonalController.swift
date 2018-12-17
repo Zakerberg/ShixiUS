@@ -15,7 +15,7 @@
 
 import UIKit
 import SwiftyJSON
-import IQKeyboardManagerSwift
+
 import MBProgressHUD
 
 class SX_MinePersonalController: UIViewController {
@@ -50,7 +50,7 @@ class SX_MinePersonalController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        IQKeyboardManager.shared.enable = false
+//        IQKeyboardManager.shared.enable = false
         setUI()
         fetchInfoData()
     }

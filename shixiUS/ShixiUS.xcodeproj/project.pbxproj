@@ -80,6 +80,10 @@
 		32E49D2021369DDC005633F2 /* SX_PayVocationalTrainingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D1F21369DDC005633F2 /* SX_PayVocationalTrainingController.swift */; };
 		32E49D2221378FAD005633F2 /* SX_PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E49D2121378FAD005633F2 /* SX_PaymentCell.swift */; };
 		32F0C290217F0FD40053DE84 /* SX_TrainDetailTeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F0C28F217F0FD40053DE84 /* SX_TrainDetailTeacherCell.swift */; };
+		32F8B5B721C3434D00EFD924 /* WebDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F8B5B621C3434C00EFD924 /* WebDownloader.swift */; };
+		32F8B5BC21C34A9800EFD924 /* WebDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F8B5BB21C34A9800EFD924 /* WebDownloadOperation.swift */; };
+		32F8B5BE21C34ABE00EFD924 /* WebCombinOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F8B5BD21C34ABE00EFD924 /* WebCombinOperation.swift */; };
+		32F8B5C021C34AD800EFD924 /* WebCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F8B5BF21C34AD800EFD924 /* WebCacheManager.swift */; };
 		4505982220F6F11C00504B6E /* SX_CertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982120F6F11C00504B6E /* SX_CertificationController.swift */; };
 		4505982420F8539900504B6E /* SX_BasePopSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */; };
 		4505982620FC8CB900504B6E /* SX_OverseaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505982520FC8CB900504B6E /* SX_OverseaCell.swift */; };
@@ -241,6 +245,10 @@
 		32E49D1F21369DDC005633F2 /* SX_PayVocationalTrainingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PayVocationalTrainingController.swift; sourceTree = "<group>"; };
 		32E49D2121378FAD005633F2 /* SX_PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_PaymentCell.swift; sourceTree = "<group>"; };
 		32F0C28F217F0FD40053DE84 /* SX_TrainDetailTeacherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_TrainDetailTeacherCell.swift; sourceTree = "<group>"; };
+		32F8B5B621C3434C00EFD924 /* WebDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDownloader.swift; sourceTree = "<group>"; };
+		32F8B5BB21C34A9800EFD924 /* WebDownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDownloadOperation.swift; sourceTree = "<group>"; };
+		32F8B5BD21C34ABE00EFD924 /* WebCombinOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCombinOperation.swift; sourceTree = "<group>"; };
+		32F8B5BF21C34AD800EFD924 /* WebCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCacheManager.swift; sourceTree = "<group>"; };
 		4505982120F6F11C00504B6E /* SX_CertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_CertificationController.swift; sourceTree = "<group>"; };
 		4505982320F8539900504B6E /* SX_BasePopSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_BasePopSelectedView.swift; sourceTree = "<group>"; };
 		4505982520FC8CB900504B6E /* SX_OverseaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SX_OverseaCell.swift; sourceTree = "<group>"; };
@@ -535,6 +543,17 @@
 			path = SX_Train;
 			sourceTree = "<group>";
 		};
+		32F8B5B821C34A3B00EFD924 /* WebCache */ = {
+			isa = PBXGroup;
+			children = (
+				32F8B5B621C3434C00EFD924 /* WebDownloader.swift */,
+				32F8B5BB21C34A9800EFD924 /* WebDownloadOperation.swift */,
+				32F8B5BD21C34ABE00EFD924 /* WebCombinOperation.swift */,
+				32F8B5BF21C34AD800EFD924 /* WebCacheManager.swift */,
+			);
+			path = WebCache;
+			sourceTree = "<group>";
+		};
 		4527F8F8211BE4EC000EAEB9 /* SX_Personal */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,6 +738,7 @@
 				32621249214CE12E000C1A6C /* SX_Calendar */,
 				3248484521411AA400B6049E /* SX_Picker */,
 				323E99AB213CCDBC006038F5 /* SX_PageTitleView */,
+				32F8B5B821C34A3B00EFD924 /* WebCache */,
 				45556B6020D8A0370035FCA6 /* Defines.swift */,
 				45D3520E20D8B3F600D7300A /* Common.swift */,
 				45E57405212E9847007A4DCD /* SX_UnderlineBtn.swift */,
@@ -1236,6 +1256,7 @@
 				323E99A621392618006038F5 /* SX_GuidePageView.swift in Sources */,
 				324848572142197C00B6049E /* SX_ApplyMessageCell.swift in Sources */,
 				45E573BD212A61FE007A4DCD /* SX_OrderDetailsController.swift in Sources */,
+				32F8B5B721C3434D00EFD924 /* WebDownloader.swift in Sources */,
 				323E99AA21392819006038F5 /* SX_GuidePageControl.swift in Sources */,
 				32621280214CE13E000C1A6C /* RMCalendarModel.m in Sources */,
 				324482E1214A050C00037533 /* SX_RegisterContrller.swift in Sources */,
@@ -1254,7 +1275,9 @@
 				4527F875211A8A95000EAEB9 /* SX_ApplyProgressCell.swift in Sources */,
 				45556B2620D89C5D0035FCA6 /* AppDelegate.swift in Sources */,
 				452F3E8D21435E53005696E0 /* SX_NetworkProvider.swift in Sources */,
+				32F8B5BC21C34A9800EFD924 /* WebDownloadOperation.swift in Sources */,
 				45CF168A20EF112600188F42 /* SX_TrainingProjectController.swift in Sources */,
+				32F8B5BE21C34ABE00EFD924 /* WebCombinOperation.swift in Sources */,
 				329FDF712136320C00D939F9 /* SX_MineTrainingProjectController.swift in Sources */,
 				4527F8FA211BE532000EAEB9 /* SX_PersonalIconCell.swift in Sources */,
 				32D0DFBF2147C1BD00A6549B /* SX_ProjectTripDateCell.swift in Sources */,
@@ -1325,6 +1348,7 @@
 				45556B5D20D89DAD0035FCA6 /* SX_TabBarController.swift in Sources */,
 				45440EFA20E0B9C600058978 /* SX_CycleScrollerView.swift in Sources */,
 				32621283214CE13E000C1A6C /* RMCalendarCollectionViewLayout.m in Sources */,
+				32F8B5C021C34AD800EFD924 /* WebCacheManager.swift in Sources */,
 				323E99C0213FA721006038F5 /* SX_ApplyTrainListController.swift in Sources */,
 				329FDF6F2136318300D939F9 /* SX_MineEmploymentJobsController.swift in Sources */,
 				32E49D2021369DDC005633F2 /* SX_PayVocationalTrainingController.swift in Sources */,

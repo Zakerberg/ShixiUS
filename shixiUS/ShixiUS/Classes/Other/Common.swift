@@ -67,7 +67,8 @@
         
         var cString: NSString = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased() as NSString
         
-        if (cString.hasPrefix("#")) {
+        if (
+            cString.hasPrefix("#")) {
             cString = cString.substring(from: 1) as NSString
         }
         
@@ -84,8 +85,8 @@
         let bString = cString.substring(with: NSMakeRange(4, 2))
         
         var r : CUnsignedInt = 0x0,
-        g : CUnsignedInt = 0x0,
-        b : CUnsignedInt = 0x0
+        g : CUnsignedInt     = 0x0,
+        b : CUnsignedInt     = 0x0
         
         Scanner(string: rString).scanHexInt32(&r)
         Scanner(string: gString).scanHexInt32(&g)
@@ -153,11 +154,36 @@
  // ==============================================================================
  extension UIImageView {
     static var operationKey = "operationKey"
-    var operation: WebCombineOperation? {
-        get{
-            return objc_getAssociatedObject(self, &UIImage.operationKey) as? WebCombineOperation
-        }
-    }
+    //    var operation: WebCombineOperation? {
+    //        get{
+    //            return objc_getAssociatedObject(self, &UIImage.operationKey) as? WebCombineOperation
+    //        }
+    //
+    //        set {
+    //            objc_setAssociatedObject(self, &UIImageView.operationKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+    //        }
+    //    }
+    
+    //    func cancelOperation() {
+    //        operation?.cancel()
+    //    }
+    
+    //    func setImageWithURL(imageURL: URL, completed: WebImageCompletedBlock?) {
+    //        setImageWithURL(imageUrl: imageURL, progress: nil, completed: completed, cancel: nil)
+    //    }
+    //
+    //    func setImageWithURL(imageUrl: URL, progress: WebImageProgressBlock?, completed: WebImageCompletedBlock?) {
+    //        self.setImageWithURL(imageUrl: imageUrl, progress: progress, completed: completed, cancel: nil)
+    //    }
+    //
+    //    func setImageWithURL(imageUrl: URL, progress: WebImageProgressBlock?, completed: WebImageCompletedBlock?, cancel: WebImageCancelBlock?) {
+    //        self.cancelOperation()
+    //
+    //    }
+    
+    
+    
+    
  }
  
  // ==============================================================================
@@ -918,110 +944,110 @@
  // ==============================================================================
  extension NSDate {
     
-        /// 计算这个月有多少天
-        func numberOfDaysInCurrentMonth() -> Int {
-            // 频繁调用 NSCalendar.current 可能有性能问题
-            return ((NSCalendar.current.range(of: .day, in: .month, for: self as Date))?.count)!
+    /// 计算这个月有多少天
+    func numberOfDaysInCurrentMonth() -> Int {
+        // 频繁调用 NSCalendar.current 可能有性能问题
+        return ((NSCalendar.current.range(of: .day, in: .month, for: self as Date))?.count)!
+    }
+    
+    /// 获取这个月有多少周
+    func numberOfWeeksInCurrentMonth() -> NSInteger {
+        let weekDay:NSInteger = self.firstDayOfCurrentMonth().weeklyOrdinality()
+        var days:NSInteger    = self.numberOfDaysInCurrentMonth()
+        
+        var weeks = 0
+        if weekDay > 1 {
+            weeks += 1
+            days -= (7 - weekDay + 1)
         }
+        weeks += days/7
+        weeks += (days%7 > 0) ? 1 : 0
+        
+        return weeks
+    }
     
-        /// 获取这个月有多少周
-        func numberOfWeeksInCurrentMonth() -> NSInteger {
-            let weekDay:NSInteger = self.firstDayOfCurrentMonth().weeklyOrdinality()
-            var days:NSInteger    = self.numberOfDaysInCurrentMonth()
+    /*计算这个月最开始的一天*/
+    func firstDayOfCurrentMonth() -> NSDate {
+        let startDate = NSDate()
+        // let Ok: Bool  = NSCalendar.current.startOfDay(for: startDate)
+        
+        return startDate
+    }
     
-            var weeks = 0
-            if weekDay > 1 {
-                weeks += 1
-                days -= (7 - weekDay + 1)
-            }
-            weeks += days/7
-            weeks += (days%7 > 0) ? 1 : 0
+    /*计算这个月的第一天是礼拜几*/
+    func weeklyOrdinality() -> NSInteger {
+        return NSCalendar.current.ordinality(of: .day, in: .weekday, for: self as Date)!
+    }
     
-            return weeks
-        }
+    func lastDayOfCurrentMonth() -> NSDate {
+        //            let calendarUnit   = NSCalendar.Unit(rawValue: NSCalendar.Unit.year.rawValue | NSCalendar.Unit.month.rawValue | NSCalendar.Unit.day.rawValue)
+        let dateComponents: NSDateComponents = NSCalendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day], from: self as Date) as NSDateComponents
+        dateComponents.day = self.numberOfDaysInCurrentMonth()
+        return NSCalendar.current.date(from: dateComponents as DateComponents) as! NSDate
+    }
     
-        /*计算这个月最开始的一天*/
-        func firstDayOfCurrentMonth() -> NSDate {
-            let startDate = NSDate()
-            // let Ok: Bool  = NSCalendar.current.startOfDay(for: startDate)
-    
-            return startDate
-        }
-    
-        /*计算这个月的第一天是礼拜几*/
-        func weeklyOrdinality() -> NSInteger {
-            return NSCalendar.current.ordinality(of: .day, in: .weekday, for: self as Date)!
-        }
-    
-        func lastDayOfCurrentMonth() -> NSDate {
-//            let calendarUnit   = NSCalendar.Unit(rawValue: NSCalendar.Unit.year.rawValue | NSCalendar.Unit.month.rawValue | NSCalendar.Unit.day.rawValue)
-            let dateComponents: NSDateComponents = NSCalendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day], from: self as Date) as NSDateComponents
-            dateComponents.day = self.numberOfDaysInCurrentMonth()
-            return NSCalendar.current.date(from: dateComponents as DateComponents) as! NSDate
-        }
-
     /// 上个月
-        func dayInThePreviousMonth() -> NSDate {
-            let dateComponents: NSDateComponents = NSDateComponents()
-            dateComponents.month = -1
-            return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
-        }
-
+    func dayInThePreviousMonth() -> NSDate {
+        let dateComponents: NSDateComponents = NSDateComponents()
+        dateComponents.month = -1
+        return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
+    }
+    
     /// 下个月
-        func dayInFollowingMonth() -> NSDate {
-            let dateComponents: NSDateComponents = NSDateComponents()
-            dateComponents.month = 1
-            return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
-        }
+    func dayInFollowingMonth() -> NSDate {
+        let dateComponents: NSDateComponents = NSDateComponents()
+        dateComponents.month = 1
+        return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
+    }
     
-        /// 获取当前日期之前后的几个月
-        func dayInTheFollowingMonth(month: Int) -> NSDate {
-            let dateComponents: NSDateComponents = NSDateComponents()
-            dateComponents.month                 = month
-            return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
-        }
+    /// 获取当前日期之前后的几个月
+    func dayInTheFollowingMonth(month: Int) -> NSDate {
+        let dateComponents: NSDateComponents = NSDateComponents()
+        dateComponents.month                 = month
+        return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
+    }
     
-        /// 获取当前日期之前后的几天
-        func dayInTheFollowingDay(day: Int) -> NSDate {
-           let dateComponents  = NSDateComponents()
-            dateComponents.day = day
-            return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
-        }
+    /// 获取当前日期之前后的几天
+    func dayInTheFollowingDay(day: Int) -> NSDate {
+        let dateComponents  = NSDateComponents()
+        dateComponents.day = day
+        return NSCalendar.current.date(byAdding: dateComponents as DateComponents, to: self as Date, wrappingComponents: true)! as NSDate
+    }
     
-        func YMDComponents() -> NSDateComponents {
-            return NSCalendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekday], from: self as Date) as NSDateComponents
-        }
+    func YMDComponents() -> NSDateComponents {
+        return NSCalendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekday], from: self as Date) as NSDateComponents
+    }
     
-        /// NSString 转 NSDate
-//        func dateFormString(dateString: NSString) -> NSDate {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.date(from: "yyyy-MM-dd")
-//
-////            let destDate =
-//        }
-//
-//        /// NSDate 转 NSString
-//        func stringFormDate(date: NSDate) -> NSString {
-//
-//        }
-//
-//        class func getDayNumbertoDay(_ today: NSDate, beforeDay: NSDate) -> Int {
-//
-//        }
-//
-//        func getweekInValueWithDate() -> Int {
-//
-//        }
-//
-//        /// 判断日期是今天,明天,后天,周几
-//        func compareIfTodayWithDate() -> NSString {
-//
-//        }
-//
-//        /// 通过数字返回星期几
-//        class func getWeekStringFormInteger(week:Int) -> NSString {
-//
-//        }
+    /// NSString 转 NSDate
+    //        func dateFormString(dateString: NSString) -> NSDate {
+    //            let dateFormatter = DateFormatter()
+    //            dateFormatter.date(from: "yyyy-MM-dd")
+    //
+    ////            let destDate =
+    //        }
+    //
+    //        /// NSDate 转 NSString
+    //        func stringFormDate(date: NSDate) -> NSString {
+    //
+    //        }
+    //
+    //        class func getDayNumbertoDay(_ today: NSDate, beforeDay: NSDate) -> Int {
+    //
+    //        }
+    //
+    //        func getweekInValueWithDate() -> Int {
+    //
+    //        }
+    //
+    //        /// 判断日期是今天,明天,后天,周几
+    //        func compareIfTodayWithDate() -> NSString {
+    //
+    //        }
+    //
+    //        /// 通过数字返回星期几
+    //        class func getWeekStringFormInteger(week:Int) -> NSString {
+    //
+    //        }
  }
  
  // ===============================================================================================
@@ -1058,5 +1084,85 @@
     }
  }
  
- 
- 
+ // ===============================================================================================
+ // MARK: - UIWindow Extension showTips
+ // ===============================================================================================
+ extension UIWindow {
+    static var tipsKey = "tipsKey"
+    static var tips: UITextView? {
+        get {
+            return objc_getAssociatedObject(self, &UIWindow.tipsKey) as? UITextView
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &UIWindow.tipsKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+    static var tapKey = "tapKey"
+    static var tap: UITapGestureRecognizer? {
+        get {
+            return objc_getAssociatedObject(self, &UIWindow.tapKey) as? UITapGestureRecognizer
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &UIWindow.tapKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+    static func showTips(text: String) {
+        if tips.isSome { dismiss() }
+        Thread.sleep(forTimeInterval: 0.5)
+        let window               = UIApplication.shared.delegate?.window as? UIWindow
+        let maxWidth : CGFloat   = 200
+        let maxHeight: CGFloat   = window?.frame.size.height ?? 0 - 200
+        let commonInset: CGFloat = 10
+        
+        let font      = UIFont.systemFont(ofSize: 12)
+        let string    = NSMutableAttributedString(string: text)
+        
+        string.addAttributes([.font: font], range: NSRange(location: 0, length: string.length))
+        let rect      = string.boundingRect(with: CGSize(width: maxWidth, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+        let size      = CGSize(width: CGFloat(ceilf(Float(rect.size.width))), height: CGFloat(ceilf(rect.size.height < maxHeight ? Float(rect.size.height) : Float(maxHeight))))
+        
+        let textFrame = CGRect(x: (window?.frame.size.width ?? 0)/2 - size.width/2 - commonInset, y: (window?.frame.size.height ?? 0) - size.height/2 - commonInset - 100, width: size.width + commonInset * 2, height: size.height + commonInset * 2)
+        let textView                = UITextView(frame: textFrame)
+        textView.text               = text
+        textView.font               = font
+        textView.textColor          = UIColor.white
+        textView.backgroundColor    = UIColor.black
+        textView.layer.cornerRadius = 5
+        textView.isEditable         = false
+        textView.isSelectable       = false
+        textView.isScrollEnabled    = false
+        textView.textContainer.lineFragmentPadding = 0
+        textView.contentInset       = UIEdgeInsets(top: commonInset, left: commonInset, bottom: commonInset, right: commonInset)
+        
+        let tapGesture              = UITapGestureRecognizer(target: self, action: #selector(handlerGesture(sender:)))
+        window?.addGestureRecognizer(tapGesture)
+        window?.addSubview(textView)
+        
+        tips = textView
+        tap  = tapGesture
+        
+        self.perform(#selector(dismiss), with: nil, afterDelay: 2.0)
+    }
+    
+    @objc static func handlerGesture(sender: UIGestureRecognizer) {
+        dismiss()
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(dismiss), object: nil)
+    }
+    
+    @objc static func dismiss() {
+        if let tapGesture = tap {
+            let window    = UIApplication.shared.delegate?.window as? UIWindow
+            window?.removeGestureRecognizer(tapGesture)
+        }
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            tips?.alpha   = 0
+        }) { (Finish) in
+            tips?.removeFromSuperview()
+        }
+    }
+ }
