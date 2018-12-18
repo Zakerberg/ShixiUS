@@ -26,6 +26,14 @@
  typealias WebImageCompletedBlock = (_ image: UIImage?, _ error: Error?) -> Void
  typealias WebImageCancelBlock    = () -> Void
  
+ //打印信息
+ func SXLog<T>(_ message : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
+    #if DEBUG
+    let fileName = (file as NSString).lastPathComponent
+    print("\n>>> \(Date())  \(fileName) (line: \(lineNum)): \(message)\n")
+    #endif
+ }
+ 
  // ==============================================================================
  // MARK: - UIColor
  // ==============================================================================
@@ -218,49 +226,124 @@
  //使用,前面是十六进制值,后面是透明度(粉嫩色...)
  // self.view.backgroundColor = HexColor(0xFF335B,1.0f);
  
+ 
  // ==============================================================================
- //MARK: - NSString Extension MD5
+ // MARK: - UIView iOS12.1 tabBar偏移 (由于Swift没有+load方法,所以手动触发, 先放在ApplicationDelegate里面)
  // ==============================================================================
- extension NSString  {
-    
-    var md5: NSString! {
-        let str = self.cString(using: String.Encoding.utf8.rawValue)
-        let strLen = CC_LONG(self.lengthOfBytes(using: String.Encoding.utf8.rawValue))
-        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
-        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
-        
-        CC_MD5(str!, strLen, result)
-        
-        let hash = NSMutableString()
-        for i in 0...digestLen {
-            hash.appendFormat("%02x", result[i])
+ extension UIView {
+    /// Swift4 不支持dispatch_once, 静态变量默认用dispatch_once初始化, 可以替代dispatch_once的实现
+    private static let swizzlingTabBarButtonFrame: Void = {
+        guard #available(iOS 12.1, *) else { return }
+        guard let cls = NSClassFromString("UITabBarButton") else { return }
+        let originalSelector     = #selector(setter: UIView.frame)
+        let swizzledSelector     = #selector(UIView.sx_setFrame)
+        guard let orihinalMehtod = class_getInstanceMethod(cls, originalSelector) else { return }
+        guard let swizzledMethod = class_getInstanceMethod(cls, swizzledSelector) else { return }
+        let isSuccess            = class_addMethod(cls, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
+        if (isSuccess) {
+            class_replaceMethod(cls, swizzledSelector, method_getImplementation(orihinalMehtod), method_getTypeEncoding(orihinalMehtod))
+        } else {
+            method_exchangeImplementations(orihinalMehtod, swizzledMethod)
         }
-        result.deallocate(capacity: digestLen)
-        return String(format: hash as String) as NSString
+    }()
+    
+    @objc func sx_setFrame(frame: CGRect) {
+        var newFrame: CGRect     = frame
+        if !self.frame.isEmpty {
+            guard !newFrame.isEmpty else{ return }
+            newFrame.size.height = newFrame.size.height > 48.0 ? newFrame.size.height : 48.0
+        }
+        self.sx_setFrame(frame: newFrame)
+    }
+    
+    open class func swizzledTabBarButtonFrame() {
+        UIView.swizzlingTabBarButtonFrame
     }
  }
  
- extension Int {
-    var FloatValue:CGFloat{return CGFloat(self)}
-    var DoubleValue:Double{return Double(self)}
+ // ===============================================================================
+ // MARK: - UIWindow Extension showTips
+ // ===============================================================================
+ extension UIWindow {
+    static var tipsKey = "tipsKey"
+    static var tips: UITextView? {
+        get {
+            return objc_getAssociatedObject(self, &UIWindow.tipsKey) as? UITextView
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &UIWindow.tipsKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
     
+    static var tapKey = "tapKey"
+    static var tap: UITapGestureRecognizer? {
+        get {
+            return objc_getAssociatedObject(self, &UIWindow.tapKey) as? UITapGestureRecognizer
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &UIWindow.tapKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+    static func showTips(text: String) {
+        if tips.isSome { dismiss() }
+        Thread.sleep(forTimeInterval: 0.5)
+        let window                  = UIApplication.shared.delegate?.window as? UIWindow
+        let maxWidth : CGFloat      = 200
+        let maxHeight: CGFloat      = window?.frame.size.height ?? 0 - 200
+        let commonInset: CGFloat    = 10
+        
+        let font                    = UIFont.systemFont(ofSize: 12)
+        let string                  = NSMutableAttributedString(string: text)
+        
+        string.addAttributes([.font: font], range: NSRange(location: 0, length: string.length))
+        let rect                    = string.boundingRect(with: CGSize(width: maxWidth, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+        let size                    = CGSize(width: CGFloat(ceilf(Float(rect.size.width))), height: CGFloat(ceilf(rect.size.height < maxHeight ? Float(rect.size.height) : Float(maxHeight))))
+        
+        let textFrame               = CGRect(x: (window?.frame.size.width ?? 0)/2 - size.width/2 - commonInset, y: (window?.frame.size.height ?? 0) - size.height/2 - commonInset - 100, width: size.width + commonInset * 2, height: size.height + commonInset * 2)
+        let textView                = UITextView(frame: textFrame)
+        textView.text               = text
+        textView.font               = font
+        textView.textColor          = UIColor.white
+        textView.backgroundColor    = UIColor.black
+        textView.layer.cornerRadius = 5
+        textView.isEditable         = false
+        textView.isSelectable       = false
+        textView.isScrollEnabled    = false
+        textView.textContainer.lineFragmentPadding = 0
+        textView.contentInset       = UIEdgeInsets(top: commonInset, left: commonInset, bottom: commonInset, right: commonInset)
+        
+        let tapGesture              = UITapGestureRecognizer(target: self, action: #selector(handlerGesture(sender:)))
+        window?.addGestureRecognizer(tapGesture)
+        window?.addSubview(textView)
+        tips                        = textView
+        tap                         = tapGesture
+        self.perform(#selector(dismiss), with: nil, afterDelay: 2.0)
+    }
+    
+    @objc static func handlerGesture(sender: UIGestureRecognizer) {
+        dismiss()
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(dismiss), object: nil)
+    }
+    
+    @objc static func dismiss() {
+        if let tapGesture = tap {
+            let window    = UIApplication.shared.delegate?.window as? UIWindow
+            window?.removeGestureRecognizer(tapGesture)
+        }
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            tips?.alpha   = 0
+        }) { (Finish) in
+            tips?.removeFromSuperview()
+        }
+    }
  }
- 
- extension CGFloat {
-    var IPAD_XValue:CGFloat{return CGFloat(self*SCREEN_WIDTH)/375}
- }
- 
- //打印信息
- func SXLog<T>(_ message : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
-    #if DEBUG
-    let fileName = (file as NSString).lastPathComponent
-    print("\n>>> \(Date())  \(fileName) (line: \(lineNum)): \(message)\n")
-    #endif
- }
- 
  
  // ==============================================================================
- // MARK: - UILabel Extension
+ // MARK: - UILabel Extension 计算UILabel的高度(带有行间距的情况)
  // ==============================================================================
  extension UILabel {
     
@@ -300,15 +383,15 @@
  }
  
  // ==============================================================================
- // MARK: - setRightItem
+ // MARK: - UIViewController Extension: setRightItem
  // ==============================================================================
  extension UIViewController {
     
     func setRightItem(_ imageName: String) {
         
-        let imageItem = UIBarButtonItem(image: UIImage.init(named: imageName), style: .plain, target: self, action: #selector(rightAction))
+        let imageItem        = UIBarButtonItem(image: UIImage.init(named: imageName), style: .plain, target: self, action: #selector(rightAction))
         imageItem.setBackgroundImage(UIImage.init(named: "mask"), for: .normal, barMetrics: .default)
-        let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        let negativeSpacer   = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         negativeSpacer.width = 0
         self.navigationItem.rightBarButtonItems = [imageItem]
     }
@@ -316,21 +399,19 @@
     
     func setLeftItem(_ imageName: String) {
         
-        let btn = UIButton(type: .custom)
+        let btn   = UIButton(type: .custom)
         btn.frame = CGRect(x: 0, y: 0, width: 30.FloatValue.IPAD_XValue, height: 30.FloatValue.IPAD_XValue)
         btn.setBackgroundImage(UIImage.init(named: "mask"), for: .normal)
         btn.setImage(UIImage.init(named: imageName), for: .normal)
         btn.addTarget(self, action: #selector(leftBackAction), for: .touchUpInside)
-        
-        let leftItem = UIBarButtonItem(customView: btn)
-        
-        let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        let leftItem         = UIBarButtonItem(customView: btn)
+        let negativeSpacer   = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         negativeSpacer.width = -10
         self.navigationItem.leftBarButtonItems = [negativeSpacer, leftItem]
     }
     
     @objc func rightAction() {
-        SXLog("share.....还没写,慢慢填坑......") 
+        SXLog("share.....还没写,慢慢填坑......")
     }
     
     @objc func leftBackAction() {
@@ -342,11 +423,10 @@
  // MARK: - UIButton Extension
  // ==============================================================================
  extension UIButton {
-    
     func addTimer(_ timeOut: Int, btn: UIButton){
         //倒计时时间
-        var timeout = timeOut
-        let queue:DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
+        var timeout               = timeOut
+        let queue:DispatchQueue   = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
         let _timer:DispatchSource = DispatchSource.makeTimerSource(flags: [], queue: queue) as! DispatchSource
         _timer.schedule(wallDeadline: DispatchWallTime.now(), repeating: .seconds(1))
         //每秒执行
@@ -376,7 +456,6 @@
  // MARK: - UIView Extension CustomFrame
  // ==============================================================================
  extension UIView {
-    
     var x: CGFloat {
         get{
             return frame.origin.x
@@ -451,10 +530,86 @@
  }
  
  // ==============================================================================
- // MARK: - String Extension
+ // MARK: - UITextField
+ // ==============================================================================
+ extension UITextField {
+    // 使用runtime给textField添加最大的输入属性, 默任15
+    var maxTextNumber: Int {
+        set {
+            objc_setAssociatedObject(self, &maxTextNumberDegault, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+        
+        get {
+            if let rs = objc_getAssociatedObject(self, &maxTextNumberDegault) as? Int {
+                return rs
+            }
+            return 30
+        }
+    }
+    
+    // 添加判断数量的方法
+    func addChangeTextTarget() {
+        self.addTarget(self, action:#selector(changeText), for:.editingChanged)
+    }
+    @objc func changeText() {
+        // 判断是不是拼音状态,拼音不截取文本
+        if let positionRange = self.markedTextRange {
+            guard self.position(from: positionRange.start, offset: 0) != nil else {
+                checkTextFieldText()
+                return
+            }
+        }else{
+            checkTextFieldText()
+        }
+    }
+    
+    func checkTextFieldText() {
+        guard (self.text?.length)! <= maxTextNumber else {
+            self.text = (self.text?.stringCut(end: maxTextNumber))!
+            return
+        }
+    }
+ }
+ 
+ // ==============================================================================
+ //MARK: - NSString Extension MD5
+ // ==============================================================================
+ extension NSString  {
+    
+    var md5: NSString! {
+        let str = self.cString(using: String.Encoding.utf8.rawValue)
+        let strLen = CC_LONG(self.lengthOfBytes(using: String.Encoding.utf8.rawValue))
+        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
+        
+        CC_MD5(str!, strLen, result)
+        
+        let hash = NSMutableString()
+        for i in 0...digestLen {
+            hash.appendFormat("%02x", result[i])
+        }
+        result.deallocate(capacity: digestLen)
+        return String(format: hash as String) as NSString
+    }
+ }
+ 
+ // ==============================================================================
+ //MARK: - FloatValue, DoubleValue, IPAD_XValue
+ // ==============================================================================
+ extension Int {
+    var FloatValue:CGFloat{return CGFloat(self)}
+    var DoubleValue:Double{return Double(self)}
+    
+ }
+ 
+ extension CGFloat {
+    var IPAD_XValue:CGFloat{return CGFloat(self*SCREEN_WIDTH)/375}
+ }
+ 
+ // ==============================================================================
+ // MARK: - String Extension 计算文字宽度, base64, isValiteEmail
  // ==============================================================================
  extension String {
-    
     /// 计算文字宽度
     func SX_widthWithString(font: UIFont, size: CGSize) -> CGFloat {
         let rect = NSString(string: self).boundingRect(with: CGSize(width: size.width, height: size.height), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
@@ -476,13 +631,26 @@
         let emailTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailTest.evaluate(with: self)
     }
+    
+    var length: Int {
+        /// 更改成其他的影响还有emoji协议的签名
+        return self.utf16.count
+    }
+    
+    /// 截取第一个到任意位置
+    /// end: 结束的位置
+    /// Returns: 截取后的字符串
+    func stringCut(end: Int) -> String {
+        if !(end <= count) { return self }
+        let sInde = index(startIndex, offsetBy: end)
+        return String(self[..<sInde])
+    }
  }
  
  // ==============================================================================
  // MARK: - CGRect
  // ==============================================================================
  extension CGRect {
-    
     var x: CGFloat {
         get {
             return self.origin.x
@@ -599,65 +767,6 @@
         let timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, fireDate, interval, 0, 0, handler)
         CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, CFRunLoopMode.commonModes)
         return timer!
-    }
- }
- 
- // ==============================================================================
- // MARK: - UITextField
- // ==============================================================================
- extension UITextField {
-    // 使用runtime给textField添加最大的输入属性, 默任15
-    var maxTextNumber: Int {
-        set {
-            objc_setAssociatedObject(self, &maxTextNumberDegault, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-        
-        get {
-            if let rs = objc_getAssociatedObject(self, &maxTextNumberDegault) as? Int {
-                return rs
-            }
-            return 30
-        }
-    }
-    
-    // 添加判断数量的方法
-    func addChangeTextTarget() {
-        self.addTarget(self, action:#selector(changeText), for:.editingChanged)
-    }
-    @objc func changeText() {
-        // 判断是不是拼音状态,拼音不截取文本
-        if let positionRange = self.markedTextRange {
-            guard self.position(from: positionRange.start, offset: 0) != nil else {
-                checkTextFieldText()
-                return
-            }
-        }else{
-            checkTextFieldText()
-        }
-    }
-    
-    func checkTextFieldText() {
-        guard (self.text?.length)! <= maxTextNumber else {
-            self.text = (self.text?.stringCut(end: maxTextNumber))!
-            return
-        }
-    }
- }
- 
- extension String {
-    
-    var length: Int {
-        /// 更改成其他的影响还有emoji协议的签名
-        return self.utf16.count
-    }
-    
-    /// 截取第一个到任意位置
-    /// end: 结束的位置
-    /// Returns: 截取后的字符串
-    func stringCut(end: Int) -> String {
-        if !(end <= count) { return self }
-        let sInde = index(startIndex, offsetBy: end)
-        return String(self[..<sInde])
     }
  }
  
@@ -1050,126 +1159,9 @@
     //        }
  }
  
- // ===============================================================================================
- // MARK: - UIView iOS12.1 tabBar偏移 (由于Swift没有+load方法,所以手动触发, 先放在ApplicationDelegate里面)
- // ===============================================================================================
- extension UIView {
-    /// Swift4 不支持dispatch_once, 静态变量默认用dispatch_once初始化, 可以替代dispatch_once的实现
-    private static let swizzlingTabBarButtonFrame: Void = {
-        guard #available(iOS 12.1, *) else { return }
-        guard let cls = NSClassFromString("UITabBarButton") else { return }
-        let originalSelector     = #selector(setter: UIView.frame)
-        let swizzledSelector     = #selector(UIView.sx_setFrame)
-        guard let orihinalMehtod = class_getInstanceMethod(cls, originalSelector) else { return }
-        guard let swizzledMethod = class_getInstanceMethod(cls, swizzledSelector) else { return }
-        let isSuccess            = class_addMethod(cls, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
-        if (isSuccess) {
-            class_replaceMethod(cls, swizzledSelector, method_getImplementation(orihinalMehtod), method_getTypeEncoding(orihinalMehtod))
-        } else {
-            method_exchangeImplementations(orihinalMehtod, swizzledMethod)
-        }
-    }()
-    
-    @objc func sx_setFrame(frame: CGRect) {
-        var newFrame: CGRect = frame
-        if !self.frame.isEmpty {
-            guard !newFrame.isEmpty else{ return }
-            newFrame.size.height = newFrame.size.height > 48.0 ? newFrame.size.height : 48.0
-        }
-        self.sx_setFrame(frame: newFrame)
-    }
-    
-    open class func swizzledTabBarButtonFrame() {
-        UIView.swizzlingTabBarButtonFrame
-    }
- }
- 
- // ===============================================================================================
- // MARK: - UIWindow Extension showTips
- // ===============================================================================================
- extension UIWindow {
-    static var tipsKey = "tipsKey"
-    static var tips: UITextView? {
-        get {
-            return objc_getAssociatedObject(self, &UIWindow.tipsKey) as? UITextView
-        }
-        
-        set {
-            objc_setAssociatedObject(self, &UIWindow.tipsKey, newValue, .OBJC_ASSOCIATION_RETAIN)
-        }
-    }
-    
-    static var tapKey = "tapKey"
-    static var tap: UITapGestureRecognizer? {
-        get {
-            return objc_getAssociatedObject(self, &UIWindow.tapKey) as? UITapGestureRecognizer
-        }
-        
-        set {
-            objc_setAssociatedObject(self, &UIWindow.tapKey, newValue, .OBJC_ASSOCIATION_RETAIN)
-        }
-    }
-    
-    static func showTips(text: String) {
-        if tips.isSome { dismiss() }
-        Thread.sleep(forTimeInterval: 0.5)
-        let window               = UIApplication.shared.delegate?.window as? UIWindow
-        let maxWidth : CGFloat   = 200
-        let maxHeight: CGFloat   = window?.frame.size.height ?? 0 - 200
-        let commonInset: CGFloat = 10
-        
-        let font      = UIFont.systemFont(ofSize: 12)
-        let string    = NSMutableAttributedString(string: text)
-        
-        string.addAttributes([.font: font], range: NSRange(location: 0, length: string.length))
-        let rect      = string.boundingRect(with: CGSize(width: maxWidth, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
-        let size      = CGSize(width: CGFloat(ceilf(Float(rect.size.width))), height: CGFloat(ceilf(rect.size.height < maxHeight ? Float(rect.size.height) : Float(maxHeight))))
-        
-        let textFrame = CGRect(x: (window?.frame.size.width ?? 0)/2 - size.width/2 - commonInset, y: (window?.frame.size.height ?? 0) - size.height/2 - commonInset - 100, width: size.width + commonInset * 2, height: size.height + commonInset * 2)
-        let textView                = UITextView(frame: textFrame)
-        textView.text               = text
-        textView.font               = font
-        textView.textColor          = UIColor.white
-        textView.backgroundColor    = UIColor.black
-        textView.layer.cornerRadius = 5
-        textView.isEditable         = false
-        textView.isSelectable       = false
-        textView.isScrollEnabled    = false
-        textView.textContainer.lineFragmentPadding = 0
-        textView.contentInset       = UIEdgeInsets(top: commonInset, left: commonInset, bottom: commonInset, right: commonInset)
-        
-        let tapGesture              = UITapGestureRecognizer(target: self, action: #selector(handlerGesture(sender:)))
-        window?.addGestureRecognizer(tapGesture)
-        window?.addSubview(textView)
-        
-        tips = textView
-        tap  = tapGesture
-        
-        self.perform(#selector(dismiss), with: nil, afterDelay: 2.0)
-    }
-    
-    @objc static func handlerGesture(sender: UIGestureRecognizer) {
-        dismiss()
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(dismiss), object: nil)
-    }
-    
-    @objc static func dismiss() {
-        if let tapGesture = tap {
-            let window    = UIApplication.shared.delegate?.window as? UIWindow
-            window?.removeGestureRecognizer(tapGesture)
-        }
-        
-        UIView.animate(withDuration: 0.25, animations: {
-            tips?.alpha   = 0
-        }) { (Finish) in
-            tips?.removeFromSuperview()
-        }
-    }
- }
- 
- // ===============================================================================================
+ // ===============================================================================
  // MARK: - Array Extension
- // ===============================================================================================
+ // ===============================================================================
  extension Array {
     mutating func removeAtIndexes (indexs: [Int]) -> () {
         
@@ -1179,6 +1171,31 @@
     }
  }
  
+ // ===============================================================================
+ // MARK: - SX_NavigationBar
+ // ===============================================================================
+ extension SX_NavigationBar {
+    
+    class func isIphoneX() -> Bool {
+        return UIScreen.main.bounds.equalTo(CGRect(x: 0, y: 0, width: 375, height: 812))
+    }
+    
+    class func navBarBottom() -> Int {
+        return self.isIphoneX() ? 88 : 64;
+    }
+    
+    class func tabBarHeight() -> Int {
+        return self.isIphoneX() ? 83 : 49;
+    }
+    
+    class func screenWidth() -> Int {
+        return Int(UIScreen.main.bounds.size.width)
+    }
+    
+    class func screenHeight() -> Int {
+        return Int(UIScreen.main.bounds.size.height)
+    }
+ }
  
  
  
