@@ -725,7 +725,7 @@
     }
     
     
-    static func formatCount(count: NSInteger) -> CGSize {
+    static func formatCount(count: NSInteger) -> String {
         if count < 10000 {
             return String(count)
         }else{
