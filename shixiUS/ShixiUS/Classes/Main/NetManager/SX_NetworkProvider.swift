@@ -19,12 +19,12 @@ import SwiftyJSON
 import ObjectMapper
 
 ///成功
-typealias SuccessStringClosure = (_ result: String) -> Void
-typealias SuccessModelClosure = (_ result: Mappable?) -> Void
+typealias SuccessStringClosure   = (_ result: String) -> Void
+typealias SuccessModelClosure    = (_ result: Mappable?) -> Void
 typealias SuccessArrModelClosure = (_ result: [Mappable]?) -> Void
-typealias SuccessJSONClosure = (_ result:JSON) -> Void
+typealias SuccessJSONClosure     = (_ result:JSON) -> Void
 /// 失败
-typealias FailClosure = (_ errorMsg: String?) -> Void
+typealias FailClosure            = (_ errorMsg: String?) -> Void
 
 public class SX_NetworkProvider {
     
@@ -55,8 +55,7 @@ public class SX_NetworkProvider {
             }
         }
     }
-    
-    
+
     /// 请求对象JSON数据
     func requestDataWithTargetModelJSON<T:TargetType,M:Mappable>(target:T,model:M,successClosure: @escaping SuccessModelClosure,failClosure: @escaping FailClosure) {
         let requestProvider = MoyaProvider<T>(requestClosure:requestTimeoutClosure(target: target))
