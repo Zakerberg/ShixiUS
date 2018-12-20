@@ -647,6 +647,105 @@
     }
  }
  
+ 
+ // ==============================================================================
+ // MARK: -
+ // ==============================================================================
+ extension String {
+    
+    func substring(location index: Int, length: Int) -> String {
+        if self.count > index {
+            let startIndex = self.index(self.startIndex, offsetBy: index)
+            let endIndex   = self.index(self.startIndex, offsetBy: index + length)
+            let subString  = self[startIndex..<endIndex]
+            return String(subString)
+        }else{
+            return self
+        }
+    }
+    
+    
+    func substring(range: NSRange) -> String {
+        if self.count > range.location {
+            let starIndex = self.index(self.startIndex, offsetBy: range.location)
+            let endIndex  = self.index(self.startIndex, offsetBy: range.location + range.length)
+            let subString = self[starIndex..<endIndex]
+            return String(subString)
+        }else{
+            return self
+        }
+    }
+    
+    
+    func md5() -> String {
+        let cStr1       = cString(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
+        let buffer      = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
+        CC_MD5(cStr1, CC_LONG(strlen(cStr1!)), buffer)
+        var md5String   = ""
+        for index in 0...15 {
+            let obcStr1 = String(format: "%02x", buffer[index])
+            md5String.append(obcStr1)
+        }
+        free(buffer)
+        return md5String
+    }
+    
+    
+    func urlScheme(scheme: String) -> URL? {
+        if let url = URL(string: self) {
+            var components     = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            components?.scheme = scheme
+            return components?.url
+        }
+        return nil
+    }
+    
+    
+    static func readJSON2DicWithFileName(fileName: String) -> [String:Any] {
+        let path     = Bundle.main.path(forResource: fileName, ofType: "json") ?? ""
+        var dict     = [String:Any]()
+        do{
+            let data = try Data.init(contentsOf: URL.init(fileURLWithPath: path))
+            dict     = try JSONSerialization.jsonObject(with: data, options:[]) as! [String : Any]
+        }catch {
+            print(error.localizedDescription)
+        }
+        return dict
+        
+    }
+    
+    
+    static func format(decimal: Float, _ maximumDigits: Int = 1, _ minimumDigits: Int = 1) -> String? {
+        let number = NSNumber(value: decimal)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = maximumDigits // 设置小数点后最多2位
+        numberFormatter.minimumFractionDigits = minimumDigits // 设置小数点后少多2位 (不足补0)
+        
+        return numberFormatter.string(from: number)
+    }
+    
+    
+    static func formatCount(count: NSInteger) -> CGSize {
+        if count < 10000 {
+            return String(count)
+        }else{
+            return (String.format(decimal: Float(count)/Float(10000)) ?? "0") + "w"
+        }
+    }
+    
+    func singleLineSizeWithText(font: UIFont) -> CGSize {
+        return self.size(withAttributes: [NSAttributedString.Key.font : font])
+    }
+    
+    func singleLineSizeWithAttributeText(font: UIFont) -> CGSize {
+        let attributes  = [NSAttributedString.Key.font: font]
+        let attString   = NSAttributedString(string: self, attributes: attributes)
+        let framesetter = CTFramesetterCreateWithAttributedString(attString)
+        
+        return CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRange(location: 0, length: 0), nil, CGSize(width: Double.greatestFiniteMagnitude, height: Double.greatestFiniteMagnitude), nil)
+    }
+ }
+ 
  // ==============================================================================
  // MARK: - CGRect
  // ==============================================================================
