@@ -1191,7 +1191,7 @@
         //            let calendarUnit   = NSCalendar.Unit(rawValue: NSCalendar.Unit.year.rawValue | NSCalendar.Unit.month.rawValue | NSCalendar.Unit.day.rawValue)
         let dateComponents: NSDateComponents = NSCalendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day], from: self as Date) as NSDateComponents
         dateComponents.day = self.numberOfDaysInCurrentMonth()
-        return NSCalendar.current.date(from: dateComponents as DateComponents) as! NSDate
+        return NSCalendar.current.date(from: dateComponents as DateComponents)! as NSDate
     }
     
     /// 上个月
@@ -1227,12 +1227,12 @@
     }
     
     /// NSString 转 NSDate
-    //        func dateFormString(dateString: NSString) -> NSDate {
-    //            let dateFormatter = DateFormatter()
-    //            dateFormatter.date(from: "yyyy-MM-dd")
-    //
-    ////            let destDate =
-    //        }
+//            func dateFormString(dateString: NSString) -> NSDate {
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.date(from: "yyyy-MM-dd")
+//
+//                let destDate =
+//            }
     //
     //        /// NSDate 转 NSString
     //        func stringFormDate(date: NSDate) -> NSString {
