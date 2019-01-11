@@ -223,22 +223,26 @@
  extension SX_HomeVC {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        if (offsetY > NAVBAR_COLORCHANGE_POINT)
-        {
-            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(SX_NavigationBar.navBarBottom())
-            navBarBackgroundAlpha = alpha
-            navBarTintColor  = UIColor.white.withAlphaComponent(alpha)
-            navBarTitleColor = UIColor.white.withAlphaComponent(alpha)
-            statusBarStyle   = .default
-            title = "首页"
-        } else {
-            navBarBackgroundAlpha = 0
-            navBarTintColor  = .clear
-            navBarTitleColor = .clear
-            statusBarStyle   = .lightContent
-            title = "首页"
-        }
+        scrollView.rx.contentOffset.subscribe(onNext: { (contentOffset) in
+            let offsetY = scrollView.contentOffset.y
+            if (offsetY > NAVBAR_COLORCHANGE_POINT)
+            {
+                let alpha                  = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(SX_NavigationBar.navBarBottom())
+                self.navBarBackgroundAlpha = alpha
+                self.navBarTintColor       = UIColor.white.withAlphaComponent(alpha)
+                self.navBarTitleColor      = UIColor.white.withAlphaComponent(alpha)
+                self.statusBarStyle        = .default
+                self.title                 = "首页"
+            } else {
+                self.navBarBackgroundAlpha = 0
+                self.navBarTintColor       = .clear
+                self.navBarTitleColor      = .clear
+                self.statusBarStyle        = .lightContent
+                self.title                 = "首页"
+            }
+        }, onError: { (error) in
+            SXLog(error)
+        }, onCompleted: nil, onDisposed: nil)
     }
     
     fileprivate func imgsScaledToSize(image: UIImage, newSize: CGSize) -> UIImage {
