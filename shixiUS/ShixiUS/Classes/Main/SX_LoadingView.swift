@@ -102,9 +102,9 @@ extension SX_LoadingView  {
     /// loadingFailed
     func loadingFail() {
         self.indicatorView?.alpha = 0
-        self.failLabel?.alpha = 1
-        self.failView?.alpha = 1
-        self.reloadButton?.alpha = 1
+        self.failLabel?.alpha     = 1
+        self.failView?.alpha      = 1
+        self.reloadButton?.alpha  = 1
     }
     
     ///
